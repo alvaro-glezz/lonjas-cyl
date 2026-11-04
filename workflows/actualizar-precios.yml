@@ -1,0 +1,41 @@
+# Lee las lonjas varias veces al día (lunes a sábado) y publica los precios nuevos.
+# Si nada ha cambiado, no hace nada. Se puede lanzar a mano desde la pestaña "Actions".
+name: Actualizar precios
+
+on:
+  schedule:
+    # Horas en UTC: 12:40, 16:40 y 20:40 (13:40, 17:40 y 21:40 en España en invierno)
+    - cron: "40 12,16,20 * * 1-6"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: actualizar-precios
+  cancel-in-progress: false
+
+jobs:
+  actualizar:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+          cache-dependency-path: scraper/requirements.txt
+      - run: pip install -r scraper/requirements.txt
+      - run: python scraper/actualizar.py
+      - name: Guardar si hay precios nuevos
+        run: |
+          if git diff --quiet data/; then
+            echo "Sin cambios"
+          else
+            git config user.name "actualizador-lonjas"
+            git config user.email "actions@users.noreply.github.com"
+            git add data/
+            git commit -m "Precios actualizados $(date -u +%Y-%m-%d)"
+            git push
+          fi
