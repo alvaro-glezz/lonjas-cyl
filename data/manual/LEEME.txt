@@ -1,0 +1,10 @@
+CARGA MANUAL DE PRECIOS (respaldo)
+
+Si la lectura automática de una lonja falla, o quieres corregir una semana,
+crea aquí un archivo con el nombre de la lonja:
+  salamanca.csv, leon.csv, segovia.csv, lerma.csv, zamora.csv, valladolid-palencia.csv
+
+Copia la plantilla ejemplo-plantilla.csv, separada por punto y coma (;).
+La fecha es la de la sesión de la lonja (dd/mm/aaaa). Si es más reciente
+que la que tiene la app, se publica en la siguiente actualización.
+Deja "actual" vacío o escribe S/C cuando no haya cotización.
