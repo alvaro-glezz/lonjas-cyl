@@ -1,0 +1,28 @@
+== Borrados
+ok
+== Importar con descarga
+Descargado data/fuentes/jcyl/2025/semana-52.xlsx
+Descargado data/fuentes/jcyl/2026/semana-43.xlsx
+Archivos importados: 93 de 94
+Series: 470 · registros: 32145 · sesiones repetidas omitidas: 948
+== Comparar con el original
+fc80acaf662888e25a4db4c053de950330b64620b912b48bdd7b7a6c832a665f  -
+fc80acaf662888e25a4db4c053de950330b64620b912b48bdd7b7a6c832a665f  -
+4e4dbf6a8c103bed94f27cc1560c174bdb2e28a6b62007ac5821f02f84582f64  -
+4e4dbf6a8c103bed94f27cc1560c174bdb2e28a6b62007ac5821f02f84582f64  -
+== Cambios
+D  data/fuentes/jcyl/2025/semana-52.xlsx
+D  data/fuentes/jcyl/2026/semana-43.xlsx
+ M data/fuentes/jcyl/enlaces.tsv
+?? data/fuentes/jcyl/2025/semana-52.xlsx
+?? data/fuentes/jcyl/2026/semana-43.xlsx
+== Validar
+1. Excel enlazados en la web: 94 · guardados: 94 · faltan: ninguno
+   importados: 93 · no importados: [(2025, 50, 'Publicación distinta (precios medios provinciales), no cotizaciones de lonja')]
+2. Registros comprobados contra los Excel: 32145 · distintos: 0
+3. Registros duplicados (misma serie y sesión): 0
+4. Fechas no válidas: 0 · precios sin fecha de celebración (identificados por semana): 494 · series con más de una unidad: 0
+   unidades: {'€/100 kg': 86, '€/kg vivo': 133, '€/kg': 14, '€/docena': 28, '€/unidad': 77, '€/kg canal': 128, '€/@': 4}
+5. Precio − diferencia = precio anterior: 24824 de 27208 (91.2%). Las diferencias se deben a semanas sin sesión y a lonjas que calculan la diferencia de otra forma.
+   valores marcados como dudosos: 78 de 32145
+RESULTADO: correcto
