@@ -1,5 +1,5 @@
 {
- "generado": "2026-11-04T09:54+00:00",
+ "generado": "2026-11-04T13:49+00:00",
  "lonjas": [
   {
    "id": "salamanca",
@@ -277,413 +277,195 @@
    "fuente": "https://www.lonjadeleon.es/category/cotizaciones/",
    "estado": "activa",
    "nota": null,
-   "fecha": "2026-10-29",
+   "fecha": "2026-11-04",
    "precios": [
     {
-     "cat": "Cereales",
-     "producto": "Trigo pienso",
+     "id": "leon-agria",
+     "cat": "€/t €/t =",
+     "producto": "Agria",
      "unidad": "€/t",
-     "ant": 230,
-     "act": 228,
-     "id": "leon-trigo-pienso",
-     "clave": "trigo"
+     "ant": 350.0,
+     "act": 350.0
     },
     {
-     "cat": "Cereales",
-     "producto": "Cebada",
+     "id": "leon-jaerla",
+     "cat": "€/t €/t =",
+     "producto": "Jaerla",
      "unidad": "€/t",
-     "ant": 224,
-     "act": 222,
-     "id": "leon-cebada",
-     "clave": "cebada"
+     "ant": 320.0,
+     "act": 320.0
     },
     {
-     "cat": "Cereales",
-     "producto": "Triticale",
+     "id": "leon-kennebec",
+     "cat": "€/t €/t =",
+     "producto": "Kennebec",
      "unidad": "€/t",
-     "ant": 220,
-     "act": 218,
-     "id": "leon-triticale",
-     "clave": "triticale"
+     "ant": 390.0,
+     "act": 390.0
     },
     {
-     "cat": "Cereales",
-     "producto": "Centeno",
+     "id": "leon-red-pontiac",
+     "cat": "€/t €/t =",
+     "producto": "Red Pontiac",
      "unidad": "€/t",
-     "ant": 197,
-     "act": 197,
-     "id": "leon-centeno",
-     "clave": "centeno"
+     "ant": 340.0,
+     "act": 340.0
     },
     {
-     "cat": "Cereales",
-     "producto": "Avena",
+     "id": "leon-red-scarlett",
+     "cat": "€/t €/t =",
+     "producto": "Red Scarlett",
      "unidad": "€/t",
-     "ant": 202,
-     "act": 202,
-     "id": "leon-avena",
-     "clave": "avena"
+     "ant": 330.0,
+     "act": 330.0
     },
     {
-     "cat": "Cereales",
-     "producto": "Maíz destino secadero",
+     "id": "leon-yona",
+     "cat": "€/t €/t =",
+     "producto": "Yona",
      "unidad": "€/t",
-     "ant": 250,
-     "act": null,
-     "id": "leon-maiz-destino-secadero",
-     "clave": "maiz"
+     "ant": 330.0,
+     "act": 330.0
     },
     {
-     "cat": "Oleaginosas",
+     "id": "leon-canela",
+     "cat": "€/kg €/kg",
+     "producto": "Canela",
+     "unidad": "",
+     "ant": 1.3,
+     "act": 1.3
+    },
+    {
+     "id": "leon-negra",
+     "cat": "€/kg €/kg",
+     "producto": "Negra",
+     "unidad": "",
+     "ant": 2.8,
+     "act": 2.8
+    },
+    {
+     "id": "leon-palmena-redonda",
+     "cat": "€/kg €/kg",
+     "producto": "Palmeña Redonda",
+     "unidad": "",
+     "ant": 2.0,
+     "act": 2.0
+    },
+    {
+     "id": "leon-planchada",
+     "cat": "€/kg €/kg",
+     "producto": "Planchada",
+     "unidad": "",
+     "ant": 1.95,
+     "act": 1.95
+    },
+    {
+     "id": "leon-plancheta",
+     "cat": "€/kg €/kg",
+     "producto": "Plancheta",
+     "unidad": "",
+     "ant": 2.0,
+     "act": 2.0
+    },
+    {
+     "id": "leon-pinta",
+     "cat": "€/kg €/kg",
+     "producto": "Pinta",
+     "unidad": "",
+     "ant": 0.95,
+     "act": 0.95
+    },
+    {
+     "id": "leon-rinon-de-leon",
+     "cat": "€/kg €/kg",
+     "producto": "Riñón de León",
+     "unidad": "",
+     "ant": 1.4,
+     "act": 1.4
+    },
+    {
+     "id": "leon-redonda",
+     "cat": "€/kg €/kg",
+     "producto": "Redonda",
+     "unidad": "",
+     "ant": 1.35,
+     "act": 1.35
+    },
+    {
+     "id": "leon-girasol",
+     "cat": "€/t €/t",
      "producto": "Girasol",
      "unidad": "€/t",
-     "ant": 500,
-     "act": 500,
-     "id": "leon-girasol",
+     "ant": 500.0,
+     "act": 500.0,
      "clave": "girasol"
     },
     {
-     "cat": "Oleaginosas",
+     "id": "leon-girasol-alto-oleico",
+     "cat": "€/t €/t",
      "producto": "Girasol alto oleico",
      "unidad": "€/t",
-     "ant": 515,
-     "act": 515,
-     "id": "leon-girasol-alto-oleico"
+     "ant": 515.0,
+     "act": 515.0
     },
     {
-     "cat": "Forrajes",
-     "producto": "Alfalfa paquete rama",
+     "id": "leon-trigo-pienso",
+     "cat": "€/t €/t",
+     "producto": "Trigo Pienso",
      "unidad": "€/t",
-     "ant": 225,
-     "act": 225,
-     "id": "leon-alfalfa-paquete-rama",
-     "clave": "alfalfa"
+     "ant": 228.0,
+     "act": 226.0,
+     "clave": "trigo"
     },
     {
-     "cat": "Forrajes",
-     "producto": "Alfalfa deshidratada",
+     "id": "leon-cebada",
+     "cat": "€/t €/t",
+     "producto": "Cebada",
      "unidad": "€/t",
-     "ant": 255,
-     "act": 255,
-     "id": "leon-alfalfa-deshidratada"
+     "ant": 222.0,
+     "act": 221.0,
+     "clave": "cebada"
     },
     {
-     "cat": "Forrajes",
-     "producto": "Paja 1ª cebada",
+     "id": "leon-triticale",
+     "cat": "€/t €/t",
+     "producto": "Triticale",
      "unidad": "€/t",
-     "ant": 65,
-     "act": 65,
-     "id": "leon-paja-1a-cebada",
-     "clave": "paja"
+     "ant": 218.0,
+     "act": 216.0,
+     "clave": "triticale"
     },
     {
-     "cat": "Forrajes",
-     "producto": "Veza forraje 1ª",
+     "id": "leon-centeno",
+     "cat": "€/t €/t",
+     "producto": "Centeno",
      "unidad": "€/t",
-     "ant": 170,
-     "act": 170,
-     "id": "leon-veza-forraje-1a"
+     "ant": 197.0,
+     "act": 197.0,
+     "clave": "centeno"
     },
     {
-     "cat": "Forrajes",
-     "producto": "Forraje",
+     "id": "leon-avena",
+     "cat": "€/t €/t",
+     "producto": "Avena",
      "unidad": "€/t",
-     "ant": 130,
-     "act": 130,
-     "id": "leon-forraje"
+     "ant": 202.0,
+     "act": 200.0,
+     "clave": "avena"
     },
     {
-     "cat": "Alubias",
-     "producto": "Alubia canela",
-     "unidad": "€/kg",
-     "ant": 1.3,
-     "act": 1.3,
-     "id": "leon-alubia-canela"
-    },
-    {
-     "cat": "Alubias",
-     "producto": "Alubia negra",
-     "unidad": "€/kg",
-     "ant": 2.8,
-     "act": 2.8,
-     "id": "leon-alubia-negra"
-    },
-    {
-     "cat": "Alubias",
-     "producto": "Alubia palmeña redonda",
-     "unidad": "€/kg",
-     "ant": 2.0,
-     "act": 2.0,
-     "id": "leon-alubia-palmena-redonda"
-    },
-    {
-     "cat": "Alubias",
-     "producto": "Alubia planchada",
-     "unidad": "€/kg",
-     "ant": 1.95,
-     "act": 1.95,
-     "id": "leon-alubia-planchada"
-    },
-    {
-     "cat": "Alubias",
-     "producto": "Alubia plancheta",
-     "unidad": "€/kg",
-     "ant": 2.0,
-     "act": 2.0,
-     "id": "leon-alubia-plancheta"
-    },
-    {
-     "cat": "Alubias",
-     "producto": "Alubia pinta",
-     "unidad": "€/kg",
-     "ant": 0.95,
-     "act": 0.95,
-     "id": "leon-alubia-pinta"
-    },
-    {
-     "cat": "Alubias",
-     "producto": "Alubia riñón de León",
-     "unidad": "€/kg",
-     "ant": 1.4,
-     "act": 1.4,
-     "id": "leon-alubia-rinon-de-leon"
-    },
-    {
-     "cat": "Alubias",
-     "producto": "Alubia redonda",
-     "unidad": "€/kg",
-     "ant": 1.35,
-     "act": 1.35,
-     "id": "leon-alubia-redonda"
-    },
-    {
-     "cat": "Patata",
-     "producto": "Patata Agria",
+     "id": "leon-maiz",
+     "cat": "€/t €/t",
+     "producto": "Maíz",
      "unidad": "€/t",
-     "ant": 350,
-     "act": 350,
-     "id": "leon-patata-agria"
-    },
-    {
-     "cat": "Patata",
-     "producto": "Patata Jaerla",
-     "unidad": "€/t",
-     "ant": 320,
-     "act": 320,
-     "id": "leon-patata-jaerla"
-    },
-    {
-     "cat": "Patata",
-     "producto": "Patata Kennebec",
-     "unidad": "€/t",
-     "ant": 390,
-     "act": 390,
-     "id": "leon-patata-kennebec"
-    },
-    {
-     "cat": "Patata",
-     "producto": "Patata Red Pontiac",
-     "unidad": "€/t",
-     "ant": 340,
-     "act": 340,
-     "id": "leon-patata-red-pontiac"
-    },
-    {
-     "cat": "Patata",
-     "producto": "Patata Red Scarlett",
-     "unidad": "€/t",
-     "ant": 330,
-     "act": 330,
-     "id": "leon-patata-red-scarlett"
-    },
-    {
-     "cat": "Patata",
-     "producto": "Patata Yona",
-     "unidad": "€/t",
-     "ant": 330,
-     "act": 330,
-     "id": "leon-patata-yona"
-    },
-    {
-     "cat": "Leche",
-     "producto": "Leche de vaca",
-     "unidad": "€/l",
-     "ant": 0.475,
-     "act": 0.475,
-     "id": "leon-leche-de-vaca"
-    },
-    {
-     "cat": "Leche",
-     "producto": "Leche de oveja",
-     "unidad": "€/E.Q.",
-     "ant": 0.11419,
-     "act": 0.11419,
-     "id": "leon-leche-de-oveja"
-    },
-    {
-     "cat": "Leche",
-     "producto": "Leche de cabra",
-     "unidad": "€/E.Q.",
-     "ant": 0.12621,
-     "act": 0.12621,
-     "id": "leon-leche-de-cabra"
-    },
-    {
-     "cat": "Ovino y caprino",
-     "producto": "Lechazo hasta 12 kg",
-     "unidad": "€/kg vivo",
-     "ant": 8.2,
-     "act": 8.3,
-     "id": "leon-lechazo-hasta-12-kg",
-     "clave": "lechazo"
-    },
-    {
-     "cat": "Ovino y caprino",
-     "producto": "Cabrito hasta 11 kg",
-     "unidad": "€/kg vivo",
-     "ant": 8.2,
-     "act": 8.3,
-     "id": "leon-cabrito-hasta-11-kg"
-    },
-    {
-     "cat": "Ovino y caprino",
-     "producto": "Cordero 12,1-15 kg",
-     "unidad": "€/ud",
-     "ant": 105,
-     "act": 100,
-     "id": "leon-cordero-12-1-15-kg"
-    },
-    {
-     "cat": "Ovino y caprino",
-     "producto": "Cordero 15,1-18 kg",
-     "unidad": "€/ud",
-     "ant": 110,
-     "act": 110,
-     "id": "leon-cordero-15-1-18-kg"
-    },
-    {
-     "cat": "Ovino y caprino",
-     "producto": "Cordero 18,1-23 kg",
-     "unidad": "€/ud",
-     "ant": 130,
-     "act": 130,
-     "id": "leon-cordero-18-1-23-kg"
-    },
-    {
-     "cat": "Ovino y caprino",
-     "producto": "Cordero 23,1-27 kg",
-     "unidad": "€/ud",
-     "ant": 140,
-     "act": 140,
-     "id": "leon-cordero-23-1-27-kg"
-    },
-    {
-     "cat": "Ovino y caprino",
-     "producto": "Cordero 27,1-35 kg",
-     "unidad": "€/ud",
-     "ant": 150,
-     "act": 150,
-     "id": "leon-cordero-27-1-35-kg"
-    },
-    {
-     "cat": "Ovino y caprino",
-     "producto": "Oveja vida merina",
-     "unidad": "€/ud",
-     "ant": 130,
-     "act": 130,
-     "id": "leon-oveja-vida-merina"
-    },
-    {
-     "cat": "Ovino y caprino",
-     "producto": "Oveja vida leche",
-     "unidad": "€/ud",
-     "ant": 90,
-     "act": 90,
-     "id": "leon-oveja-vida-leche"
-    },
-    {
-     "cat": "Ovino y caprino",
-     "producto": "Oveja vida Assaf",
-     "unidad": "€/ud",
-     "ant": 180,
-     "act": 180,
-     "id": "leon-oveja-vida-assaf"
-    },
-    {
-     "cat": "Vacuno de vida",
-     "producto": "Frisones",
-     "unidad": "€/ud",
-     "ant": 100,
-     "act": 100,
-     "id": "leon-frisones"
-    },
-    {
-     "cat": "Vacuno de vida",
-     "producto": "Pasteros macho 200 kg",
-     "unidad": "€/ud",
-     "ant": 1100,
-     "act": 1100,
-     "id": "leon-pasteros-macho-200-kg"
-    },
-    {
-     "cat": "Vacuno de vida",
-     "producto": "Pasteros hembra 200 kg",
-     "unidad": "€/ud",
-     "ant": 1000,
-     "act": 1000,
-     "id": "leon-pasteros-hembra-200-kg"
-    },
-    {
-     "cat": "Vacuno de carne",
-     "producto": "Hembras U",
-     "unidad": "€/kg canal",
-     "ant": 6.95,
-     "act": 6.95,
-     "id": "leon-hembras-u"
-    },
-    {
-     "cat": "Vacuno de carne",
-     "producto": "Hembras R",
-     "unidad": "€/kg canal",
-     "ant": 6.85,
-     "act": 6.85,
-     "id": "leon-hembras-r"
-    },
-    {
-     "cat": "Vacuno de carne",
-     "producto": "Hembras O",
-     "unidad": "€/kg canal",
-     "ant": 5.25,
-     "act": 5.2,
-     "id": "leon-hembras-o"
-    },
-    {
-     "cat": "Vacuno de carne",
-     "producto": "Machos U",
-     "unidad": "€/kg canal",
-     "ant": 6.1,
-     "act": 6.1,
-     "id": "leon-machos-u"
-    },
-    {
-     "cat": "Vacuno de carne",
-     "producto": "Machos R",
-     "unidad": "€/kg canal",
-     "ant": 6.0,
-     "act": 6.0,
-     "id": "leon-machos-r"
-    },
-    {
-     "cat": "Vacuno de carne",
-     "producto": "Machos O",
-     "unidad": "€/kg canal",
-     "ant": 5.25,
-     "act": 5.2,
-     "id": "leon-machos-o"
+     "ant": null,
+     "act": null,
+     "clave": "maiz"
     }
    ],
    "comprobado": "2026-11-03T23:45:00+01:00",
-   "origen": "carga inicial"
+   "origen": "https://www.lonjadeleon.es/lonja-patata-04-11-2026/",
+   "error": null
   },
   {
    "id": "segovia",
@@ -1132,6 +914,10 @@
    [
     "2026-10-29",
     228
+   ],
+   [
+    "2026-11-04",
+    226.0
    ]
   ],
   "leon-cebada": [
@@ -1174,6 +960,10 @@
    [
     "2026-10-29",
     222
+   ],
+   [
+    "2026-11-04",
+    221.0
    ]
   ],
   "leon-avena": [
@@ -1216,6 +1006,10 @@
    [
     "2026-10-29",
     202
+   ],
+   [
+    "2026-11-04",
+    200.0
    ]
   ],
   "leon-centeno": [
@@ -1258,6 +1052,10 @@
    [
     "2026-10-29",
     197
+   ],
+   [
+    "2026-11-04",
+    197.0
    ]
   ],
   "leon-triticale": [
@@ -1300,6 +1098,10 @@
    [
     "2026-10-29",
     218
+   ],
+   [
+    "2026-11-04",
+    216.0
    ]
   ],
   "segovia-cerdo-selecto": [
@@ -1682,12 +1484,20 @@
    [
     "2026-10-29",
     500
+   ],
+   [
+    "2026-11-04",
+    500.0
    ]
   ],
   "leon-girasol-alto-oleico": [
    [
     "2026-10-29",
     515
+   ],
+   [
+    "2026-11-04",
+    515.0
    ]
   ],
   "leon-alfalfa-paquete-rama": [
@@ -2132,6 +1942,90 @@
    [
     "2026-10-30",
     1.56
+   ]
+  ],
+  "leon-agria": [
+   [
+    "2026-11-04",
+    350.0
+   ]
+  ],
+  "leon-jaerla": [
+   [
+    "2026-11-04",
+    320.0
+   ]
+  ],
+  "leon-kennebec": [
+   [
+    "2026-11-04",
+    390.0
+   ]
+  ],
+  "leon-red-pontiac": [
+   [
+    "2026-11-04",
+    340.0
+   ]
+  ],
+  "leon-red-scarlett": [
+   [
+    "2026-11-04",
+    330.0
+   ]
+  ],
+  "leon-yona": [
+   [
+    "2026-11-04",
+    330.0
+   ]
+  ],
+  "leon-canela": [
+   [
+    "2026-11-04",
+    1.3
+   ]
+  ],
+  "leon-negra": [
+   [
+    "2026-11-04",
+    2.8
+   ]
+  ],
+  "leon-palmena-redonda": [
+   [
+    "2026-11-04",
+    2.0
+   ]
+  ],
+  "leon-planchada": [
+   [
+    "2026-11-04",
+    1.95
+   ]
+  ],
+  "leon-plancheta": [
+   [
+    "2026-11-04",
+    2.0
+   ]
+  ],
+  "leon-pinta": [
+   [
+    "2026-11-04",
+    0.95
+   ]
+  ],
+  "leon-rinon-de-leon": [
+   [
+    "2026-11-04",
+    1.4
+   ]
+  ],
+  "leon-redonda": [
+   [
+    "2026-11-04",
+    1.35
    ]
   ]
  }
