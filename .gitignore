@@ -1,0 +1,11 @@
+# Secretos y archivos locales: nunca deben subirse al repositorio
+.env
+.env.*
+*.pem
+*.key
+__pycache__/
+*.pyc
+.venv/
+venv/
+.DS_Store
+Thumbs.db

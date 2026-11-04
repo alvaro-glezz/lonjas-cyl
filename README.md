@@ -31,7 +31,7 @@ La app no lee las webs de las lonjas: solo descarga `data/precios.json`. Así es
 2. **Crea un repositorio**: botón verde *New* → nombre `lonjas-cyl` → marca *Public* → *Create repository*.
 3. **Sube los archivos**: en el repositorio, enlace *uploading an existing file*. Descomprime el zip en tu PC y arrastra **el contenido** de la carpeta `app-lonjas` (no la carpeta en sí) → *Commit changes*.
 4. **Comprueba la tarea automática**: Windows a veces no arrastra la carpeta `.github` porque empieza por punto. Si en el repositorio no aparece `.github/workflows/actualizar-precios.yml`, créala a mano: *Add file → Create new file*, escribe como nombre `.github/workflows/actualizar-precios.yml`, pega el contenido de ese archivo (ábrelo con el Bloc de notas) y guarda.
-5. **Da permiso para guardar precios**: *Settings → Actions → General → Workflow permissions* → marca *Read and write permissions* → *Save*.
+5. **Da permiso para guardar precios**: *Settings → Actions → General → Workflow permissions* → marca *Read and write permissions* → *Save*. Además, activa la verificación en dos pasos en GitHub (*Settings → Password and authentication*): quien entre en tu cuenta puede cambiar los precios que ven todos.
 6. **Publica la app**: *Settings → Pages* → en *Branch* elige `main` y `/ (root)` → *Save*. En un par de minutos GitHub te da la dirección, del tipo `https://tu-usuario.github.io/lonjas-cyl/`.
 7. **Primera actualización**: pestaña *Actions* → *Actualizar precios* → *Run workflow*. Al terminar verás en verde ✔ o en rojo ✖; abre el registro para ver qué ha leído de cada lonja.
 
@@ -39,6 +39,15 @@ La app no lee las webs de las lonjas: solo descarga `data/precios.json`. Así es
 
 - **Android (Chrome)**: abre la dirección → menú ⋮ → *Añadir a pantalla de inicio* / *Instalar aplicación*.
 - **iPhone (Safari)**: abre la dirección → botón *Compartir* → *Añadir a pantalla de inicio*.
+
+## Seguridad
+
+Resumen de lo que protege esta versión (detalle en `INFORME-SEGURIDAD.md`):
+
+- **La app no se fía de los datos**: `precios.json` viene de webs y PDF de terceros, así que la app lo revisa campo a campo antes de mostrarlo y descarta lo que no encaja (HTML, enlaces `javascript:`, números raros). Además lleva una política de contenido (CSP) que impide ejecutar código que no sea el suyo.
+- **El lector solo habla con webs conocidas**: descarga únicamente por https y de los dominios de `DOMINIOS_PERMITIDOS` (en `scraper/actualizar.py`). Si una lonja cambia de web o publica sus PDF en otro dominio, la app marcará «Revisar fuente» y el registro de *Actions* dirá «Dirección no permitida»: añade ese dominio a la lista **solo si es el oficial de la lonja**.
+- **Nunca subas contraseñas ni claves** al repositorio (es público). Esta app no necesita ninguna; el `.gitignore` ya excluye los archivos típicos (`.env`, etc.).
+- **Tipografías propias**: las fuentes *Barlow Condensed* y *Public Sans* van dentro de la carpeta `fonts/` (licencia libre OFL). La app no se conecta a Google ni a ningún otro sitio: mejor para la privacidad (RGPD).
 
 ## Si una lonja deja de actualizarse
 
