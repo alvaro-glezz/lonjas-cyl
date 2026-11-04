@@ -1,5 +1,5 @@
 {
- "generado": "2026-11-04T15:34+00:00",
+ "generado": "2026-11-04T15:44+00:00",
  "lonjas": [
   {
    "id": "salamanca",
@@ -267,7 +267,7 @@
    ],
    "comprobado": "2026-11-03T23:45:00+01:00",
    "origen": "carga inicial",
-   "error": "Lectura incompleta: 4 filas, fecha ''"
+   "error": "Lectura incompleta o no válida"
   },
   {
    "id": "leon",
@@ -715,7 +715,7 @@
    ],
    "comprobado": "2026-11-03T23:45:00+01:00",
    "origen": "carga inicial",
-   "error": "JSONDecodeError: Expecting value: line 1 column 1 (char 0)"
+   "error": null
   },
   {
    "id": "lerma",
@@ -845,7 +845,8 @@
     }
    ],
    "comprobado": "2026-11-03T23:45:00+01:00",
-   "origen": "carga inicial"
+   "origen": "carga inicial",
+   "error": "Falló la lectura automática (ValueError)"
   },
   {
    "id": "zamora",
