@@ -20,7 +20,7 @@ import sys
 import traceback
 from datetime import date, datetime, timedelta, timezone
 from pathlib import Path
-from urllib.parse import urljoin
+from urllib.parse import urljoin, urlparse
 
 import requests
 from bs4 import BeautifulSoup
@@ -37,25 +37,72 @@ MESES = {m: i + 1 for i, m in enumerate(
 MINIMO_FILAS = 4
 AÑOS_HISTORIAL = 3
 
+# --- Límites de seguridad -------------------------------------------------
+# Solo se descargan páginas y PDF de estos dominios (y sus subdominios), siempre por https. Los enlaces a
+# PDF salen del HTML de webs ajenas: sin esta lista, una web comprometida podría hacer que el robot
+# descargue cualquier otra dirección. Si una lonja cambia de dominio, añádelo aquí.
+DOMINIOS_PERMITIDOS = ("lasalina.es", "lonjadeleon.es", "fessegovia.es", "lerma.burgos.es")
+MAX_BYTES = 15 * 1024 * 1024   # tamaño máximo de cada descarga
+MAX_PAGINAS_PDF = 30           # un boletín real tiene 1-5 páginas
+MAX_REDIRECCIONES = 5
+PRECIO_MAX = 100_000           # €/t, €/kg, €/ud... nada real se acerca a esto
+
 
 # ---------------------------------------------------------------------------
 # Utilidades de red y de fechas
 # ---------------------------------------------------------------------------
-def bajar(url: str, **kw) -> requests.Response:
-    r = requests.get(url, headers=CABECERAS, timeout=40, **kw)
-    r.raise_for_status()
-    return r
+def dominio_permitido(url: str) -> bool:
+    p = urlparse(url)
+    h = (p.hostname or "").lower()
+    return p.scheme == "https" and any(h == d or h.endswith("." + d) for d in DOMINIOS_PERMITIDOS)
+
+
+def bajar(url: str) -> requests.Response:
+    """Descarga segura: solo https y dominios conocidos, redirecciones revisadas una a una, tamaño limitado."""
+    for _ in range(MAX_REDIRECCIONES + 1):
+        if not dominio_permitido(url):
+            raise ValueError(f"Dirección no permitida ({urlparse(url).hostname}). "
+                             "Si es legítima, añade su dominio a DOMINIOS_PERMITIDOS.")
+        r = requests.get(url, headers=CABECERAS, timeout=(10, 40), stream=True, allow_redirects=False)
+        if r.status_code in (301, 302, 303, 307, 308) and r.headers.get("Location"):
+            url = urljoin(url, r.headers["Location"])
+            r.close()
+            continue
+        r.raise_for_status()
+        buf = bytearray()
+        for trozo in r.iter_content(65536):
+            buf += trozo
+            if len(buf) > MAX_BYTES:
+                r.close()
+                raise ValueError("Respuesta demasiado grande")
+        r._content, r._content_consumed = bytes(buf), True  # para que .text/.json/.content sigan funcionando
+        return r
+    raise ValueError("Demasiadas redirecciones")
+
+
+def fecha_plausible(iso: str | None) -> bool:
+    """Una sesión real es de los últimos 2 años y no es futura. Evita que una fecha mal leída
+    (p. ej. 2099) bloquee para siempre las actualizaciones, ya que solo se aceptan sesiones más nuevas."""
+    try:
+        d = date.fromisoformat(iso or "")
+    except ValueError:
+        return False
+    hoy = date.today()
+    return hoy - timedelta(days=730) <= d <= hoy + timedelta(days=1)
 
 
 def fecha_en(texto: str) -> str | None:
     """Primera fecha que aparezca: '3 de noviembre de 2026', '29-10-2026', '29.10.2026'."""
     t = texto.lower()
-    m = re.search(r"(\d{1,2})\s+de\s+(" + "|".join(MESES) + r")\s+(?:de\s+)?(\d{4})", t)
-    if m:
-        return date(int(m.group(3)), MESES[m.group(2)], int(m.group(1))).isoformat()
-    m = re.search(r"(\d{4})[-_ ](" + "|".join(MESES) + r")[-_ ](\d{1,2})", t)  # lonja-2026-Noviembre-3
-    if m:
-        return date(int(m.group(1)), MESES[m.group(2)], int(m.group(3))).isoformat()
+    try:
+        m = re.search(r"(\d{1,2})\s+de\s+(" + "|".join(MESES) + r")\s+(?:de\s+)?(\d{4})", t)
+        if m:
+            return date(int(m.group(3)), MESES[m.group(2)], int(m.group(1))).isoformat()
+        m = re.search(r"(\d{4})[-_ ](" + "|".join(MESES) + r")[-_ ](\d{1,2})", t)  # lonja-2026-Noviembre-3
+        if m:
+            return date(int(m.group(1)), MESES[m.group(2)], int(m.group(3))).isoformat()
+    except ValueError:
+        return None
     m = re.search(r"\b(\d{1,2})[-./](\d{1,2})[-./](\d{4}|\d{2})\b", t)
     if m:
         a = int(m.group(3)); a += 2000 if a < 100 else 0
@@ -68,7 +115,11 @@ def fecha_en(texto: str) -> str | None:
 
 def texto_pdf(contenido: bytes) -> str:
     import pdfplumber
+    if not contenido.startswith(b"%PDF-"):
+        raise ValueError("El archivo descargado no es un PDF")
     with pdfplumber.open(io.BytesIO(contenido)) as pdf:
+        if len(pdf.pages) > MAX_PAGINAS_PDF:
+            raise ValueError(f"PDF con demasiadas páginas ({len(pdf.pages)})")
         return "\n".join((p.extract_text() or "") for p in pdf.pages)
 
 
@@ -123,6 +174,8 @@ def leer_leon():
         if not re.search(r"lonja|cotizac", titulo, re.I):
             continue
         f = fecha_en(titulo) or e["date"][:10]
+        if not fecha_plausible(f):
+            continue
         por_fecha.setdefault(f, []).append((titulo, e))
     if not por_fecha:
         raise RuntimeError("No hay entradas de cotizaciones en la web de la Lonja de León")
@@ -191,26 +244,51 @@ def leer_manual(id_lonja: str):
     ruta = MANUAL / f"{id_lonja}.csv"
     if not ruta.exists():
         return None
+    if ruta.stat().st_size > 1_000_000:
+        raise ValueError(f"{ruta.name}: archivo demasiado grande")
     filas, fecha = [], None
     with ruta.open(encoding="utf-8-sig") as fh:
         for r in csv.DictReader(fh, delimiter=";"):
-            if not r.get("producto"):
+            if len(filas) >= 600:
+                break
+            if not (r.get("producto") or "").strip():
                 continue
-            fecha = r["fecha"].strip() or fecha
-            filas.append({"cat": r["categoria"].strip() or "General", "producto": r["producto"].strip(),
-                          "unidad": r["unidad"].strip(), "ant": numero(r.get("anterior")), "act": numero(r.get("actual"))})
-    if fecha and re.match(r"\d{1,2}/\d{1,2}/\d{4}", fecha):
+            fecha = (r.get("fecha") or "").strip() or fecha
+            filas.append({"cat": (r.get("categoria") or "").strip() or "General", "producto": r["producto"].strip(),
+                          "unidad": (r.get("unidad") or "").strip(), "ant": numero(r.get("anterior")), "act": numero(r.get("actual"))})
+    if fecha and re.match(r"^\d{1,2}/\d{1,2}/\d{4}$", fecha):
         d, m, a = fecha.split("/")
-        fecha = date(int(a), int(m), int(d)).isoformat()
+        fecha = date(int(a), int(m), int(d)).isoformat()  # fecha imposible -> ValueError, lo gestiona main()
     return (fecha, filas, "carga manual") if fecha and filas else None
+
+
+def limpiar_fila(f: dict) -> dict | None:
+    """Valida una fila leída de una fuente externa antes de publicarla. Devuelve None si no es fiable."""
+    def txt(v, mx):
+        return re.sub(r"[\x00-\x1f\x7f<>\"'`]", " ", str(v or "")).strip()[:mx]
+    producto, cat, unidad = txt(f.get("producto"), 80), txt(f.get("cat"), 40) or "General", txt(f.get("unidad"), 20)
+    if len(producto) < 3 or not slug(producto):
+        return None
+    if unidad and not re.fullmatch(r"€/[A-Za-z. ]{1,14}", unidad):
+        unidad = ""
+    valores = [f.get("ant"), f.get("act")]
+    if any(v is not None and not (0 <= v <= PRECIO_MAX) for v in valores):
+        return None
+    out = {"producto": producto, "cat": cat, "unidad": unidad, "ant": f.get("ant"), "act": f.get("act")}
+    if f.get("rango"):
+        out["rango"] = txt(f["rango"], 30)
+    return out
 
 
 # ---------------------------------------------------------------------------
 # Fusión con los datos existentes
 # ---------------------------------------------------------------------------
 def aplicar(lonja: dict, historial: dict, fecha: str, filas: list[dict], origen: str) -> bool:
+    filas = [g for g in (limpiar_fila(f) for f in filas) if g]
     if not fecha or len(filas) < MINIMO_FILAS:
-        raise RuntimeError(f"Lectura incompleta: {len(filas)} filas, fecha {fecha!r}")
+        raise RuntimeError(f"Lectura incompleta: {len(filas)} filas válidas, fecha {fecha!r}")
+    if not fecha_plausible(fecha):
+        raise RuntimeError(f"Fecha de sesión fuera de rango: {fecha!r}")
     if lonja.get("fecha") and fecha <= lonja["fecha"]:
         return False  # ya tenemos esta sesión (o una más nueva)
     previos = {f["id"]: f for f in lonja.get("precios", [])}
@@ -256,13 +334,18 @@ def main(solo: list[str]) -> int:
         lid = lonja["id"]
         if solo and lid not in solo:
             continue
-        lectura, error = None, None
-        manual = leer_manual(lid)
+        lectura, error, manual = None, None, None
+        try:
+            manual = leer_manual(lid)
+        except Exception as exc:  # noqa: BLE001  (un CSV mal escrito no debe tumbar al resto de lonjas)
+            error = f"CSV manual no válido: {type(exc).__name__}"
+            print(f"[{lid}] {error}: {exc}")
         if lid in LECTORES:
             try:
                 lectura = LECTORES[lid]()
             except Exception as exc:  # noqa: BLE001
-                error = f"{type(exc).__name__}: {exc}"
+                error = f"Falló la lectura automática ({type(exc).__name__})"
+                print(f"[{lid}] detalle: {exc}")  # el detalle completo queda solo en el registro de Actions
                 traceback.print_exc()
         if manual and (not lectura or (manual[0] or "") >= (lectura[0] or "")):
             lectura = manual
@@ -272,11 +355,12 @@ def main(solo: list[str]) -> int:
                 print(f"[{lid}] sesión {lectura[0]}: {len(lectura[1])} filas" + (" (nueva)" if cambio else " (sin cambios)"))
                 error = None  # hay datos válidos (automáticos o manuales)
             except Exception as exc:  # noqa: BLE001
-                error = str(exc)
+                error = "Lectura incompleta o no válida"
+                print(f"[{lid}] detalle: {exc}")
         if error:
             fallos += 1
             print(f"[{lid}] ERROR: {error}")
-            lonja["error"] = error[:300]
+            lonja["error"] = error[:120]  # el JSON es público: sin rutas, URLs ni mensajes internos
         elif lonja.get("error") and lectura:
             lonja["error"] = None
 

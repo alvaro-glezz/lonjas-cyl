@@ -13,6 +13,12 @@ import unicodedata
 # Texto y números
 # ---------------------------------------------------------------------------
 
+# Un boletín real tiene líneas cortas. Las muy largas son basura o un intento de colgar el lector
+# (las expresiones regulares tardan mucho más cuanto más larga es la línea).
+MAX_LINEA = 300
+MAX_FILAS = 600
+
+
 def sin_acentos(t: str) -> str:
     return "".join(c for c in unicodedata.normalize("NFD", t) if unicodedata.category(c) != "Mn")
 
@@ -155,8 +161,10 @@ def leer_linea(linea: str, con_diferencia: bool | None = None) -> dict | None:
       'Maíz 250,00 S/C'                                  (actual sin cotización)
       'Cerdo Selecto 1,20 / 1,21 ='                     (horquilla)
     """
+    if len(linea) > MAX_LINEA * 4:  # ni siquiera vale la pena normalizarla
+        return None
     linea = re.sub(r"\s+", " ", linea.replace(" ", " ")).strip()
-    if not linea or CABECERA_RUIDO.search(linea[:25]) or re.match(r"(?i)(lonja|semana|sesi[oó]n|fecha)\b", linea):
+    if not linea or len(linea) > MAX_LINEA or CABECERA_RUIDO.search(linea[:25]) or re.match(r"(?i)(lonja|semana|sesi[oó]n|fecha)\b", linea):
         return None
     if re.search(r"(?i)\d{1,2}\s+de\s+(enero|febrero|marzo|abril|mayo|junio|julio|agosto|septiembre|octubre|noviembre|diciembre)", linea):
         return None
@@ -214,8 +222,10 @@ def leer_texto(texto: str, unidad_defecto: str = "") -> list[dict]:
     filas, cat, unidad_mesa = [], "General", unidad_defecto
     for bruta in texto.splitlines():
         linea = bruta.strip()
-        if not linea:
+        if not linea or len(linea) > MAX_LINEA:
             continue
+        if len(filas) >= MAX_FILAS:
+            break
         if es_titulo(linea):
             t = re.sub(r"^MESA (DE|DEL) ", "", linea.strip()).strip()
             if not CABECERA_RUIDO.search(t) and len(t) < 40:
