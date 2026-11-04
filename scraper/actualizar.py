@@ -148,9 +148,14 @@ def elegir_pdf(lid: str, pdfs: list[tuple[str, str]], patron: str) -> tuple[str,
     for u, t in pdfs:
         if u not in vistos:
             vistos.add(u); unicos.append((u, t))
-    candidatos = [p for p in unicos if re.search(patron, p[0] + " " + p[1], re.I)] or unicos
+    utiles = [p for p in unicos if not re.search(NO_BOLETIN, p[0] + " " + p[1], re.I)]
+    if not utiles:
+        for u, t in unicos[:8]:
+            print(f"[{lid}] PDF descartado (no es un boletín): {t[:60]!r} | {u[:140]}")
+        raise RuntimeError("La página no enlaza ningún boletín de cotizaciones")
+    candidatos = [p for p in utiles if re.search(patron, p[0] + " " + p[1], re.I)] or utiles
     con_fecha = [(fecha_de_enlace(u, t), u, t) for u, t in candidatos]
-    for f, u, t in con_fecha[:8]:
+    for f, u, t in con_fecha[:20]:
         print(f"[{lid}] PDF visto: {f or 'sin fecha'} | {t[:60]!r} | {u[:140]}")
     fechados = [c for c in con_fecha if c[0]]
     elegido = max(fechados) if fechados else con_fecha[0]
@@ -197,13 +202,26 @@ def filas_de_tablas_html(html: str, cat_defecto: str, unidad_defecto: str = "") 
 
 
 def enlaces_pdf(html: str, base: str) -> list[tuple[str, str]]:
+    """PDF enlazados en la página: enlaces <a>, marcos/visores (iframe, embed, object) y, por si los pinta
+    un script, cualquier ruta terminada en .pdf escrita en el HTML. En orden de aparición, sin repetir."""
     sopa = BeautifulSoup(html, "html.parser")
-    out = []
+    out, vistos = [], set()
+    def poner(href, texto):
+        u = urljoin(base, href.strip())
+        if ".pdf" in u.lower() and u not in vistos:
+            vistos.add(u); out.append((u, texto))
     for a in sopa.find_all("a", href=True):
-        href = urljoin(base, a["href"])
-        if ".pdf" in href.lower():
-            out.append((href, a.get_text(" ", strip=True)))
+        poner(a["href"], a.get_text(" ", strip=True))
+    for tag, attr in (("iframe", "src"), ("embed", "src"), ("object", "data")):
+        for el in sopa.find_all(tag):
+            if el.get(attr):
+                poner(el[attr], f"({tag})")
+    for m in re.finditer(r"""["'(=]\s*((?:https?:)?/?/?[^"'()<>\s]{1,300}?\.pdf)\b""", html[:2_000_000], re.I):
+        poner(m.group(1), "")
     return out
+
+
+NO_BOLETIN = r"estatut|normativ|reglament|ordenanz|acuerdo|bases|convocatoria|acta"
 
 
 # ---------------------------------------------------------------------------
@@ -254,9 +272,25 @@ def leer_salamanca():
     pagina = "https://www.lasalina.es/economiayhacienda/agriculturayganaderia/mercado/lonja/"
     html = bajar(pagina).text
     pdfs = enlaces_pdf(html, pagina)
+    if not any(re.search(r"/pdfs/lonja|cotiz", u, re.I) for u, _ in pdfs):
+        # El boletín no está en la portada de la Lonja: se mira en sus subpáginas (cotizaciones, boletines...)
+        sopa = BeautifulSoup(html, "html.parser")
+        sub = []
+        for a in sopa.find_all("a", href=True):
+            u = urljoin(pagina, a["href"]).split("#")[0]
+            txt = a.get_text(" ", strip=True)
+            if (dominio_permitido(u) and ".pdf" not in u.lower() and u.rstrip("/") != pagina.rstrip("/")
+                    and re.search(r"cotiza|bolet|precio|sesion|sesión|mesa", u + " " + txt, re.I) and u not in sub):
+                sub.append(u)
+        for u in sub[:4]:
+            print(f"[salamanca] buscando el boletín en la subpágina {u[:140]}")
+            try:
+                pdfs += enlaces_pdf(bajar(u).text, u)
+            except Exception as exc:  # noqa: BLE001
+                print(f"[salamanca] no se pudo abrir la subpágina: {type(exc).__name__}")
     if not pdfs:
         raise RuntimeError("No hay PDF en la página de La Salina")
-    url_pdf, fecha_nombre = elegir_pdf("salamanca", pdfs, r"lonja|cotiz")
+    url_pdf, fecha_nombre = elegir_pdf("salamanca", pdfs, r"/pdfs/lonja|lonja-20\d\d|cotiz")
     texto = texto_pdf(bajar(url_pdf).content)
     fecha = fecha_en(texto[:1500]) or fecha_nombre or fecha_en(texto)
     filas = leer_texto(texto)
@@ -264,22 +298,94 @@ def leer_salamanca():
     return fecha, filas, url_pdf
 
 
+LERMA_UNIDADES = {"tonelada": "€/t", "kg": "€/kg", "unidad": "€/ud"}
+LERMA_MESAS = (("cereal", "Cereales"), ("porcino", "Porcino"), ("lech", "Porcino"), ("vacuno", "Vacuno"), ("ovino", "Ovino"))
+LERMA_LINEA = re.compile(r"^(?P<nombre>.+?)[\s.…]*?\s(?P<precio>\d{1,5}(?:[.,]\d{1,3})?)\s*(?P<unidad>euros?\s*/\s*[a-záéíóú.]+|[“”\"]+)?\s*$", re.I)
+
+
+def nombre_lerma(crudo: str, anterior: str, mesa_original: str) -> str:
+    """'“ “ rosada' tras 'Terneras carne blanca' -> 'Terneras carne rosada'; 'Normal' (porcino) -> 'Cerdo normal'."""
+    crudo = re.sub(r"[()]", " ", crudo)
+    if re.match(r"^[“”\"]", crudo):
+        resto = re.sub(r"^([“”\"]\s*)+", "", crudo).strip()
+        base = anterior.rsplit(" ", 1)[0] if " " in anterior else anterior
+        crudo = f"{base} {resto}"
+    n = re.sub(r"\s+", " ", crudo).strip().lower()
+    if "porcino" in mesa_original.lower() and n in ("selecto", "normal", "graso"):
+        n = "cerdo " + n
+    n = n.replace("cerdas desvieje", "cerdas de desvieje")
+    n = n[:1].upper() + n[1:]
+    return re.sub(r"\biii\b", "III", re.sub(r"\blerma\b", "Lerma", n))
+
+
+def leer_sesion_lerma(bloque: str):
+    """Lee una sesión: 'FECHA DE CELEBRACIÓN: 30 de Octubre de 2026' y líneas 'Trigo (Tipo III).... 230 Euros/Tonelada'."""
+    from comun import numero
+    m = re.search(r"celebraci[oó]n\s*:?\s*(.{0,60})", bloque, re.I)
+    fecha = fecha_en(m.group(1)) if m else fecha_en(bloque[:400])
+    filas, mesa, mesa_original, unidad, anterior = [], "General", "", "", ""
+    for linea in bloque.splitlines():
+        linea = linea.strip()
+        if not linea or len(linea) > 200:
+            continue
+        if re.match(r"(?i)comentario", linea):
+            break
+        if not re.search(r"\d", linea) and linea.upper() == linea and len(linea) < 40:
+            for clave, nombre in LERMA_MESAS:
+                if clave in linea.lower():
+                    mesa, mesa_original, unidad = nombre, linea, ""
+            continue
+        if mesa == "General":
+            continue  # cabecera del boletín (fechas, títulos)
+        m = LERMA_LINEA.match(linea)
+        if not m:
+            continue
+        u = (m.group("unidad") or "").lower()
+        if u.startswith("euro"):
+            unidad = next((v for k, v in LERMA_UNIDADES.items() if k in u), unidad)
+        nombre = nombre_lerma(m.group("nombre").strip(" .…"), anterior, mesa_original)
+        anterior = nombre
+        und = unidad + (" vivo" if unidad == "€/kg" and mesa == "Porcino" else "")
+        filas.append({"cat": mesa, "producto": nombre, "unidad": und, "ant": None, "act": numero(m.group("precio"))})
+    return fecha, filas
+
+
 def leer_lerma():
-    """El Ayuntamiento de Lerma publica las cotizaciones de cada viernes."""
+    """Lerma publica un PDF por año ('lonjahistorico2026.pdf') con una sesión por página, de la más antigua a la
+    más reciente. Se coge el del año más alto y se lee la última sesión."""
+    import pdfplumber
     pagina = "https://lerma.burgos.es/lonja"
     html = bajar(pagina).text
-    pdfs = enlaces_pdf(html, pagina)
-    fecha_nombre = None
-    if pdfs:
-        url, fecha_nombre = elegir_pdf("lerma", pdfs, r"lonja|cotiz|precio|sesi[oó]n|mercado")
-        texto = texto_pdf(bajar(url).content)
-    else:
-        print("[lerma] la página no enlaza PDF; se lee el texto de la propia página")
-        url, texto = pagina, BeautifulSoup(html, "html.parser").get_text("\n")
-    fecha = fecha_en(texto[:1500]) or fecha_nombre or fecha_en(texto)
-    filas = leer_texto(texto)
-    diagnostico("lerma", texto, filas, fecha)
-    return fecha, filas, url
+    pdfs = [(u, t) for u, t in enlaces_pdf(html, pagina) if re.search(r"lonja", u + " " + t, re.I)]
+    con_año = []
+    for u, t in pdfs:
+        años = [int(a) for a in re.findall(r"(20\d\d)", u.rsplit("/", 1)[-1] + " " + t)]
+        if años:
+            con_año.append((max(años), u))
+    if not con_año:
+        for u, t in pdfs[:10]:
+            print(f"[lerma] PDF visto: {t[:60]!r} | {u[:140]}")
+        raise RuntimeError("No se encuentra el histórico anual de la Lonja de Lerma")
+    año, url = max(con_año)
+    print(f"[lerma] histórico elegido ({año}): {url[:160]}")
+    if año < date.today().year - 1:
+        print(f"[lerma] aviso: el histórico más reciente enlazado es de {año}")
+    contenido = bajar(url).content
+    if not contenido.startswith(b"%PDF-"):
+        raise ValueError("El archivo descargado no es un PDF")
+    with pdfplumber.open(io.BytesIO(contenido)) as pdf:
+        n = len(pdf.pages)
+        if n > MAX_PAGINAS_TOTAL:
+            raise ValueError(f"PDF con demasiadas páginas ({n})")
+        texto = "\n".join((p.extract_text() or "") for p in pdf.pages[-3:])  # las 3 últimas bastan
+    bloques = re.split(r"(?i)(?=lonja agropecuaria de lerma)", texto)
+    for bloque in reversed(bloques):
+        fecha, filas = leer_sesion_lerma(bloque)
+        if fecha and len(filas) >= MINIMO_FILAS:
+            print(f"[lerma] última sesión del PDF ({n} páginas): {fecha}, {len(filas)} filas")
+            return fecha, filas, url
+    diagnostico("lerma", bloques[-1] if bloques else texto, [], None)
+    raise RuntimeError("No se reconoce la última sesión del histórico de Lerma")
 
 
 LECTORES = {"leon": leer_leon, "segovia": leer_segovia, "salamanca": leer_salamanca, "lerma": leer_lerma}
