@@ -450,7 +450,7 @@ def descargar() -> list[str]:
             continue
         for m in re.finditer(r'<a\b[^>]*href="([^"]+)"[^>]*>(.*?)</a>', html, re.S | re.I):
             href = urllib.parse.urljoin(PAGINA.format(anio=anio), m.group(1).replace("&amp;", "&"))
-            texto = limpio(re.sub(r"<[^>]+>", " ", m.group(2)))
+            texto = re.sub(r"\s*\(\d+\s*kbytes\)", "", limpio(re.sub(r"<[^>]+>", " ", m.group(2))), flags=re.I).strip()
             ruta = urllib.parse.unquote(urllib.parse.urlparse(href).path)
             s = re.search(r"Semana\s+(\d{1,2})\b", texto)
             if not s or not re.search(r"\.xlsx?$", ruta, re.I):
