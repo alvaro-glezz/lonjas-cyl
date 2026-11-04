@@ -1,0 +1,67 @@
+# Descarga puntual de los Excel de lonjas 2026 publicados por la Junta de Castilla y León.
+# Se ejecuta al subir cambios a la rama "descarga-jcyl" o a mano desde "Actions".
+# Solo descarga archivos alojados en dominios jcyl.es y no ejecuta nada de lo descargado.
+name: Descargar Excel Junta CyL
+
+on:
+  push:
+    branches: [descarga-jcyl]
+    paths: [".github/workflows/descargar-jcyl.yml"]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  descargar:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - name: Descargar página y Excel
+        run: |
+          set -u
+          DEST=data/fuentes/jcyl-2026
+          mkdir -p "$DEST"
+          UA="Mozilla/5.0 (X11; Linux x86_64) lonjas-cyl"
+          for ANIO in 2026 2025; do
+            URL="https://agriculturaganaderia.jcyl.es/web/es/estadistica-informacion-agraria/lonjas-${ANIO}.html"
+            curl -sSL --max-time 60 -A "$UA" -o "$DEST/pagina-${ANIO}.html" "$URL" || echo "No se pudo leer $URL"
+          done
+          python3 - "$DEST" <<'PY'
+          import re, sys, html, urllib.parse, pathlib
+          dest = pathlib.Path(sys.argv[1])
+          out = []
+          for anio in ("2026", "2025"):
+              p = dest / f"pagina-{anio}.html"
+              if not p.exists():
+                  continue
+              base = f"https://agriculturaganaderia.jcyl.es/web/es/estadistica-informacion-agraria/lonjas-{anio}.html"
+              txt = p.read_text("utf-8", "replace")
+              for m in re.finditer(r'<a\b[^>]*href="([^"]+)"[^>]*>(.*?)</a>', txt, re.S | re.I):
+                  href = urllib.parse.urljoin(base, html.unescape(m.group(1)))
+                  texto = re.sub(r"<[^>]+>|\s+", " ", m.group(2)).strip()
+                  host = urllib.parse.urlparse(href).hostname or ""
+                  if not (host == "jcyl.es" or host.endswith(".jcyl.es")):
+                      continue
+                  if re.search(r"\.(xlsx?|xlsm|ods|csv)(\?|$)", href, re.I) or re.search(r"excel|xls", texto, re.I):
+                      out.append(f"{anio}\t{href}\t{texto}")
+          (dest / "enlaces.tsv").write_text("\n".join(dict.fromkeys(out)) + "\n", "utf-8")
+          print("\n".join(out))
+          PY
+          i=0
+          while IFS=$'\t' read -r ANIO HREF TEXTO; do
+            [ -z "$HREF" ] && continue
+            i=$((i+1))
+            mkdir -p "$DEST/$ANIO"
+            NOMBRE=$(basename "${HREF%%\?*}" | tr -c 'A-Za-z0-9._-' '_')
+            curl -sSL --max-time 120 --max-filesize 30000000 -A "$UA" -o "$DEST/$ANIO/$NOMBRE" "$HREF" || echo "Fallo: $HREF"
+          done < "$DEST/enlaces.tsv"
+          ls -la "$DEST" "$DEST"/* | head -200
+      - name: Guardar en la rama
+        run: |
+          git config user.name "actualizador-lonjas"
+          git config user.email "actions@users.noreply.github.com"
+          git add data/fuentes
+          git commit -m "Excel de lonjas descargados de la Junta CyL" || echo "Nada nuevo"
+          git push
