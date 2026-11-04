@@ -1,5 +1,5 @@
 {
- "generado": "2026-11-04T13:49+00:00",
+ "generado": "2026-11-04T15:34+00:00",
  "lonjas": [
   {
    "id": "salamanca",
@@ -714,7 +714,8 @@
     }
    ],
    "comprobado": "2026-11-03T23:45:00+01:00",
-   "origen": "carga inicial"
+   "origen": "carga inicial",
+   "error": "JSONDecodeError: Expecting value: line 1 column 1 (char 0)"
   },
   {
    "id": "lerma",
