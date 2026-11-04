@@ -43,7 +43,8 @@ AÑOS_HISTORIAL = 3
 # descargue cualquier otra dirección. Si una lonja cambia de dominio, añádelo aquí.
 DOMINIOS_PERMITIDOS = ("lasalina.es", "lonjadeleon.es", "fessegovia.es", "lerma.burgos.es")
 MAX_BYTES = 15 * 1024 * 1024   # tamaño máximo de cada descarga
-MAX_PAGINAS_PDF = 30           # un boletín real tiene 1-5 páginas
+MAX_PAGINAS_PDF = 30           # solo se leen las primeras páginas: un boletín real tiene 1-5
+MAX_PAGINAS_TOTAL = 400        # un PDF más grande que esto ni se abre
 MAX_REDIRECCIONES = 5
 PRECIO_MAX = 100_000           # €/t, €/kg, €/ud... nada real se acerca a esto
 
@@ -114,13 +115,57 @@ def fecha_en(texto: str) -> str | None:
 
 
 def texto_pdf(contenido: bytes) -> str:
+    """Texto de las primeras MAX_PAGINAS_PDF páginas (un PDF largo no se rechaza: se lee solo el principio)."""
     import pdfplumber
     if not contenido.startswith(b"%PDF-"):
         raise ValueError("El archivo descargado no es un PDF")
     with pdfplumber.open(io.BytesIO(contenido)) as pdf:
-        if len(pdf.pages) > MAX_PAGINAS_PDF:
-            raise ValueError(f"PDF con demasiadas páginas ({len(pdf.pages)})")
-        return "\n".join((p.extract_text() or "") for p in pdf.pages)
+        n = len(pdf.pages)
+        if n > MAX_PAGINAS_TOTAL:
+            raise ValueError(f"PDF con demasiadas páginas ({n})")
+        if n > MAX_PAGINAS_PDF:
+            print(f"    aviso: el PDF tiene {n} páginas; se leen solo las {MAX_PAGINAS_PDF} primeras")
+        return "\n".join((p.extract_text() or "") for p in pdf.pages[:MAX_PAGINAS_PDF])
+
+
+def fecha_de_enlace(url: str, texto: str) -> str | None:
+    """Fecha en el nombre del archivo o en el texto del enlace ('lonja-2026-Noviembre-3.pdf', 'Lonja 31.10.2026')."""
+    nombre = url.rsplit("/", 1)[-1]
+    for trozo in (texto, nombre.replace("-", " ").replace("_", " "), url.replace("-", " ").replace("_", " ")):
+        f = fecha_en(trozo or "")
+        if f and fecha_plausible(f):
+            return f
+    return None
+
+
+def elegir_pdf(lid: str, pdfs: list[tuple[str, str]], patron: str) -> tuple[str, str | None]:
+    """Elige el boletín más reciente entre los PDF enlazados en una página.
+    1) se quedan los que parecen de cotizaciones (patron) si hay alguno;
+    2) de los que llevan fecha válida, el más nuevo;
+    3) si ninguno lleva fecha, el primero de la página (estas webs ponen arriba el último).
+    Deja en el registro de Actions qué candidatos vio y cuál eligió, para poder revisarlo."""
+    vistos, unicos = set(), []
+    for u, t in pdfs:
+        if u not in vistos:
+            vistos.add(u); unicos.append((u, t))
+    candidatos = [p for p in unicos if re.search(patron, p[0] + " " + p[1], re.I)] or unicos
+    con_fecha = [(fecha_de_enlace(u, t), u, t) for u, t in candidatos]
+    for f, u, t in con_fecha[:8]:
+        print(f"[{lid}] PDF visto: {f or 'sin fecha'} | {t[:60]!r} | {u[:140]}")
+    fechados = [c for c in con_fecha if c[0]]
+    elegido = max(fechados) if fechados else con_fecha[0]
+    print(f"[{lid}] PDF elegido: {elegido[1][:160]}")
+    return elegido[1], elegido[0]
+
+
+def diagnostico(lid: str, texto: str, filas: list, fecha: str | None) -> None:
+    """Si la lectura sale floja, deja en el registro el principio del documento para ver su formato."""
+    if fecha and len(filas) >= 8:
+        return
+    lineas = [l.strip() for l in texto.splitlines() if l.strip()][:15]
+    print(f"[{lid}] lectura floja ({len(filas)} filas, fecha {fecha!r}). Principio del documento:")
+    for l in lineas:
+        print(f"    | {l[:110]}")
 
 
 def filas_de_tablas_html(html: str, cat_defecto: str, unidad_defecto: str = "") -> list[dict]:
@@ -208,14 +253,15 @@ def leer_salamanca():
     """La Diputación (La Salina) publica cada lunes el PDF de la Lonja."""
     pagina = "https://www.lasalina.es/economiayhacienda/agriculturayganaderia/mercado/lonja/"
     html = bajar(pagina).text
-    pdfs = [(u, t) for u, t in enlaces_pdf(html, pagina) if re.search(r"lonja|cotiz", u + t, re.I)]
+    pdfs = enlaces_pdf(html, pagina)
     if not pdfs:
-        raise RuntimeError("No hay PDF de cotizaciones en la página de La Salina")
-    con_fecha = [(fecha_en(u.replace("-", " ") + " " + t) or "", u) for u, t in pdfs]
-    fecha_nombre, url_pdf = max(con_fecha)
+        raise RuntimeError("No hay PDF en la página de La Salina")
+    url_pdf, fecha_nombre = elegir_pdf("salamanca", pdfs, r"lonja|cotiz")
     texto = texto_pdf(bajar(url_pdf).content)
-    fecha = fecha_en(texto[:600]) or fecha_nombre
-    return fecha, leer_texto(texto), url_pdf
+    fecha = fecha_en(texto[:1500]) or fecha_nombre or fecha_en(texto)
+    filas = leer_texto(texto)
+    diagnostico("salamanca", texto, filas, fecha)
+    return fecha, filas, url_pdf
 
 
 def leer_lerma():
@@ -223,14 +269,17 @@ def leer_lerma():
     pagina = "https://lerma.burgos.es/lonja"
     html = bajar(pagina).text
     pdfs = enlaces_pdf(html, pagina)
+    fecha_nombre = None
     if pdfs:
-        con_fecha = [(fecha_en(u.replace("-", " ") + " " + t) or "", u) for u, t in pdfs]
-        _, url = max(con_fecha)
+        url, fecha_nombre = elegir_pdf("lerma", pdfs, r"lonja|cotiz|precio|sesi[oó]n|mercado")
         texto = texto_pdf(bajar(url).content)
     else:
+        print("[lerma] la página no enlaza PDF; se lee el texto de la propia página")
         url, texto = pagina, BeautifulSoup(html, "html.parser").get_text("\n")
-    fecha = fecha_en(texto)
-    return fecha, leer_texto(texto), url
+    fecha = fecha_en(texto[:1500]) or fecha_nombre or fecha_en(texto)
+    filas = leer_texto(texto)
+    diagnostico("lerma", texto, filas, fecha)
+    return fecha, filas, url
 
 
 LECTORES = {"leon": leer_leon, "segovia": leer_segovia, "salamanca": leer_salamanca, "lerma": leer_lerma}
