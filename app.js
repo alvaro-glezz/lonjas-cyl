@@ -240,6 +240,7 @@ function vistaComparar() {
       <div class="filtros" role="group" aria-label="Producto">${disponibles.map(([c, n]) => `<button class="chip" type="button" data-clave-cmp="${esc(c)}" aria-pressed="${c === estado.clave}">${n}</button>`).join("")}</div>
       <div class="comparativa">${filasCmp || '<div class="vacio sin-borde">No hay cotizaciones de este producto ahora mismo.</div>'}</div>
       <p class="nota">La barra dorada marca el precio más alto. Fíjate en la descripción bajo cada lonja: un «trigo pienso» en almacén y un «trigo tipo III» en origen no son exactamente el mismo producto.</p>
+      ${CLAVE_A_JUNTA[estado.clave] ? `<button class="chip auto" type="button" data-h-abrir="${esc(estado.clave)}">Ver su evolución en el histórico 2025–2026</button>` : ""}
     </section>`;
 }
 
@@ -293,11 +294,13 @@ function abrirDetalle(id) {
       <div><span class="etiqueta">${serie.length > 1 ? "Mín · máx" : "Sesión"}</span><b class="num chico">${serie.length > 1 ? precio(Math.min(...vals), f.unidad) + " · " + precio(Math.max(...vals), f.unidad) : fechaCorta(f.lonja.fecha)}</b><small>${serie.length > 1 ? serie.length + " sesiones" : ""}</small></div>
     </div>
     <div class="grafico">${grafico(serie, f.unidad)}</div>
+    <div id="det-hist" class="det-hist"></div>
     ${serie.length > 1 ? `<div class="serie">${[...serie].reverse().map(p => `<div><span>${fechaLarga(p[0])}</span><b class="num">${precio(p[1], f.unidad)}</b></div>`).join("")}</div>` : ""}
     <button class="chip auto" type="button" data-fav="${esc(f.id)}" aria-pressed="${FAVS.has(f.id)}">${FAVS.has(f.id) ? "★ En favoritos" : "☆ Añadir a favoritos"}</button>
   </div>`;
   velo.hidden = false;
   $(".cerrar", velo).focus();
+  pintarHistDetalle(f);
 }
 function cerrarDetalle() { const v = $("#velo"); v.hidden = true; v.innerHTML = ""; }
 
@@ -310,6 +313,8 @@ function router() {
   else if (h === "lonjas") html = vistaLonjas();
   else if (h === "comparar") html = vistaComparar();
   else if (h === "favoritos") html = vistaFavoritos();
+  else if (h === "historico") html = vistaHistorico();
+  else if (h === "historico-fuentes") { html = vistaFuentesHist(); seccion = "historico"; }
   else { html = vistaHoy(); seccion = "hoy"; }
   $("#vista").innerHTML = html;
   document.querySelectorAll("[data-w]").forEach(el => { el.style.width = Math.min(100, Math.max(0, Number(el.dataset.w) || 0)) + "%"; });

@@ -13,7 +13,7 @@ App para el móvil con las cotizaciones semanales de las lonjas agropecuarias de
 | Zamora | — | Sin cotizar desde septiembre de 2026 |
 | Valladolid y Palencia | — | Dejó de cotizar en julio de 2026 |
 
-Pantallas: **Hoy** (resumen de trigo, cebada, maíz, cerdo, lechones y lechazo, y estado de cada lonja), **Lonjas** (la tablilla completa de cada una, por mesas y con buscador), **Comparar** (el mismo producto en todas las lonjas) y **Favoritos** (los precios que tú marques con la estrella). Al tocar un producto se ve su evolución semana a semana.
+Pantallas: **Hoy** (resumen de trigo, cebada, maíz, cerdo, lechones y lechazo, y estado de cada lonja), **Lonjas** (la tablilla completa de cada una, por mesas y con buscador), **Comparar** (el mismo producto en todas las lonjas) **Histórico** (cotizaciones semanales oficiales de 2025 y 2026) y **Favoritos** (los precios que tú marques con la estrella). Al tocar un producto se ve su evolución semana a semana y, si la Junta lo publica, su histórico oficial 2025–2026.
 
 ## Cómo funciona
 
@@ -48,6 +48,24 @@ Resumen de lo que protege esta versión (detalle en `INFORME-SEGURIDAD.md`):
 - **El lector solo habla con webs conocidas**: descarga únicamente por https y de los dominios de `DOMINIOS_PERMITIDOS` (en `scraper/actualizar.py`). Si una lonja cambia de web o publica sus PDF en otro dominio, la app marcará «Revisar fuente» y el registro de *Actions* dirá «Dirección no permitida»: añade ese dominio a la lista **solo si es el oficial de la lonja**.
 - **Nunca subas contraseñas ni claves** al repositorio (es público). Esta app no necesita ninguna; el `.gitignore` ya excluye los archivos típicos (`.env`, etc.).
 - **Tipografías propias**: las fuentes *Barlow Condensed* y *Public Sans* van dentro de la carpeta `fonts/` (licencia libre OFL). La app no se conecta a Google ni a ningún otro sitio: mejor para la privacidad (RGPD).
+
+## Histórico oficial 2025–2026 (Junta de Castilla y León)
+
+La Junta publica cada semana un Excel con las cotizaciones de las lonjas y mercados de Castilla y León (y de las principales lonjas de España). La app los incorpora como histórico:
+
+```
+Web de la Junta (Excel semanales) ──► scraper/importar_jcyl.py ──► data/historico/indice.json
+                                       (el robot lo ejecuta en         data/historico/2025.json
+                                        cada actualización)            data/historico/2026.json
+```
+
+- **Originales**: `data/fuentes/jcyl/2025/` y `2026/`, sin modificar, con su `LEEME.md` y la lista de enlaces oficiales.
+- **Datos para la app**: una serie por lonja, producto y unidad, tal como los publica la Junta. Cada punto lleva la fecha de celebración y la semana. Las unidades son las de la Junta (los cereales en €/100 kg), así que **no se mezclan** con las series de la app (€/t).
+- **Pantalla Histórico**: filtros por ámbito (Castilla y León o toda España), categoría, producto, provincia, lonja y periodo (2025, 2026, todo o comparar 2025 con 2026). Muestra el último precio, la media, el mínimo y el máximo, la variación en el periodo, la variación interanual (misma semana del año anterior), la media del mismo periodo de los dos años, la tendencia de las últimas 4 sesiones, la comparativa entre lonjas y la tabla semana a semana.
+- **Comprobación**: `python scraper/validar_historico.py` vuelve a leer todos los Excel y verifica que no falta ninguno, que los valores coinciden, que no hay duplicados y que cada serie tiene una sola unidad.
+- Los valores que se apartan mucho del resto de su serie (casi siempre filas desplazadas en el Excel original) se marcan como «dudoso»: se ven en la tabla, pero no entran en gráficos ni medias.
+
+Para importarlos a mano: `pip install -r scraper/requirements.txt` y `python scraper/importar_jcyl.py` (añade `--descargar` para bajar antes los Excel nuevos).
 
 ## Si una lonja deja de actualizarse
 

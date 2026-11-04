@@ -18,7 +18,7 @@ concurrency:
 jobs:
   actualizar:
     runs-on: ubuntu-latest
-    timeout-minutes: 10
+    timeout-minutes: 15
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
@@ -28,6 +28,11 @@ jobs:
           cache-dependency-path: scraper/requirements.txt
       - run: pip install -r scraper/requirements.txt
       - run: python scraper/actualizar.py
+      # Histórico oficial de la Junta de CyL: baja los Excel semanales nuevos y rehace data/historico/.
+      # Si la web de la Junta falla, los precios del día se publican igualmente.
+      - name: Histórico de la Junta de Castilla y León
+        continue-on-error: true
+        run: python scraper/importar_jcyl.py --descargar
       - name: Guardar si hay precios nuevos
         run: |
           if git diff --quiet data/; then

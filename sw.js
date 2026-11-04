@@ -1,8 +1,8 @@
 // Funciona sin cobertura: guarda la app y los últimos precios descargados.
 // Seguridad: solo se guardan respuestas correctas (200) del propio dominio; así un error 404/500 puntual
 // no se queda "pegado" en la copia sin conexión.
-const VERSION = "lonjas-v3";
-const APP = ["./", "index.html", "estilos.css", "app.js", "manifest.webmanifest", "icons/icono.svg", "icons/icono-192.png",
+const VERSION = "lonjas-v4";
+const APP = ["./", "index.html", "estilos.css", "app.js", "historico.js", "manifest.webmanifest", "icons/icono.svg", "icons/icono-192.png",
   "fonts/barlow-condensed-latin-500-normal.woff2", "fonts/barlow-condensed-latin-600-normal.woff2", "fonts/barlow-condensed-latin-700-normal.woff2",
   "fonts/public-sans-latin-400-normal.woff2", "fonts/public-sans-latin-500-normal.woff2", "fonts/public-sans-latin-600-normal.woff2", "fonts/public-sans-latin-700-normal.woff2"];
 
