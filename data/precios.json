@@ -1,5 +1,5 @@
 {
- "generado": "2026-11-04T16:26+00:00",
+ "generado": "2026-11-04T16:36+00:00",
  "lonjas": [
   {
    "id": "salamanca",
@@ -267,7 +267,7 @@
    ],
    "comprobado": "2026-11-03T23:45:00+01:00",
    "origen": "carga inicial",
-   "error": "Lectura incompleta o no válida"
+   "error": "Falló la lectura automática (RuntimeError)"
   },
   {
    "id": "leon",
@@ -846,7 +846,7 @@
    ],
    "comprobado": "2026-11-03T23:45:00+01:00",
    "origen": "carga inicial",
-   "error": "Lectura incompleta o no válida"
+   "error": "Falló la lectura automática (RuntimeError)"
   },
   {
    "id": "zamora",
