@@ -12,39 +12,27 @@ jobs:
     timeout-minutes: 10
     steps:
       - uses: actions/checkout@v4
-      - name: Descargar fuentes de Salamanca (2.ª vuelta)
+      - name: Boletines reales de León, Segovia, Lerma y Salamanca (para las pruebas automáticas)
         run: |
           set +e
           rm -rf diag && mkdir -p diag
-          UA="Mozilla/5.0 (X11; Linux x86_64) AppLonjasCyL-diagnostico"
-          bajar() { curl -sSL -A "$UA" --max-time 60 -o "diag/$1" -w "$1 %{http_code} %{content_type} %{size_download} %{url_effective}\n" "$2" >> diag/estado.txt; }
-          bajar sal-cotizaciones.html "https://www.lasalina.es/Aplicaciones/lonja/Cotizaciones.jsp"
-          bajar sal-lonja-sub.html "https://www.lasalina.es/lasalina/economiayhacienda/agriculturayganaderia/mercado/lonja/lonja.html"
-          bajar ckan-package.json "https://datosabiertossalamanca.es/api/3/action/package_show?id=cotizaciones-semanales-de-la-lonja-de-salamanca"
-          bajar ckan-dataset.html "https://datosabiertossalamanca.es/dataset/cotizaciones-semanales-de-la-lonja-de-salamanca"
+          UA="AppLonjasCyL/1.0 (lector semanal de cotizaciones publicas)"
+          bajar() { curl -sSL -A "$UA" --max-time 90 -o "diag/$1" -w "$1 %{http_code} %{content_type} %{size_download}\n" "$2" >> diag/estado.txt; }
+          bajar leon-posts.json "https://www.lonjadeleon.es/wp-json/wp/v2/posts?per_page=40&_fields=date,title,link,content"
+          bajar segovia-posts.json "https://www.fessegovia.es/wp-json/wp/v2/posts?search=precios%20lonja&per_page=5&_fields=date,title,link,content"
+          bajar lerma.html "https://lerma.burgos.es/lonja"
+          curl -sSL -A "$UA" --max-time 90 -r 0-300000 -o diag/salamanca-inicio.csv "https://datosabiertossalamanca.es/dataset/c914b1a6-4673-4288-8613-d077f6d5b619/resource/042beb52-4d80-4380-b073-e170364f65e7/download/agr03.csv"
           python3 - <<'PY'
-          import json, re, pathlib, subprocess
-          d = pathlib.Path("diag")
+          import json, re, subprocess
           try:
-              pkg = json.loads((d / "ckan-package.json").read_text())["result"]
-              lineas = [f"licencia: {pkg.get('license_title')} | {pkg.get('license_url')}", f"modificado: {pkg.get('metadata_modified')}"]
-              for i, r in enumerate(pkg.get("resources", [])):
-                  lineas.append(f"{i} | {r.get('format')} | {r.get('name')} | {r.get('last_modified') or r.get('created')} | {r.get('url')}")
-              (d / "ckan-recursos.txt").write_text("\n".join(lineas))
-              urls = [r["url"] for r in pkg.get("resources", []) if (r.get("format") or "").upper() in ("CSV", "JSON", "XLSX", "XLS")][:3]
-          except Exception as e:
-              (d / "ckan-recursos.txt").write_text(f"ERROR {e}")
-              urls = []
-          for u in urls:
-              n = re.sub(r"[^A-Za-z0-9._-]", "_", u.rsplit("/", 1)[-1])[:60] or "recurso"
-              subprocess.run(["curl", "-sSL", "-A", "Mozilla/5.0", "--max-time", "90", "-o", f"diag/ckan-{n}", "-w", f"ckan-{n} %{{http_code}} %{{content_type}} %{{size_download}} %{{url_effective}}\n", u], stdout=open("diag/estado.txt", "a"))
-          for f in sorted(d.glob("*.html")):
-              t = f.read_text(errors="replace")
-              (f.with_suffix(".enlaces.txt")).write_text("\n".join(re.findall(r'(?:href|src|action|data)\s*=\s*["\']([^"\']+)["\']', t, re.I)))
+              e = max(json.load(open("diag/segovia-posts.json")), key=lambda x: x["date"])
+              u = re.findall(r'href="([^"]+\.pdf)"', e["content"]["rendered"], re.I)[0]
+              subprocess.run(["curl", "-sSL", "-A", "AppLonjasCyL/1.0", "--max-time", "90", "-o", "diag/segovia.pdf", u])
+              open("diag/segovia-pdf-url.txt", "w").write(u)
+          except Exception as ex:
+              open("diag/segovia-pdf-url.txt", "w").write(f"ERROR {ex}")
           PY
-          # recortar archivos de datos muy grandes (solo hace falta ver el formato)
-          for f in diag/ckan-*; do s=$(stat -c %s "$f"); if [ "$s" -gt 400000 ]; then head -c 200000 "$f" > "$f.inicio"; tail -c 100000 "$f" > "$f.final"; rm "$f"; fi; done
-          ls -la diag; cat diag/estado.txt; cat diag/ckan-recursos.txt
+          ls -la diag; cat diag/estado.txt
       - name: Guardar en la rama
         run: |
           git config user.name "diagnostico-lonjas"
