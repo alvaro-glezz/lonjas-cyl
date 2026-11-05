@@ -125,7 +125,7 @@ async function cargar(forzar = false) {
     if (copia) { DATOS = copia; DATOS.__sinRed = true; }
     else if (!DATOS) { $("#vista").innerHTML = `<div class="vacio"><b>No se han podido cargar las cotizaciones</b>Comprueba la conexión y pulsa el botón de actualizar, arriba a la derecha.</div>`; }
   } finally { btn.classList.remove("girando"); }
-  if (DATOS) { pintarCabecera(); router(); }
+  if (DATOS) { pintarCabecera(); router(); if (typeof trasCargarDatos === "function") trasCargarDatos(); }
 }
 
 function pintarCabecera() {
@@ -153,10 +153,12 @@ function vistaHoy() {
   }).join("");
   return `
     ${DATOS.__sinRed ? '<p class="aviso-red">Estás sin conexión. Se muestran los últimos precios guardados en este teléfono.</p>' : ""}
+    ${typeof bloqueAvisosCumplidos === "function" ? bloqueAvisosCumplidos() : ""}
     <section class="seccion">
       <div class="titulo-seccion"><h2>Pizarra de la semana</h2><span>Toca un producto para comparar</span></div>
       <div class="pizarra">${fichas}</div>
     </section>
+    ${typeof seccionTitulares === "function" ? seccionTitulares() : ""}
     <section class="seccion">
       <div class="titulo-seccion"><h2>Lonjas</h2><span>Última sesión de cada una</span></div>
       ${listaLonjas()}
@@ -307,7 +309,7 @@ function vistaComparar() {
 
 function vistaFavoritos() {
   const filas = todasLasFilas().filter(f => FAVS.has(f.id));
-  return `<section class="seccion">
+  return `${typeof seccionAvisos === "function" ? seccionAvisos() : ""}<section class="seccion">
     <div class="titulo-seccion"><h2>Mis precios</h2><span>${filas.length} guardado${filas.length === 1 ? "" : "s"}</span></div>
     ${filas.length ? `<div class="tablilla">${filas.map(f => filaHTML(f, true)).join("")}</div>` :
       `<div class="vacio"><b>Aún no tienes precios guardados</b>Abre una lonja y toca la estrella junto a los productos que vendes o compras. Aparecerán aquí, juntos.</div>`}
@@ -355,12 +357,14 @@ function abrirDetalle(id) {
       <div><span class="etiqueta">${serie.length > 1 ? "Mín · máx" : "Sesión"}</span><b class="num chico">${serie.length > 1 ? precio(Math.min(...vals), f.unidad) + " · " + precio(Math.max(...vals), f.unidad) : fechaCorta(f.lonja.fecha)}</b><small>${serie.length > 1 ? serie.length + " sesiones" : ""}</small></div>
     </div>
     <div class="grafico">${grafico(serie, f.unidad)}</div>
+    <div id="det-aviso" class="det-aviso"></div>
     <div id="det-hist" class="det-hist"></div>
     ${serie.length > 1 ? `<div class="serie">${[...serie].reverse().map(p => `<div><span>${fechaLarga(p[0])}</span><b class="num">${precio(p[1], f.unidad)}</b></div>`).join("")}</div>` : ""}
     <button class="chip auto" type="button" data-fav="${esc(f.id)}" aria-pressed="${FAVS.has(f.id)}">${FAVS.has(f.id) ? "★ En favoritos" : "☆ Añadir a favoritos"}</button>
   </div>`;
   velo.hidden = false;
   $(".cerrar", velo).focus();
+  if (typeof pintarAvisoDetalle === "function") pintarAvisoDetalle(f);
   pintarHistDetalle(f);
 }
 function cerrarDetalle() { const v = $("#velo"); v.hidden = true; v.innerHTML = ""; }
@@ -373,6 +377,7 @@ function router() {
   if (h.startsWith("lonja-")) { html = vistaLonja(h.slice(6)); seccion = "lonjas"; }
   else if (h === "lonjas") html = vistaLonjas();
   else if (h === "fuentes") { html = vistaFuentes(); seccion = "lonjas"; }
+  else if (h === "calculadora" && typeof vistaCalculadora === "function") { html = vistaCalculadora(); seccion = "hoy"; }
   else if (h === "comparar") html = vistaComparar();
   else if (h === "favoritos") html = vistaFavoritos();
   else if (h === "historico") html = vistaHistorico();
@@ -381,6 +386,7 @@ function router() {
   $("#vista").innerHTML = html;
   document.querySelectorAll("[data-w]").forEach(el => { el.style.width = Math.min(100, Math.max(0, Number(el.dataset.w) || 0)) + "%"; });
   document.querySelectorAll(".navegacion a").forEach(a => a.dataset.vista === seccion ? a.setAttribute("aria-current", "page") : a.removeAttribute("aria-current"));
+  if (typeof trasPintar === "function") trasPintar(h);
 }
 function ir(h) { if (location.hash.slice(1) === h) router(); else location.hash = h; window.scrollTo(0, 0); }
 
@@ -422,4 +428,7 @@ document.addEventListener("visibilitychange", () => {
 if ("serviceWorker" in navigator && location.protocol === "https:" && !/claude|anthropic/.test(location.hostname)) {
   navigator.serviceWorker.register("sw.js").catch(() => {});
 }
-cargar();
+// Se espera a que estén cargados todos los archivos de la app (historico.js, agricultor.js): si los precios
+// llegasen antes, la primera pantalla se pintaría sin sus secciones.
+if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", () => cargar(), { once: true });
+else cargar();

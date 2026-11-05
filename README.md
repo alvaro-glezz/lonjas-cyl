@@ -67,6 +67,13 @@ Web de la Junta (Excel semanales) ──► scraper/importar_jcyl.py ──► d
 
 Para importarlos a mano: `pip install -r scraper/requirements.txt` y `python scraper/importar_jcyl.py` (añade `--descargar` para bajar antes los Excel nuevos).
 
+## Herramientas para el agricultor
+
+- **Avisos de precio**: en el detalle de cualquier producto, «Avisarme del precio» (sube a / baja a). Suena una vez al cruzar el precio y se rearma cuando vuelve al otro lado. Se guardan en el propio teléfono (sin cuentas). Notificación al llegar precios nuevos; con la app instalada en Android también con la app cerrada (sincronización periódica del navegador). En iPhone y con la app cerrada haría falta un servidor de notificaciones *push* (siguiente paso si se quiere).
+- **Resumen de la semana** en *Hoy*: titulares automáticos (rachas, movimientos fuertes, quién paga más), qué sube y qué baja; se comparte por WhatsApp. Opción de aviso los lunes.
+- **Calculadora de venta**: cuánto pagaría cada lonja por una partida, descontando el porte de cada una.
+- **Letra grande**: botón «Aa» de la cabecera.
+
 ## Si una lonja deja de actualizarse
 
 **Te enterarás solo.** Si una lonja falla dos lecturas seguidas (o lleva más de 15 días sin sesiones nuevas, o no se pudo actualizar el histórico de la Junta), el robot abre una incidencia en la pestaña *Issues* del repositorio y GitHub te la manda por correo. Se cierra sola cuando todo vuelve a funcionar. En la app, *Lonjas → Estado de las fuentes* muestra cuándo se leyó bien cada lonja por última vez.

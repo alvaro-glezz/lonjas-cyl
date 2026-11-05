@@ -222,7 +222,9 @@ function semanaISO(iso) {
 
 /** Tamaño del dibujo: tan ancho como el hueco real, para que los textos se lean a su tamaño (12 px). */
 function medidasGrafico(contexto) {
-  const w = window.innerWidth || 390, h = window.innerHeight || 800;
+  // Con «letra grande» la pantalla se amplía: se dibuja para el ancho real que queda, así el texto también crece
+  const z = typeof factorLetra === "function" ? factorLetra() : 1;
+  const w = (window.innerWidth || 390) / z, h = (window.innerHeight || 800) / z;
   if (contexto === "png") return { W: 720, H: 360 };
   if (contexto === "ampliado") {
     const W = Math.round(Math.max(300, Math.min(w - 40, 1400)));
@@ -453,10 +455,11 @@ function mostrarPunto(caja, idx) {
     return `<span><i class="c-${l.color}"></i><em>${esc(l.nombre)}${extra ? ` <small>${esc(extra)}</small>` : ""}</em><b class="num">${esc(it.txt)}</b></span>`;
   }).join("");
   tip.hidden = false;
-  const r = svg.getBoundingClientRect(), px = c.x * r.width / g.m.W, tw = tip.offsetWidth;
+  // Medidas en píxeles CSS de la caja (con letra grande la pantalla está ampliada y getBoundingClientRect no coincide)
+  const ancho = svg.clientWidth || svg.getBoundingClientRect().width, px = c.x * ancho / g.m.W, tw = tip.offsetWidth;
   let left = px + 14;
-  if (left + tw > r.width) left = px - tw - 14;
-  if (left < 0) left = Math.max(0, Math.min(r.width - tw, px - tw / 2));
+  if (left + tw > ancho) left = px - tw - 14;
+  if (left < 0) left = Math.max(0, Math.min(ancho - tw, px - tw / 2));
   tip.style.left = Math.round(left) + "px";
 }
 function puntoEn(svg, clientX) {
