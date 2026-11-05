@@ -1,0 +1,22 @@
+# Vercel solo publica lo que necesita la app en el móvil.
+# El robot (scraper/), la tarea de GitHub (.github/), los Excel originales de la Junta
+# (data/fuentes/, 18 MB) y los documentos internos se quedan en GitHub, pero no se sirven en la web.
+
+# 1) Se ignora todo lo de la raíz...
+/*
+
+# 2) ...menos los archivos de la app
+!index.html
+!app.js
+!historico.js
+!estilos.css
+!sw.js
+!manifest.webmanifest
+!vercel.json
+!icons
+!fonts
+!data
+
+# 3) Dentro de data/, solo precios.json e historico/
+/data/fuentes
+/data/manual
