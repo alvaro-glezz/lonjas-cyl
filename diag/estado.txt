@@ -1,6 +1,3 @@
-sal-cotizaciones.html 200 text/html;charset=ISO-8859-1 118208 https://www.lasalina.es/Aplicaciones/lonja/Cotizaciones.jsp
-sal-lonja-sub.html 200 text/html;charset=UTF-8 26750 https://www.lasalina.es/lasalina/economiayhacienda/agriculturayganaderia/mercado/lonja/index.html
-ckan-package.json 200 application/json;charset=utf-8 7143 https://datosabiertossalamanca.es/api/3/action/package_show?id=cotizaciones-semanales-de-la-lonja-de-salamanca
-ckan-dataset.html 200 text/html; charset=utf-8 23339 https://datosabiertossalamanca.es/dataset/cotizaciones-semanales-de-la-lonja-de-salamanca
-ckan-agr03.csv 200 text/csv 10246581 https://datosabiertossalamanca.es/dataset/c914b1a6-4673-4288-8613-d077f6d5b619/resource/042beb52-4d80-4380-b073-e170364f65e7/download/agr03.csv
-ckan-agr03.xlsx 200 application/vnd.openxmlformats-officedocument.spreadsheetml.sheet 4952416 https://datosabiertossalamanca.es/dataset/c914b1a6-4673-4288-8613-d077f6d5b619/resource/ce918df1-9176-4139-965c-70ccab930ef8/download/agr03.xlsx
+leon-posts.json 200 application/json; charset=UTF-8 105382
+segovia-posts.json 200 application/json; charset=UTF-8 3820
+lerma.html 200 text/html; charset=UTF-8 63853
