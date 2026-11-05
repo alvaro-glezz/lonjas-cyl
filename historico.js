@@ -9,18 +9,21 @@
 const RUTA_HIST = "data/historico/";
 const RE_SEM = /^\d{4}-W\d{2}$/;
 const SECTORES_HIST = ["Cereales y forrajes", "Porcino", "Vacuno", "Ovino y caprino", "Aves y conejos"];
+// La Junta publica los cereales y forrajes en €/100 kg; en el campo se habla de €/t. Se convierten al mostrarlos
+// (los archivos de data/historico/ se quedan tal como los publica la Junta).
+const CONVERSION_UNIDAD = { "€/100 kg": { u: "€/t", factor: 10 } };
 const HIST = { indice: null, puntos: {}, grupos: new Map(), cache: new Map(), cargando: null, error: null };
-const estHist = { ambito: "cyl", sector: "Cereales y forrajes", grupo: null, lonja: null, provincia: "Todas", periodo: "2026", todas: false };
+const estHist = { ambito: "cyl", sector: "Cereales y forrajes", grupo: null, lonja: null, provincia: "Todas", periodo: "2026", todas: false, extra: [], ampliado: false };
 
 // Productos clave de la app -> producto del cuadro de la Junta (misma lonja; la unidad es la que publica la Junta)
 const CLAVE_A_JUNTA = {
-  trigo: "Cereales y forrajes|Trigo|€/100 kg",
-  cebada: "Cereales y forrajes|Cebada (+64)|€/100 kg",
-  maiz: "Cereales y forrajes|Maiz seco nac|€/100 kg",
-  avena: "Cereales y forrajes|Avena|€/100 kg",
-  centeno: "Cereales y forrajes|Centeno|€/100 kg",
-  girasol: "Cereales y forrajes|Pipa de girasol|€/100 kg",
-  alfalfa: "Cereales y forrajes|Alfalfa rama|€/100 kg",
+  trigo: "Cereales y forrajes|Trigo|€/t",
+  cebada: "Cereales y forrajes|Cebada (+64)|€/t",
+  maiz: "Cereales y forrajes|Maiz seco nac|€/t",
+  avena: "Cereales y forrajes|Avena|€/t",
+  centeno: "Cereales y forrajes|Centeno|€/t",
+  girasol: "Cereales y forrajes|Pipa de girasol|€/t",
+  alfalfa: "Cereales y forrajes|Alfalfa rama|€/t",
   "cerdo-normal": "Porcino|Cebo · normal|€/kg vivo",
   "cerdo-selecto": "Porcino|Cebo · selecto|€/kg vivo",
   lechazo: "Ovino y caprino|Lechazos · 10-12 Kgs.|€/kg vivo",
@@ -43,7 +46,8 @@ function sanearIndice(c) {
     if (!RE_ID.test(id) || !s || typeof s !== "object" || !out.lonjas[s.l]) continue;
     const p = texto(s.p, 120), u = texto(s.u, 24), sec = texto(s.s, 40);
     if (!p || !u || !sec) continue;
-    out.series[id] = { l: s.l, s: sec, p, u, dudosos: num(s.dudosos) || 0 };
+    const conv = CONVERSION_UNIDAD[u];
+    out.series[id] = { l: s.l, s: sec, p, u: conv ? conv.u : u, factor: conv ? conv.factor : 1, uJunta: u, dudosos: num(s.dudosos) || 0 };
   }
   for (const a of (Array.isArray(c.archivos) ? c.archivos : []).slice(0, 300)) {
     if (!a || !Number.isInteger(a.anio) || !Number.isInteger(a.semana)) continue;
@@ -55,10 +59,12 @@ function sanearIndice(c) {
 function sanearAnio(c, indice) {
   const out = {};
   if (!c || typeof c !== "object" || !c.series || typeof c.series !== "object") return out;
+  const conv = (v, k) => v == null ? null : Math.round(v * k * 1e4) / 1e4;
   for (const [id, serie] of Object.entries(c.series)) {
     if (!indice.series[id] || !Array.isArray(serie)) continue;
+    const k = indice.series[id].factor || 1;
     out[id] = serie.slice(0, 80).filter(p => Array.isArray(p) && typeof p[1] === "string" && RE_SEM.test(p[1]) && num(p[2]) !== null)
-      .map(p => ({ f: fechaOk(p[0]), w: p[1], a: p[2], b: num(p[3]), dud: p[4] === 1 }));
+      .map(p => ({ f: fechaOk(p[0]), w: p[1], a: conv(p[2], k), b: conv(num(p[3]), k), dud: p[4] === 1 }));
   }
   return out;
 }
@@ -105,6 +111,15 @@ function puntosSerie(id) {
   const pts = (HIST.puntos[id] || []).map(p => ({ ...p, v: p.b != null ? Math.round((p.a + p.b) / 2 * 1e5) / 1e5 : p.a,
     fecha: p.f || lunesISO(p.w), sinFecha: !p.f }))
     .sort((x, y) => x.fecha.localeCompare(y.fecha) || x.w.localeCompare(y.w));
+  // Picos aislados: un salto de más del 20 % que vuelve a su nivel a la semana siguiente (p. ej. trigo de Segovia,
+  // 22,8 -> 30,0 -> 23,0) es casi siempre una errata del Excel. Se marca como dudoso, igual que los que marca el importador.
+  for (let i = 1; i < pts.length - 1; i++) {
+    const a = pts[i - 1], p = pts[i], b = pts[i + 1];
+    if (a.dud || p.dud || b.dud || a.v <= 0 || b.v <= 0) continue;
+    if ((Date.parse(b.fecha) - Date.parse(a.fecha)) / 864e5 > 28) continue;
+    const ra = p.v / a.v - 1, rb = p.v / b.v - 1;
+    if (Math.sign(ra) === Math.sign(rb) && Math.abs(ra) > 0.2 && Math.abs(rb) > 0.2 && Math.abs(a.v / b.v - 1) < 0.06) pts[i] = { ...p, dud: true, pico: true };
+  }
   HIST.cache.set(id, pts);
   return pts;
 }
@@ -182,53 +197,354 @@ function txtPct(v, dec = 1) {
 }
 const valorTxt = (p, u) => p.b != null ? `${precio(p.a, u)}–${precio(p.b, u)}` : precio(p.a, u);
 
-/* ---------- gráfico de líneas (una o varias series de la MISMA unidad) ---------- */
-function graficoHist(lineas, { eje = "fecha", unidad = "", etiqueta = "Evolución del precio" } = {}) {
-  const todos = lineas.flatMap(l => l.pts);
-  if (todos.length < 2) return '<p class="nota">No hay suficientes sesiones en este periodo para dibujar la evolución.</p>';
-  const W = 420, H = 210, mi = { l: 50, r: 12, t: 12, b: 30 };
-  const xv = p => eje === "semana" ? semDe(p) : new Date(p.fecha + "T12:00:00").getTime();
+/* ---------- gráficos ----------
+   Un gráfico se calcula una vez como «modelo» (lista de trazos: líneas, áreas, puntos y textos) y de ahí se
+   dibuja en pantalla (SVG) o en una imagen PNG para descargar (canvas). Así los dos salen idénticos y la
+   imagen no necesita relajar la política de seguridad (CSP) de la app.
+   Todas las líneas de un gráfico tienen la MISMA unidad. */
+const COLORES_LINEA = ["pino", "paja", "s3", "s4", "s5"];
+const MAX_LONJAS_GRAFICO = 5;
+const MESES_C = ["ene", "feb", "mar", "abr", "may", "jun", "jul", "ago", "sep", "oct", "nov", "dic"];
+// Colores fijos (tema claro) para la imagen descargada: se comparte por WhatsApp o se imprime, mejor sobre blanco.
+const PALETA_PNG = { hoja: "#ffffff", fondo: "#eef1ea", tinta: "#18241d", tenue: "#5b6a60", linea: "#d6ddd2",
+  pino: "#24503c", paja: "#b9861f", s3: "#2f6db5", s4: "#8a4fb0", s5: "#c0365f" };
+const GRAFS = new Map();
+let nGraf = 0;
+
+const fmtNum = (v, d) => v.toLocaleString("es-ES", { minimumFractionDigits: d, maximumFractionDigits: d });
+function pasoBonito(rango, n) {
+  const bruto = rango / Math.max(1, n), e = 10 ** Math.floor(Math.log10(bruto)), f = bruto / e;
+  return (f <= 1 ? 1 : f <= 2 ? 2 : f <= 2.5 ? 2.5 : f <= 5 ? 5 : 10) * e;
+}
+function decimalesPaso(paso) {
+  let d = 0;
+  while (d < 4 && Math.abs(Math.round(paso * 10 ** d) - paso * 10 ** d) > 1e-6) d++;
+  return d;
+}
+/** Semana ISO de una fecha 'AAAA-MM-DD' -> 'AAAA-Www' (para poner las sesiones recientes en el eje de semanas). */
+function semanaISO(iso) {
+  const d = new Date(iso + "T12:00:00Z"), dia = d.getUTCDay() || 7;
+  d.setUTCDate(d.getUTCDate() + 4 - dia);
+  const a = d.getUTCFullYear(), s = Math.ceil(((d - Date.UTC(a, 0, 1)) / 86400000 + 1) / 7);
+  return `${a}-W${String(s).padStart(2, "0")}`;
+}
+
+/** Tamaño del dibujo: tan ancho como el hueco real, para que los textos se lean a su tamaño (12 px). */
+function medidasGrafico(contexto) {
+  const w = window.innerWidth || 390, h = window.innerHeight || 800;
+  if (contexto === "png") return { W: 720, H: 360 };
+  if (contexto === "ampliado") {
+    const W = Math.round(Math.max(300, Math.min(w - 40, 1400)));
+    return { W, H: Math.round(Math.max(220, Math.min(h - 250, W * 0.62))) };
+  }
+  const W = Math.round(Math.max(280, Math.min(w - (contexto === "detalle" ? 40 : 64), 728)));
+  return { W, H: Math.round(Math.max(200, Math.min(W * 0.6, 330))) };
+}
+
+/**
+ * lineas: [{ nombre, color, pts, recientes?, discontinua? }]  (pts sin valores dudosos, ordenados)
+ * o: { eje: "fecha" | "semana", unidad, banda, media, W, H }
+ */
+function construirGrafico(lineas, o) {
+  const W = o.W, H = o.H, mi = { l: 46, r: 14, t: 26, b: 26 };
+  const vis = lineas.filter(l => l.pts.length || (l.recientes || []).length);
+  const todos = vis.flatMap(l => [...l.pts, ...(l.recientes || [])]);
+  if (todos.length < 2) return null;
+  const xv = p => o.eje === "semana" ? semDe(p) : Date.parse(p.fecha + "T12:00:00Z");
   let x0 = Math.min(...todos.map(xv)), x1 = Math.max(...todos.map(xv));
-  if (eje === "semana") { x0 = 1; x1 = Math.max(x1, 52); }
-  const vals = todos.map(p => p.v);
+  if (o.eje === "semana") { x0 = 1; x1 = Math.max(x1, 52); }
+  if (x1 === x0) x1 = x0 + (o.eje === "semana" ? 1 : 86400000);
+  const conBanda = o.banda && vis.length === 1 && vis[0].pts.some(p => p.b != null);
+  const vals = todos.flatMap(p => conBanda && p.b != null ? [p.a, p.b] : [p.v]);
   let lo = Math.min(...vals), hi = Math.max(...vals);
-  const pad = (hi - lo) * 0.15 || Math.abs(hi) * 0.02 || 1; lo -= pad; hi += pad;
-  const x = v => mi.l + (v - x0) / (x1 - x0 || 1) * (W - mi.l - mi.r);
-  const y = v => mi.t + (hi - v) / (hi - lo) * (H - mi.t - mi.b);
-  const ticks = [lo + pad, (lo + hi) / 2, hi - pad];
-  const salto = eje === "semana" ? 4 : 35 * 86400000; // huecos largos (sin sesiones) no se unen con una línea
-  const trazos = l => {
-    const seg = []; let act = [];
-    l.pts.forEach((p, i) => {
-      if (i && xv(p) - xv(l.pts[i - 1]) > salto) { seg.push(act); act = []; }
-      act.push(`${x(xv(p)).toFixed(1)},${y(p.v).toFixed(1)}`);
-    });
-    seg.push(act);
-    return seg.map(s => s.length > 1
-      ? `<polyline points="${s.join(" ")}" fill="none" stroke="${l.color}" stroke-width="${l.grosor || 2.5}" stroke-linejoin="round" stroke-linecap="round"${l.discontinua ? ' stroke-dasharray="5 4"' : ""}/>`
-      : `<circle cx="${s[0].split(",")[0]}" cy="${s[0].split(",")[1]}" r="2.5" fill="${l.color}"/>`).join("");
-  };
-  let etX;
-  if (eje === "semana") {
-    etX = [1, 13, 26, 39, 52].map(s => `<text x="${x(s)}" y="${H - 9}" font-size="12" fill="var(--tenue)" text-anchor="middle">S${s}</text>`).join("");
+  if (hi === lo) { const d = Math.abs(hi) * 0.05 || 1; lo -= d; hi += d; }
+  const paso = pasoBonito(hi - lo, H >= 280 ? 6 : 4);
+  lo = Math.floor(lo / paso - 1e-9) * paso; hi = Math.ceil(hi / paso + 1e-9) * paso;
+  const dec = decimalesPaso(paso);
+  const X = v => mi.l + (v - x0) / (x1 - x0) * (W - mi.l - mi.r);
+  const Y = v => mi.t + (hi - v) / (hi - lo) * (H - mi.t - mi.b);
+  const P = [];
+
+  // Eje vertical: valores redondos y la unidad arriba
+  for (let v = lo; v <= hi + paso / 2; v += paso) {
+    const vy = Y(v);
+    P.push({ k: "line", x1: mi.l, x2: W - mi.r, y1: vy, y2: vy, c: "linea", w: 1 });
+    P.push({ k: "text", x: mi.l - 6, y: vy + 4, txt: fmtNum(Math.round(v * 1e6) / 1e6, dec), c: "tenue", size: 12, anchor: "end", font: "cifra" });
+  }
+  P.push({ k: "text", x: 4, y: 13, txt: o.unidad, c: "tenue", size: 11.5, anchor: "start", font: "texto", weight: 600 });
+
+  // Eje horizontal: meses (y separador de año)
+  const base = H - mi.b;
+  if (o.eje === "semana") {
+    const cada = W < 420 ? 2 : 1;
+    for (let m = 0; m < 12; m += cada) {
+      const xs = X(1 + m * 52 / 12);
+      P.push({ k: "line", x1: xs, x2: xs, y1: base, y2: base + 4, c: "linea", w: 1 });
+      P.push({ k: "text", x: xs + 2, y: H - 8, txt: MESES_C[m], c: "tenue", size: 12, anchor: "start", font: "texto" });
+    }
   } else {
     const f0 = new Date(x0), f1 = new Date(x1);
-    etX = `<text x="${mi.l}" y="${H - 9}" font-size="12" fill="var(--tenue)">${fechaCorta(f0.toISOString().slice(0, 10))} ${f0.getFullYear()}</text>
-      <text x="${W - mi.r}" y="${H - 9}" font-size="12" fill="var(--tenue)" text-anchor="end">${fechaCorta(f1.toISOString().slice(0, 10))} ${f1.getFullYear()}</text>`;
-    // Separador de año
-    for (let a = f0.getFullYear() + 1; a <= f1.getFullYear(); a++) {
-      const xa = x(Date.UTC(a, 0, 1));
-      etX += `<line x1="${xa}" x2="${xa}" y1="${mi.t}" y2="${H - mi.b}" stroke="var(--linea)" stroke-dasharray="3 3"/>
-        <text x="${xa + 4}" y="${mi.t + 11}" font-size="12" fill="var(--tenue)">${a}</text>`;
+    const a0 = f0.getUTCFullYear(), m0 = f0.getUTCMonth();
+    const nM = (f1.getUTCFullYear() - a0) * 12 + f1.getUTCMonth() - m0 + 1;
+    const maxEt = Math.max(3, Math.floor((W - mi.l - mi.r) / 44));
+    const cada = [1, 2, 3, 4, 6, 12].find(s => Math.ceil(nM / s) <= maxEt) || 12;
+    const DIA = 86400000;
+    let ultimaEt = -Infinity;
+    for (let k = 0; k <= nM; k++) {
+      const a = a0 + Math.floor((m0 + k) / 12), m = (m0 + k) % 12, t = Date.UTC(a, m, 1);
+      if (t < x0 - 20 * DIA || t > x1) continue;   // el mes en que empieza la serie también se rotula
+      const xs = X(Math.max(t, x0));
+      if (m === 0 && t > x0 + 21 * DIA) {          // separador de año (no si la serie empieza en los últimos días de diciembre)
+        P.push({ k: "line", x1: xs, x2: xs, y1: mi.t, y2: base, c: "tenue", w: 1, dash: "3 3" });
+        P.push({ k: "text", x: xs + 4, y: mi.t + 12, txt: String(a), c: "tenue", size: 12, anchor: "start", font: "cifra", weight: 600 });
+      }
+      if (m % cada === 0 && xs <= W - mi.r - 18 && xs - ultimaEt >= 30) {
+        ultimaEt = xs;
+        P.push({ k: "line", x1: xs, x2: xs, y1: base, y2: base + 4, c: "linea", w: 1 });
+        P.push({ k: "text", x: xs + 2, y: H - 8, txt: MESES_C[m], c: "tenue", size: 12, anchor: "start", font: "texto" });
+      }
     }
   }
-  const ult = lineas.map(l => l.pts.at(-1) && `<circle cx="${x(xv(l.pts.at(-1)))}" cy="${y(l.pts.at(-1).v)}" r="5" fill="${l.color}" stroke="var(--hoja)" stroke-width="2"/>`).join("");
-  const leyenda = lineas.length > 1 ? `<div class="leyenda">${lineas.map(l => `<span><i class="${l.clase}"></i>${esc(l.nombre)}</span>`).join("")}</div>` : "";
-  return `<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="${esc(etiqueta)}">
-    ${ticks.map(v => `<line x1="${mi.l}" x2="${W - mi.r}" y1="${y(v)}" y2="${y(v)}" stroke="var(--linea)" stroke-width="1"/>
-      <text x="${mi.l - 8}" y="${y(v) + 4}" text-anchor="end" font-size="13" fill="var(--tenue)" font-family="var(--cifra)">${precio(Math.round(v * 1000) / 1000, unidad)}</text>`).join("")}
-    ${etX}${lineas.map(trazos).join("")}${ult}
-  </svg>${leyenda}`;
+  P.push({ k: "line", x1: mi.l, x2: W - mi.r, y1: base, y2: base, c: "tenue", w: 1 });
+
+  const salto = o.eje === "semana" ? 4 : 35 * 86400000; // huecos largos (sin sesiones) no se unen con una línea
+  const tramos = pts => {
+    const seg = []; let act = [];
+    pts.forEach((p, i) => { if (i && xv(p) - xv(pts[i - 1]) > salto) { seg.push(act); act = []; } act.push(p); });
+    if (act.length) seg.push(act);
+    return seg;
+  };
+
+  // Horquilla mínimo–máximo (solo con una lonja, cuando la publica)
+  if (conBanda) {
+    for (const s of tramos(vis[0].pts.filter(p => p.b != null))) {
+      if (s.length < 2) continue;
+      P.push({ k: "area", c: vis[0].color, op: 0.16,
+        pts: [...s.map(p => [X(xv(p)), Y(p.a)]), ...[...s].reverse().map(p => [X(xv(p)), Y(p.b)])] });
+    }
+  }
+  // Media del periodo (solo con una lonja)
+  let valorMedia = null;
+  if (o.media && vis.length === 1 && vis[0].pts.length > 2) {
+    valorMedia = media(vis[0].pts.map(p => p.v));
+    const ym = Y(valorMedia);
+    P.push({ k: "line", x1: mi.l, x2: W - mi.r, y1: ym, y2: ym, c: "tenue", w: 1.2, dash: "6 4" });
+    const dm = valorMedia >= 100 ? 0 : decimalesPaso(paso) + 1;
+    P.push({ k: "text", x: W - mi.r - 2, y: ym - 5, txt: "media " + fmtNum(valorMedia, Math.min(dm, 3)), c: "tenue", size: 12, anchor: "end", font: "cifra", weight: 600 });
+  }
+  // Líneas
+  vis.forEach(l => {
+    for (const s of tramos(l.pts)) {
+      if (s.length > 1) P.push({ k: "path", pts: s.map(p => [X(xv(p)), Y(p.v)]), c: l.color, w: l.grosor || 2.5, dash: l.discontinua ? "5 4" : null });
+      else P.push({ k: "circle", x: X(xv(s[0])), y: Y(s[0].v), r: 2.5, fill: l.color });
+    }
+    // Sesiones recientes de la propia lonja: línea de puntos que continúa la oficial
+    const rec = l.recientes || [];
+    if (rec.length) {
+      const desde = l.pts.at(-1);
+      const cadena = (desde && xv(rec[0]) - xv(desde) <= salto * 2 ? [desde] : []).concat(rec);
+      if (cadena.length > 1) P.push({ k: "path", pts: cadena.map(p => [X(xv(p)), Y(p.v)]), c: l.color, w: 2, dash: "2 4" });
+      rec.forEach(p => P.push({ k: "circle", x: X(xv(p)), y: Y(p.v), r: 3.2, fill: "hoja", stroke: l.color, sw: 2 }));
+    }
+    const ult = rec.at(-1) || l.pts.at(-1);   // marcador final: lleno si es oficial, hueco si es dato reciente de la lonja
+    if (ult) P.push(ult.reciente ? { k: "circle", x: X(xv(ult)), y: Y(ult.v), r: 4.8, fill: "hoja", stroke: l.color, sw: 2.6 }
+      : { k: "circle", x: X(xv(ult)), y: Y(ult.v), r: 4.5, fill: l.color, stroke: "hoja", sw: 2 });
+  });
+
+  // Columnas para consultar al tocar. Con varias lonjas se agrupa por semana: cada lonja cotiza un día distinto.
+  const porSemana = o.eje === "semana" || vis.length > 1;
+  const cols = new Map();
+  vis.forEach(l => [...l.pts, ...(l.recientes || [])].forEach(p => {
+    const k = o.eje === "semana" ? semDe(p) : porSemana ? p.w : p.fecha;
+    if (!cols.has(k)) cols.set(k, { fecha: p.fecha, w: p.w, sinFecha: !!p.sinFecha, porSemana, items: [] });
+    const c = cols.get(k), i = lineas.indexOf(l);
+    if (c.items.some(it => it.i === i)) return;
+    c.items.push({ i, x: X(xv(p)), y: Y(p.v), txt: valorTxt(p, o.unidad), reciente: !!p.reciente, fecha: p.fecha, sinFecha: !!p.sinFecha });
+  }));
+  const columnas = [...cols.values()].map(c => ({ ...c, x: media(c.items.map(it => it.x)) })).sort((a, b) => a.x - b.x);
+  return { W, H, mi, P, columnas, valorMedia, conBanda };
+}
+
+/* Dibujo en SVG */
+const colorVar = c => `var(--${c})`;
+function svgDe(P) {
+  const n = v => Math.round(v * 10) / 10;
+  return P.map(p => {
+    if (p.k === "line") return `<line x1="${n(p.x1)}" x2="${n(p.x2)}" y1="${n(p.y1)}" y2="${n(p.y2)}" stroke="${colorVar(p.c)}" stroke-width="${p.w}"${p.dash ? ` stroke-dasharray="${p.dash}"` : ""}/>`;
+    if (p.k === "path") return `<polyline points="${p.pts.map(([x, y]) => n(x) + "," + n(y)).join(" ")}" fill="none" stroke="${colorVar(p.c)}" stroke-width="${p.w}" stroke-linejoin="round" stroke-linecap="round"${p.dash ? ` stroke-dasharray="${p.dash}"` : ""}/>`;
+    if (p.k === "area") return `<polygon points="${p.pts.map(([x, y]) => n(x) + "," + n(y)).join(" ")}" fill="${colorVar(p.c)}" fill-opacity="${p.op}" stroke="none"/>`;
+    if (p.k === "circle") return `<circle cx="${n(p.x)}" cy="${n(p.y)}" r="${p.r}" fill="${p.fill ? colorVar(p.fill) : "none"}"${p.stroke ? ` stroke="${colorVar(p.stroke)}" stroke-width="${p.sw || 1}"` : ""}/>`;
+    if (p.k === "text") return `<text x="${n(p.x)}" y="${n(p.y)}" font-size="${p.size}" fill="${colorVar(p.c)}" text-anchor="${p.anchor}" font-family="${p.font === "cifra" ? "var(--cifra)" : "var(--texto)"}"${p.weight ? ` font-weight="${p.weight}"` : ""}>${esc(p.txt)}</text>`;
+    return "";
+  }).join("");
+}
+/* Dibujo en canvas (imagen descargable) */
+function canvasDe(ctx, P, col) {
+  for (const p of P) {
+    ctx.save();
+    if (p.k === "line" || p.k === "path") {
+      ctx.strokeStyle = col(p.c); ctx.lineWidth = p.w || 1; ctx.lineJoin = "round"; ctx.lineCap = "round";
+      ctx.setLineDash(p.dash ? p.dash.split(" ").map(Number) : []);
+      const pts = p.k === "line" ? [[p.x1, p.y1], [p.x2, p.y2]] : p.pts;
+      ctx.beginPath(); pts.forEach(([x, y], i) => i ? ctx.lineTo(x, y) : ctx.moveTo(x, y)); ctx.stroke();
+    } else if (p.k === "area") {
+      ctx.globalAlpha = p.op; ctx.fillStyle = col(p.c);
+      ctx.beginPath(); p.pts.forEach(([x, y], i) => i ? ctx.lineTo(x, y) : ctx.moveTo(x, y)); ctx.closePath(); ctx.fill();
+    } else if (p.k === "circle") {
+      ctx.beginPath(); ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+      if (p.fill) { ctx.fillStyle = col(p.fill); ctx.fill(); }
+      if (p.stroke) { ctx.strokeStyle = col(p.stroke); ctx.lineWidth = p.sw || 1; ctx.stroke(); }
+    } else if (p.k === "text") {
+      ctx.fillStyle = col(p.c);
+      ctx.font = `${p.weight || 500} ${p.size}px ${p.font === "cifra" ? '"Barlow Condensed", "Arial Narrow", sans-serif' : '"Public Sans", system-ui, sans-serif'}`;
+      ctx.textAlign = p.anchor === "end" ? "right" : p.anchor === "middle" ? "center" : "left";
+      ctx.fillText(p.txt, p.x, p.y);
+    }
+    ctx.restore();
+  }
+}
+
+function leyendaHTML(lineas, m) {
+  const items = lineas.filter(l => l.pts.length || (l.recientes || []).length)
+    .map(l => `<span><i class="c-${l.color}${l.discontinua ? " disc" : ""}"></i>${esc(l.nombre)}</span>`);
+  if (lineas.some(l => (l.recientes || []).length)) items.push('<span><i class="rec"></i>Sesiones recientes (publicadas por la lonja)</span>');
+  if (m.conBanda) items.push(`<span><i class="banda c-${lineas[0].color}"></i>Horquilla mínimo–máximo</span>`);
+  if (m.valorMedia != null) items.push('<span><i class="media"></i>Media del periodo</span>');
+  return items.length > 1 ? `<div class="leyenda">${items.join("")}</div>` : "";
+}
+
+/**
+ * Gráfico interactivo. o: { eje, unidad, etiqueta, banda, media, contexto ("normal" | "ampliado" | "detalle"),
+ * titulo, subtitulo, archivo } — titulo/subtitulo/archivo se usan al descargar.
+ */
+function graficoHist(lineas, o = {}) {
+  const opts = { eje: "fecha", unidad: "", etiqueta: "Evolución del precio", ...o };
+  const m = construirGrafico(lineas, { ...opts, ...medidasGrafico(opts.contexto) });
+  if (!m) return '<p class="nota">No hay suficientes sesiones en este periodo para dibujar la evolución.</p>';
+  const id = "g" + (++nGraf);
+  GRAFS.set(id, { lineas, o: opts, m });
+  while (GRAFS.size > 24) GRAFS.delete(GRAFS.keys().next().value);
+  const guia = `<g class="guia" display="none"><line x1="0" x2="0" y1="${m.mi.t}" y2="${m.H - m.mi.b}" stroke="var(--tinta)" stroke-width="1" stroke-dasharray="3 3" opacity=".55"/>${lineas.map((l, i) => `<circle data-i="${i}" r="5.5" cx="0" cy="0" fill="${colorVar(l.color)}" stroke="var(--hoja)" stroke-width="2"/>`).join("")}</g>`;
+  return `<div class="graf" data-graf="${id}">
+      <svg viewBox="0 0 ${m.W} ${m.H}" role="img" tabindex="0" aria-label="${esc(opts.etiqueta)}. Toca el gráfico o usa las flechas del teclado para ver el precio de cada sesión.">${svgDe(m.P)}${guia}</svg>
+      <div class="graf-tip" role="status" aria-live="polite" hidden></div>
+    </div>${leyendaHTML(lineas, m)}`;
+}
+
+/* ---------- consultar un punto (tocar, arrastrar, ratón o flechas) ---------- */
+function ocultarPunto(caja) {
+  const cajas = caja ? [caja] : document.querySelectorAll(".graf[data-idx]");
+  cajas.forEach(c => {
+    delete c.dataset.idx;
+    c.querySelector(".guia")?.setAttribute("display", "none");
+    const tip = c.querySelector(".graf-tip"); if (tip) tip.hidden = true;
+  });
+}
+function mostrarPunto(caja, idx) {
+  const g = GRAFS.get(caja.dataset.graf), svg = caja.querySelector("svg");
+  if (!g || !svg || !g.m.columnas.length) return;
+  idx = Math.max(0, Math.min(g.m.columnas.length - 1, idx));
+  caja.dataset.idx = idx;
+  const c = g.m.columnas[idx], guia = svg.querySelector(".guia");
+  guia.setAttribute("display", "inline");
+  const ln = guia.querySelector("line"); ln.setAttribute("x1", c.x); ln.setAttribute("x2", c.x);
+  guia.querySelectorAll("circle").forEach(ci => {
+    const it = c.items.find(t => t.i === Number(ci.dataset.i));
+    if (it) { ci.setAttribute("cx", it.x); ci.setAttribute("cy", it.y); ci.setAttribute("display", "inline"); }
+    else ci.setAttribute("display", "none");
+  });
+  const semana = g.o.eje === "semana" || c.porSemana;
+  const cab = g.o.eje === "semana" ? `Semana ${Number(c.w.slice(6))}` : semana || c.sinFecha ? `Semana ${Number(c.w.slice(6))} de ${c.w.slice(0, 4)}` : fechaLarga(c.fecha);
+  const tip = caja.querySelector(".graf-tip");
+  tip.innerHTML = `<b>${esc(cab)}</b>` + c.items.map(it => {
+    const l = g.lineas[it.i];
+    const extra = [semana && !it.sinFecha ? fechaCorta(it.fecha) : "", it.reciente ? "dato de la lonja" : ""].filter(Boolean).join(" · ");
+    return `<span><i class="c-${l.color}"></i><em>${esc(l.nombre)}${extra ? ` <small>${esc(extra)}</small>` : ""}</em><b class="num">${esc(it.txt)}</b></span>`;
+  }).join("");
+  tip.hidden = false;
+  const r = svg.getBoundingClientRect(), px = c.x * r.width / g.m.W, tw = tip.offsetWidth;
+  let left = px + 14;
+  if (left + tw > r.width) left = px - tw - 14;
+  if (left < 0) left = Math.max(0, Math.min(r.width - tw, px - tw / 2));
+  tip.style.left = Math.round(left) + "px";
+}
+function puntoEn(svg, clientX) {
+  const caja = svg.closest(".graf"), g = caja && GRAFS.get(caja.dataset.graf);
+  if (!g || !g.m.columnas.length) return;
+  const r = svg.getBoundingClientRect(), vx = (clientX - r.left) / r.width * g.m.W;
+  let mejor = 0, d = Infinity;
+  g.m.columnas.forEach((c, i) => { const dd = Math.abs(c.x - vx); if (dd < d) { d = dd; mejor = i; } });
+  mostrarPunto(caja, mejor);
+}
+
+/* ---------- descargas: imagen PNG (o compartir en el móvil) y CSV para Excel ---------- */
+function nombreArchivo(g, ext) {
+  return `lonjas-${slugTxt(g.o.archivo || g.o.titulo || "grafico")}.${ext}`;
+}
+const slugTxt = t => String(t).normalize("NFD").replace(/[̀-ͯ]/g, "").toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "").slice(0, 80) || "grafico";
+function descargarBlob(blob, nombre) {
+  const u = URL.createObjectURL(blob), a = document.createElement("a");
+  a.href = u; a.download = nombre; a.rel = "noopener";
+  document.body.appendChild(a); a.click(); a.remove();
+  setTimeout(() => URL.revokeObjectURL(u), 5000);
+}
+async function exportarPNG(id) {
+  const g = GRAFS.get(id); if (!g) return;
+  const m = construirGrafico(g.lineas, { ...g.o, ...medidasGrafico("png") });
+  if (!m) return;
+  const col = c => PALETA_PNG[c] || PALETA_PNG.tinta;
+  const items = g.lineas.filter(l => l.pts.length || (l.recientes || []).length);
+  const cab = 64, filasLey = Math.ceil((items.length + (items.some(l => (l.recientes || []).length) ? 1 : 0)) / 3), pie = 26 + filasLey * 20;
+  const W = m.W + 32, H = cab + m.H + pie;
+  const cv = document.createElement("canvas"); cv.width = W * 2; cv.height = H * 2;
+  const ctx = cv.getContext("2d"); ctx.scale(2, 2);
+  try { await document.fonts?.ready; } catch {}
+  ctx.fillStyle = col("hoja"); ctx.fillRect(0, 0, W, H);
+  const texto = (t, x, y, size, color, peso = 600, fuente = "texto", alinea = "left") => {
+    ctx.fillStyle = col(color); ctx.textAlign = alinea;
+    ctx.font = `${peso} ${size}px ${fuente === "cifra" ? '"Barlow Condensed", "Arial Narrow", sans-serif' : '"Public Sans", system-ui, sans-serif'}`;
+    ctx.fillText(t, x, y);
+  };
+  texto(g.o.titulo || "Lonjas CyL", 16, 30, 22, "tinta", 700, "cifra");
+  texto(g.o.subtitulo || "", 16, 52, 13, "tenue", 500);
+  ctx.save(); ctx.translate(16, cab); canvasDe(ctx, m.P, col); ctx.restore();
+  // leyenda
+  const ley = items.map(l => ({ c: l.color, t: l.nombre, disc: l.discontinua }));
+  if (items.some(l => (l.recientes || []).length)) ley.push({ c: "tenue", t: "Puntos huecos: últimas sesiones", disc: true });
+  ley.forEach((it, i) => {
+    const x = 16 + (i % 3) * ((W - 32) / 3), y = cab + m.H + 18 + Math.floor(i / 3) * 20;
+    ctx.save(); ctx.strokeStyle = col(it.c); ctx.lineWidth = 3; ctx.setLineDash(it.disc ? [4, 3] : []);
+    ctx.beginPath(); ctx.moveTo(x, y - 4); ctx.lineTo(x + 18, y - 4); ctx.stroke(); ctx.restore();
+    texto(it.t.length > 34 ? it.t.slice(0, 33) + "…" : it.t, x + 24, y, 12, "tinta", 500);
+  });
+  texto("Fuente: Junta de Castilla y León y lonjas · Lonjas CyL", W - 16, H - 8, 11, "tenue", 500, "texto", "right");
+  const blob = await new Promise(r => cv.toBlob(r, "image/png"));
+  if (!blob) return;
+  const nombre = nombreArchivo(g, "png");
+  // En el móvil se ofrece compartir (WhatsApp, correo…); si no se puede, se descarga
+  if (window.matchMedia?.("(pointer: coarse)").matches && typeof File === "function" && navigator.canShare) {
+    const file = new File([blob], nombre, { type: "image/png" });
+    if (navigator.canShare({ files: [file] })) {
+      try { await navigator.share({ files: [file], title: g.o.titulo || "Lonjas CyL" }); return; }
+      catch (e) { if (e && e.name === "AbortError") return; }
+    }
+  }
+  descargarBlob(blob, nombre);
+}
+function exportarCSV(id) {
+  const g = GRAFS.get(id); if (!g) return;
+  const n = v => v == null ? "" : v.toLocaleString("es-ES", { useGrouping: false, maximumFractionDigits: 4 });
+  const campo = v => /[;"\n]/.test(v) ? `"${String(v).replace(/"/g, '""')}"` : v;
+  const filas = [["Fecha", "Semana", "Lonja", "Provincia", "Producto", "Unidad", "Precio", "Mínimo", "Máximo", "Dudoso", "Origen"]];
+  for (const l of g.lineas) {
+    for (const p of [...(l.csv || l.pts), ...(l.recientes || [])]) {
+      filas.push([p.sinFecha ? "" : p.fecha, p.w || "", l.lonja || l.nombre, l.provincia || "", l.producto || "", g.o.unidad,
+        n(p.v), p.b != null ? n(p.a) : "", p.b != null ? n(p.b) : "", p.dud ? "sí" : "no",
+        p.reciente ? "Lonja (lectura de la app)" : "Junta de Castilla y León"]);
+    }
+  }
+  const txt = "﻿" + filas.map(f => f.map(v => campo(String(v))).join(";")).join("\r\n");
+  descargarBlob(new Blob([txt], { type: "text/csv;charset=utf-8" }), nombreArchivo(g, "csv"));
 }
 
 /* ---------- selección ---------- */
@@ -255,6 +571,8 @@ function normalizarSeleccion() {
     // Por defecto, la lonja con más sesiones
     estHist.lonja = [...filtradas].sort((a, b) => puntosSerie(b).length - puntosSerie(a).length)[0] || null;
   }
+  // Lonjas añadidas al gráfico: del mismo producto y filtro, sin repetir la principal
+  estHist.extra = estHist.extra.filter(x => x !== estHist.lonja && filtradas.includes(x)).slice(0, MAX_LONJAS_GRAFICO - 1);
   return { sectores, delSector, g, provincias, filtradas };
 }
 
@@ -262,7 +580,7 @@ function normalizarSeleccion() {
 function abrirHistoricoDe(clave, lonjaApp) {
   estHist.grupo = CLAVE_A_JUNTA[clave] || estHist.grupo;
   estHist.sector = (estHist.grupo || "").split("|")[0] || estHist.sector;
-  estHist.provincia = "Todas"; estHist.lonja = null; estHist.ambito = "cyl";
+  estHist.provincia = "Todas"; estHist.lonja = null; estHist.ambito = "cyl"; estHist.extra = [];
   if (lonjaApp && HIST.indice) estHist.lonja = serieDeApp(clave, lonjaApp);
   ir("historico");
 }
@@ -303,73 +621,157 @@ function vistaHistorico() {
         <div class="filtros" role="group" aria-label="Periodo">${chips(periodos, estHist.periodo, "data-h-periodo")}</div>
       </div>
     </section>
-    ${ser ? panelSerie(estHist.lonja, pts, g) : ""}
+    ${ser ? panelSerie(estHist.lonja, pts, g, filtradas) : ""}
     ${panelLonjas(g, filtradas)}
     ${ser ? panelSemanal(pts, g) : ""}
     <p class="nota">Fuente: ${HIST.indice.fuente ? `<a href="${esc(HIST.indice.fuente)}" target="_blank" rel="noopener noreferrer">Junta de Castilla y León, precios de lonjas y mercados</a>` : "Junta de Castilla y León"}.
-      Valores tal como se publican, en la unidad de cada producto. Cuando la lonja da una horquilla (mínimo–máximo) se usa el centro para gráficos y medias.
-      Los valores marcados como «dudoso» se apartan mucho del resto de la serie (casi siempre, una fila desplazada en el Excel original) y no se usan en los cálculos.
+      Valores tal como se publican, en la unidad de cada producto, salvo cereales y forrajes: la Junta los da en €/100 kg y aquí se muestran en €/t (multiplicados por 10).
+      Los puntos huecos al final de una línea son sesiones más recientes que la app ha leído de la propia lonja y que la Junta aún no ha publicado. Cuando la lonja da una horquilla (mínimo–máximo) se usa el centro para gráficos y medias.
+      Los valores marcados como «dudoso» se apartan mucho del resto de la serie o son un pico aislado que vuelve a su nivel la semana siguiente (casi siempre, una errata o una fila desplazada en el Excel original) y no se usan en gráficos ni cálculos.
       <a href="#historico-fuentes">Archivos importados</a>.</p>`;
 }
 
-function panelSerie(id, pts, g) {
-  const s = HIST.indice.series[id], u = s.u, per = estHist.periodo;
+/* ---------- sesiones recientes que la app ya ha leído de la propia lonja ----------
+   La Junta publica su cuadro con unas semanas de retraso; el robot de la app lee cada lonja el mismo día.
+   Se añaden al final de la serie oficial SOLO si es la misma lonja, el mismo producto clave (trigo, cebada…),
+   la misma unidad, y el primer valor no se aparta más de un 15 % del último oficial (si no, no son comparables). */
+const normU = u => String(u || "").toLowerCase().replace(/\s+/g, " ").trim();
+function recientesDe(id) {
+  if (typeof DATOS === "undefined" || !DATOS || !Array.isArray(DATOS.lonjas)) return [];
+  const s = HIST.indice.series[id], l = lonjaH(s.l);
+  if (!l.app) return [];
+  const clave = Object.keys(CLAVE_A_JUNTA).find(k => CLAVE_A_JUNTA[k] === `${s.s}|${s.p}|${s.u}`);
+  const lonjaApp = clave && DATOS.lonjas.find(x => x.id === l.app);
+  const oficial = lonjaApp && ultimo(puntosSerie(id));
+  if (!oficial) return [];
+  let mejor = null;
+  for (const f of lonjaApp.precios.filter(f => f.clave === clave && normU(f.unidad) === normU(s.u))) {
+    const serie = (DATOS.historial?.[f.id] || []).filter(p => p[0] > oficial.fecha && num(p[1]) !== null && p[1] > 0);
+    if (!serie.length) continue;
+    const dif = Math.abs(serie[0][1] - oficial.v) / Math.abs(oficial.v);
+    if (dif <= 0.15 && (!mejor || dif < mejor.dif)) mejor = { dif, serie };
+  }
+  return mejor ? mejor.serie.slice(-12).map(([fecha, v]) => ({ fecha, w: semanaISO(fecha), v, a: v, b: null, reciente: true, sinFecha: false, dud: false })) : [];
+}
+const nombreCorto = id => lonjaH(HIST.indice.series[id].l).nombre.replace(/^Lonja de(l)? /, "");
+/** Una línea del gráfico para una serie y un periodo (sin dudosos; con las sesiones recientes del periodo). */
+function lineaDe(id, per, color) {
+  const s = HIST.indice.series[id], l = lonjaH(s.l), enP = enPeriodo(puntosSerie(id), per);
+  const rec = recientesDe(id).filter(p => per === "todo" || per === "comparar" || anioDe(p) === Number(per));
+  return { nombre: nombreCorto(id), color, pts: enP.filter(p => !p.dud), csv: enP, recientes: rec, lonja: l.nombre, provincia: l.provincia, producto: s.p };
+}
+
+function panelSerie(id, pts, g, filtradas) {
+  const s = HIST.indice.series[id], u = s.u, per = estHist.periodo, lonjaN = lonjaH(s.l).nombre;
   const anios = HIST.indice.anios, anioAct = per === "todo" || per === "comparar" ? anios.at(-1) : Number(per);
   const vis = enPeriodo(pts, per).filter(p => !p.dud);
   const ult = ultimo(enPeriodo(pts, per));
-  let grafico;
+  const perTxt = per === "todo" ? `${anios[0]}–${anios.at(-1)}` : per === "comparar" ? `${anios.at(-2)} frente a ${anios.at(-1)}` : per;
+  const base = { unidad: u, contexto: estHist.ampliado ? "ampliado" : "normal", subtitulo: `${u} · ${perTxt} · cotizaciones semanales` };
+  let lineas, opts;
   if (per === "comparar") {
-    const lineas = anios.slice(-2).map((a, i, arr) => ({ nombre: String(a), pts: pts.filter(p => !p.dud && anioDe(p) === a),
-      color: i === arr.length - 1 ? "var(--pino)" : "var(--paja)", clase: i === arr.length - 1 ? "l-act" : "l-ant", discontinua: i !== arr.length - 1 }));
-    grafico = graficoHist(lineas, { eje: "semana", unidad: u, etiqueta: `Precio por semana del año, ${anios.slice(-2).join(" frente a ")}` });
+    const rec = recientesDe(id);
+    lineas = anios.slice(-2).map((a, i, arr) => {
+      const actual = i === arr.length - 1, todos = pts.filter(p => anioDe(p) === a);
+      return { nombre: String(a), color: actual ? "pino" : "paja", discontinua: !actual, pts: todos.filter(p => !p.dud), csv: todos,
+        recientes: actual ? rec.filter(p => anioDe(p) === a) : [], lonja: lonjaN, provincia: lonjaH(s.l).provincia, producto: s.p };
+    });
+    opts = { ...base, eje: "semana", etiqueta: `Precio por semana del año, ${anios.slice(-2).join(" frente a ")}`,
+      titulo: `${s.p} · ${lonjaN}`, archivo: `${s.p}-${nombreCorto(id)}-${anios.slice(-2).join("-")}` };
   } else {
-    grafico = graficoHist([{ nombre: s.p, pts: vis, color: "var(--pino)", clase: "l-act" }], { unidad: u, etiqueta: `Evolución de ${s.p} en ${lonjaH(s.l).nombre}` });
+    lineas = [id, ...estHist.extra].map((sid, i) => lineaDe(sid, per, COLORES_LINEA[i]));
+    const varias = lineas.length > 1;
+    opts = { ...base, banda: !varias, media: !varias,
+      etiqueta: varias ? `Evolución de ${s.p} en ${lineas.map(l => l.nombre).join(", ")}` : `Evolución de ${s.p} en ${lonjaN}`,
+      titulo: varias ? `${s.p} · ${lineas.length} lonjas` : `${s.p} · ${lonjaN}`,
+      archivo: `${s.p}-${varias ? lineas.map(l => l.nombre).join("-") : nombreCorto(id)}-${per}` };
   }
+  const grafico = graficoHist(lineas, opts);
+  const gid = grafico.includes(`data-graf="g${nGraf}"`) ? "g" + nGraf : null;
+  const principal = per === "comparar" ? lineas.at(-1) : lineas[0];
+  const rec = principal.recientes;
+
   const vals = vis.map(p => p.v);
   const ia = mismaSemanaAnterior(pts, ult), mp = mismoPeriodo(pts, anioAct), t = tendencia(enPeriodo(pts, per));
   const primero = vis[0];
   const vAnio = primero && ult && primero !== ult ? txtPct(pct(ult.v, primero.v)) : null;
   const vIa = txtPct(ia ? pct(ult.v, ia.v) : null), vMp = txtPct(mp ? mp.var : null);
   const nDud = enPeriodo(pts, per).filter(p => p.dud).length;
+  const redondeo = v => u === "€/t" ? Math.round(v * 100) / 100 : Math.round(v * 1000) / 1000;
+
+  const otras = filtradas.filter(x => x !== id);
+  const lleno = estHist.extra.length >= MAX_LONJAS_GRAFICO - 1;
+  const chipsExtra = per === "comparar"
+    ? (otras.length ? `<p class="nota">Para ver varias lonjas en el mismo gráfico, elige un año o ${anios[0]}–${anios.at(-1)}.</p>` : "")
+    : otras.length ? `<div class="extra-lonjas" role="group" aria-label="Añadir lonjas al gráfico"><span class="etiqueta">Añadir al gráfico (hasta ${MAX_LONJAS_GRAFICO} lonjas)</span>
+        <div class="filtros envolver">${otras.map(x => {
+          const i = estHist.extra.indexOf(x);
+          return `<button class="chip" type="button" data-h-extra="${esc(x)}" aria-pressed="${i >= 0}"${i < 0 && lleno ? " disabled" : ""}>${i >= 0 ? `<i class="punto c-${COLORES_LINEA[i + 1]}"></i>` : "+ "}${esc(nombreCorto(x))}</button>`;
+        }).join("")}</div></div>` : "";
+  const acciones = gid ? `<div class="graf-acciones">
+      <button class="chip" type="button" data-h-ampliar aria-pressed="${estHist.ampliado}">${estHist.ampliado ? "✕ Cerrar" : "⤢ Ampliar"}</button>
+      <button class="chip" type="button" data-h-png="${gid}">⇩ Imagen</button>
+      <button class="chip" type="button" data-h-csv="${gid}">⇩ Excel (CSV)</button></div>` : "";
+  const notaRec = rec.length ? `<p class="nota">Puntos huecos al final: ${rec.length === 1 ? "la última sesión publicada" : `las ${rec.length} últimas sesiones publicadas`} por la propia lonja (${fechaCorta(rec.at(-1).fecha)}: <b class="num">${valorTxt(rec.at(-1), u)}</b>). La Junta aún no las ha recogido en su cuadro.</p>` : "";
+
   return `
     <section class="seccion">
-      <div class="tarjeta-hist">
-        <div class="cab-hist"><div><div class="etiqueta">${esc(lonjaH(s.l).nombre)} · ${esc(s.s)}</div><h3>${esc(s.p)}</h3><small>${esc(u)}</small></div>
+      <div class="tarjeta-hist${estHist.ampliado ? " ampliado" : ""}"${estHist.ampliado ? ' role="dialog" aria-modal="true" aria-label="Gráfico ampliado"' : ""}>
+        <div class="cab-hist"><div><div class="etiqueta">${esc(lonjaN)} · ${esc(s.s)}</div><h3>${esc(s.p)}</h3><small>${esc(u)} · ${esc(perTxt)}</small></div>
           ${t ? `<span class="pastilla ${t.clase}" title="Últimas 4 sesiones: ${t.sube} subidas, ${t.baja} bajadas">${t.txt}</span>` : ""}</div>
         <div class="datos-det cuatro">
           <div><span class="etiqueta">Último</span><b class="num">${ult ? valorTxt(ult, u) : "—"}</b><small>${ult ? (ult.sinFecha ? "semana " + semDe(ult) + " de " + anioDe(ult) : fechaLarga(ult.fecha)) : ""}</small></div>
-          <div><span class="etiqueta">Media${per === "comparar" ? " " + anios.join("–") : ""}</span><b class="num">${vals.length ? precio(Math.round(media(vals) * 1000) / 1000, u) : "—"}</b><small>${vals.length} sesiones</small></div>
+          <div><span class="etiqueta">Media${per === "comparar" ? " " + anios.join("–") : ""}</span><b class="num">${vals.length ? precio(redondeo(media(vals)), u) : "—"}</b><small>${vals.length} sesiones</small></div>
           <div><span class="etiqueta">Mín · máx</span><b class="num chico">${vals.length ? precio(Math.min(...vals), u) + " · " + precio(Math.max(...vals), u) : "—"}</b><small>${vAnio ? `<span class="var ${vAnio.clase}">${vAnio.txt}</span> en el periodo` : ""}</small></div>
           <div><span class="etiqueta">Interanual</span><b class="num chico var ${vIa.clase}">${vIa.txt}</b><small>${ia ? `vs ${valorTxt(ia, u)} (sem. ${semDe(ia)} de ${anioDe(ia)})` : "sin dato del año anterior"}</small></div>
         </div>
-        ${mp ? `<p class="mismo-periodo">Media de ${anioAct} entre las semanas ${mp.desde} y ${mp.hasta}: <b class="num">${precio(Math.round(mp.act * 1000) / 1000, u)}</b>, frente a <b class="num">${precio(Math.round(mp.ant * 1000) / 1000, u)}</b> en las mismas ${mp.semanas} semanas de ${anioAct - 1} (<span class="var ${vMp.clase}">${vMp.txt}</span>).</p>` : ""}
+        ${mp ? `<p class="mismo-periodo">Media de ${anioAct} entre las semanas ${mp.desde} y ${mp.hasta}: <b class="num">${precio(redondeo(mp.act), u)}</b>, frente a <b class="num">${precio(redondeo(mp.ant), u)}</b> en las mismas ${mp.semanas} semanas de ${anioAct - 1} (<span class="var ${vMp.clase}">${vMp.txt}</span>).</p>` : ""}
         <div class="grafico">${grafico}</div>
+        ${acciones}
+        ${chipsExtra}
+        ${notaRec}
         ${nDud ? `<p class="nota">${nDud} valor${nDud === 1 ? "" : "es"} dudoso${nDud === 1 ? "" : "s"} fuera del gráfico (ver tabla semanal).</p>` : ""}
       </div>
     </section>`;
 }
 
+/** Entre lonjas: cada lonja como un punto sobre una escala ajustada a los precios, con la media marcada.
+    Las barras desde cero escondían diferencias de 5–10 €/t, que son justo las que importan para vender. */
 function panelLonjas(g, filtradas) {
-  const per = estHist.periodo;
+  const per = estHist.periodo, u = g.unidad;
   const filas = filtradas.map(id => {
-    const pts = puntosSerie(id), u = ultimo(enPeriodo(pts, per));
-    return { id, s: HIST.indice.series[id], u, h4: hace4(pts, u), ia: mismaSemanaAnterior(pts, u) };
-  }).filter(f => f.u).sort((a, b) => b.u.v - a.u.v);
+    const pts = puntosSerie(id), ul = ultimo(enPeriodo(pts, per));
+    return { id, s: HIST.indice.series[id], u: ul, h4: hace4(pts, ul), ia: mismaSemanaAnterior(pts, ul) };
+  }).filter(f => f.u);
   if (!filas.length) return "";
-  const max = Math.max(...filas.map(f => f.u.v));
+  const masNueva = filas.reduce((m, f) => f.u.fecha > m ? f.u.fecha : m, "");
+  const lim = new Date(masNueva + "T12:00:00Z"); lim.setUTCDate(lim.getUTCDate() - 21);
+  const tope = lim.toISOString().slice(0, 10);
+  filas.forEach(f => { f.viejo = f.u.fecha < tope; });
+  const actuales = filas.filter(f => !f.viejo);
+  const med = media(actuales.map(f => f.u.v));
+  filas.sort((a, b) => (a.viejo - b.viejo) || b.u.v - a.u.v);
+  let lo = Math.min(...filas.map(f => f.u.v), med), hi = Math.max(...filas.map(f => f.u.v), med);
+  const pad = (hi - lo) * 0.08 || Math.abs(hi) * 0.03 || 1; lo -= pad; hi += pad;
+  const pos = v => Math.round((10 + (v - lo) / (hi - lo) * 180) * 10) / 10;
+  const red = v => u === "€/t" ? Math.round(v) : Math.round(v * 1000) / 1000;
+  const enGraf = estHist.periodo === "comparar" ? [estHist.lonja] : [estHist.lonja, ...estHist.extra];
   return `
     <section class="seccion">
-      <div class="titulo-seccion"><h2>Entre lonjas</h2><span>${esc(g.producto)} · ${esc(g.unidad)}</span></div>
+      <div class="titulo-seccion"><h2>Entre lonjas</h2><span>${esc(g.producto)} · ${esc(u)}</span></div>
+      <p class="nota">${actuales.length > 1 ? `Media de las ${actuales.length} lonjas con sesión en las 3 últimas semanas: <b class="num">${precio(red(med), u)}</b>. La raya marca la media; cada punto, el último precio de la lonja.` : "Último precio de cada lonja en el periodo elegido."}</p>
       <div class="comparativa">${filas.map(f => {
         const v4 = txtPct(f.h4 ? pct(f.u.v, f.h4.v) : null), via = txtPct(f.ia ? pct(f.u.v, f.ia.v) : null);
-        return `<div class="cmp-fila" role="button" tabindex="0" data-h-lonja="${esc(f.id)}"${f.id === estHist.lonja ? ' aria-current="true"' : ""}>
-          <span><b>${esc(lonjaH(f.s.l).nombre.replace(/^Lonja de(l)? /, ""))}</b><br><small class="etiqueta">${f.u.sinFecha ? "sem. " + semDe(f.u) : fechaCorta(f.u.fecha)} ${anioDe(f.u)}</small></span>
-          <div class="barra-cmp" aria-hidden="true"><i class="${f.id === estHist.lonja ? "mejor" : ""}" data-w="${Math.round(Math.max(4, f.u.v / max * 100))}"></i></div>
-          <span class="cmp-valor num">${valorTxt(f.u, g.unidad)}<small class="var ${v4.clase}">${v4.txt} 4 sem.</small></span>
-          <span class="q">${esc(lonjaH(f.s.l).provincia)} · interanual <span class="var ${via.clase}">${via.txt}</span></span>
+        const i = enGraf.indexOf(f.id), color = i >= 0 ? COLORES_LINEA[i] : "tenue";
+        const d = red(f.u.v - med), dTxt = f.viejo || actuales.length < 2 ? "" : d === 0 ? "= media" : `${d > 0 ? "+" : "−"}${precio(Math.abs(d), u)} vs media`;
+        return `<div class="cmp-fila${f.viejo ? " viejo" : ""}" role="button" tabindex="0" data-h-lonja="${esc(f.id)}"${f.id === estHist.lonja ? ' aria-current="true"' : ""}>
+          <span><b>${esc(nombreCorto(f.id))}</b><br><small class="etiqueta">${f.u.sinFecha ? "sem. " + semDe(f.u) : fechaCorta(f.u.fecha)} ${anioDe(f.u)}</small></span>
+          <svg class="tira" viewBox="0 0 200 20" aria-hidden="true"><line x1="10" x2="190" y1="10" y2="10" stroke="var(--linea)" stroke-width="5" stroke-linecap="round"/>${actuales.length > 1 ? `<line x1="${pos(med)}" x2="${pos(med)}" y1="1" y2="19" stroke="var(--tenue)" stroke-width="2"/>` : ""}<circle cx="${pos(f.u.v)}" cy="10" r="${i >= 0 ? 7 : 6}" fill="${f.viejo ? "var(--hoja)" : colorVar(color)}" stroke="${colorVar(color)}" stroke-width="2.5"/></svg>
+          <span class="cmp-valor num">${valorTxt(f.u, u)}<small class="var ${d > 0 ? "s" : d < 0 ? "b" : "i"}">${dTxt}</small></span>
+          <span class="q">${esc(lonjaH(f.s.l).provincia)} · 4 sem. <span class="var ${v4.clase}">${v4.txt}</span> · interanual <span class="var ${via.clase}">${via.txt}</span>${f.viejo ? " · sin sesión reciente (no cuenta en la media)" : ""}</span>
         </div>`;
       }).join("")}</div>
-      <p class="nota">Último precio de cada lonja en el periodo elegido. Cada lonja cotiza en sus propias condiciones, así que las diferencias no siempre son de mercado.</p>
+      <p class="nota">Toca una lonja para verla arriba. Cada lonja cotiza en sus propias condiciones (origen, almacén, calidad), así que las diferencias no siempre son de mercado.</p>
     </section>`;
 }
 
@@ -425,30 +827,83 @@ async function pintarHistDetalle(f) {
   if (!id) { caja.innerHTML = ""; return; }
   const s = HIST.indice.series[id], pts = puntosSerie(id).filter(p => !p.dud), u = ultimo(pts), ia = mismaSemanaAnterior(pts, u);
   const via = txtPct(ia ? pct(u.v, ia.v) : null);
+  const linea = lineaDe(id, "todo", "pino");
   caja.innerHTML = `<div class="etiqueta">Histórico oficial ${HIST.indice.anios[0]}–${HIST.indice.anios.at(-1)} · Junta de CyL</div>
-    <p class="nota">${esc(s.p)} · ${esc(s.u)} (unidad de la Junta). Último: <b class="num">${valorTxt(u, s.u)}</b> · interanual <span class="var ${via.clase}">${via.txt}</span></p>
-    <div class="grafico">${graficoHist([{ nombre: s.p, pts, color: "var(--pino)", clase: "l-act" }], { unidad: s.u })}</div>
+    <p class="nota">${esc(s.p)} · ${esc(s.u)}${s.factor !== 1 ? ` (la Junta lo publica en ${esc(s.uJunta)})` : ""}. Último: <b class="num">${valorTxt(u, s.u)}</b> · interanual <span class="var ${via.clase}">${via.txt}</span></p>
+    <div class="grafico">${graficoHist([linea], { unidad: s.u, contexto: "detalle", banda: true, etiqueta: `Histórico de ${s.p} en ${lonjaH(s.l).nombre}`,
+      titulo: `${s.p} · ${lonjaH(s.l).nombre}`, subtitulo: `${s.u} · histórico oficial`, archivo: `${s.p}-${nombreCorto(id)}-historico` })}</div>
     <button class="chip auto" type="button" data-h-abrir="${esc(f.clave)}" data-h-lonja-app="${esc(f.lonja.id)}">Ver en Histórico</button>`;
 }
 
 /* ---------- eventos ---------- */
+function reabrirAmpliado() {
+  router();
+  document.querySelector("[data-h-ampliar]")?.focus({ preventScroll: true });
+}
 document.addEventListener("click", e => {
   const t = e.target;
   const q = sel => t.closest(sel);
   let el;
   if ((el = q("[data-h-ambito]"))) { estHist.ambito = el.dataset.hAmbito; estHist.lonja = null; return router(); }
-  if ((el = q("[data-h-sector]"))) { estHist.sector = el.dataset.hSector; estHist.grupo = null; estHist.lonja = null; return router(); }
+  if ((el = q("[data-h-sector]"))) { estHist.sector = el.dataset.hSector; estHist.grupo = null; estHist.lonja = null; estHist.extra = []; return router(); }
   if ((el = q("[data-h-provincia]"))) { estHist.provincia = el.dataset.hProvincia; estHist.lonja = null; return router(); }
   if ((el = q("[data-h-periodo]"))) { estHist.periodo = el.dataset.hPeriodo; return router(); }
-  if ((el = q("[data-h-lonja]"))) { estHist.lonja = el.dataset.hLonja; router(); return document.getElementById("h-lonja")?.scrollIntoView({ block: "center" }); }
+  if ((el = q("[data-h-extra]"))) {
+    const id = el.dataset.hExtra, i = estHist.extra.indexOf(id);
+    if (i >= 0) estHist.extra.splice(i, 1); else if (estHist.extra.length < MAX_LONJAS_GRAFICO - 1) estHist.extra.push(id);
+    const y = window.scrollY; router(); window.scrollTo(0, y);
+    return document.querySelector(`[data-h-extra="${CSS.escape(id)}"]`)?.focus({ preventScroll: true });
+  }
+  if (q("[data-h-ampliar]")) { estHist.ampliado = !estHist.ampliado; return reabrirAmpliado(); }
+  if ((el = q("[data-h-png]"))) { exportarPNG(el.dataset.hPng).catch(() => {}); return; }
+  if ((el = q("[data-h-csv]"))) { exportarCSV(el.dataset.hCsv); return; }
+  if ((el = q("[data-h-lonja]"))) {
+    estHist.lonja = el.dataset.hLonja; estHist.ampliado = false; router();
+    return document.getElementById("h-lonja")?.scrollIntoView({ block: "center" });
+  }
   if (q("[data-h-todas]")) { estHist.todas = !estHist.todas; return router(); }
   if (q("[data-h-reintentar]")) { HIST.error = null; return router(); }
   if ((el = q("[data-h-abrir]"))) { cerrarDetalle(); return abrirHistoricoDe(el.dataset.hAbrir, el.dataset.hLonjaApp || null); }
 });
 document.addEventListener("keydown", e => {
-  if ((e.key === "Enter" || e.key === " ") && e.target.matches("[data-h-lonja]")) { e.preventDefault(); e.target.click(); }
+  if ((e.key === "Enter" || e.key === " ") && e.target.matches("[data-h-lonja]")) { e.preventDefault(); e.target.click(); return; }
+  const svg = e.target.closest?.(".graf svg");
+  if (svg) {
+    const caja = svg.closest(".graf"), g = GRAFS.get(caja.dataset.graf);
+    if (!g) return;
+    const n = g.m.columnas.length, act = caja.dataset.idx != null ? Number(caja.dataset.idx) : n;
+    const nuevo = { ArrowRight: act >= n ? n - 1 : act + 1, ArrowLeft: act >= n ? n - 1 : act - 1, Home: 0, End: n - 1 }[e.key];
+    if (nuevo != null) { e.preventDefault(); return mostrarPunto(caja, nuevo); }
+    if (e.key === "Escape" && caja.dataset.idx != null) { e.preventDefault(); return ocultarPunto(caja); }
+  }
+  if (e.key === "Escape" && estHist.ampliado && location.hash === "#historico") { estHist.ampliado = false; reabrirAmpliado(); }
 });
 document.addEventListener("change", e => {
-  if (e.target.id === "h-producto") { estHist.grupo = e.target.value; estHist.lonja = null; estHist.provincia = "Todas"; router(); }
+  if (e.target.id === "h-producto") { estHist.grupo = e.target.value; estHist.lonja = null; estHist.provincia = "Todas"; estHist.extra = []; router(); }
   if (e.target.id === "h-lonja") { estHist.lonja = e.target.value; router(); }
+});
+// Consultar el gráfico: con el ratón al pasar, con el dedo al tocar o arrastrar en horizontal
+document.addEventListener("pointermove", e => {
+  const svg = e.target.closest?.(".graf svg");
+  if (svg && (e.pointerType !== "touch" || e.buttons)) puntoEn(svg, e.clientX);
+});
+document.addEventListener("pointerdown", e => {
+  const svg = e.target.closest?.(".graf svg");
+  if (svg) puntoEn(svg, e.clientX);
+  else if (!e.target.closest?.(".graf-tip")) ocultarPunto();
+});
+document.addEventListener("pointerout", e => {
+  if (e.pointerType !== "mouse") return;
+  const caja = e.target.closest?.(".graf");
+  if (caja && !caja.contains(e.relatedTarget)) ocultarPunto(caja);
+});
+// El gráfico se dibuja al ancho real de la pantalla: al girar el móvil o cambiar la ventana, se redibuja
+let tRedim = null, anchoPrevio = window.innerWidth;
+window.addEventListener("resize", () => {
+  clearTimeout(tRedim);
+  tRedim = setTimeout(() => {
+    if (Math.abs(window.innerWidth - anchoPrevio) < 30 && !estHist.ampliado) return;
+    anchoPrevio = window.innerWidth;
+    if (location.hash.startsWith("#historico") && HIST.indice) { const y = window.scrollY; router(); window.scrollTo(0, y); }
+  }, 250);
 });
