@@ -33,3 +33,57 @@ def test_fallo_del_historico_de_la_junta(avisar):
 def test_texto_del_aviso_lleva_instrucciones(avisar):
     t = avisar.cuerpo([{"id": "leon", "nombre": "León", "tipo": "falla", "detalle": "x"}], "https://github.com/a/b/actions/runs/1")
     assert "| León | falla | x |" in t and "se cerrará sola" in t and "<!-- claves: leon:falla -->" in t
+
+
+class _GitHubFalso:
+    """Imita la API de incidencias de GitHub para probar el aviso sin tocar el repositorio real."""
+    def __init__(self):
+        self.incidencias, self.llamadas = [], []
+
+    def __call__(self):            # requests.Session()
+        return self
+
+    headers = {}
+
+    def _resp(self, datos):
+        class R:
+            def __init__(s, d): s.d = d
+            def json(s): return s.d
+            def raise_for_status(s): pass
+        return R(datos)
+
+    def get(self, url, params=None, timeout=None):
+        self.llamadas.append(("GET", url))
+        return self._resp([i for i in self.incidencias if i["state"] == "open"])
+
+    def post(self, url, json=None, timeout=None):
+        self.llamadas.append(("POST", url))
+        if url.endswith("/issues"):
+            self.incidencias.append({"number": len(self.incidencias) + 1, "state": "open", "body": json["body"], "html_url": "x"})
+        return self._resp({"html_url": "x"})
+
+    def patch(self, url, json=None, timeout=None):
+        self.llamadas.append(("PATCH", url))
+        n = int(url.rsplit("/", 1)[1]); inc = self.incidencias[n - 1]
+        inc.update({k: v for k, v in json.items() if k in ("body", "state")})
+        return self._resp({})
+
+
+def test_flujo_completo_de_la_incidencia(avisar, monkeypatch, tmp_path):
+    import json, requests
+    gh = _GitHubFalso()
+    monkeypatch.setattr(requests, "Session", gh)
+    monkeypatch.setenv("GITHUB_REPOSITORY", "dueño/lonjas"); monkeypatch.setenv("GITHUB_TOKEN", "x"); monkeypatch.setenv("GITHUB_RUN_ID", "1")
+    monkeypatch.delenv("JCYL_RESULTADO", raising=False)
+    datos = tmp_path / "precios.json"; monkeypatch.setattr(avisar, "DATOS", datos)
+    hoy = date.today().isoformat()
+    def escribir(fallos_leon):
+        datos.write_text(json.dumps(_datos(leon={"fallos": fallos_leon, "fecha": hoy, "error": "x"}, lerma={"fallos": 0, "fecha": hoy})))
+    escribir(2); avisar.main([])
+    assert len(gh.incidencias) == 1 and gh.incidencias[0]["state"] == "open"          # se abre
+    escribir(3); avisar.main([])
+    assert len(gh.incidencias) == 1 and not any(m == "PATCH" for m, _ in gh.llamadas)  # mismo problema: no se repite
+    escribir(0); avisar.main([])
+    assert gh.incidencias[0]["state"] == "closed"                                      # se cierra sola
+    escribir(0); n = len(gh.llamadas); avisar.main([])
+    assert [m for m, _ in gh.llamadas[n:]] == ["GET"]                                  # todo bien y nada abierto: solo mira
