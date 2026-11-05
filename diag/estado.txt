@@ -1,0 +1,8 @@
+salamanca.html 200 text/html;charset=UTF-8 26750 https://www.lasalina.es/economiayhacienda/agriculturayganaderia/mercado/lonja/
+lasalina-buscador.html 200 text/html;charset=UTF-8 37687 https://www.lasalina.es/buscador.html?action=search&query=lonja&searchPage=1
+lerma.html 200 text/html; charset=UTF-8 63853 https://lerma.burgos.es/lonja
+sal-EstatutosLonja_Modif2016-arts.15y16_Dispos_Trans.pdf 200 application/pdf 32379 https://www.lasalina.es/lasalina/documentacion/economiayhacienda/2017/normativa/acuerdos/EstatutosLonja_Modif2016-arts.15y16_Dispos_Trans.pdf
+sal-EstatutosLonja_Modif2016-arts.15y16_Dispos_Trans.pdf 200 application/pdf 32295 https://www.lasalina.es/lasalina/documentacion/economiayhacienda/2016/normativa/acuerdos/EstatutosLonja_Modif2016-arts.15y16_Dispos_Trans.pdf
+sal-EstatutosLonja_Modif2016-arts.15y16_Dispos_Trans.pdf 200 application/pdf 32379 https://www.lasalina.es/lasalina/documentacion/economiayhacienda/2017/normativa/acuerdos/EstatutosLonja_Modif2016-arts.15y16_Dispos_Trans.pdf
+ler-lonjahistC3B3rico2023.pdf 200 application/pdf 565885 https://lerma.burgos.es/sites/lerma/files/lonjahist%C3%B3rico2023.pdf
+ler-historico2024.pdf 200 application/pdf 215711 https://lerma.burgos.es/sites/lerma/files/lonjahistorico2024.pdf
