@@ -12,47 +12,39 @@ jobs:
     timeout-minutes: 10
     steps:
       - uses: actions/checkout@v4
-      - name: Descargar páginas
+      - name: Descargar fuentes de Salamanca (2.ª vuelta)
         run: |
           set +e
-          mkdir -p diag
+          rm -rf diag && mkdir -p diag
           UA="Mozilla/5.0 (X11; Linux x86_64) AppLonjasCyL-diagnostico"
           bajar() { curl -sSL -A "$UA" --max-time 60 -o "diag/$1" -w "$1 %{http_code} %{content_type} %{size_download} %{url_effective}\n" "$2" >> diag/estado.txt; }
-          bajar salamanca.html "https://www.lasalina.es/economiayhacienda/agriculturayganaderia/mercado/lonja/"
-          bajar lasalina-buscador.html "https://www.lasalina.es/buscador.html?action=search&query=lonja&searchPage=1"
-          bajar lerma.html "https://lerma.burgos.es/lonja"
+          bajar sal-cotizaciones.html "https://www.lasalina.es/Aplicaciones/lonja/Cotizaciones.jsp"
+          bajar sal-lonja-sub.html "https://www.lasalina.es/lasalina/economiayhacienda/agriculturayganaderia/mercado/lonja/lonja.html"
+          bajar ckan-package.json "https://datosabiertossalamanca.es/api/3/action/package_show?id=cotizaciones-semanales-de-la-lonja-de-salamanca"
+          bajar ckan-dataset.html "https://datosabiertossalamanca.es/dataset/cotizaciones-semanales-de-la-lonja-de-salamanca"
           python3 - <<'PY'
-          import re, pathlib
-          for f in sorted(pathlib.Path("diag").glob("*.html")):
+          import json, re, pathlib, subprocess
+          d = pathlib.Path("diag")
+          try:
+              pkg = json.loads((d / "ckan-package.json").read_text())["result"]
+              lineas = [f"licencia: {pkg.get('license_title')} | {pkg.get('license_url')}", f"modificado: {pkg.get('metadata_modified')}"]
+              for i, r in enumerate(pkg.get("resources", [])):
+                  lineas.append(f"{i} | {r.get('format')} | {r.get('name')} | {r.get('last_modified') or r.get('created')} | {r.get('url')}")
+              (d / "ckan-recursos.txt").write_text("\n".join(lineas))
+              urls = [r["url"] for r in pkg.get("resources", []) if (r.get("format") or "").upper() in ("CSV", "JSON", "XLSX", "XLS")][:3]
+          except Exception as e:
+              (d / "ckan-recursos.txt").write_text(f"ERROR {e}")
+              urls = []
+          for u in urls:
+              n = re.sub(r"[^A-Za-z0-9._-]", "_", u.rsplit("/", 1)[-1])[:60] or "recurso"
+              subprocess.run(["curl", "-sSL", "-A", "Mozilla/5.0", "--max-time", "90", "-o", f"diag/ckan-{n}", "-w", f"ckan-{n} %{{http_code}} %{{content_type}} %{{size_download}} %{{url_effective}}\n", u], stdout=open("diag/estado.txt", "a"))
+          for f in sorted(d.glob("*.html")):
               t = f.read_text(errors="replace")
-              hrefs = re.findall(r'(?:href|src|data)\s*=\s*["\']([^"\']+)["\']', t, re.I)
-              (f.with_suffix(".enlaces.txt")).write_text("\n".join(hrefs))
+              (f.with_suffix(".enlaces.txt")).write_text("\n".join(re.findall(r'(?:href|src|action|data)\s*=\s*["\']([^"\']+)["\']', t, re.I)))
           PY
-          # PDF candidatos de las dos páginas (solo los que parecen de lonja), para ver su formato
-          grep -hoiE '[^"'"'"' <>]*(pdfs/lonja|lonja[^"'"'"' <>]*)\.pdf' diag/salamanca.enlaces.txt diag/lasalina-buscador.enlaces.txt | head -3 | while read u; do
-            case "$u" in http*) url="$u";; /*) url="https://www.lasalina.es$u";; *) url="https://www.lasalina.es/$u";; esac
-            n=$(basename "$url" | tr -cd 'A-Za-z0-9._-'); bajar "sal-$n" "$url"; done
-          grep -hoiE '[^"'"'"' <>]*\.pdf' diag/lerma.enlaces.txt | grep -vi histor | head -5 | while read u; do
-            case "$u" in http*) url="$u";; /*) url="https://lerma.burgos.es$u";; *) url="https://lerma.burgos.es/$u";; esac
-            n=$(basename "$url" | tr -cd 'A-Za-z0-9._-'); bajar "ler-$n" "$url"; done
-          bajar ler-historico2024.pdf "https://lerma.burgos.es/sites/lerma/files/lonjahistorico2024.pdf"
-          ls -la diag; cat diag/estado.txt
-      - name: Texto de los PDF
-        run: |
-          pip install -q pdfplumber
-          python3 - <<'PY'
-          import pathlib, pdfplumber
-          for f in sorted(pathlib.Path("diag").glob("*.pdf")):
-              try:
-                  with pdfplumber.open(f) as pdf:
-                      n = len(pdf.pages); pags = list(range(min(2, n))) + list(range(max(2, n - 2), n))
-                      txt = "\n".join(f"=== página {i+1} de {n} ===\n" + (pdf.pages[i].extract_text() or "[sin texto: ¿imagen escaneada?]") for i in pags)
-                      imgs = sum(len(p.images) for p in pdf.pages[-2:])
-                      txt += f"\n=== imágenes en las 2 últimas páginas: {imgs} ==="
-              except Exception as e:
-                  txt = f"ERROR {type(e).__name__}: {e}"
-              f.with_suffix(".txt").write_text(txt)
-          PY
+          # recortar archivos de datos muy grandes (solo hace falta ver el formato)
+          for f in diag/ckan-*; do s=$(stat -c %s "$f"); if [ "$s" -gt 400000 ]; then head -c 200000 "$f" > "$f.inicio"; tail -c 100000 "$f" > "$f.final"; rm "$f"; fi; done
+          ls -la diag; cat diag/estado.txt; cat diag/ckan-recursos.txt
       - name: Guardar en la rama
         run: |
           git config user.name "diagnostico-lonjas"
