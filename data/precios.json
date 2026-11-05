@@ -1,273 +1,395 @@
 {
- "generado": "2026-11-04T16:36+00:00",
+ "generado": "2026-11-05T12:43+00:00",
  "lonjas": [
   {
    "id": "salamanca",
    "nombre": "Lonja de Salamanca",
    "provincia": "Salamanca",
    "dia": "Lunes",
-   "fuente": "https://www.lasalina.es/economiayhacienda/agriculturayganaderia/mercado/lonja/",
+   "fuente": "https://datosabiertossalamanca.es/dataset/cotizaciones-semanales-de-la-lonja-de-salamanca",
    "estado": "activa",
-   "nota": null,
+   "nota": "Datos abiertos de la Diputación de Salamanca (licencia CC BY 4.0)",
    "fecha": "2026-11-03",
    "precios": [
     {
+     "id": "salamanca-trigo-blando",
      "cat": "Cereales",
      "producto": "Trigo blando",
      "unidad": "€/t",
-     "ant": 238,
-     "act": 236,
-     "id": "salamanca-trigo-blando",
+     "ant": 238.0,
+     "act": 236.0,
      "clave": "trigo"
     },
     {
+     "id": "salamanca-cebada",
      "cat": "Cereales",
      "producto": "Cebada",
      "unidad": "€/t",
-     "ant": 232,
-     "act": 231,
-     "id": "salamanca-cebada",
+     "ant": 232.0,
+     "act": 231.0,
      "clave": "cebada"
     },
     {
+     "id": "salamanca-avena",
      "cat": "Cereales",
-     "producto": "Maíz",
+     "producto": "Avena",
      "unidad": "€/t",
-     "ant": 246,
-     "act": 243,
-     "id": "salamanca-maiz",
-     "clave": "maiz"
+     "ant": 205.0,
+     "act": 204.0,
+     "clave": "avena"
     },
     {
+     "id": "salamanca-centeno",
+     "cat": "Cereales",
+     "producto": "Centeno",
+     "unidad": "€/t",
+     "ant": 222.0,
+     "act": 221.0,
+     "clave": "centeno"
+    },
+    {
+     "id": "salamanca-triticale",
      "cat": "Cereales",
      "producto": "Triticale",
      "unidad": "€/t",
-     "ant": 228,
-     "act": 226,
-     "id": "salamanca-triticale",
+     "ant": 228.0,
+     "act": 226.0,
      "clave": "triticale"
     },
     {
-     "cat": "Forrajes",
-     "producto": "Paja",
+     "id": "salamanca-maiz",
+     "cat": "Cereales",
+     "producto": "Maíz",
      "unidad": "€/t",
-     "ant": 76,
-     "act": 77,
-     "id": "salamanca-paja",
-     "clave": "paja"
+     "ant": 246.0,
+     "act": 243.0,
+     "clave": "maiz"
     },
     {
+     "id": "salamanca-garbanzo-pedrosillano",
      "cat": "Leguminosas",
      "producto": "Garbanzo pedrosillano",
      "unidad": "€/t",
-     "ant": 750,
-     "act": 750,
-     "id": "salamanca-garbanzo-pedrosillano"
+     "ant": 750.0,
+     "act": 750.0
     },
     {
+     "id": "salamanca-lenteja-de-la-armuna-igp",
      "cat": "Leguminosas",
      "producto": "Lenteja de La Armuña IGP",
      "unidad": "€/t",
-     "ant": 1100,
-     "act": 1100,
-     "id": "salamanca-lenteja-de-la-armuna-igp"
+     "ant": 1100.0,
+     "act": 1100.0
     },
     {
-     "cat": "Vacuno de carne",
-     "producto": "Terneras +12 meses, menos de 270 kg",
-     "unidad": "€/kg canal",
-     "ant": 7.4,
-     "act": 7.4,
-     "id": "salamanca-terneras-12-meses-menos-de-270-kg"
+     "id": "salamanca-paja",
+     "cat": "Forrajes",
+     "producto": "Paja",
+     "unidad": "€/t",
+     "ant": 76.0,
+     "act": 77.0,
+     "clave": "paja"
     },
     {
-     "cat": "Vacuno de carne",
-     "producto": "Terneras +12 meses, más de 270 kg",
-     "unidad": "€/kg canal",
-     "ant": 7.08,
-     "act": 7.1,
-     "id": "salamanca-terneras-12-meses-mas-de-270-kg"
-    },
-    {
-     "cat": "Vacuno de carne",
-     "producto": "Añojos menos de 350 kg",
-     "unidad": "€/kg canal",
-     "ant": 6.41,
-     "act": 6.41,
-     "id": "salamanca-anojos-menos-de-350-kg"
-    },
-    {
-     "cat": "Vacuno de carne",
-     "producto": "Añojos más de 350 kg",
-     "unidad": "€/kg canal",
-     "ant": 6.32,
-     "act": 6.35,
-     "id": "salamanca-anojos-mas-de-350-kg"
-    },
-    {
-     "cat": "Vacuno de carne",
-     "producto": "Erales",
-     "unidad": "€/kg canal",
-     "ant": 5.24,
-     "act": 5.24,
-     "id": "salamanca-erales"
-    },
-    {
-     "cat": "Vacuno de carne",
-     "producto": "Novillos",
-     "unidad": "€/kg canal",
-     "ant": 5.13,
-     "act": 5.13,
-     "id": "salamanca-novillos"
-    },
-    {
-     "cat": "Vacuno de carne",
-     "producto": "Vacas",
-     "unidad": "€/kg canal",
-     "ant": 6.06,
-     "act": 6.06,
-     "id": "salamanca-vacas"
-    },
-    {
-     "cat": "Vacuno de carne",
-     "producto": "Toros",
-     "unidad": "€/kg canal",
-     "ant": 5.26,
-     "act": 5.26,
-     "id": "salamanca-toros"
-    },
-    {
-     "cat": "Vacuno de vida",
-     "producto": "Terneros",
+     "id": "salamanca-lechazo-extra",
+     "cat": "Ovino",
+     "producto": "Lechazo extra",
      "unidad": "€/kg vivo",
-     "ant": 5.82,
-     "act": 5.82,
-     "id": "salamanca-terneros"
+     "ant": 10.25,
+     "act": 10.3
     },
     {
-     "cat": "Vacuno de vida",
-     "producto": "Terneras",
-     "unidad": "€/kg vivo",
-     "ant": 5.36,
-     "act": 5.36,
-     "id": "salamanca-terneras"
-    },
-    {
-     "cat": "Vacuno de vida",
-     "producto": "Terneros del país",
-     "unidad": "€/kg vivo",
-     "ant": 3.99,
-     "act": 3.99,
-     "id": "salamanca-terneros-del-pais"
-    },
-    {
+     "id": "salamanca-lechazo-hasta-11-kg",
      "cat": "Ovino",
      "producto": "Lechazo hasta 11 kg",
      "unidad": "€/kg vivo",
-     "ant": 9.8,
-     "act": 9.85,
-     "id": "salamanca-lechazo-hasta-11-kg",
+     "ant": 9.85,
+     "act": 9.9,
      "clave": "lechazo"
     },
     {
+     "id": "salamanca-lechazo-11-13-kg",
      "cat": "Ovino",
      "producto": "Lechazo 11-13 kg",
      "unidad": "€/kg vivo",
-     "ant": 9.0,
-     "act": 9.05,
-     "id": "salamanca-lechazo-11-13-kg"
+     "ant": 9.05,
+     "act": 9.1
     },
     {
+     "id": "salamanca-lechazo-13-15-kg",
+     "cat": "Ovino",
+     "producto": "Lechazo 13-15 kg",
+     "unidad": "€/kg vivo",
+     "ant": 7.45,
+     "act": 7.55
+    },
+    {
+     "id": "salamanca-cordero-15-19-kg",
      "cat": "Ovino",
      "producto": "Cordero 15-19 kg",
      "unidad": "€/kg vivo",
-     "ant": 6.95,
-     "act": 7.0,
-     "id": "salamanca-cordero-15-19-kg"
+     "ant": 7.0,
+     "act": 7.1
     },
     {
+     "id": "salamanca-cordero-19-23-kg",
+     "cat": "Ovino",
+     "producto": "Cordero 19-23 kg",
+     "unidad": "€/kg vivo",
+     "ant": 6.4,
+     "act": 6.5
+    },
+    {
+     "id": "salamanca-cordero-23-25-5-kg",
+     "cat": "Ovino",
+     "producto": "Cordero 23-25,5 kg",
+     "unidad": "€/kg vivo",
+     "ant": 6.15,
+     "act": 6.25
+    },
+    {
+     "id": "salamanca-cordero-25-5-28-kg",
+     "cat": "Ovino",
+     "producto": "Cordero 25,5-28 kg",
+     "unidad": "€/kg vivo",
+     "ant": 5.75,
+     "act": 5.85
+    },
+    {
+     "id": "salamanca-cordero-28-34-kg",
+     "cat": "Ovino",
+     "producto": "Cordero 28-34 kg",
+     "unidad": "€/kg vivo",
+     "ant": 4.9,
+     "act": 5.0
+    },
+    {
+     "id": "salamanca-cordero-mas-de-34-kg",
+     "cat": "Ovino",
+     "producto": "Cordero más de 34 kg",
+     "unidad": "€/kg vivo",
+     "ant": 4.3,
+     "act": 4.4
+    },
+    {
+     "id": "salamanca-oveja-de-sacrificio",
+     "cat": "Ovino",
+     "producto": "Oveja de sacrificio",
+     "unidad": "€/kg vivo",
+     "ant": 1.15,
+     "act": 1.15,
+     "rango": "0,9–1,4"
+    },
+    {
+     "id": "salamanca-oveja-de-vida",
+     "cat": "Ovino",
+     "producto": "Oveja de vida",
+     "unidad": "€/ud",
+     "ant": 162.5,
+     "act": 162.5,
+     "rango": "150–175"
+    },
+    {
+     "id": "salamanca-cerdo-selecto",
      "cat": "Porcino blanco",
      "producto": "Cerdo selecto",
      "unidad": "€/kg vivo",
      "ant": 1.205,
      "act": 1.165,
      "rango": "1,16–1,17",
-     "id": "salamanca-cerdo-selecto",
      "clave": "cerdo-selecto"
     },
     {
+     "id": "salamanca-cerdo-normal",
      "cat": "Porcino blanco",
      "producto": "Cerdo normal",
      "unidad": "€/kg vivo",
      "ant": 1.195,
      "act": 1.155,
      "rango": "1,15–1,16",
-     "id": "salamanca-cerdo-normal",
      "clave": "cerdo-normal"
     },
     {
+     "id": "salamanca-cerdo-graso",
      "cat": "Porcino blanco",
      "producto": "Cerdo graso",
      "unidad": "€/kg vivo",
      "ant": 1.69,
      "act": 1.65,
-     "rango": "1,63–1,67",
-     "id": "salamanca-cerdo-graso"
+     "rango": "1,63–1,67"
     },
     {
+     "id": "salamanca-cerdas-de-desvieje",
+     "cat": "Porcino blanco",
+     "producto": "Cerdas de desvieje",
+     "unidad": "€/kg vivo",
+     "ant": 0.405,
+     "act": 0.375,
+     "rango": "0,36–0,39"
+    },
+    {
+     "id": "salamanca-lechones-base-20-kg",
      "cat": "Porcino blanco",
      "producto": "Lechones base 20 kg",
      "unidad": "€/ud",
-     "ant": 36,
-     "act": 34,
-     "id": "salamanca-lechones-base-20-kg",
+     "ant": 34.0,
+     "act": 32.0,
      "clave": "lechones"
     },
     {
+     "id": "salamanca-tostones-4-6-kg",
      "cat": "Porcino blanco",
      "producto": "Tostones 4-6 kg",
      "unidad": "€/ud",
-     "ant": 27,
-     "act": 27,
-     "id": "salamanca-tostones-4-6-kg"
+     "ant": 27.0,
+     "act": 27.0
     },
     {
+     "id": "salamanca-tostones-6-8-kg",
      "cat": "Porcino blanco",
      "producto": "Tostones 6-8 kg",
      "unidad": "€/ud",
-     "ant": 27,
-     "act": 27,
-     "id": "salamanca-tostones-6-8-kg"
+     "ant": 27.0,
+     "act": 27.0
     },
     {
+     "id": "salamanca-iberico-cebo-de-campo",
      "cat": "Porcino ibérico",
      "producto": "Ibérico cebo de campo",
      "unidad": "€/kg vivo",
-     "ant": 3.06,
-     "act": 3.16,
-     "id": "salamanca-iberico-cebo-de-campo"
+     "ant": 3.2,
+     "act": 3.21,
+     "rango": "3,16–3,26"
     },
     {
+     "id": "salamanca-iberico-cebo",
      "cat": "Porcino ibérico",
      "producto": "Ibérico cebo",
      "unidad": "€/kg vivo",
-     "ant": 2.93,
-     "act": 3.03,
-     "id": "salamanca-iberico-cebo"
+     "ant": 3.07,
+     "act": 3.08,
+     "rango": "3,03–3,13"
     },
     {
+     "id": "salamanca-lechones-ibericos",
      "cat": "Porcino ibérico",
      "producto": "Lechones ibéricos",
      "unidad": "€/kg vivo",
-     "ant": 6.56,
-     "act": 6.53,
-     "rango": "6,28–6,78",
-     "id": "salamanca-lechones-ibericos"
+     "ant": 6.53,
+     "act": 6.5,
+     "rango": "6,25–6,75"
+    },
+    {
+     "id": "salamanca-primales-iberico-puro",
+     "cat": "Porcino ibérico",
+     "producto": "Primales ibérico puro",
+     "unidad": "€/kg vivo",
+     "ant": 4.375,
+     "act": 4.375,
+     "rango": "4,2–4,55"
+    },
+    {
+     "id": "salamanca-primales-iberico-cruzado",
+     "cat": "Porcino ibérico",
+     "producto": "Primales ibérico cruzado",
+     "unidad": "€/kg vivo",
+     "ant": 4.375,
+     "act": 4.375,
+     "rango": "4,2–4,55"
+    },
+    {
+     "id": "salamanca-terneros",
+     "cat": "Vacuno de vida",
+     "producto": "Terneros",
+     "unidad": "€/kg vivo",
+     "ant": 5.82,
+     "act": 5.82
+    },
+    {
+     "id": "salamanca-terneras",
+     "cat": "Vacuno de vida",
+     "producto": "Terneras",
+     "unidad": "€/kg vivo",
+     "ant": 5.36,
+     "act": 5.36
+    },
+    {
+     "id": "salamanca-terneros-del-pais",
+     "cat": "Vacuno de vida",
+     "producto": "Terneros del país",
+     "unidad": "€/kg vivo",
+     "ant": 3.99,
+     "act": 3.99
+    },
+    {
+     "id": "salamanca-terneras-12-meses-menos-de-270-kg",
+     "cat": "Vacuno de carne",
+     "producto": "Terneras +12 meses, menos de 270 kg",
+     "unidad": "€/kg canal",
+     "ant": 7.4,
+     "act": 7.4
+    },
+    {
+     "id": "salamanca-terneras-12-meses-mas-de-270-kg",
+     "cat": "Vacuno de carne",
+     "producto": "Terneras +12 meses, más de 270 kg",
+     "unidad": "€/kg canal",
+     "ant": 7.08,
+     "act": 7.1
+    },
+    {
+     "id": "salamanca-anojos-menos-de-350-kg",
+     "cat": "Vacuno de carne",
+     "producto": "Añojos menos de 350 kg",
+     "unidad": "€/kg canal",
+     "ant": 6.41,
+     "act": 6.41
+    },
+    {
+     "id": "salamanca-anojos-mas-de-350-kg",
+     "cat": "Vacuno de carne",
+     "producto": "Añojos más de 350 kg",
+     "unidad": "€/kg canal",
+     "ant": 6.32,
+     "act": 6.35
+    },
+    {
+     "id": "salamanca-erales",
+     "cat": "Vacuno de carne",
+     "producto": "Erales",
+     "unidad": "€/kg canal",
+     "ant": 5.24,
+     "act": 5.24
+    },
+    {
+     "id": "salamanca-novillos",
+     "cat": "Vacuno de carne",
+     "producto": "Novillos",
+     "unidad": "€/kg canal",
+     "ant": 5.13,
+     "act": 5.13
+    },
+    {
+     "id": "salamanca-toros",
+     "cat": "Vacuno de carne",
+     "producto": "Toros",
+     "unidad": "€/kg canal",
+     "ant": 5.26,
+     "act": 5.26
+    },
+    {
+     "id": "salamanca-vacas",
+     "cat": "Vacuno de carne",
+     "producto": "Vacas",
+     "unidad": "€/kg canal",
+     "ant": 6.06,
+     "act": 6.06
     }
    ],
    "comprobado": "2026-11-03T23:45:00+01:00",
-   "origen": "carga inicial",
-   "error": "Falló la lectura automática (RuntimeError)"
+   "origen": "https://datosabiertossalamanca.es/dataset/cotizaciones-semanales-de-la-lonja-de-salamanca",
+   "error": null,
+   "ultima_lectura": "2026-11-05T12:43+00:00"
   },
   {
    "id": "leon",
@@ -281,7 +403,7 @@
    "precios": [
     {
      "id": "leon-agria",
-     "cat": "€/t €/t =",
+     "cat": "Patatas",
      "producto": "Agria",
      "unidad": "€/t",
      "ant": 350.0,
@@ -289,7 +411,7 @@
     },
     {
      "id": "leon-jaerla",
-     "cat": "€/t €/t =",
+     "cat": "Patatas",
      "producto": "Jaerla",
      "unidad": "€/t",
      "ant": 320.0,
@@ -297,7 +419,7 @@
     },
     {
      "id": "leon-kennebec",
-     "cat": "€/t €/t =",
+     "cat": "Patatas",
      "producto": "Kennebec",
      "unidad": "€/t",
      "ant": 390.0,
@@ -305,7 +427,7 @@
     },
     {
      "id": "leon-red-pontiac",
-     "cat": "€/t €/t =",
+     "cat": "Patatas",
      "producto": "Red Pontiac",
      "unidad": "€/t",
      "ant": 340.0,
@@ -313,7 +435,7 @@
     },
     {
      "id": "leon-red-scarlett",
-     "cat": "€/t €/t =",
+     "cat": "Patatas",
      "producto": "Red Scarlett",
      "unidad": "€/t",
      "ant": 330.0,
@@ -321,79 +443,15 @@
     },
     {
      "id": "leon-yona",
-     "cat": "€/t €/t =",
+     "cat": "Patatas",
      "producto": "Yona",
      "unidad": "€/t",
      "ant": 330.0,
      "act": 330.0
     },
     {
-     "id": "leon-canela",
-     "cat": "€/kg €/kg",
-     "producto": "Canela",
-     "unidad": "",
-     "ant": 1.3,
-     "act": 1.3
-    },
-    {
-     "id": "leon-negra",
-     "cat": "€/kg €/kg",
-     "producto": "Negra",
-     "unidad": "",
-     "ant": 2.8,
-     "act": 2.8
-    },
-    {
-     "id": "leon-palmena-redonda",
-     "cat": "€/kg €/kg",
-     "producto": "Palmeña Redonda",
-     "unidad": "",
-     "ant": 2.0,
-     "act": 2.0
-    },
-    {
-     "id": "leon-planchada",
-     "cat": "€/kg €/kg",
-     "producto": "Planchada",
-     "unidad": "",
-     "ant": 1.95,
-     "act": 1.95
-    },
-    {
-     "id": "leon-plancheta",
-     "cat": "€/kg €/kg",
-     "producto": "Plancheta",
-     "unidad": "",
-     "ant": 2.0,
-     "act": 2.0
-    },
-    {
-     "id": "leon-pinta",
-     "cat": "€/kg €/kg",
-     "producto": "Pinta",
-     "unidad": "",
-     "ant": 0.95,
-     "act": 0.95
-    },
-    {
-     "id": "leon-rinon-de-leon",
-     "cat": "€/kg €/kg",
-     "producto": "Riñón de León",
-     "unidad": "",
-     "ant": 1.4,
-     "act": 1.4
-    },
-    {
-     "id": "leon-redonda",
-     "cat": "€/kg €/kg",
-     "producto": "Redonda",
-     "unidad": "",
-     "ant": 1.35,
-     "act": 1.35
-    },
-    {
      "id": "leon-girasol",
-     "cat": "€/t €/t",
+     "cat": "Girasol",
      "producto": "Girasol",
      "unidad": "€/t",
      "ant": 500.0,
@@ -402,7 +460,7 @@
     },
     {
      "id": "leon-girasol-alto-oleico",
-     "cat": "€/t €/t",
+     "cat": "Girasol",
      "producto": "Girasol alto oleico",
      "unidad": "€/t",
      "ant": 515.0,
@@ -410,7 +468,7 @@
     },
     {
      "id": "leon-trigo-pienso",
-     "cat": "€/t €/t",
+     "cat": "Cereales",
      "producto": "Trigo Pienso",
      "unidad": "€/t",
      "ant": 228.0,
@@ -419,7 +477,7 @@
     },
     {
      "id": "leon-cebada",
-     "cat": "€/t €/t",
+     "cat": "Cereales",
      "producto": "Cebada",
      "unidad": "€/t",
      "ant": 222.0,
@@ -428,7 +486,7 @@
     },
     {
      "id": "leon-triticale",
-     "cat": "€/t €/t",
+     "cat": "Cereales",
      "producto": "Triticale",
      "unidad": "€/t",
      "ant": 218.0,
@@ -437,7 +495,7 @@
     },
     {
      "id": "leon-centeno",
-     "cat": "€/t €/t",
+     "cat": "Cereales",
      "producto": "Centeno",
      "unidad": "€/t",
      "ant": 197.0,
@@ -446,7 +504,7 @@
     },
     {
      "id": "leon-avena",
-     "cat": "€/t €/t",
+     "cat": "Cereales",
      "producto": "Avena",
      "unidad": "€/t",
      "ant": 202.0,
@@ -455,17 +513,432 @@
     },
     {
      "id": "leon-maiz",
-     "cat": "€/t €/t",
+     "cat": "Cereales",
      "producto": "Maíz",
      "unidad": "€/t",
      "ant": null,
      "act": null,
      "clave": "maiz"
+    },
+    {
+     "id": "leon-canela",
+     "cat": "Alubias",
+     "producto": "Canela",
+     "unidad": "€/kg",
+     "ant": 1.3,
+     "act": 1.3
+    },
+    {
+     "id": "leon-negra",
+     "cat": "Alubias",
+     "producto": "Negra",
+     "unidad": "€/kg",
+     "ant": 2.8,
+     "act": 2.8
+    },
+    {
+     "id": "leon-palmena-redonda",
+     "cat": "Alubias",
+     "producto": "Palmeña Redonda",
+     "unidad": "€/kg",
+     "ant": 2.0,
+     "act": 2.0
+    },
+    {
+     "id": "leon-planchada",
+     "cat": "Alubias",
+     "producto": "Planchada",
+     "unidad": "€/kg",
+     "ant": 1.95,
+     "act": 1.95
+    },
+    {
+     "id": "leon-plancheta",
+     "cat": "Alubias",
+     "producto": "Plancheta",
+     "unidad": "€/kg",
+     "ant": 2.0,
+     "act": 2.0
+    },
+    {
+     "id": "leon-pinta",
+     "cat": "Alubias",
+     "producto": "Pinta",
+     "unidad": "€/kg",
+     "ant": 0.95,
+     "act": 0.95
+    },
+    {
+     "id": "leon-rinon-de-leon",
+     "cat": "Alubias",
+     "producto": "Riñón de León",
+     "unidad": "€/kg",
+     "ant": 1.4,
+     "act": 1.4
+    },
+    {
+     "id": "leon-redonda",
+     "cat": "Alubias",
+     "producto": "Redonda",
+     "unidad": "€/kg",
+     "ant": 1.35,
+     "act": 1.35
+    },
+    {
+     "id": "leon-leche-de-vaca",
+     "cat": "Leche de vaca",
+     "producto": "Leche de vaca",
+     "unidad": "€/litro",
+     "ant": 0.475,
+     "act": 0.475
+    },
+    {
+     "id": "leon-leche-de-oveja",
+     "cat": "Leche de oveja y de cabra",
+     "producto": "Leche de oveja",
+     "unidad": "€/e.q.",
+     "ant": 0.11419,
+     "act": 0.11419
+    },
+    {
+     "id": "leon-leche-de-cabra",
+     "cat": "Leche de oveja y de cabra",
+     "producto": "Leche de cabra",
+     "unidad": "€/e.q.",
+     "ant": 0.12621,
+     "act": 0.12621
+    },
+    {
+     "id": "leon-alfalfa-paquete-rama",
+     "cat": "Forrajes",
+     "producto": "Alfalfa paquete rama",
+     "unidad": "€/t",
+     "ant": 225.0,
+     "act": 225.0,
+     "clave": "alfalfa"
+    },
+    {
+     "id": "leon-alfalfa-paquete-deshidratado",
+     "cat": "Forrajes",
+     "producto": "Alfalfa paquete deshidratado",
+     "unidad": "€/t",
+     "ant": 255.0,
+     "act": 255.0
+    },
+    {
+     "id": "leon-paja-1a-cebada",
+     "cat": "Forrajes",
+     "producto": "Paja 1ª (Cebada)",
+     "unidad": "€/t",
+     "ant": 65.0,
+     "act": 65.0,
+     "clave": "paja"
+    },
+    {
+     "id": "leon-veza-forraje-de-1a",
+     "cat": "Forrajes",
+     "producto": "Veza forraje de 1ª",
+     "unidad": "€/t",
+     "ant": 170.0,
+     "act": 170.0
+    },
+    {
+     "id": "leon-forraje",
+     "cat": "Forrajes",
+     "producto": "Forraje",
+     "unidad": "€/t",
+     "ant": 130.0,
+     "act": 130.0
+    },
+    {
+     "id": "leon-frisones",
+     "cat": "Ganado vida",
+     "producto": "Frisones",
+     "unidad": "€/ud",
+     "ant": 100.0,
+     "act": 100.0
+    },
+    {
+     "id": "leon-pasteros-macho-200-kg",
+     "cat": "Ganado vida",
+     "producto": "Pasteros macho (200 kg)",
+     "unidad": "€/ud",
+     "ant": 1100.0,
+     "act": 1100.0
+    },
+    {
+     "id": "leon-pasteros-hembra-200-kg",
+     "cat": "Ganado vida",
+     "producto": "Pasteros hembra (200 kg)",
+     "unidad": "€/ud",
+     "ant": 1000.0,
+     "act": 1000.0
+    },
+    {
+     "id": "leon-hembras-180-200-kg-u",
+     "cat": "Bovino carne",
+     "producto": "Hembras 180-200 kg U",
+     "unidad": "€/kg canal",
+     "ant": 6.95,
+     "act": 6.95
+    },
+    {
+     "id": "leon-hembras-180-200-kg-r",
+     "cat": "Bovino carne",
+     "producto": "Hembras 180-200 kg R",
+     "unidad": "€/kg canal",
+     "ant": 6.85,
+     "act": 6.85
+    },
+    {
+     "id": "leon-hembras-180-200-kg-o",
+     "cat": "Bovino carne",
+     "producto": "Hembras 180-200 kg O",
+     "unidad": "€/kg canal",
+     "ant": 5.25,
+     "act": 5.2
+    },
+    {
+     "id": "leon-hembras-201-250-kg-u",
+     "cat": "Bovino carne",
+     "producto": "Hembras 201-250 kg U",
+     "unidad": "€/kg canal",
+     "ant": 6.95,
+     "act": 6.95
+    },
+    {
+     "id": "leon-hembras-201-250-kg-r",
+     "cat": "Bovino carne",
+     "producto": "Hembras 201-250 kg R",
+     "unidad": "€/kg canal",
+     "ant": 6.85,
+     "act": 6.85
+    },
+    {
+     "id": "leon-hembras-201-250-kg-o",
+     "cat": "Bovino carne",
+     "producto": "Hembras 201-250 kg O",
+     "unidad": "€/kg canal",
+     "ant": 5.25,
+     "act": 5.2
+    },
+    {
+     "id": "leon-hembras-mas-250-kg-u",
+     "cat": "Bovino carne",
+     "producto": "Hembras más 250 kg U",
+     "unidad": "€/kg canal",
+     "ant": 6.95,
+     "act": 6.95
+    },
+    {
+     "id": "leon-hembras-mas-250-kg-r",
+     "cat": "Bovino carne",
+     "producto": "Hembras más 250 kg R",
+     "unidad": "€/kg canal",
+     "ant": 6.85,
+     "act": 6.85
+    },
+    {
+     "id": "leon-hembras-mas-250-kg-o",
+     "cat": "Bovino carne",
+     "producto": "Hembras más 250 kg O",
+     "unidad": "€/kg canal",
+     "ant": 5.25,
+     "act": 5.2
+    },
+    {
+     "id": "leon-machos-200-250-kg-u",
+     "cat": "Bovino carne",
+     "producto": "Machos 200-250 kg U",
+     "unidad": "€/kg canal",
+     "ant": 6.1,
+     "act": 6.1
+    },
+    {
+     "id": "leon-machos-200-250-kg-r",
+     "cat": "Bovino carne",
+     "producto": "Machos 200-250 kg R",
+     "unidad": "€/kg canal",
+     "ant": 6.0,
+     "act": 6.0
+    },
+    {
+     "id": "leon-machos-200-250-kg-o",
+     "cat": "Bovino carne",
+     "producto": "Machos 200-250 kg O",
+     "unidad": "€/kg canal",
+     "ant": 5.25,
+     "act": 5.2
+    },
+    {
+     "id": "leon-machos-251-300-kg-u",
+     "cat": "Bovino carne",
+     "producto": "Machos 251-300 kg U",
+     "unidad": "€/kg canal",
+     "ant": 6.1,
+     "act": 6.1
+    },
+    {
+     "id": "leon-machos-251-300-kg-r",
+     "cat": "Bovino carne",
+     "producto": "Machos 251-300 kg R",
+     "unidad": "€/kg canal",
+     "ant": 6.0,
+     "act": 6.0
+    },
+    {
+     "id": "leon-machos-251-300-kg-o",
+     "cat": "Bovino carne",
+     "producto": "Machos 251-300 kg O",
+     "unidad": "€/kg canal",
+     "ant": 5.25,
+     "act": 5.2
+    },
+    {
+     "id": "leon-machos-mas-de-300-kg-u",
+     "cat": "Bovino carne",
+     "producto": "Machos más de 300 kg U",
+     "unidad": "€/kg canal",
+     "ant": 6.1,
+     "act": 6.1
+    },
+    {
+     "id": "leon-machos-mas-de-300-kg-r",
+     "cat": "Bovino carne",
+     "producto": "Machos más de 300 kg R",
+     "unidad": "€/kg canal",
+     "ant": 6.0,
+     "act": 6.0
+    },
+    {
+     "id": "leon-machos-mas-de-300-kg-o",
+     "cat": "Bovino carne",
+     "producto": "Machos más de 300 kg O",
+     "unidad": "€/kg canal",
+     "ant": 5.25,
+     "act": 5.2
+    },
+    {
+     "id": "leon-fabrica-y-segunda",
+     "cat": "Vacas sacrificio",
+     "producto": "Fábrica y Segunda",
+     "unidad": "€/kg canal",
+     "ant": 4.1,
+     "act": 4.1,
+     "rango": "3,60–4,60"
+    },
+    {
+     "id": "leon-primera-y-extra-engrasada",
+     "cat": "Vacas sacrificio",
+     "producto": "Primera y Extra (Engrasada)",
+     "unidad": "€/kg canal",
+     "ant": 5.35,
+     "act": 5.35,
+     "rango": "4,60–6,10"
+    },
+    {
+     "id": "leon-lechazos-hasta-12-kg",
+     "cat": "Ovino",
+     "producto": "Lechazos hasta 12 kg",
+     "unidad": "€/kg vivo",
+     "ant": 8.2,
+     "act": 8.3
+    },
+    {
+     "id": "leon-cabritos-hasta-11-kg",
+     "cat": "Ovino",
+     "producto": "Cabritos hasta 11 kg",
+     "unidad": "€/kg vivo",
+     "ant": 8.2,
+     "act": 8.3
+    },
+    {
+     "id": "leon-corderos-12-1-15-kg",
+     "cat": "Ovino",
+     "producto": "Corderos 12,1-15 kg",
+     "unidad": "€/ud",
+     "ant": 105.0,
+     "act": 100.0
+    },
+    {
+     "id": "leon-corderos-15-1-18-kg",
+     "cat": "Ovino",
+     "producto": "Corderos 15,1-18 kg",
+     "unidad": "€/ud",
+     "ant": 110.0,
+     "act": 110.0
+    },
+    {
+     "id": "leon-corderos-18-1-23-kg",
+     "cat": "Ovino",
+     "producto": "Corderos 18,1-23 kg",
+     "unidad": "€/ud",
+     "ant": 130.0,
+     "act": 130.0
+    },
+    {
+     "id": "leon-corderos-23-1-27-kg",
+     "cat": "Ovino",
+     "producto": "Corderos 23,1-27 kg",
+     "unidad": "€/ud",
+     "ant": 140.0,
+     "act": 140.0
+    },
+    {
+     "id": "leon-corderos-27-1-35-kg",
+     "cat": "Ovino",
+     "producto": "Corderos 27,1-35 kg",
+     "unidad": "€/ud",
+     "ant": 150.0,
+     "act": 150.0
+    },
+    {
+     "id": "leon-ovejas-vida-merina",
+     "cat": "Ovino",
+     "producto": "Ovejas vida merina",
+     "unidad": "€/ud",
+     "ant": 130.0,
+     "act": 130.0
+    },
+    {
+     "id": "leon-ovejas-vida-leche",
+     "cat": "Ovino",
+     "producto": "Ovejas vida leche",
+     "unidad": "€/ud",
+     "ant": 90.0,
+     "act": 90.0
+    },
+    {
+     "id": "leon-ovejas-vida-assaf-sin-carta",
+     "cat": "Ovino",
+     "producto": "Ovejas vida Assaf (Sin carta)",
+     "unidad": "€/ud",
+     "ant": 180.0,
+     "act": 180.0
+    },
+    {
+     "id": "leon-ovejas-sacrificio-1a",
+     "cat": "Ovino",
+     "producto": "Ovejas sacrificio 1ª",
+     "unidad": "€/kg vivo",
+     "ant": 1.35,
+     "act": 1.35,
+     "rango": "1,20–1,50"
+    },
+    {
+     "id": "leon-ovejas-sacrificio-2a",
+     "cat": "Ovino",
+     "producto": "Ovejas sacrificio 2ª",
+     "unidad": "€/kg vivo",
+     "ant": 0.85,
+     "act": 0.85,
+     "rango": "0,50–1,20"
     }
    ],
    "comprobado": "2026-11-03T23:45:00+01:00",
    "origen": "https://www.lonjadeleon.es/lonja-patata-04-11-2026/",
-   "error": null
+   "error": null,
+   "ultima_lectura": "2026-11-05T12:43+00:00"
   },
   {
    "id": "segovia",
@@ -478,244 +951,261 @@
    "fecha": "2026-10-29",
    "precios": [
     {
-     "cat": "Cereales",
-     "producto": "Trigo pienso 72 kg/hl",
-     "unidad": "€/t",
-     "ant": 232,
-     "act": 231,
-     "id": "segovia-trigo-pienso-72-kg-hl",
-     "clave": "trigo"
-    },
-    {
+     "id": "segovia-cebada-62-kg-hl",
      "cat": "Cereales",
      "producto": "Cebada 62 kg/hl",
      "unidad": "€/t",
-     "ant": 223,
-     "act": 223,
-     "id": "segovia-cebada-62-kg-hl",
+     "ant": 223.0,
+     "act": 223.0,
      "clave": "cebada"
     },
     {
+     "id": "segovia-trigo-pienso-72-kg-hl",
      "cat": "Cereales",
-     "producto": "Avena",
+     "producto": "Trigo pienso 72 kg/hl",
      "unidad": "€/t",
-     "ant": 200,
-     "act": 200,
-     "id": "segovia-avena",
-     "clave": "avena"
+     "ant": 232.0,
+     "act": 231.0,
+     "clave": "trigo"
     },
     {
-     "cat": "Cereales",
-     "producto": "Centeno",
-     "unidad": "€/t",
-     "ant": 209,
-     "act": 209,
-     "id": "segovia-centeno",
-     "clave": "centeno"
-    },
-    {
-     "cat": "Oleaginosas",
-     "producto": "Girasol 9-2-44",
-     "unidad": "€/t",
-     "ant": 505,
-     "act": 502,
-     "id": "segovia-girasol-9-2-44",
-     "clave": "girasol"
-    },
-    {
+     "id": "segovia-colza-9-2-42",
      "cat": "Oleaginosas",
      "producto": "Colza 9-2-42",
      "unidad": "€/t",
      "ant": null,
-     "act": null,
-     "id": "segovia-colza-9-2-42"
+     "act": null
     },
     {
+     "id": "segovia-avena",
+     "cat": "Cereales",
+     "producto": "Avena",
+     "unidad": "€/t",
+     "ant": 200.0,
+     "act": 200.0,
+     "clave": "avena"
+    },
+    {
+     "id": "segovia-girasol-9-2-44",
+     "cat": "Oleaginosas",
+     "producto": "Girasol 9-2-44",
+     "unidad": "€/t",
+     "ant": 505.0,
+     "act": 502.0,
+     "clave": "girasol"
+    },
+    {
+     "id": "segovia-centeno",
+     "cat": "Cereales",
+     "producto": "Centeno",
+     "unidad": "€/t",
+     "ant": 209.0,
+     "act": 209.0,
+     "clave": "centeno"
+    },
+    {
+     "id": "segovia-alfalfa-empacada",
      "cat": "Forrajes",
      "producto": "Alfalfa empacada",
      "unidad": "€/t",
-     "ant": 215,
-     "act": 215,
-     "id": "segovia-alfalfa-empacada",
+     "ant": 215.0,
+     "act": 215.0,
      "clave": "alfalfa"
     },
     {
+     "id": "segovia-paja-empacada",
      "cat": "Forrajes",
      "producto": "Paja empacada",
      "unidad": "€/t",
-     "ant": 67,
-     "act": 67,
-     "id": "segovia-paja-empacada",
+     "ant": 67.0,
+     "act": 67.0,
      "clave": "paja"
     },
     {
+     "id": "segovia-forraje-veza-mezcla",
      "cat": "Forrajes",
      "producto": "Forraje veza mezcla",
      "unidad": "€/t",
-     "ant": 160,
-     "act": 160,
-     "id": "segovia-forraje-veza-mezcla"
+     "ant": 160.0,
+     "act": 160.0
     },
     {
+     "id": "segovia-forraje",
      "cat": "Forrajes",
      "producto": "Forraje",
      "unidad": "€/t",
-     "ant": 135,
-     "act": 135,
-     "id": "segovia-forraje"
+     "ant": 135.0,
+     "act": 135.0
     },
     {
-     "cat": "Porcino",
-     "producto": "Cerdo selecto",
-     "unidad": "€/kg vivo",
-     "ant": 1.222,
-     "act": 1.182,
-     "id": "segovia-cerdo-selecto",
-     "clave": "cerdo-selecto"
-    },
-    {
-     "cat": "Porcino",
-     "producto": "Cerdo normal",
-     "unidad": "€/kg vivo",
-     "ant": 1.21,
-     "act": 1.17,
-     "id": "segovia-cerdo-normal",
-     "clave": "cerdo-normal"
-    },
-    {
-     "cat": "Porcino",
-     "producto": "Cerdo graso",
-     "unidad": "€/kg vivo",
-     "ant": 1.675,
-     "act": 1.65,
-     "id": "segovia-cerdo-graso"
-    },
-    {
-     "cat": "Porcino",
-     "producto": "Cerda desvieje extra",
-     "unidad": "€/kg vivo",
-     "ant": 0.27,
-     "act": 0.27,
-     "id": "segovia-cerda-desvieje-extra"
-    },
-    {
-     "cat": "Porcino",
-     "producto": "Cerda desvieje primera",
-     "unidad": "€/kg vivo",
-     "ant": 0.18,
-     "act": 0.18,
-     "id": "segovia-cerda-desvieje-primera"
-    },
-    {
-     "cat": "Porcino",
-     "producto": "Lechones 20 kg",
-     "unidad": "€/ud",
-     "ant": 39,
-     "act": 37,
-     "id": "segovia-lechones-20-kg",
-     "clave": "lechones"
-    },
-    {
-     "cat": "Porcino",
-     "producto": "Cochinillos sin hierro",
-     "unidad": "€/ud",
-     "ant": 32,
-     "act": 33,
-     "id": "segovia-cochinillos-sin-hierro"
-    },
-    {
+     "id": "segovia-cordero-extra-igp",
      "cat": "Ovino",
      "producto": "Cordero Extra IGP",
      "unidad": "€/kg vivo",
      "ant": 10.45,
-     "act": 10.55,
-     "id": "segovia-cordero-extra-igp"
+     "act": 10.55
     },
     {
+     "id": "segovia-cordero-segolechal",
      "cat": "Ovino",
      "producto": "Cordero Segolechal",
      "unidad": "€/kg vivo",
      "ant": 9.79,
-     "act": 9.89,
-     "id": "segovia-cordero-segolechal"
+     "act": 9.89
     },
     {
+     "id": "segovia-lechazo-10-12-kg",
      "cat": "Ovino",
      "producto": "Lechazo 10-12 kg",
      "unidad": "€/kg vivo",
      "ant": 9.35,
      "act": 9.45,
-     "id": "segovia-lechazo-10-12-kg",
      "clave": "lechazo"
     },
     {
+     "id": "segovia-cordero-nodriza-y-2a",
+     "cat": "Ovino",
+     "producto": "Cordero nodriza y 2ª",
+     "unidad": "€/kg vivo",
+     "ant": null,
+     "act": null
+    },
+    {
+     "id": "segovia-lechal-12-1-15-kg",
      "cat": "Ovino",
      "producto": "Lechal 12,1-15 kg",
      "unidad": "€/kg vivo",
      "ant": 8.37,
-     "act": 8.47,
-     "id": "segovia-lechal-12-1-15-kg"
+     "act": 8.47
     },
     {
+     "id": "segovia-recental-15-1-19-kg",
      "cat": "Ovino",
      "producto": "Recental 15,1-19 kg",
      "unidad": "€/kg vivo",
      "ant": 7.37,
-     "act": 7.47,
-     "id": "segovia-recental-15-1-19-kg"
+     "act": 7.47
     },
     {
+     "id": "segovia-pascual-19-1-23-kg",
      "cat": "Ovino",
      "producto": "Pascual 19,1-23 kg",
      "unidad": "€/kg vivo",
      "ant": 6.38,
-     "act": 6.48,
-     "id": "segovia-pascual-19-1-23-kg"
+     "act": 6.48
     },
     {
+     "id": "segovia-pascual-23-1-25-5-kg",
      "cat": "Ovino",
      "producto": "Pascual 23,1-25,5 kg",
      "unidad": "€/kg vivo",
      "ant": 5.99,
-     "act": 6.09,
-     "id": "segovia-pascual-23-1-25-5-kg"
+     "act": 6.09
     },
     {
+     "id": "segovia-pascual-25-5-28-kg",
      "cat": "Ovino",
      "producto": "Pascual 25,5-28 kg",
      "unidad": "€/kg vivo",
      "ant": 5.62,
-     "act": 5.72,
-     "id": "segovia-pascual-25-5-28-kg"
+     "act": 5.72
     },
     {
+     "id": "segovia-cordero-28-1-34-kg",
      "cat": "Ovino",
      "producto": "Cordero 28,1-34 kg",
      "unidad": "€/kg vivo",
      "ant": 5.14,
-     "act": 5.24,
-     "id": "segovia-cordero-28-1-34-kg"
+     "act": 5.24
     },
     {
+     "id": "segovia-oveja-desvieje-1a",
      "cat": "Ovino",
      "producto": "Oveja desvieje 1ª",
      "unidad": "€/kg vivo",
      "ant": 1.65,
-     "act": 1.65,
-     "id": "segovia-oveja-desvieje-1a"
+     "act": 1.65
     },
     {
+     "id": "segovia-oveja-desvieje-2a",
      "cat": "Ovino",
      "producto": "Oveja desvieje 2ª",
      "unidad": "€/kg vivo",
      "ant": 1.05,
-     "act": 1.05,
-     "id": "segovia-oveja-desvieje-2a"
+     "act": 1.05
+    },
+    {
+     "id": "segovia-cerdo-selecto",
+     "cat": "Porcino",
+     "producto": "Cerdo selecto",
+     "unidad": "€/kg vivo",
+     "ant": 1.222,
+     "act": 1.182,
+     "clave": "cerdo-selecto"
+    },
+    {
+     "id": "segovia-cerdo-normal",
+     "cat": "Porcino",
+     "producto": "Cerdo normal",
+     "unidad": "€/kg vivo",
+     "ant": 1.21,
+     "act": 1.17,
+     "clave": "cerdo-normal"
+    },
+    {
+     "id": "segovia-cerdo-graso",
+     "cat": "Porcino",
+     "producto": "Cerdo graso",
+     "unidad": "€/kg vivo",
+     "ant": 1.675,
+     "act": 1.65
+    },
+    {
+     "id": "segovia-cerda-desvieje-extra",
+     "cat": "Porcino",
+     "producto": "Cerda desvieje extra",
+     "unidad": "€/kg vivo",
+     "ant": 0.27,
+     "act": 0.27
+    },
+    {
+     "id": "segovia-cerda-desvieje-primera",
+     "cat": "Porcino",
+     "producto": "Cerda desvieje primera",
+     "unidad": "€/kg vivo",
+     "ant": 0.18,
+     "act": 0.18
+    },
+    {
+     "id": "segovia-lechones-20-kg",
+     "cat": "Porcino",
+     "producto": "Lechones 20 kg",
+     "unidad": "€/ud",
+     "ant": 39.0,
+     "act": 37.0,
+     "clave": "lechones"
+    },
+    {
+     "id": "segovia-cochinillos-con-hierro",
+     "cat": "Porcino",
+     "producto": "Cochinillos con hierro",
+     "unidad": "€/ud",
+     "ant": null,
+     "act": null
+    },
+    {
+     "id": "segovia-cochinillos-sin-hierro",
+     "cat": "Porcino",
+     "producto": "Cochinillos sin hierro",
+     "unidad": "€/ud",
+     "ant": 32.0,
+     "act": 33.0
     }
    ],
    "comprobado": "2026-11-03T23:45:00+01:00",
-   "origen": "carga inicial",
-   "error": null
+   "origen": "https://www.fessegovia.es/wp-content/uploads/2026/10/LONJA-CEREALES-OVINO-Y-PORCINO-29.10.2026.pdf",
+   "error": null,
+   "ultima_lectura": "2026-11-05T12:43+00:00"
   },
   {
    "id": "lerma",
@@ -728,125 +1218,126 @@
    "fecha": "2026-10-30",
    "precios": [
     {
+     "id": "lerma-trigo-tipo-iii",
      "cat": "Cereales",
      "producto": "Trigo tipo III",
      "unidad": "€/t",
-     "ant": 232,
-     "act": 231,
-     "id": "lerma-trigo-tipo-iii",
+     "ant": 232.0,
+     "act": 231.0,
      "clave": "trigo"
     },
     {
+     "id": "lerma-cebada-dos-carreras",
      "cat": "Cereales",
      "producto": "Cebada dos carreras",
      "unidad": "€/t",
-     "ant": 223,
-     "act": 223,
-     "id": "lerma-cebada-dos-carreras",
+     "ant": 223.0,
+     "act": 223.0,
      "clave": "cebada"
     },
     {
+     "id": "lerma-cerdo-normal",
      "cat": "Porcino",
      "producto": "Cerdo normal",
      "unidad": "€/kg vivo",
      "ant": 1.208,
      "act": 1.168,
-     "id": "lerma-cerdo-normal",
      "clave": "cerdo-normal"
     },
     {
+     "id": "lerma-cerdas-de-desvieje",
      "cat": "Porcino",
      "producto": "Cerdas de desvieje",
      "unidad": "€/kg vivo",
      "ant": 0.36,
-     "act": 0.33,
-     "id": "lerma-cerdas-de-desvieje"
+     "act": 0.33
     },
     {
+     "id": "lerma-lechon-tipo-lerma",
      "cat": "Porcino",
      "producto": "Lechón tipo Lerma",
      "unidad": "€/ud",
      "ant": 24.5,
      "act": 23.5,
-     "id": "lerma-lechon-tipo-lerma",
      "clave": "lechones"
     },
     {
+     "id": "lerma-terneras-carne-blanca",
      "cat": "Vacuno",
      "producto": "Terneras carne blanca",
      "unidad": "€/kg",
      "ant": 5.89,
-     "act": 5.89,
-     "id": "lerma-terneras-carne-blanca"
+     "act": 5.89
     },
     {
+     "id": "lerma-terneras-carne-rosada",
      "cat": "Vacuno",
      "producto": "Terneras carne rosada",
      "unidad": "€/kg",
      "ant": 5.7,
-     "act": 5.7,
-     "id": "lerma-terneras-carne-rosada"
+     "act": 5.7
     },
     {
+     "id": "lerma-anojos-extra",
      "cat": "Vacuno",
      "producto": "Añojos extra",
      "unidad": "€/kg",
      "ant": 5.68,
-     "act": 5.68,
-     "id": "lerma-anojos-extra"
+     "act": 5.68
     },
     {
+     "id": "lerma-anojos-primera",
      "cat": "Vacuno",
      "producto": "Añojos primera",
      "unidad": "€/kg",
      "ant": 5.36,
-     "act": 5.36,
-     "id": "lerma-anojos-primera"
+     "act": 5.36
     },
     {
+     "id": "lerma-anojos-corriente",
      "cat": "Vacuno",
      "producto": "Añojos corriente",
      "unidad": "€/kg",
      "ant": 5.31,
-     "act": 5.31,
-     "id": "lerma-anojos-corriente"
+     "act": 5.31
     },
     {
+     "id": "lerma-vacas-extra",
      "cat": "Vacuno",
      "producto": "Vacas extra",
      "unidad": "€/kg",
      "ant": 3.0,
-     "act": 3.0,
-     "id": "lerma-vacas-extra"
+     "act": 3.0
     },
     {
+     "id": "lerma-vacas-primera",
      "cat": "Vacuno",
      "producto": "Vacas primera",
      "unidad": "€/kg",
      "ant": 2.5,
-     "act": 2.5,
-     "id": "lerma-vacas-primera"
+     "act": 2.5
     },
     {
+     "id": "lerma-vacas-segunda",
      "cat": "Vacuno",
      "producto": "Vacas segunda",
      "unidad": "€/kg",
      "ant": 2.0,
-     "act": 2.0,
-     "id": "lerma-vacas-segunda"
+     "act": 2.0
     },
     {
+     "id": "lerma-vacas-industria",
      "cat": "Vacuno",
      "producto": "Vacas industria",
      "unidad": "€/kg",
      "ant": 1.56,
-     "act": 1.56,
-     "id": "lerma-vacas-industria"
+     "act": 1.56
     }
    ],
    "comprobado": "2026-11-03T23:45:00+01:00",
-   "origen": "carga inicial",
-   "error": "Falló la lectura automática (RuntimeError)"
+   "origen": "https://lerma.burgos.es/lonja",
+   "error": null,
+   "ultima_lectura": "2026-11-05T12:43+00:00"
   },
   {
    "id": "zamora",
@@ -1173,7 +1664,7 @@
    ],
    [
     "2026-10-29",
-    231
+    231.0
    ]
   ],
   "segovia-cebada-62-kg-hl": [
@@ -1191,7 +1682,7 @@
    ],
    [
     "2026-10-29",
-    223
+    223.0
    ]
   ],
   "lerma-cerdo-normal": [
@@ -1245,7 +1736,7 @@
    ],
    [
     "2026-10-30",
-    231
+    231.0
    ]
   ],
   "lerma-cebada-dos-carreras": [
@@ -1263,7 +1754,7 @@
    ],
    [
     "2026-10-30",
-    223
+    223.0
    ]
   ],
   "salamanca-maiz": [
@@ -1281,7 +1772,7 @@
    ],
    [
     "2026-11-03",
-    243
+    243.0
    ]
   ],
   "salamanca-trigo-blando": [
@@ -1299,7 +1790,7 @@
    ],
    [
     "2026-11-03",
-    236
+    236.0
    ]
   ],
   "salamanca-cebada": [
@@ -1317,31 +1808,31 @@
    ],
    [
     "2026-11-03",
-    231
+    231.0
    ]
   ],
   "salamanca-triticale": [
    [
     "2026-11-03",
-    226
+    226.0
    ]
   ],
   "salamanca-paja": [
    [
     "2026-11-03",
-    77
+    77.0
    ]
   ],
   "salamanca-garbanzo-pedrosillano": [
    [
     "2026-11-03",
-    750
+    750.0
    ]
   ],
   "salamanca-lenteja-de-la-armuna-igp": [
    [
     "2026-11-03",
-    1100
+    1100.0
    ]
   ],
   "salamanca-terneras-12-meses-menos-de-270-kg": [
@@ -1413,19 +1904,19 @@
   "salamanca-lechazo-hasta-11-kg": [
    [
     "2026-11-03",
-    9.85
+    9.9
    ]
   ],
   "salamanca-lechazo-11-13-kg": [
    [
     "2026-11-03",
-    9.05
+    9.1
    ]
   ],
   "salamanca-cordero-15-19-kg": [
    [
     "2026-11-03",
-    7.0
+    7.1
    ]
   ],
   "salamanca-cerdo-selecto": [
@@ -1449,37 +1940,37 @@
   "salamanca-lechones-base-20-kg": [
    [
     "2026-11-03",
-    34
+    32.0
    ]
   ],
   "salamanca-tostones-4-6-kg": [
    [
     "2026-11-03",
-    27
+    27.0
    ]
   ],
   "salamanca-tostones-6-8-kg": [
    [
     "2026-11-03",
-    27
+    27.0
    ]
   ],
   "salamanca-iberico-cebo-de-campo": [
    [
     "2026-11-03",
-    3.16
+    3.21
    ]
   ],
   "salamanca-iberico-cebo": [
    [
     "2026-11-03",
-    3.03
+    3.08
    ]
   ],
   "salamanca-lechones-ibericos": [
    [
     "2026-11-03",
-    6.53
+    6.5
    ]
   ],
   "leon-girasol": [
@@ -1506,6 +1997,10 @@
    [
     "2026-10-29",
     225
+   ],
+   [
+    "2026-11-04",
+    225.0
    ]
   ],
   "leon-alfalfa-deshidratada": [
@@ -1518,6 +2013,10 @@
    [
     "2026-10-29",
     65
+   ],
+   [
+    "2026-11-04",
+    65.0
    ]
   ],
   "leon-veza-forraje-1a": [
@@ -1530,6 +2029,10 @@
    [
     "2026-10-29",
     130
+   ],
+   [
+    "2026-11-04",
+    130.0
    ]
   ],
   "leon-alubia-canela": [
@@ -1620,17 +2123,29 @@
    [
     "2026-10-29",
     0.475
+   ],
+   [
+    "2026-11-04",
+    0.475
    ]
   ],
   "leon-leche-de-oveja": [
    [
     "2026-10-29",
     0.11419
+   ],
+   [
+    "2026-11-04",
+    0.11419
    ]
   ],
   "leon-leche-de-cabra": [
    [
     "2026-10-29",
+    0.12621
+   ],
+   [
+    "2026-11-04",
     0.12621
    ]
   ],
@@ -1698,18 +2213,30 @@
    [
     "2026-10-29",
     100
+   ],
+   [
+    "2026-11-04",
+    100.0
    ]
   ],
   "leon-pasteros-macho-200-kg": [
    [
     "2026-10-29",
     1100
+   ],
+   [
+    "2026-11-04",
+    1100.0
    ]
   ],
   "leon-pasteros-hembra-200-kg": [
    [
     "2026-10-29",
     1000
+   ],
+   [
+    "2026-11-04",
+    1000.0
    ]
   ],
   "leon-hembras-u": [
@@ -1751,43 +2278,43 @@
   "segovia-avena": [
    [
     "2026-10-29",
-    200
+    200.0
    ]
   ],
   "segovia-centeno": [
    [
     "2026-10-29",
-    209
+    209.0
    ]
   ],
   "segovia-girasol-9-2-44": [
    [
     "2026-10-29",
-    502
+    502.0
    ]
   ],
   "segovia-alfalfa-empacada": [
    [
     "2026-10-29",
-    215
+    215.0
    ]
   ],
   "segovia-paja-empacada": [
    [
     "2026-10-29",
-    67
+    67.0
    ]
   ],
   "segovia-forraje-veza-mezcla": [
    [
     "2026-10-29",
-    160
+    160.0
    ]
   ],
   "segovia-forraje": [
    [
     "2026-10-29",
-    135
+    135.0
    ]
   ],
   "segovia-cerdo-graso": [
@@ -1811,13 +2338,13 @@
   "segovia-lechones-20-kg": [
    [
     "2026-10-29",
-    37
+    37.0
    ]
   ],
   "segovia-cochinillos-sin-hierro": [
    [
     "2026-10-29",
-    33
+    33.0
    ]
   ],
   "segovia-cordero-extra-igp": [
@@ -2028,6 +2555,294 @@
    [
     "2026-11-04",
     1.35
+   ]
+  ],
+  "salamanca-avena": [
+   [
+    "2026-11-03",
+    204.0
+   ]
+  ],
+  "salamanca-centeno": [
+   [
+    "2026-11-03",
+    221.0
+   ]
+  ],
+  "salamanca-lechazo-extra": [
+   [
+    "2026-11-03",
+    10.3
+   ]
+  ],
+  "salamanca-lechazo-13-15-kg": [
+   [
+    "2026-11-03",
+    7.55
+   ]
+  ],
+  "salamanca-cordero-19-23-kg": [
+   [
+    "2026-11-03",
+    6.5
+   ]
+  ],
+  "salamanca-cordero-23-25-5-kg": [
+   [
+    "2026-11-03",
+    6.25
+   ]
+  ],
+  "salamanca-cordero-25-5-28-kg": [
+   [
+    "2026-11-03",
+    5.85
+   ]
+  ],
+  "salamanca-cordero-28-34-kg": [
+   [
+    "2026-11-03",
+    5.0
+   ]
+  ],
+  "salamanca-cordero-mas-de-34-kg": [
+   [
+    "2026-11-03",
+    4.4
+   ]
+  ],
+  "salamanca-oveja-de-sacrificio": [
+   [
+    "2026-11-03",
+    1.15
+   ]
+  ],
+  "salamanca-oveja-de-vida": [
+   [
+    "2026-11-03",
+    162.5
+   ]
+  ],
+  "salamanca-cerdas-de-desvieje": [
+   [
+    "2026-11-03",
+    0.375
+   ]
+  ],
+  "salamanca-primales-iberico-puro": [
+   [
+    "2026-11-03",
+    4.375
+   ]
+  ],
+  "salamanca-primales-iberico-cruzado": [
+   [
+    "2026-11-03",
+    4.375
+   ]
+  ],
+  "leon-alfalfa-paquete-deshidratado": [
+   [
+    "2026-11-04",
+    255.0
+   ]
+  ],
+  "leon-veza-forraje-de-1a": [
+   [
+    "2026-11-04",
+    170.0
+   ]
+  ],
+  "leon-hembras-180-200-kg-u": [
+   [
+    "2026-11-04",
+    6.95
+   ]
+  ],
+  "leon-hembras-180-200-kg-r": [
+   [
+    "2026-11-04",
+    6.85
+   ]
+  ],
+  "leon-hembras-180-200-kg-o": [
+   [
+    "2026-11-04",
+    5.2
+   ]
+  ],
+  "leon-hembras-201-250-kg-u": [
+   [
+    "2026-11-04",
+    6.95
+   ]
+  ],
+  "leon-hembras-201-250-kg-r": [
+   [
+    "2026-11-04",
+    6.85
+   ]
+  ],
+  "leon-hembras-201-250-kg-o": [
+   [
+    "2026-11-04",
+    5.2
+   ]
+  ],
+  "leon-hembras-mas-250-kg-u": [
+   [
+    "2026-11-04",
+    6.95
+   ]
+  ],
+  "leon-hembras-mas-250-kg-r": [
+   [
+    "2026-11-04",
+    6.85
+   ]
+  ],
+  "leon-hembras-mas-250-kg-o": [
+   [
+    "2026-11-04",
+    5.2
+   ]
+  ],
+  "leon-machos-200-250-kg-u": [
+   [
+    "2026-11-04",
+    6.1
+   ]
+  ],
+  "leon-machos-200-250-kg-r": [
+   [
+    "2026-11-04",
+    6.0
+   ]
+  ],
+  "leon-machos-200-250-kg-o": [
+   [
+    "2026-11-04",
+    5.2
+   ]
+  ],
+  "leon-machos-251-300-kg-u": [
+   [
+    "2026-11-04",
+    6.1
+   ]
+  ],
+  "leon-machos-251-300-kg-r": [
+   [
+    "2026-11-04",
+    6.0
+   ]
+  ],
+  "leon-machos-251-300-kg-o": [
+   [
+    "2026-11-04",
+    5.2
+   ]
+  ],
+  "leon-machos-mas-de-300-kg-u": [
+   [
+    "2026-11-04",
+    6.1
+   ]
+  ],
+  "leon-machos-mas-de-300-kg-r": [
+   [
+    "2026-11-04",
+    6.0
+   ]
+  ],
+  "leon-machos-mas-de-300-kg-o": [
+   [
+    "2026-11-04",
+    5.2
+   ]
+  ],
+  "leon-fabrica-y-segunda": [
+   [
+    "2026-11-04",
+    4.1
+   ]
+  ],
+  "leon-primera-y-extra-engrasada": [
+   [
+    "2026-11-04",
+    5.35
+   ]
+  ],
+  "leon-lechazos-hasta-12-kg": [
+   [
+    "2026-11-04",
+    8.3
+   ]
+  ],
+  "leon-cabritos-hasta-11-kg": [
+   [
+    "2026-11-04",
+    8.3
+   ]
+  ],
+  "leon-corderos-12-1-15-kg": [
+   [
+    "2026-11-04",
+    100.0
+   ]
+  ],
+  "leon-corderos-15-1-18-kg": [
+   [
+    "2026-11-04",
+    110.0
+   ]
+  ],
+  "leon-corderos-18-1-23-kg": [
+   [
+    "2026-11-04",
+    130.0
+   ]
+  ],
+  "leon-corderos-23-1-27-kg": [
+   [
+    "2026-11-04",
+    140.0
+   ]
+  ],
+  "leon-corderos-27-1-35-kg": [
+   [
+    "2026-11-04",
+    150.0
+   ]
+  ],
+  "leon-ovejas-vida-merina": [
+   [
+    "2026-11-04",
+    130.0
+   ]
+  ],
+  "leon-ovejas-vida-leche": [
+   [
+    "2026-11-04",
+    90.0
+   ]
+  ],
+  "leon-ovejas-vida-assaf-sin-carta": [
+   [
+    "2026-11-04",
+    180.0
+   ]
+  ],
+  "leon-ovejas-sacrificio-1a": [
+   [
+    "2026-11-04",
+    1.35
+   ]
+  ],
+  "leon-ovejas-sacrificio-2a": [
+   [
+    "2026-11-04",
+    0.85
    ]
   ]
  }
