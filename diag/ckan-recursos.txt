@@ -1,0 +1,5 @@
+licencia: Creative Commons Attribution 4.0 | https://creativecommons.org/licenses/by/4.0/legalcode.es
+modificado: 2026-11-03T13:54:04.566798
+0 | CSV | Cotizaciones semanales de la Lonja de Salamanca | 2026-11-03T13:53:25.428532 | https://datosabiertossalamanca.es/dataset/c914b1a6-4673-4288-8613-d077f6d5b619/resource/042beb52-4d80-4380-b073-e170364f65e7/download/agr03.csv
+1 | XLSX | Cotizaciones semanales de la Lonja de Salamanca | 2026-11-03T13:53:45.876865 | https://datosabiertossalamanca.es/dataset/c914b1a6-4673-4288-8613-d077f6d5b619/resource/ce918df1-9176-4139-965c-70ccab930ef8/download/agr03.xlsx
+2 | XML | Cotizaciones semanales de la lonja de Salamanca | 2026-11-03T13:54:04.527190 | https://datosabiertossalamanca.es/dataset/c914b1a6-4673-4288-8613-d077f6d5b619/resource/e0dcd22f-bf4b-4c97-87e4-aae2806b82e6/download/agr03.xml
