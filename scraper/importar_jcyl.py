@@ -552,6 +552,19 @@ def puntos_dudosos(pts: list[dict]) -> set[int]:
         local = vec[len(vec) // 2]
         if med > 0 and local > 0 and abs(x / med - 1) > 0.45 and abs(x / local - 1) > 0.45:
             out.add(i)
+    # Picos aislados: un salto de más del 20 % que vuelve a su nivel en la sesión siguiente (los vecinos se
+    # parecen entre sí, a menos de un 6 %, y están a 4 semanas como mucho). P. ej. trigo de Segovia en la
+    # semana 39 de 2026: 22,8 -> 30,0 -> 23,0 €/100 kg. Casi siempre es una errata del Excel.
+    fechas = [dt.date.fromisoformat(p["f"] or lunes(p["w"])) for p in pts]
+    for i in range(1, len(v) - 1):
+        if {i - 1, i, i + 1} & out:
+            continue
+        a, x, b = v[i - 1], v[i], v[i + 1]
+        if a <= 0 or b <= 0 or (fechas[i + 1] - fechas[i - 1]).days > 28:
+            continue
+        ra, rb = x / a - 1, x / b - 1
+        if ra * rb > 0 and abs(ra) > 0.2 and abs(rb) > 0.2 and abs(a / b - 1) < 0.06:
+            out.add(i)
     return out
 
 
@@ -584,7 +597,8 @@ def escribir(res: dict) -> dict:
     indice = {
         "fuente": PAGINA.format(anio=2026),
         "nota": "Cotizaciones semanales publicadas por la Junta de Castilla y León (Servicio de Estudios, "
-                "Estadística y Planificación Agraria). Valores tal como se publican.",
+                "Estadística y Planificación Agraria). Valores tal como se publican; los dudosos (filas desplazadas o "
+                "picos aislados, casi siempre erratas del Excel) se marcan, no se borran.",
         "generado": dt.datetime.now(dt.timezone.utc).isoformat(timespec="minutes"),
         "formato_punto": ["fecha de celebración (o null)", "semana ISO", "precio o mínimo",
                           "máximo (si hay horquilla; null si no)", "1 si el valor es dudoso"],

@@ -7,9 +7,18 @@ on:
     # Horas en UTC: 12:40, 16:40 y 20:40 (13:40, 17:40 y 21:40 en España en invierno)
     - cron: "40 12,16,20 * * 1-6"
   workflow_dispatch:
+  # Cuando cambia el código del robot: pruebas y lectura en ese momento (no hay que esperar a la hora programada).
+  # Los commits del propio robot no vuelven a lanzarlo (GitHub no encadena tareas hechas con GITHUB_TOKEN).
+  push:
+    branches: [main]
+    paths:
+      - "scraper/*.py"
+      - "scraper/requirements*.txt"
+      - ".github/workflows/actualizar-precios.yml"
 
 permissions:
   contents: write
+  issues: write   # para abrir y cerrar el aviso «fuentes con problemas»
 
 concurrency:
   group: actualizar-precios
@@ -26,21 +35,34 @@ jobs:
           python-version: "3.12"
           cache: pip
           cache-dependency-path: scraper/requirements.txt
-      - run: pip install -r scraper/requirements.txt
-      - run: python scraper/actualizar.py
+      - run: pip install -r scraper/requirements.txt -r scraper/requirements-pruebas.txt
+      # Si el código del robot está roto, no se lee ni se publica nada (y GitHub avisa por correo del fallo).
+      - name: Pruebas del robot
+        run: python -m pytest -q scraper/pruebas
+      - name: Leer las lonjas
+        run: python scraper/actualizar.py
       # Histórico oficial de la Junta de CyL: baja los Excel semanales nuevos y rehace data/historico/.
       # Si la web de la Junta falla, los precios del día se publican igualmente.
       - name: Histórico de la Junta de Castilla y León
+        id: jcyl
         continue-on-error: true
         run: python scraper/importar_jcyl.py --descargar
       - name: Guardar si hay precios nuevos
         run: |
-          if git diff --quiet data/; then
+          if [ -z "$(git status --porcelain data/ scraper/pruebas/casos/)" ]; then
             echo "Sin cambios"
           else
             git config user.name "actualizador-lonjas"
             git config user.email "actions@users.noreply.github.com"
-            git add data/
+            git add data/ scraper/pruebas/casos/
             git commit -m "Precios actualizados $(date -u +%Y-%m-%d)"
             git push
           fi
+      # Abre (o cierra) una incidencia en GitHub si alguna lonja falla: llega por correo al dueño del repositorio.
+      - name: Avisar si alguna fuente falla
+        if: always()
+        continue-on-error: true
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          JCYL_RESULTADO: ${{ steps.jcyl.outcome }}
+        run: python scraper/avisar.py

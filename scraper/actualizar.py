@@ -35,13 +35,14 @@ CABECERAS = {"User-Agent": "AppLonjasCyL/1.0 (lector semanal de cotizaciones pub
 MESES = {m: i + 1 for i, m in enumerate(
     ["enero", "febrero", "marzo", "abril", "mayo", "junio", "julio", "agosto", "septiembre", "octubre", "noviembre", "diciembre"])}
 MINIMO_FILAS = 4
+FALLOS_TOPE = 3        # «3 o más» lecturas fallidas seguidas
 AÑOS_HISTORIAL = 3
 
 # --- Límites de seguridad -------------------------------------------------
 # Solo se descargan páginas y PDF de estos dominios (y sus subdominios), siempre por https. Los enlaces a
 # PDF salen del HTML de webs ajenas: sin esta lista, una web comprometida podría hacer que el robot
 # descargue cualquier otra dirección. Si una lonja cambia de dominio, añádelo aquí.
-DOMINIOS_PERMITIDOS = ("lasalina.es", "lonjadeleon.es", "fessegovia.es", "lerma.burgos.es")
+DOMINIOS_PERMITIDOS = ("lasalina.es", "lonjadeleon.es", "fessegovia.es", "lerma.burgos.es", "datosabiertossalamanca.es")
 MAX_BYTES = 15 * 1024 * 1024   # tamaño máximo de cada descarga
 MAX_PAGINAS_PDF = 30           # solo se leen las primeras páginas: un boletín real tiene 1-5
 MAX_PAGINAS_TOTAL = 400        # un PDF más grande que esto ni se abre
@@ -58,8 +59,10 @@ def dominio_permitido(url: str) -> bool:
     return p.scheme == "https" and any(h == d or h.endswith("." + d) for d in DOMINIOS_PERMITIDOS)
 
 
-def bajar(url: str) -> requests.Response:
-    """Descarga segura: solo https y dominios conocidos, redirecciones revisadas una a una, tamaño limitado."""
+def bajar(url: str, parcial: int | None = None) -> requests.Response:
+    """Descarga segura: solo https y dominios conocidos, redirecciones revisadas una a una, tamaño limitado.
+    Con `parcial`, se leen solo los primeros bytes indicados (sin error): útil para archivos que crecen cada
+    semana y traen lo más reciente al principio (datos abiertos de Salamanca)."""
     for _ in range(MAX_REDIRECCIONES + 1):
         if not dominio_permitido(url):
             raise ValueError(f"Dirección no permitida ({urlparse(url).hostname}). "
@@ -73,6 +76,9 @@ def bajar(url: str) -> requests.Response:
         buf = bytearray()
         for trozo in r.iter_content(65536):
             buf += trozo
+            if parcial and len(buf) >= parcial:
+                r.close()
+                break
             if len(buf) > MAX_BYTES:
                 r.close()
                 raise ValueError("Respuesta demasiado grande")
@@ -125,7 +131,10 @@ def texto_pdf(contenido: bytes) -> str:
             raise ValueError(f"PDF con demasiadas páginas ({n})")
         if n > MAX_PAGINAS_PDF:
             print(f"    aviso: el PDF tiene {n} páginas; se leen solo las {MAX_PAGINAS_PDF} primeras")
-        return "\n".join((p.extract_text() or "") for p in pdf.pages[:MAX_PAGINAS_PDF])
+        # Solo el texto horizontal: algunos boletines (Segovia) llevan rótulos en vertical o reflejados
+        # ('SELAEREC' = CEREALES) que se mezclarían con los nombres de los productos.
+        horizontal = lambda o: o.get("object_type") != "char" or (o.get("upright", True) and o["matrix"][0] > 0)
+        return "\n".join((p.filter(horizontal).extract_text() or "") for p in pdf.pages[:MAX_PAGINAS_PDF])
 
 
 def fecha_de_enlace(url: str, texto: str) -> str | None:
@@ -173,26 +182,71 @@ def diagnostico(lid: str, texto: str, filas: list, fecha: str | None) -> None:
         print(f"    | {l[:110]}")
 
 
+UNIDADES_LEON = ((r"€\s*/\s*t\b|euros?\s*/\s*t(on)?", "€/t"), (r"kg\.?\s*vivo", "€/kg vivo"), (r"kg\.?\s*canal", "€/kg canal"),
+                 (r"unidad", "€/ud"), (r"litro", "€/litro"), (r"e\.?\s*q", "€/e.q."), (r"€\s*/\s*kg|euros?\s*/\s*kg", "€/kg"))
+
+
+def unidad_leon(txt: str) -> str:
+    for patron, u in UNIDADES_LEON:
+        if re.search(patron, txt or "", re.I):
+            return u
+    return ""
+
+
+def precio_leon(txt: str):
+    """'1.100,00' -> 1100; '0,475*' -> 0.475; '3,60/4,60' -> (3.6, 4.6); 'S/C' o vacío -> None."""
+    txt = (txt or "").replace("*", "").strip()
+    if not txt or re.fullmatch(r"(?i)s\s*/\s*c\.?", txt):
+        return None
+    partes = re.findall(r"\d{1,3}(?:\.\d{3})+(?:,\d+)?|\d+(?:,\d+)?", txt)
+    vals = [numero(p) for p in partes][:2]
+    if not vals or any(v is None for v in vals):
+        return None
+    return (vals[0], vals[1]) if len(vals) == 2 and "/" in txt else vals[0]
+
+
 def filas_de_tablas_html(html: str, cat_defecto: str, unidad_defecto: str = "") -> list[dict]:
-    """Lee las tablas HTML de una entrada de blog (formato de la Lonja de León)."""
+    """Tablas de la Lonja de León: 'NOMBRE | COTIZACIÓN ANTERIOR | COTIZACIÓN ACTUAL | DIF.'.
+    Fila de cabecera -> mesa ('PATATAS'); fila con unidades ('€/t', '€/Kg. Canal') -> unidad (y, si trae nombre,
+    sección: 'GANADO VIDA'); fila sin precios ('Hembras 180-200 kg.') -> prefijo de las siguientes ('U', 'R', 'O').
+    Horquillas '3,60/4,60' -> centro + rango. Comprobado con las entradas reales de oct.–nov. 2026."""
     sopa = BeautifulSoup(html, "html.parser")
-    filas, cat, unidad = [], cat_defecto, unidad_defecto
+    filas, cat, unidad, prefijo = [], cat_defecto, unidad_defecto, ""
     for tr in sopa.select("tr"):
-        celdas = [c.get_text(" ", strip=True) for c in tr.find_all(["td", "th"])]
-        celdas = [c for c in celdas if c]
-        if not celdas:
+        celdas = [re.sub(r"\s+", " ", c.get_text(" ", strip=True).replace("\xa0", " ")).strip() for c in tr.find_all(["td", "th"])]
+        if not any(celdas):
             continue
-        linea = " ".join(celdas)
-        if "€/t" in linea.replace(" ", "") and not re.search(r"\d", linea):
-            unidad = "€/t"
-        if len(celdas) == 1 or es_titulo(linea) or not re.search(r"\d|s/c", linea, re.I):
-            if not re.search(r"cotizaci|anterior|actual|dif", linea, re.I) and len(linea) < 40:
-                cat = bonito(linea).capitalize()
+        nombre, resto = celdas[0], celdas[1:]
+        texto_resto = " ".join(resto)
+        if re.search(r"(?i)cotizaci|anterior|actual", texto_resto):          # cabecera de la tabla
+            if nombre:
+                cat = bonito(nombre).capitalize()
+            prefijo = ""
             continue
-        f = leer_linea(linea)
-        if f:
-            f.update(cat=cat, unidad=unidad or unidad_defecto)
-            filas.append(f)
+        if resto and unidad_leon(texto_resto) and not re.search(r"\d", texto_resto):   # fila de unidades
+            unidad = unidad_leon(texto_resto)
+            if nombre:
+                cat = bonito(nombre).capitalize()
+            prefijo = ""
+            continue
+        valores = [precio_leon(c) for c in resto[:2]]
+        if nombre and not any(v is not None for v in valores) and not re.search(r"(?i)s\s*/\s*c", texto_resto):
+            prefijo = re.sub(r"[.\s]+$", "", nombre)                         # subtítulo: 'Hembras 180-200 kg'
+            continue
+        if not nombre:
+            continue
+        limpio = re.sub(r"[*\s]+$", "", nombre).strip()
+        if prefijo and len(limpio) <= 3:
+            limpio = f"{prefijo} {limpio}"
+        ant, act = (valores + [None, None])[:2]
+        f = {"producto": limpio, "cat": cat, "unidad": unidad or unidad_defecto}
+        if isinstance(act, tuple):
+            f["rango"] = "–".join(f"{v:.2f}".replace(".", ",") for v in act)
+            act = round(sum(act) / 2, 4)
+        if isinstance(ant, tuple):
+            ant = round(sum(ant) / 2, 4)
+        f.update(ant=ant, act=act)
+        filas.append(f)
     if not filas:  # sin tablas: probar como texto
         filas = leer_texto(sopa.get_text("\n"), unidad_defecto)
         for f in filas:
@@ -230,25 +284,48 @@ NO_BOLETIN = r"estatut|normativ|reglament|ordenanz|acuerdo|bases|convocatoria|ac
 def leer_leon():
     """Web WordPress de la Lonja: una entrada por mesa ('Lonja cereal 29-10-2026')."""
     url = "https://www.lonjadeleon.es/wp-json/wp/v2/posts?per_page=40&_fields=date,title,link,content"
-    entradas = bajar(url).json()
-    por_fecha: dict[str, list] = {}
+    fecha, filas, enlace, usadas = interpretar_leon(bajar(url).json())
+    MATERIAL["leon"] = {"entradas": usadas}
+    return fecha, filas, enlace
+
+
+def mesa_leon(titulo: str) -> str:
+    """'Lonja carne de vacuno 29-10-2026' y 'Lonja carne vacuno 30-09-2026' -> 'carne vacuno' (misma mesa)."""
+    t = re.sub(r"(?i)\blonja\b|\d{1,2}-\d{1,2}-\d{2,4}", " ", titulo).lower()
+    palabras = [re.sub(r"s$", "", p) for p in re.findall(r"[a-záéíóúñ]+", t) if p not in ("de", "y", "del", "la", "el")]
+    return " ".join(palabras) or "general"
+
+
+def interpretar_leon(entradas: list):
+    """La Lonja de León publica cada mesa en su día (cereal, girasol, patata y alubia los miércoles; vacuno, ovino,
+    leche y forraje los jueves). Se toma la última entrada de cada mesa publicada en los 10 días anteriores a la
+    más reciente, y la sesión de la lonja es la fecha más reciente. Devuelve también las entradas usadas, que se
+    guardan como caso de prueba."""
+    ultimas: dict[str, tuple] = {}
     for e in entradas:
         titulo = BeautifulSoup(e["title"]["rendered"], "html.parser").get_text()
-        if not re.search(r"lonja|cotizac", titulo, re.I):
-            continue
+        if not re.match(r"(?i)\s*lonja\b", titulo):
+            continue  # noticias del blog
         f = fecha_en(titulo) or e["date"][:10]
         if not fecha_plausible(f):
             continue
-        por_fecha.setdefault(f, []).append((titulo, e))
-    if not por_fecha:
+        clave = mesa_leon(titulo)
+        if clave not in ultimas or f > ultimas[clave][0]:
+            ultimas[clave] = (f, titulo, e)
+    if not ultimas:
         raise RuntimeError("No hay entradas de cotizaciones en la web de la Lonja de León")
-    fecha = max(por_fecha)
+    fecha = max(f for f, _, _ in ultimas.values())
+    limite = (date.fromisoformat(fecha) - timedelta(days=10)).isoformat()
+    elegidas = sorted((v for v in ultimas.values() if v[0] >= limite), key=lambda v: (v[0], v[1]), reverse=True)
     filas = []
-    for titulo, e in por_fecha[fecha]:
+    for f, titulo, e in elegidas:
         mesa = re.sub(r"(?i)lonja( de)?|\d{1,2}-\d{1,2}-\d{2,4}", "", titulo).strip(" -") or "General"
         unidad = "€/t" if re.search(r"cereal|forraj|patat|girasol", mesa, re.I) else ""
         filas += filas_de_tablas_html(e["content"]["rendered"], mesa.capitalize(), unidad)
-    return fecha, filas, por_fecha[fecha][0][1]["link"]
+    usadas = [{"date": e["date"], "link": e["link"], "title": {"rendered": e["title"]["rendered"]},
+               "content": {"rendered": e["content"]["rendered"]}} for _, _, e in elegidas]
+    principal = next(e for f, _, e in elegidas if f == fecha)
+    return fecha, filas, principal["link"], usadas
 
 
 def leer_segovia():
@@ -262,13 +339,226 @@ def leer_segovia():
     if not pdfs:
         raise RuntimeError(f"La entrada {e['link']} no tiene PDF")
     url_pdf = pdfs[0][0]
-    texto = texto_pdf(bajar(url_pdf).content)
-    fecha = fecha_en(url_pdf.replace("-", " ")) or fecha_en(e["title"]["rendered"]) or e["date"][:10]
-    return fecha, leer_texto(texto, "€/t"), url_pdf
+    material = {"texto": texto_pdf(bajar(url_pdf).content), "url_pdf": url_pdf, "titulo": e["title"]["rendered"], "fecha_entrada": e["date"]}
+    MATERIAL["segovia"] = material
+    fecha, filas = interpretar_segovia(material)
+    return fecha, filas, url_pdf
+
+
+# Productos del boletín de Segovia -> (mesa, nombre en la app, unidad). Los nombres son los que ya usaba la app,
+# para conservar su histórico. Un producto nuevo que no esté aquí no se publica y queda anotado en el registro.
+SEGOVIA_PRODUCTOS = [
+    (r"^cebada", ("Cereales", "Cebada 62 kg/hl", "€/t")),
+    (r"^trigo pienso", ("Cereales", "Trigo pienso 72 kg/hl", "€/t")),
+    (r"^trigo", ("Cereales", "Trigo", "€/t")),
+    (r"^avena", ("Cereales", "Avena", "€/t")),
+    (r"^centeno", ("Cereales", "Centeno", "€/t")),
+    (r"^triticale", ("Cereales", "Triticale", "€/t")),
+    (r"^ma[ií]z", ("Cereales", "Maíz", "€/t")),
+    (r"^girasol", ("Oleaginosas", "Girasol 9-2-44", "€/t")),
+    (r"^colza", ("Oleaginosas", "Colza 9-2-42", "€/t")),
+    (r"^(alfalfa|paquete empacada)", ("Forrajes", "Alfalfa empacada", "€/t")),
+    (r"^paja", ("Forrajes", "Paja empacada", "€/t")),
+    (r"^forraje veza", ("Forrajes", "Forraje veza mezcla", "€/t")),
+    (r"^forraje$", ("Forrajes", "Forraje", "€/t")),
+    (r"extra igp", ("Ovino", "Cordero Extra IGP", "€/kg vivo")),
+    (r"segolechal", ("Ovino", "Cordero Segolechal", "€/kg vivo")),
+    (r"lechal 10-12", ("Ovino", "Lechazo 10-12 kg", "€/kg vivo")),
+    (r"nodriza", ("Ovino", "Cordero nodriza y 2ª", "€/kg vivo")),
+    (r"lechal 12,1-15", ("Ovino", "Lechal 12,1-15 kg", "€/kg vivo")),
+    (r"recental", ("Ovino", "Recental 15,1-19 kg", "€/kg vivo")),
+    (r"pascual 19,1", ("Ovino", "Pascual 19,1-23 kg", "€/kg vivo")),
+    (r"pascual 23,1", ("Ovino", "Pascual 23,1-25,5 kg", "€/kg vivo")),
+    (r"pascual 25,5", ("Ovino", "Pascual 25,5-28 kg", "€/kg vivo")),
+    (r"(grande )?28,1-34", ("Ovino", "Cordero 28,1-34 kg", "€/kg vivo")),
+    (r"ovejas? desvieje primera", ("Ovino", "Oveja desvieje 1ª", "€/kg vivo")),
+    (r"ovejas? desvieje segunda", ("Ovino", "Oveja desvieje 2ª", "€/kg vivo")),
+    (r"^selecto", ("Porcino", "Cerdo selecto", "€/kg vivo")),
+    (r"^normal", ("Porcino", "Cerdo normal", "€/kg vivo")),
+    (r"^cerdo graso", ("Porcino", "Cerdo graso", "€/kg vivo")),
+    (r"^cerdas? desvieje extra", ("Porcino", "Cerda desvieje extra", "€/kg vivo")),
+    (r"^cerdas? desvieje primera", ("Porcino", "Cerda desvieje primera", "€/kg vivo")),
+    (r"^lechones de 20", ("Porcino", "Lechones 20 kg", "€/ud")),
+    (r"con hierro", ("Porcino", "Cochinillos con hierro", "€/ud")),
+    (r"sin hierro", ("Porcino", "Cochinillos sin hierro", "€/ud")),
+]
+_PRECIO_SG = r"(S/C|-?\d+,\d+)"
+
+
+def leer_segovia_texto(texto: str) -> list[dict]:
+    """Líneas 'Nombre  anterior  diferencia  actual [otras columnas]'. Si el nombre ocupa dos líneas
+    ('Cordero lechal 10-12 Kg. para' + '9,35 0,10 9,45 104'), se une con la anterior."""
+    filas, pendiente, vistos = [], "", set()
+    for linea in texto.splitlines():
+        linea = re.sub(r"\s+", " ", linea).strip()
+        if not linea or len(linea) > MAX_LINEA_SG:
+            continue
+        m = re.search(rf"{_PRECIO_SG} {_PRECIO_SG} {_PRECIO_SG}", linea) or re.search(rf"{_PRECIO_SG} {_PRECIO_SG}(?!\S)", linea)
+        if not m:
+            if re.search(r"[a-zá-ú]{3}", linea, re.I) and not re.search(r"(?i)precio|semana|anterior|medida|origen|agricultor|granja|lonja|cotizaciones|euros|sacrificio|€", linea):
+                pendiente = linea
+            continue
+        nombre = linea[:m.start()].strip(" .*") or pendiente
+        pendiente = ""
+        clave = re.sub(r"\s+", " ", nombre.replace("*", "")).strip(" .").lower()
+        destino = next((d for patron, d in SEGOVIA_PRODUCTOS if re.search(patron, clave)), None)
+        if not destino:
+            if clave:
+                print(f"[segovia] producto no reconocido (no se publica): {nombre!r}")
+            continue
+        if destino in vistos:
+            continue
+        vistos.add(destino)
+        vals = [None if g == "S/C" else numero(g) for g in m.groups()]
+        ant, act = (vals[0], vals[2]) if len(vals) == 3 else (vals[0], vals[1])
+        filas.append({"cat": destino[0], "producto": destino[1], "unidad": destino[2], "ant": ant, "act": act})
+    return filas
+
+
+MAX_LINEA_SG = 200
+
+
+def interpretar_segovia(m: dict):
+    fecha = fecha_en(m["url_pdf"].replace("-", " ")) or fecha_en(m["titulo"]) or m["fecha_entrada"][:10]
+    return fecha, leer_segovia_texto(m["texto"])
+
+
+SALAMANCA_CKAN = "https://datosabiertossalamanca.es/api/3/action/package_show?id=cotizaciones-semanales-de-la-lonja-de-salamanca"
+SALAMANCA_DATASET = "https://datosabiertossalamanca.es/dataset/cotizaciones-semanales-de-la-lonja-de-salamanca"
+SALAMANCA_NOTA = "Datos abiertos de la Diputación de Salamanca (licencia CC BY 4.0)"
+# (MESA, PRODUCTO, CATEGORÍA) del CSV -> (mesa en la app, nombre, unidad). Los nombres de los productos que la app
+# ya tenía se conservan tal cual para no cortar su histórico (p. ej. «Terneras +12 meses, menos de 270 kg» es la
+# categoría Especial, la que se tomaba de referencia). Lo que no está aquí no se publica (p. ej. el despiece de ibérico).
+SALAMANCA_PRODUCTOS = {
+    ("CEREALES", "Cereales", "Trigo Blando p.e. > 72 kg/Hl"): ("Cereales", "Trigo blando", "€/t"),
+    ("CEREALES", "Cereales", "Cebada"): ("Cereales", "Cebada", "€/t"),
+    ("CEREALES", "Cereales", "Avena"): ("Cereales", "Avena", "€/t"),
+    ("CEREALES", "Cereales", "Centeno"): ("Cereales", "Centeno", "€/t"),
+    ("CEREALES", "Cereales", "Triticale"): ("Cereales", "Triticale", "€/t"),
+    ("CEREALES", "Cereales", "Maíz"): ("Cereales", "Maíz", "€/t"),
+    ("CEREALES", "Leguminosas", "Guisantes"): ("Leguminosas", "Guisantes", "€/t"),
+    ("CEREALES", "Leguminosas", "Garbanzo pedrosillano"): ("Leguminosas", "Garbanzo pedrosillano", "€/t"),
+    ("CEREALES", "Leguminosas", "Lenteja armuña D.O."): ("Leguminosas", "Lenteja de La Armuña IGP", "€/t"),
+    ("CEREALES", "Oleaginosas", "Girasol"): ("Oleaginosas", "Girasol", "€/t"),
+    ("CEREALES", "Oleaginosas", "Girasol A.O."): ("Oleaginosas", "Girasol alto oleico", "€/t"),
+    ("CEREALES", "Oleaginosas", "Colza"): ("Oleaginosas", "Colza", "€/t"),
+    ("CEREALES", "Forrajes", "Forraje Extra"): ("Forrajes", "Forraje extra", "€/t"),
+    ("CEREALES", "Forrajes", "Forraje de Primera"): ("Forrajes", "Forraje de primera", "€/t"),
+    ("CEREALES", "Forrajes", "Alfalfa empacada"): ("Forrajes", "Alfalfa empacada", "€/t"),
+    ("CEREALES", "Forrajes", "Veza henificada"): ("Forrajes", "Veza henificada", "€/t"),
+    ("CEREALES", "Forrajes", "Paja paquete pequeño"): ("Forrajes", "Paja paquete pequeño", "€/t"),
+    ("CEREALES", "Forrajes", "Paja paquete grande"): ("Forrajes", "Paja", "€/t"),
+    ("OVINO", "Lechazo", "Extra"): ("Ovino", "Lechazo extra", "€/kg vivo"),
+    ("OVINO", "Lechazo", "Hasta 11 Kg"): ("Ovino", "Lechazo hasta 11 kg", "€/kg vivo"),
+    ("OVINO", "Lechazo", "11,01 a 13 KG."): ("Ovino", "Lechazo 11-13 kg", "€/kg vivo"),
+    ("OVINO", "Lechazo", "13,01 a 15 KG."): ("Ovino", "Lechazo 13-15 kg", "€/kg vivo"),
+    ("OVINO", "Cordero", "15,01 a 19 KG."): ("Ovino", "Cordero 15-19 kg", "€/kg vivo"),
+    ("OVINO", "Cordero", "19,01 a 23 KG."): ("Ovino", "Cordero 19-23 kg", "€/kg vivo"),
+    ("OVINO", "Cordero", "23,01 a 25,49 KG."): ("Ovino", "Cordero 23-25,5 kg", "€/kg vivo"),
+    ("OVINO", "Cordero", "25,5 a 28 KG."): ("Ovino", "Cordero 25,5-28 kg", "€/kg vivo"),
+    ("OVINO", "Cordero", "28,01 a 34 KG."): ("Ovino", "Cordero 28-34 kg", "€/kg vivo"),
+    ("OVINO", "Cordero", "+ de 34 KG."): ("Ovino", "Cordero más de 34 kg", "€/kg vivo"),
+    ("OVINO", "Oveja", "Sacrificio"): ("Ovino", "Oveja de sacrificio", "€/kg vivo"),
+    ("OVINO", "Oveja", "Vida"): ("Ovino", "Oveja de vida", "€/ud"),
+    ("PORCINO BLANCO E IBÉRICO", "Porcino blanco", "Selecto"): ("Porcino blanco", "Cerdo selecto", "€/kg vivo"),
+    ("PORCINO BLANCO E IBÉRICO", "Porcino blanco", "Normal"): ("Porcino blanco", "Cerdo normal", "€/kg vivo"),
+    ("PORCINO BLANCO E IBÉRICO", "Porcino blanco", "Graso"): ("Porcino blanco", "Cerdo graso", "€/kg vivo"),
+    ("PORCINO BLANCO E IBÉRICO", "Porcino blanco", "Cerdas"): ("Porcino blanco", "Cerdas de desvieje", "€/kg vivo"),
+    ("PORCINO BLANCO E IBÉRICO", "Lechón", "Selecto"): ("Porcino blanco", "Lechones base 20 kg", "€/ud"),
+    ("PORCINO BLANCO E IBÉRICO", "Tostón", "4 a 6 Kg"): ("Porcino blanco", "Tostones 4-6 kg", "€/ud"),
+    ("PORCINO BLANCO E IBÉRICO", "Tostón", "6,01 a 8 Kg"): ("Porcino blanco", "Tostones 6-8 kg", "€/ud"),
+    ("PORCINO BLANCO E IBÉRICO", "Porcino Ibérico", "Bellota 100% IB"): ("Porcino ibérico", "Ibérico bellota 100 %", "€/kg vivo"),
+    ("PORCINO BLANCO E IBÉRICO", "Porcino Ibérico", "Cebo de campo"): ("Porcino ibérico", "Ibérico cebo de campo", "€/kg vivo"),
+    ("PORCINO BLANCO E IBÉRICO", "Porcino Ibérico", "Cebo"): ("Porcino ibérico", "Ibérico cebo", "€/kg vivo"),
+    ("PORCINO BLANCO E IBÉRICO", "Porcino Ibérico", "Lechones hasta 23 Kg (Gran partida)"): ("Porcino ibérico", "Lechones ibéricos", "€/kg vivo"),
+    ("PORCINO BLANCO E IBÉRICO", "Porcino Ibérico", "Primales ibérico puro"): ("Porcino ibérico", "Primales ibérico puro", "€/kg vivo"),
+    ("PORCINO BLANCO E IBÉRICO", "Porcino Ibérico", "Primales ibérico cruzado"): ("Porcino ibérico", "Primales ibérico cruzado", "€/kg vivo"),
+    ("BOVINO DE VIDA", "Ternero", "Extra macho"): ("Vacuno de vida", "Terneros", "€/kg vivo"),
+    ("BOVINO DE VIDA", "Ternero", "Extra hembra"): ("Vacuno de vida", "Terneras", "€/kg vivo"),
+    ("BOVINO DE VIDA", "Ternero del país", "Macho"): ("Vacuno de vida", "Terneros del país", "€/kg vivo"),
+    ("BOVINO DE CARNE", "Ternera mayor 12 meses", "Especial menor 270 Kg"): ("Vacuno de carne", "Terneras +12 meses, menos de 270 kg", "€/kg canal"),
+    ("BOVINO DE CARNE", "Ternera mayor 12 meses", "Especial mayor 270 Kg"): ("Vacuno de carne", "Terneras +12 meses, más de 270 kg", "€/kg canal"),
+    ("BOVINO DE CARNE", "Añojos", "Especial menor 350 Kg"): ("Vacuno de carne", "Añojos menos de 350 kg", "€/kg canal"),
+    ("BOVINO DE CARNE", "Añojos", "Especial mayor 350 Kg"): ("Vacuno de carne", "Añojos más de 350 kg", "€/kg canal"),
+    ("BOVINO DE CARNE", "Erales", "Extra"): ("Vacuno de carne", "Erales", "€/kg canal"),
+    ("BOVINO DE CARNE", "Novillos", "Extra"): ("Vacuno de carne", "Novillos", "€/kg canal"),
+    ("BOVINO DE CARNE", "Toros", "Extra"): ("Vacuno de carne", "Toros", "€/kg canal"),
+    ("BOVINO DE CARNE", "Vacas", "Extra"): ("Vacuno de carne", "Vacas", "€/kg canal"),
+}
+
+
+def _clave_csv(*partes: str) -> tuple:
+    """Clave tolerante: sin espacios repetidos ni diferencias de mayúsculas o de punto final."""
+    return tuple(re.sub(r"\s+", " ", p or "").strip().rstrip(".").lower() for p in partes)
+
+
+_SALAMANCA_CLAVES = {_clave_csv(*k): v for k, v in SALAMANCA_PRODUCTOS.items()}
+
+
+def leer_salamanca_csv(texto: str):
+    """CSV de datos abiertos: "ID";"FECHA";"MESA";"PRODUCTO";"CATEGORIA";"VALOR1";"VALOR2" (sesiones más nuevas
+    primero). VALOR2 es el máximo de la horquilla (0 o -1 si no hay); 0 en los dos = esa semana no cotizó."""
+    def num(v):
+        v = (v or "").strip().replace(".", "").replace(",", ".") if "," in (v or "") else (v or "").strip()
+        try:
+            x = float(v)
+        except ValueError:
+            return None
+        return x if x > 0 else None
+    sesiones: dict[str, dict] = {}
+    for fila in csv.reader(io.StringIO(texto), delimiter=";"):
+        if len(fila) < 7 or not re.fullmatch(r"\d{4}-\d{2}-\d{2}", fila[1].strip()):
+            continue  # cabecera o última línea cortada (lectura parcial)
+        destino = _SALAMANCA_CLAVES.get(_clave_csv(fila[2], fila[3], fila[4]))
+        if not destino:
+            continue
+        a, b = num(fila[5]), num(fila[6])
+        if a is None:
+            continue
+        sesiones.setdefault(fila[1].strip(), {})[destino] = (a, b if b and b > a else None)
+    if not sesiones:
+        return None, []
+    fechas = sorted(sesiones, reverse=True)
+    actual, previa = sesiones[fechas[0]], (sesiones[fechas[1]] if len(fechas) > 1 else {})
+    medio = lambda a, b: round((a + b) / 2, 4) if b else a
+    filas = []
+    for (cat, nombre, unidad), (a, b) in actual.items():
+        f = {"cat": cat, "producto": nombre, "unidad": unidad, "act": medio(a, b),
+             "ant": medio(*previa[(cat, nombre, unidad)]) if (cat, nombre, unidad) in previa else None}
+        if b:
+            f["rango"] = f"{a:.3f}".rstrip("0").rstrip(".").replace(".", ",") + "–" + f"{b:.3f}".rstrip("0").rstrip(".").replace(".", ",")
+        filas.append(f)
+    orden = list(dict.fromkeys(v for v in SALAMANCA_PRODUCTOS.values()))
+    filas.sort(key=lambda f: orden.index((f["cat"], f["producto"], f["unidad"])))
+    return fechas[0], filas
 
 
 def leer_salamanca():
-    """La Diputación (La Salina) publica cada lunes el PDF de la Lonja."""
+    """Cotizaciones de la Lonja de Salamanca: datos abiertos de la Diputación (cada lunes, desde 2005; CC BY 4.0).
+    El CSV pesa más de 10 MB pero trae lo más reciente al principio: basta con leer su comienzo."""
+    try:
+        recursos = bajar(SALAMANCA_CKAN).json()["result"]["resources"]
+        url = next(r["url"] for r in recursos if (r.get("format") or "").upper() == "CSV")
+        crudo = bajar(url, parcial=512 * 1024).content
+        try:
+            texto = crudo.decode("utf-8")
+        except UnicodeDecodeError:
+            texto = crudo.decode("latin-1")
+        fecha, filas = leer_salamanca_csv(texto)
+        if fecha:
+            fechas = sorted({m.group(1) for m in re.finditer(r'^"\d+";"(\d{4}-\d{2}-\d{2})"', texto, re.M)}, reverse=True)[:2]
+            MATERIAL["salamanca"] = {"csv": "\n".join([texto.splitlines()[0]] + [l for l in texto.splitlines() if any(f'"{x}"' in l[:30] for x in fechas)])}
+        if fecha and len(filas) >= MINIMO_FILAS:
+            print(f"[salamanca] datos abiertos: sesión {fecha}, {len(filas)} filas")
+            return fecha, filas, SALAMANCA_DATASET
+        print(f"[salamanca] los datos abiertos no traen una sesión válida ({len(filas)} filas, fecha {fecha!r})")
+    except Exception as exc:  # noqa: BLE001
+        print(f"[salamanca] datos abiertos no disponibles ({type(exc).__name__}: {exc}); se prueba la web de la Lonja")
+    return leer_salamanca_pdf()
+
+
+def leer_salamanca_pdf():
+    """Respaldo: boletín en PDF enlazado desde la web de la Lonja (en nov. 2026 la web no enlaza ninguno)."""
     pagina = "https://www.lasalina.es/economiayhacienda/agriculturayganaderia/mercado/lonja/"
     html = bajar(pagina).text
     pdfs = enlaces_pdf(html, pagina)
@@ -350,12 +640,67 @@ def leer_sesion_lerma(bloque: str):
     return fecha, filas
 
 
+LERMA_UNIDAD_HTML = (("tonelada", "€/t"), ("unidad", "€/ud"), ("kg", "€/kg"))
+
+
+def leer_lerma_html(html: str):
+    """Sesión actual de Lerma, publicada como tabla en la propia página (comprobado el 5 nov 2026):
+    filas 'TRIGO TIPO III | 231 €/TONELADA | 232 €/TONELADA'; títulos de mesa ('CEREALES', 'PORCINO CEBADO'…);
+    en ganado, '........... PRIMERA' repite la primera parte del nombre anterior ('Añojos primera');
+    '-' es sin cotización."""
+    sopa = BeautifulSoup(html, "html.parser")
+    fecha, filas, mesa, mesa_original, anterior = None, [], "General", "", ""
+    for tabla in sopa.find_all("table"):
+        texto_tabla = tabla.get_text(" ", strip=True)
+        if not re.search(r"(?i)cotizaciones|celebraci", texto_tabla):
+            continue
+        m = re.search(r"(?i)celebraci[oó]n\s*(.{0,60})", texto_tabla)
+        fecha = fecha_en(m.group(1)) if m else fecha_en(texto_tabla)
+        for tr in tabla.find_all("tr"):
+            celdas = [re.sub(r"\s+", " ", td.get_text(" ", strip=True).replace("\xa0", " ")).strip() for td in tr.find_all(["td", "th"])]
+            celdas = [c for c in celdas if c]
+            if not celdas:
+                continue
+            if re.match(r"(?i)comentario", celdas[0]):
+                break
+            if len(celdas) == 1 or re.fullmatch(r"(?i)actual|anterior", " ".join(celdas[1:2])):
+                for clave, nombre in LERMA_MESAS:
+                    if clave in celdas[0].lower():
+                        mesa, mesa_original = nombre, celdas[0]
+                continue
+            if mesa == "General" or len(celdas) < 2 or not re.search(r"\d|-", " ".join(celdas[1:])):
+                continue
+            crudo = re.sub(r"^[.…\s]{3,}", "“ ", celdas[0])          # '...... PRIMERA' = ídem
+            crudo = re.sub(r"\s*\((cerdo blanco)\)", "", crudo, flags=re.I)
+            nombre = nombre_lerma(crudo, anterior, mesa_original)
+            anterior = nombre
+            def valor(c):
+                n = re.search(r"\d+(?:[.,]\d+)?", c or "")
+                return numero(n.group(0)) if n else None
+            act, ant = valor(celdas[1]), valor(celdas[2] if len(celdas) > 2 else "")
+            if act is None and ant is None:
+                continue  # la lonja no da ese precio (p. ej. porcino selecto y graso)
+            u = next((v for k, v in LERMA_UNIDAD_HTML if k in " ".join(celdas[1:]).lower()), "")
+            und = u + (" vivo" if u == "€/kg" and mesa == "Porcino" else "")
+            filas.append({"cat": mesa, "producto": nombre, "unidad": und, "ant": ant, "act": act})
+        break
+    return fecha, filas
+
+
 def leer_lerma():
-    """Lerma publica un PDF por año ('lonjahistorico2026.pdf') con una sesión por página, de la más antigua a la
-    más reciente. Se coge el del año más alto y se lee la última sesión."""
+    """Lerma publica la sesión de cada semana como tabla en su página (actual y anterior). Los PDF anuales
+    ('lonjahistoricoAAAA.pdf', una sesión por página) son su archivo: se usan solo si la tabla no se puede leer."""
     import pdfplumber
     pagina = "https://lerma.burgos.es/lonja"
     html = bajar(pagina).text
+    fecha, filas = leer_lerma_html(html)
+    tabla = BeautifulSoup(html, "html.parser").find("table")
+    if tabla is not None:
+        MATERIAL["lerma"] = {"html": str(tabla)}
+    if fecha and len(filas) >= MINIMO_FILAS:
+        print(f"[lerma] sesión de la página: {fecha}, {len(filas)} filas")
+        return fecha, filas, pagina
+    print(f"[lerma] la tabla de la página no se reconoce ({len(filas)} filas, fecha {fecha!r}); se prueba el histórico en PDF")
     pdfs = [(u, t) for u, t in enlaces_pdf(html, pagina) if re.search(r"lonja", u + " " + t, re.I)]
     con_año = []
     for u, t in pdfs:
@@ -386,6 +731,37 @@ def leer_lerma():
             return fecha, filas, url
     diagnostico("lerma", bloques[-1] if bloques else texto, [], None)
     raise RuntimeError("No se reconoce la última sesión del histórico de Lerma")
+
+
+# Material en bruto de la última lectura de cada lonja (lo que se descargó, ya en texto): con él se guardan casos
+# de prueba reales en scraper/pruebas/casos/, y las pruebas comprueban que el lector sigue interpretándolos igual.
+MATERIAL: dict[str, dict] = {}
+INTERPRETES = {
+    "leon": lambda m: interpretar_leon(m["entradas"])[:2],
+    "segovia": interpretar_segovia,
+    "salamanca": lambda m: leer_salamanca_csv(m["csv"]),
+    "lerma": lambda m: leer_lerma_html(m["html"]),
+}
+CASOS = Path(__file__).resolve().parent / "pruebas" / "casos"
+CASOS_POR_LONJA = 6
+
+
+def filas_publicables(filas: list[dict]) -> list[dict]:
+    """Las filas tal como se publicarían (después de la validación de aplicar)."""
+    return [g for g in (limpiar_fila(dict(f)) for f in filas) if g]
+
+
+def guardar_caso(lid: str, fecha: str, filas: list[dict], origen: str) -> None:
+    """Guarda la lectura como caso de prueba: material descargado + resultado esperado. Solo las 6 últimas por lonja."""
+    if lid not in MATERIAL or lid not in INTERPRETES or not fecha:
+        return
+    carpeta = CASOS / lid
+    carpeta.mkdir(parents=True, exist_ok=True)
+    caso = {"lonja": lid, "fecha": fecha, "origen": origen, "material": MATERIAL[lid],
+            "esperado": {"fecha": fecha, "filas": filas_publicables(filas)}}
+    (carpeta / f"{fecha}.json").write_text(json.dumps(caso, ensure_ascii=False, indent=1), encoding="utf-8")
+    for viejo in sorted(carpeta.glob("*.json"))[:-CASOS_POR_LONJA]:
+        viejo.unlink()
 
 
 LECTORES = {"leon": leer_leon, "segovia": leer_segovia, "salamanca": leer_salamanca, "lerma": leer_lerma}
@@ -444,8 +820,11 @@ def aplicar(lonja: dict, historial: dict, fecha: str, filas: list[dict], origen:
         raise RuntimeError(f"Lectura incompleta: {len(filas)} filas válidas, fecha {fecha!r}")
     if not fecha_plausible(fecha):
         raise RuntimeError(f"Fecha de sesión fuera de rango: {fecha!r}")
-    if lonja.get("fecha") and fecha <= lonja["fecha"]:
-        return False  # ya tenemos esta sesión (o una más nueva)
+    # Misma sesión leída otra vez: se actualiza si ha cambiado (corrección de la lonja, lector mejorado o la
+    # «carga inicial» hecha a mano al crear la app). Lo cargado a mano en data/manual/ no se pisa.
+    misma = lonja.get("fecha") == fecha and "carga manual" not in (lonja.get("origen"), origen)
+    if lonja.get("fecha") and (fecha < lonja["fecha"] or (fecha == lonja["fecha"] and not misma)):
+        return False  # ya tenemos una sesión más nueva (o esta misma, cargada a mano)
     previos = {f["id"]: f for f in lonja.get("precios", [])}
     por_clave = {f["clave"]: f for f in lonja.get("precios", []) if f.get("clave")}
     nuevas, vistos = [], set()
@@ -460,14 +839,19 @@ def aplicar(lonja: dict, historial: dict, fecha: str, filas: list[dict], origen:
         # El mismo producto pudo llamarse distinto la semana pasada: se enlaza por su clave
         previo = previos.get(f["id"]) or (por_clave.get(clave) if clave else None)
         if f.get("ant") is None and previo:
-            f["ant"] = previo.get("act")
+            f["ant"] = previo.get("ant") if misma else previo.get("act")
         if previo and previo["id"] != f["id"] and f["id"] not in historial and previo["id"] in historial:
             historial[f["id"]] = list(historial[previo["id"]])
         nuevas.append({k: f[k] for k in ("id", "cat", "producto", "unidad", "ant", "act", "rango", "clave") if k in f})
+    if misma and nuevas == lonja.get("precios") and origen == lonja.get("origen"):
+        return False  # la misma sesión, leída igual: nada que publicar
+    for f in nuevas:
         if f.get("act") is not None:
             serie = historial.setdefault(f["id"], [])
             if not serie or serie[-1][0] != fecha:
                 serie.append([fecha, f["act"]])
+            elif misma:
+                serie[-1][1] = f["act"]
     lonja.update(precios=nuevas, fecha=fecha, origen=origen, estado="activa", error=None)
     return True
 
@@ -483,6 +867,7 @@ def main(solo: list[str]) -> int:
     historial = datos.setdefault("historial", {})
     antes = json.dumps(datos, sort_keys=True)
     ahora = datetime.now(timezone.utc).astimezone().isoformat(timespec="minutes")
+    hoy = ahora[:10]
     fallos = 0
 
     for lonja in datos["lonjas"]:
@@ -502,6 +887,7 @@ def main(solo: list[str]) -> int:
                 error = f"Falló la lectura automática ({type(exc).__name__})"
                 print(f"[{lid}] detalle: {exc}")  # el detalle completo queda solo en el registro de Actions
                 traceback.print_exc()
+        automatica = lectura
         if manual and (not lectura or (manual[0] or "") >= (lectura[0] or "")):
             lectura = manual
         if lectura:
@@ -509,9 +895,24 @@ def main(solo: list[str]) -> int:
                 cambio = aplicar(lonja, historial, *lectura)
                 print(f"[{lid}] sesión {lectura[0]}: {len(lectura[1])} filas" + (" (nueva)" if cambio else " (sin cambios)"))
                 error = None  # hay datos válidos (automáticos o manuales)
+                if lectura is automatica and (cambio or not (CASOS / lid).exists()):
+                    guardar_caso(lid, lectura[0], lectura[1], lectura[2])
+                if lid == "salamanca" and lectura[2] == SALAMANCA_DATASET:
+                    lonja["fuente"], lonja["nota"] = SALAMANCA_DATASET, SALAMANCA_NOTA  # atribución que pide la licencia
             except Exception as exc:  # noqa: BLE001
                 error = "Lectura incompleta o no válida"
                 print(f"[{lid}] detalle: {exc}")
+        # Estado de la fuente (lo usa la pantalla «Estado de las fuentes» y el aviso por GitHub).
+        # La última lectura correcta se apunta una vez al día, para no publicar un cambio en cada pasada.
+        if lid in LECTORES or manual:
+            if error:
+                lonja["fallos"] = min(FALLOS_TOPE, int(lonja.get("fallos") or 0) + 1)  # tope: no publicar un cambio en cada pasada
+                lonja["fallo_desde"] = lonja.get("fallo_desde") or ahora
+            else:
+                if lonja.get("fallos"):
+                    lonja["fallos"], lonja["fallo_desde"] = 0, None
+                if (lonja.get("ultima_lectura") or "")[:10] != hoy:
+                    lonja["ultima_lectura"] = ahora
         if error:
             fallos += 1
             print(f"[{lid}] ERROR: {error}")

@@ -47,7 +47,7 @@ function variacion(f) {
 function diasDesde(iso) { return Math.floor((Date.now() - new Date(iso + "T12:00:00")) / 86400000); }
 function estadoLonja(l) {
   if (l.estado === "suspendida") return { txt: "Sin cotizar", clase: "p-off" };
-  if (l.error && diasDesde(l.fecha) > 8) return { txt: "Revisar fuente", clase: "p-err" };
+  if (l.error && ((l.fallos || 0) >= 2 || diasDesde(l.fecha) > 8)) return { txt: "Revisar fuente", clase: "p-err" };
   if (!l.fecha) return { txt: "Sin datos", clase: "p-off" };
   return diasDesde(l.fecha) <= 7 ? { txt: "Al día", clase: "p-dia" } : { txt: "Pendiente", clase: "p-pend" };
 }
@@ -65,6 +65,10 @@ function fechaOk(v) {
   if (typeof v !== "string" || !RE_FECHA.test(v)) return null;
   const [a, m, d] = v.split("-").map(Number), f = new Date(Date.UTC(a, m - 1, d));
   return (f.getUTCFullYear() === a && f.getUTCMonth() === m - 1 && f.getUTCDate() === d) ? v : null;
+}
+/** Fecha y hora ISO ('2026-11-05T13:40+01:00') válida, o null. */
+function fechaHoraOk(v) {
+  return typeof v === "string" && v.length <= 40 && /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}/.test(v) && !isNaN(new Date(v)) ? v : null;
 }
 function urlHttps(v) {
   try { const u = new URL(v); return u.protocol === "https:" ? u.href : null; } catch { return null; }
@@ -87,7 +91,9 @@ function sanear(crudo) {
     out.lonjas.push({
       id: l.id, nombre: texto(l.nombre, 80) || l.id, provincia: texto(l.provincia, 60), dia: texto(l.dia, 20),
       estado: l.estado === "suspendida" ? "suspendida" : "activa", nota: texto(l.nota, 200) || null,
-      fuente: urlHttps(l.fuente), fecha: fechaOk(l.fecha), origen: texto(l.origen, 60), error: l.error ? true : null, precios,
+      fuente: urlHttps(l.fuente), fecha: fechaOk(l.fecha), origen: texto(l.origen, 200), error: l.error ? (texto(l.error, 120) || "Error de lectura") : null,
+      ultimaLectura: fechaHoraOk(l.ultima_lectura ?? l.ultimaLectura), falloDesde: fechaHoraOk(l.fallo_desde ?? l.falloDesde),
+      fallos: Number.isInteger(l.fallos) && l.fallos >= 0 && l.fallos < 10000 ? l.fallos : 0, precios,
     });
   }
   if (crudo.historial && typeof crudo.historial === "object") {
@@ -176,7 +182,62 @@ function listaLonjas() {
 }
 
 function vistaLonjas() {
-  return `<section class="seccion"><div class="titulo-seccion"><h2>Todas las lonjas</h2><span>Castilla y León</span></div>${listaLonjas()}</section>`;
+  return `<section class="seccion"><div class="titulo-seccion"><h2>Todas las lonjas</h2><span>Castilla y León</span></div>${listaLonjas()}
+    <button class="chip auto" type="button" data-ir="fuentes">Estado de las fuentes ›</button></section>`;
+}
+
+/* ---------- estado de las fuentes: ¿se están leyendo bien las lonjas? ---------- */
+function cuando(iso) {
+  if (!iso) return "—";
+  const f = new Date(iso), d = Math.round((new Date().setHours(0, 0, 0, 0) - new Date(f).setHours(0, 0, 0, 0)) / 86400000);
+  const h = `${String(f.getHours()).padStart(2, "0")}:${String(f.getMinutes()).padStart(2, "0")} h`;
+  return d === 0 ? `hoy, ${h}` : d === 1 ? `ayer, ${h}` : `${f.getDate()} ${MESES[f.getMonth()]} ${f.getFullYear()}`;
+}
+function tipoOrigen(l) {
+  const o = (l.origen || "").toLowerCase();
+  if (o === "carga manual") return "Cargado a mano";
+  if (o === "carga inicial") return "Carga inicial (a mano, al crear la app)";
+  if (o.includes("datosabiertos")) return "Datos abiertos oficiales";
+  if (o.endsWith(".pdf")) return "Boletín en PDF";
+  return o ? "Web de la lonja" : "—";
+}
+function estadoFuente(l) {
+  if (l.estado === "suspendida") return { txt: "Sin cotizar", clase: "p-off" };
+  if ((l.fallos || 0) >= 2) return { txt: "Falla", clase: "p-err" };
+  if ((l.fallos || 0) === 1) return { txt: "Reintentando", clase: "p-pend" };
+  return { txt: "Funciona", clase: "p-dia" };
+}
+function vistaFuentes() {
+  const activas = DATOS.lonjas.filter(l => l.estado !== "suspendida");
+  const conFallo = activas.filter(l => (l.fallos || 0) >= 2);
+  const ultima = activas.map(l => l.ultimaLectura).filter(Boolean).sort().at(-1);
+  let hist = "";
+  if (typeof HIST !== "undefined") {
+    if (!HIST.indice && !HIST.cargando && !HIST.error) cargarHistorico().then(() => { if (location.hash === "#fuentes") router(); });
+    const imp = HIST.indice ? HIST.indice.archivos.filter(a => a.importado) : [];
+    const u = imp.at(-1);
+    hist = `<div class="fuente-fila">
+        <div class="fuente-cab"><h3>Histórico oficial · Junta de Castilla y León</h3><span class="pastilla ${HIST.error ? "p-err" : u ? "p-dia" : "p-off"}">${HIST.error ? "No disponible" : u ? "Funciona" : "Cargando…"}</span></div>
+        <dl>${u ? `<dt>Última semana importada</dt><dd>semana ${u.semana} de ${u.anio}</dd><dt>Archivos</dt><dd>${imp.length} Excel semanales · <a href="#historico-fuentes">ver lista</a></dd>` : ""}
+          <dt>Origen</dt><dd>Excel semanales de la Junta (con unas semanas de retraso)</dd></dl></div>`;
+  }
+  return `<section class="seccion">
+    <div class="cab-lonja"><button class="volver" type="button" data-ir="lonjas">‹ Volver</button><h2>Estado de las fuentes</h2>
+      <div class="meta">El robot lee las lonjas 3 veces al día, de lunes a sábado.${ultima ? ` Última lectura correcta: ${cuando(ultima)}.` : ""}</div></div>
+    ${conFallo.length ? `<div class="aviso-red"><b>${conFallo.length === 1 ? "Una lonja no se está pudiendo leer" : `${conFallo.length} lonjas no se están pudiendo leer`}.</b> La app sigue mostrando sus últimos precios buenos. Al responsable de la app le llega un aviso automático.</div>` : `<div class="aviso-ok">Todas las lonjas activas se están leyendo correctamente.</div>`}
+    <div class="fuentes">${DATOS.lonjas.map(l => {
+      const e = estadoFuente(l);
+      return `<div class="fuente-fila${l.estado === "suspendida" ? " apagada" : ""}">
+        <div class="fuente-cab"><h3>${esc(l.nombre)}</h3><span class="pastilla ${e.clase}">${e.txt}</span></div>
+        ${l.estado === "suspendida" ? `<p class="nota">${esc(l.nota || "Sin cotizaciones activas")}</p>` : `<dl>
+          <dt>Última sesión</dt><dd>${l.fecha ? fechaLarga(l.fecha) : "—"}${l.dia ? ` · cotiza los ${esc(l.dia).toLowerCase()}` : ""}</dd>
+          <dt>Última lectura correcta</dt><dd>${cuando(l.ultimaLectura)}</dd>
+          <dt>Origen</dt><dd>${tipoOrigen(l)}${l.fuente ? ` · <a href="${esc(l.fuente)}" target="_blank" rel="noopener noreferrer">${l.nota ? esc(l.nota) : "ver fuente"}</a>` : ""}</dd>
+          ${l.error ? `<dt>Problema</dt><dd class="err">${esc(l.error)}${l.fallos ? ` · ${l.fallos >= 3 ? "3 o más intentos seguidos" : l.fallos === 1 ? "1 intento" : `${l.fallos} intentos seguidos`}${l.falloDesde ? `, desde ${cuando(l.falloDesde)}` : ""}` : ""}</dd>` : ""}
+        </dl>`}</div>`;
+    }).join("")}${hist}</div>
+    <p class="nota">Si una lonja cambia su web o deja de publicar, el robot conserva los últimos precios buenos y avisa. Los precios se pueden cargar a mano mientras se adapta el lector.</p>
+  </section>`;
 }
 
 function filaHTML(f, conLonja = false) {
@@ -214,7 +275,7 @@ function vistaLonja(id) {
       <div class="filtros" role="group" aria-label="Mesas">${cats.map(c => `<button class="chip" type="button" data-cat="${esc(c)}" aria-pressed="${c === estado.cat}">${esc(c)}</button>`).join("")}</div>
       <input id="buscar-producto" class="buscar" type="search" placeholder="Buscar producto (trigo, cordero, vacas…)" value="${esc(estado.texto)}" aria-label="Buscar producto">
       <div class="tablilla">${cuerpo || '<div class="vacio sin-borde"><b>Nada coincide</b>Prueba con otra palabra o elige «Todas».</div>'}</div>
-      <p class="fuente">Fuente: ${l.fuente ? `<a href="${esc(l.fuente)}" target="_blank" rel="noopener noreferrer">publicación oficial de la lonja</a>` : "lonja"}${l.origen === "carga manual" ? " · cargado a mano" : ""}${l.error ? " · La última lectura automática falló; se muestran los precios de la sesión indicada." : ""}</p>
+      <p class="fuente">Fuente: ${l.fuente ? `<a href="${esc(l.fuente)}" target="_blank" rel="noopener noreferrer">${l.nota ? esc(l.nota) : "publicación oficial de la lonja"}</a>` : "lonja"}${l.origen === "carga manual" ? " · cargado a mano" : ""}${l.error ? " · La última lectura automática falló; se muestran los precios de la sesión indicada." : ""} · <a href="#fuentes">Estado de las fuentes</a></p>
     </section>`;
 }
 
@@ -311,6 +372,7 @@ function router() {
   let html, seccion = h;
   if (h.startsWith("lonja-")) { html = vistaLonja(h.slice(6)); seccion = "lonjas"; }
   else if (h === "lonjas") html = vistaLonjas();
+  else if (h === "fuentes") { html = vistaFuentes(); seccion = "lonjas"; }
   else if (h === "comparar") html = vistaComparar();
   else if (h === "favoritos") html = vistaFavoritos();
   else if (h === "historico") html = vistaHistorico();

@@ -316,3 +316,16 @@ main {
 }
 .tarjeta-hist.ampliado .datos-det, .tarjeta-hist.ampliado .mismo-periodo { display: none; }
 body:has(.tarjeta-hist.ampliado) { overflow: hidden; }
+
+/* Estado de las fuentes */
+.fuentes { display: grid; gap: 10px; }
+.fuente-fila { background: var(--hoja); border: 1px solid var(--linea); border-radius: 14px; padding: 12px 14px; display: grid; gap: 8px; min-width: 0; }
+.fuente-fila.apagada { opacity: .7; }
+.fuente-cab { display: flex; justify-content: space-between; align-items: start; gap: 10px; }
+.fuente-cab h3 { margin: 0; font: 700 19px/1.15 var(--cifra); letter-spacing: .02em; }
+.fuente-fila dl { display: grid; grid-template-columns: minmax(0, 11em) minmax(0, 1fr); gap: 4px 12px; margin: 0; font-size: 13.5px; }
+.fuente-fila dt { color: var(--tenue); }
+.fuente-fila dd { margin: 0; overflow-wrap: anywhere; }
+.fuente-fila dd.err { color: var(--baja); }
+.aviso-ok { background: var(--sube-suave); color: var(--tinta); border-radius: 10px; padding: 10px 12px; font-size: 13.5px; }
+@media (max-width: 420px) { .fuente-fila dl { grid-template-columns: 1fr; } .fuente-fila dt { margin-top: 4px; } }

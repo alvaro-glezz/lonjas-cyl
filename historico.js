@@ -111,15 +111,6 @@ function puntosSerie(id) {
   const pts = (HIST.puntos[id] || []).map(p => ({ ...p, v: p.b != null ? Math.round((p.a + p.b) / 2 * 1e5) / 1e5 : p.a,
     fecha: p.f || lunesISO(p.w), sinFecha: !p.f }))
     .sort((x, y) => x.fecha.localeCompare(y.fecha) || x.w.localeCompare(y.w));
-  // Picos aislados: un salto de más del 20 % que vuelve a su nivel a la semana siguiente (p. ej. trigo de Segovia,
-  // 22,8 -> 30,0 -> 23,0) es casi siempre una errata del Excel. Se marca como dudoso, igual que los que marca el importador.
-  for (let i = 1; i < pts.length - 1; i++) {
-    const a = pts[i - 1], p = pts[i], b = pts[i + 1];
-    if (a.dud || p.dud || b.dud || a.v <= 0 || b.v <= 0) continue;
-    if ((Date.parse(b.fecha) - Date.parse(a.fecha)) / 864e5 > 28) continue;
-    const ra = p.v / a.v - 1, rb = p.v / b.v - 1;
-    if (Math.sign(ra) === Math.sign(rb) && Math.abs(ra) > 0.2 && Math.abs(rb) > 0.2 && Math.abs(a.v / b.v - 1) < 0.06) pts[i] = { ...p, dud: true, pico: true };
-  }
   HIST.cache.set(id, pts);
   return pts;
 }

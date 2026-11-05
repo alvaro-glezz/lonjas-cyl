@@ -69,7 +69,20 @@ Para importarlos a mano: `pip install -r scraper/requirements.txt` y `python scr
 
 ## Si una lonja deja de actualizarse
 
-Las webs cambian de formato sin avisar. Hay dos salidas:
+**Te enterarás solo.** Si una lonja falla dos lecturas seguidas (o lleva más de 15 días sin sesiones nuevas, o no se pudo actualizar el histórico de la Junta), el robot abre una incidencia en la pestaña *Issues* del repositorio y GitHub te la manda por correo. Se cierra sola cuando todo vuelve a funcionar. En la app, *Lonjas → Estado de las fuentes* muestra cuándo se leyó bien cada lonja por última vez.
+
+De dónde lee el robot cada lonja (noviembre de 2026):
+
+| Lonja | Fuente |
+|---|---|
+| Salamanca | Datos abiertos de la Diputación (CSV semanal desde 2005, licencia CC BY 4.0: hay que citar la fuente, y la app lo hace) |
+| León | Blog de la Lonja: una entrada por mesa; cereal, girasol, patata y alubia se publican un día y vacuno, ovino, leche y forraje otro, así que se combinan |
+| Segovia | PDF semanal de la FES (solo se lee el texto horizontal: el PDF trae rótulos en vertical) |
+| Lerma | Tabla de la sesión actual en la página del Ayuntamiento (los PDF anuales son solo su archivo) |
+
+**Pruebas automáticas.** Cada vez que el robot publica una sesión nueva guarda lo que descargó en `scraper/pruebas/casos/`. Antes de cada lectura se ejecutan las pruebas (`python -m pytest scraper/pruebas`): si alguien cambia un lector y rompe una lonja que funcionaba, la tarea falla, no se publica nada y GitHub avisa por correo.
+
+Para arreglarlo hay dos salidas:
 
 - **Carga manual (inmediata)**: en `data/manual/` crea `leon.csv`, `salamanca.csv`, `segovia.csv`, `lerma.csv`, `zamora.csv` o `valladolid-palencia.csv` copiando `ejemplo-plantilla.csv`. Se edita en la propia web de GitHub (*Add file → Create new file*). En la siguiente actualización se publica.
 - **Arreglar el lector**: cada lonja tiene su función en `scraper/actualizar.py` (`leer_leon`, `leer_segovia`, …). El registro de *Actions* dice cuál falló y por qué.
