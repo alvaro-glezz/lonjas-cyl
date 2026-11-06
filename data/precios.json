@@ -1,5 +1,5 @@
 {
- "generado": "2026-11-05T21:25+00:00",
+ "generado": "2026-11-06T13:50+00:00",
  "lonjas": [
   {
    "id": "salamanca",
@@ -389,7 +389,7 @@
    "comprobado": "2026-11-03T23:45:00+01:00",
    "origen": "https://datosabiertossalamanca.es/dataset/cotizaciones-semanales-de-la-lonja-de-salamanca",
    "error": null,
-   "ultima_lectura": "2026-11-05T12:43+00:00"
+   "ultima_lectura": "2026-11-06T13:50+00:00"
   },
   {
    "id": "leon",
@@ -938,7 +938,7 @@
    "comprobado": "2026-11-03T23:45:00+01:00",
    "origen": "https://www.lonjadeleon.es/lonja-patata-04-11-2026/",
    "error": null,
-   "ultima_lectura": "2026-11-05T12:43+00:00"
+   "ultima_lectura": "2026-11-06T13:50+00:00"
   },
   {
    "id": "segovia",
@@ -948,7 +948,7 @@
    "fuente": "https://www.fessegovia.es/lonja-agropecuaria-de-segovia",
    "estado": "activa",
    "nota": null,
-   "fecha": "2026-10-29",
+   "fecha": "2026-11-05",
    "precios": [
     {
      "id": "segovia-cebada-62-kg-hl",
@@ -956,7 +956,7 @@
      "producto": "Cebada 62 kg/hl",
      "unidad": "€/t",
      "ant": 223.0,
-     "act": 223.0,
+     "act": 221.0,
      "clave": "cebada"
     },
     {
@@ -964,8 +964,8 @@
      "cat": "Cereales",
      "producto": "Trigo pienso 72 kg/hl",
      "unidad": "€/t",
-     "ant": 232.0,
-     "act": 231.0,
+     "ant": 231.0,
+     "act": 229.0,
      "clave": "trigo"
     },
     {
@@ -982,7 +982,7 @@
      "producto": "Avena",
      "unidad": "€/t",
      "ant": 200.0,
-     "act": 200.0,
+     "act": 198.0,
      "clave": "avena"
     },
     {
@@ -990,8 +990,8 @@
      "cat": "Oleaginosas",
      "producto": "Girasol 9-2-44",
      "unidad": "€/t",
-     "ant": 505.0,
-     "act": 502.0,
+     "ant": 502.0,
+     "act": 500.0,
      "clave": "girasol"
     },
     {
@@ -1000,7 +1000,7 @@
      "producto": "Centeno",
      "unidad": "€/t",
      "ant": 209.0,
-     "act": 209.0,
+     "act": 207.0,
      "clave": "centeno"
     },
     {
@@ -1042,7 +1042,7 @@
      "cat": "Ovino",
      "producto": "Cordero Extra IGP",
      "unidad": "€/kg vivo",
-     "ant": 10.45,
+     "ant": 10.55,
      "act": 10.55
     },
     {
@@ -1050,7 +1050,7 @@
      "cat": "Ovino",
      "producto": "Cordero Segolechal",
      "unidad": "€/kg vivo",
-     "ant": 9.79,
+     "ant": 9.89,
      "act": 9.89
     },
     {
@@ -1058,7 +1058,7 @@
      "cat": "Ovino",
      "producto": "Lechazo 10-12 kg",
      "unidad": "€/kg vivo",
-     "ant": 9.35,
+     "ant": 9.45,
      "act": 9.45,
      "clave": "lechazo"
     },
@@ -1075,48 +1075,48 @@
      "cat": "Ovino",
      "producto": "Lechal 12,1-15 kg",
      "unidad": "€/kg vivo",
-     "ant": 8.37,
-     "act": 8.47
+     "ant": 8.47,
+     "act": 8.62
     },
     {
      "id": "segovia-recental-15-1-19-kg",
      "cat": "Ovino",
      "producto": "Recental 15,1-19 kg",
      "unidad": "€/kg vivo",
-     "ant": 7.37,
-     "act": 7.47
+     "ant": 7.47,
+     "act": 7.62
     },
     {
      "id": "segovia-pascual-19-1-23-kg",
      "cat": "Ovino",
      "producto": "Pascual 19,1-23 kg",
      "unidad": "€/kg vivo",
-     "ant": 6.38,
-     "act": 6.48
+     "ant": 6.48,
+     "act": 6.63
     },
     {
      "id": "segovia-pascual-23-1-25-5-kg",
      "cat": "Ovino",
      "producto": "Pascual 23,1-25,5 kg",
      "unidad": "€/kg vivo",
-     "ant": 5.99,
-     "act": 6.09
+     "ant": 6.09,
+     "act": 6.24
     },
     {
      "id": "segovia-pascual-25-5-28-kg",
      "cat": "Ovino",
      "producto": "Pascual 25,5-28 kg",
      "unidad": "€/kg vivo",
-     "ant": 5.62,
-     "act": 5.72
+     "ant": 5.72,
+     "act": 5.87
     },
     {
      "id": "segovia-cordero-28-1-34-kg",
      "cat": "Ovino",
      "producto": "Cordero 28,1-34 kg",
      "unidad": "€/kg vivo",
-     "ant": 5.14,
-     "act": 5.24
+     "ant": 5.24,
+     "act": 5.39
     },
     {
      "id": "segovia-oveja-desvieje-1a",
@@ -1124,7 +1124,7 @@
      "producto": "Oveja desvieje 1ª",
      "unidad": "€/kg vivo",
      "ant": 1.65,
-     "act": 1.65
+     "act": 1.7
     },
     {
      "id": "segovia-oveja-desvieje-2a",
@@ -1132,15 +1132,15 @@
      "producto": "Oveja desvieje 2ª",
      "unidad": "€/kg vivo",
      "ant": 1.05,
-     "act": 1.05
+     "act": 1.1
     },
     {
      "id": "segovia-cerdo-selecto",
      "cat": "Porcino",
      "producto": "Cerdo selecto",
      "unidad": "€/kg vivo",
-     "ant": 1.222,
-     "act": 1.182,
+     "ant": 1.182,
+     "act": 1.147,
      "clave": "cerdo-selecto"
     },
     {
@@ -1148,8 +1148,8 @@
      "cat": "Porcino",
      "producto": "Cerdo normal",
      "unidad": "€/kg vivo",
-     "ant": 1.21,
-     "act": 1.17,
+     "ant": 1.17,
+     "act": 1.135,
      "clave": "cerdo-normal"
     },
     {
@@ -1157,8 +1157,8 @@
      "cat": "Porcino",
      "producto": "Cerdo graso",
      "unidad": "€/kg vivo",
-     "ant": 1.675,
-     "act": 1.65
+     "ant": 1.65,
+     "act": 1.63
     },
     {
      "id": "segovia-cerda-desvieje-extra",
@@ -1166,7 +1166,7 @@
      "producto": "Cerda desvieje extra",
      "unidad": "€/kg vivo",
      "ant": 0.27,
-     "act": 0.27
+     "act": 0.23
     },
     {
      "id": "segovia-cerda-desvieje-primera",
@@ -1174,15 +1174,15 @@
      "producto": "Cerda desvieje primera",
      "unidad": "€/kg vivo",
      "ant": 0.18,
-     "act": 0.18
+     "act": 0.14
     },
     {
      "id": "segovia-lechones-20-kg",
      "cat": "Porcino",
      "producto": "Lechones 20 kg",
      "unidad": "€/ud",
-     "ant": 39.0,
-     "act": 37.0,
+     "ant": 37.0,
+     "act": 35.0,
      "clave": "lechones"
     },
     {
@@ -1198,16 +1198,16 @@
      "cat": "Porcino",
      "producto": "Cochinillos sin hierro",
      "unidad": "€/ud",
-     "ant": 32.0,
-     "act": 33.0
+     "ant": 33.0,
+     "act": 34.0
     }
    ],
    "comprobado": "2026-11-03T23:45:00+01:00",
-   "origen": "https://www.fessegovia.es/wp-content/uploads/2026/10/LONJA-CEREALES-OVINO-Y-PORCINO-29.10.2026.pdf",
-   "error": "Falló la lectura automática (JSONDecodeError)",
-   "ultima_lectura": "2026-11-05T12:43+00:00",
-   "fallos": 1,
-   "fallo_desde": "2026-11-05T21:25+00:00"
+   "origen": "https://www.fessegovia.es/wp-content/uploads/2026/11/LONJA-CEREALES-OVINO-Y-PORCINO-05.11.2026.pdf",
+   "error": null,
+   "ultima_lectura": "2026-11-06T13:50+00:00",
+   "fallos": 0,
+   "fallo_desde": null
   },
   {
    "id": "lerma",
@@ -1339,7 +1339,7 @@
    "comprobado": "2026-11-03T23:45:00+01:00",
    "origen": "https://lerma.burgos.es/lonja",
    "error": null,
-   "ultima_lectura": "2026-11-05T12:43+00:00"
+   "ultima_lectura": "2026-11-06T13:50+00:00"
   },
   {
    "id": "zamora",
@@ -1623,6 +1623,10 @@
    [
     "2026-10-29",
     1.182
+   ],
+   [
+    "2026-11-05",
+    1.147
    ]
   ],
   "segovia-cerdo-normal": [
@@ -1649,6 +1653,10 @@
    [
     "2026-10-29",
     1.17
+   ],
+   [
+    "2026-11-05",
+    1.135
    ]
   ],
   "segovia-trigo-pienso-72-kg-hl": [
@@ -1667,6 +1675,10 @@
    [
     "2026-10-29",
     231.0
+   ],
+   [
+    "2026-11-05",
+    229.0
    ]
   ],
   "segovia-cebada-62-kg-hl": [
@@ -1685,6 +1697,10 @@
    [
     "2026-10-29",
     223.0
+   ],
+   [
+    "2026-11-05",
+    221.0
    ]
   ],
   "lerma-cerdo-normal": [
@@ -2281,23 +2297,39 @@
    [
     "2026-10-29",
     200.0
+   ],
+   [
+    "2026-11-05",
+    198.0
    ]
   ],
   "segovia-centeno": [
    [
     "2026-10-29",
     209.0
+   ],
+   [
+    "2026-11-05",
+    207.0
    ]
   ],
   "segovia-girasol-9-2-44": [
    [
     "2026-10-29",
     502.0
+   ],
+   [
+    "2026-11-05",
+    500.0
    ]
   ],
   "segovia-alfalfa-empacada": [
    [
     "2026-10-29",
+    215.0
+   ],
+   [
+    "2026-11-05",
     215.0
    ]
   ],
@@ -2305,11 +2337,19 @@
    [
     "2026-10-29",
     67.0
+   ],
+   [
+    "2026-11-05",
+    67.0
    ]
   ],
   "segovia-forraje-veza-mezcla": [
    [
     "2026-10-29",
+    160.0
+   ],
+   [
+    "2026-11-05",
     160.0
    ]
   ],
@@ -2317,41 +2357,69 @@
    [
     "2026-10-29",
     135.0
+   ],
+   [
+    "2026-11-05",
+    135.0
    ]
   ],
   "segovia-cerdo-graso": [
    [
     "2026-10-29",
     1.65
+   ],
+   [
+    "2026-11-05",
+    1.63
    ]
   ],
   "segovia-cerda-desvieje-extra": [
    [
     "2026-10-29",
     0.27
+   ],
+   [
+    "2026-11-05",
+    0.23
    ]
   ],
   "segovia-cerda-desvieje-primera": [
    [
     "2026-10-29",
     0.18
+   ],
+   [
+    "2026-11-05",
+    0.14
    ]
   ],
   "segovia-lechones-20-kg": [
    [
     "2026-10-29",
     37.0
+   ],
+   [
+    "2026-11-05",
+    35.0
    ]
   ],
   "segovia-cochinillos-sin-hierro": [
    [
     "2026-10-29",
     33.0
+   ],
+   [
+    "2026-11-05",
+    34.0
    ]
   ],
   "segovia-cordero-extra-igp": [
    [
     "2026-10-29",
+    10.55
+   ],
+   [
+    "2026-11-05",
     10.55
    ]
   ],
@@ -2359,11 +2427,19 @@
    [
     "2026-10-29",
     9.89
+   ],
+   [
+    "2026-11-05",
+    9.89
    ]
   ],
   "segovia-lechazo-10-12-kg": [
    [
     "2026-10-29",
+    9.45
+   ],
+   [
+    "2026-11-05",
     9.45
    ]
   ],
@@ -2371,48 +2447,80 @@
    [
     "2026-10-29",
     8.47
+   ],
+   [
+    "2026-11-05",
+    8.62
    ]
   ],
   "segovia-recental-15-1-19-kg": [
    [
     "2026-10-29",
     7.47
+   ],
+   [
+    "2026-11-05",
+    7.62
    ]
   ],
   "segovia-pascual-19-1-23-kg": [
    [
     "2026-10-29",
     6.48
+   ],
+   [
+    "2026-11-05",
+    6.63
    ]
   ],
   "segovia-pascual-23-1-25-5-kg": [
    [
     "2026-10-29",
     6.09
+   ],
+   [
+    "2026-11-05",
+    6.24
    ]
   ],
   "segovia-pascual-25-5-28-kg": [
    [
     "2026-10-29",
     5.72
+   ],
+   [
+    "2026-11-05",
+    5.87
    ]
   ],
   "segovia-cordero-28-1-34-kg": [
    [
     "2026-10-29",
     5.24
+   ],
+   [
+    "2026-11-05",
+    5.39
    ]
   ],
   "segovia-oveja-desvieje-1a": [
    [
     "2026-10-29",
     1.65
+   ],
+   [
+    "2026-11-05",
+    1.7
    ]
   ],
   "segovia-oveja-desvieje-2a": [
    [
     "2026-10-29",
     1.05
+   ],
+   [
+    "2026-11-05",
+    1.1
    ]
   ],
   "lerma-cerdas-de-desvieje": [
