@@ -37,6 +37,9 @@ MESES = {m: i + 1 for i, m in enumerate(
 MINIMO_FILAS = 4
 FALLOS_TOPE = 3        # «3 o más» lecturas fallidas seguidas
 AÑOS_HISTORIAL = 3
+# Un producto que deja de salir en la sesión se sigue mostrando como «sin cotizar» con su último precio
+# durante este tiempo (cubre productos de temporada y mesas que se publican otro día, como en León).
+DIAS_SIN_COTIZAR = 180
 
 # --- Límites de seguridad -------------------------------------------------
 # Solo se descargan páginas y PDF de estos dominios (y sus subdominios), siempre por https. Los enlaces a
@@ -814,6 +817,53 @@ def limpiar_fila(f: dict) -> dict | None:
 # ---------------------------------------------------------------------------
 # Fusión con los datos existentes
 # ---------------------------------------------------------------------------
+def palabras_nombre(id_producto: str, lonja_id: str) -> frozenset:
+    """'leon-corderos-12-1-15-kg' -> {'corde', '12', '1', '15', 'kg'}: palabras del nombre recortadas a 5 letras,
+    para reconocer el mismo producto con otro nombre (singular/plural, 'deshidratada'/'deshidratado')."""
+    resto = id_producto[len(lonja_id) + 1:] if id_producto.startswith(lonja_id + "-") else id_producto
+    return frozenset(w[:5] for w in resto.split("-") if w and w not in ("de", "del", "la", "el", "y", "sin", "con"))
+
+
+def renombrado(p: dict, nuevos: list[dict], lonja_id: str) -> bool:
+    """¿El producto p sigue cotizando con otro nombre? Solo cuenta un producto que aparece por primera vez en esta
+    sesión, con la misma unidad y cuyas palabras contienen a las de p (o al revés): así 'Patata Agria' -> 'Agria'
+    es un cambio de nombre, pero 'Trigo' no se oculta porque siga cotizando el 'Trigo duro' de siempre."""
+    a = palabras_nombre(p["id"], lonja_id)
+    for f in nuevos:
+        if f.get("unidad") != p.get("unidad"):
+            continue
+        b = palabras_nombre(f["id"], lonja_id)
+        if a and b and (a <= b or b <= a):
+            return True
+    return False
+
+
+def sin_cotizar(lonja: dict, historial: dict, nuevas: list[dict], enlazados: set, fecha: str, misma: bool) -> list[dict]:
+    """Productos de sesiones anteriores que no salen en esta. No se borran: se conservan sin precio actual y con
+    su último precio y fecha («ult»), para que el agricultor vea que no cotizaron y cuándo fue la última vez.
+    Se olvidan pasados DIAS_SIN_COTIZAR días."""
+    ids = {f["id"] for f in nuevas}
+    previos = {p["id"] for p in lonja.get("precios", [])}
+    estrenados = [f for f in nuevas if f["id"] not in previos and f["id"] not in historial]
+    limite = (date.fromisoformat(fecha) - timedelta(days=DIAS_SIN_COTIZAR)).isoformat()
+    out = []
+    for p in lonja.get("precios", []):
+        if p["id"] in ids or p["id"] in enlazados or renombrado(p, estrenados, lonja["id"]):
+            continue
+        if p.get("act") is not None:
+            if misma:  # estaba en esta misma sesión y la lectura corregida ya no lo trae: no se conserva
+                continue
+            serie = [q for q in historial.get(p["id"]) or [] if q[0] < fecha]
+            ult = list(serie[-1]) if serie else [lonja.get("fecha"), p["act"]]
+        else:
+            ult = p.get("ult")
+        if not ult or not ult[0] or ult[0] < limite or ult[0] >= fecha:
+            continue
+        out.append({k: p[k] for k in ("id", "cat", "producto", "unidad", "clave") if k in p}
+                   | {"ant": None, "act": None, "ult": [ult[0], ult[1]]})
+    return out
+
+
 def aplicar(lonja: dict, historial: dict, fecha: str, filas: list[dict], origen: str) -> bool:
     filas = [g for g in (limpiar_fila(f) for f in filas) if g]
     if not fecha or len(filas) < MINIMO_FILAS:
@@ -826,8 +876,8 @@ def aplicar(lonja: dict, historial: dict, fecha: str, filas: list[dict], origen:
     if lonja.get("fecha") and (fecha < lonja["fecha"] or (fecha == lonja["fecha"] and not misma)):
         return False  # ya tenemos una sesión más nueva (o esta misma, cargada a mano)
     previos = {f["id"]: f for f in lonja.get("precios", [])}
-    por_clave = {f["clave"]: f for f in lonja.get("precios", []) if f.get("clave")}
-    nuevas, vistos = [], set()
+    por_clave = {f["clave"]: f for f in lonja.get("precios", []) if f.get("clave") and f.get("act") is not None}
+    nuevas, vistos, enlazados = [], set(), set()
     for f in filas:
         f["id"] = f"{lonja['id']}-{slug(f['producto'])}"
         if f["id"] in vistos:  # mismo nombre en dos mesas (p. ej. 'Primera')
@@ -838,11 +888,21 @@ def aplicar(lonja: dict, historial: dict, fecha: str, filas: list[dict], origen:
             f["clave"] = clave
         # El mismo producto pudo llamarse distinto la semana pasada: se enlaza por su clave
         previo = previos.get(f["id"]) or (por_clave.get(clave) if clave else None)
+        if previo:
+            enlazados.add(previo["id"])
         if f.get("ant") is None and previo:
-            f["ant"] = previo.get("ant") if misma else previo.get("act")
+            # Si la sesión anterior no lo cotizó, el «anterior» es su último precio conocido
+            f["ant"] = previo.get("ant") if misma else (
+                previo["act"] if previo.get("act") is not None else (previo.get("ult") or [None, None])[1])
         if previo and previo["id"] != f["id"] and f["id"] not in historial and previo["id"] in historial:
             historial[f["id"]] = list(historial[previo["id"]])
-        nuevas.append({k: f[k] for k in ("id", "cat", "producto", "unidad", "ant", "act", "rango", "clave") if k in f})
+        if f.get("act") is None:
+            serie = historial.get(f["id"]) or []
+            anteriores = [p for p in serie if p[0] < fecha]
+            if anteriores:
+                f["ult"] = list(anteriores[-1])
+        nuevas.append({k: f[k] for k in ("id", "cat", "producto", "unidad", "ant", "act", "rango", "clave", "ult") if k in f})
+    nuevas += sin_cotizar(lonja, historial, nuevas, enlazados, fecha, misma)
     if misma and nuevas == lonja.get("precios") and origen == lonja.get("origen"):
         return False  # la misma sesión, leída igual: nada que publicar
     for f in nuevas:

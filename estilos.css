@@ -388,3 +388,15 @@ html.letra-grande .navegacion a { font-size: 13.5px; }
 .calc-tabla .tr.mejor .total small { color: var(--aviso); font-weight: 600; }
 .calc-tabla input { padding: 7px 8px; font-size: 14px; }
 .linea-aviso small { color: var(--tenue); font-size: 12.5px; }
+
+/* ---------- próxima sesión, productos sin cotizar, fuentes y método ---------- */
+.prox { margin-top: 4px; font-size: 13px; font-weight: 600; color: var(--pino); }
+.prox::before { content: "◷ "; font-weight: 400; }
+.fila.sin-cot .prod b { color: var(--tenue); font-weight: 500; }
+.prod small.ult { display: block; margin-top: 2px; font-style: italic; }
+.enlaces-pie { display: flex; flex-wrap: wrap; gap: 8px; }
+.metodo .sub { margin: 18px 0 8px; font: 700 17px/1.2 var(--cifra); text-transform: uppercase; letter-spacing: .05em; color: var(--pino); }
+.metodo .lista { margin: 0; padding-left: 20px; display: grid; gap: 8px; font-size: 14px; line-height: 1.5; max-width: 68ch; }
+.metodo .lista b { font-weight: 600; }
+.metodo .fuente-fila .nota { max-width: none; }
+.metodo .aviso-red { margin-top: 18px; line-height: 1.5; }

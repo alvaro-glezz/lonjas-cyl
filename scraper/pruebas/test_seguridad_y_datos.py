@@ -83,3 +83,56 @@ def test_lo_cargado_a_mano_no_se_pisa_con_la_misma_fecha(act):
     hoy = act.date.today().isoformat()
     l = _lonja(); l.update(fecha=hoy, origen="carga manual")
     assert not act.aplicar(l, {}, hoy, copy.deepcopy(FILAS), "web")
+
+
+def test_producto_que_no_sale_se_conserva_sin_cotizar_con_su_ultimo_precio(act):
+    """Un producto que no aparece en la sesión nueva no se borra: queda sin precio y con su último precio y fecha."""
+    l = _lonja()
+    l["precios"].append({"id": "x-colza", "cat": "O", "producto": "Colza", "unidad": "€/t", "ant": 400, "act": 405})
+    h = {"x-trigo": [["2026-10-26", 232]], "x-colza": [["2026-10-19", 400], ["2026-10-26", 405]]}
+    ayer = (act.date.today() - act.timedelta(days=1)).isoformat()
+    assert act.aplicar(l, h, ayer, copy.deepcopy(FILAS), "web")
+    colza = next(p for p in l["precios"] if p["id"] == "x-colza")
+    assert colza["act"] is None and colza["ant"] is None and colza["ult"] == ["2026-10-26", 405]
+    assert h["x-colza"][-1] == ["2026-10-26", 405]                  # el historial no inventa puntos
+    assert not act.aplicar(l, h, ayer, copy.deepcopy(FILAS), "web")   # releída igual: nada que publicar
+    # Vuelve a cotizar: el «anterior» es su último precio conocido y deja de estar sin cotizar
+    con_colza = copy.deepcopy(FILAS) + [{"cat": "O", "producto": "Colza", "unidad": "€/t", "ant": None, "act": 410}]
+    assert act.aplicar(l, h, act.date.today().isoformat(), con_colza, "web")
+    colza = next(p for p in l["precios"] if p["id"] == "x-colza")
+    assert colza["act"] == 410 and colza["ant"] == 405 and "ult" not in colza
+
+
+def test_sin_cotizar_se_olvida_pasado_el_plazo(act):
+    l = _lonja()
+    viejo = (act.date.today() - act.timedelta(days=act.DIAS_SIN_COTIZAR + 5)).isoformat()
+    l["precios"].append({"id": "x-colza", "cat": "O", "producto": "Colza", "unidad": "€/t", "ant": None, "act": None,
+                         "ult": [viejo, 405]})
+    assert act.aplicar(l, {}, act.date.today().isoformat(), copy.deepcopy(FILAS), "web")
+    assert not any(p["id"] == "x-colza" for p in l["precios"])
+
+
+def test_producto_listado_sin_precio_lleva_su_ultimo_precio(act):
+    filas = copy.deepcopy(FILAS) + [{"cat": "O", "producto": "Colza", "unidad": "€/t", "ant": None, "act": None}]
+    h = {"x-colza": [["2026-10-12", 399]]}
+    l, hoy = _lonja(), act.date.today().isoformat()
+    assert act.aplicar(l, h, hoy, filas, "web")
+    colza = next(p for p in l["precios"] if p["id"] == "x-colza")
+    assert colza["act"] is None and colza["ult"] == ["2026-10-12", 399]
+
+
+def test_cambio_de_nombre_no_deja_el_nombre_viejo_sin_cotizar(act):
+    """Si el lector cambia el nombre de un producto ('Patata Agria' -> 'Agria'), el viejo no se queda colgado."""
+    l = {"id": "leon", "fecha": "2026-10-26", "origen": "web", "precios": [
+        {"id": "leon-patata-agria", "cat": "P", "producto": "Patata Agria", "unidad": "€/t", "ant": 350, "act": 350},
+        {"id": "leon-cordero-12-1-15-kg", "cat": "O", "producto": "Cordero 12,1-15 kg", "unidad": "€/ud", "ant": 100, "act": 100},
+        {"id": "leon-trigo", "cat": "C", "producto": "Trigo", "unidad": "€/t", "ant": 230, "act": 231},
+        {"id": "leon-trigo-duro", "cat": "C", "producto": "Trigo duro", "unidad": "€/t", "ant": 280, "act": 281}]}
+    filas = [{"cat": c, "producto": n, "unidad": u, "ant": None, "act": v} for c, n, u, v in (
+        ("P", "Agria", "€/t", 350), ("O", "Corderos 12,1-15 kg", "€/ud", 100), ("C", "Trigo duro", "€/t", 282),
+        ("C", "Cebada", "€/t", 221))]
+    h = {"leon-trigo": [["2026-10-26", 231]], "leon-trigo-duro": [["2026-10-26", 281]]}
+    assert act.aplicar(l, h, act.date.today().isoformat(), filas, "web")
+    ids = {p["id"]: p for p in l["precios"]}
+    assert "leon-patata-agria" not in ids and "leon-cordero-12-1-15-kg" not in ids
+    assert ids["leon-trigo"]["act"] is None and ids["leon-trigo"]["ult"] == ["2026-10-26", 231]   # sí dejó de cotizar
