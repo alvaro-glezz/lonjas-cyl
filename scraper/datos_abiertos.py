@@ -19,7 +19,7 @@ from pathlib import Path
 RAIZ = Path(__file__).resolve().parent.parent
 DATOS = RAIZ / "data" / "precios.json"
 SALIDA = RAIZ / "data" / "abiertos"
-WEB = "https://alvaro-glezz.github.io/lonjas-cyl/"
+WEB = "https://lonjas-cyl-khaki.vercel.app/"  # misma dirección principal que scraper/paginas.py
 VERSION = 1
 LICENCIA = ("Recopilación de Lonjas CyL. Puedes reutilizarla citando «Lonjas CyL» y la "
             "lonja de origen de cada precio (columna fuente). Los precios de la Lonja de Salamanca proceden de los datos "
