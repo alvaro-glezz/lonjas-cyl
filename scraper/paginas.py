@@ -19,7 +19,7 @@ from pathlib import Path
 RAIZ = Path(__file__).resolve().parent.parent
 DATOS = RAIZ / "data" / "precios.json"
 # Dirección pública principal (la que Google debe tomar como buena). Si se compra un dominio, se cambia solo aquí.
-WEB = "https://alvaro-glezz.github.io/lonjas-cyl/"
+WEB = "https://lonjas-cyl-khaki.vercel.app/"
 CARPETAS = ("precio", "lonja", "precios", "plazos")
 PLAZOS = RAIZ / "data" / "plazos.json"
 

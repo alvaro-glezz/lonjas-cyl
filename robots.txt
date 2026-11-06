@@ -3,4 +3,4 @@ Allow: /
 Disallow: /scraper/
 Disallow: /data/fuentes/
 
-Sitemap: https://alvaro-glezz.github.io/lonjas-cyl/sitemap.xml
+Sitemap: https://lonjas-cyl-khaki.vercel.app/sitemap.xml
