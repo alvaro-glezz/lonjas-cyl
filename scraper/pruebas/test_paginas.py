@@ -90,3 +90,29 @@ def test_escapa_nombres(pag):
 
 def test_numeros_en_espanol(pag):
     assert pag.num(1234.5) == "1.234,50" and pag.num(236.0) == "236" and pag.num(1.155) == "1,155" and pag.num(None) == "—"
+
+
+def test_pagina_de_plazos_con_cuenta_atras(pag, datos, tmp_path):
+    plazos = {"actualizado": "2026-11-07", "plazos": [
+        {"id": "a", "titulo": "Anticipo <PAC>", "inicio": "2000-01-01", "fin": "2999-12-31", "detalle": "x", "fuente": "https://x.es/a.pdf"},
+        {"id": "b", "titulo": "Viejo", "inicio": "2000-01-01", "fin": "2000-01-02"},
+        {"id": "c", "titulo": "Futuro", "inicio": "2998-01-01", "fin": "2998-02-01", "confirmado": False, "fuente": "javascript:alert(1)"}]}
+    rutas = pag.generar(datos, tmp_path, plazos)
+    assert "plazos/" in rutas
+    html = (tmp_path / "plazos" / "index.html").read_text(encoding="utf-8")
+    assert "Anticipo &lt;PAC&gt;" in html and "<PAC>" not in html          # escapado
+    assert "quedan" in html and "Terminado" in html and "fecha prevista" in html
+    assert "javascript:" not in html                                       # solo enlaces https
+    assert html.index("Anticipo") < html.index("Futuro") < html.index("Viejo")   # en curso, próximo, pasado
+    assert "plazos/" in (tmp_path / "sitemap.xml").read_text(encoding="utf-8")
+
+
+def test_plazos_reales_validos():
+    """data/plazos.json (se edita a mano): fechas reales, fin >= inicio, ids únicos y fuentes https."""
+    from datetime import date
+    p = json.loads((RAIZ / "data" / "plazos.json").read_text(encoding="utf-8"))
+    ids = [x["id"] for x in p["plazos"]]
+    assert len(ids) == len(set(ids)) and all(re.fullmatch(r"[a-z0-9][a-z0-9-]*", i) for i in ids)
+    for x in p["plazos"]:
+        assert date.fromisoformat(x["inicio"]) <= date.fromisoformat(x["fin"])
+        assert x["fuente"].startswith("https://") and x["titulo"] and x["tipo"] in ("cobro", "tramite")

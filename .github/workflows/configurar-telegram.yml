@@ -1,0 +1,32 @@
+# Conecta el robot de Telegram con la app de Vercel (solo hace falta una vez, o si cambia la dirección o la clave).
+# Antes: secretos TELEGRAM_TOKEN y TELEGRAM_SECRETO en GitHub, y TELEGRAM_SECRETO también en Vercel.
+# Se lanza a mano: pestaña «Actions» -> «Configurar Telegram» -> «Run workflow».
+name: Configurar Telegram
+
+on:
+  workflow_dispatch:
+    inputs:
+      url:
+        description: "Dirección de la app en Vercel (https://…vercel.app)"
+        required: true
+        default: "https://lonjas-cyl-khaki.vercel.app"
+
+permissions:
+  contents: read
+
+jobs:
+  configurar:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install -r scraper/requirements.txt
+      - name: Conectar el robot
+        env:
+          TELEGRAM_TOKEN: ${{ secrets.TELEGRAM_TOKEN }}
+          TELEGRAM_SECRETO: ${{ secrets.TELEGRAM_SECRETO }}
+          TELEGRAM_URL: ${{ inputs.url }}
+        run: python scraper/telegram.py --configurar

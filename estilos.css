@@ -401,3 +401,25 @@ html.letra-grande .navegacion a { font-size: 13.5px; }
 .metodo .fuente-fila .nota { max-width: none; }
 .metodo .aviso-red { margin-top: 18px; line-height: 1.5; }
 .enlace-precios{text-align:center;padding:24px 16px;font-size:.9rem}
+
+/* ---------- plazos del campo (PAC) ---------- */
+.plazos { display: grid; gap: 10px; }
+.plazo { display: grid; gap: 6px; width: 100%; text-align: left; font: inherit; color: inherit; background: var(--hoja); border: 1px solid var(--linea); border-radius: 14px; padding: 12px 14px; }
+button.plazo { cursor: pointer; }
+button.plazo:hover { border-color: var(--pino); }
+.fuente-fila > .plazo { border: 0; padding: 0; background: none; }
+.plazo-cab { display: flex; justify-content: space-between; align-items: flex-start; gap: 10px; }
+.plazo-cab b { font-weight: 600; }
+.plazo-cab .pastilla { white-space: nowrap; }
+.plazo-fechas { font-size: 13px; color: var(--tenue); }
+.plazo-barra { display: block; height: 6px; border-radius: 3px; background: var(--linea); overflow: hidden; }
+.plazo-barra i { display: block; height: 100%; background: var(--pino); border-radius: 3px; }
+.plazo.urgente .plazo-barra i { background: var(--baja); }
+.mesa-suelta { margin: 18px 0 8px; font: 700 15px/1.2 var(--cifra); text-transform: uppercase; letter-spacing: .06em; color: var(--tenue); }
+
+/* ---------- datos abiertos y widget ---------- */
+.widget-form { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px; margin: 10px 0; }
+.widget-form select { width: 100%; }
+.codigo { width: 100%; font: 12.5px/1.45 ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace; color: var(--tinta); background: var(--hoja);
+  border: 1px solid var(--linea); border-radius: 10px; padding: 10px; resize: vertical; overflow-wrap: anywhere; }
+.metodo .campo { display: grid; gap: 4px; margin-bottom: 8px; }

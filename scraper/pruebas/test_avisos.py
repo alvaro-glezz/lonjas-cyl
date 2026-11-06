@@ -87,3 +87,14 @@ def test_flujo_completo_de_la_incidencia(avisar, monkeypatch, tmp_path):
     assert gh.incidencias[0]["state"] == "closed"                                      # se cierra sola
     escribir(0); n = len(gh.llamadas); avisar.main([])
     assert [m for m, _ in gh.llamadas[n:]] == ["GET"]                                  # todo bien y nada abierto: solo mira
+
+
+def test_calendario_de_plazos_por_actualizar(avisar):
+    from datetime import date
+    plazos = {"plazos": [{"id": "a", "fin": "2027-06-30"}]}
+    assert avisar.problema_plazos(plazos, date(2027, 5, 1)) is None          # quedan 60 días
+    p = avisar.problema_plazos(plazos, date(2027, 6, 10))                       # quedan 20 días
+    assert p and p["id"] == "plazos" and "2027-06-30" in p["detalle"]
+    assert avisar.problema_plazos({"plazos": []}, date(2027, 1, 1))["tipo"] == "por actualizar"
+    assert avisar.problema_plazos(None, date(2027, 1, 1)) is None
+    assert any(x["id"] == "plazos" for x in avisar.problemas({"lonjas": []}, date(2027, 6, 10), None, plazos))

@@ -1,0 +1,50 @@
+{
+  "LEEME": "Calendario de plazos del campo. Se edita a mano. Cada plazo: id único (minúsculas y guiones), título, inicio y fin (AAAA-MM-DD), detalle, fuente (https) y fuente_nombre. confirmado=false = fecha prevista (plazo general), aún no publicada para ese año. tipo: cobro | tramite. El robot avisa (incidencia en GitHub) cuando ya no queda ningún plazo futuro.",
+  "actualizado": "2026-11-07",
+  "plazos": [
+    {
+      "id": "pac-2026-anticipo",
+      "titulo": "Anticipo de la PAC 2026",
+      "tipo": "cobro",
+      "inicio": "2026-10-16",
+      "fin": "2026-11-30",
+      "confirmado": true,
+      "detalle": "Hasta el 75 % de la ayuda básica a la renta con sus pagos complementarios (redistributivo y jóvenes), los ecorregímenes y las ayudas asociadas. Previsión para Castilla y León hasta el 30 de noviembre: 638,6 millones de euros.",
+      "fuente": "https://www.mapa.gob.es/dam/mapa/contenido/prensa/notas-de-prensa/documentos/documentos-2026/26-10-16-pago-anticipado-pac.pdf",
+      "fuente_nombre": "Ministerio de Agricultura, Pesca y Alimentación · nota de prensa del 16 de octubre de 2026"
+    },
+    {
+      "id": "pac-2026-saldo",
+      "titulo": "Pago del saldo de la PAC 2026",
+      "tipo": "cobro",
+      "inicio": "2026-12-01",
+      "fin": "2027-06-30",
+      "confirmado": true,
+      "detalle": "Desde el 1 de diciembre se puede pagar hasta el 90 % de la ayuda; el resto, a partir de mediados de mayo. La ayuda asociada al cebo de terneros y el pago específico al algodón solo se pagan desde el 1 de diciembre. Pagos residuales hasta el 15 de octubre de 2027.",
+      "fuente": "https://www.mapa.gob.es/dam/mapa/contenido/prensa/notas-de-prensa/documentos/documentos-2026/26-10-16-pago-anticipado-pac.pdf",
+      "fuente_nombre": "Ministerio de Agricultura, Pesca y Alimentación · nota de prensa del 16 de octubre de 2026"
+    },
+    {
+      "id": "pac-2027-solicitud",
+      "titulo": "Solicitud Única de la PAC 2027",
+      "tipo": "tramite",
+      "inicio": "2027-02-01",
+      "fin": "2027-04-30",
+      "confirmado": false,
+      "detalle": "Fecha prevista según el plazo general (en 2026 fue del 1 de febrero al 30 de abril). Otros años se ha ampliado: confírmalo con la Junta de Castilla y León o tu entidad colaboradora cuando se publique.",
+      "fuente": "https://www.lamoncloa.gob.es/serviciosdeprensa/notasprensa/agricultura/Documents/2026/060226-diptico-pac-2026-fega.pdf",
+      "fuente_nombre": "FEGA · díptico Solicitud Única PAC 2026"
+    },
+    {
+      "id": "pac-2027-modificacion",
+      "titulo": "Modificaciones de la Solicitud Única 2027",
+      "tipo": "tramite",
+      "inicio": "2027-05-01",
+      "fin": "2027-05-31",
+      "confirmado": false,
+      "detalle": "Fecha prevista según el plazo general (en 2026, modificaciones y comunicaciones de cesión de derechos hasta el 31 de mayo).",
+      "fuente": "https://www.lamoncloa.gob.es/serviciosdeprensa/notasprensa/agricultura/Documents/2026/060226-diptico-pac-2026-fega.pdf",
+      "fuente_nombre": "FEGA · díptico Solicitud Única PAC 2026"
+    }
+  ]
+}

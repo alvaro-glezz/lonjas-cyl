@@ -27,9 +27,28 @@ FALLOS_PARA_AVISAR = 2
 DIAS_SIN_SESION = 15
 
 
-def problemas(datos: dict, hoy: date, jcyl: str | None = None) -> list[dict]:
-    """Lista de problemas actuales, uno por lonja (y uno para el histórico de la Junta)."""
+DIAS_AVISO_PLAZOS = 30
+
+
+def problema_plazos(plazos: dict | None, hoy: date) -> dict | None:
+    """El calendario de la PAC (data/plazos.json) se edita a mano: avisa cuando quedan menos de 30 días para que
+    termine el último plazo que tiene, para añadir los nuevos a tiempo."""
+    if not plazos:
+        return None
+    fines = sorted(p["fin"] for p in plazos.get("plazos", []) if p.get("fin"))
+    if fines and (date.fromisoformat(fines[-1]) - hoy).days >= DIAS_AVISO_PLAZOS:
+        return None
+    return {"id": "plazos", "nombre": "Calendario de plazos de la PAC", "tipo": "por actualizar",
+            "detalle": (f"El último plazo del calendario termina el {fines[-1]}. " if fines else "El calendario está vacío. ")
+                       + "Añade las fechas nuevas en data/plazos.json (con su fuente oficial)."}
+
+
+def problemas(datos: dict, hoy: date, jcyl: str | None = None, plazos: dict | None = None) -> list[dict]:
+    """Lista de problemas actuales, uno por lonja (y uno para el histórico de la Junta y otro para los plazos)."""
     out = []
+    pl = problema_plazos(plazos, hoy)
+    if pl:
+        out.append(pl)
     for l in datos.get("lonjas", []):
         if l.get("estado") == "suspendida":
             continue
@@ -71,7 +90,9 @@ Esta incidencia se actualiza sola en cada pasada y **se cerrará sola** cuando t
 
 def main(argv: list[str]) -> int:
     datos = json.loads(DATOS.read_text(encoding="utf-8"))
-    lista = problemas(datos, date.today(), os.environ.get("JCYL_RESULTADO"))
+    ruta_plazos = RAIZ / "data" / "plazos.json"
+    plazos = json.loads(ruta_plazos.read_text(encoding="utf-8")) if ruta_plazos.is_file() else None
+    lista = problemas(datos, date.today(), os.environ.get("JCYL_RESULTADO"), plazos)
     repo, token = os.environ.get("GITHUB_REPOSITORY"), os.environ.get("GITHUB_TOKEN")
     run = os.environ.get("GITHUB_RUN_ID")
     enlace = f"{os.environ.get('GITHUB_SERVER_URL', 'https://github.com')}/{repo}/actions/runs/{run}" if repo and run else None

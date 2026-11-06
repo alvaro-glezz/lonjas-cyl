@@ -5,7 +5,7 @@ como páginas distintas. Estas páginas son HTML estático, rápidas y sin JavaS
 data/precios.json. Cada una enlaza a la app para lo interactivo (avisos, calculadora, gráficos).
 
 Lo ejecuta la tarea «Actualizar precios» después de leer las lonjas. Uso local:  python scraper/paginas.py
-Solo escribe en precio/, lonja/, precios/ y sitemap.xml. Nunca toca data/.
+Solo escribe en precio/, lonja/, precios/, plazos/ y sitemap.xml. Nunca toca data/.
 """
 from __future__ import annotations
 
@@ -20,7 +20,8 @@ RAIZ = Path(__file__).resolve().parent.parent
 DATOS = RAIZ / "data" / "precios.json"
 # Dirección pública principal (la que Google debe tomar como buena). Si se compra un dominio, se cambia solo aquí.
 WEB = "https://alvaro-glezz.github.io/lonjas-cyl/"
-CARPETAS = ("precio", "lonja", "precios")
+CARPETAS = ("precio", "lonja", "precios", "plazos")
+PLAZOS = RAIZ / "data" / "plazos.json"
 
 # Producto (clave de la app) -> (nombre con artículo, nombre corto, categoría de la página)
 PRODUCTOS = {
@@ -365,12 +366,59 @@ def pagina_indice(datos: dict, productos: list[str], sectores: list[str]) -> str
                   h1=h1, cuerpo=cuerpo, migas=migas, ld=[ld_migas(migas, ruta)])
 
 
+def pagina_plazos(plazos: dict, hoy: str) -> str | None:
+    """Calendario de la PAC (data/plazos.json) con su cuenta atrás calculada el día en que se genera la página."""
+    lista = [p for p in plazos.get("plazos", []) if p.get("inicio") and p.get("fin") and p.get("titulo")]
+    if not lista:
+        return None
+    d = lambda a, b: (date.fromisoformat(a) - date.fromisoformat(b)).days
+
+    def estado(p: dict) -> tuple[int, str]:
+        if hoy < p["inicio"]:
+            n = d(p["inicio"], hoy)
+            return 1, "Empieza mañana" if n == 1 else f"Empieza en {n} días"
+        if hoy <= p["fin"]:
+            n = d(p["fin"], hoy)
+            return 0, "Último día" if n == 0 else "Termina mañana" if n == 1 else f"En curso: quedan {n} días"
+        return 2, "Terminado"
+
+    orden = sorted(lista, key=lambda p: (estado(p)[0], p["fin"] if estado(p)[0] == 0 else p["inicio"]))
+    anios = sorted({p["inicio"][:4] for p in lista} | {p["fin"][:4] for p in lista})
+    rango_anios = anios[0] if len(anios) == 1 else f"{anios[0]}–{anios[-1]}"
+    vivo = next((p for p in orden if estado(p)[0] < 2), None)
+    if vivo:
+        frase = f"{vivo['titulo']}: {estado(vivo)[1].lower()} ({fecha_larga(vivo['fin'] if estado(vivo)[0] == 0 else vivo['inicio'])})."
+    else:
+        frase = "Calendario de cobros y trámites de la PAC."
+    filas = "".join(
+        f'<tr><td><a href="#{escape(p["id"])}">{escape(p["titulo"])}</a>{"" if p.get("confirmado", True) else " <small>(fecha prevista)</small>"}</td>'
+        f'<td>{fecha_corta(p["inicio"])} {p["inicio"][:4]} – {fecha_corta(p["fin"])} {p["fin"][:4]}</td><td>{escape(estado(p)[1])}</td></tr>' for p in orden)
+    fichas = "".join(
+        f'<h2 id="{escape(p["id"])}">{escape(p["titulo"])}</h2>'
+        f'<p class="fecha">Del {fecha_larga(p["inicio"])} al {fecha_larga(p["fin"])}{"" if p.get("confirmado", True) else " · fecha prevista, pendiente de publicar"}.</p>'
+        + (f'<p>{escape(p["detalle"])}</p>' if p.get("detalle") else "")
+        + (f'<p class="nota">Fuente: <a href="{escape(p["fuente"])}" rel="nofollow">{escape(p.get("fuente_nombre") or "documento oficial")}</a></p>'
+           if str(p.get("fuente", "")).startswith("https://") else "") for p in orden)
+    ruta = "plazos/"
+    h1 = f"Calendario de la PAC {rango_anios}: plazos y pagos"
+    migas = [("Inicio", ""), ("Plazos de la PAC", None)]
+    cuerpo = (f'<p class="lead">{escape(frase)}</p><p class="fecha">Cuenta atrás a {fecha_larga(hoy)}.</p>'
+              '<div class="tabla"><table><thead><tr><th>Plazo</th><th>Fechas</th><th>Estado</th></tr></thead><tbody>' + filas + "</tbody></table></div>"
+              + fichas
+              + '<p class="nota">Fechas generales de la PAC en España. Las «previstas» son el plazo habitual y aún no se han publicado para ese año. '
+                'Cada pago depende de la Junta de Castilla y León y de tu expediente: consulta tu caso con tu entidad colaboradora.</p>'
+              + '<section class="cta"><h2>Cuenta atrás en el móvil</h2><p>La app muestra estos plazos en su pantalla de inicio, junto a los precios de las lonjas de Castilla y León.</p><a class="boton" href="../#plazos">Abrir Lonjas CyL</a></section>')
+    return pagina(ruta=ruta, nivel=1, titulo=f"Calendario PAC {rango_anios}: anticipo, pago del saldo y Solicitud Única | Lonjas CyL",
+                  descripcion=f"Fechas de cobro y trámites de la PAC {rango_anios} con cuenta atrás: anticipo, saldo, Solicitud Única. {frase}",
+                  h1=h1, cuerpo=cuerpo, migas=migas, ld=[ld_migas(migas, ruta)])
+
+
 def sitemap(rutas: list[tuple[str, str]]) -> str:
     urls = "".join(f"<url><loc>{WEB}{r}</loc><lastmod>{m}</lastmod></url>" for r, m in rutas)
     return f'<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">{urls}</urlset>\n'
 
 
-def generar(datos: dict, raiz: Path = RAIZ) -> list[str]:
+def generar(datos: dict, raiz: Path = RAIZ, plazos: dict | None = None) -> list[str]:
     """Escribe todas las páginas. Devuelve las rutas generadas. Borra antes las carpetas generadas (nada más)."""
     for c in CARPETAS:
         shutil.rmtree(raiz / c, ignore_errors=True)
@@ -391,6 +439,10 @@ def generar(datos: dict, raiz: Path = RAIZ) -> list[str]:
     for l in lonjas_activas(datos):
         escribir(f"lonja/{l['id']}/", pagina_lonja(datos, l), (l.get("fecha") or hoy))
     escribir("precios/", pagina_indice(datos, productos, sectores), hoy)
+    if plazos is None and (raiz / "data" / "plazos.json").is_file():
+        plazos = json.loads((raiz / "data" / "plazos.json").read_text(encoding="utf-8"))
+    if plazos:
+        escribir("plazos/", pagina_plazos(plazos, date.today().isoformat()), (plazos.get("actualizado") or hoy))
     (raiz / "sitemap.xml").write_text(sitemap(hechas), encoding="utf-8")
     return [r for r, _ in hechas]
 

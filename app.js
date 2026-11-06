@@ -188,6 +188,7 @@ function vistaHoy() {
       <div class="pizarra">${fichas}</div>
     </section>
     ${typeof seccionTitulares === "function" ? seccionTitulares() : ""}
+    ${typeof bloquePlazos === "function" ? bloquePlazos() : ""}
     <section class="seccion">
       <div class="titulo-seccion"><h2>Lonjas</h2><span>Última sesión de cada una</span></div>
       ${listaLonjas()}
@@ -216,7 +217,7 @@ function listaLonjas() {
 
 function vistaLonjas() {
   return `<section class="seccion"><div class="titulo-seccion"><h2>Todas las lonjas</h2><span>Castilla y León</span></div>${listaLonjas()}
-    <div class="enlaces-pie"><button class="chip auto" type="button" data-ir="fuentes">Estado de las fuentes ›</button><button class="chip auto" type="button" data-ir="metodo">Fuentes y método ›</button></div>
+    <div class="enlaces-pie"><button class="chip auto" type="button" data-ir="fuentes">Estado de las fuentes ›</button><button class="chip auto" type="button" data-ir="metodo">Fuentes y método ›</button><button class="chip auto" type="button" data-ir="datos">Datos abiertos y widget ›</button></div>
     <p class="nota">Las sesiones pueden cambiar de día en semanas con festivo.</p></section>`;
 }
 
@@ -325,6 +326,7 @@ function vistaMetodo() {
       <li>Lonja de Salamanca: datos abiertos de la Diputación de Salamanca, licencia <a href="https://creativecommons.org/licenses/by/4.0/deed.es" target="_blank" rel="noopener noreferrer">CC BY 4.0</a>.</li>
       <li>Resto de lonjas e histórico: publicaciones públicas de cada lonja y de la Junta de Castilla y León. La app cita y enlaza siempre la fuente original.</li>
       <li>Lonjas CyL es una app independiente: no es una lonja ni habla en nombre de ninguna.</li>
+      <li>Los precios se pueden descargar en CSV y JSON, y poner en otras webs con un widget: <a href="#datos">Datos abiertos y widget</a>.</li>
     </ul>
 
     <p class="aviso-red"><b>Precios orientativos.</b> Cada lonja cotiza en sus propias condiciones (calidad, punto de entrega, peso). Estos precios sirven para informarse y comparar; no son una oferta de compra ni una recomendación de compra o venta. Antes de cerrar una operación, confírmalo con tu lonja o tu comprador.</p>
@@ -477,6 +479,8 @@ function router() {
   else if (h === "lonjas") html = vistaLonjas();
   else if (h === "fuentes") { html = vistaFuentes(); seccion = "lonjas"; }
   else if (h === "metodo") { html = vistaMetodo(); seccion = "lonjas"; }
+  else if (h === "plazos" && typeof vistaPlazos === "function") { html = vistaPlazos(); seccion = "hoy"; }
+  else if (h === "datos" && typeof vistaDatos === "function") { html = vistaDatos(); seccion = "lonjas"; }
   else if (h === "calculadora" && typeof vistaCalculadora === "function") { html = vistaCalculadora(); seccion = "hoy"; }
   else if (h === "comparar") html = vistaComparar();
   else if (h.startsWith("comparar-")) { estado.clave = h.slice(9); html = vistaComparar(); seccion = "comparar"; }  // enlace directo desde las páginas de precios

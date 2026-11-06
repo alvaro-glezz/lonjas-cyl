@@ -105,3 +105,10 @@ Para arreglarlo hay dos salidas:
 1. Ampliar a más lonjas de España (Binéfar, Mercolleida, Ebro, Albacete…) añadiendo un lector por lonja.
 2. Avisos en el móvil cuando cambie un precio marcado como favorito.
 3. Publicarla en Google Play y App Store empaquetando esta misma app con PWABuilder (https://www.pwabuilder.com): no hace falta reescribirla.
+
+## Plazos, datos abiertos, widget y Telegram
+
+- **Plazos del campo** (`data/plazos.json`, se edita a mano): cobros y trámites de la PAC con su fuente oficial. La app los muestra en *Hoy* con cuenta atrás y en `#plazos`; `plazos/` es la página para Google. Cuando quedan menos de 30 días para el último plazo, el aviso automático pide añadir fechas nuevas.
+- **Datos abiertos** (`data/abiertos/`, los genera `scraper/datos_abiertos.py` en cada pasada): `precios.csv` y `historial.csv` (separador `;`, decimales con coma, se abren con Excel) y `precios.json`. En la app: *Lonjas → Datos abiertos y widget*.
+- **Widget** (`widget/`): tabla de precios para insertar en otras webs con un `<iframe>`. Parámetros: `lonja`, `p` (productos), `tema=oscuro`, `max`. El código se genera en *Datos abiertos y widget*.
+- **Telegram**: `scraper/telegram.py` publica en el canal cada sesión nueva; `api/telegram.js` (función de Vercel) responde a los mensajes del robot. Se activa con los secretos `TELEGRAM_TOKEN`, `TELEGRAM_CANAL` y `TELEGRAM_SECRETO` en GitHub, `TELEGRAM_SECRETO` en Vercel, y la tarea *Configurar Telegram*. Sin secretos no hace nada.
