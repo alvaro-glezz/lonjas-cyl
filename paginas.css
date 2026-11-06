@@ -1,0 +1,46 @@
+/* Páginas estáticas de precios (precio/, lonja/, precios/): las que lee Google. Misma identidad que la app, sin JavaScript. */
+@font-face{font-family:"Barlow Condensed";font-weight:700;font-display:swap;src:url("fonts/barlow-condensed-latin-700-normal.woff2") format("woff2")}
+@font-face{font-family:"Public Sans";font-weight:400;font-display:swap;src:url("fonts/public-sans-latin-400-normal.woff2") format("woff2")}
+@font-face{font-family:"Public Sans";font-weight:700;font-display:swap;src:url("fonts/public-sans-latin-700-normal.woff2") format("woff2")}
+:root{--fondo:#eef1ea;--hoja:#fff;--tinta:#18241d;--tenue:#5b6a60;--linea:#d6ddd2;--pino:#24503c;--pino-suave:#e1ebe3;--paja:#b9861f;--sube:#23774a;--baja:#b3402a;
+  --cifra:"Barlow Condensed","Arial Narrow",sans-serif;--texto:"Public Sans",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+@media (prefers-color-scheme:dark){:root{--fondo:#101612;--hoja:#18201b;--tinta:#e5ebe5;--tenue:#9aa89e;--linea:#2b362f;--pino:#8fc7a5;--pino-suave:#1f3329;--paja:#e0b252;--sube:#6fcf97;--baja:#f08a73;color-scheme:dark}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--fondo);color:var(--tinta);font:16px/1.55 var(--texto)}
+.dentro{max-width:860px;margin:0 auto;padding:0 16px}
+a{color:var(--pino)}
+.cab{background:#24503c;color:#f4f7f2}
+.cab .dentro{display:flex;align-items:center;justify-content:space-between;min-height:56px;gap:12px}
+.marca{display:flex;align-items:center;gap:10px;color:#f4f7f2;text-decoration:none;font:700 1.35rem var(--cifra);letter-spacing:.01em}
+.boton{display:inline-block;background:#e0b252;color:#18241d;font-weight:700;text-decoration:none;border-radius:999px;padding:.55em 1.1em;font-size:.95rem}
+.migas{font-size:.85rem;color:var(--tenue);margin:18px 0 6px}
+.migas a{color:var(--tenue)}
+h1{font:700 clamp(1.8rem,5vw,2.5rem)/1.1 var(--cifra);margin:.2em 0 .4em;text-wrap:balance}
+h2{font:700 1.45rem/1.2 var(--cifra);margin:1.6em 0 .5em}
+h2 small{font:400 .9rem var(--texto);color:var(--tenue)}
+.lead{font-size:1.12rem;margin:.2em 0}
+.fecha,.nota{color:var(--tenue);font-size:.9rem}
+.tenue{color:var(--tenue)}
+.tabla{overflow-x:auto;background:var(--hoja);border:1px solid var(--linea);border-radius:12px;margin:12px 0}
+table{border-collapse:collapse;width:100%;font-size:.95rem}
+th,td{padding:10px 12px;text-align:left;border-bottom:1px solid var(--linea);vertical-align:top}
+tr:last-child td{border-bottom:0}
+th{font-size:.78rem;text-transform:uppercase;letter-spacing:.04em;color:var(--tenue);font-weight:700;white-space:nowrap}
+.n{text-align:right;white-space:nowrap;font-variant-numeric:tabular-nums}
+td b{font:700 1.2rem var(--cifra)}
+td small{color:var(--tenue)}
+.sube{color:var(--sube)}.baja{color:var(--baja)}.igual{color:var(--tenue)}
+.graf{margin:18px 0;background:var(--hoja);border:1px solid var(--linea);border-radius:12px;padding:10px}
+.graf svg{width:100%;height:auto;display:block}
+.graf figcaption{color:var(--tenue);font-size:.85rem;padding:4px 6px 0}
+.rej{stroke:var(--linea);stroke-width:1}
+.eje{fill:var(--tenue);font:14px var(--texto)}
+.nom{font:700 14px var(--texto)}
+.cta{background:var(--pino-suave);border-radius:14px;padding:4px 18px 18px;margin:28px 0}
+.cta h2{margin-top:.8em}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chips a{background:var(--hoja);border:1px solid var(--linea);border-radius:999px;padding:.35em .9em;text-decoration:none;font-size:.92rem}
+.chips a[aria-current]{background:var(--pino);color:var(--hoja);border-color:var(--pino)}
+.pie{border-top:1px solid var(--linea);margin-top:40px;padding:12px 0 28px;color:var(--tenue);font-size:.85rem}
+.pie a{color:var(--tenue)}
+@media (max-width:600px){.opc{display:none}th,td{padding:9px 8px}}

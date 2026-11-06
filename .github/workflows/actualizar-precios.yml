@@ -47,14 +47,18 @@ jobs:
         id: jcyl
         continue-on-error: true
         run: python scraper/importar_jcyl.py --descargar
+      # Páginas que lee Google (una por producto y por lonja) y sitemap.xml, con los precios recién leídos.
+      - name: Páginas para Google
+        continue-on-error: true
+        run: python scraper/paginas.py
       - name: Guardar si hay precios nuevos
         run: |
-          if [ -z "$(git status --porcelain data/ scraper/pruebas/casos/)" ]; then
+          if [ -z "$(git status --porcelain data/ scraper/pruebas/casos/ precio/ lonja/ precios/ sitemap.xml)" ]; then
             echo "Sin cambios"
           else
             git config user.name "actualizador-lonjas"
             git config user.email "actions@users.noreply.github.com"
-            git add data/ scraper/pruebas/casos/
+            git add data/ scraper/pruebas/casos/ precio/ lonja/ precios/ sitemap.xml
             git commit -m "Precios actualizados $(date -u +%Y-%m-%d)"
             git push
           fi

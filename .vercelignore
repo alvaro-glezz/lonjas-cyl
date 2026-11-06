@@ -17,6 +17,13 @@
 !icons
 !fonts
 !data
+!precio
+!lonja
+!precios
+!paginas.css
+!robots.txt
+!sitemap.xml
+!googleb*.html
 
 # 3) Dentro de data/, solo precios.json e historico/
 /data/fuentes

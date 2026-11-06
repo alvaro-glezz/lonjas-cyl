@@ -400,3 +400,4 @@ html.letra-grande .navegacion a { font-size: 13.5px; }
 .metodo .lista b { font-weight: 600; }
 .metodo .fuente-fila .nota { max-width: none; }
 .metodo .aviso-red { margin-top: 18px; line-height: 1.5; }
+.enlace-precios{text-align:center;padding:24px 16px;font-size:.9rem}

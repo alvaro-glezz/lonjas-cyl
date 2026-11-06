@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+Disallow: /scraper/
+Disallow: /data/fuentes/
+
+Sitemap: https://alvaro-glezz.github.io/lonjas-cyl/sitemap.xml

@@ -479,6 +479,7 @@ function router() {
   else if (h === "metodo") { html = vistaMetodo(); seccion = "lonjas"; }
   else if (h === "calculadora" && typeof vistaCalculadora === "function") { html = vistaCalculadora(); seccion = "hoy"; }
   else if (h === "comparar") html = vistaComparar();
+  else if (h.startsWith("comparar-")) { estado.clave = h.slice(9); html = vistaComparar(); seccion = "comparar"; }  // enlace directo desde las páginas de precios
   else if (h === "favoritos") html = vistaFavoritos();
   else if (h === "historico") html = vistaHistorico();
   else if (h === "historico-fuentes") { html = vistaFuentesHist(); seccion = "historico"; }
