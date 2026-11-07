@@ -202,12 +202,25 @@ def unidad_hablada(u: str, por: bool = False) -> str:
     return t.replace(" la ", " por ").replace(" el ", " por ") if por else t
 
 
+def _euros(n: int) -> str:
+    """Entero delante de «euros»: uno -> un, veintiuno -> veintiún, treinta y uno -> treinta y un."""
+    return re.sub(r"(veinti)?uno$", lambda m: "veintiún" if m.group(1) else "un", en_palabras(n))
+
+
 def precio_hablado(v: float, unidad: str, dec: int | None = None, por: bool = False) -> str:
-    """«doscientos treinta y un euros la tonelada» (uno -> un delante de «euros»)."""
-    n = decir(v, dec)
-    if " con " not in n:
-        n = re.sub(r"(veinti)?uno$", lambda m: "veintiún" if m.group(1) else "un", n)
-    return f"{n} {unidad_hablada(unidad, por)}"
+    """236 €/t -> «doscientos treinta y seis euros la tonelada»; 9,90 €/kg vivo -> «nueve euros con noventa céntimos
+    el kilo vivo»; 0,45 -> «cuarenta y cinco céntimos por kilo vivo»; 1,155 -> «uno coma ciento cincuenta y cinco euros…»."""
+    u = unidad_hablada(unidad, por)
+    resto = u[len("euros"):] if u.startswith("euros") else " " + u
+    v = round(abs(v), 3 if dec is None else dec)
+    if round(v, 2) != v:
+        return f"{decir(v, sep='coma')} {u}"
+    e, c = divmod(int(round(v * 100)), 100)
+    if e == 0:
+        return f"{en_palabras(c)} céntimos{resto}"
+    if c == 0:
+        return f"{_euros(e)} {u}"
+    return f"{_euros(e)} {'euro' if e == 1 else 'euros'} con {en_palabras(c)} céntimos{resto}"
 
 
 def producto_hablado(p: str) -> str:
@@ -217,24 +230,46 @@ def producto_hablado(p: str) -> str:
     return p.strip(" -·").lower()
 
 
+def _lista(cosas: list[str]) -> str:
+    return cosas[0] if len(cosas) == 1 else ", ".join(cosas[:-1]) + " y " + cosas[-1]
+
+
 def guion_ranking(r: dict) -> str:
-    frases = [titulo_ranking(r["clave"])]
-    for i, (l, p) in enumerate(r["filas"][:5]):
-        frases.append(f"{nombre_corto(l)}, " + (precio_hablado(p["act"], r["unidad"]) if i == 0 else decir(p["act"])) + ".")
+    """Pocas frases y bien enlazadas (así la voz no va a trompicones). Las lonjas con el mismo precio, juntas."""
+    grupos: list[tuple[float, list[str]]] = []
+    for l, p in r["filas"][:5]:
+        if grupos and abs(grupos[-1][0] - p["act"]) < 1e-9:
+            grupos[-1][1].append(nombre_corto(l))
+        else:
+            grupos.append((p["act"], [nombre_corto(l)]))
+    (p0, l0), resto = grupos[0], grupos[1:]
+    txt = f"{titulo_ranking(r['clave'])[:-1]} esta semana? Paga más {_lista(l0)}, con {precio_hablado(p0, r['unidad'])}"
+    if resto:
+        partes = [f"{_lista(ls)}, con {decir(v, sep='coma')}" for v, ls in resto]
+        txt += "; le " + ("sigue " if len(resto[0][1]) == 1 and len(resto) == 1 else "siguen ") + (
+            partes[0] if len(partes) == 1 else "; ".join(partes[:-1]) + "; y " + partes[-1])
     dif = r["filas"][0][1]["act"] - r["filas"][-1][1]["act"]
-    frases.append(f"Hasta {precio_hablado(dif, r['unidad'], 0 if dif >= 10 else 2, por=True)} de diferencia.")
-    frases.append("Todos los precios, gratis, en Lonjas CyL.")
-    return " ".join(frases)
+    txt += f". Entre la que más paga y la que menos hay {precio_hablado(dif, r['unidad'], 0 if dif >= 10 else 2, por=True)} de diferencia."
+    return txt + " Tienes todos los precios, gratis, en Lonjas CyL."
 
 
 def guion_movimientos(m: dict) -> str:
-    frases = ["Lo que más se ha movido esta semana en las lonjas de Castilla y León."]
-    for c in m["suben"]:
-        frases.append(f"Sube {producto_hablado(c['producto'])} en {c['lonja']}, un {decir(abs(c['pct']), 1, 'coma')} por ciento.")
-    for c in m["bajan"]:
-        frases.append(f"Baja {producto_hablado(c['producto'])} en {c['lonja']}, un {decir(abs(c['pct']), 1, 'coma')} por ciento.")
-    frases.append("Todos los precios, gratis, en Lonjas CyL.")
-    return " ".join(frases)
+    def item(c):
+        return f"{producto_hablado(c['producto'])} en {c['lonja']}, un {decir(abs(c['pct']), 1, 'coma')} por ciento"
+    txt = "Esto es lo que más se ha movido esta semana en las lonjas de Castilla y León."
+    def serie(cs):
+        xs = [item(c) for c in cs]
+        return xs[0] if len(xs) == 1 else "; ".join(xs[:-1]) + "; y " + xs[-1]
+    if m["suben"]:
+        txt += " Las mayores subidas: " + serie(m["suben"]) + "."
+    if m["bajan"]:
+        txt += (" En cambio, las mayores bajadas: " if m["suben"] else " Las mayores bajadas: ") + serie(m["bajan"]) + "."
+    return txt + " Tienes todos los precios, gratis, en Lonjas CyL."
+
+
+def para_leer(texto: str) -> str:
+    """Lo que la voz no debe leer letra a letra."""
+    return texto.replace("Lonjas CyL", "Lonjas Castilla y León").replace("CyL", "Castilla y León")
 
 
 def voz(texto: str, destino: Path) -> Path | None:
@@ -243,8 +278,13 @@ def voz(texto: str, destino: Path) -> Path | None:
     if not modelo or not Path(modelo).is_file():
         return None
     destino.parent.mkdir(parents=True, exist_ok=True)
-    r = subprocess.run([sys.executable, "-m", "piper", "-m", modelo, "-f", str(destino), "--length-scale", "0.92",
-                        "--sentence-silence", "0.25"], input=texto, text=True, capture_output=True)
+    # Ritmo natural (1.0), poca pausa entre frases y algo más de variación en la entonación (noise-w).
+    opciones = ["--length-scale", os.environ.get("PIPER_RITMO", "1.0"), "--sentence-silence", "0.12",
+                "--noise-scale", "0.6", "--noise-w-scale", "0.9"]
+    if os.environ.get("PIPER_HABLANTE"):
+        opciones += ["-s", os.environ["PIPER_HABLANTE"]]
+    r = subprocess.run([sys.executable, "-m", "piper", "-m", modelo, "-f", str(destino), *opciones],
+                       input=para_leer(texto), text=True, capture_output=True)
     if r.returncode != 0 or not destino.is_file():
         print(f"[redes] Sin voz (Piper falló): {r.stderr[-300:]}")
         return None

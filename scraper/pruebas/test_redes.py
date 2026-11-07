@@ -126,7 +126,10 @@ def test_numeros_hablados(redes):
     assert redes.precio_hablado(10, "€/t", 0, por=True) == "diez euros por tonelada"
     assert redes.producto_hablado("Oveja desvieje 2ª") == "oveja desvieje segunda" and redes.producto_hablado("Cebada 62 kg/hl") == "cebada"
     g = redes.guion_ranking(redes.ranking(_datos(), "trigo", date(2026, 11, 9)))
-    assert g.startswith("¿Dónde se paga más el trigo? Salamanca, doscientos treinta y seis euros la tonelada.") and "€" not in g
+    assert g.startswith("¿Dónde se paga más el trigo esta semana? Paga más Salamanca, con doscientos treinta y seis euros la tonelada; le sigue León, con doscientos veintiséis.")
+    assert "€" not in g and "CyL" not in redes.para_leer(g) and redes.para_leer(g).endswith("en Lonjas Castilla y León.")
+    assert redes.precio_hablado(9.9, "€/kg vivo") == "nueve euros con noventa céntimos el kilo vivo"
+    assert redes.precio_hablado(0.45, "€/kg vivo", 2, por=True) == "cuarenta y cinco céntimos por kilo vivo"
 
 
 @pytest.mark.skipif(not shutil.which("ffmpeg"), reason="sin ffmpeg")
