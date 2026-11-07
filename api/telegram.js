@@ -230,6 +230,9 @@ async function procesarAvisos(t, crudo, msg, lonjas, alm) {
 
 async function procesar(textoCrudo, msg, lonjas, web, alm) {
   const t = norm(String(textoCrudo || "").replace(/^\/([a-z_]+)(@\w+)?/i, "$1")).slice(0, 120);
+  if (t === "miid") {
+    return `Tu número de chat es <code>${esc(String(msg.chat.id))}</code>.\nPara recibir aquí lo que publica el robot de redes, guárdalo en GitHub como secreto <b>TELEGRAM_ADMIN_CHAT</b>. No es una contraseña, pero no hace falta compartirlo.`;
+  }
   if (/^(aviso|avisos|avisame|mis avisos|borrar|quitar)\b/.test(t)) {
     try { return await procesarAvisos(t, textoCrudo, msg, lonjas, alm); }
     catch { return "No he podido guardar o leer tus avisos ahora mismo. Prueba en unos minutos."; }

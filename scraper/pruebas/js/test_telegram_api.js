@@ -50,6 +50,7 @@ const msg = (text, type = "private") => ({ update_id: 1, message: { message_id: 
   r = await llamar(msg("alubias"), ok); assert.match(r.j.text, /León · Alubias · Canela: <b>1,30<\/b>/);
   r = await llamar(msg("<script>alert(1)</script>"), ok); assert.ok(!r.j.text.includes("<script>")); assert.match(r.j.text, /No he encontrado/);
   r = await llamar(msg("/start"), ok); assert.match(r.j.text, /Escríbeme un producto/);
+  r = await llamar(msg("/miid"), ok); assert.match(r.j.text, /Tu número de chat es <code>42<\/code>/); assert.match(r.j.text, /TELEGRAM_ADMIN_CHAT/);
   r = await llamar(msg("hola a todos", "group"), ok); assert.deepStrictEqual(r.j, {});            // en grupos, solo comandos
   r = await llamar(msg("/trigo", "group"), ok); assert.strictEqual(r.j.reply_to_message_id, 7);
   r = await llamar({ update_id: 2, edited_message: {} }, ok); assert.deepStrictEqual(r.j, {});

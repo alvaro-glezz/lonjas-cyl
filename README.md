@@ -130,3 +130,7 @@ En *Hoy → Para decidir* (`herramientas.js`, sin servidor; lo que escribe el us
 - `contador.js` (app, páginas de precios y widget) avisa a `api/uso.js`, que suma recuentos por día en Upstash. Sin cookies ni identificadores; las personas distintas se cuentan con un resumen de IP + navegador que cambia cada día y no se guarda (HyperLogLog). No cuenta robots, ni a quien pide «no rastrear», ni fuera de la web de Vercel. Los datos caducan a los 400 días.
 - `api/estadisticas.js` entrega los datos al panel con la cabecera `Authorization: Bearer <PANEL_CLAVE>`.
 - Activación: Upstash conectado al proyecto en Vercel (el mismo de los avisos) y la variable `PANEL_CLAVE` (12 caracteres o más) en Vercel → Settings → Environment Variables, con Redeploy.
+
+## Copia privada de las redes por Telegram
+
+En cada franja de «Redes sociales», `scraper/redes_telegram.py` te manda a tu chat con @lonjascyl_bot la imagen, el carrusel o el reel con su texto (`--previa`, justo después de crearlo) y luego si se publicó bien o el error (`--resultado`). Secreto `TELEGRAM_ADMIN_CHAT` = tu número de chat (escribe `/miid` al robot). Sin él no hace nada; si Telegram falla, la publicación sigue igual.

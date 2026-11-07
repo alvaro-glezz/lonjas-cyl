@@ -69,6 +69,14 @@ jobs:
           FRANJA: ${{ inputs.franja || (github.event.schedule == '55 17 * * 1-5' && 'historia') || '' }}
           FORZAR: ${{ inputs.forzar }}
         run: python scraper/redes.py --crear
+      # Copia privada en tu chat con @lonjascyl_bot de lo que se va a publicar (sin TELEGRAM_ADMIN_CHAT no hace nada).
+      - name: Enviarme lo que se va a publicar (Telegram)
+        continue-on-error: true
+        env:
+          TELEGRAM_TOKEN: ${{ secrets.TELEGRAM_TOKEN }}
+          TELEGRAM_ADMIN_CHAT: ${{ secrets.TELEGRAM_ADMIN_CHAT }}
+          PROBAR: ${{ inputs.probar }}
+        run: python scraper/redes_telegram.py --previa
       # Las imágenes y vídeos van a una rama aparte («medios») que se rehace cada vez: no engordan main.
       - name: Subir imágenes y vídeo
         id: medios
@@ -89,6 +97,14 @@ jobs:
           INSTAGRAM_TOKEN: ${{ secrets.INSTAGRAM_TOKEN }}
           MEDIOS_SHA: ${{ steps.medios.outputs.sha }}
         run: python scraper/redes.py --publicar
+      - name: Avisarme del resultado (Telegram)
+        if: always() && steps.medios.outputs.sha != ''
+        continue-on-error: true
+        env:
+          TELEGRAM_TOKEN: ${{ secrets.TELEGRAM_TOKEN }}
+          TELEGRAM_ADMIN_CHAT: ${{ secrets.TELEGRAM_ADMIN_CHAT }}
+          PROBAR: ${{ inputs.probar }}
+        run: python scraper/redes_telegram.py --resultado
       - name: Guardar el registro
         if: always()
         run: |
