@@ -1,6 +1,11 @@
 {
  "comparativa": "2026-W45",
- "franja": "historias-todas",
+ "franja": "reel",
+ "franjas": {
+  "2026-11-07": [
+   "reel"
+  ]
+ },
  "preparado": [],
  "publicado": {
   "leon": "2026-11-04",
@@ -21,6 +26,12 @@
    "fecha": "2026-11-07T13:02",
    "id": "2026-W45-comparativa",
    "media": "18119708149807751"
+  },
+  {
+   "facebook": "1322797096579302",
+   "fecha": "2026-11-07T16:56",
+   "id": "2026-11-07-reel-movimientos",
+   "media": "18136749958578385"
   }
  ],
  "token_renovado": "2026-11-07"
