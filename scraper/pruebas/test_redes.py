@@ -143,3 +143,17 @@ def test_reel_con_voz_dura_lo_que_la_narracion(redes, tmp_path, monkeypatch):
                                capture_output=True, text=True).stdout)
     assert 15.5 <= dur <= 16.6 and not list(tmp_path.glob("*.wav"))
     assert redes.AVISO_VOZ in redes.texto_reel_ranking(redes.ranking(_datos(), "trigo", date(2026, 11, 9)))
+
+
+def test_fusionar_registro_sin_perder_nada():
+    f = _cargar("fusionar_estado").fusionar
+    nuestro = {"publicado": {"leon": "2026-11-04"}, "franjas": {"2026-11-07": ["reel"]}, "preparado": [],
+               "registro": [{"fecha": "2026-11-07T16:00", "id": "reel"}], "token_caduca": None}
+    suyo = {"publicado": {"leon": "2026-11-04", "segovia": "2026-11-05"}, "franjas": {"2026-11-07": ["manana"]},
+            "comparativa": "2026-W45", "historias": {"hechas": [1]},
+            "registro": [{"fecha": "2026-11-07T13:01", "id": "leon"}]}
+    u = f(nuestro, suyo)
+    assert u["publicado"] == {"leon": "2026-11-04", "segovia": "2026-11-05"} and u["comparativa"] == "2026-W45"
+    assert u["franjas"]["2026-11-07"] == ["manana", "reel"] and u["historias"] == {"hechas": [1]}
+    assert [r["id"] for r in u["registro"]] == ["leon", "reel"]
+    assert f({"publicado": {"leon": "2026-11-04"}}, {"publicado": {"leon": "2026-11-11"}})["publicado"]["leon"] == "2026-11-11"

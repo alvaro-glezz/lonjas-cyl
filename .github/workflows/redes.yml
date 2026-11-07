@@ -95,8 +95,17 @@ jobs:
           if [ -n "$(git status --porcelain data/instagram.json)" ]; then
             git config user.name "actualizador-lonjas"
             git config user.email "actions@users.noreply.github.com"
-            git add data/instagram.json
-            git commit -qm "Registro de redes $(date -u +%F)"
-            git pull -q --rebase
-            git push -q
+            # Si otra tarea guardó el registro mientras tanto, se unen las dos versiones (no se pierde nada).
+            cp data/instagram.json /tmp/nuestro.json
+            for intento in 1 2 3; do
+              git fetch -q origin main
+              git reset -q --hard origin/main
+              python scraper/fusionar_estado.py /tmp/nuestro.json data/instagram.json > /tmp/unido.json
+              cp /tmp/unido.json data/instagram.json
+              git add data/instagram.json
+              git diff --cached --quiet && break
+              git commit -qm "Registro de redes $(date -u +%F)"
+              git push -q && break
+              sleep 5
+            done
           fi
