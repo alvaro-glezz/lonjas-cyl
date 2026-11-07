@@ -63,7 +63,7 @@ jobs:
         continue-on-error: true
         env:
           TELEGRAM_TOKEN: ${{ secrets.TELEGRAM_TOKEN }}
-          TELEGRAM_CANAL: ${{ secrets.TELEGRAM_CANAL || '@lonjas_cyl' }}   # grupo público t.me/lonjas_cyl
+          TELEGRAM_CANAL: '@lonjas_cyl'   # canal público t.me/lonjas_cyl (no es secreto)
         run: python scraper/telegram.py
       - name: Guardar si hay precios nuevos
         run: |
