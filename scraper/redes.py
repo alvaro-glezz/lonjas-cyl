@@ -388,7 +388,7 @@ def _render(escenas: list[tuple[float, object]], destino: Path, sonido: Path, ha
                "-i", "-", "-i", str(sonido)]
     if habla:
         audio = ["-i", str(habla), "-filter_complex",
-                 "[1:a]volume=0.45[m];[2:a]aresample=48000,adelay=350|350,volume=1.5[v];[m][v]amix=inputs=2:duration=first:normalize=0[a]",
+                 "[1:a]volume=0.45[m];[2:a]aresample=48000,adelay=350|350,volume=1.2[v];[m][v]amix=inputs=2:duration=first:normalize=0,alimiter=limit=0.89:level=false[a]",
                  "-map", "0:v", "-map", "[a]"]
     else:
         audio = ["-map", "0:v", "-map", "1:a"]
