@@ -1,0 +1,42 @@
+name: Diagnóstico (temporal)
+on:
+  push:
+    branches: [telegram-diagnostico]
+permissions:
+  contents: write
+jobs:
+  voces:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install -q -r scraper/requirements.txt "piper-tts==1.8.0"
+      - run: command -v ffmpeg || (sudo apt-get update -qq && sudo apt-get install -y -qq ffmpeg)
+      - name: Variantes de la voz C (no publica nada)
+        run: |
+          mkdir -p ~/v && cd ~/v
+          H=https://huggingface.co/rhasspy/piper-voices/resolve/main/es/es_ES/sharvard/medium
+          curl -sSfLO "$H/es_ES-sharvard-medium.onnx"; curl -sSfLO "$H/es_ES-sharvard-medium.onnx.json"
+          cd "$GITHUB_WORKSPACE" && mkdir -p muestras
+          python - <<'PY'
+          import json, os, subprocess, sys
+          from datetime import date
+          sys.path.insert(0, "scraper")
+          import redes
+          d = json.load(open("data/precios.json"))
+          g = redes.guion_ranking(redes.ranking(d, "cebada", date(2026, 11, 7)))
+          os.environ["PIPER_MODELO"] = os.path.expanduser("~/v/es_ES-sharvard-medium.onnx")
+          os.environ["PIPER_HABLANTE"] = "1"
+          casos = {"C1-agil":     dict(PIPER_RITMO="0.95", PIPER_PAUSA="0.05", PIPER_RUIDO="0.667", PIPER_RUIDO_W="1.0", PIPER_COMAS="no"),
+                   "C2-seguida":  dict(PIPER_RITMO="0.95", PIPER_PAUSA="0.05", PIPER_RUIDO="0.667", PIPER_RUIDO_W="1.0", PIPER_COMAS="si"),
+                   "C3-viva":     dict(PIPER_RITMO="0.90", PIPER_PAUSA="0.0",  PIPER_RUIDO="0.75",  PIPER_RUIDO_W="1.2", PIPER_COMAS="si")}
+          for nombre, env in casos.items():
+              os.environ.update(env)
+              print("TEXTO", nombre, redes.para_leer(g))
+              w = redes.voz(g, redes.Path(f"muestras/{nombre}.wav"))
+              subprocess.run(["ffmpeg", "-loglevel", "error", "-y", "-i", str(w), "-b:a", "96k", f"muestras/{nombre}.mp3"], check=True)
+              print("MUESTRA:", nombre, round(redes.duracion_wav(w), 1), "s")
+          PY
+          cd muestras && rm -f *.wav && git init -q -b muestras-voz && git add -A && git -c user.name=a -c user.email=a@b.c commit -qm muestras && git push -qf "https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git" muestras-voz
