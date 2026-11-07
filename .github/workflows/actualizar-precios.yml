@@ -58,12 +58,12 @@ jobs:
       - name: Datos abiertos
         continue-on-error: true
         run: python scraper/datos_abiertos.py
-      # Canal de Telegram: publica las sesiones nuevas. Sin los secretos TELEGRAM_TOKEN y TELEGRAM_CANAL no hace nada.
+      # Canal de Telegram: publica las sesiones nuevas. Sin el secreto TELEGRAM_TOKEN no hace nada.
       - name: Publicar en Telegram
         continue-on-error: true
         env:
           TELEGRAM_TOKEN: ${{ secrets.TELEGRAM_TOKEN }}
-          TELEGRAM_CANAL: ${{ secrets.TELEGRAM_CANAL }}
+          TELEGRAM_CANAL: ${{ secrets.TELEGRAM_CANAL || '@lonjas_cyl' }}   # grupo público t.me/lonjas_cyl
         run: python scraper/telegram.py
       - name: Guardar si hay precios nuevos
         run: |
