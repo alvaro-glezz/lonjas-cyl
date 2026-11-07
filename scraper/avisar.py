@@ -43,12 +43,28 @@ def problema_plazos(plazos: dict | None, hoy: date) -> dict | None:
                        + "Añade las fechas nuevas en data/plazos.json (con su fuente oficial)."}
 
 
-def problemas(datos: dict, hoy: date, jcyl: str | None = None, plazos: dict | None = None) -> list[dict]:
-    """Lista de problemas actuales, uno por lonja (y uno para el histórico de la Junta y otro para los plazos)."""
+def problema_instagram(ig: dict | None, hoy: date) -> dict | None:
+    """El token de Instagram caduca a los 60 días: el robot lo renueva, pero si Instagram da uno nuevo o está a punto
+    de caducar, hay que guardarlo a mano en GitHub (secreto INSTAGRAM_TOKEN)."""
+    if not ig:
+        return None
+    caduca = ig.get("token_caduca")
+    if ig.get("token_cambiado"):
+        detalle = "Instagram ha dado un token nuevo al renovarlo."
+    elif caduca and (date.fromisoformat(caduca) - hoy).days < 10:
+        detalle = f"El token caduca el {caduca}."
+    else:
+        return None
+    return {"id": "instagram", "nombre": "Cuenta de Instagram", "tipo": "token por renovar",
+            "detalle": detalle + " Genera uno nuevo en developers.facebook.com y guárdalo en el secreto INSTAGRAM_TOKEN."}
+
+
+def problemas(datos: dict, hoy: date, jcyl: str | None = None, plazos: dict | None = None, ig: dict | None = None) -> list[dict]:
+    """Lista de problemas actuales, uno por lonja (y uno para el histórico de la Junta, los plazos e Instagram)."""
     out = []
-    pl = problema_plazos(plazos, hoy)
-    if pl:
-        out.append(pl)
+    for pl in (problema_plazos(plazos, hoy), problema_instagram(ig, hoy)):
+        if pl:
+            out.append(pl)
     for l in datos.get("lonjas", []):
         if l.get("estado") == "suspendida":
             continue
@@ -92,7 +108,9 @@ def main(argv: list[str]) -> int:
     datos = json.loads(DATOS.read_text(encoding="utf-8"))
     ruta_plazos = RAIZ / "data" / "plazos.json"
     plazos = json.loads(ruta_plazos.read_text(encoding="utf-8")) if ruta_plazos.is_file() else None
-    lista = problemas(datos, date.today(), os.environ.get("JCYL_RESULTADO"), plazos)
+    f_ig = RAIZ / "data" / "instagram.json"
+    ig = json.loads(f_ig.read_text(encoding="utf-8")) if f_ig.is_file() else None
+    lista = problemas(datos, date.today(), os.environ.get("JCYL_RESULTADO"), plazos, ig)
     repo, token = os.environ.get("GITHUB_REPOSITORY"), os.environ.get("GITHUB_TOKEN")
     run = os.environ.get("GITHUB_RUN_ID")
     enlace = f"{os.environ.get('GITHUB_SERVER_URL', 'https://github.com')}/{repo}/actions/runs/{run}" if repo and run else None
