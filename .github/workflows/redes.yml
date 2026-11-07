@@ -4,16 +4,18 @@ name: Redes sociales
 # Horas en UTC (en verano, una hora más tarde en España):
 #   07:00 -> 8:00   publicación de la mañana (sesión nueva o «producto del día»)
 #   12:30 -> 13:30  reel
+#   17:55 -> 19:00  reel con historia (lun–vie, desde el 9 nov 2026 hasta publicar los cinco; scraper/historias.py)
 #   18:00 -> 19:00  segunda publicación, solo si hay otra sesión nueva o la comparativa del viernes/sábado
 on:
   schedule:
     - cron: "0 7 * * 1-6"
     - cron: "30 12 * * 1-6"
+    - cron: "55 17 * * 1-5"
     - cron: "0 18 * * 1-6"
   workflow_dispatch:
     inputs:
       franja:
-        description: "manana, reel o tarde"
+        description: "manana, reel, tarde, historia o historias-todas (los 5 reels con historia, con probar=si)"
         required: true
         default: "reel"
       probar:
@@ -62,7 +64,7 @@ jobs:
       - name: Crear la publicación de esta franja
         env:
           INSTAGRAM_TOKEN: ${{ secrets.INSTAGRAM_TOKEN }}
-          FRANJA: ${{ inputs.franja }}
+          FRANJA: ${{ inputs.franja || (github.event.schedule == '55 17 * * 1-5' && 'historia') || '' }}
           FORZAR: ${{ inputs.forzar }}
         run: python scraper/redes.py --crear
       # Las imágenes y vídeos van a una rama aparte («medios») que se rehace cada vez: no engordan main.

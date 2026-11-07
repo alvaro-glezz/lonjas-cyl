@@ -440,6 +440,8 @@ def publicar(estado: dict, token: str, base_url: str, hoy: date, llamar=llamar, 
             estado.setdefault("publicado", {})[item["lonja"]] = item["fecha"]
         elif item["tipo"] == "comparativa":
             estado["comparativa"] = item["semana"]
+        elif item["tipo"] == "historia":
+            estado.setdefault("historias", []).append(item["n"])
         fid = None
         if fb:
             try:

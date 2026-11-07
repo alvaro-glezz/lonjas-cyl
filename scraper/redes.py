@@ -5,6 +5,8 @@
   13:30  «reel»    1 reel de ~12 s: «¿Dónde se paga más el …?» (lun, mié, vie) o «Lo que más se mueve esta
                    semana» (mar, jue, sáb).
   19:00  «tarde»   solo si hay otra sesión nueva por publicar o, viernes y sábado, la comparativa de la semana.
+  19:00  «historia» (tarea de las 17:55 UTC, lun–vie) los 5 reels con historia de historias.py, uno por día laborable
+                   desde el 9 nov 2026 hasta publicar los cinco. FRANJA=historias-todas crea los cinco sin publicar.
 
 Todo sale de data/precios.json (nunca se inventa una cifra). Lo lanza la tarea «Redes sociales»:
   python scraper/redes.py --crear       crea imágenes o vídeo en salida/ y lo anota en data/instagram.json
@@ -529,6 +531,10 @@ def _sesion(datos: dict, estado: dict, hoy: date) -> dict | None:
 def elegir(franja: str, datos: dict, estado: dict, hoy: date) -> dict | None:
     """Qué toca publicar en esa franja (o None). No crea archivos."""
     dia = hoy.weekday()
+    if franja == "historia":
+        import historias
+        n = historias.siguiente(estado, hoy)
+        return historias.item(n, hoy) if n else None
     if dia == 6:
         return None
     if franja in ("manana", "tarde"):
@@ -580,6 +586,9 @@ def crear_archivos(item: dict, datos: dict, hoy: date, carpeta: Path) -> None:
         ig.imagen_comparativa(ranking(datos, k, hoy), carpeta / item["imagenes"][0])
         if len(item["imagenes"]) > 1:
             imagen_evolucion(evolucion(datos, k, hoy), carpeta / item["imagenes"][1])
+    elif item["tipo"] == "historia":
+        import historias
+        historias.reel(item["n"], carpeta / item["video"], datos, hoy)
     elif item["tipo"] == "reel":
         if item["reel"] == "ranking":
             reel_ranking(ranking(datos, item["clave"], hoy), carpeta / item["video"])
@@ -601,6 +610,13 @@ def marcar(estado: dict, franja: str, hoy: date) -> None:
 def crear(datos: dict, estado: dict, franja: str, hoy: date, carpeta: Path = SALIDA, forzar: bool = False) -> dict | None:
     estado["preparado"] = []
     estado["franja"] = franja
+    if franja == "historias-todas":              # ensayo: los cinco reels con historia, sin publicar nada
+        import historias
+        for n in sorted(historias.HISTORIAS):
+            it = historias.item(n, hoy)
+            crear_archivos(it, datos, hoy, carpeta)
+            (carpeta / it["video"]).with_suffix(".txt").write_text(it["texto"], encoding="utf-8")
+        return {"id": "historias-todas"}
     if hecha(estado, franja, hoy) and not forzar:
         return None
     item = elegir(franja, datos, estado, hoy)
