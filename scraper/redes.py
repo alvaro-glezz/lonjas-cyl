@@ -17,6 +17,7 @@ from __future__ import annotations
 import json
 import math
 import os
+import re
 import struct
 import subprocess
 import sys
@@ -39,6 +40,9 @@ PRODUCTO_DIA = ["trigo", "cebada", "maiz", "centeno", "girasol", "lechazo"]     
 PRODUCTO_REEL = ["cebada", "maiz", "trigo", "cerdo-normal", "centeno", "lechazo"]    # lunes..sábado
 ARTICULO = {k: v[0] for k, v in PRODUCTOS.items()}                                  # «del trigo», «de la cebada»…
 VW, VH, FPS, SEGUNDOS = 1080, 1920, 30, 12
+PORTADA, CIERRE = 2.4, 2.6          # segundos de la portada y del cierre del reel
+# Voz: Piper con la voz española «davefx» (licencia CC0). La tarea la descarga y pone su ruta en PIPER_MODELO.
+AVISO_VOZ = "🔊 Voz generada por ordenador."
 
 
 # ---------- datos ----------
@@ -151,6 +155,105 @@ def texto_dia(r: dict, e: dict | None, web: str = WEB) -> str:
     lineas += ["", "Cada lonja cotiza su propia calidad. Precios orientativos.", "", pie_texto(web), "",
                etiquetas("#" + NOMBRES[r["clave"]].replace(" ", "").replace("í", "i"), "#precios", "#lonjas")]
     return "\n".join(lineas)[:2150]
+
+
+# ---------- voz ----------
+
+_UNI = ["cero", "uno", "dos", "tres", "cuatro", "cinco", "seis", "siete", "ocho", "nueve", "diez", "once", "doce", "trece",
+        "catorce", "quince", "dieciséis", "diecisiete", "dieciocho", "diecinueve", "veinte", "veintiuno", "veintidós",
+        "veintitrés", "veinticuatro", "veinticinco", "veintiséis", "veintisiete", "veintiocho", "veintinueve"]
+_DEC = {3: "treinta", 4: "cuarenta", 5: "cincuenta", 6: "sesenta", 7: "setenta", 8: "ochenta", 9: "noventa"}
+_CEN = {1: "ciento", 2: "doscientos", 3: "trescientos", 4: "cuatrocientos", 5: "quinientos", 6: "seiscientos",
+        7: "setecientos", 8: "ochocientos", 9: "novecientos"}
+
+
+def en_palabras(n: int) -> str:
+    """Número entero (0–999.999) en palabras, en español."""
+    if n < 30:
+        return _UNI[n]
+    if n < 100:
+        d, u = divmod(n, 10)
+        return _DEC[d] + ("" if u == 0 else " y " + _UNI[u])
+    if n < 1000:
+        c, r = divmod(n, 100)
+        if n == 100:
+            return "cien"
+        return _CEN[c] + ("" if r == 0 else " " + en_palabras(r))
+    m, r = divmod(n, 1000)
+    return ("mil" if m == 1 else en_palabras(m).replace("uno", "un") + " mil") + ("" if r == 0 else " " + en_palabras(r))
+
+
+def decir(v: float, dec: int | None = None, sep: str = "con") -> str:
+    """236 -> «doscientos treinta y seis»; 9,45 -> «nueve con cuarenta y cinco»; 1,155 -> «uno con ciento cincuenta y cinco»."""
+    txt = num(abs(v), dec).replace(".", "")
+    ent, _, fr = txt.partition(",")
+    out = en_palabras(int(ent))
+    if fr and int(fr):
+        out += f" {sep} " + (("cero " * (len(fr) - len(fr.lstrip("0")))) + en_palabras(int(fr))).strip()
+    return out
+
+
+UNIDADES_HABLADAS = {"€/t": "euros la tonelada", "€/kg vivo": "euros el kilo vivo", "€/kg canal": "euros el kilo canal",
+                     "€/kg": "euros el kilo", "€/ud": "euros la unidad", "€/cabeza": "euros por cabeza", "€/l": "euros el litro"}
+
+
+def unidad_hablada(u: str, por: bool = False) -> str:
+    t = UNIDADES_HABLADAS.get(u, "euros" if u.startswith("€") else u)
+    return t.replace(" la ", " por ").replace(" el ", " por ") if por else t
+
+
+def precio_hablado(v: float, unidad: str, dec: int | None = None, por: bool = False) -> str:
+    """«doscientos treinta y un euros la tonelada» (uno -> un delante de «euros»)."""
+    n = decir(v, dec)
+    if " con " not in n:
+        n = re.sub(r"(veinti)?uno$", lambda m: "veintiún" if m.group(1) else "un", n)
+    return f"{n} {unidad_hablada(unidad, por)}"
+
+
+def producto_hablado(p: str) -> str:
+    """«Oveja desvieje 2ª» -> «oveja desvieje segunda»; «Cebada 62 kg/hl» -> «cebada»; «Girasol 9-2-44» -> «girasol»."""
+    p = p.replace("1ª", "primera").replace("2ª", "segunda").replace("3ª", "tercera").replace("<", "menos de ")
+    p = re.split(r"\s\d", p)[0]
+    return p.strip(" -·").lower()
+
+
+def guion_ranking(r: dict) -> str:
+    frases = [titulo_ranking(r["clave"])]
+    for i, (l, p) in enumerate(r["filas"][:5]):
+        frases.append(f"{nombre_corto(l)}, " + (precio_hablado(p["act"], r["unidad"]) if i == 0 else decir(p["act"])) + ".")
+    dif = r["filas"][0][1]["act"] - r["filas"][-1][1]["act"]
+    frases.append(f"Hasta {precio_hablado(dif, r['unidad'], 0 if dif >= 10 else 2, por=True)} de diferencia.")
+    frases.append("Todos los precios, gratis, en Lonjas CyL.")
+    return " ".join(frases)
+
+
+def guion_movimientos(m: dict) -> str:
+    frases = ["Lo que más se ha movido esta semana en las lonjas de Castilla y León."]
+    for c in m["suben"]:
+        frases.append(f"Sube {producto_hablado(c['producto'])} en {c['lonja']}, un {decir(abs(c['pct']), 1, 'coma')} por ciento.")
+    for c in m["bajan"]:
+        frases.append(f"Baja {producto_hablado(c['producto'])} en {c['lonja']}, un {decir(abs(c['pct']), 1, 'coma')} por ciento.")
+    frases.append("Todos los precios, gratis, en Lonjas CyL.")
+    return " ".join(frases)
+
+
+def voz(texto: str, destino: Path) -> Path | None:
+    """Narración con Piper (si está instalada y hay modelo). Sin voz, el reel sale solo con música."""
+    modelo = os.environ.get("PIPER_MODELO", "").strip()
+    if not modelo or not Path(modelo).is_file():
+        return None
+    destino.parent.mkdir(parents=True, exist_ok=True)
+    r = subprocess.run([sys.executable, "-m", "piper", "-m", modelo, "-f", str(destino), "--length-scale", "0.92",
+                        "--sentence-silence", "0.25"], input=texto, text=True, capture_output=True)
+    if r.returncode != 0 or not destino.is_file():
+        print(f"[redes] Sin voz (Piper falló): {r.stderr[-300:]}")
+        return None
+    return destino
+
+
+def duracion_wav(f: Path) -> float:
+    with wave.open(str(f)) as w:
+        return w.getnframes() / w.getframerate()
 
 
 # ---------- reel ----------
@@ -277,12 +380,20 @@ def _filas_reel(cab: str, sub: str, filas: list[dict], nota: str):
     return fotograma
 
 
-def _render(escenas: list[tuple[float, object]], destino: Path, sonido: Path) -> Path:
-    """escenas = [(segundos, fotograma o función t -> fotograma)]. Escribe MP4 H.264 + AAC (formato de reels)."""
+def _render(escenas: list[tuple[float, object]], destino: Path, sonido: Path, habla: Path | None = None) -> Path:
+    """escenas = [(segundos, fotograma o función t -> fotograma)]. Escribe MP4 H.264 + AAC (formato de reels).
+    Con `habla`, la voz va encima de la música (la música, más baja)."""
     destino.parent.mkdir(parents=True, exist_ok=True)
-    cmd = ["ffmpeg", "-y", "-loglevel", "error", "-f", "rawvideo", "-pix_fmt", "rgb24", "-s", f"{VW}x{VH}", "-r", str(FPS),
-           "-i", "-", "-i", str(sonido), "-c:v", "libx264", "-preset", "veryfast", "-crf", "23", "-pix_fmt", "yuv420p",
-           "-c:a", "aac", "-b:a", "128k", "-ar", "48000", "-shortest", "-movflags", "+faststart", str(destino)]
+    entrada = ["ffmpeg", "-y", "-loglevel", "error", "-f", "rawvideo", "-pix_fmt", "rgb24", "-s", f"{VW}x{VH}", "-r", str(FPS),
+               "-i", "-", "-i", str(sonido)]
+    if habla:
+        audio = ["-i", str(habla), "-filter_complex",
+                 "[1:a]volume=0.45[m];[2:a]aresample=48000,adelay=350|350,volume=1.5[v];[m][v]amix=inputs=2:duration=first:normalize=0[a]",
+                 "-map", "0:v", "-map", "[a]"]
+    else:
+        audio = ["-map", "0:v", "-map", "1:a"]
+    cmd = entrada + audio + ["-c:v", "libx264", "-preset", "veryfast", "-crf", "23", "-pix_fmt", "yuv420p",
+                             "-c:a", "aac", "-b:a", "128k", "-ar", "48000", "-shortest", "-movflags", "+faststart", str(destino)]
     proc = subprocess.Popen(cmd, stdin=subprocess.PIPE)
     try:
         for dur, esc in escenas:
@@ -307,13 +418,21 @@ def reel_ranking(r: dict, destino: Path, web: str = WEB) -> Path:
     dif = r["filas"][0][1]["act"] - r["filas"][-1][1]["act"]
     medio = _filas_reel(f"Precio {art}", f"Últimas sesiones ({corto(fechas[0])} – {corto(fechas[-1])}) · {r['unidad']}",
                         filas, f"Diferencia: {num(dif, 0 if dif >= 10 else 2)} {r['unidad']}")
-    escenas = [(2.4, _fondo_marca(titulo_ranking(r["clave"]), "Últimas sesiones de las lonjas de Castilla y León")),
-               (7.0, medio), (SEGUNDOS - 9.4, _cierre(web))]
-    sonido = musica(destino.with_suffix(".wav"))
+    return _montar(guion_ranking(r), _fondo_marca(titulo_ranking(r["clave"]), "Últimas sesiones de las lonjas de Castilla y León"),
+                   medio, _cierre(web), destino)
+
+
+def _montar(guion: str, portada, medio, cierre, destino: Path) -> Path:
+    """Une portada, parte central y cierre; si hay voz, el reel dura lo que la narración (mínimo 12 s)."""
+    habla = voz(guion, destino.with_name(destino.stem + "-voz.wav"))
+    total = max(SEGUNDOS, round(duracion_wav(habla) + 1.0, 1)) if habla else SEGUNDOS
+    sonido = musica(destino.with_suffix(".wav"), total)
     try:
-        return _render(escenas, destino, sonido)
+        return _render([(PORTADA, portada), (total - PORTADA - CIERRE, medio), (CIERRE, cierre)], destino, sonido, habla)
     finally:
         sonido.unlink(missing_ok=True)
+        if habla:
+            habla.unlink(missing_ok=True)
 
 
 def titulo_ranking(clave: str) -> str:
@@ -329,20 +448,15 @@ def reel_movimientos(m: dict, destino: Path, web: str = WEB) -> Path:
     for c in m["bajan"]:
         filas.append({"n": "", "titulo": c["producto"], "sub": c["lonja"], "valor": signo(c["pct"], 1) + " %", "color": BAJA, "flecha": False})
     medio = _filas_reel("Lo que más se mueve", "Sesiones de los últimos 8 días · cambio frente a la anterior", filas[:6], "")
-    escenas = [(2.4, _fondo_marca("Lo que más se ha movido esta semana", "Lonjas de Castilla y León")), (7.0, medio),
-               (SEGUNDOS - 9.4, _cierre(web))]
-    sonido = musica(destino.with_suffix(".wav"))
-    try:
-        return _render(escenas, destino, sonido)
-    finally:
-        sonido.unlink(missing_ok=True)
+    return _montar(guion_movimientos(m), _fondo_marca("Lo que más se ha movido esta semana", "Lonjas de Castilla y León"),
+                   medio, _cierre(web), destino)
 
 
 def texto_reel_ranking(r: dict, web: str = WEB) -> str:
     lineas = [titulo_ranking(r["clave"]) + " 👇", ""]
     lineas += [f"{i}. {nombre_corto(l)}: {num(p['act'])} {r['unidad']} ({p['producto']})" for i, (l, p) in enumerate(r["filas"], 1)]
     lineas += ["", f"Diferencia: {num(r['filas'][0][1]['act'] - r['filas'][-1][1]['act'], 2)} {r['unidad']}. Cada lonja cotiza su propia calidad.",
-               "", pie_texto(web), "Precios orientativos.", "",
+               "", pie_texto(web), "Precios orientativos.", AVISO_VOZ, "",
                etiquetas("#reels", "#" + NOMBRES[r["clave"]].replace(" ", "").replace("í", "i"), "#precios")]
     return "\n".join(lineas)[:2150]
 
@@ -351,7 +465,7 @@ def texto_reel_movimientos(m: dict, web: str = WEB) -> str:
     lineas = ["📊 Lo que más se ha movido esta semana en las lonjas de Castilla y León", ""]
     lineas += [f"▲ {c['producto']} ({c['lonja']}): {signo(c['pct'], 1)} % · {num(c['act'])} {c['unidad']}" for c in m["suben"]]
     lineas += [f"▼ {c['producto']} ({c['lonja']}): {signo(c['pct'], 1)} % · {num(c['act'])} {c['unidad']}" for c in m["bajan"]]
-    lineas += ["", "Cambio frente a la sesión anterior de cada lonja.", "", pie_texto(web), "Precios orientativos.", "",
+    lineas += ["", "Cambio frente a la sesión anterior de cada lonja.", "", pie_texto(web), "Precios orientativos.", AVISO_VOZ, "",
                etiquetas("#reels", "#mercadoagrario", "#precios")]
     return "\n".join(lineas)[:2150]
 

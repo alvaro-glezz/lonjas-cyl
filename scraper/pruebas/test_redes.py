@@ -117,3 +117,26 @@ def test_reel_de_verdad(redes, tmp_path):
                           capture_output=True, text=True).stdout.split()
     assert "h264,1080,1920" in info and "aac" in info
     assert not (tmp_path / "r.wav").exists()
+
+
+def test_numeros_hablados(redes):
+    assert redes.decir(236) == "doscientos treinta y seis" and redes.decir(9.45) == "nueve con cuarenta y cinco"
+    assert redes.decir(1.155) == "uno con ciento cincuenta y cinco" and redes.decir(4.8, 1, "coma") == "cuatro coma ocho"
+    assert redes.precio_hablado(231, "€/t") == "doscientos treinta y un euros la tonelada"
+    assert redes.precio_hablado(10, "€/t", 0, por=True) == "diez euros por tonelada"
+    assert redes.producto_hablado("Oveja desvieje 2ª") == "oveja desvieje segunda" and redes.producto_hablado("Cebada 62 kg/hl") == "cebada"
+    g = redes.guion_ranking(redes.ranking(_datos(), "trigo", date(2026, 11, 9)))
+    assert g.startswith("¿Dónde se paga más el trigo? Salamanca, doscientos treinta y seis euros la tonelada.") and "€" not in g
+
+
+@pytest.mark.skipif(not shutil.which("ffmpeg"), reason="sin ffmpeg")
+def test_reel_con_voz_dura_lo_que_la_narracion(redes, tmp_path, monkeypatch):
+    def voz_falsa(texto, destino):            # 15 s de «voz» (un tono): sin descargar el modelo
+        redes.musica(destino, 15, 22050)
+        return destino
+    monkeypatch.setattr(redes, "voz", voz_falsa)
+    f = redes.reel_ranking(redes.ranking(_datos(), "trigo", date(2026, 11, 9)), tmp_path / "v.mp4")
+    dur = float(subprocess.run(["ffprobe", "-v", "error", "-show_entries", "format=duration", "-of", "csv=p=0", str(f)],
+                               capture_output=True, text=True).stdout)
+    assert 15.5 <= dur <= 16.6 and not list(tmp_path.glob("*.wav"))
+    assert redes.AVISO_VOZ in redes.texto_reel_ranking(redes.ranking(_datos(), "trigo", date(2026, 11, 9)))
