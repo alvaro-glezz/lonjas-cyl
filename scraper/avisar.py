@@ -53,6 +53,10 @@ def problema_instagram(ig: dict | None, hoy: date) -> dict | None:
         return {"id": "instagram", "nombre": "Cuenta de Instagram", "tipo": "no publica",
                 "detalle": f"Falló la publicación del {ig['error'].get('fecha')}: {ig['error'].get('detalle')}. "
                            "Se reintenta en cada pasada. Si dice que el token no es válido, genera uno nuevo y guárdalo en INSTAGRAM_TOKEN."}
+    if ig.get("error_facebook"):
+        return {"id": "instagram", "nombre": "Página de Facebook", "tipo": "no publica",
+                "detalle": f"Instagram sí publica, pero Facebook falló el {ig['error_facebook'].get('fecha')}: "
+                           f"{ig['error_facebook'].get('detalle')}. Si habla de permisos, genera el token con «pages_manage_posts»."}
     if ig.get("token_cambiado"):
         detalle = "Instagram ha dado un token nuevo al renovarlo."
     elif caduca and (date.fromisoformat(caduca) - hoy).days < 10:

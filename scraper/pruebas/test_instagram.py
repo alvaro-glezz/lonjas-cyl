@@ -158,3 +158,43 @@ def test_publicar_por_facebook(ig, tmp_path):
 def test_aviso_si_falla_la_publicacion(avisar):
     p = avisar.problema_instagram({"error": {"fecha": "2026-11-07", "detalle": "Invalid OAuth access token"}}, date(2026, 11, 7))
     assert p["tipo"] == "no publica" and "Invalid OAuth" in p["detalle"]
+
+
+def test_tambien_en_facebook(ig, tmp_path):
+    estado = {}
+    ig.preparar(_datos(), estado, date(2026, 11, 6), tmp_path)     # León (1 imagen) + comparativa (carrusel)
+    llamadas = []
+
+    def falsa(metodo, ruta, token, **p):
+        llamadas.append((ruta, p))
+        if ruta.endswith("/media"):
+            return {"id": "c1"}
+        if ruta.endswith("/media_publish"):
+            return {"id": "m1"}
+        if ruta.endswith("/photos"):
+            return {"id": "f1", "post_id": "pag_1"} if p.get("published") != "false" else {"id": f"foto{len(llamadas)}"}
+        if ruta.endswith("/feed"):
+            assert "attached_media[0]" in p and "attached_media[1]" in p
+            return {"id": "pag_2"}
+        return {"status_code": "FINISHED"}
+
+    ig.publicar(estado, "EAA", "https://web.es/", date(2026, 11, 6), llamar=falsa, espera=lambda s: None,
+                ig="https://graph.facebook.com/1784", fb=("1368", "EAApag"))
+    assert [r.get("facebook") for r in estado["registro"]] == ["pag_1", "pag_2"] and "error_facebook" not in estado
+    assert any(r == "https://graph.facebook.com/1368/photos" and p.get("message", "").startswith("📊") for r, p in llamadas)
+
+
+def test_si_falla_facebook_instagram_sigue(ig, tmp_path, avisar):
+    estado = {}
+    ig.preparar(_datos(), estado, date(2026, 11, 5), tmp_path)
+
+    def falsa(metodo, ruta, token, **p):
+        if "/1368/" in ruta:
+            raise ig.ErrorInstagram("Instagram photos: (#200) requires pages_manage_posts (código 200)")
+        return {"id": "x"} if ruta.endswith(("/media", "/media_publish")) else {"status_code": "FINISHED"}
+
+    hechas = ig.publicar(estado, "EAA", "https://web.es/", date(2026, 11, 5), llamar=falsa, espera=lambda s: None,
+                         ig="https://graph.facebook.com/1784", fb=("1368", "EAApag"))
+    assert hechas == ["2026-11-02-salamanca", "2026-11-04-leon"] and estado["preparado"] == []
+    assert "pages_manage_posts" in estado["error_facebook"]["detalle"] and estado["error_facebook"]["detalle"].startswith("Facebook")
+    assert avisar.problema_instagram(estado, date(2026, 11, 5))["nombre"] == "Página de Facebook"

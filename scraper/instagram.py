@@ -17,6 +17,8 @@ Vale cualquiera de los dos tipos de la API de Instagram de Meta:
   * «inicio de sesión de Instagram» (IG…): caduca a los 60 días; el robot lo renueva una vez por semana.
 El token nunca se imprime. Lo que caduca o falla se anota en data/instagram.json y avisar.py abre un aviso.
   python scraper/instagram.py --comprobar  comprueba la conexión (cuenta y caducidad) sin publicar
+Con token de Facebook publica lo mismo en la página de Facebook vinculada (permiso pages_manage_posts).
+Para no hacerlo: variable PUBLICAR_FACEBOOK=no.
 """
 from __future__ import annotations
 
@@ -394,7 +396,34 @@ def caducidad_fb(estado: dict, token: str, hoy: date, llamar=llamar) -> None:
         estado.pop("token_caduca", None)
 
 
-def publicar(estado: dict, token: str, base_url: str, hoy: date, llamar=llamar, espera=time.sleep, ig: str = "me") -> list[str]:
+def pagina_fb(token: str, llamar=llamar) -> tuple[str, str] | None:
+    """(id de la página de Facebook, token de la página) si el token es de Facebook; None si es de Instagram."""
+    if token.startswith("IG"):
+        return None
+    yo = llamar("GET", f"{API_FB}/me", token, fields="id,instagram_business_account")
+    if yo.get("instagram_business_account"):
+        return yo["id"], token
+    for pag in llamar("GET", f"{API_FB}/me/accounts", token, fields="id,access_token,instagram_business_account").get("data", []):
+        if pag.get("instagram_business_account") and pag.get("access_token"):
+            return pag["id"], pag["access_token"]
+    return None
+
+
+def publicar_facebook(item: dict, base_url: str, pagina: str, token: str, llamar=llamar) -> str:
+    """La misma publicación en la página de Facebook: una foto, o varias fotos en una sola entrada."""
+    urls = [base_url + r for r in item["imagenes"]]
+    if len(urls) == 1:
+        r = llamar("POST", f"{API_FB}/{pagina}/photos", token, url=urls[0], message=item["texto"])
+        return r.get("post_id") or r["id"]
+    fotos = [llamar("POST", f"{API_FB}/{pagina}/photos", token, url=u, published="false")["id"] for u in urls[:10]]
+    extra = {f"attached_media[{i}]": json.dumps({"media_fbid": f}) for i, f in enumerate(fotos)}
+    return llamar("POST", f"{API_FB}/{pagina}/feed", token, message=item["texto"], **extra)["id"]
+
+
+def publicar(estado: dict, token: str, base_url: str, hoy: date, llamar=llamar, espera=time.sleep, ig: str = "me",
+             fb: tuple[str, str] | None = None) -> list[str]:
+    """Publica en Instagram y, si hay página de Facebook, también allí. Un fallo de Facebook no frena Instagram:
+    se anota en estado['error_facebook'] (avisar.py lo avisa)."""
     hechas = []
     for item in list(estado.get("preparado", [])):
         mid = publicar_item(item, base_url, token, llamar, espera, ig)
@@ -402,7 +431,15 @@ def publicar(estado: dict, token: str, base_url: str, hoy: date, llamar=llamar, 
             estado.setdefault("publicado", {})[item["lonja"]] = item["fecha"]
         else:
             estado["comparativa"] = item["semana"]
-        estado.setdefault("registro", []).append({"fecha": datetime.now().isoformat(timespec="minutes"), "id": item["id"], "media": mid})
+        fid = None
+        if fb:
+            try:
+                fid = publicar_facebook(item, base_url, fb[0], fb[1], llamar)
+                estado.pop("error_facebook", None)
+            except ErrorInstagram as e:
+                estado["error_facebook"] = {"fecha": hoy.isoformat(), "detalle": str(e).replace("Instagram ", "Facebook ", 1)}
+        estado.setdefault("registro", []).append({"fecha": datetime.now().isoformat(timespec="minutes"), "id": item["id"], "media": mid,
+                                                  **({"facebook": fid} if fid else {})})
         estado["registro"] = estado["registro"][-60:]
         estado["preparado"].remove(item)
         hechas.append(item["id"])
@@ -455,13 +492,16 @@ def main(argv: list[str]) -> int:
                     print("[instagram] Las imágenes aún no están en internet: se publicarán en la próxima pasada.")
                 else:
                     ig, tk, tipo = cuenta(token)
+                    fb = pagina_fb(token) if os.environ.get("PUBLICAR_FACEBOOK", "si") != "no" else None
                     try:
-                        hechas = publicar(estado, tk, base, hoy, ig=ig)
+                        hechas = publicar(estado, tk, base, hoy, ig=ig, fb=fb)
                         estado.pop("error", None)
                     except ErrorInstagram as e:
                         estado["error"] = {"fecha": hoy.isoformat(), "detalle": str(e)}
                         raise
-                    print(f"[instagram] Publicadas: {', '.join(hechas)}")
+                    print(f"[instagram] Publicadas: {', '.join(hechas)}" + (" (también en Facebook)" if fb and "error_facebook" not in estado else ""))
+                    if estado.get("error_facebook"):
+                        print(f"[facebook] No se pudo publicar: {estado['error_facebook']['detalle']}")
             if token.startswith("IG"):
                 renovar_token(estado, token, hoy)
             else:
