@@ -22,6 +22,19 @@ const MESES = ["ene", "feb", "mar", "abr", "may", "jun", "jul", "ago", "sep", "o
 const RE_ID = /^[a-z0-9][a-z0-9-]{0,99}$/;
 const CACHE_MS = 5 * 60 * 1000;
 let cache = { t: 0, datos: null };
+const uso = require("./_almacen");
+
+/** Cuenta mensajes y personas del robot para el panel (sin guardar el número de chat: solo un resumen diario). */
+async function contarBot(chat) {
+  const c = uso.config();
+  if (!c) return;
+  const dia = uso.hoyMadrid();
+  const huella = require("crypto").createHash("sha256").update(`${dia}|${chat}|${c.token}`).digest("hex").slice(0, 20);
+  try {
+    await uso.pipeline([["HINCRBY", `uso:d:${dia}`, "bot:mensajes", 1], ["PFADD", `uso:b:${dia}`, huella],
+      ["EXPIRE", `uso:d:${dia}`, 400 * 86400], ["EXPIRE", `uso:b:${dia}`, 400 * 86400]]);
+  } catch { /* el recuento nunca debe impedir la respuesta */ }
+}
 
 const esc = s => String(s ?? "").replace(/[&<>]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;" }[c]));
 const norm = s => String(s || "").toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g, "").replace(/[^a-z0-9ñ ]+/g, " ").replace(/\s+/g, " ").trim();
@@ -249,6 +262,7 @@ async function manejador(req, res) {
   if (!msg || !msg.chat || typeof msg.text !== "string") return res.status(200).json({});
   const privado = msg.chat.type === "private";
   if (!privado && !msg.text.startsWith("/")) return res.status(200).json({});
+  await contarBot(msg.chat.id);
   let texto;
   try {
     const web = origenDe(req);

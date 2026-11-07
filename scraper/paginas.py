@@ -106,7 +106,7 @@ def pagina(*, ruta: str, nivel: int, titulo: str, descripcion: str, h1: str, cue
 <title>{escape(titulo)}</title>
 <meta name="description" content="{escape(descripcion)}">
 <link rel="canonical" href="{canon}">
-<meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'self'; font-src 'self'; img-src 'self'; base-uri 'none'; form-action 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; connect-src 'self'; style-src 'self'; font-src 'self'; img-src 'self'; base-uri 'none'; form-action 'none'">
 <meta name="theme-color" content="#24503c">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="es_ES">
@@ -121,6 +121,7 @@ def pagina(*, ruta: str, nivel: int, titulo: str, descripcion: str, h1: str, cue
 <link rel="icon" href="{up}icons/icono.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="{up}icons/icono-192.png">
 <link rel="stylesheet" href="{up}paginas.css">
+<script src="{up}contador.js" data-ruta="web:{escape(ruta.strip("/").replace("/", "-") or "inicio")}" defer></script>
 {ld_txt}
 </head>
 <body>

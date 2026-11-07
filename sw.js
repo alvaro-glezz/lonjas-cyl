@@ -1,9 +1,9 @@
 // Funciona sin cobertura: guarda la app y los últimos precios descargados.
 // Seguridad: solo se guardan respuestas correctas (200) del propio dominio; así un error 404/500 puntual
 // no se queda "pegado" en la copia sin conexión.
-const VERSION = "lonjas-v12";
+const VERSION = "lonjas-v13";
 const AJUSTES = "lonjas-ajustes";   // avisos y ajustes que guarda la app (no se borran al actualizar)
-const APP = ["./", "index.html", "estilos.css", "app.js", "historico.js", "agricultor.js", "plazos.js", "abiertos.js", "herramientas.js", "manifest.webmanifest", "icons/icono.svg", "icons/icono-192.png",
+const APP = ["./", "index.html", "estilos.css", "app.js", "historico.js", "agricultor.js", "plazos.js", "abiertos.js", "herramientas.js", "contador.js", "manifest.webmanifest", "icons/icono.svg", "icons/icono-192.png",
   "fonts/barlow-condensed-latin-500-normal.woff2", "fonts/barlow-condensed-latin-600-normal.woff2", "fonts/barlow-condensed-latin-700-normal.woff2",
   "fonts/public-sans-latin-400-normal.woff2", "fonts/public-sans-latin-500-normal.woff2", "fonts/public-sans-latin-600-normal.woff2", "fonts/public-sans-latin-700-normal.woff2"];
 
@@ -18,6 +18,8 @@ self.addEventListener("activate", e => {
 self.addEventListener("fetch", e => {
   const url = new URL(e.request.url);
   if (e.request.method !== "GET" || url.origin !== location.origin) return;
+  // Funciones del servidor y panel privado: nunca se guardan copias en el teléfono
+  if (/\/(api|panel)\//.test(url.pathname)) return;
   // Precios: primero la red (siempre lo más nuevo); si no hay red, la copia guardada
   if (url.pathname.endsWith("/data/precios.json")) {
     e.respondWith(fetch(e.request).then(r => {

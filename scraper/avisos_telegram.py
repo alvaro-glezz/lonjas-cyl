@@ -93,6 +93,23 @@ def revisar(datos: dict, avisos_por_chat: dict, hoy: date) -> tuple[list[tuple[s
     return mensajes, cambios
 
 
+def audiencia(r, token: str, con_avisos: int) -> None:
+    """Para el panel de estadísticas: miembros del canal y personas con avisos, una vez al día (el último valor manda)."""
+    from zoneinfo import ZoneInfo
+    from datetime import datetime
+    from telegram import llamar
+    dia = datetime.now(ZoneInfo("Europe/Madrid")).date().isoformat()
+    campos = ["tg:avisos", con_avisos]
+    canal = os.environ.get("TELEGRAM_CANAL", "").strip()
+    if canal:
+        try:
+            campos += ["tg:canal", int(llamar(token, "getChatMemberCount", {"chat_id": canal}))]
+        except Exception as e:  # noqa: BLE001 - sin el número de miembros el resto sigue
+            print(f"[avisos] no se pudo leer el número de miembros del canal: {type(e).__name__}")
+    r("HSET", f"uso:d:{dia}", *campos)
+    r("EXPIRE", f"uso:d:{dia}", 400 * 86400)
+
+
 def bloqueado(error: Exception) -> bool:
     t = str(error).lower()
     return "blocked" in t or "chat not found" in t or "user is deactivated" in t
@@ -118,6 +135,7 @@ def main() -> int:
         except json.JSONDecodeError:
             avisos[c] = []
     mensajes, cambios = revisar(datos, avisos, date.today())
+    audiencia(r, token, len(chats))
     enviados = fallidos = 0
     for chat, texto in mensajes:
         try:

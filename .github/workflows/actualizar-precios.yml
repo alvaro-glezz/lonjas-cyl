@@ -42,6 +42,7 @@ jobs:
         run: |
           python -m pytest -q scraper/pruebas
           node scraper/pruebas/js/test_telegram_api.js > /dev/null
+          node scraper/pruebas/js/test_uso_api.js
       - name: Leer las lonjas
         run: python scraper/actualizar.py
       # Histórico oficial de la Junta de CyL: baja los Excel semanales nuevos y rehace data/historico/.
@@ -72,6 +73,7 @@ jobs:
           TELEGRAM_TOKEN: ${{ secrets.TELEGRAM_TOKEN }}
           UPSTASH_REDIS_REST_URL: ${{ secrets.UPSTASH_REDIS_REST_URL }}
           UPSTASH_REDIS_REST_TOKEN: ${{ secrets.UPSTASH_REDIS_REST_TOKEN }}
+          TELEGRAM_CANAL: "@lonjas_cyl"
         run: python scraper/avisos_telegram.py
       - name: Guardar si hay precios nuevos
         run: |

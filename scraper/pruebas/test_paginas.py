@@ -62,7 +62,11 @@ def test_cada_pagina_es_valida_para_google(generado, pag):
             json.loads(bloque)
         assert "None" not in re.sub(r"<script.*?</script>", "", html, flags=re.S)
         assert "nan" not in html.lower().split("<body>")[1].replace("nanc", "").replace("nana", "")
-        assert "<script src" not in html  # sin JavaScript
+        # Sin JavaScript para el contenido: solo el contador anónimo de visitas, diferido y de esta misma web
+        import re as _re
+        scripts = _re.findall(r'<script src="([^"]+)"', html)
+        assert len(scripts) == 1 and _re.fullmatch(r"(\.\./)+contador\.js", scripts[0])
+        assert 'data-ruta="web:' in html and "defer></script>" in html
 
 
 def test_frase_principal_del_trigo(pag):

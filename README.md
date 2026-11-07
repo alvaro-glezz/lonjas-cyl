@@ -122,3 +122,11 @@ En *Hoy → Para decidir* (`herramientas.js`, sin servidor; lo que escribe el us
 - **¿Caro o barato?** (`#termometro`): el último precio frente a todas las semanas del histórico oficial de la Junta (y las sesiones recientes) de los dos últimos años, con mínimo, máximo y variación interanual. No es una previsión.
 - **Diferencias habituales** (en *Comparar*): cuánto paga de media una lonja más que otra en las semanas en que cotizaron las dos, y si esta semana la diferencia es la habitual.
 - **Avisos personales por Telegram**: «/aviso trigo salamanca 240», «/avisos», «/borrar 1» en el robot (`api/telegram.js`, guardados en Upstash Redis). `scraper/avisos_telegram.py` los revisa después de cada lectura. Necesita Upstash conectado en Vercel y los secretos `UPSTASH_REDIS_REST_URL` y `UPSTASH_REDIS_REST_TOKEN` en GitHub.
+
+## Panel de visitas
+
+`panel/` (privado, con contraseña, sin indexar) muestra personas por día, visitas, páginas vistas, de dónde llegan (Google, Telegram, WhatsApp…), qué secciones de la app se usan, qué páginas de Google se visitan, qué webs ponen el widget, aparatos, países, app instalada y la audiencia de Telegram (miembros del canal, personas que escriben al robot, personas con avisos).
+
+- `contador.js` (app, páginas de precios y widget) avisa a `api/uso.js`, que suma recuentos por día en Upstash. Sin cookies ni identificadores; las personas distintas se cuentan con un resumen de IP + navegador que cambia cada día y no se guarda (HyperLogLog). No cuenta robots, ni a quien pide «no rastrear», ni fuera de la web de Vercel. Los datos caducan a los 400 días.
+- `api/estadisticas.js` entrega los datos al panel con la cabecera `Authorization: Bearer <PANEL_CLAVE>`.
+- Activación: Upstash conectado al proyecto en Vercel (el mismo de los avisos) y la variable `PANEL_CLAVE` (12 caracteres o más) en Vercel → Settings → Environment Variables, con Redeploy.

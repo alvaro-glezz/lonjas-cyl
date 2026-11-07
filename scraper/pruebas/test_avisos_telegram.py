@@ -68,7 +68,12 @@ def test_main_envia_guarda_y_limpia(av, monkeypatch, tmp_path):
         def __init__(self, url, token):
             assert url == "https://r.example" and token == "tok"
 
-        def __call__(self, cmd, k, v=None):
+        def __call__(self, cmd, k, v=None, *resto):
+            if cmd == "HSET":
+                args = (v,) + resto
+                tienda.setdefault(k, {}).update(dict(zip(args[::2], args[1::2])))
+                return 1
+            if cmd == "EXPIRE": return 1
             if cmd == "SMEMBERS": return list(tienda[k])
             if cmd == "GET": return tienda.get(k)
             if cmd == "SET": tienda[k] = v; return "OK"
@@ -96,3 +101,5 @@ def test_main_envia_guarda_y_limpia(av, monkeypatch, tmp_path):
     l42 = json.loads(tienda["avisos:42"])
     assert l42[0]["armado"] is False and l42[1]["armado"] is True      # el que sonó queda sin armar; el otro, igual
     assert "avisos:99" not in tienda and "99" not in tienda["avisos:chats"]   # bloqueó el robot: se borra
+    dia = next(k for k in tienda if k.startswith("uso:d:"))
+    assert tienda[dia]["tg:avisos"] == 2 and "tg:canal" not in tienda[dia]   # audiencia para el panel (sin canal en la prueba)

@@ -330,6 +330,14 @@ function vistaMetodo() {
       <li>Los precios se pueden descargar en CSV y JSON, y poner en otras webs con un widget: <a href="#datos">Datos abiertos y widget</a>.</li>
     </ul>
 
+    <h3 class="sub">Privacidad</h3>
+    <ul class="lista">
+      <li>La app no usa cookies ni pide registrarse. Favoritos, avisos, ofertas y tu explotación se guardan solo en tu teléfono.</li>
+      <li>Para saber cuánta gente la usa se cuentan las visitas de forma anónima: qué sección se ve, de qué web se llega, si es móvil u ordenador y el país. Para no contar dos veces a la misma persona en un día se usa un resumen cifrado que cambia cada día; tu dirección IP no se guarda. Los recuentos se borran a los 400 días.</li>
+      <li>Si tu navegador pide «no rastrear», no se cuenta nada.</li>
+      <li>El robot de Telegram guarda tu número de chat solo si creas avisos; «/borrar todos» lo elimina.</li>
+    </ul>
+
     <p class="aviso-red"><b>Precios orientativos.</b> Cada lonja cotiza en sus propias condiciones (calidad, punto de entrega, peso). Estos precios sirven para informarse y comparar; no son una oferta de compra ni una recomendación de compra o venta. Antes de cerrar una operación, confírmalo con tu lonja o tu comprador.</p>
   </section>`;
 }
@@ -446,6 +454,7 @@ function grafico(serie, unidad) {
 
 function abrirDetalle(id) {
   const f = buscarFila(id); if (!f) return;
+  if (window.LonjasUso) window.LonjasUso.contar("detalle");
   const serie = (DATOS.historial?.[id] || []).filter(p => p[0] && p[1] != null);
   const vals = serie.map(p => p[1]);
   const v = variacion(f);
@@ -498,6 +507,11 @@ function router() {
   document.querySelectorAll(".navegacion a").forEach(a => a.dataset.vista === seccion ? a.setAttribute("aria-current", "page") : a.removeAttribute("aria-current"));
   if (typeof trasPintar === "function") trasPintar(h);
   if (typeof trasPintarHerramientas === "function") trasPintarHerramientas(h);
+  // Se cuenta al cambiar de sección, no cada vez que se repinta (al terminar de cargar plazos o histórico)
+  if (window.LonjasUso && h !== router.ultimaContada) {
+    router.ultimaContada = h;
+    window.LonjasUso.contar(/^(lonja-[a-z0-9-]+|comparar-[a-z0-9-]+)$/.test(h) ? h : h.split("-")[0]);
+  }
 }
 function ir(h) { if (location.hash.slice(1) === h) router(); else location.hash = h; window.scrollTo(0, 0); }
 

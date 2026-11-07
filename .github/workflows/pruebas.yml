@@ -21,3 +21,4 @@ jobs:
       - run: pip install -r scraper/requirements.txt -r scraper/requirements-pruebas.txt
       - run: python -m pytest -q scraper/pruebas
       - run: node scraper/pruebas/js/test_telegram_api.js > /dev/null
+      - run: node scraper/pruebas/js/test_uso_api.js
