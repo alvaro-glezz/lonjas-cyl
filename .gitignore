@@ -11,3 +11,4 @@ venv/
 Thumbs.db
 .pytest_cache/
 redes/muestra/
+salida/

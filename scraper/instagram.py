@@ -30,7 +30,7 @@ from datetime import date, datetime, timedelta
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
-from paginas import WEB, fecha_larga, num  # noqa: E402
+from paginas import PRODUCTOS, WEB, fecha_larga, num  # noqa: E402
 from telegram import PRINCIPALES  # noqa: E402
 
 RAIZ = Path(__file__).resolve().parent.parent
@@ -52,6 +52,7 @@ ETIQUETAS_BASE = ["#lonjas", "#CastillayLeón", "#preciosagrarios", "#agricultur
 PINO, PINO_OSC, FONDO, HOJA, TINTA, TENUE, LINEA = "#24503c", "#1b3d2e", "#eef1ea", "#ffffff", "#18241d", "#5b6a60", "#d6ddd2"
 PAJA, SUBE, BAJA, CLARO = "#e0b252", "#23774a", "#b3402a", "#cfe0d4"
 ANCHO, ALTO = 1080, 1350
+NOMBRES = {k: v[1] for k, v in PRODUCTOS.items()}
 
 
 # ---------- textos ----------
@@ -134,7 +135,7 @@ def comparativas(datos: dict, hoy: date) -> list[dict]:
 
 
 def texto_comparativa(comps: list[dict], web: str = WEB) -> str:
-    nombres = {"trigo": "Trigo", "cebada": "Cebada", "maiz": "Maíz", "centeno": "Centeno"}
+    nombres = NOMBRES
     lineas = ["🌾 ¿Dónde se paga más esta semana?", ""]
     for c in comps:
         f = c["filas"]
@@ -232,7 +233,7 @@ def imagen_sesion(l: dict, destino: Path, web: str = WEB) -> Path:
 
 def imagen_comparativa(c: dict, destino: Path, web: str = WEB) -> Path:
     from PIL import Image, ImageDraw
-    nombres = {"trigo": "Trigo", "cebada": "Cebada", "maiz": "Maíz", "centeno": "Centeno"}
+    nombres = NOMBRES
     img = Image.new("RGB", (ANCHO, ALTO), FONDO)
     d = ImageDraw.Draw(img)
     fechas = sorted(l["fecha"] for l, _ in c["filas"])
@@ -248,7 +249,7 @@ def imagen_comparativa(c: dict, destino: Path, web: str = WEB) -> Path:
         d.text((ANCHO - 90, yy + alto_fila / 2 + 4), num(p["act"]), font=_cifra(92), fill=TINTA, anchor="rm")
     dif = c["filas"][0][1]["act"] - c["filas"][-1][1]["act"]
     yb = y + min(len(c["filas"]), 5) * (alto_fila + 18) + 20
-    d.text((70, yb), f"Diferencia: {num(dif)} {c['unidad']}", font=_cifra(60), fill=PINO)
+    d.text((70, yb), f"Diferencia: {num(dif, 0 if dif >= 10 else 2)} {c['unidad']}", font=_cifra(60), fill=PINO)
     d.text((70, yb + 78), "Cada lonja cotiza su propia calidad.", font=_texto(28), fill=TENUE)
     _pie(d, ", ".join(sorted({l.get('nombre', '') for l, _ in c['filas']})).replace("Lonja de ", ""), web)
     destino.parent.mkdir(parents=True, exist_ok=True)
@@ -315,9 +316,9 @@ def llamar(metodo: str, ruta: str, token: str, **params) -> dict:
     return j
 
 
-def esperar_contenedor(cid: str, token: str, llamar=llamar, espera=time.sleep, ig: str = "me") -> None:
+def esperar_contenedor(cid: str, token: str, llamar=llamar, espera=time.sleep, ig: str = "me", veces: int = 30) -> None:
     base = ig.rsplit("/", 1)[0] + "/" if ig.startswith("https://") else ""
-    for _ in range(30):
+    for _ in range(veces):
         st = llamar("GET", base + cid, token, fields="status_code").get("status_code")
         if st in (None, "FINISHED"):
             return
@@ -345,8 +346,13 @@ def cuenta(token: str, llamar=llamar) -> tuple[str, str, str]:
 
 
 def publicar_item(item: dict, base_url: str, token: str, llamar=llamar, espera=time.sleep, ig: str = "me") -> str:
-    urls = [base_url + r for r in item["imagenes"]]
     media, publicar_ = f"{ig}/media", f"{ig}/media_publish"
+    if item.get("video"):          # reel: Instagram tarda en procesar el vídeo (hasta ~10 min)
+        cid = llamar("POST", media, token, media_type="REELS", video_url=base_url + item["video"], caption=item["texto"],
+                     share_to_feed="true")["id"]
+        esperar_contenedor(cid, token, llamar, espera, ig, veces=120)
+        return llamar("POST", publicar_, token, creation_id=cid)["id"]
+    urls = [base_url + r for r in item["imagenes"]]
     if len(urls) == 1:
         cid = llamar("POST", media, token, image_url=urls[0], caption=item["texto"])["id"]
     else:
@@ -363,7 +369,7 @@ def en_internet(url: str, intentos: int = 30, espera=time.sleep) -> bool:
     for _ in range(intentos):
         try:
             r = requests.head(url, timeout=15, allow_redirects=True)
-            if r.status_code == 200 and r.headers.get("content-type", "").startswith("image/"):
+            if r.status_code == 200 and r.headers.get("content-type", "").startswith(("image/", "video/")):
                 return True
         except requests.RequestException:
             pass
@@ -410,7 +416,10 @@ def pagina_fb(token: str, llamar=llamar) -> tuple[str, str] | None:
 
 
 def publicar_facebook(item: dict, base_url: str, pagina: str, token: str, llamar=llamar) -> str:
-    """La misma publicación en la página de Facebook: una foto, o varias fotos en una sola entrada."""
+    """La misma publicación en la página de Facebook: una foto, varias fotos en una sola entrada, o el vídeo."""
+    if item.get("video"):
+        r = llamar("POST", f"{API_FB}/{pagina}/videos", token, file_url=base_url + item["video"], description=item["texto"])
+        return r.get("id")
     urls = [base_url + r for r in item["imagenes"]]
     if len(urls) == 1:
         r = llamar("POST", f"{API_FB}/{pagina}/photos", token, url=urls[0], message=item["texto"])
@@ -429,7 +438,7 @@ def publicar(estado: dict, token: str, base_url: str, hoy: date, llamar=llamar, 
         mid = publicar_item(item, base_url, token, llamar, espera, ig)
         if item["tipo"] == "sesion":
             estado.setdefault("publicado", {})[item["lonja"]] = item["fecha"]
-        else:
+        elif item["tipo"] == "comparativa":
             estado["comparativa"] = item["semana"]
         fid = None
         if fb:

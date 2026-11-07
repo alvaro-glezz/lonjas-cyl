@@ -1,0 +1,84 @@
+name: Redes sociales
+
+# Instagram (@lonjas.cyl) y página de Facebook (Lonjas CyL), de lunes a sábado. Ver scraper/redes.py.
+# Horas en UTC (en verano, una hora más tarde en España):
+#   07:00 -> 8:00   publicación de la mañana (sesión nueva o «producto del día»)
+#   12:30 -> 13:30  reel
+#   18:00 -> 19:00  segunda publicación, solo si hay otra sesión nueva o la comparativa del viernes/sábado
+on:
+  schedule:
+    - cron: "0 7 * * 1-6"
+    - cron: "30 12 * * 1-6"
+    - cron: "0 18 * * 1-6"
+  workflow_dispatch:
+    inputs:
+      franja:
+        description: "manana, reel o tarde"
+        required: true
+        default: "reel"
+      probar:
+        description: "si = crear los archivos pero NO publicar"
+        required: false
+        default: "no"
+      forzar:
+        description: "si = repetir la franja aunque ya se hiciera hoy"
+        required: false
+        default: "no"
+
+permissions:
+  contents: write
+
+# Misma cola que «Actualizar precios»: así nunca escriben las dos a la vez en el repositorio.
+concurrency:
+  group: actualizar-precios
+  cancel-in-progress: false
+
+jobs:
+  publicar:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install -q -r scraper/requirements.txt
+      - name: ffmpeg (para los reels)
+        run: command -v ffmpeg || (sudo apt-get update -qq && sudo apt-get install -y -qq ffmpeg)
+      - name: Crear la publicación de esta franja
+        env:
+          INSTAGRAM_TOKEN: ${{ secrets.INSTAGRAM_TOKEN }}
+          FRANJA: ${{ inputs.franja }}
+          FORZAR: ${{ inputs.forzar }}
+        run: python scraper/redes.py --crear
+      # Las imágenes y vídeos van a una rama aparte («medios») que se rehace cada vez: no engordan main.
+      - name: Subir imágenes y vídeo
+        id: medios
+        run: |
+          if [ -d salida ] && [ -n "$(ls -A salida 2>/dev/null)" ]; then
+            cd salida
+            git init -q -b medios
+            git add -A
+            git -c user.name="actualizador-lonjas" -c user.email="actions@users.noreply.github.com" commit -qm "Medios $(date -u +%F)"
+            git push -qf "https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git" medios
+            echo "sha=$(git rev-parse HEAD)" >> "$GITHUB_OUTPUT"
+          else
+            echo "Nada que subir"
+          fi
+      - name: Publicar en Instagram y Facebook
+        if: steps.medios.outputs.sha != '' && inputs.probar != 'si'
+        env:
+          INSTAGRAM_TOKEN: ${{ secrets.INSTAGRAM_TOKEN }}
+          MEDIOS_SHA: ${{ steps.medios.outputs.sha }}
+        run: python scraper/redes.py --publicar
+      - name: Guardar el registro
+        if: always()
+        run: |
+          if [ -n "$(git status --porcelain data/instagram.json)" ]; then
+            git config user.name "actualizador-lonjas"
+            git config user.email "actions@users.noreply.github.com"
+            git add data/instagram.json
+            git commit -qm "Registro de redes $(date -u +%F)"
+            git pull -q --rebase
+            git push -q
+          fi

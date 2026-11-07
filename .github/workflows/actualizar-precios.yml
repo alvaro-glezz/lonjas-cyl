@@ -73,36 +73,15 @@ jobs:
           UPSTASH_REDIS_REST_URL: ${{ secrets.UPSTASH_REDIS_REST_URL }}
           UPSTASH_REDIS_REST_TOKEN: ${{ secrets.UPSTASH_REDIS_REST_TOKEN }}
         run: python scraper/avisos_telegram.py
-      # Instagram (1/2): crea las imágenes de lo que toca publicar. Sin el secreto INSTAGRAM_TOKEN no hace nada.
-      - name: Imágenes para Instagram
-        continue-on-error: true
-        env:
-          INSTAGRAM_TOKEN: ${{ secrets.INSTAGRAM_TOKEN }}
-        run: python scraper/instagram.py --preparar
       - name: Guardar si hay precios nuevos
         run: |
-          if [ -z "$(git status --porcelain data/ scraper/pruebas/casos/ precio/ lonja/ precios/ plazos/ sitemap.xml redes/instagram/)" ]; then
+          if [ -z "$(git status --porcelain data/ scraper/pruebas/casos/ precio/ lonja/ precios/ plazos/ sitemap.xml)" ]; then
             echo "Sin cambios"
           else
             git config user.name "actualizador-lonjas"
             git config user.email "actions@users.noreply.github.com"
-            git add data/ scraper/pruebas/casos/ precio/ lonja/ precios/ plazos/ sitemap.xml redes/instagram/
+            git add data/ scraper/pruebas/casos/ precio/ lonja/ precios/ plazos/ sitemap.xml
             git commit -m "Precios actualizados $(date -u +%Y-%m-%d)"
-            git push
-          fi
-      # Instagram (2/2): publica las imágenes cuando ya están en internet y guarda el registro.
-      - name: Publicar en Instagram
-        continue-on-error: true
-        env:
-          INSTAGRAM_TOKEN: ${{ secrets.INSTAGRAM_TOKEN }}
-        run: |
-          export GITHUB_SHA_GUARDADO=$(git rev-parse HEAD)
-          python scraper/instagram.py --publicar
-          if [ -n "$(git status --porcelain data/instagram.json)" ]; then
-            git config user.name "actualizador-lonjas"
-            git config user.email "actions@users.noreply.github.com"
-            git add data/instagram.json
-            git commit -m "Registro de Instagram $(date -u +%Y-%m-%d)"
             git push
           fi
       # Abre (o cierra) una incidencia en GitHub si alguna lonja falla: llega por correo al dueño del repositorio.
