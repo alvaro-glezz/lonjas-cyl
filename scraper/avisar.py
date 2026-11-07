@@ -49,6 +49,10 @@ def problema_instagram(ig: dict | None, hoy: date) -> dict | None:
     if not ig:
         return None
     caduca = ig.get("token_caduca")
+    if ig.get("error"):
+        return {"id": "instagram", "nombre": "Cuenta de Instagram", "tipo": "no publica",
+                "detalle": f"Falló la publicación del {ig['error'].get('fecha')}: {ig['error'].get('detalle')}. "
+                           "Se reintenta en cada pasada. Si dice que el token no es válido, genera uno nuevo y guárdalo en INSTAGRAM_TOKEN."}
     if ig.get("token_cambiado"):
         detalle = "Instagram ha dado un token nuevo al renovarlo."
     elif caduca and (date.fromisoformat(caduca) - hoy).days < 10:

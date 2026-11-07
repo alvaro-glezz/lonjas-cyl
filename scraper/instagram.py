@@ -10,9 +10,13 @@ Qué publica (nunca inventa: todo sale de data/precios.json):
     maíz y centeno en las lonjas que han cotizado en los últimos 7 días.
 No publica sesiones de hace más de 3 días ni repite: guarda lo hecho en data/instagram.json.
 
-Necesita el secreto INSTAGRAM_TOKEN (GitHub -> Settings -> Secrets and variables -> Actions): el token de la
-«API de Instagram con inicio de sesión de Instagram» de una cuenta profesional. Sin él no hace nada.
-El token nunca se imprime. Caduca a los 60 días: el robot lo renueva una vez por semana y anota cuándo caduca.
+Necesita el secreto INSTAGRAM_TOKEN (GitHub -> Settings -> Secrets and variables -> Actions). Sin él no hace nada.
+Vale cualquiera de los dos tipos de la API de Instagram de Meta:
+  * «inicio de sesión de Facebook» (EAA…): token de la página de Facebook vinculada a la cuenta (o de usuario con
+    acceso a esa página). El de página sacado de un token de usuario largo no caduca.
+  * «inicio de sesión de Instagram» (IG…): caduca a los 60 días; el robot lo renueva una vez por semana.
+El token nunca se imprime. Lo que caduca o falla se anota en data/instagram.json y avisar.py abre un aviso.
+  python scraper/instagram.py --comprobar  comprueba la conexión (cuenta y caducidad) sin publicar
 """
 from __future__ import annotations
 
@@ -33,7 +37,8 @@ ESTADO = RAIZ / "data" / "instagram.json"
 CARPETA = RAIZ / "redes" / "instagram"
 LETRAS = Path(__file__).resolve().parent / "letras"
 ICONO = RAIZ / "icons" / "icono-512.png"
-API = "https://graph.instagram.com"
+API = "https://graph.instagram.com"          # token de «inicio de sesión de Instagram» (empieza por IG)
+API_FB = "https://graph.facebook.com"        # token de «inicio de sesión de Facebook» (página vinculada a Instagram)
 REPO_RAW = "https://raw.githubusercontent.com/alvaro-glezz/lonjas-cyl/{sha}/"
 DIAS_MAX = 3                       # no se publican sesiones más antiguas
 COMPARA = ["trigo", "cebada", "maiz", "centeno"]
@@ -294,7 +299,8 @@ class ErrorInstagram(RuntimeError):
 def llamar(metodo: str, ruta: str, token: str, **params) -> dict:
     import requests
     params["access_token"] = token
-    r = (requests.post if metodo == "POST" else requests.get)(f"{API}/{ruta}", data=params if metodo == "POST" else None,
+    url = ruta if ruta.startswith("https://") else f"{API}/{ruta}"
+    r = (requests.post if metodo == "POST" else requests.get)(url, data=params if metodo == "POST" else None,
                                                              params=None if metodo == "POST" else params, timeout=60)
     try:
         j = r.json()
@@ -303,13 +309,14 @@ def llamar(metodo: str, ruta: str, token: str, **params) -> dict:
     if r.status_code >= 400 or "error" in j:
         e = j.get("error") or {}
         # Nunca se imprime el token: solo la ruta y el mensaje de error de Instagram
-        raise ErrorInstagram(f"Instagram {ruta.split('?')[0]}: {e.get('message') or r.status_code} (código {e.get('code')})")
+        raise ErrorInstagram(f"Instagram {ruta.split('?')[0].rsplit('/', 1)[-1]}: {e.get('message') or r.status_code} (código {e.get('code')})")
     return j
 
 
-def esperar_contenedor(cid: str, token: str, llamar=llamar, espera=time.sleep) -> None:
+def esperar_contenedor(cid: str, token: str, llamar=llamar, espera=time.sleep, ig: str = "me") -> None:
+    base = ig.rsplit("/", 1)[0] + "/" if ig.startswith("https://") else ""
     for _ in range(30):
-        st = llamar("GET", cid, token, fields="status_code").get("status_code")
+        st = llamar("GET", base + cid, token, fields="status_code").get("status_code")
         if st in (None, "FINISHED"):
             return
         if st in ("ERROR", "EXPIRED"):
@@ -318,17 +325,35 @@ def esperar_contenedor(cid: str, token: str, llamar=llamar, espera=time.sleep) -
     raise ErrorInstagram("Instagram tardó demasiado en procesar la imagen")
 
 
-def publicar_item(item: dict, base_url: str, token: str, llamar=llamar, espera=time.sleep) -> str:
+def cuenta(token: str, llamar=llamar) -> tuple[str, str, str]:
+    """(dirección de la cuenta en la API, token con el que publicar, tipo).
+
+    * Token de «inicio de sesión de Instagram» (empieza por «IG»): graph.instagram.com/me.
+    * Token de «inicio de sesión de Facebook» (empieza por «EAA»): de página o de usuario. Se busca la página
+      que tiene vinculada la cuenta de Instagram y se publica con el token de esa página."""
+    if token.startswith("IG"):
+        return f"{API}/me", token, "instagram"
+    yo = llamar("GET", f"{API_FB}/me", token, fields="id,instagram_business_account")
+    if yo.get("instagram_business_account"):
+        return f"{API_FB}/{yo['instagram_business_account']['id']}", token, "pagina"
+    for pag in llamar("GET", f"{API_FB}/me/accounts", token, fields="access_token,instagram_business_account").get("data", []):
+        if pag.get("instagram_business_account") and pag.get("access_token"):
+            return f"{API_FB}/{pag['instagram_business_account']['id']}", pag["access_token"], "usuario"
+    raise ErrorInstagram("Ninguna página de Facebook de este token tiene una cuenta de Instagram vinculada")
+
+
+def publicar_item(item: dict, base_url: str, token: str, llamar=llamar, espera=time.sleep, ig: str = "me") -> str:
     urls = [base_url + r for r in item["imagenes"]]
+    media, publicar_ = f"{ig}/media", f"{ig}/media_publish"
     if len(urls) == 1:
-        cid = llamar("POST", "me/media", token, image_url=urls[0], caption=item["texto"])["id"]
+        cid = llamar("POST", media, token, image_url=urls[0], caption=item["texto"])["id"]
     else:
-        hijos = [llamar("POST", "me/media", token, image_url=u, is_carousel_item="true")["id"] for u in urls[:10]]
+        hijos = [llamar("POST", media, token, image_url=u, is_carousel_item="true")["id"] for u in urls[:10]]
         for h in hijos:
-            esperar_contenedor(h, token, llamar, espera)
-        cid = llamar("POST", "me/media", token, media_type="CAROUSEL", children=",".join(hijos), caption=item["texto"])["id"]
-    esperar_contenedor(cid, token, llamar, espera)
-    return llamar("POST", "me/media_publish", token, creation_id=cid)["id"]
+            esperar_contenedor(h, token, llamar, espera, ig)
+        cid = llamar("POST", media, token, media_type="CAROUSEL", children=",".join(hijos), caption=item["texto"])["id"]
+    esperar_contenedor(cid, token, llamar, espera, ig)
+    return llamar("POST", publicar_, token, creation_id=cid)["id"]
 
 
 def en_internet(url: str, intentos: int = 30, espera=time.sleep) -> bool:
@@ -356,10 +381,23 @@ def renovar_token(estado: dict, token: str, hoy: date, llamar=llamar) -> None:
         estado["token_cambiado"] = hoy.isoformat()   # habría que guardar el token nuevo en GitHub: lo avisa avisar.py
 
 
-def publicar(estado: dict, token: str, base_url: str, hoy: date, llamar=llamar, espera=time.sleep) -> list[str]:
+def caducidad_fb(estado: dict, token: str, hoy: date, llamar=llamar) -> None:
+    """Token de Facebook: anota cuándo caduca (0 = no caduca, como el de página sacado de un token largo)."""
+    if estado.get("token_renovado") == hoy.isoformat():
+        return
+    d = llamar("GET", f"{API_FB}/debug_token", token, input_token=token).get("data", {})
+    estado["token_renovado"] = hoy.isoformat()
+    fin = d.get("expires_at") or 0
+    if fin:
+        estado["token_caduca"] = datetime.fromtimestamp(int(fin)).date().isoformat()
+    else:
+        estado.pop("token_caduca", None)
+
+
+def publicar(estado: dict, token: str, base_url: str, hoy: date, llamar=llamar, espera=time.sleep, ig: str = "me") -> list[str]:
     hechas = []
     for item in list(estado.get("preparado", [])):
-        mid = publicar_item(item, base_url, token, llamar, espera)
+        mid = publicar_item(item, base_url, token, llamar, espera, ig)
         if item["tipo"] == "sesion":
             estado.setdefault("publicado", {})[item["lonja"]] = item["fecha"]
         else:
@@ -392,6 +430,16 @@ def main(argv: list[str]) -> int:
         print("[instagram] Sin configurar (falta el secreto INSTAGRAM_TOKEN): no se prepara ni se publica nada.")
         return 0
     estado = json.loads(ESTADO.read_text(encoding="utf-8")) if ESTADO.is_file() else {}
+    if "--comprobar" in argv:      # prueba la conexión sin publicar nada
+        ig, tk, tipo = cuenta(token)
+        info = llamar("GET", ig, tk, fields="username,followers_count,media_count")
+        print(f"[instagram] Conectado a @{info.get('username')} (token de {tipo}) · {info.get('media_count')} publicaciones")
+        try:
+            caducidad_fb(estado, token, hoy) if tipo != "instagram" else renovar_token(estado, token, hoy)
+            print(f"[instagram] El token caduca: {estado.get('token_caduca') or 'no caduca'}")
+        except ErrorInstagram as e:
+            print(f"[instagram] No se pudo saber cuándo caduca el token: {e}")
+        return 0
     try:
         if "--preparar" in argv:
             lista = preparar(datos, estado, hoy)
@@ -406,9 +454,18 @@ def main(argv: list[str]) -> int:
                 if not base or not en_internet(base + primera, intentos=6):
                     print("[instagram] Las imágenes aún no están en internet: se publicarán en la próxima pasada.")
                 else:
-                    hechas = publicar(estado, token, base, hoy)
+                    ig, tk, tipo = cuenta(token)
+                    try:
+                        hechas = publicar(estado, tk, base, hoy, ig=ig)
+                        estado.pop("error", None)
+                    except ErrorInstagram as e:
+                        estado["error"] = {"fecha": hoy.isoformat(), "detalle": str(e)}
+                        raise
                     print(f"[instagram] Publicadas: {', '.join(hechas)}")
-            renovar_token(estado, token, hoy)
+            if token.startswith("IG"):
+                renovar_token(estado, token, hoy)
+            else:
+                caducidad_fb(estado, token, hoy)
             if estado.get("token_caduca"):
                 print(f"[instagram] El token caduca el {estado['token_caduca']}")
     finally:

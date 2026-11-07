@@ -120,3 +120,41 @@ def test_aviso_token_instagram(avisar):
     assert avisar.problema_instagram({"token_caduca": "2027-01-05"}, date(2026, 11, 6)) is None
     assert avisar.problema_instagram({"token_caduca": "2026-11-12"}, date(2026, 11, 6))["id"] == "instagram"
     assert avisar.problema_instagram({"token_cambiado": "2026-11-06"}, date(2026, 11, 6))["tipo"] == "token por renovar"
+
+
+def test_cuenta_con_token_de_facebook(ig):
+    def falsa(metodo, ruta, token, **p):
+        if ruta.endswith("/me"):
+            return {"id": "u1"} if token == "EAAusuario" else {"id": "pag1", "instagram_business_account": {"id": "1784"}}
+        if ruta.endswith("/me/accounts"):
+            return {"data": [{"id": "otra"}, {"id": "pag1", "access_token": "EAApagina", "instagram_business_account": {"id": "1784"}}]}
+        raise AssertionError(ruta)
+    assert ig.cuenta("IGabc", falsa) == ("https://graph.instagram.com/me", "IGabc", "instagram")
+    assert ig.cuenta("EAApagina", falsa) == ("https://graph.facebook.com/1784", "EAApagina", "pagina")
+    assert ig.cuenta("EAAusuario", falsa) == ("https://graph.facebook.com/1784", "EAApagina", "usuario")
+    with pytest.raises(ig.ErrorInstagram):
+        ig.cuenta("EAAusuario", lambda m, r, t, **p: {"data": []} if r.endswith("accounts") else {"id": "u"})
+
+
+def test_publicar_por_facebook(ig, tmp_path):
+    estado = {}
+    ig.preparar(_datos(), estado, date(2026, 11, 5), tmp_path)
+    rutas = []
+
+    def falsa(metodo, ruta, token, **p):
+        rutas.append(ruta)
+        if ruta.endswith("/media"):
+            return {"id": "c9"}
+        if ruta.endswith("/media_publish"):
+            return {"id": "m9"}
+        return {"status_code": "FINISHED"}
+
+    ig.publicar(estado, "EAApagina", "https://web.es/", date(2026, 11, 5), llamar=falsa, espera=lambda s: None,
+                ig="https://graph.facebook.com/1784")
+    assert "https://graph.facebook.com/1784/media" in rutas and "https://graph.facebook.com/1784/media_publish" in rutas
+    assert "https://graph.facebook.com/c9" in rutas            # comprobación del contenedor en el mismo servidor
+
+
+def test_aviso_si_falla_la_publicacion(avisar):
+    p = avisar.problema_instagram({"error": {"fecha": "2026-11-07", "detalle": "Invalid OAuth access token"}}, date(2026, 11, 7))
+    assert p["tipo"] == "no publica" and "Invalid OAuth" in p["detalle"]
