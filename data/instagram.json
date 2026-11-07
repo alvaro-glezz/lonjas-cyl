@@ -1,0 +1,35 @@
+{
+ "preparado": [
+  {
+   "fecha": "2026-11-04",
+   "id": "2026-11-04-leon",
+   "imagenes": [
+    "redes/instagram/2026-11-04-leon.jpg"
+   ],
+   "lonja": "leon",
+   "texto": "📊 Lonja de León · sesión del miércoles 4 nov\n\nTrigo Pienso: 226 €/t ▼ −2\nCebada: 221 €/t ▼ −1\nAvena: 200 €/t ▼ −2\nCenteno: 197 €/t =\nTriticale: 216 €/t ▼ −2\nGirasol: 500 €/t =\nAlfalfa paquete rama: 225 €/t =\nPaja 1ª (Cebada): 65 €/t =\n\n▲ 2 suben · ▼ 11 bajan · = 51 repiten\n\n📍 Todos los precios y la comparativa entre lonjas, en el enlace de la bio (lonjas-cyl-khaki.vercel.app).\nAvisos gratis en Telegram: t.me/lonjas_cyl\nFuente: Lonja de León. Precios orientativos: confírmalos con tu lonja o comprador.\n\n#León #cereales #lonjaLeón #lonjas #CastillayLeón #preciosagrarios #agricultura #ganadería #campo",
+   "tipo": "sesion"
+  },
+  {
+   "fecha": "2026-11-05",
+   "id": "2026-11-05-segovia",
+   "imagenes": [
+    "redes/instagram/2026-11-05-segovia.jpg"
+   ],
+   "lonja": "segovia",
+   "texto": "📊 Lonja de Segovia · sesión del jueves 5 nov\n\nTrigo pienso 72 kg/hl: 229 €/t ▼ −2\nCebada 62 kg/hl: 221 €/t ▼ −2\nAvena: 198 €/t ▼ −2\nCenteno: 207 €/t ▼ −2\nGirasol 9-2-44: 500 €/t ▼ −2\nAlfalfa empacada: 215 €/t =\nPaja empacada: 67 €/t =\nCerdo normal: 1,135 €/kg vivo ▼ −0,035\n\n▲ 9 suben · ▼ 11 bajan · = 7 repiten\n\n📍 Todos los precios y la comparativa entre lonjas, en el enlace de la bio (lonjas-cyl-khaki.vercel.app).\nAvisos gratis en Telegram: t.me/lonjas_cyl\nFuente: Lonja de Segovia. Precios orientativos: confírmalos con tu lonja o comprador.\n\n#Segovia #cereales #lonjaSegovia #lonjas #CastillayLeón #preciosagrarios #agricultura #ganadería #campo",
+   "tipo": "sesion"
+  },
+  {
+   "id": "2026-W45-comparativa",
+   "imagenes": [
+    "redes/instagram/2026-W45-trigo.jpg",
+    "redes/instagram/2026-W45-cebada.jpg",
+    "redes/instagram/2026-W45-centeno.jpg"
+   ],
+   "semana": "2026-W45",
+   "texto": "🌾 ¿Dónde se paga más esta semana?\n\nTrigo (€/t): Salamanca 236 · Segovia 229 · León 226 → 10 de diferencia\nCebada (€/t): Salamanca 231 · León 221 · Segovia 221 → 10 de diferencia\nCenteno (€/t): Salamanca 221 · Segovia 207 · León 197 → 24 de diferencia\n\nCada lonja cotiza su propia calidad: mira también la descripción del producto en la app.\n\n📍 Todos los precios y la comparativa entre lonjas, en el enlace de la bio (lonjas-cyl-khaki.vercel.app).\nAvisos gratis en Telegram: t.me/lonjas_cyl\nPrecios orientativos de las últimas sesiones de cada lonja.\n\n#trigo #cebada #cereales #comparativa #lonjas #CastillayLeón #preciosagrarios #agricultura #ganadería #campo",
+   "tipo": "comparativa"
+  }
+ ]
+}
