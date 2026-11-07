@@ -824,6 +824,7 @@ async function pintarHistDetalle(f) {
   const linea = lineaDe(id, "todo", "pino");
   caja.innerHTML = `<div class="etiqueta">Histórico oficial ${HIST.indice.anios[0]}–${HIST.indice.anios.at(-1)} · Junta de CyL</div>
     <p class="nota">${esc(s.p)} · ${esc(s.u)}${s.factor !== 1 ? ` (la Junta lo publica en ${esc(s.uJunta)})` : ""}. Último: <b class="num">${valorTxt(u, s.u)}</b> · interanual <span class="var ${via.clase}">${via.txt}</span></p>
+    ${typeof lineaTermometro === "function" ? lineaTermometro(id) : ""}
     <div class="grafico">${graficoHist([linea], { unidad: s.u, contexto: "detalle", banda: true, etiqueta: `Histórico de ${s.p} en ${lonjaH(s.l).nombre}`,
       titulo: `${s.p} · ${lonjaH(s.l).nombre}`, subtitulo: `${s.u} · histórico oficial`, archivo: `${s.p}-${nombreCorto(id)}-historico` })}</div>
     <button class="chip auto" type="button" data-h-abrir="${esc(f.clave)}" data-h-lonja-app="${esc(f.lonja.id)}">Ver en Histórico</button>`;

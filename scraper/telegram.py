@@ -47,7 +47,7 @@ def linea(p: dict) -> str:
     return f"{escape(p['producto'], quote=False)}: <b>{num(p['act'])}</b> {escape(p.get('unidad', ''), quote=False)} {flecha(p)}".rstrip()
 
 
-def mensaje_sesion(l: dict, web: str = WEB) -> str:
+def mensaje_sesion(l: dict, web: str = WEB, robot: str | None = None) -> str:
     """Resumen de una sesión: productos principales, lo que más se mueve, balance y enlaces."""
     con = [p for p in l.get("precios", []) if p.get("act") is not None]
     principales = sorted((p for p in con if p.get("clave") in PRINCIPALES), key=lambda p: PRINCIPALES.index(p["clave"]))[:8]
@@ -66,6 +66,8 @@ def mensaje_sesion(l: dict, web: str = WEB) -> str:
     partes += ["", f"▲ {suben} suben · ▼ {bajan} bajan · = {iguales} repiten",
                f"Todos los precios: {web}lonja/{l['id']}/",
                f"Fuente: {escape(l.get('nota') or l.get('nombre', ''), quote=False)} · precios orientativos"]
+    if robot:
+        partes.append(f"🔔 Tus propios avisos de precio: t.me/{robot}")
     return "\n".join(partes)[:4000]
 
 
@@ -95,8 +97,16 @@ def llamar(token: str, metodo: str, cuerpo: dict) -> dict:
 
 def publicar(datos: dict, estado: dict, token: str, canal: str, hoy: date, llamar=llamar) -> list[str]:
     hechas = []
-    for l in pendientes(datos, estado, hoy):
-        llamar(token, "sendMessage", {"chat_id": canal, "text": mensaje_sesion(l), "parse_mode": "HTML",
+    lista = pendientes(datos, estado, hoy)
+    robot = None
+    if lista:
+        try:
+            u = (llamar(token, "getMe", {}) or {}).get("username")
+            robot = u if isinstance(u, str) and re.fullmatch(r"[A-Za-z0-9_]{5,32}", u) else None
+        except Exception:  # noqa: BLE001 - sin el enlace al robot el mensaje sigue valiendo
+            robot = None
+    for l in lista:
+        llamar(token, "sendMessage", {"chat_id": canal, "text": mensaje_sesion(l, robot=robot), "parse_mode": "HTML",
                                       "disable_web_page_preview": True})
         estado.setdefault("publicado", {})[l["id"]] = l["fecha"]
         hechas.append(l["id"])

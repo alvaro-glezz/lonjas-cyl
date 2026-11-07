@@ -149,7 +149,8 @@ function seccionAvisos() {
   const avisos = leerAvisos();
   if (!avisos.length) {
     return `<section class="seccion"><div class="titulo-seccion"><h2>Mis avisos</h2><span>0</span></div>
-      <div class="vacio"><b>Sin avisos de precio</b>Abre cualquier producto y pon el precio al que quieres vender o comprar: la app te avisa cuando la lonja llegue a él.</div></section>`;
+      <div class="vacio"><b>Sin avisos de precio</b>Abre cualquier producto y pon el precio al que quieres vender o comprar: la app te avisa cuando la lonja llegue a él.</div>
+      <p class="nota">¿Tienes iPhone o quieres el aviso aunque no abras la app? Únete al canal <a href="https://t.me/lonjas_cyl" target="_blank" rel="noopener noreferrer">t.me/lonjas_cyl</a> y escribe al robot del canal, por ejemplo: <i>/aviso trigo salamanca 240</i>.</p></section>`;
   }
   return `<section class="seccion"><div class="titulo-seccion"><h2>Mis avisos</h2><span>${avisos.length}</span></div>
     <div class="tablilla">${avisos.map(a => {
@@ -161,7 +162,8 @@ function seccionAvisos() {
         <button class="chip" type="button" data-aviso-borrar="${esc(a.id)}" aria-label="Quitar aviso de ${esc(f.producto)}">Quitar</button>
       </div>`;
     }).join("")}</div>
-    <p class="nota">${esc(textoPermiso())}</p></section>`;
+    <p class="nota">${esc(textoPermiso())}</p>
+    <p class="nota">¿Tienes iPhone o quieres el aviso aunque no abras la app? Únete al canal <a href="https://t.me/lonjas_cyl" target="_blank" rel="noopener noreferrer">t.me/lonjas_cyl</a> y escribe al robot del canal, por ejemplo: <i>/aviso trigo salamanca 240</i>.</p></section>`;
 }
 /** Avisos cumplidos, arriba del todo en «Hoy». */
 function bloqueAvisosCumplidos() {

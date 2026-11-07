@@ -65,6 +65,14 @@ jobs:
           TELEGRAM_TOKEN: ${{ secrets.TELEGRAM_TOKEN }}
           TELEGRAM_CANAL: '@lonjas_cyl'   # canal público t.me/lonjas_cyl (no es secreto)
         run: python scraper/telegram.py
+      # Avisos personales del robot de Telegram («/aviso trigo 240»). Sin los secretos de Upstash no hace nada.
+      - name: Avisos personales por Telegram
+        continue-on-error: true
+        env:
+          TELEGRAM_TOKEN: ${{ secrets.TELEGRAM_TOKEN }}
+          UPSTASH_REDIS_REST_URL: ${{ secrets.UPSTASH_REDIS_REST_URL }}
+          UPSTASH_REDIS_REST_TOKEN: ${{ secrets.UPSTASH_REDIS_REST_TOKEN }}
+        run: python scraper/avisos_telegram.py
       # Instagram (1/2): crea las imágenes de lo que toca publicar. Sin el secreto INSTAGRAM_TOKEN no hace nada.
       - name: Imágenes para Instagram
         continue-on-error: true

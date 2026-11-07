@@ -187,6 +187,7 @@ function vistaHoy() {
       <div class="titulo-seccion"><h2>Pizarra de la semana</h2><span>Toca un producto para comparar</span></div>
       <div class="pizarra">${fichas}</div>
     </section>
+    ${typeof seccionHerramientas === "function" ? seccionHerramientas() : ""}
     ${typeof seccionTitulares === "function" ? seccionTitulares() : ""}
     ${typeof bloquePlazos === "function" ? bloquePlazos() : ""}
     <section class="seccion">
@@ -404,7 +405,8 @@ function vistaComparar() {
       <div class="comparativa">${filasCmp || '<div class="vacio sin-borde">No hay cotizaciones de este producto ahora mismo.</div>'}</div>
       <p class="nota">La barra dorada marca el precio más alto. Fíjate en la descripción bajo cada lonja: un «trigo pienso» en almacén y un «trigo tipo III» en origen no son exactamente el mismo producto.</p>
       ${CLAVE_A_JUNTA[estado.clave] ? `<button class="chip auto" type="button" data-h-abrir="${esc(estado.clave)}">Ver su evolución en el histórico 2025–2026</button>` : ""}
-    </section>`;
+    </section>
+    ${typeof bloqueDiferencias === "function" ? bloqueDiferencias(estado.clave) : ""}`;
 }
 
 function vistaFavoritos() {
@@ -482,6 +484,9 @@ function router() {
   else if (h === "plazos" && typeof vistaPlazos === "function") { html = vistaPlazos(); seccion = "hoy"; }
   else if (h === "datos" && typeof vistaDatos === "function") { html = vistaDatos(); seccion = "lonjas"; }
   else if (h === "calculadora" && typeof vistaCalculadora === "function") { html = vistaCalculadora(); seccion = "hoy"; }
+  else if (h === "oferta" && typeof vistaOferta === "function") { html = vistaOferta(); seccion = "hoy"; }
+  else if (h === "explotacion" && typeof vistaExplotacion === "function") { html = vistaExplotacion(); seccion = "hoy"; }
+  else if (h === "termometro" && typeof vistaTermometro === "function") { html = vistaTermometro(); seccion = "hoy"; }
   else if (h === "comparar") html = vistaComparar();
   else if (h.startsWith("comparar-")) { estado.clave = h.slice(9); html = vistaComparar(); seccion = "comparar"; }  // enlace directo desde las páginas de precios
   else if (h === "favoritos") html = vistaFavoritos();
@@ -492,6 +497,7 @@ function router() {
   document.querySelectorAll("[data-w]").forEach(el => { el.style.width = Math.min(100, Math.max(0, Number(el.dataset.w) || 0)) + "%"; });
   document.querySelectorAll(".navegacion a").forEach(a => a.dataset.vista === seccion ? a.setAttribute("aria-current", "page") : a.removeAttribute("aria-current"));
   if (typeof trasPintar === "function") trasPintar(h);
+  if (typeof trasPintarHerramientas === "function") trasPintarHerramientas(h);
 }
 function ir(h) { if (location.hash.slice(1) === h) router(); else location.hash = h; window.scrollTo(0, 0); }
 

@@ -112,3 +112,13 @@ Para arreglarlo hay dos salidas:
 - **Datos abiertos** (`data/abiertos/`, los genera `scraper/datos_abiertos.py` en cada pasada): `precios.csv` y `historial.csv` (separador `;`, decimales con coma, se abren con Excel) y `precios.json`. En la app: *Lonjas → Datos abiertos y widget*.
 - **Widget** (`widget/`): tabla de precios para insertar en otras webs con un `<iframe>`. Parámetros: `lonja`, `p` (productos), `tema=oscuro`, `max`. El código se genera en *Datos abiertos y widget*.
 - **Telegram**: `scraper/telegram.py` publica en el canal cada sesión nueva; `api/telegram.js` (función de Vercel) responde a los mensajes del robot. Se activa con los secretos `TELEGRAM_TOKEN`, `TELEGRAM_CANAL` y `TELEGRAM_SECRETO` en GitHub, `TELEGRAM_SECRETO` en Vercel, y la tarea *Configurar Telegram*. Sin secretos no hace nada.
+
+## Herramientas para decidir
+
+En *Hoy → Para decidir* (`herramientas.js`, sin servidor; lo que escribe el usuario se queda en su teléfono):
+
+- **¿Me están pagando bien?** (`#oferta`): la oferta del almacén frente a la media, la más alta y cada lonja de esta semana, y lo que supone en euros para su cantidad.
+- **Mi explotación** (`#explotacion`): existencias valoradas con la media, la lonja que más paga o una lonja concreta, y el cambio desde la sesión anterior.
+- **¿Caro o barato?** (`#termometro`): el último precio frente a todas las semanas del histórico oficial de la Junta (y las sesiones recientes) de los dos últimos años, con mínimo, máximo y variación interanual. No es una previsión.
+- **Diferencias habituales** (en *Comparar*): cuánto paga de media una lonja más que otra en las semanas en que cotizaron las dos, y si esta semana la diferencia es la habitual.
+- **Avisos personales por Telegram**: «/aviso trigo salamanca 240», «/avisos», «/borrar 1» en el robot (`api/telegram.js`, guardados en Upstash Redis). `scraper/avisos_telegram.py` los revisa después de cada lectura. Necesita Upstash conectado en Vercel y los secretos `UPSTASH_REDIS_REST_URL` y `UPSTASH_REDIS_REST_TOKEN` en GitHub.

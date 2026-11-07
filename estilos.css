@@ -423,3 +423,49 @@ button.plazo:hover { border-color: var(--pino); }
 .codigo { width: 100%; font: 12.5px/1.45 ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace; color: var(--tinta); background: var(--hoja);
   border: 1px solid var(--linea); border-radius: 10px; padding: 10px; resize: vertical; overflow-wrap: anywhere; }
 .metodo .campo { display: grid; gap: 4px; margin-bottom: 8px; }
+
+/* ---------- herramientas para decidir ---------- */
+.herrs { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px; }
+.herr { display: grid; gap: 4px; align-content: start; text-align: left; font: inherit; color: inherit; cursor: pointer;
+  background: var(--hoja); border: 1px solid var(--linea); border-radius: 14px; padding: 12px 14px; box-shadow: var(--sombra); }
+.herr:hover { border-color: var(--pino); }
+.herr > b { font: 700 18px/1.15 var(--cifra); text-transform: uppercase; letter-spacing: .02em; color: var(--pino); }
+.herr small { font-size: 13px; color: var(--tenue); line-height: 1.35; }
+.herr small b { color: var(--tinta); font-size: 15px; }
+.sub-h { margin: 20px 0 8px; font: 700 17px/1.2 var(--cifra); text-transform: uppercase; letter-spacing: .05em; color: var(--pino); }
+.veredicto { border-radius: 14px; padding: 14px 16px; margin: 12px 0; border: 1px solid var(--linea); background: var(--hoja); }
+.veredicto > b { display: block; font: 700 24px/1.1 var(--cifra); text-transform: uppercase; letter-spacing: .02em; }
+.veredicto p { margin: 6px 0 0; line-height: 1.45; }
+.veredicto.bien { background: var(--sube-suave); border-color: transparent; } .veredicto.bien > b { color: var(--sube); }
+.veredicto.mal { background: var(--baja-suave); border-color: transparent; } .veredicto.mal > b { color: var(--baja); }
+.veredicto.igual { background: var(--pino-suave); border-color: transparent; } .veredicto.igual > b { color: var(--pino); }
+.veredicto .grande { font-size: 34px; color: var(--tinta); }
+.oferta-tabla, .partidas, .termos, .difs { display: grid; gap: 8px; }
+.oferta-fila, .partida { display: grid; grid-template-columns: 1fr auto auto; gap: 10px; align-items: center; background: var(--hoja);
+  border: 1px solid var(--linea); border-radius: 12px; padding: 10px 12px; cursor: pointer; }
+.partida { cursor: default; }
+.partida.apagada { opacity: .7; grid-template-columns: 1fr auto; }
+.oferta-fila .precio { font: 700 20px var(--cifra); }
+.oferta-fila .var { min-width: 64px; text-align: right; font-weight: 600; font-size: 14px; }
+.prod small { display: block; color: var(--tenue); font-size: 12.5px; }
+.valor-partida { text-align: right; } .valor-partida b { font: 700 20px var(--cifra); display: block; } .valor-partida small { font-size: 13px; font-weight: 600; }
+.termo-fila { display: grid; grid-template-columns: 1fr auto auto; grid-template-areas: "prod precio pill" "barra barra barra" "texto texto texto";
+  gap: 6px 10px; align-items: center; text-align: left; font: inherit; color: inherit; cursor: pointer; width: 100%;
+  background: var(--hoja); border: 1px solid var(--linea); border-radius: 12px; padding: 10px 12px; }
+.termo-fila:hover { border-color: var(--pino); }
+.termo-fila .prod { grid-area: prod; } .termo-fila .precio { grid-area: precio; font: 700 20px var(--cifra); text-align: right; }
+.termo-fila .precio small { display: block; font: 400 11px var(--texto); color: var(--tenue); }
+.termo-fila .pastilla { grid-area: pill; }
+.termo { grid-area: barra; display: block; height: 8px; border-radius: 4px; overflow: hidden;
+  background: linear-gradient(90deg, var(--baja-suave), var(--pino-suave) 50%, var(--sube-suave)); }
+.termo i { display: block; height: 100%; border-radius: 4px; background: var(--tenue); }
+.termo i.alto, .termo i.algo-alto { background: var(--sube); } .termo i.bajo, .termo i.algo-bajo { background: var(--baja); } .termo i.normal { background: var(--pino); }
+.termo-texto { grid-area: texto; font-size: 13px; color: var(--tenue); line-height: 1.4; }
+.termo-alto, .termo-algo-alto { background: var(--sube-suave); color: var(--sube); }
+.termo-bajo, .termo-algo-bajo { background: var(--baja-suave); color: var(--baja); }
+.termo-normal { background: var(--pino-suave); color: var(--pino); }
+.termo-detalle .pastilla { margin-right: 4px; }
+.dif { background: var(--hoja); border: 1px solid var(--linea); border-radius: 12px; padding: 10px 12px; }
+.dif p { margin: 0; line-height: 1.45; font-size: 14.5px; }
+.dif-ahora { display: inline-block; margin-top: 6px; font-size: 13px; font-weight: 600; padding: 2px 8px; border-radius: 999px; background: var(--pino-suave); color: var(--pino); }
+.dif-ahora.s { background: var(--sube-suave); color: var(--sube); } .dif-ahora.b { background: var(--baja-suave); color: var(--baja); }
