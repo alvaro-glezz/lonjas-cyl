@@ -1,15 +1,7 @@
 {
  "comparativa": "2026-W45",
- "franja": "reel",
- "preparado": [
-  {
-   "id": "2026-11-07-reel-movimientos",
-   "reel": "movimientos",
-   "texto": "📊 Lo que más se ha movido esta semana en las lonjas de Castilla y León\n\n▲ Oveja desvieje 2ª (Segovia): +4,8 % · 1,10 €/kg vivo\n▲ Oveja desvieje 1ª (Segovia): +3,0 % · 1,70 €/kg vivo\n▲ Cochinillos sin hierro (Segovia): +3,0 % · 34 €/ud\n▼ Cerda desvieje primera (Segovia): −22,2 % · 0,14 €/kg vivo\n▼ Cerda desvieje extra (Segovia): −14,8 % · 0,23 €/kg vivo\n▼ Cerdas de desvieje (Lerma): −8,3 % · 0,33 €/kg vivo\n\nCambio frente a la sesión anterior de cada lonja.\n\n📍 Todos los precios y la comparativa entre lonjas, en el enlace de la bio (lonjas-cyl-khaki.vercel.app).\nAvisos gratis en Telegram: t.me/lonjas_cyl\nPrecios orientativos.\n🔊 Voz generada por ordenador.\n\n#reels #mercadoagrario #precios #lonjas #CastillayLeón #preciosagrarios #agricultura #ganadería #campo",
-   "tipo": "reel",
-   "video": "2026-11-07-reel-movimientos.mp4"
-  }
- ],
+ "franja": "historias-todas",
+ "preparado": [],
  "publicado": {
   "leon": "2026-11-04",
   "segovia": "2026-11-05"
