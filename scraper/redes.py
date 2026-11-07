@@ -43,8 +43,9 @@ PRODUCTO_REEL = ["cebada", "maiz", "trigo", "cerdo-normal", "centeno", "lechazo"
 ARTICULO = {k: v[0] for k, v in PRODUCTOS.items()}                                  # «del trigo», «de la cebada»…
 VW, VH, FPS, SEGUNDOS = 1080, 1920, 30, 12
 PORTADA, CIERRE = 2.4, 2.6          # segundos de la portada y del cierre del reel
-# Voz: Piper con la voz española «davefx» (licencia CC0). La tarea la descarga y pone su ruta en PIPER_MODELO.
-AVISO_VOZ = "🔊 Voz generada por ordenador."
+# Voz: Piper con la voz española «sharvard», hablante de mujer (1). Licencia CC BY 3.0 (corpus Sharvard): hay que citarla,
+# y va en AVISO_VOZ. La tarea la descarga y pone su ruta en PIPER_MODELO (y PIPER_HABLANTE=1).
+AVISO_VOZ = "🔊 Voz generada por ordenador (voz «sharvard» de Piper, corpus Sharvard, licencia CC BY 3.0)."
 
 
 # ---------- datos ----------
@@ -283,8 +284,9 @@ def voz(texto: str, destino: Path) -> Path | None:
     destino.parent.mkdir(parents=True, exist_ok=True)
     # Ritmo natural (1.0), poca pausa entre frases y algo más de variación en la entonación (noise-w).
     e = os.environ.get
-    opciones = ["--length-scale", e("PIPER_RITMO", "0.95"), "--sentence-silence", e("PIPER_PAUSA", "0.05"),
-                "--noise-scale", e("PIPER_RUIDO", "0.667"), "--noise-w-scale", e("PIPER_RUIDO_W", "1.0")]
+    # Ajuste «C3 · viva», elegido por el dueño el 7 nov: más ágil, sin pausas entre frases, entonación más variada.
+    opciones = ["--length-scale", e("PIPER_RITMO", "0.90"), "--sentence-silence", e("PIPER_PAUSA", "0.0"),
+                "--noise-scale", e("PIPER_RUIDO", "0.75"), "--noise-w-scale", e("PIPER_RUIDO_W", "1.2")]
     if os.environ.get("PIPER_HABLANTE"):
         opciones += ["-s", os.environ["PIPER_HABLANTE"]]
     r = subprocess.run([sys.executable, "-m", "piper", "-m", modelo, "-f", str(destino), *opciones],

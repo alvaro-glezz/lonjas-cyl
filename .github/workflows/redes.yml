@@ -47,20 +47,22 @@ jobs:
       - run: pip install -q -r scraper/requirements.txt
       - name: ffmpeg (para los reels)
         run: command -v ffmpeg || (sudo apt-get update -qq && sudo apt-get install -y -qq ffmpeg)
-      # Voz de los reels: Piper con la voz española «davefx» (licencia CC0). Si falla, el reel sale solo con música.
+      # Voz de los reels: Piper, voz española «sharvard», hablante de mujer (licencia CC BY 3.0, se cita en el texto).
+      # Si falla, el reel sale solo con música.
       - uses: actions/cache@v4
         with:
           path: ~/voces
-          key: piper-davefx-medium-a31bce3
+          key: piper-sharvard-medium-1
       - name: Voz (Piper)
         continue-on-error: true
         run: |
           pip install -q "piper-tts==1.8.0"
           mkdir -p ~/voces && cd ~/voces
-          B=https://huggingface.co/rhasspy/piper-voices/resolve/a31bce3ed50c05399b2a830efd1c607df03cf4b5/es/es_ES/davefx/medium
-          [ -s es_ES-davefx-medium.onnx ] || curl -sSfLO "$B/es_ES-davefx-medium.onnx"
-          [ -s es_ES-davefx-medium.onnx.json ] || curl -sSfLO "$B/es_ES-davefx-medium.onnx.json"
-          echo "Hola." | python -m piper -m es_ES-davefx-medium.onnx -f prueba.wav && echo "PIPER_MODELO=$HOME/voces/es_ES-davefx-medium.onnx" >> "$GITHUB_ENV"
+          B=https://huggingface.co/rhasspy/piper-voices/resolve/main/es/es_ES/sharvard/medium
+          [ -s es_ES-sharvard-medium.onnx ] || curl -sSfLO "$B/es_ES-sharvard-medium.onnx"
+          [ -s es_ES-sharvard-medium.onnx.json ] || curl -sSfLO "$B/es_ES-sharvard-medium.onnx.json"
+          echo "Hola." | python -m piper -m es_ES-sharvard-medium.onnx -s 1 -f prueba.wav && {
+            echo "PIPER_MODELO=$HOME/voces/es_ES-sharvard-medium.onnx"; echo "PIPER_HABLANTE=1"; } >> "$GITHUB_ENV"
       - name: Crear la publicación de esta franja
         env:
           INSTAGRAM_TOKEN: ${{ secrets.INSTAGRAM_TOKEN }}
