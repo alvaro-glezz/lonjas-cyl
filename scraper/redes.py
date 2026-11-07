@@ -268,8 +268,9 @@ def guion_movimientos(m: dict) -> str:
 
 
 def para_leer(texto: str) -> str:
-    """Lo que la voz no debe leer letra a letra."""
-    return texto.replace("Lonjas CyL", "Lonjas Castilla y León").replace("CyL", "Castilla y León")
+    """Lo que la voz no debe leer letra a letra. Con PIPER_COMAS=si, «;» pasa a «,» (pausas más cortas, más fluido)."""
+    texto = texto.replace("Lonjas CyL", "Lonjas Castilla y León").replace("CyL", "Castilla y León")
+    return texto.replace(";", ",") if os.environ.get("PIPER_COMAS", "si") == "si" else texto
 
 
 def voz(texto: str, destino: Path) -> Path | None:
@@ -279,8 +280,9 @@ def voz(texto: str, destino: Path) -> Path | None:
         return None
     destino.parent.mkdir(parents=True, exist_ok=True)
     # Ritmo natural (1.0), poca pausa entre frases y algo más de variación en la entonación (noise-w).
-    opciones = ["--length-scale", os.environ.get("PIPER_RITMO", "1.0"), "--sentence-silence", "0.12",
-                "--noise-scale", "0.6", "--noise-w-scale", "0.9"]
+    e = os.environ.get
+    opciones = ["--length-scale", e("PIPER_RITMO", "0.95"), "--sentence-silence", e("PIPER_PAUSA", "0.05"),
+                "--noise-scale", e("PIPER_RUIDO", "0.667"), "--noise-w-scale", e("PIPER_RUIDO_W", "1.0")]
     if os.environ.get("PIPER_HABLANTE"):
         opciones += ["-s", os.environ["PIPER_HABLANTE"]]
     r = subprocess.run([sys.executable, "-m", "piper", "-m", modelo, "-f", str(destino), *opciones],
