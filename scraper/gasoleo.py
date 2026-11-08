@@ -26,6 +26,7 @@ URL = ("https://sedeaplicaciones.minetur.gob.es/ServiciosRESTCarburantes/Precios
 FUENTE = "Ministerio para la Transición Ecológica y el Reto Demográfico (Geoportal de gasolineras)"
 FUENTE_URL = "https://geoportalgasolineras.es/geoportal-instalaciones/Inicio"
 DIAS_HISTORIAL = 400
+MARGEN = 0.20                      # precio anómalo: más de un 20 % lejos de la mediana de la provincia
 CYL = ["05", "09", "24", "34", "37", "40", "42", "47", "49"]
 
 # Código INE de provincia -> nombre para mostrar
@@ -58,17 +59,28 @@ def bonito(t: str) -> str:
     return " ".join(p if (i and p in MINUSCULAS) else p[:1].upper() + p[1:] for i, p in enumerate(pal))
 
 
+def localidad(t: str) -> str:
+    """«BAÑEZA (LA)» -> «La Bañeza»; «ROA» -> «Roa»."""
+    t = bonito(t)
+    if t.endswith(")") and "(" in t:
+        base, art = t[:-1].rsplit("(", 1)
+        art = art.strip()
+        if art.lower() in ("la", "el", "los", "las", "o", "a", "os", "as", "l'"):
+            t = f"{art[:1].upper()}{art[1:].lower()} {base.strip()}"
+    return t
+
+
 def nombre_gasolinera(e: dict) -> str:
     """El rótulo; si es solo un número de registro («Nº 10.935») o está vacío, «Gasolinera de <localidad>»."""
     r = bonito(e.get("Rótulo", ""))
     if not r or r.lower().startswith(("nº", "n°", "no ")) or r.replace(".", "").replace(" ", "").isdigit():
-        return f"Gasolinera de {bonito(e.get('Localidad') or e.get('Municipio') or '')}".strip()
+        return f"Gasolinera de {localidad(e.get('Localidad') or e.get('Municipio') or '')}".strip()
     return r
 
 
 def estacion(e: dict, precio: float) -> dict:
     return {"nombre": nombre_gasolinera(e), "precio": precio, "direccion": bonito(e.get("Dirección", "")),
-            "localidad": bonito(e.get("Localidad") or e.get("Municipio") or ""), "cp": e.get("C.P.", ""),
+            "localidad": localidad(e.get("Localidad") or e.get("Municipio") or ""), "cp": e.get("C.P.", ""),
             "horario": (e.get("Horario") or "").strip(), "lat": numero(e.get("Latitud")), "lon": numero(e.get("Longitud (WGS84)"))}
 
 
@@ -81,6 +93,14 @@ def resumir(respuesta: dict) -> dict:
         if p is None or not 0.3 < p < 4 or prov not in PROVINCIAS or e.get("Tipo Venta", "P") != "P":
             continue
         por_prov.setdefault(prov, []).append((p, e))
+    # Precios anómalos: más de un 20 % por debajo o por encima de la mediana de su provincia (suelen ser precios sin
+    # actualizar o errores al comunicarlos). No cuentan para la media ni para «la más barata»; se dice cuántos son.
+    descartes: dict[str, int] = {}
+    for prov, lista in por_prov.items():
+        med = median(p for p, _ in lista)
+        buenos = [(p, e) for p, e in lista if med * (1 - MARGEN) <= p <= med * (1 + MARGEN)]
+        descartes[prov] = len(lista) - len(buenos)
+        por_prov[prov] = buenos or lista
     provincias = []
     sin_tilde = lambda t: unicodedata.normalize("NFD", t).encode("ascii", "ignore").decode().lower()
     for prov, lista in sorted(por_prov.items(), key=lambda x: sin_tilde(PROVINCIAS[x[0]])):
@@ -88,7 +108,8 @@ def resumir(respuesta: dict) -> dict:
         baratas = sorted(lista, key=lambda x: (x[0], x[1].get("Localidad", "")))[:3]
         provincias.append({"id": prov, "nombre": PROVINCIAS[prov], "cyl": prov in CYL, "n": len(lista),
                            "media": round(mean(precios), 3), "mediana": round(median(precios), 3),
-                           "min": min(precios), "max": max(precios), "baratas": [estacion(e, p) for p, e in baratas]})
+                           "min": min(precios), "max": max(precios), "descartados": descartes.get(prov, 0),
+                           "baratas": [estacion(e, p) for p, e in baratas]})
     todos = [p for lista in por_prov.values() for p, _ in lista]
     cyl = [p for prov in CYL for p, _ in por_prov.get(prov, [])]
     try:

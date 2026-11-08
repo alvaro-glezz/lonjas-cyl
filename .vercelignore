@@ -11,12 +11,14 @@
 !historico.js
 !agricultor.js
 !plazos.js
+!gasoleo.js
 !abiertos.js
 !herramientas.js
 !ayuda.js
 !contador.js
 !panel
 !plazos
+!gasoleo-agricola
 !widget
 !api
 !estilos.css

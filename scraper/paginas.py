@@ -20,7 +20,7 @@ RAIZ = Path(__file__).resolve().parent.parent
 DATOS = RAIZ / "data" / "precios.json"
 # Dirección pública principal (la que Google debe tomar como buena). Si se compra un dominio, se cambia solo aquí.
 WEB = "https://lonjas-cyl-khaki.vercel.app/"
-CARPETAS = ("precio", "lonja", "precios", "plazos")
+CARPETAS = ("precio", "lonja", "precios", "plazos", "gasoleo-agricola")
 PLAZOS = RAIZ / "data" / "plazos.json"
 
 # Producto (clave de la app) -> (nombre con artículo, nombre corto, categoría de la página)
@@ -414,6 +414,50 @@ def pagina_plazos(plazos: dict, hoy: str) -> str | None:
                   h1=h1, cuerpo=cuerpo, migas=migas, ld=[ld_migas(migas, ruta)])
 
 
+def pagina_gasoleo(g: dict) -> str | None:
+    """Precio del gasóleo agrícola (B) por provincia: media, mínimo y la gasolinera más barata (datos del Ministerio)."""
+    provs = g.get("provincias") or []
+    if not provs:
+        return None
+    ruta = "gasoleo-agricola/"
+    l3 = lambda v: "—" if v is None else f"{v:.3f}".replace(".", ",")
+    fecha = (g.get("fecha") or "")[:10]
+    cyl, es = g.get("cyl") or {}, g.get("espana") or {}
+    barata = min((p for p in provs if p.get("baratas")), key=lambda p: p["baratas"][0]["precio"], default=None)
+    frase = (f"Hoy el gasóleo agrícola (B) cuesta de media {l3(cyl.get('media'))} €/l en Castilla y León y {l3(es.get('media'))} €/l en España"
+             + (f"; el más barato, {l3(barata['baratas'][0]['precio'])} €/l en {barata['baratas'][0]['localidad']} ({barata['nombre']})." if barata else "."))
+
+    def filas(lista):
+        out = []
+        for p in lista:
+            b = (p.get("baratas") or [{}])[0]
+            sitio = f"{escape(b.get('nombre', ''))}<br><small>{escape(b.get('localidad', ''))}</small>" if b else "—"
+            out.append(f"<tr><td><b>{escape(p['nombre'])}</b></td><td class=\"n\"><b>{l3(p['media'])}</b></td>"
+                       f"<td class=\"n\">{l3(p['min'])}</td><td>{sitio}</td><td class=\"n opc\">{p['n']}</td></tr>")
+        cab = ('<div class="tabla"><table><thead><tr><th>Provincia</th><th class="n">Media €/l</th><th class="n">Mínimo</th>'
+               '<th>Más barata</th><th class="n opc">Gasolineras</th></tr></thead><tbody>')
+        return cab + "".join(out) + "</tbody></table></div>"
+
+    fuente = escape(g.get("fuente") or "Ministerio para la Transición Ecológica y el Reto Demográfico")
+    url_f = g.get("fuente_url") or ""
+    cuerpo = (f'<p class="lead">{escape(frase)}</p><p class="fecha">Datos del {fecha_larga(fecha)}. Se actualizan cada día.</p>'
+              "<h2>Castilla y León</h2>" + filas([p for p in provs if p.get("cyl")])
+              + "<h2>Resto de España</h2>" + filas([p for p in provs if not p.get("cyl")])
+              + '<section class="cta"><h2>Las 3 más baratas de tu provincia, con mapa</h2><p>En la app eliges tu provincia y ves sus gasolineras más baratas con dirección, horario y cómo llegar. Gratis y sin registro.</p><a class="boton" href="../#gasoleo">Ver en la app</a></section>'
+              + f'<p class="nota">Precios que las gasolineras comunican al {fuente} (solo venta al público). '
+              + (f'<a href="{escape(url_f)}" rel="nofollow">Geoportal de gasolineras</a>. ' if url_f.startswith("https://") else "")
+              + "El gasóleo B solo puede usarse en los usos autorizados.</p>"
+              + "<h2>Precios de las lonjas</h2>" + enlaces_productos(1))
+    migas = [("Inicio", ""), ("Gasóleo agrícola", None)]
+    ld = [ld_migas(migas, ruta), {"@context": "https://schema.org", "@type": "Dataset", "name": "Precio del gasóleo agrícola (B) por provincia",
+          "description": frase, "url": WEB + ruta, "dateModified": fecha, "inLanguage": "es", "isAccessibleForFree": True,
+          "spatialCoverage": {"@type": "Place", "name": "España"}, "creator": {"@type": "Organization", "name": "Lonjas CyL", "url": WEB},
+          "isBasedOn": url_f or fuente,
+          "distribution": [{"@type": "DataDownload", "encodingFormat": "application/json", "contentUrl": WEB + "data/gasoleo.json"}]}]
+    return pagina(ruta=ruta, nivel=1, titulo=f"Precio del gasóleo agrícola (B) hoy por provincia ({fecha_corta(fecha)}) | Lonjas CyL",
+                  descripcion=frase, h1="Precio del gasóleo agrícola (B) hoy por provincia", cuerpo=cuerpo, migas=migas, ld=ld)
+
+
 def sitemap(rutas: list[tuple[str, str]]) -> str:
     urls = "".join(f"<url><loc>{WEB}{r}</loc><lastmod>{m}</lastmod></url>" for r, m in rutas)
     return f'<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">{urls}</urlset>\n'
@@ -444,6 +488,10 @@ def generar(datos: dict, raiz: Path = RAIZ, plazos: dict | None = None) -> list[
         plazos = json.loads((raiz / "data" / "plazos.json").read_text(encoding="utf-8"))
     if plazos:
         escribir("plazos/", pagina_plazos(plazos, date.today().isoformat()), (plazos.get("actualizado") or hoy))
+    f_gas = raiz / "data" / "gasoleo.json"
+    if f_gas.is_file():
+        g = json.loads(f_gas.read_text(encoding="utf-8"))
+        escribir("gasoleo-agricola/", pagina_gasoleo(g), (g.get("fecha") or hoy)[:10])
     (raiz / "sitemap.xml").write_text(sitemap(hechas), encoding="utf-8")
     return [r for r, _ in hechas]
 

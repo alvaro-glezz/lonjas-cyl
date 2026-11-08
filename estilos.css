@@ -511,3 +511,38 @@ button.plazo:hover { border-color: var(--pino); }
 .red-txt { flex: 1; min-width: 0; }
 .red-txt small { display: block; color: var(--tenue); font-size: 12.5px; }
 .red-boton { flex: none; background: var(--pino); color: var(--hoja); border-radius: 999px; padding: 7px 14px; font-weight: 600; font-size: 14px; }
+
+/* Gasóleo agrícola (B) */
+.gasoleo-hoy { width: 100%; display: grid; gap: 6px; text-align: left; font: inherit; color: inherit; cursor: pointer;
+  background: var(--hoja); border: 1px solid var(--linea); border-radius: 14px; padding: 14px; }
+.gasoleo-hoy:hover { border-color: var(--pino); }
+.gh-fila { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 6px 14px; }
+.gh-fila b.num { font: 600 30px/1 var(--cifra); }
+.gh-fila small, .gh-barata { font-size: 13px; color: var(--tenue); }
+.gh-barata b.num { font: 600 18px var(--cifra); color: var(--sube); }
+.gh-ver { font-size: 13px; color: var(--pino); font-weight: 600; }
+.gasoleo-lead { margin: 0 0 12px; font-size: 15px; }
+.gasoleo-lead b { font: 600 19px var(--cifra); }
+.gasoleo-mia { display: grid; gap: 4px; font-size: 13px; color: var(--tenue); margin-bottom: 6px; }
+.gasoleo-mia select { font: inherit; font-size: 15px; color: var(--tinta); background: var(--hoja); border: 1px solid var(--linea); border-radius: 10px; padding: 10px; }
+.gasoleo-grupo { font: 700 16px var(--cifra); text-transform: uppercase; letter-spacing: .04em; color: var(--tenue); margin: 18px 0 8px; }
+.gasoleo-prov { background: var(--hoja); border: 1px solid var(--linea); border-radius: 12px; margin-bottom: 8px; }
+.gasoleo-prov > summary { list-style: none; cursor: pointer; padding: 12px 14px; display: grid; grid-template-columns: 1fr auto; gap: 2px 10px; }
+.gasoleo-prov > summary::-webkit-details-marker { display: none; }
+.gasoleo-prov[open] > summary { border-bottom: 1px solid var(--linea); }
+.gp-nombre { font-weight: 700; font-size: 16px; }
+.gp-media { grid-row: span 2; align-self: center; text-align: right; }
+.gp-media b { font: 600 26px/1 var(--cifra); }
+.gp-media small { display: block; font-size: 11.5px; color: var(--tenue); }
+.gp-min { font-size: 12.5px; color: var(--tenue); }
+.gp-min b { color: var(--sube); font-family: var(--cifra); font-size: 15px; }
+.gp-lista { list-style: none; margin: 0; padding: 4px 14px 10px; }
+.gp-lista li { display: grid; grid-template-columns: auto 1fr auto; gap: 10px; align-items: center; padding: 8px 0; border-bottom: 1px solid var(--linea); }
+.gp-lista li:last-child { border-bottom: 0; }
+.gp-precio { font: 600 20px var(--cifra); }
+.gp-sitio { display: grid; min-width: 0; }
+.gp-sitio b { font-size: 14px; overflow-wrap: anywhere; }
+.gp-sitio small { font-size: 12px; color: var(--tenue); overflow-wrap: anywhere; }
+.gp-mapa { font-size: 12.5px; font-weight: 600; color: var(--pino); white-space: nowrap; }
+.gasoleo-resto > summary { cursor: pointer; font-weight: 600; color: var(--pino); padding: 12px 2px; }
+.gp-nota { margin: 0; padding: 0 14px 12px; font-size: 12px; color: var(--tenue); }

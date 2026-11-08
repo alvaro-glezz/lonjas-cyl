@@ -50,3 +50,28 @@ def test_nombres_bonitos(g):
     assert g.bonito("AVENIDA CASTILLA LA MANCHA, 26") == "Avenida Castilla la Mancha, 26"
     assert g.bonito("Calle Mayor") == "Calle Mayor"
     assert g.nombre_gasolinera({"Rótulo": "", "Localidad": "TORO"}) == "Gasolinera de Toro"
+
+
+def test_localidades(g):
+    assert g.localidad("BAÑEZA (LA)") == "La Bañeza" and g.localidad("ROA") == "Roa" and g.localidad("Bañeza (la)") == "La Bañeza"
+
+
+def test_pagina_para_google(g, tmp_path):
+    import json
+    from conftest import _cargar as cargar
+    pag = cargar("paginas")
+    r = g.resumir(_resp())
+    html = pag.pagina_gasoleo(r)
+    assert "<h1>Precio del gasóleo agrícola (B) hoy por provincia</h1>" in html and "1,117" in html and "Madrigal" in html
+    assert 'rel="canonical"' in html and "Ministerio" in html
+    (tmp_path / "data").mkdir()
+    (tmp_path / "data" / "gasoleo.json").write_text(json.dumps(r), encoding="utf-8")
+    rutas = pag.generar({"lonjas": []}, tmp_path, {"plazos": []})
+    assert "gasoleo-agricola/" in rutas and (tmp_path / "gasoleo-agricola" / "index.html").is_file()
+
+
+def test_descarta_precios_anomalos(g):
+    r = g.resumir({"Fecha": "08/11/2026 10:00:00", "ResultadoConsulta": "OK", "ListaEESSPrecio":
+                   [_est("10", "1,700"), _est("10", "1,650"), _est("10", "1,690"), _est("10", "1,099", "BARATO SOSPECHOSO")]})
+    p = r["provincias"][0]
+    assert p["descartados"] == 1 and p["min"] == 1.65 and p["n"] == 3 and p["baratas"][0]["nombre"] != "Barato Sospechoso"

@@ -191,6 +191,7 @@ function vistaHoy() {
     ${typeof seccionHerramientas === "function" ? seccionHerramientas() : ""}
     ${typeof seccionTitulares === "function" ? seccionTitulares() : ""}
     ${typeof bloquePlazos === "function" ? bloquePlazos() : ""}
+    ${typeof bloqueGasoleo === "function" ? bloqueGasoleo() : ""}
     <section class="seccion">
       <div class="titulo-seccion"><h2>Lonjas</h2><span>Última sesión de cada una</span></div>
       ${listaLonjas()}
@@ -545,6 +546,7 @@ function router() {
   else if (h === "metodo") { html = vistaMetodo(); seccion = "lonjas"; }
   else if (h === "ayuda" && typeof vistaAyuda === "function") { html = vistaAyuda(); seccion = "hoy"; }
   else if (h === "plazos" && typeof vistaPlazos === "function") { html = vistaPlazos(); seccion = "hoy"; }
+  else if (h === "gasoleo" && typeof vistaGasoleo === "function") { html = vistaGasoleo(); seccion = "hoy"; }
   else if (h === "datos" && typeof vistaDatos === "function") { html = vistaDatos(); seccion = "lonjas"; }
   else if (h === "calculadora" && typeof vistaCalculadora === "function") { html = vistaCalculadora(); seccion = "hoy"; }
   else if (h === "oferta" && typeof vistaOferta === "function") { html = vistaOferta(); seccion = "hoy"; }
