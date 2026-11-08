@@ -1,9 +1,12 @@
 {
  "comparativa": "2026-W45",
- "franja": "especial:explotacion",
+ "franja": "especial:instalar",
  "franjas": {
   "2026-11-07": [
    "reel"
+  ],
+  "2026-11-08": [
+   "especial:instalar"
   ]
  },
  "preparado": [
@@ -47,6 +50,12 @@
    "fecha": "2026-11-07T16:56",
    "id": "2026-11-07-reel-movimientos",
    "media": "18136749958578385"
+  },
+  {
+   "facebook": "1590984109466759",
+   "fecha": "2026-11-08T11:52",
+   "id": "2026-11-08-especial-instalar",
+   "media": "17922446082447681"
   }
  ],
  "token_renovado": "2026-11-07"
