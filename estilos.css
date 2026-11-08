@@ -469,3 +469,22 @@ button.plazo:hover { border-color: var(--pino); }
 .dif p { margin: 0; line-height: 1.45; font-size: 14.5px; }
 .dif-ahora { display: inline-block; margin-top: 6px; font-size: 13px; font-weight: 600; padding: 2px 8px; border-radius: 999px; background: var(--pino-suave); color: var(--pino); }
 .dif-ahora.s { background: var(--sube-suave); color: var(--sube); } .dif-ahora.b { background: var(--baja-suave); color: var(--baja); }
+
+/* Ayuda (botón «i») */
+.i-ayuda { width: 22px; height: 22px; border-radius: 50%; border: 2px solid currentColor; display: grid; place-items: center;
+  font: 700 14px/1 Georgia, "Times New Roman", serif; font-style: italic; }
+.ayuda-indice { display: flex; flex-wrap: wrap; gap: 6px; margin: 4px 0 14px; }
+.ayuda-indice .chip { text-decoration: none; }
+.ayuda-lista { display: grid; gap: 8px; margin-bottom: 16px; }
+.ayuda-item { background: var(--hoja); border: 1px solid var(--linea); border-radius: 12px; scroll-margin-top: 80px; }
+.ayuda-item > summary { list-style: none; cursor: pointer; display: flex; gap: 12px; align-items: flex-start; padding: 12px 14px; }
+.ayuda-item > summary::-webkit-details-marker { display: none; }
+.ayuda-item > summary::after { content: "›"; margin-left: auto; font-size: 20px; line-height: 1; color: var(--tenue); transition: transform .15s; }
+.ayuda-item[open] > summary::after { transform: rotate(90deg); }
+.ayuda-item > summary small { display: block; color: var(--tenue); font-size: 13px; margin-top: 2px; font-weight: 400; }
+.ayuda-ico { font-size: 22px; line-height: 1.2; flex: none; }
+.ayuda-cuerpo { padding: 0 14px 14px 48px; }
+.ayuda-cuerpo ol { margin: 6px 0 12px; padding-left: 20px; display: grid; gap: 6px; }
+.ayuda-cuerpo p { margin: 0 0 8px; }
+.ayuda h3.sub-h { margin: 18px 0 8px; font-size: 16px; }
+@media (max-width: 420px) { .ayuda-cuerpo { padding-left: 14px; } }

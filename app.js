@@ -490,6 +490,7 @@ function router() {
   else if (h === "lonjas") html = vistaLonjas();
   else if (h === "fuentes") { html = vistaFuentes(); seccion = "lonjas"; }
   else if (h === "metodo") { html = vistaMetodo(); seccion = "lonjas"; }
+  else if (h === "ayuda" && typeof vistaAyuda === "function") { html = vistaAyuda(); seccion = "hoy"; }
   else if (h === "plazos" && typeof vistaPlazos === "function") { html = vistaPlazos(); seccion = "hoy"; }
   else if (h === "datos" && typeof vistaDatos === "function") { html = vistaDatos(); seccion = "lonjas"; }
   else if (h === "calculadora" && typeof vistaCalculadora === "function") { html = vistaCalculadora(); seccion = "hoy"; }
