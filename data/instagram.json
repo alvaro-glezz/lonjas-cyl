@@ -6,7 +6,8 @@
    "reel"
   ],
   "2026-11-08": [
-   "especial:instalar"
+   "especial:instalar",
+   "especial:explotacion"
   ]
  },
  "preparado": [
@@ -63,6 +64,12 @@
    "fecha": "2026-11-08T11:52",
    "id": "2026-11-08-especial-instalar",
    "media": "17922446082447681"
+  },
+  {
+   "facebook": "1938776430429432",
+   "fecha": "2026-11-08T21:10",
+   "id": "2026-11-08-especial-explotacion",
+   "media": "18139134223632919"
   }
  ],
  "token_renovado": "2026-11-07"
