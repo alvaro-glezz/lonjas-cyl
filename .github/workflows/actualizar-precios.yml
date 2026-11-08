@@ -51,6 +51,10 @@ jobs:
         id: jcyl
         continue-on-error: true
         run: python scraper/importar_jcyl.py --descargar
+      # Gasóleo agrícola (B): media por provincia y gasolineras más baratas (servicio oficial del Ministerio).
+      - name: Gasóleo B
+        continue-on-error: true
+        run: python scraper/gasoleo.py
       # Páginas que lee Google (una por producto y por lonja) y sitemap.xml, con los precios recién leídos.
       - name: Páginas para Google
         continue-on-error: true
