@@ -114,10 +114,23 @@ def anotar_historial(hist: dict, resumen: dict) -> dict:
 
 
 def descargar() -> dict:
-    import requests
-    r = requests.get(URL, headers={"Accept": "application/json", "User-Agent": "LonjasCyL/1.0 (precios agrarios)"}, timeout=90)
-    r.raise_for_status()
-    d = r.json()
+    """El servidor del Ministerio usa una configuración TLS antigua que Python rechaza por defecto («UNEXPECTED_EOF»).
+    Se permite solo para esta conexión (sigue cifrada y con el certificado comprobado); si aun así falla, se usa curl."""
+    import ssl
+    import subprocess
+    import urllib.request
+    cab = {"Accept": "application/json", "User-Agent": "LonjasCyL/1.0 (precios agrarios)"}
+    try:
+        ctx = ssl.create_default_context()
+        ctx.options |= getattr(ssl, "OP_LEGACY_SERVER_CONNECT", 0x4)
+        ctx.set_ciphers("DEFAULT@SECLEVEL=1")
+        with urllib.request.urlopen(urllib.request.Request(URL, headers=cab), context=ctx, timeout=90) as r:
+            crudo = r.read()
+    except Exception as e:  # noqa: BLE001
+        print(f"[gasóleo] Python no pudo conectar ({type(e).__name__}); se prueba con curl")
+        crudo = subprocess.run(["curl", "-sSf", "-m", "120", "-H", "Accept: application/json", "-A", cab["User-Agent"], URL],
+                               capture_output=True, check=True).stdout
+    d = json.loads(crudo.decode("utf-8-sig"))
     if d.get("ResultadoConsulta") != "OK" or not d.get("ListaEESSPrecio"):
         raise RuntimeError(f"Respuesta inesperada del Ministerio: {d.get('ResultadoConsulta')}")
     return d
