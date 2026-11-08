@@ -183,6 +183,7 @@ function vistaHoy() {
   return `
     ${DATOS.__sinRed ? '<p class="aviso-red">Estás sin conexión. Se muestran los últimos precios guardados en este teléfono.</p>' : ""}
     ${typeof bloqueAvisosCumplidos === "function" ? bloqueAvisosCumplidos() : ""}
+    ${seccionMiPizarra()}
     <section class="seccion">
       <div class="titulo-seccion"><h2>Pizarra de la semana</h2><span>Toca un producto para comparar</span></div>
       <div class="pizarra">${fichas}</div>
@@ -195,6 +196,36 @@ function vistaHoy() {
       ${listaLonjas()}
     </section>
     <p class="nota">Precios orientativos publicados por cada lonja. Cada lonja cotiza en sus propias condiciones (calidad, punto de entrega, peso), así que los valores no siempre son comparables entre sí. <a href="#metodo">Fuentes y método</a>.</p>`;
+}
+
+/* «Mi pizarra»: como la Pizarra de la semana, pero con los productos que el usuario ha marcado con ★.
+   Una ficha por favorito (producto de una lonja concreta), en el orden en que los guardó. Al tocarla, su detalle. */
+function seccionMiPizarra(dondeFavoritos = false) {
+  const filas = [...FAVS].map(buscarFila).filter(Boolean);
+  if (!filas.length) {
+    return dondeFavoritos ? "" : `<section class="seccion mi-pizarra-vacia">
+      <p><b>Crea tu pizarra.</b> Toca la ★ de los productos que vendes o compras y los tendrás aquí arriba, juntos, cada vez que abras la app.</p>
+    </section>`;
+  }
+  const fichas = filas.map(f => {
+    const v = variacion(f);
+    const lonja = f.lonja.nombre.replace("Lonja de ", "");
+    const pastilla = f.act == null
+      ? `<span class="pastilla p-igual">sin cotizar${f.ult ? ` · último ${precio(f.ult[1], f.unidad)}` : ""}</span>`
+      : v.clase === "s" ? `<span class="pastilla p-sube">${v.txt}</span>`
+      : v.clase === "b" ? `<span class="pastilla p-baja">${v.txt}</span>`
+      : `<span class="pastilla p-igual">${v.txt === "nuevo" ? "nuevo" : "= repite"}</span>`;
+    return `<button class="ficha ficha-fav${f.act == null ? " sin-cot" : ""}" type="button" data-fila="${esc(f.id)}" aria-label="${esc(f.producto)}, ${esc(lonja)}">
+      <span class="nombre">${esc(f.producto)}</span>
+      <span class="valor num">${f.act == null ? "—" : precio(f.act, f.unidad)}<small>${esc(f.unidad)}</small></span>
+      <span class="rango">${esc(lonja)} · ${fechaCorta(f.lonja.fecha)}</span>
+      ${pastilla}</button>`;
+  }).join("");
+  const suben = filas.filter(f => variacion(f).d > 0).length, bajan = filas.filter(f => variacion(f).d < 0).length;
+  return `<section class="seccion mi-pizarra">
+    <div class="titulo-seccion"><h2>Mi pizarra</h2><span>${filas.length} favorito${filas.length === 1 ? "" : "s"} · ${suben} ▲ · ${bajan} ▼${dondeFavoritos ? "" : ` · <button class="enlace" type="button" data-ir="favoritos">editar</button>`}</span></div>
+    <div class="pizarra">${fichas}</div>
+  </section>`;
 }
 
 function listaLonjas() {
@@ -441,7 +472,7 @@ function seccionRedes() {
 
 function vistaFavoritos() {
   const filas = todasLasFilas().filter(f => FAVS.has(f.id));
-  return `${seccionRedes()}${typeof seccionAvisos === "function" ? seccionAvisos() : ""}<section class="seccion">
+  return `${seccionMiPizarra(true)}${seccionRedes()}${typeof seccionAvisos === "function" ? seccionAvisos() : ""}<section class="seccion">
     <div class="titulo-seccion"><h2>Mis precios</h2><span>${filas.length} guardado${filas.length === 1 ? "" : "s"}</span></div>
     ${filas.length ? `<div class="tablilla">${filas.map(f => filaHTML(f, true)).join("")}</div>` :
       `<div class="vacio"><b>Aún no tienes precios guardados</b>Abre una lonja y toca la estrella junto a los productos que vendes o compras. Aparecerán aquí, juntos.</div>`}

@@ -112,6 +112,13 @@ main {
 .ficha .valor small { font: 500 13px var(--texto); color: var(--tenue); margin-left: 3px; }
 .ficha .rango { font-size: 12px; color: var(--tenue); }
 .ficha .pastilla { justify-self: start; }
+/* Mi pizarra (favoritos) */
+.mi-pizarra .ficha-fav { border-color: color-mix(in srgb, var(--paja) 55%, var(--linea)); }
+.mi-pizarra .ficha-fav .nombre { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.mi-pizarra .ficha-fav.sin-cot .valor { color: var(--tenue); }
+.titulo-seccion .enlace { background: none; border: 0; padding: 0; font: inherit; color: var(--pino); text-decoration: underline; cursor: pointer; }
+.mi-pizarra-vacia p { margin: 0; padding: 12px 14px; border: 1px dashed var(--linea); border-radius: 12px; font-size: 14px; color: var(--tenue); background: var(--hoja); }
+.mi-pizarra-vacia b { color: var(--tinta); }
 
 /* Tarjetas de lonja */
 .lonjas { display: grid; gap: 10px; }
