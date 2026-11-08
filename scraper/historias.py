@@ -542,7 +542,7 @@ def subtitulo(lienzo, texto: str, t: float, y: int = 250, entra: bool = True):
     from PIL import Image, ImageDraw
     a = suave(t / 0.35) if entra else 1.0
     if a <= 0:
-        return
+        return y
     letra = _cifra(86)
     tmp = ImageDraw.Draw(Image.new("RGB", (10, 10)))
     # partir respetando los trozos resaltados
@@ -581,6 +581,7 @@ def subtitulo(lienzo, texto: str, t: float, y: int = 250, entra: bool = True):
             x += tmp.textlength(w + " ", font=letra)
         yy += 94
     pegar(lienzo, capa, W / 2, y + capa.height - 40 * (1 - a), 1.0, a)
+    return y + capa.height             # dónde acaba el rótulo (los subtítulos van justo debajo)
 
 
 @lru_cache(maxsize=None)
@@ -1062,16 +1063,90 @@ def plan(escenas: list, voces: list[Path | None]) -> list[float]:
     return durs
 
 
-def reel(n: int, destino: Path, datos: dict | None = None, hoy: date | None = None, web: str = WEB, escenas: list | None = None) -> Path:
-    """Monta el reel n de HISTORIAS, o el de las `escenas` que se le pasen (reels especiales, especiales.py)."""
+def leer(texto: str) -> float:
+    """Tiempo para leer un subtítulo con calma: ~2,2 palabras por segundo."""
+    return len(texto.split()) / 2.2 + .8
+
+
+def _trozos(texto: str, letra, ancho: int, max_lineas: int = 2) -> list[list[str]]:
+    """Parte el texto en tarjetas de subtítulo de hasta `max_lineas` líneas, sin juntar dos frases en una tarjeta y con
+    las dos líneas de cada tarjeta equilibradas (sin una palabra suelta abajo)."""
+    import re
+    from PIL import Image, ImageDraw
+    tmp = ImageDraw.Draw(Image.new("RGB", (10, 10)))
+    largo = lambda ws: tmp.textlength(" ".join(ws), font=letra)
+    tarjetas = []
+    for frase in re.split(r"(?<=[.?!])\s+", texto.strip()):
+        pals = frase.split()
+        while pals:
+            # cuántas palabras caben en max_lineas líneas
+            n, lineas, actual = 0, 1, []
+            for k, w in enumerate(pals):
+                if actual and largo(actual + [w]) > ancho:
+                    lineas += 1
+                    actual = [w]
+                    if lineas > max_lineas:
+                        break
+                else:
+                    actual.append(w)
+                n = k + 1
+            trozo, pals = pals[:n], pals[n:]
+            if pals and len(pals) <= 2:            # no dejar una o dos palabras solas en la tarjeta siguiente
+                corte = max(1, len(trozo) - 3)
+                trozo, pals = trozo[:corte], trozo[corte:] + pals
+            if largo(trozo) <= ancho:
+                tarjetas.append([" ".join(trozo)])
+            else:                                   # dos líneas lo más parecidas posible
+                mejor = min((c for c in range(1, len(trozo)) if largo(trozo[:c]) <= ancho and largo(trozo[c:]) <= ancho),
+                            key=lambda c: abs(largo(trozo[:c]) - largo(trozo[c:])), default=None)
+                if mejor is None:
+                    mejor = len(trozo) // 2
+                tarjetas.append([" ".join(trozo[:mejor]), " ".join(trozo[mejor:])])
+    return tarjetas
+
+
+def leyenda(lienzo, texto: str, t: float, dur: float, y: int = 420):
+    """Subtítulo de lo que se cuenta (para ver el reel sin sonido): letra blanca sobre franja oscura, justo debajo del
+    rótulo, para no tapar el móvil. Si la frase es larga va en varias tarjetas, repartidas por palabras."""
+    from PIL import Image, ImageDraw
+    letra = _texto(48, 600)
+    tarjetas = _trozos(texto, letra, W - 220)
+    pesos = [sum(len(l.split()) for l in tj) for tj in tarjetas]
+    total = sum(pesos) or 1
+    fin, i = 0.0, 0
+    for i, p in enumerate(pesos):
+        fin += dur * p / total
+        if t < fin:
+            break
+    lineas = tarjetas[i]
+    tmp = ImageDraw.Draw(Image.new("RGB", (10, 10)))
+    alto_l = 66
+    ancho = int(max(tmp.textlength(l, font=letra) for l in lineas) + 64)
+    alto = len(lineas) * alto_l + 36
+    capa = Image.new("RGBA", (ancho, alto), (0, 0, 0, 0))
+    d = ImageDraw.Draw(capa)
+    d.rounded_rectangle([0, 0, ancho - 1, alto - 1], radius=22, fill=(16, 22, 18, 215))
+    for k, l in enumerate(lineas):
+        x = (ancho - tmp.textlength(l, font=letra)) / 2
+        d.text((x, 16 + k * alto_l), l, font=letra, fill=(255, 255, 255))
+    lienzo.paste(capa, ((W - ancho) // 2, y), capa)
+
+
+def reel(n: int, destino: Path, datos: dict | None = None, hoy: date | None = None, web: str = WEB, escenas: list | None = None,
+         voz: bool = True, leyendas: bool = False) -> Path:
+    """Monta el reel n de HISTORIAS, o el de las `escenas` que se le pasen (reels especiales, especiales.py).
+    `voz=False`: sin locución (solo música). `leyendas=True`: lo que contaría la voz sale escrito abajo."""
     hoy = hoy or date.today()
     escenas = escenas or HISTORIAS[n]["escenas"](datos, hoy)
     tmp = destino.with_name(destino.stem + "-tmp")
     tmp.mkdir(parents=True, exist_ok=True)
     cierre_voz = "Lonjas Castilla y León. Gratis, y sin registro."
-    voces = [_voz_escena(e[0], tmp / f"v{i}.wav") for i, e in enumerate(escenas)]
-    voz_cierre = _voz_escena(cierre_voz, tmp / "vc.wav")
-    durs = plan(escenas, voces) + [max(3.0, (redes.duracion_wav(voz_cierre) if voz_cierre else estimar(cierre_voz)) + .9)]
+    voces = [_voz_escena(e[0], tmp / f"v{i}.wav") if voz else None for i, e in enumerate(escenas)]
+    voz_cierre = _voz_escena(cierre_voz, tmp / "vc.wav") if voz else None
+    if voz:
+        durs = plan(escenas, voces) + [max(3.0, (redes.duracion_wav(voz_cierre) if voz_cierre else estimar(cierre_voz)) + .9)]
+    else:
+        durs = [round(max(m, leer(tx) if leyendas else estimar(tx) + .55), 2) for tx, _, _, m in escenas] + [3.5]
     total = sum(durs)
     # pista de voz alineada con las escenas (cada frase empieza 0,2 s después de su escena)
     pista = None
@@ -1093,7 +1168,7 @@ def reel(n: int, destino: Path, datos: dict | None = None, hoy: date | None = No
             w.writeframes(bytes(buf))
     musica = redes.musica(tmp / "musica.wav", total)
     cierre = redes._cierre(web)
-    escenas_v = [(d, e[1], e[2]) for d, e in zip(durs, escenas)] + [(durs[-1], None, None)]
+    escenas_v = [(d, e[1], e[2], e[0]) for d, e in zip(durs, escenas)] + [(durs[-1], None, None, None)]
     parcial = destino.with_name(destino.stem + ".parcial.mp4")
     cmd = ["ffmpeg", "-y", "-loglevel", "error", "-f", "rawvideo", "-pix_fmt", "rgb24", "-s", f"{W}x{H}", "-r", str(FPS),
            "-i", "-", "-i", str(musica)]
@@ -1109,7 +1184,7 @@ def reel(n: int, destino: Path, datos: dict | None = None, hoy: date | None = No
     proc = subprocess.Popen(cmd, stdin=subprocess.PIPE)
     anterior = None
     try:
-        for j, (dur, cap, dib) in enumerate(escenas_v):
+        for j, (dur, cap, dib, dicho) in enumerate(escenas_v):
             for k in range(int(round(dur * FPS))):
                 t = k / FPS
                 if dib is None:
@@ -1117,7 +1192,9 @@ def reel(n: int, destino: Path, datos: dict | None = None, hoy: date | None = No
                 else:
                     img = dib(t, dur).convert("RGB")
                     img.paste(marca(), (60, 150), marca())
-                    subtitulo(img, cap, t, entra=j > 0)
+                    abajo = subtitulo(img, cap, t, entra=j > 0)
+                    if leyendas and dicho:
+                        leyenda(img, dicho, t, dur, max(abajo, 250 + 146) + 22)
                 if anterior is not None and t < FUNDIDO:
                     img = Image.blend(anterior, img, t / FUNDIDO)
                 proc.stdin.write(img.tobytes())

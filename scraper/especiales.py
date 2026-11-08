@@ -190,19 +190,19 @@ def escenas_instalar(datos=None, hoy=None):
     def e2(t, d):
         img = _base("campo", t)
         _movil_grande(img, pantalla_safari(t, "compartir"), t)
-        pegar(img, _chip("iPhone · Safari"), W / 2, 640)
+        pegar(img, _chip("iPhone · Safari"), W / 2, 722)
         return img
 
     def e3(t, d):
         img = _base("campo", t)
         _movil_grande(img, pantalla_safari(t, "hoja"), 1.0)
-        pegar(img, _chip("iPhone · Safari"), W / 2, 640)
+        pegar(img, _chip("iPhone · Safari"), W / 2, 722)
         return img
 
     def e4(t, d):
         img = _base("campo", t)
         _movil_grande(img, pantalla_chrome(t), t)
-        pegar(img, _chip("Android · Chrome"), W / 2, 640)
+        pegar(img, _chip("Android · Chrome"), W / 2, 722)
         return img
 
     def e5(t, d):
@@ -299,7 +299,7 @@ def texto_publicacion(nombre: str, web: str = WEB) -> str:
     e = ESPECIALES[nombre]
     nota = ("Ejemplo de la captura: 60 t de trigo, 45 t de cebada y 3.300 kg de lechazo, con los precios de las sesiones del 3 al 5 "
             "de noviembre de 2026. " if nombre == "explotacion" else "")
-    return (f"{e['texto']}\n\n{h.redes.ig.pie_texto(web)}\n\n{nota}Ilustraciones y capturas reales de la app. {h.redes.AVISO_VOZ}\n\n"
+    return (f"{e['texto']}\n\n{h.redes.ig.pie_texto(web)}\n\n{nota}Ilustraciones y capturas reales de la app. 🔇 Con subtítulos: se entiende sin sonido.\n\n"
             + etiquetas(*ETIQUETAS[nombre], "#LonjasCyL"))
 
 
@@ -311,7 +311,8 @@ def item(nombre: str, hoy: date) -> dict | None:
 
 
 def reel(nombre: str, destino: Path, datos=None, hoy=None, web: str = WEB) -> Path:
-    return h.reel(0, destino, datos, hoy, web, escenas=ESPECIALES[nombre]["escenas"](datos, hoy))
+    """Sin voz y con subtítulos (lo pidió el dueño de la app el 8 nov 2026)."""
+    return h.reel(0, destino, datos, hoy, web, escenas=ESPECIALES[nombre]["escenas"](datos, hoy), voz=False, leyendas=True)
 
 
 if __name__ == "__main__":
@@ -325,7 +326,8 @@ if __name__ == "__main__":
             for frac in (.35, .9):
                 img = dib(dur * frac, dur).convert("RGB")
                 img.paste(h.marca(), (60, 150), h.marca())
-                h.subtitulo(img, cap, 1.0)
+                abajo = h.subtitulo(img, cap, 1.0)
+                h.leyenda(img, texto, dur * frac, dur, abajo + 22)
                 f = carpeta / f"{nombre}-e{i + 1}-{int(frac * 100)}.jpg"
                 img.save(f, quality=85)
                 print(f)
