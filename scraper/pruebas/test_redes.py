@@ -165,7 +165,7 @@ def test_reels_especiales_cualquier_dia():
     domingo = date(2026, 11, 8)
     it = r.elegir("especial:instalar", {"lonjas": []}, {}, domingo)
     assert it["tipo"] == "especial" and it["video"] == "2026-11-08-especial-instalar.mp4"
-    assert "Añadir a pantalla de inicio" in it["texto"] and "#LonjasCyL" in it["texto"] and "CC BY 3.0" in it["texto"]
+    assert "Añadir a pantalla de inicio" in it["texto"] and "#LonjasCyL" in it["texto"] and "CC BY 3.0" not in it["texto"] and "subtítulos" in it["texto"]
     assert r.elegir("especial:explotacion", {"lonjas": []}, {}, domingo)["id"] == "2026-11-08-especial-explotacion"
     assert r.elegir("especial:no-existe", {"lonjas": []}, {}, domingo) is None
     assert r.elegir("reel", {"lonjas": []}, {}, domingo) is None          # el domingo, lo demás no publica
