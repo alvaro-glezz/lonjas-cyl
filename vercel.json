@@ -2,6 +2,13 @@
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "framework": null,
   "cleanUrls": false,
+  "git": {
+    "deploymentEnabled": {
+      "medios": false,
+      "muestras-voz": false,
+      "restauracion-antes-mejoras-1-2": false
+    }
+  },
   "headers": [
     {
       "source": "/((?!widget/).*)",

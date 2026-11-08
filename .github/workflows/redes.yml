@@ -83,6 +83,8 @@ jobs:
         run: |
           if [ -d salida ] && [ -n "$(ls -A salida 2>/dev/null)" ]; then
             cd salida
+            # Esta rama solo guarda archivos: que Vercel no intente publicarla como web (daba «Preview deployment failed»).
+            echo '{"git": {"deploymentEnabled": false}}' > vercel.json
             git init -q -b medios
             git add -A
             git -c user.name="actualizador-lonjas" -c user.email="actions@users.noreply.github.com" commit -qm "Medios $(date -u +%F)"
