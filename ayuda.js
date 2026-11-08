@@ -51,6 +51,7 @@ const AYUDA = [
   { id: "favoritos", icono: "⭐", titulo: "Favoritos y avisos", ir: "favoritos",
     para: "Tener juntos los productos que te interesan y tus avisos de precio.",
     pasos: [
+      "Arriba, en <b>Síguenos en redes y Telegram</b>, tienes con un toque el canal de Telegram, el robot, Instagram y Facebook de la app.",
       "Toca la estrella ☆ junto a cualquier producto y aparecerá aquí, en «Mis precios».",
       "En «Mis avisos» ves los avisos que has creado desde la ficha de un producto y puedes borrarlos.",
       "En Android con la app instalada, el aviso llega aunque la tengas cerrada. En iPhone, salta al abrir la app; para recibirlo siempre, usa el robot de Telegram (más abajo).",

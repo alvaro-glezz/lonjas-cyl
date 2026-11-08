@@ -417,9 +417,31 @@ function vistaComparar() {
     ${typeof bloqueDiferencias === "function" ? bloqueDiferencias(estado.clave) : ""}`;
 }
 
+/* Redes de la app: un toque para seguirlas o unirse al canal de Telegram (abre la app de cada red si está instalada). */
+const REDES = [
+  { id: "telegram", nombre: "Canal de Telegram", usuario: "t.me/lonjas_cyl", url: "https://t.me/lonjas_cyl", accion: "Unirme", ico: "✈️",
+    txt: "Cada sesión nueva de cada lonja, al momento." },
+  { id: "robot", nombre: "Robot de Telegram", usuario: "@lonjascyl_bot", url: "https://t.me/lonjascyl_bot", accion: "Abrir", ico: "🤖",
+    txt: "Pregúntale un precio o crea avisos: /aviso trigo salamanca 240." },
+  { id: "instagram", nombre: "Instagram", usuario: "@lonjas.cyl", url: "https://www.instagram.com/lonjas.cyl/", accion: "Seguir", ico: "📸",
+    txt: "Precios del día, reels y comparativas." },
+  { id: "facebook", nombre: "Facebook", usuario: "Lonjas CyL", url: "https://www.facebook.com/1368079503066363", accion: "Seguir", ico: "👍",
+    txt: "Lo mismo que en Instagram, en Facebook." },
+];
+
+function seccionRedes() {
+  return `<details class="redes-app seccion">
+    <summary><span class="ayuda-ico" aria-hidden="true">📣</span><span><b>Síguenos en redes y Telegram</b><small>Un toque para seguir la app o unirte al canal</small></span></summary>
+    <div class="redes-lista">${REDES.map(r => `<a class="red red-${r.id}" href="${esc(r.url)}" target="_blank" rel="noopener noreferrer" data-red="${r.id}">
+        <span class="red-ico" aria-hidden="true">${r.ico}</span>
+        <span class="red-txt"><b>${esc(r.nombre)}</b><small>${esc(r.usuario)} · ${esc(r.txt)}</small></span>
+        <span class="red-boton">${esc(r.accion)}</span></a>`).join("")}</div>
+  </details>`;
+}
+
 function vistaFavoritos() {
   const filas = todasLasFilas().filter(f => FAVS.has(f.id));
-  return `${typeof seccionAvisos === "function" ? seccionAvisos() : ""}<section class="seccion">
+  return `${seccionRedes()}${typeof seccionAvisos === "function" ? seccionAvisos() : ""}<section class="seccion">
     <div class="titulo-seccion"><h2>Mis precios</h2><span>${filas.length} guardado${filas.length === 1 ? "" : "s"}</span></div>
     ${filas.length ? `<div class="tablilla">${filas.map(f => filaHTML(f, true)).join("")}</div>` :
       `<div class="vacio"><b>Aún no tienes precios guardados</b>Abre una lonja y toca la estrella junto a los productos que vendes o compras. Aparecerán aquí, juntos.</div>`}

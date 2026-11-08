@@ -477,7 +477,7 @@ button.plazo:hover { border-color: var(--pino); }
 .ayuda-indice .chip { text-decoration: none; }
 .ayuda-lista { display: grid; gap: 8px; margin-bottom: 16px; }
 .ayuda-item { background: var(--hoja); border: 1px solid var(--linea); border-radius: 12px; scroll-margin-top: 80px; }
-.ayuda-item > summary { list-style: none; cursor: pointer; display: flex; gap: 12px; align-items: flex-start; padding: 12px 14px; }
+.ayuda-item > summary, .redes-app > summary { list-style: none; cursor: pointer; display: flex; gap: 12px; align-items: flex-start; padding: 12px 14px; }
 .ayuda-item > summary::-webkit-details-marker { display: none; }
 .ayuda-item > summary::after { content: "›"; margin-left: auto; font-size: 20px; line-height: 1; color: var(--tenue); transition: transform .15s; }
 .ayuda-item[open] > summary::after { transform: rotate(90deg); }
@@ -488,3 +488,19 @@ button.plazo:hover { border-color: var(--pino); }
 .ayuda-cuerpo p { margin: 0 0 8px; }
 .ayuda h3.sub-h { margin: 18px 0 8px; font-size: 16px; }
 @media (max-width: 420px) { .ayuda-cuerpo { padding-left: 14px; } }
+
+/* Favoritos: redes de la app */
+.redes-app { background: var(--hoja); border: 1px solid var(--linea); border-radius: 12px; padding: 0; }
+.redes-app > summary { list-style: none; cursor: pointer; display: flex; gap: 12px; align-items: flex-start; padding: 12px 14px; }
+.redes-app > summary::-webkit-details-marker { display: none; }
+.redes-app > summary::after { content: "›"; margin-left: auto; font-size: 20px; line-height: 1; color: var(--tenue); transition: transform .15s; }
+.redes-app[open] > summary::after { transform: rotate(90deg); }
+.redes-app > summary small { display: block; color: var(--tenue); font-size: 13px; margin-top: 2px; }
+.redes-lista { display: grid; gap: 8px; padding: 0 12px 12px; }
+.red { display: flex; align-items: center; gap: 12px; padding: 10px 12px; border: 1px solid var(--linea); border-radius: 10px;
+  color: inherit; text-decoration: none; min-height: 56px; }
+.red:hover { border-color: var(--pino); }
+.red-ico { font-size: 24px; flex: none; }
+.red-txt { flex: 1; min-width: 0; }
+.red-txt small { display: block; color: var(--tenue); font-size: 12.5px; }
+.red-boton { flex: none; background: var(--pino); color: var(--hoja); border-radius: 999px; padding: 7px 14px; font-weight: 600; font-size: 14px; }
