@@ -1,12 +1,20 @@
 {
  "comparativa": "2026-W45",
- "franja": "tarde",
+ "franja": "especial:instalar",
  "franjas": {
   "2026-11-07": [
    "reel"
   ]
  },
- "preparado": [],
+ "preparado": [
+  {
+   "id": "2026-11-08-especial-instalar",
+   "nombre": "instalar",
+   "texto": "📲 Lonjas CyL en tu móvil, como una app más (30 segundos, sin tienda de aplicaciones):\n\n🍎 iPhone: abre la web en Safari → Compartir (en iOS 26, dentro de «⋯») → «Añadir a pantalla de inicio» → Añadir.\n🤖 Android: abre la web en Chrome → ⋮ → «Instalar aplicación» (o «Añadir a pantalla de inicio»).\n\nSe actualiza sola, funciona sin cobertura y es gratis, sin registro.\n\nGuárdalo para tenerlo a mano y pásaselo a quien le pueda servir.\n\n📍 Todos los precios y la comparativa entre lonjas, en el enlace de la bio (lonjas-cyl-khaki.vercel.app).\nAvisos gratis en Telegram: t.me/lonjas_cyl\n\nIlustraciones y capturas reales de la app. 🔊 Voz generada por ordenador (voz «sharvard» de Piper, corpus Sharvard, licencia CC BY 3.0).\n\n#agricultores #lonjas #castillayleon #LonjasCyL #CastillayLeón #preciosagrarios #agricultura #ganadería #campo",
+   "tipo": "especial",
+   "video": "2026-11-08-especial-instalar.mp4"
+  }
+ ],
  "publicado": {
   "leon": "2026-11-04",
   "segovia": "2026-11-05"
