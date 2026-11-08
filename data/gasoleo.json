@@ -1,12 +1,12 @@
 {
- "fecha": "2026-11-08T23:13",
+ "fecha": "2026-11-08T23:19",
  "fuente": "Ministerio para la Transición Ecológica y el Reto Demográfico (Geoportal de gasolineras)",
  "fuente_url": "https://geoportalgasolineras.es/geoportal-instalaciones/Inicio",
  "unidad": "€/l",
  "espana": {
-  "media": 1.703,
-  "min": 1.09,
-  "n": 2266
+  "media": 1.706,
+  "min": 1.359,
+  "n": 2245
  },
  "cyl": {
   "media": 1.684,
@@ -23,6 +23,7 @@
    "mediana": 1.789,
    "min": 1.453,
    "max": 1.91,
+   "descartados": 0,
    "baratas": [
     {
      "nombre": "Repsol",
@@ -60,22 +61,13 @@
    "id": "01",
    "nombre": "Álava",
    "cyl": false,
-   "n": 17,
-   "media": 1.77,
+   "n": 16,
+   "media": 1.79,
    "mediana": 1.829,
-   "min": 1.459,
+   "min": 1.618,
    "max": 1.928,
+   "descartados": 1,
    "baratas": [
-    {
-     "nombre": "Ona Lowcost",
-     "precio": 1.459,
-     "direccion": "Avenida Avda. de los Huetos, 56",
-     "localidad": "Vitoria-gasteiz",
-     "cp": "01010",
-     "horario": "L-D: 06:00-22:00",
-     "lat": 42.857194,
-     "lon": -2.716389
-    },
     {
      "nombre": "N1jundiz",
      "precio": 1.618,
@@ -95,6 +87,16 @@
      "horario": "L-D: 24H",
      "lat": 42.692917,
      "lon": -2.920667
+    },
+    {
+     "nombre": "Beroil Gasteiz",
+     "precio": 1.659,
+     "direccion": "Calle Zearsoloeta, 1",
+     "localidad": "Vitoria-gasteiz",
+     "cp": "01195",
+     "horario": "L-D: 00:00-23:59",
+     "lat": 42.847528,
+     "lon": -2.752139
     }
    ]
   },
@@ -102,27 +104,18 @@
    "id": "02",
    "nombre": "Albacete",
    "cyl": false,
-   "n": 39,
-   "media": 1.695,
-   "mediana": 1.73,
-   "min": 1.099,
+   "n": 38,
+   "media": 1.711,
+   "mediana": 1.735,
+   "min": 1.479,
    "max": 1.989,
+   "descartados": 1,
    "baratas": [
-    {
-     "nombre": "Gasolinera de Fuente-alamo",
-     "precio": 1.099,
-     "direccion": "Avda. Doctor Perez Gil, 25",
-     "localidad": "Fuente-alamo",
-     "cp": "02651",
-     "horario": "L: 07:00-21:00",
-     "lat": 38.689833,
-     "lon": -1.433306
-    },
     {
      "nombre": "La Remediadora",
      "precio": 1.479,
      "direccion": "Alfredo Atienza, 149-151",
-     "localidad": "Roda (la)",
+     "localidad": "La Roda",
      "cp": "02630",
      "horario": "L-D: 24H",
      "lat": 39.201139,
@@ -137,6 +130,16 @@
      "horario": "L-D: 24H",
      "lat": 39.367333,
      "lon": -1.59325
+    },
+    {
+     "nombre": "Sat Santa Cruz de Pozo Lorente",
+     "precio": 1.535,
+     "direccion": "Poligono Paraje Recial, 2",
+     "localidad": "Pozo-lorente",
+     "cp": "02154",
+     "horario": "L-D: 24H",
+     "lat": 39.081278,
+     "lon": -1.512611
     }
    ]
   },
@@ -149,6 +152,7 @@
    "mediana": 1.8,
    "min": 1.629,
    "max": 1.889,
+   "descartados": 0,
    "baratas": [
     {
      "nombre": "Jbm",
@@ -186,22 +190,13 @@
    "id": "04",
    "nombre": "Almería",
    "cyl": false,
-   "n": 66,
-   "media": 1.695,
+   "n": 65,
+   "media": 1.703,
    "mediana": 1.699,
-   "min": 1.2,
+   "min": 1.469,
    "max": 1.921,
+   "descartados": 1,
    "baratas": [
-    {
-     "nombre": "Desert Truckers",
-     "precio": 1.2,
-     "direccion": "Paraje Cañada los Albardinales, S/n",
-     "localidad": "Tabernas",
-     "cp": "04200",
-     "horario": "L-D: 08:00-20:00",
-     "lat": 37.067806,
-     "lon": -2.367361
-    },
     {
      "nombre": "Es Borja - E.s.sobrado de Picato, S.l.u",
      "precio": 1.469,
@@ -216,11 +211,21 @@
      "nombre": "Repsol",
      "precio": 1.499,
      "direccion": "Carretera Ctra. Nacional 340 Km. 520,700",
-     "localidad": "Gallardos (los)",
+     "localidad": "Los Gallardos",
      "cp": "04280",
      "horario": "L-D: 07:00-21:00",
      "lat": 37.168139,
      "lon": -1.932611
+    },
+    {
+     "nombre": "E.s. Coop Santa Maria del Aguila - el Ejido",
+     "precio": 1.522,
+     "direccion": "Calle Camino de Roquetas, 6",
+     "localidad": "El Ejido",
+     "cp": "04700",
+     "horario": "L-D: 24H",
+     "lat": 36.778167,
+     "lon": -2.772639
     }
    ]
   },
@@ -233,6 +238,7 @@
    "mediana": 1.769,
    "min": 1.54,
    "max": 1.865,
+   "descartados": 0,
    "baratas": [
     {
      "nombre": "Estacion de Servicio Valle de Trubia S.l.",
@@ -275,6 +281,7 @@
    "mediana": 1.719,
    "min": 1.589,
    "max": 1.839,
+   "descartados": 0,
    "baratas": [
     {
      "nombre": "An Energeticos - Madrigal",
@@ -312,41 +319,42 @@
    "id": "06",
    "nombre": "Badajoz",
    "cyl": false,
-   "n": 82,
-   "media": 1.649,
-   "mediana": 1.649,
-   "min": 1.108,
+   "n": 78,
+   "media": 1.673,
+   "mediana": 1.653,
+   "min": 1.473,
    "max": 1.89,
+   "descartados": 4,
    "baratas": [
     {
-     "nombre": "Murillo Rojo Sl",
-     "precio": 1.108,
-     "direccion": "Carretera Ba-613 Km. 24,8",
-     "localidad": "Hornachos",
-     "cp": "06228",
-     "horario": "L: 07:00-22:00; D: 07:00-14:30",
-     "lat": 38.555556,
-     "lon": -6.077639
+     "nombre": "Coop. Perales",
+     "precio": 1.473,
+     "direccion": "C/ Encarnacion, S/n",
+     "localidad": "Arroyo de San Servan",
+     "cp": "06850",
+     "horario": "L-D: 24H",
+     "lat": 38.851639,
+     "lon": -6.454028
     },
     {
-     "nombre": "Repsol",
-     "precio": 1.149,
-     "direccion": "Calle Peon de la Villa, 0,5",
-     "localidad": "Monterrubio de la Serena",
-     "cp": "06427",
-     "horario": "L: 09:00-14:30",
-     "lat": 38.589389,
-     "lon": -5.438639
+     "nombre": "Cooperativa Olivarera Cabeza del Buey",
+     "precio": 1.48,
+     "direccion": "Carretera Puebla de Alcocer Km. 1",
+     "localidad": "Cabeza del Buey",
+     "cp": "06600",
+     "horario": "L-D: 24H",
+     "lat": 38.731722,
+     "lon": -5.223472
     },
     {
-     "nombre": "Canchalosa",
-     "precio": 1.21,
-     "direccion": "Carretera Circunvalacion Km. 3,4",
-     "localidad": "Zarza (la)",
-     "cp": "06830",
-     "horario": "L-D: 00:00-23:59",
-     "lat": 38.827083,
-     "lon": -6.213194
+     "nombre": "Gasoleo B",
+     "precio": 1.49,
+     "direccion": "Poligono Industrial Frexnense, S/n",
+     "localidad": "Fregenal de la Sierra",
+     "cp": "06340",
+     "horario": "L-D: 24H",
+     "lat": 38.168028,
+     "lon": -6.636444
     }
    ]
   },
@@ -359,6 +367,7 @@
    "mediana": 1.755,
    "min": 1.49,
    "max": 1.928,
+   "descartados": 0,
    "baratas": [
     {
      "nombre": "Avanti",
@@ -401,6 +410,7 @@
    "mediana": 1.845,
    "min": 1.659,
    "max": 1.929,
+   "descartados": 0,
    "baratas": [
     {
      "nombre": "Artea Oil , S.a.",
@@ -443,6 +453,7 @@
    "mediana": 1.664,
    "min": 1.491,
    "max": 1.856,
+   "descartados": 0,
    "baratas": [
     {
      "nombre": "Coridu",
@@ -480,22 +491,13 @@
    "id": "10",
    "nombre": "Cáceres",
    "cyl": false,
-   "n": 49,
-   "media": 1.688,
+   "n": 48,
+   "media": 1.695,
    "mediana": 1.719,
-   "min": 1.349,
+   "min": 1.486,
    "max": 1.889,
+   "descartados": 1,
    "baratas": [
-    {
-     "nombre": "Estacion de Servicio Castañar",
-     "precio": 1.349,
-     "direccion": "CARRETERA km 28",
-     "localidad": "Castañar de Ibor",
-     "cp": "10340",
-     "horario": "L: 07:00-22:00",
-     "lat": 39.625083,
-     "lon": -5.418583
-    },
     {
      "nombre": "Coop. San Jose",
      "precio": 1.486,
@@ -515,6 +517,16 @@
      "horario": "L-D: 24H",
      "lat": 39.851778,
      "lon": -5.629528
+    },
+    {
+     "nombre": "Sdad Coop San Lucas del Torno",
+     "precio": 1.544,
+     "direccion": "Carretera el Torno - Cabezabellosa Km. 0,800",
+     "localidad": "El Torno",
+     "cp": "10617",
+     "horario": "L-D: 24H",
+     "lat": 40.134556,
+     "lon": -5.948556
     }
    ]
   },
@@ -527,6 +539,7 @@
    "mediana": 1.739,
    "min": 1.498,
    "max": 1.865,
+   "descartados": 0,
    "baratas": [
     {
      "nombre": "Suministros Mazo",
@@ -564,11 +577,12 @@
    "id": "39",
    "nombre": "Cantabria",
    "cyl": false,
-   "n": 31,
-   "media": 1.763,
-   "mediana": 1.799,
+   "n": 30,
+   "media": 1.745,
+   "mediana": 1.774,
    "min": 1.52,
-   "max": 2.299,
+   "max": 1.869,
+   "descartados": 1,
    "baratas": [
     {
      "nombre": "Meroil",
@@ -606,32 +620,13 @@
    "id": "12",
    "nombre": "Castellón",
    "cyl": false,
-   "n": 54,
-   "media": 1.658,
-   "mediana": 1.688,
-   "min": 1.137,
+   "n": 52,
+   "media": 1.675,
+   "mediana": 1.698,
+   "min": 1.359,
    "max": 1.868,
+   "descartados": 2,
    "baratas": [
-    {
-     "nombre": "Sin Rotulo",
-     "precio": 1.137,
-     "direccion": "Avenida Sierra de Espadan, 1",
-     "localidad": "Artana",
-     "cp": "12527",
-     "horario": "L-V: 00:07-14:00 y 16:00-19:30; S: 07:00-14:00",
-     "lat": 39.891083,
-     "lon": -0.251139
-    },
-    {
-     "nombre": "Bdmed",
-     "precio": 1.299,
-     "direccion": "Carretera Apeadero de Betxi Polig. 19 Parc. 34 Km. 2",
-     "localidad": "Apeadero de Bechi",
-     "cp": "12200",
-     "horario": "L-D: 24H",
-     "lat": 39.951278,
-     "lon": -0.182472
-    },
     {
      "nombre": "Bdmed",
      "precio": 1.359,
@@ -641,6 +636,26 @@
      "horario": "L-D: 24H",
      "lat": 39.981167,
      "lon": -0.022833
+    },
+    {
+     "nombre": "COOP. Nª Sª DE LA ASUNCION DE SONEJA",
+     "precio": 1.488,
+     "direccion": "Carretera Teruel, S/n Km. 0",
+     "localidad": "Soneja",
+     "cp": "12480",
+     "horario": "L-D: 24H",
+     "lat": 39.813056,
+     "lon": -0.430833
+    },
+    {
+     "nombre": "Transportes Rodolfo y Ventura",
+     "precio": 1.499,
+     "direccion": "Carretera Teruel Km. 24",
+     "localidad": "Soneja",
+     "cp": "12480",
+     "horario": "L-D: 24H",
+     "lat": 39.811278,
+     "lon": -0.428222
     }
    ]
   },
@@ -648,22 +663,13 @@
    "id": "13",
    "nombre": "Ciudad Real",
    "cyl": false,
-   "n": 81,
-   "media": 1.667,
+   "n": 80,
+   "media": 1.673,
    "mediana": 1.639,
-   "min": 1.18,
+   "min": 1.497,
    "max": 1.949,
+   "descartados": 1,
    "baratas": [
-    {
-     "nombre": "Libre",
-     "precio": 1.18,
-     "direccion": "CM 412 km 154.8",
-     "localidad": "Villanueva de la Fuente",
-     "cp": "13330",
-     "horario": "L-D: 07:00-23:00",
-     "lat": 38.695333,
-     "lon": -2.691639
-    },
     {
      "nombre": "El Rubial Soc. Coop.",
      "precio": 1.497,
@@ -683,6 +689,16 @@
      "horario": "L-D: 24H",
      "lat": 38.750861,
      "lon": -2.874611
+    },
+    {
+     "nombre": "Sumnistros Agricolas de Pedro Muñoz S. Coop. de C-lm",
+     "precio": 1.5,
+     "direccion": "Carretera Pedro Muñoz a Socuellamos Km. 1",
+     "localidad": "Pedro Muñoz",
+     "cp": "13620",
+     "horario": "L-D: 24H",
+     "lat": 39.396167,
+     "lon": -2.937778
     }
    ]
   },
@@ -695,12 +711,13 @@
    "mediana": 1.702,
    "min": 1.478,
    "max": 1.879,
+   "descartados": 0,
    "baratas": [
     {
      "nombre": "Cepsa",
      "precio": 1.478,
      "direccion": "Calle Carrera Baja, 6",
-     "localidad": "Rambla (la)",
+     "localidad": "La Rambla",
      "cp": "14540",
      "horario": "L-D: 24H",
      "lat": 37.609444,
@@ -737,6 +754,7 @@
    "mediana": 1.593,
    "min": 1.452,
    "max": 1.829,
+   "descartados": 0,
    "baratas": [
     {
      "nombre": "Ntro. Padre Jesus Nazareno, Sdad. Coop de Clm",
@@ -779,6 +797,7 @@
    "mediana": 1.839,
    "min": 1.729,
    "max": 1.889,
+   "descartados": 0,
    "baratas": [
     {
      "nombre": "Ids",
@@ -816,22 +835,13 @@
    "id": "17",
    "nombre": "Girona",
    "cyl": false,
-   "n": 50,
-   "media": 1.768,
+   "n": 49,
+   "media": 1.776,
    "mediana": 1.799,
-   "min": 1.339,
+   "min": 1.559,
    "max": 1.917,
+   "descartados": 1,
    "baratas": [
-    {
-     "nombre": "Cepsa",
-     "precio": 1.339,
-     "direccion": "Carretera C-31 Km. 357,2",
-     "localidad": "Verges",
-     "cp": "17142",
-     "horario": "L: 07:00-21:00",
-     "lat": 42.064694,
-     "lon": 3.049528
-    },
     {
      "nombre": "Aoil",
      "precio": 1.559,
@@ -851,6 +861,16 @@
      "horario": "L-D: 24H",
      "lat": 42.231139,
      "lon": 2.979778
+    },
+    {
+     "nombre": "Enco Sant Jordi",
+     "precio": 1.56,
+     "direccion": "Av.generalitat.25",
+     "localidad": "S. Jordi Desvalls",
+     "cp": "17464",
+     "horario": "L-S: 07:00-21:00; D: 09:00-14:00",
+     "lat": 42.070694,
+     "lon": 2.95875
     }
    ]
   },
@@ -863,6 +883,7 @@
    "mediana": 1.676,
    "min": 1.529,
    "max": 1.819,
+   "descartados": 0,
    "baratas": [
     {
      "nombre": "San Isidro Sca",
@@ -905,6 +926,7 @@
    "mediana": 1.699,
    "min": 1.559,
    "max": 1.739,
+   "descartados": 0,
    "baratas": [
     {
      "nombre": "Gasoleos Teruel",
@@ -942,22 +964,13 @@
    "id": "21",
    "nombre": "Huelva",
    "cyl": false,
-   "n": 44,
-   "media": 1.704,
+   "n": 42,
+   "media": 1.702,
    "mediana": 1.745,
-   "min": 1.34,
-   "max": 2.159,
+   "min": 1.4,
+   "max": 2.009,
+   "descartados": 2,
    "baratas": [
-    {
-     "nombre": "Cooperativa Corchera",
-     "precio": 1.34,
-     "direccion": "Carretera Hu-4103 Km. 29,5",
-     "localidad": "Berrocal",
-     "cp": "21647",
-     "horario": "L-D: 24H",
-     "lat": 37.60625,
-     "lon": -6.543583
-    },
     {
      "nombre": "Deoil",
      "precio": 1.4,
@@ -977,6 +990,16 @@
      "horario": "L-V: 07:30-21:30; S-D: 08:30-21:30",
      "lat": 37.243,
      "lon": -7.204889
+    },
+    {
+     "nombre": "Cobella",
+     "precio": 1.479,
+     "direccion": "Avenida Blas Infante, S/n",
+     "localidad": "Lepe",
+     "cp": "21400",
+     "horario": "L-D: 07:00-23:00",
+     "lat": 37.249639,
+     "lon": -7.214
     }
    ]
   },
@@ -989,6 +1012,7 @@
    "mediana": 1.675,
    "min": 1.507,
    "max": 1.864,
+   "descartados": 0,
    "baratas": [
     {
      "nombre": "Agropienso",
@@ -1031,6 +1055,7 @@
    "mediana": 1.859,
    "min": 1.509,
    "max": 2.199,
+   "descartados": 0,
    "baratas": [
     {
      "nombre": "Set&go",
@@ -1073,6 +1098,7 @@
    "mediana": 1.749,
    "min": 1.518,
    "max": 1.921,
+   "descartados": 0,
    "baratas": [
     {
      "nombre": "Aceites Guadalquivir",
@@ -1115,6 +1141,7 @@
    "mediana": 1.699,
    "min": 1.549,
    "max": 1.819,
+   "descartados": 0,
    "baratas": [
     {
      "nombre": "Beroil",
@@ -1157,12 +1184,13 @@
    "mediana": 1.699,
    "min": 1.5,
    "max": 1.839,
+   "descartados": 0,
    "baratas": [
     {
      "nombre": "Cepsa",
      "precio": 1.5,
      "direccion": "Carretera N-vi Km. 302,6",
-     "localidad": "Bañeza (la)",
+     "localidad": "La Bañeza",
      "cp": "24750",
      "horario": "L-D: 24H",
      "lat": 42.304444,
@@ -1172,7 +1200,7 @@
      "nombre": "Valcarce",
      "precio": 1.519,
      "direccion": "A-6, SALIDA 419/420 km 419",
-     "localidad": "Portela de Valcarce (la)",
+     "localidad": "La Portela de Valcarce",
      "cp": "24524",
      "horario": "L-D: 24H",
      "lat": 42.658806,
@@ -1199,6 +1227,7 @@
    "mediana": 1.62,
    "min": 1.432,
    "max": 1.87,
+   "descartados": 0,
    "baratas": [
     {
      "nombre": "Fru-rose, Sccl",
@@ -1241,12 +1270,13 @@
    "mediana": 1.805,
    "min": 1.559,
    "max": 1.889,
+   "descartados": 0,
    "baratas": [
     {
      "nombre": "O Xeixo,s.coop Galega Oil",
      "precio": 1.559,
      "direccion": "Lugar Carrizal, S/n",
-     "localidad": "Regueira (a)",
+     "localidad": "A Regueira",
      "cp": "27246",
      "horario": "L-D: 24H",
      "lat": 43.285417,
@@ -1283,6 +1313,7 @@
    "mediana": 1.819,
    "min": 1.599,
    "max": 1.919,
+   "descartados": 0,
    "baratas": [
     {
      "nombre": "Bp Taraza 365",
@@ -1325,6 +1356,7 @@
    "mediana": 1.699,
    "min": 1.488,
    "max": 1.989,
+   "descartados": 0,
    "baratas": [
     {
      "nombre": "S.coop.and. Agrícola Virgen de la Oliva",
@@ -1362,22 +1394,13 @@
    "id": "30",
    "nombre": "Murcia",
    "cyl": false,
-   "n": 105,
-   "media": 1.688,
+   "n": 103,
+   "media": 1.687,
    "mediana": 1.699,
-   "min": 1.299,
-   "max": 2.159,
+   "min": 1.399,
+   "max": 1.979,
+   "descartados": 2,
    "baratas": [
-    {
-     "nombre": "El Romeral",
-     "precio": 1.299,
-     "direccion": "Carretera Molina Fortuna Km. 6,5",
-     "localidad": "Molina de Segura",
-     "cp": "30500",
-     "horario": "L-D: 06:00-22:00",
-     "lat": 38.108611,
-     "lon": -1.165111
-    },
     {
      "nombre": "Renesur-el Altiplano",
      "precio": 1.399,
@@ -1397,6 +1420,16 @@
      "horario": "L-S: 08:00-22:00",
      "lat": 37.756972,
      "lon": -1.483222
+    },
+    {
+     "nombre": "E L P U E N T E, S.l.",
+     "precio": 1.498,
+     "direccion": "Carretera Nacional Km. 344",
+     "localidad": "Molina de Segura",
+     "cp": "30500",
+     "horario": "L-D: 05:30-22:30",
+     "lat": 38.054694,
+     "lon": -1.228333
     }
    ]
   },
@@ -1409,6 +1442,7 @@
    "mediana": 1.609,
    "min": 1.53,
    "max": 1.926,
+   "descartados": 0,
    "baratas": [
     {
      "nombre": "Transportes Cruz",
@@ -1451,6 +1485,7 @@
    "mediana": 1.789,
    "min": 1.609,
    "max": 1.849,
+   "descartados": 0,
    "baratas": [
     {
      "nombre": "Repsol",
@@ -1466,7 +1501,7 @@
      "nombre": "Staroil",
      "precio": 1.699,
      "direccion": "Autovia A52 Km. 132",
-     "localidad": "Gudiña (a)",
+     "localidad": "A Gudiña",
      "cp": "32540",
      "horario": "L-D: 24H",
      "lat": 42.024889,
@@ -1493,6 +1528,7 @@
    "mediana": 1.579,
    "min": 1.569,
    "max": 1.8,
+   "descartados": 0,
    "baratas": [
     {
      "nombre": "An Energeticos - Car Carrion",
@@ -1535,6 +1571,7 @@
    "mediana": 1.699,
    "min": 1.619,
    "max": 1.869,
+   "descartados": 0,
    "baratas": [
     {
      "nombre": "O Rodo",
@@ -1577,6 +1614,7 @@
    "mediana": 1.709,
    "min": 1.507,
    "max": 1.799,
+   "descartados": 0,
    "baratas": [
     {
      "nombre": "Aranpino",
@@ -1619,6 +1657,7 @@
    "mediana": 1.712,
    "min": 1.544,
    "max": 1.813,
+   "descartados": 0,
    "baratas": [
     {
      "nombre": "An Energeticos - Fuentesauco Glus I",
@@ -1661,6 +1700,7 @@
    "mediana": 1.729,
    "min": 1.47,
    "max": 1.899,
+   "descartados": 0,
    "baratas": [
     {
      "nombre": "Sca Agraria San Anton",
@@ -1676,7 +1716,7 @@
      "nombre": "Gasolinera de la Cooperativa Ntra Sra del Rosario",
      "precio": 1.495,
      "direccion": "Calle Fray Martin Povea, 51",
-     "localidad": "Saucejo (el)",
+     "localidad": "El Saucejo",
      "cp": "41650",
      "horario": "L-D: 24H",
      "lat": 37.070889,
@@ -1703,6 +1743,7 @@
    "mediana": 1.709,
    "min": 1.679,
    "max": 1.829,
+   "descartados": 0,
    "baratas": [
     {
      "nombre": "Ghc Soria",
@@ -1740,32 +1781,13 @@
    "id": "43",
    "nombre": "Tarragona",
    "cyl": false,
-   "n": 54,
-   "media": 1.653,
-   "mediana": 1.675,
-   "min": 1.09,
+   "n": 52,
+   "media": 1.673,
+   "mediana": 1.685,
+   "min": 1.476,
    "max": 1.879,
+   "descartados": 2,
    "baratas": [
-    {
-     "nombre": "Bionet",
-     "precio": 1.09,
-     "direccion": "POL. INDUSTRIAL RIU-CLAR, C/ SOFRE Nº 3",
-     "localidad": "Tarragona",
-     "cp": "43006",
-     "horario": "L-D: 24H",
-     "lat": 41.1385,
-     "lon": 1.221797
-    },
-    {
-     "nombre": "Repsol",
-     "precio": 1.144,
-     "direccion": "Cl Avenida de la Rapita, 141",
-     "localidad": "Amposta",
-     "cp": "43870",
-     "horario": "L: 08:00-13:30 y 16:30-20:00",
-     "lat": 40.705944,
-     "lon": 0.579861
-    },
     {
      "nombre": "Montsia",
      "precio": 1.476,
@@ -1775,6 +1797,26 @@
      "horario": "L: 24H",
      "lat": 40.703389,
      "lon": 0.587722
+    },
+    {
+     "nombre": "Montsia",
+     "precio": 1.476,
+     "direccion": "Carretera Diputacion Km. 2,45",
+     "localidad": "Sant Jaume D'enveja",
+     "cp": "43877",
+     "horario": "L-D: 24H",
+     "lat": 40.690806,
+     "lon": 0.721694
+    },
+    {
+     "nombre": "Icor Energia",
+     "precio": 1.5,
+     "direccion": "Avenida de Reus, 86",
+     "localidad": "Alcover",
+     "cp": "43460",
+     "horario": "L-D: 06:30-21:30",
+     "lat": 41.256167,
+     "lon": 1.169056
     }
    ]
   },
@@ -1787,6 +1829,7 @@
    "mediana": 1.685,
    "min": 1.536,
    "max": 1.885,
+   "descartados": 0,
    "baratas": [
     {
      "nombre": "Sanicoop",
@@ -1829,6 +1872,7 @@
    "mediana": 1.664,
    "min": 1.39,
    "max": 1.859,
+   "descartados": 0,
    "baratas": [
     {
      "nombre": "Petrocasarrubios",
@@ -1866,32 +1910,13 @@
    "id": "46",
    "nombre": "Valencia",
    "cyl": false,
-   "n": 142,
-   "media": 1.659,
-   "mediana": 1.644,
-   "min": 1.1,
+   "n": 140,
+   "media": 1.667,
+   "mediana": 1.649,
+   "min": 1.399,
    "max": 1.898,
+   "descartados": 2,
    "baratas": [
-    {
-     "nombre": "Bp",
-     "precio": 1.1,
-     "direccion": "At A-3, 281",
-     "localidad": "Requena",
-     "cp": "46340",
-     "horario": "L-D: 24H",
-     "lat": 39.530556,
-     "lon": -1.165306
-    },
-    {
-     "nombre": "Moeve",
-     "precio": 1.125,
-     "direccion": "Carretera Madrid Valencia Km 276 Km.",
-     "localidad": "Requena",
-     "cp": "46340",
-     "horario": "L-D: 06:00-23:00",
-     "lat": 39.483861,
-     "lon": -1.095056
-    },
     {
      "nombre": "Gasolwin",
      "precio": 1.399,
@@ -1901,6 +1926,26 @@
      "horario": "L-D: 24H",
      "lat": 38.987667,
      "lon": -0.473194
+    },
+    {
+     "nombre": "E.s.visa",
+     "precio": 1.399,
+     "direccion": "Plaza Calvario, 13",
+     "localidad": "Sollana",
+     "cp": "46430",
+     "horario": "L-V: 07:00-21:00; S: 07:00-15:00; D: 08:00-13:30",
+     "lat": 39.280861,
+     "lon": -0.383417
+    },
+    {
+     "nombre": "Bdmed",
+     "precio": 1.449,
+     "direccion": "Avenida Vicente Vidal, S/n",
+     "localidad": "Alzira",
+     "cp": "46600",
+     "horario": "L-D: 24H",
+     "lat": 39.14475,
+     "lon": -0.427528
     }
    ]
   },
@@ -1913,6 +1958,7 @@
    "mediana": 1.751,
    "min": 1.509,
    "max": 1.879,
+   "descartados": 0,
    "baratas": [
     {
      "nombre": "Cocope, S. Coop.",
@@ -1955,6 +2001,7 @@
    "mediana": 1.614,
    "min": 1.55,
    "max": 1.839,
+   "descartados": 0,
    "baratas": [
     {
      "nombre": "Agrinza",
@@ -1997,6 +2044,7 @@
    "mediana": 1.651,
    "min": 1.5,
    "max": 1.908,
+   "descartados": 0,
    "baratas": [
     {
      "nombre": "Cooperativa de Luna",
