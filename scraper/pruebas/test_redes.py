@@ -157,3 +157,15 @@ def test_fusionar_registro_sin_perder_nada():
     assert u["franjas"]["2026-11-07"] == ["manana", "reel"] and u["historias"] == {"hechas": [1]}
     assert [r["id"] for r in u["registro"]] == ["leon", "reel"]
     assert f({"publicado": {"leon": "2026-11-04"}}, {"publicado": {"leon": "2026-11-11"}})["publicado"]["leon"] == "2026-11-11"
+
+
+def test_reels_especiales_cualquier_dia():
+    import redes as r
+    from datetime import date
+    domingo = date(2026, 11, 8)
+    it = r.elegir("especial:instalar", {"lonjas": []}, {}, domingo)
+    assert it["tipo"] == "especial" and it["video"] == "2026-11-08-especial-instalar.mp4"
+    assert "Añadir a pantalla de inicio" in it["texto"] and "#LonjasCyL" in it["texto"] and "CC BY 3.0" in it["texto"]
+    assert r.elegir("especial:explotacion", {"lonjas": []}, {}, domingo)["id"] == "2026-11-08-especial-explotacion"
+    assert r.elegir("especial:no-existe", {"lonjas": []}, {}, domingo) is None
+    assert r.elegir("reel", {"lonjas": []}, {}, domingo) is None          # el domingo, lo demás no publica

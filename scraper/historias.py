@@ -1062,9 +1062,10 @@ def plan(escenas: list, voces: list[Path | None]) -> list[float]:
     return durs
 
 
-def reel(n: int, destino: Path, datos: dict | None = None, hoy: date | None = None, web: str = WEB) -> Path:
+def reel(n: int, destino: Path, datos: dict | None = None, hoy: date | None = None, web: str = WEB, escenas: list | None = None) -> Path:
+    """Monta el reel n de HISTORIAS, o el de las `escenas` que se le pasen (reels especiales, especiales.py)."""
     hoy = hoy or date.today()
-    escenas = HISTORIAS[n]["escenas"](datos, hoy)
+    escenas = escenas or HISTORIAS[n]["escenas"](datos, hoy)
     tmp = destino.with_name(destino.stem + "-tmp")
     tmp.mkdir(parents=True, exist_ok=True)
     cierre_voz = "Lonjas Castilla y León. Gratis, y sin registro."

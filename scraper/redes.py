@@ -537,6 +537,9 @@ def elegir(franja: str, datos: dict, estado: dict, hoy: date) -> dict | None:
         import historias
         n = historias.siguiente(estado, hoy)
         return historias.item(n, hoy) if n else None
+    if franja.startswith("especial:"):              # reels especiales (especiales.py): se lanzan a mano, cualquier día
+        import especiales
+        return especiales.item(franja.split(":", 1)[1], hoy)
     if dia == 6:
         return None
     if franja in ("manana", "tarde"):
@@ -591,6 +594,9 @@ def crear_archivos(item: dict, datos: dict, hoy: date, carpeta: Path) -> None:
     elif item["tipo"] == "historia":
         import historias
         historias.reel(item["n"], carpeta / item["video"], datos, hoy)
+    elif item["tipo"] == "especial":
+        import especiales
+        especiales.reel(item["nombre"], carpeta / item["video"], datos, hoy)
     elif item["tipo"] == "reel":
         if item["reel"] == "ranking":
             reel_ranking(ranking(datos, item["clave"], hoy), carpeta / item["video"])

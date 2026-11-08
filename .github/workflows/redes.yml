@@ -15,7 +15,7 @@ on:
   workflow_dispatch:
     inputs:
       franja:
-        description: "manana, reel, tarde, historia o historias-todas (los 5 reels con historia, con probar=si)"
+        description: "manana, reel, tarde, historia, historias-todas (con probar=si) o especial:instalar / especial:explotacion"
         required: true
         default: "reel"
       probar:

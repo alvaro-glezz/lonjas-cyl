@@ -42,7 +42,8 @@ def llamar(token: str, metodo: str, datos: dict, archivos: dict | None = None) -
 
 
 def cabecera(franja: str, probar: bool) -> str:
-    t = f"📅 {FRANJAS.get(franja, franja)} · Instagram y Facebook"
+    nombre = f"Reel especial «{franja.split(':', 1)[1]}»" if franja.startswith("especial:") else FRANJAS.get(franja, franja)
+    t = f"📅 {nombre} · Instagram y Facebook"
     return ("🧪 PRUEBA (no se publicará)\n" if probar else "") + t
 
 
@@ -92,7 +93,7 @@ def resultado(estado: dict, hoy: date, probar: bool) -> str | None:
     franja = estado.get("franja", "?")
     if franja == "historias-todas":
         return None
-    nombre = FRANJAS.get(franja, franja)
+    nombre = f"Reel especial «{franja.split(':', 1)[1]}»" if franja.startswith("especial:") else FRANJAS.get(franja, franja)
     if probar:
         return f"🧪 {nombre}: era una prueba, no se ha publicado."
     e = estado.get("error")
