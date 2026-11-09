@@ -1,16 +1,16 @@
 {
- "fecha": "2026-11-08T23:19",
+ "fecha": "2026-11-09T14:54",
  "fuente": "Ministerio para la Transición Ecológica y el Reto Demográfico (Geoportal de gasolineras)",
  "fuente_url": "https://geoportalgasolineras.es/geoportal-instalaciones/Inicio",
  "unidad": "€/l",
  "espana": {
-  "media": 1.706,
+  "media": 1.704,
   "min": 1.359,
-  "n": 2245
+  "n": 2250
  },
  "cyl": {
-  "media": 1.684,
-  "min": 1.491,
+  "media": 1.675,
+  "min": 1.485,
   "n": 164
  },
  "provincias": [
@@ -63,7 +63,7 @@
    "cyl": false,
    "n": 16,
    "media": 1.79,
-   "mediana": 1.829,
+   "mediana": 1.827,
    "min": 1.618,
    "max": 1.928,
    "descartados": 1,
@@ -105,8 +105,8 @@
    "nombre": "Albacete",
    "cyl": false,
    "n": 38,
-   "media": 1.711,
-   "mediana": 1.735,
+   "media": 1.705,
+   "mediana": 1.719,
    "min": 1.479,
    "max": 1.989,
    "descartados": 1,
@@ -122,6 +122,16 @@
      "lon": -2.14775
     },
     {
+     "nombre": "Gasolinera de Valdeganga",
+     "precio": 1.529,
+     "direccion": "Calle Santa Cruz, 16",
+     "localidad": "Valdeganga",
+     "cp": "02150",
+     "horario": "L-D: 24H",
+     "lat": 39.137222,
+     "lon": -1.680944
+    },
+    {
      "nombre": "Bodegas Saac",
      "precio": 1.531,
      "direccion": "Calle Valencia, 41",
@@ -130,16 +140,6 @@
      "horario": "L-D: 24H",
      "lat": 39.367333,
      "lon": -1.59325
-    },
-    {
-     "nombre": "Sat Santa Cruz de Pozo Lorente",
-     "precio": 1.535,
-     "direccion": "Poligono Paraje Recial, 2",
-     "localidad": "Pozo-lorente",
-     "cp": "02154",
-     "horario": "L-D: 24H",
-     "lat": 39.081278,
-     "lon": -1.512611
     }
    ]
   },
@@ -147,13 +147,23 @@
    "id": "03",
    "nombre": "Alicante",
    "cyl": false,
-   "n": 51,
-   "media": 1.788,
-   "mediana": 1.8,
-   "min": 1.629,
+   "n": 52,
+   "media": 1.781,
+   "mediana": 1.795,
+   "min": 1.6,
    "max": 1.889,
    "descartados": 0,
    "baratas": [
+    {
+     "nombre": "E.s. Cañizares",
+     "precio": 1.6,
+     "direccion": "Avenida la Provincia, N",
+     "localidad": "Ibi",
+     "cp": "03440",
+     "horario": "L-D: 06:00-22:00",
+     "lat": 38.616889,
+     "lon": -0.585333
+    },
     {
      "nombre": "Jbm",
      "precio": 1.629,
@@ -163,16 +173,6 @@
      "horario": "L-D: 06:00-22:00",
      "lat": 38.635861,
      "lon": -0.873944
-    },
-    {
-     "nombre": "E.s. Cañizares",
-     "precio": 1.65,
-     "direccion": "Avenida la Provincia, N",
-     "localidad": "Ibi",
-     "cp": "03440",
-     "horario": "L-D: 06:00-22:00",
-     "lat": 38.616889,
-     "lon": -0.585333
     },
     {
      "nombre": "Cooperativa Divina Aurora",
@@ -191,7 +191,7 @@
    "nombre": "Almería",
    "cyl": false,
    "n": 65,
-   "media": 1.703,
+   "media": 1.702,
    "mediana": 1.699,
    "min": 1.469,
    "max": 1.921,
@@ -234,7 +234,7 @@
    "nombre": "Asturias",
    "cyl": false,
    "n": 59,
-   "media": 1.755,
+   "media": 1.754,
    "mediana": 1.769,
    "min": 1.54,
    "max": 1.865,
@@ -277,7 +277,7 @@
    "nombre": "Ávila",
    "cyl": true,
    "n": 14,
-   "media": 1.712,
+   "media": 1.711,
    "mediana": 1.719,
    "min": 1.589,
    "max": 1.839,
@@ -320,7 +320,7 @@
    "nombre": "Badajoz",
    "cyl": false,
    "n": 78,
-   "media": 1.673,
+   "media": 1.671,
    "mediana": 1.653,
    "min": 1.473,
    "max": 1.89,
@@ -363,21 +363,31 @@
    "nombre": "Barcelona",
    "cyl": false,
    "n": 39,
-   "media": 1.729,
+   "media": 1.723,
    "mediana": 1.755,
-   "min": 1.49,
+   "min": 1.48,
    "max": 1.928,
    "descartados": 0,
    "baratas": [
     {
      "nombre": "Avanti",
-     "precio": 1.49,
+     "precio": 1.48,
      "direccion": "CTRA. DE CARDONA A BERGA (B420 km 1.700)",
      "localidad": "Cardona",
      "cp": "08261",
      "horario": "L-D: 24H",
      "lat": 41.930222,
      "lon": 1.688667
+    },
+    {
+     "nombre": "Primer Truck Area",
+     "precio": 1.559,
+     "direccion": "Calle Susqueda, De, 16",
+     "localidad": "Vic",
+     "cp": "08500",
+     "horario": "L-D: 24H",
+     "lat": 41.954944,
+     "lon": 2.280194
     },
     {
      "nombre": "Low Cost Sant Fost Vilacarburants",
@@ -388,16 +398,6 @@
      "horario": "L-D: 24H",
      "lat": 41.515194,
      "lon": 2.215
-    },
-    {
-     "nombre": "Feixas Aulet",
-     "precio": 1.569,
-     "direccion": "Calle Francesc Puget Montfort, 2",
-     "localidad": "Manlleu",
-     "cp": "08560",
-     "horario": "L-D: 24H",
-     "lat": 42.004306,
-     "lon": 2.296472
     }
    ]
   },
@@ -406,10 +406,10 @@
    "nombre": "Bizkaia",
    "cyl": false,
    "n": 12,
-   "media": 1.813,
-   "mediana": 1.845,
+   "media": 1.811,
+   "mediana": 1.842,
    "min": 1.659,
-   "max": 1.929,
+   "max": 1.909,
    "descartados": 0,
    "baratas": [
     {
@@ -449,15 +449,15 @@
    "nombre": "Burgos",
    "cyl": true,
    "n": 30,
-   "media": 1.668,
+   "media": 1.659,
    "mediana": 1.664,
-   "min": 1.491,
+   "min": 1.485,
    "max": 1.856,
    "descartados": 0,
    "baratas": [
     {
      "nombre": "Coridu",
-     "precio": 1.491,
+     "precio": 1.485,
      "direccion": "Carretera San Martin de Rubiales Km. 1",
      "localidad": "Roa",
      "cp": "09300",
@@ -466,24 +466,24 @@
      "lon": -3.925778
     },
     {
-     "nombre": "E.s. Rivera",
-     "precio": 1.539,
-     "direccion": "Calle Calle San Roque (carretera Burgos-villarcayo), 13",
-     "localidad": "Villarcayo",
-     "cp": "09556",
-     "horario": "L-D: 07:30-23:00",
-     "lat": 42.940389,
-     "lon": -3.570556
+     "nombre": "Beroil",
+     "precio": 1.499,
+     "direccion": "Carretera Nacional 620 Km. 20",
+     "localidad": "Estepar",
+     "cp": "09230",
+     "horario": "L-D: 24H",
+     "lat": 42.278444,
+     "lon": -3.89175
     },
     {
-     "nombre": "Galp",
-     "precio": 1.549,
-     "direccion": "Ctra. de Logroño, 70",
-     "localidad": "Miranda de Ebro",
-     "cp": "09200",
-     "horario": "L-D: 06:30-22:30",
-     "lat": 42.68575,
-     "lon": -2.932667
+     "nombre": "Beroil, S.l.",
+     "precio": 1.499,
+     "direccion": "N-I km 249",
+     "localidad": "Rubena",
+     "cp": "09199",
+     "horario": "L-D: 24H",
+     "lat": 42.37675,
+     "lon": -3.590833
     }
    ]
   },
@@ -492,8 +492,8 @@
    "nombre": "Cáceres",
    "cyl": false,
    "n": 48,
-   "media": 1.695,
-   "mediana": 1.719,
+   "media": 1.697,
+   "mediana": 1.724,
    "min": 1.486,
    "max": 1.889,
    "descartados": 1,
@@ -578,10 +578,10 @@
    "nombre": "Cantabria",
    "cyl": false,
    "n": 30,
-   "media": 1.745,
+   "media": 1.74,
    "mediana": 1.774,
    "min": 1.52,
-   "max": 1.869,
+   "max": 1.859,
    "descartados": 1,
    "baratas": [
     {
@@ -621,7 +621,7 @@
    "nombre": "Castellón",
    "cyl": false,
    "n": 52,
-   "media": 1.675,
+   "media": 1.673,
    "mediana": 1.698,
    "min": 1.359,
    "max": 1.868,
@@ -664,12 +664,22 @@
    "nombre": "Ciudad Real",
    "cyl": false,
    "n": 80,
-   "media": 1.673,
+   "media": 1.669,
    "mediana": 1.639,
-   "min": 1.497,
+   "min": 1.479,
    "max": 1.949,
    "descartados": 1,
    "baratas": [
+    {
+     "nombre": "Castillo de Montiel",
+     "precio": 1.479,
+     "direccion": "Carrera Villanueva de los Infantes, S/n",
+     "localidad": "Montiel",
+     "cp": "13326",
+     "horario": "L-D: 24H",
+     "lat": 38.69975,
+     "lon": -2.882583
+    },
     {
      "nombre": "El Rubial Soc. Coop.",
      "precio": 1.497,
@@ -681,24 +691,14 @@
      "lon": -3.59675
     },
     {
-     "nombre": "Chm",
+     "nombre": "Coop. los Pozos",
      "precio": 1.499,
-     "direccion": "Avenida Castilla la Mancha, 11",
-     "localidad": "Villahermosa",
-     "cp": "13332",
+     "direccion": "Calle Herreros, 1",
+     "localidad": "Daimiel",
+     "cp": "13250",
      "horario": "L-D: 24H",
-     "lat": 38.750861,
-     "lon": -2.874611
-    },
-    {
-     "nombre": "Sumnistros Agricolas de Pedro Muñoz S. Coop. de C-lm",
-     "precio": 1.5,
-     "direccion": "Carretera Pedro Muñoz a Socuellamos Km. 1",
-     "localidad": "Pedro Muñoz",
-     "cp": "13620",
-     "horario": "L-D: 24H",
-     "lat": 39.396167,
-     "lon": -2.937778
+     "lat": 39.075139,
+     "lon": -3.593722
     }
    ]
   },
@@ -707,7 +707,7 @@
    "nombre": "Córdoba",
    "cyl": false,
    "n": 68,
-   "media": 1.707,
+   "media": 1.705,
    "mediana": 1.702,
    "min": 1.478,
    "max": 1.879,
@@ -735,7 +735,7 @@
     },
     {
      "nombre": "Cooperativa Lucena",
-     "precio": 1.529,
+     "precio": 1.499,
      "direccion": "Avenida de la Infancia, 15",
      "localidad": "Lucena",
      "cp": "14900",
@@ -750,7 +750,7 @@
    "nombre": "Cuenca",
    "cyl": false,
    "n": 34,
-   "media": 1.594,
+   "media": 1.59,
    "mediana": 1.593,
    "min": 1.452,
    "max": 1.829,
@@ -777,14 +777,14 @@
      "lon": -2.70975
     },
     {
-     "nombre": "Matalara",
-     "precio": 1.485,
-     "direccion": "Camino las Monjas, S/n",
-     "localidad": "Villarejo de Fuentes",
-     "cp": "16432",
+     "nombre": "Grupo Barambio",
+     "precio": 1.48,
+     "direccion": "Calle Madrid, 15",
+     "localidad": "Buenache de Alarcon",
+     "cp": "16114",
      "horario": "L-D: 24H",
-     "lat": 39.788611,
-     "lon": -2.689583
+     "lat": 39.654583,
+     "lon": -2.160528
     }
    ]
   },
@@ -793,7 +793,7 @@
    "nombre": "Gipuzkoa",
    "cyl": false,
    "n": 24,
-   "media": 1.838,
+   "media": 1.835,
    "mediana": 1.839,
    "min": 1.729,
    "max": 1.889,
@@ -811,7 +811,7 @@
     },
     {
      "nombre": "Petromiralles",
-     "precio": 1.789,
+     "precio": 1.759,
      "direccion": "Pol. Ind. Karrika. Parcela 6",
      "localidad": "Andoain",
      "cp": "20140",
@@ -878,9 +878,9 @@
    "id": "18",
    "nombre": "Granada",
    "cyl": false,
-   "n": 56,
+   "n": 57,
    "media": 1.667,
-   "mediana": 1.676,
+   "mediana": 1.679,
    "min": 1.529,
    "max": 1.819,
    "descartados": 0,
@@ -965,7 +965,7 @@
    "nombre": "Huelva",
    "cyl": false,
    "n": 42,
-   "media": 1.702,
+   "media": 1.701,
    "mediana": 1.745,
    "min": 1.4,
    "max": 2.009,
@@ -993,7 +993,7 @@
     },
     {
      "nombre": "Cobella",
-     "precio": 1.479,
+     "precio": 1.468,
      "direccion": "Avenida Blas Infante, S/n",
      "localidad": "Lepe",
      "cp": "21400",
@@ -1008,15 +1008,15 @@
    "nombre": "Huesca",
    "cyl": false,
    "n": 56,
-   "media": 1.662,
+   "media": 1.657,
    "mediana": 1.675,
-   "min": 1.507,
+   "min": 1.479,
    "max": 1.864,
    "descartados": 0,
    "baratas": [
     {
      "nombre": "Agropienso",
-     "precio": 1.507,
+     "precio": 1.479,
      "direccion": "Carretera N-240 Km. 128,100",
      "localidad": "Esplus",
      "cp": "22535",
@@ -1035,14 +1035,14 @@
      "lon": -0.32975
     },
     {
-     "nombre": "Cooperativa Osca",
-     "precio": 1.529,
-     "direccion": "Poligono Parcela 33, 33",
-     "localidad": "Alcolea de Cinca",
-     "cp": "22410",
+     "nombre": "Mazana Oil",
+     "precio": 1.525,
+     "direccion": "Calle Empalme A, 5",
+     "localidad": "Capella",
+     "cp": "22480",
      "horario": "L-D: 24H",
-     "lat": 41.719333,
-     "lon": 0.103917
+     "lat": 42.195417,
+     "lon": 0.395167
     }
    ]
   },
@@ -1051,7 +1051,7 @@
    "nombre": "Illes Balears",
    "cyl": false,
    "n": 34,
-   "media": 1.849,
+   "media": 1.847,
    "mediana": 1.859,
    "min": 1.509,
    "max": 2.199,
@@ -1094,8 +1094,8 @@
    "nombre": "Jaén",
    "cyl": false,
    "n": 119,
-   "media": 1.739,
-   "mediana": 1.749,
+   "media": 1.737,
+   "mediana": 1.748,
    "min": 1.518,
    "max": 1.921,
    "descartados": 0,
@@ -1137,7 +1137,7 @@
    "nombre": "La Rioja",
    "cyl": false,
    "n": 28,
-   "media": 1.687,
+   "media": 1.686,
    "mediana": 1.699,
    "min": 1.549,
    "max": 1.819,
@@ -1180,7 +1180,7 @@
    "nombre": "León",
    "cyl": true,
    "n": 22,
-   "media": 1.676,
+   "media": 1.667,
    "mediana": 1.699,
    "min": 1.5,
    "max": 1.839,
@@ -1197,24 +1197,24 @@
      "lon": -5.898028
     },
     {
-     "nombre": "Valcarce",
-     "precio": 1.519,
-     "direccion": "A-6, SALIDA 419/420 km 419",
-     "localidad": "La Portela de Valcarce",
-     "cp": "24524",
-     "horario": "L-D: 24H",
-     "lat": 42.658806,
-     "lon": -6.914083
+     "nombre": "Agropal",
+     "precio": 1.5,
+     "direccion": "Carretera Valencia de Don Juan Km. Sn",
+     "localidad": "Toral de los Guzmanes",
+     "cp": "24237",
+     "horario": "L-V: 09:00-13:30 y 16:00-18:30; S: 09:00-13:30",
+     "lat": 42.251222,
+     "lon": -5.566194
     },
     {
-     "nombre": "Cooperativa San Blas",
-     "precio": 1.529,
-     "direccion": "Calle el Parque, 9",
-     "localidad": "Santibañez de la Isla",
-     "cp": "24795",
-     "horario": "L-D: 24H",
-     "lat": 42.375139,
-     "lon": -5.935528
+     "nombre": "Agropal",
+     "precio": 1.5,
+     "direccion": "Carretera Ct.estacion de Valcabado-villadangos S/n Km.",
+     "localidad": "Valcabado del Paramo",
+     "cp": "24790",
+     "horario": "L-V: 09:00-13:30 y 16:00-18:30; S: 09:00-13:30",
+     "lat": 42.218889,
+     "lon": -5.801917
     }
    ]
   },
@@ -1222,9 +1222,9 @@
    "id": "25",
    "nombre": "Lleida",
    "cyl": false,
-   "n": 55,
-   "media": 1.644,
-   "mediana": 1.62,
+   "n": 54,
+   "media": 1.643,
+   "mediana": 1.625,
    "min": 1.432,
    "max": 1.87,
    "descartados": 0,
@@ -1241,7 +1241,7 @@
     },
     {
      "nombre": "Agropecuaria de Juneda",
-     "precio": 1.461,
+     "precio": 1.462,
      "direccion": "CARRETERA N-240 km 73",
      "localidad": "Juneda",
      "cp": "25430",
@@ -1265,8 +1265,8 @@
    "id": "27",
    "nombre": "Lugo",
    "cyl": false,
-   "n": 50,
-   "media": 1.79,
+   "n": 51,
+   "media": 1.788,
    "mediana": 1.805,
    "min": 1.559,
    "max": 1.889,
@@ -1309,7 +1309,7 @@
    "nombre": "Madrid",
    "cyl": false,
    "n": 42,
-   "media": 1.785,
+   "media": 1.784,
    "mediana": 1.819,
    "min": 1.599,
    "max": 1.919,
@@ -1352,12 +1352,22 @@
    "nombre": "Málaga",
    "cyl": false,
    "n": 35,
-   "media": 1.699,
+   "media": 1.69,
    "mediana": 1.699,
-   "min": 1.488,
-   "max": 1.989,
+   "min": 1.478,
+   "max": 1.909,
    "descartados": 0,
    "baratas": [
+    {
+     "nombre": "S.c.a.a. Ntra. Señora del Carmen",
+     "precio": 1.478,
+     "direccion": "Avenida de Juan Xxii, S/n",
+     "localidad": "Cuevas de San Marcos",
+     "cp": "29210",
+     "horario": "L-D: 07:00-22:30",
+     "lat": 37.267972,
+     "lon": -4.417639
+    },
     {
      "nombre": "S.coop.and. Agrícola Virgen de la Oliva",
      "precio": 1.488,
@@ -1369,18 +1379,8 @@
      "lon": -4.6615
     },
     {
-     "nombre": "S.c.a.a. Ntra. Señora del Carmen",
-     "precio": 1.502,
-     "direccion": "Avenida de Juan Xxii, S/n",
-     "localidad": "Cuevas de San Marcos",
-     "cp": "29210",
-     "horario": "L-D: 07:00-22:30",
-     "lat": 37.267972,
-     "lon": -4.417639
-    },
-    {
      "nombre": "Olivarera Trabuco",
-     "precio": 1.519,
+     "precio": 1.499,
      "direccion": "Carretera A-7203 Km. 2,2",
      "localidad": "Villanueva del Trabuco",
      "cp": "29313",
@@ -1394,7 +1394,7 @@
    "id": "30",
    "nombre": "Murcia",
    "cyl": false,
-   "n": 103,
+   "n": 105,
    "media": 1.687,
    "mediana": 1.699,
    "min": 1.399,
@@ -1438,7 +1438,7 @@
    "nombre": "Navarra",
    "cyl": false,
    "n": 103,
-   "media": 1.656,
+   "media": 1.654,
    "mediana": 1.609,
    "min": 1.53,
    "max": 1.926,
@@ -1481,10 +1481,10 @@
    "nombre": "Ourense",
    "cyl": false,
    "n": 25,
-   "media": 1.78,
+   "media": 1.779,
    "mediana": 1.789,
    "min": 1.609,
-   "max": 1.849,
+   "max": 1.839,
    "descartados": 0,
    "baratas": [
     {
@@ -1524,25 +1524,15 @@
    "nombre": "Palencia",
    "cyl": true,
    "n": 13,
-   "media": 1.641,
-   "mediana": 1.579,
-   "min": 1.569,
-   "max": 1.8,
+   "media": 1.603,
+   "mediana": 1.569,
+   "min": 1.512,
+   "max": 1.799,
    "descartados": 0,
    "baratas": [
     {
-     "nombre": "An Energeticos - Car Carrion",
-     "precio": 1.569,
-     "direccion": "Avenida Manuela Rizo, S/n",
-     "localidad": "Carrion de los Condes",
-     "cp": "34120",
-     "horario": "L-D: 24H",
-     "lat": 42.331,
-     "lon": -4.603222
-    },
-    {
      "nombre": "Agropal",
-     "precio": 1.579,
+     "precio": 1.512,
      "direccion": "Camino Polígono 518 Parcela 5010 los Palomares,",
      "localidad": "Amusco",
      "cp": "34420",
@@ -1552,13 +1542,23 @@
     },
     {
      "nombre": "Agropal",
-     "precio": 1.579,
+     "precio": 1.512,
      "direccion": "Carretera Cr Valdecañas 8 Km.",
      "localidad": "Baltanas",
      "cp": "34240",
      "horario": "L-V: 09:00-19:00",
      "lat": 41.94375,
      "lon": -4.243333
+    },
+    {
+     "nombre": "Agropal",
+     "precio": 1.512,
+     "direccion": "Carretera P-140 Km. 5",
+     "localidad": "Castrillo de Don Juan",
+     "cp": "34246",
+     "horario": "L-V: 09:00-13:30 y 16:00-19:00",
+     "lat": 41.786306,
+     "lon": -4.075917
     }
    ]
   },
@@ -1567,15 +1567,15 @@
    "nombre": "Pontevedra",
    "cyl": false,
    "n": 34,
-   "media": 1.711,
+   "media": 1.707,
    "mediana": 1.699,
-   "min": 1.619,
+   "min": 1.589,
    "max": 1.869,
    "descartados": 0,
    "baratas": [
     {
      "nombre": "O Rodo",
-     "precio": 1.619,
+     "precio": 1.589,
      "direccion": "Carretera Po-533 Km. 16",
      "localidad": "Rodeiro",
      "cp": "36530",
@@ -1610,10 +1610,10 @@
    "nombre": "Salamanca",
    "cyl": true,
    "n": 19,
-   "media": 1.701,
-   "mediana": 1.709,
+   "media": 1.7,
+   "mediana": 1.706,
    "min": 1.507,
-   "max": 1.799,
+   "max": 1.795,
    "descartados": 0,
    "baratas": [
     {
@@ -1653,7 +1653,7 @@
    "nombre": "Segovia",
    "cyl": true,
    "n": 20,
-   "media": 1.711,
+   "media": 1.71,
    "mediana": 1.712,
    "min": 1.544,
    "max": 1.813,
@@ -1696,7 +1696,7 @@
    "nombre": "Sevilla",
    "cyl": false,
    "n": 76,
-   "media": 1.717,
+   "media": 1.716,
    "mediana": 1.729,
    "min": 1.47,
    "max": 1.899,
@@ -1723,14 +1723,14 @@
      "lon": -5.08975
     },
     {
-     "nombre": "Sierra del Terril Sca",
-     "precio": 1.524,
-     "direccion": "Calle Horcajo,",
-     "localidad": "Algamitas",
-     "cp": "41661",
-     "horario": "L-D: 00:00-23:59",
-     "lat": 37.02025,
-     "lon": -5.149528
+     "nombre": "Cepsa-la Dehesa S.c.a.",
+     "precio": 1.511,
+     "direccion": "Poligono Industrial los Baldios, S/n",
+     "localidad": "Los Corrales",
+     "cp": "41657",
+     "horario": "L-D: 24H",
+     "lat": 37.1035,
+     "lon": -4.989111
     }
    ]
   },
@@ -1782,10 +1782,10 @@
    "nombre": "Tarragona",
    "cyl": false,
    "n": 52,
-   "media": 1.673,
+   "media": 1.671,
    "mediana": 1.685,
    "min": 1.476,
-   "max": 1.879,
+   "max": 1.859,
    "descartados": 2,
    "baratas": [
     {
@@ -1824,9 +1824,9 @@
    "id": "44",
    "nombre": "Teruel",
    "cyl": false,
-   "n": 33,
-   "media": 1.668,
-   "mediana": 1.685,
+   "n": 34,
+   "media": 1.67,
+   "mediana": 1.687,
    "min": 1.536,
    "max": 1.885,
    "descartados": 0,
@@ -1868,7 +1868,7 @@
    "nombre": "Toledo",
    "cyl": false,
    "n": 36,
-   "media": 1.659,
+   "media": 1.658,
    "mediana": 1.664,
    "min": 1.39,
    "max": 1.859,
@@ -1911,10 +1911,10 @@
    "nombre": "Valencia",
    "cyl": false,
    "n": 140,
-   "media": 1.667,
+   "media": 1.666,
    "mediana": 1.649,
    "min": 1.399,
-   "max": 1.898,
+   "max": 1.889,
    "descartados": 2,
    "baratas": [
     {
@@ -1954,12 +1954,22 @@
    "nombre": "Valladolid",
    "cyl": true,
    "n": 19,
-   "media": 1.702,
+   "media": 1.696,
    "mediana": 1.751,
-   "min": 1.509,
+   "min": 1.5,
    "max": 1.879,
    "descartados": 0,
    "baratas": [
+    {
+     "nombre": "Agropal",
+     "precio": 1.5,
+     "direccion": "Camino Torrejon S/n",
+     "localidad": "San Pedro de Latarce",
+     "cp": "47851",
+     "horario": "L-D: 24H",
+     "lat": 41.738778,
+     "lon": -5.330722
+    },
     {
      "nombre": "Cocope, S. Coop.",
      "precio": 1.509,
@@ -1979,16 +1989,6 @@
      "horario": "L-D: 24H",
      "lat": 41.488861,
      "lon": -4.194361
-    },
-    {
-     "nombre": "Cocope S.coop.",
-     "precio": 1.519,
-     "direccion": "CALLE Real, 81",
-     "localidad": "Cogeces del Monte",
-     "cp": "47313",
-     "horario": "L-D: 24H",
-     "lat": 41.511,
-     "lon": -4.322861
     }
    ]
   },
@@ -1997,41 +1997,41 @@
    "nombre": "Zamora",
    "cyl": true,
    "n": 22,
-   "media": 1.656,
+   "media": 1.638,
    "mediana": 1.614,
-   "min": 1.55,
+   "min": 1.5,
    "max": 1.839,
    "descartados": 0,
    "baratas": [
     {
-     "nombre": "Agrinza",
-     "precio": 1.55,
-     "direccion": "CM LA SENDA DEL VALLE km 1",
-     "localidad": "Villafafila",
-     "cp": "49136",
-     "horario": "L-D: 24H",
-     "lat": 41.856139,
-     "lon": -5.613111
-    },
-    {
-     "nombre": "Repostar Gomez Osorio",
-     "precio": 1.559,
-     "direccion": "Carretera Belber-tábara Km. 21,400",
-     "localidad": "Villarrin de Campos",
-     "cp": "49137",
-     "horario": "L-S: 08:00-21:00; D: 09:00-15:00",
-     "lat": 41.799778,
-     "lon": -5.640111
-    },
-    {
      "nombre": "Agropal",
-     "precio": 1.567,
+     "precio": 1.5,
      "direccion": "Calle Cuba, Sn",
      "localidad": "Benavente",
      "cp": "49600",
      "horario": "L-D: 24H",
      "lat": 41.992111,
      "lon": -5.657472
+    },
+    {
+     "nombre": "Agropal",
+     "precio": 1.5,
+     "direccion": "Camino de Caballo S/n- Parcela 419",
+     "localidad": "Corrales del Vino",
+     "cp": "49030",
+     "horario": "L-V: 09:00-14:00 y 16:00-18:30",
+     "lat": 41.361417,
+     "lon": -5.721083
+    },
+    {
+     "nombre": "Agropal",
+     "precio": 1.5,
+     "direccion": "CTRA RIO CHICO km S/N",
+     "localidad": "Quiruelas de Vidriales",
+     "cp": "49622",
+     "horario": "L-V: 09:00-13:30 y 16:00-18:30; S: 09:00-13:30",
+     "lat": 42.009222,
+     "lon": -5.840944
     }
    ]
   },
@@ -2040,12 +2040,22 @@
    "nombre": "Zaragoza",
    "cyl": false,
    "n": 86,
-   "media": 1.692,
+   "media": 1.69,
    "mediana": 1.651,
-   "min": 1.5,
+   "min": 1.444,
    "max": 1.908,
    "descartados": 0,
    "baratas": [
+    {
+     "nombre": "Coop. Virgen del Rosario",
+     "precio": 1.444,
+     "direccion": "Carretera Santa Isabel - San Mateo Km. 19,1",
+     "localidad": "San Mateo de Gallego",
+     "cp": "50840",
+     "horario": "L-D: 24H",
+     "lat": 41.822944,
+     "lon": -0.773944
+    },
     {
      "nombre": "Cooperativa de Luna",
      "precio": 1.5,
@@ -2065,16 +2075,6 @@
      "horario": "L-D: 24H",
      "lat": 41.495222,
      "lon": -0.512944
-    },
-    {
-     "nombre": "Coop. San Isidro Leciñena",
-     "precio": 1.51,
-     "direccion": "CARRETERA SAN MATEO Nº 5 KM.",
-     "localidad": "Leciñena",
-     "cp": "50160",
-     "horario": "L-V: 08:00-13:00 y 15:00-18:00",
-     "lat": 41.793333,
-     "lon": -0.615167
     }
    ]
   }

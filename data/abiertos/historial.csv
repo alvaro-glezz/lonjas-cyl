@@ -151,58 +151,100 @@ lerma;lerma-vacas-industria;Vacas industria;€/kg;2026-10-30;1,56
 lerma;lerma-vacas-primera;Vacas primera;€/kg;2026-10-30;2,5
 lerma;lerma-vacas-segunda;Vacas segunda;€/kg;2026-10-30;2
 salamanca;salamanca-anojos-mas-de-350-kg;Añojos más de 350 kg;€/kg canal;2026-11-03;6,35
+salamanca;salamanca-anojos-mas-de-350-kg;Añojos más de 350 kg;€/kg canal;2026-11-09;6,38
 salamanca;salamanca-anojos-menos-de-350-kg;Añojos menos de 350 kg;€/kg canal;2026-11-03;6,41
+salamanca;salamanca-anojos-menos-de-350-kg;Añojos menos de 350 kg;€/kg canal;2026-11-09;6,44
 salamanca;salamanca-avena;Avena;€/t;2026-11-03;204
+salamanca;salamanca-avena;Avena;€/t;2026-11-09;202
 salamanca;salamanca-cebada;Cebada;€/t;2026-09-14;228
 salamanca;salamanca-cebada;Cebada;€/t;2026-09-28;230
 salamanca;salamanca-cebada;Cebada;€/t;2026-10-26;232
 salamanca;salamanca-cebada;Cebada;€/t;2026-11-03;231
+salamanca;salamanca-cebada;Cebada;€/t;2026-11-09;230
 salamanca;salamanca-centeno;Centeno;€/t;2026-11-03;221
+salamanca;salamanca-centeno;Centeno;€/t;2026-11-09;220
 salamanca;salamanca-cerdas-de-desvieje;Cerdas de desvieje;€/kg vivo;2026-11-03;0,375
+salamanca;salamanca-cerdas-de-desvieje;Cerdas de desvieje;€/kg vivo;2026-11-09;0,345
 salamanca;salamanca-cerdo-graso;Cerdo graso;€/kg vivo;2026-11-03;1,65
+salamanca;salamanca-cerdo-graso;Cerdo graso;€/kg vivo;2026-11-09;1,64
 salamanca;salamanca-cerdo-normal;Cerdo normal;€/kg vivo;2026-11-03;1,155
+salamanca;salamanca-cerdo-normal;Cerdo normal;€/kg vivo;2026-11-09;1,125
 salamanca;salamanca-cerdo-selecto;Cerdo selecto;€/kg vivo;2026-11-03;1,165
+salamanca;salamanca-cerdo-selecto;Cerdo selecto;€/kg vivo;2026-11-09;1,135
 salamanca;salamanca-cordero-15-19-kg;Cordero 15-19 kg;€/kg vivo;2026-11-03;7,1
+salamanca;salamanca-cordero-15-19-kg;Cordero 15-19 kg;€/kg vivo;2026-11-09;7,15
 salamanca;salamanca-cordero-19-23-kg;Cordero 19-23 kg;€/kg vivo;2026-11-03;6,5
+salamanca;salamanca-cordero-19-23-kg;Cordero 19-23 kg;€/kg vivo;2026-11-09;6,55
 salamanca;salamanca-cordero-23-25-5-kg;Cordero 23-25,5 kg;€/kg vivo;2026-11-03;6,25
+salamanca;salamanca-cordero-23-25-5-kg;Cordero 23-25,5 kg;€/kg vivo;2026-11-09;6,3
 salamanca;salamanca-cordero-25-5-28-kg;Cordero 25,5-28 kg;€/kg vivo;2026-11-03;5,85
+salamanca;salamanca-cordero-25-5-28-kg;Cordero 25,5-28 kg;€/kg vivo;2026-11-09;5,9
 salamanca;salamanca-cordero-28-34-kg;Cordero 28-34 kg;€/kg vivo;2026-11-03;5
 salamanca;salamanca-cordero-mas-de-34-kg;Cordero más de 34 kg;€/kg vivo;2026-11-03;4,4
 salamanca;salamanca-erales;Erales;€/kg canal;2026-11-03;5,24
+salamanca;salamanca-erales;Erales;€/kg canal;2026-11-09;5,24
 salamanca;salamanca-garbanzo-pedrosillano;Garbanzo pedrosillano;€/t;2026-11-03;750
+salamanca;salamanca-garbanzo-pedrosillano;Garbanzo pedrosillano;€/t;2026-11-09;750
 salamanca;salamanca-iberico-cebo;Ibérico cebo;€/kg vivo;2026-11-03;3,08
+salamanca;salamanca-iberico-cebo;Ibérico cebo;€/kg vivo;2026-11-09;3,08
 salamanca;salamanca-iberico-cebo-de-campo;Ibérico cebo de campo;€/kg vivo;2026-11-03;3,21
+salamanca;salamanca-iberico-cebo-de-campo;Ibérico cebo de campo;€/kg vivo;2026-11-09;3,21
 salamanca;salamanca-lechazo-11-13-kg;Lechazo 11-13 kg;€/kg vivo;2026-11-03;9,1
+salamanca;salamanca-lechazo-11-13-kg;Lechazo 11-13 kg;€/kg vivo;2026-11-09;9,15
 salamanca;salamanca-lechazo-13-15-kg;Lechazo 13-15 kg;€/kg vivo;2026-11-03;7,55
+salamanca;salamanca-lechazo-13-15-kg;Lechazo 13-15 kg;€/kg vivo;2026-11-09;7,6
 salamanca;salamanca-lechazo-extra;Lechazo extra;€/kg vivo;2026-11-03;10,3
+salamanca;salamanca-lechazo-extra;Lechazo extra;€/kg vivo;2026-11-09;10,35
 salamanca;salamanca-lechazo-hasta-11-kg;Lechazo hasta 11 kg;€/kg vivo;2026-11-03;9,9
+salamanca;salamanca-lechazo-hasta-11-kg;Lechazo hasta 11 kg;€/kg vivo;2026-11-09;9,95
 salamanca;salamanca-lechones-base-20-kg;Lechones base 20 kg;€/ud;2026-11-03;32
+salamanca;salamanca-lechones-base-20-kg;Lechones base 20 kg;€/ud;2026-11-09;32
 salamanca;salamanca-lechones-ibericos;Lechones ibéricos;€/kg vivo;2026-11-03;6,5
+salamanca;salamanca-lechones-ibericos;Lechones ibéricos;€/kg vivo;2026-11-09;6,5
 salamanca;salamanca-lenteja-de-la-armuna-igp;Lenteja de La Armuña IGP;€/t;2026-11-03;1100
+salamanca;salamanca-lenteja-de-la-armuna-igp;Lenteja de La Armuña IGP;€/t;2026-11-09;1100
 salamanca;salamanca-maiz;Maíz;€/t;2026-09-14;259
 salamanca;salamanca-maiz;Maíz;€/t;2026-09-21;258
 salamanca;salamanca-maiz;Maíz;€/t;2026-10-26;246
 salamanca;salamanca-maiz;Maíz;€/t;2026-11-03;243
+salamanca;salamanca-maiz;Maíz;€/t;2026-11-09;240
 salamanca;salamanca-novillos;Novillos;€/kg canal;2026-11-03;5,13
+salamanca;salamanca-novillos;Novillos;€/kg canal;2026-11-09;5,13
 salamanca;salamanca-oveja-de-sacrificio;Oveja de sacrificio;€/kg vivo;2026-11-03;1,15
+salamanca;salamanca-oveja-de-sacrificio;Oveja de sacrificio;€/kg vivo;2026-11-09;1,15
 salamanca;salamanca-oveja-de-vida;Oveja de vida;€/ud;2026-11-03;162,5
+salamanca;salamanca-oveja-de-vida;Oveja de vida;€/ud;2026-11-09;162,5
 salamanca;salamanca-paja;Paja;€/t;2026-11-03;77
+salamanca;salamanca-paja;Paja;€/t;2026-11-09;77
 salamanca;salamanca-primales-iberico-cruzado;Primales ibérico cruzado;€/kg vivo;2026-11-03;4,375
+salamanca;salamanca-primales-iberico-cruzado;Primales ibérico cruzado;€/kg vivo;2026-11-09;4,375
 salamanca;salamanca-primales-iberico-puro;Primales ibérico puro;€/kg vivo;2026-11-03;4,375
+salamanca;salamanca-primales-iberico-puro;Primales ibérico puro;€/kg vivo;2026-11-09;4,375
 salamanca;salamanca-terneras;Terneras;€/kg vivo;2026-11-03;5,36
+salamanca;salamanca-terneras;Terneras;€/kg vivo;2026-11-09;5,36
 salamanca;salamanca-terneras-12-meses-mas-de-270-kg;Terneras +12 meses, más de 270 kg;€/kg canal;2026-11-03;7,1
+salamanca;salamanca-terneras-12-meses-mas-de-270-kg;Terneras +12 meses, más de 270 kg;€/kg canal;2026-11-09;7,1
 salamanca;salamanca-terneras-12-meses-menos-de-270-kg;Terneras +12 meses, menos de 270 kg;€/kg canal;2026-11-03;7,4
+salamanca;salamanca-terneras-12-meses-menos-de-270-kg;Terneras +12 meses, menos de 270 kg;€/kg canal;2026-11-09;7,4
 salamanca;salamanca-terneros;Terneros;€/kg vivo;2026-11-03;5,82
+salamanca;salamanca-terneros;Terneros;€/kg vivo;2026-11-09;5,82
 salamanca;salamanca-terneros-del-pais;Terneros del país;€/kg vivo;2026-11-03;3,99
+salamanca;salamanca-terneros-del-pais;Terneros del país;€/kg vivo;2026-11-09;3,99
 salamanca;salamanca-toros;Toros;€/kg canal;2026-11-03;5,26
+salamanca;salamanca-toros;Toros;€/kg canal;2026-11-09;5,26
 salamanca;salamanca-tostones-4-6-kg;Tostones 4-6 kg;€/ud;2026-11-03;27
+salamanca;salamanca-tostones-4-6-kg;Tostones 4-6 kg;€/ud;2026-11-09;27
 salamanca;salamanca-tostones-6-8-kg;Tostones 6-8 kg;€/ud;2026-11-03;27
+salamanca;salamanca-tostones-6-8-kg;Tostones 6-8 kg;€/ud;2026-11-09;27
 salamanca;salamanca-trigo-blando;Trigo blando;€/t;2026-09-14;237
 salamanca;salamanca-trigo-blando;Trigo blando;€/t;2026-09-28;238
 salamanca;salamanca-trigo-blando;Trigo blando;€/t;2026-10-26;238
 salamanca;salamanca-trigo-blando;Trigo blando;€/t;2026-11-03;236
+salamanca;salamanca-trigo-blando;Trigo blando;€/t;2026-11-09;234
 salamanca;salamanca-triticale;Triticale;€/t;2026-11-03;226
+salamanca;salamanca-triticale;Triticale;€/t;2026-11-09;224
 salamanca;salamanca-vacas;Vacas;€/kg canal;2026-11-03;6,06
+salamanca;salamanca-vacas;Vacas;€/kg canal;2026-11-09;6,06
 segovia;segovia-alfalfa-empacada;Alfalfa empacada;€/t;2026-10-29;215
 segovia;segovia-alfalfa-empacada;Alfalfa empacada;€/t;2026-11-05;215
 segovia;segovia-avena;Avena;€/t;2026-10-29;200
