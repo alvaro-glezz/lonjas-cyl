@@ -1,5 +1,5 @@
 {
- "fecha": "2026-11-09T19:50",
+ "fecha": "2026-11-09T22:30",
  "fuente": "Ministerio para la Transición Ecológica y el Reto Demográfico (Geoportal de gasolineras)",
  "fuente_url": "https://geoportalgasolineras.es/geoportal-instalaciones/Inicio",
  "unidad": "€/l",
@@ -363,7 +363,7 @@
    "nombre": "Barcelona",
    "cyl": false,
    "n": 39,
-   "media": 1.722,
+   "media": 1.721,
    "mediana": 1.755,
    "min": 1.48,
    "max": 1.928,
@@ -578,7 +578,7 @@
    "nombre": "Cantabria",
    "cyl": false,
    "n": 30,
-   "media": 1.74,
+   "media": 1.738,
    "mediana": 1.774,
    "min": 1.52,
    "max": 1.859,
@@ -664,7 +664,7 @@
    "nombre": "Ciudad Real",
    "cyl": false,
    "n": 80,
-   "media": 1.668,
+   "media": 1.667,
    "mediana": 1.639,
    "min": 1.479,
    "max": 1.949,
@@ -1094,7 +1094,7 @@
    "nombre": "Jaén",
    "cyl": false,
    "n": 119,
-   "media": 1.737,
+   "media": 1.736,
    "mediana": 1.748,
    "min": 1.518,
    "max": 1.921,
@@ -1111,6 +1111,16 @@
      "lon": -3.905028
     },
     {
+     "nombre": "Gcl",
+     "precio": 1.529,
+     "direccion": "Carretera Nal.432 Km.367.950",
+     "localidad": "Alcaudete",
+     "cp": "23660",
+     "horario": "L-D: 24H",
+     "lat": 37.543833,
+     "lon": -4.024389
+    },
+    {
      "nombre": "Blanca",
      "precio": 1.529,
      "direccion": "Carretera A401 Km. 89",
@@ -1119,16 +1129,6 @@
      "horario": "L-D: 07:00-23:00",
      "lat": 37.724,
      "lon": -3.370139
-    },
-    {
-     "nombre": "E.s. la Loperana",
-     "precio": 1.539,
-     "direccion": "Carretera Comarcal 527 Km. 29",
-     "localidad": "Lopera",
-     "cp": "23780",
-     "horario": "L-D: 06:00-22:00",
-     "lat": 37.948722,
-     "lon": -4.219722
     }
    ]
   },
@@ -1223,15 +1223,15 @@
    "nombre": "Lleida",
    "cyl": false,
    "n": 54,
-   "media": 1.643,
+   "media": 1.644,
    "mediana": 1.625,
-   "min": 1.432,
+   "min": 1.458,
    "max": 1.87,
    "descartados": 0,
    "baratas": [
     {
      "nombre": "Fru-rose, Sccl",
-     "precio": 1.432,
+     "precio": 1.458,
      "direccion": "Avgda.de la Fruita, 11",
      "localidad": "Rossello",
      "cp": "25124",
@@ -1868,7 +1868,7 @@
    "nombre": "Toledo",
    "cyl": false,
    "n": 36,
-   "media": 1.655,
+   "media": 1.654,
    "mediana": 1.664,
    "min": 1.39,
    "max": 1.859,
