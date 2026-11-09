@@ -1,6 +1,6 @@
 {
  "comparativa": "2026-W45",
- "franja": "especial:explotacion",
+ "franja": "manana",
  "franjas": {
   "2026-11-07": [
    "reel"
@@ -8,6 +8,9 @@
   "2026-11-08": [
    "especial:instalar",
    "especial:explotacion"
+  ],
+  "2026-11-09": [
+   "manana"
   ]
  },
  "preparado": [
@@ -70,6 +73,12 @@
    "fecha": "2026-11-08T21:10",
    "id": "2026-11-08-especial-explotacion",
    "media": "18139134223632919"
+  },
+  {
+   "facebook": "1368079503066363_122106282063536635",
+   "fecha": "2026-11-09T08:18",
+   "id": "2026-11-09-dia-trigo",
+   "media": "18094407011692215"
   }
  ],
  "token_renovado": "2026-11-07"
