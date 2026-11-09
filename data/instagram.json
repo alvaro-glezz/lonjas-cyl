@@ -1,6 +1,6 @@
 {
  "comparativa": "2026-W45",
- "franja": "manana",
+ "franja": "reel",
  "franjas": {
   "2026-11-07": [
    "reel"
@@ -10,7 +10,8 @@
    "especial:explotacion"
   ],
   "2026-11-09": [
-   "manana"
+   "manana",
+   "reel"
   ]
  },
  "preparado": [
@@ -79,6 +80,12 @@
    "fecha": "2026-11-09T08:18",
    "id": "2026-11-09-dia-trigo",
    "media": "18094407011692215"
+  },
+  {
+   "facebook": "2674525506319644",
+   "fecha": "2026-11-09T13:46",
+   "id": "2026-11-09-reel-cebada",
+   "media": "17932694799421974"
   }
  ],
  "token_renovado": "2026-11-07"
