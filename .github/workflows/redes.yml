@@ -22,9 +22,9 @@ on:
   workflow_dispatch:
     inputs:
       franja:
-        description: "manana, reel, tarde, historia, historias-todas (con probar=si) o especial:instalar / especial:explotacion"
-        required: true
-        default: "reel"
+        description: "Vacío = lo que toque ahora y falte por publicar. O: manana, reel, tarde, historia, historias-todas (con probar=si), especial:instalar, especial:explotacion"
+        required: false
+        default: ""
       probar:
         description: "si = crear los archivos pero NO publicar"
         required: false
