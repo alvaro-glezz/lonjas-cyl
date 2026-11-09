@@ -12,6 +12,12 @@ on:
     - cron: "30 12 * * 1-6"
     - cron: "55 17 * * 1-5"
     - cron: "0 18 * * 1-6"
+    # Reservas: GitHub a veces se salta una tarea programada (el 9 nov no lanzó las de las 19:00). Cada franja se
+    # publica una sola vez al día, así que si la principal ya salió estas no hacen nada.
+    - cron: "40 7 * * 1-6"
+    - cron: "20 13 * * 1-6"
+    - cron: "35 18 * * 1-5"
+    - cron: "50 18 * * 1-6"
   workflow_dispatch:
     inputs:
       franja:
@@ -66,7 +72,7 @@ jobs:
       - name: Crear la publicación de esta franja
         env:
           INSTAGRAM_TOKEN: ${{ secrets.INSTAGRAM_TOKEN }}
-          FRANJA: ${{ inputs.franja || (github.event.schedule == '55 17 * * 1-5' && 'historia') || '' }}
+          FRANJA: ${{ inputs.franja || ((github.event.schedule == '55 17 * * 1-5' || github.event.schedule == '35 18 * * 1-5') && 'historia') || '' }}
           FORZAR: ${{ inputs.forzar }}
         run: python scraper/redes.py --crear
       # Copia privada en tu chat con @lonjascyl_bot de lo que se va a publicar (sin TELEGRAM_ADMIN_CHAT no hace nada).
