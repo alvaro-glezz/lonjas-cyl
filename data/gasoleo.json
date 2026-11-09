@@ -1,5 +1,5 @@
 {
- "fecha": "2026-11-09T19:16",
+ "fecha": "2026-11-09T19:50",
  "fuente": "Ministerio para la Transición Ecológica y el Reto Demográfico (Geoportal de gasolineras)",
  "fuente_url": "https://geoportalgasolineras.es/geoportal-instalaciones/Inicio",
  "unidad": "€/l",
@@ -363,7 +363,7 @@
    "nombre": "Barcelona",
    "cyl": false,
    "n": 39,
-   "media": 1.723,
+   "media": 1.722,
    "mediana": 1.755,
    "min": 1.48,
    "max": 1.928,
