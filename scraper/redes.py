@@ -523,6 +523,23 @@ def franja_por_hora(ahora: datetime) -> str:
     return "manana" if ahora.hour < 10 else "reel" if ahora.hour < 15 else "tarde"
 
 
+# Cada franja: desde qué hora UTC se publica y hasta cuándo se puede recuperar si GitHub se retrasa o se salta la
+# tarea (GitHub retrasa las tareas programadas hasta ~1 h en horas de mucho uso, y a veces no las lanza).
+VENTANAS = (("manana", (6, 40), (11, 30), range(0, 6)),
+            ("reel", (12, 10), (17, 0), range(0, 6)),
+            ("historia", (17, 30), (21, 30), range(0, 5)),      # lunes a viernes
+            ("tarde", (17, 40), (21, 30), range(0, 6)))
+
+
+def franja_pendiente(ahora: datetime, estado: dict, hoy: date) -> str | None:
+    """La primera franja de hoy que ya toca y aún no se ha publicado (None si no queda ninguna)."""
+    hm = (ahora.hour, ahora.minute)
+    for franja, desde, hasta, dias in VENTANAS:
+        if hoy.weekday() in dias and desde <= hm <= hasta and not hecha(estado, franja, hoy):
+            return franja
+    return None
+
+
 def _sesion(datos: dict, estado: dict, hoy: date) -> dict | None:
     for item in ig.pendientes(datos, estado, hoy):
         if item["tipo"] == "sesion":
@@ -655,7 +672,11 @@ def main(argv: list[str]) -> int:
     estado = json.loads(ig.ESTADO.read_text(encoding="utf-8")) if ig.ESTADO.is_file() else {}
     try:
         if "--crear" in argv:
-            franja = os.environ.get("FRANJA", "").strip() or franja_por_hora(datetime.utcnow())
+            franja = os.environ.get("FRANJA", "").strip() or franja_pendiente(datetime.utcnow(), estado, hoy)
+            if not franja:
+                print("[redes] Todo lo de esta hora ya está publicado: nada que hacer.")
+                estado["preparado"] = []
+                return 0
             item = crear(datos, estado, franja, hoy, forzar=os.environ.get("FORZAR") == "si")
             print(f"[redes] Franja «{franja}»: " + (f"creado {item['id']}" if item else "nada que publicar"))
         elif "--publicar" in argv:

@@ -25,6 +25,21 @@ def _datos():
                      {"id": "l-c", "cat": "Cereales", "producto": "Cebada", "unidad": "€/t", "ant": 222, "act": 221, "clave": "cebada"}]}]}
 
 
+def test_franja_pendiente_recupera_lo_que_github_se_salta(redes):
+    lunes, sabado = date(2026, 11, 9), date(2026, 11, 14)
+    h = lambda hh, mm: datetime(2026, 11, 9, hh, mm)
+    hechas = lambda *f: {"franjas": {lunes.isoformat(): list(f)}}
+    assert redes.franja_pendiente(h(6, 0), {}, lunes) is None                       # aún no toca nada
+    assert redes.franja_pendiente(h(7, 2), {}, lunes) == "manana"
+    assert redes.franja_pendiente(h(7, 30), hechas("manana"), lunes) is None          # no se repite
+    assert redes.franja_pendiente(h(13, 0), hechas("manana"), lunes) == "reel"
+    assert redes.franja_pendiente(h(18, 25), hechas("manana", "reel"), lunes) == "historia"   # tarea retrasada
+    assert redes.franja_pendiente(h(18, 40), hechas("manana", "reel", "historia"), lunes) == "tarde"
+    assert redes.franja_pendiente(h(19, 19), hechas("manana", "reel", "historia", "tarde"), lunes) is None
+    assert redes.franja_pendiente(h(17, 40), {"franjas": {}}, sabado) == "tarde"      # sábado no hay historia
+    assert redes.franja_pendiente(h(23, 0), {}, lunes) is None                         # demasiado tarde
+
+
 def test_franja_por_hora(redes):
     assert [redes.franja_por_hora(datetime(2026, 11, 9, h, 5)) for h in (7, 12, 18)] == ["manana", "reel", "tarde"]
 

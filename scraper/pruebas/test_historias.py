@@ -79,4 +79,5 @@ def test_reel_y_publicacion_simulada(redes, tmp_path, monkeypatch):
 
 def test_tarea_programada():
     y = (Path(__file__).resolve().parents[2] / ".github" / "workflows" / "redes.yml").read_text(encoding="utf-8")
-    assert '"55 17 * * 1-5"' in y and "github.event.schedule == '55 17 * * 1-5' && 'historia'" in y
+    # La historia ya no depende de la hora exacta de la tarea: la elige redes.franja_pendiente (L–V, desde las 17:30 UTC).
+    assert '"37 17 * * 1-6"' in y and '"19 19 * * 1-6"' in y and "FRANJA: ${{ inputs.franja || '' }}" in y

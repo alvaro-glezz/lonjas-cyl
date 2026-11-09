@@ -88,7 +88,13 @@ jobs:
             git config user.email "actions@users.noreply.github.com"
             git add data/ scraper/pruebas/casos/ precio/ lonja/ precios/ plazos/ gasoleo-agricola/ sitemap.xml
             git commit -m "Precios actualizados $(date -u +%Y-%m-%d)"
-            git push
+            # Si la tarea de redes guardó su registro mientras tanto, se pone encima y se vuelve a intentar.
+            ok=""
+            for intento in 1 2 3 4; do
+              if git pull -q --rebase origin main && git push -q; then ok=1; break; fi
+              sleep 7
+            done
+            [ -n "$ok" ]
           fi
       # Abre (o cierra) una incidencia en GitHub si alguna lonja falla: llega por correo al dueño del repositorio.
       - name: Avisar si alguna fuente falla
