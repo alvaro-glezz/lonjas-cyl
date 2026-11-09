@@ -1,6 +1,6 @@
 {
  "comparativa": "2026-W45",
- "franja": "historia",
+ "franja": "tarde",
  "franjas": {
   "2026-11-07": [
    "reel"
@@ -12,7 +12,8 @@
   "2026-11-09": [
    "manana",
    "reel",
-   "historia"
+   "historia",
+   "tarde"
   ]
  },
  "historias": [
@@ -43,6 +44,7 @@
  ],
  "publicado": {
   "leon": "2026-11-04",
+  "salamanca": "2026-11-09",
   "segovia": "2026-11-05"
  },
  "registro": [
@@ -102,6 +104,12 @@
    "fecha": "2026-11-09T18:42",
    "id": "2026-11-09-historia-1-llamada",
    "media": "18120305758785295"
+  },
+  {
+   "facebook": "1368079503066363_122106854013536635",
+   "fecha": "2026-11-09T18:43",
+   "id": "2026-11-09-salamanca",
+   "media": "18104136905048166"
   }
  ],
  "token_renovado": "2026-11-07"
