@@ -1,11 +1,12 @@
 // Pruebas del robot de Telegram de Vercel (api/telegram.js). Uso: node scraper/pruebas/js/test_telegram_api.js
+// Usa una copia fija de los precios (8 nov 2026) para que el resultado no cambie cada vez que cotiza una lonja.
 "use strict";
 const assert = require("assert");
 const fs = require("fs");
 const path = require("path");
 const RAIZ = path.resolve(__dirname, "../../..");
 const api = require(path.join(RAIZ, "api/telegram.js"));
-const datos = JSON.parse(fs.readFileSync(path.join(RAIZ, "data/precios.json"), "utf8"));
+const datos = JSON.parse(fs.readFileSync(path.join(__dirname, "datos/precios-8nov.json"), "utf8"));
 let pedidas = 0;
 const redis = new Map(), sets = new Map();
 const REDIS_URL = "https://redis.example";
