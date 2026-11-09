@@ -1,6 +1,6 @@
 {
  "comparativa": "2026-W45",
- "franja": "reel",
+ "franja": "historia",
  "franjas": {
   "2026-11-07": [
    "reel"
@@ -11,9 +11,13 @@
   ],
   "2026-11-09": [
    "manana",
-   "reel"
+   "reel",
+   "historia"
   ]
  },
+ "historias": [
+  1
+ ],
  "preparado": [
   {
    "id": "2026-11-08-especial-instalar",
@@ -86,6 +90,12 @@
    "fecha": "2026-11-09T13:46",
    "id": "2026-11-09-reel-cebada",
    "media": "17932694799421974"
+  },
+  {
+   "facebook": "1672031437639315",
+   "fecha": "2026-11-09T18:40",
+   "id": "2026-11-09-historia-1-llamada",
+   "media": "18103225721457419"
   }
  ],
  "token_renovado": "2026-11-07"
