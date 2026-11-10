@@ -1,6 +1,6 @@
 {
  "comparativa": "2026-W45",
- "franja": "especial:iphone",
+ "franja": "reel",
  "franjas": {
   "2026-11-07": [
    "reel"
@@ -17,7 +17,8 @@
   ],
   "2026-11-10": [
    "manana",
-   "especial:iphone"
+   "especial:iphone",
+   "reel"
   ]
  },
  "historias": [
@@ -135,6 +136,12 @@
    "fecha": "2026-11-10T11:03",
    "id": "2026-11-10-guia-iphone",
    "media": "18140153935724296"
+  },
+  {
+   "facebook": "29061099783510346",
+   "fecha": "2026-11-10T13:07",
+   "id": "2026-11-10-reel-movimientos",
+   "media": "18117702812031462"
   }
  ],
  "token_renovado": "2026-11-07"
