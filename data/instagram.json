@@ -1,6 +1,6 @@
 {
  "comparativa": "2026-W45",
- "franja": "reel",
+ "franja": "historia",
  "franjas": {
   "2026-11-07": [
    "reel"
@@ -18,11 +18,13 @@
   "2026-11-10": [
    "manana",
    "especial:iphone",
-   "reel"
+   "reel",
+   "historia"
   ]
  },
  "historias": [
-  1
+  1,
+  2
  ],
  "preparado": [
   {
@@ -142,6 +144,12 @@
    "fecha": "2026-11-10T13:07",
    "id": "2026-11-10-reel-movimientos",
    "media": "18117702812031462"
+  },
+  {
+   "facebook": "1137767305515660",
+   "fecha": "2026-11-10T18:25",
+   "id": "2026-11-10-historia-2-manana",
+   "media": "18111980210240297"
   }
  ],
  "token_renovado": "2026-11-07"
