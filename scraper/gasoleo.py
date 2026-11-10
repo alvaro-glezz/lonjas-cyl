@@ -79,7 +79,8 @@ def nombre_gasolinera(e: dict) -> str:
 
 
 def estacion(e: dict, precio: float) -> dict:
-    return {"nombre": nombre_gasolinera(e), "precio": precio, "direccion": bonito(e.get("Dirección", "")),
+    return {"id": str(e.get("IDEESS") or ""), "nombre": nombre_gasolinera(e), "precio": precio,
+            "municipio": localidad(e.get("Municipio") or e.get("Localidad") or ""), "direccion": bonito(e.get("Dirección", "")),
             "localidad": localidad(e.get("Localidad") or e.get("Municipio") or ""), "cp": e.get("C.P.", ""),
             "horario": (e.get("Horario") or "").strip(), "lat": numero(e.get("Latitud")), "lon": numero(e.get("Longitud (WGS84)"))}
 
@@ -96,6 +97,7 @@ def resumir(respuesta: dict) -> dict:
     # Precios anómalos: más de un 20 % por debajo o por encima de la mediana de su provincia (suelen ser precios sin
     # actualizar o errores al comunicarlos). No cuentan para la media ni para «la más barata»; se dice cuántos son.
     descartes: dict[str, int] = {}
+    completas = {prov: list(lista) for prov, lista in por_prov.items()}       # todas, también las dudosas
     for prov, lista in por_prov.items():
         med = median(p for p, _ in lista)
         buenos = [(p, e) for p, e in lista if med * (1 - MARGEN) <= p <= med * (1 + MARGEN)]
@@ -106,10 +108,21 @@ def resumir(respuesta: dict) -> dict:
     for prov, lista in sorted(por_prov.items(), key=lambda x: sin_tilde(PROVINCIAS[x[0]])):
         precios = [p for p, _ in lista]
         baratas = sorted(lista, key=lambda x: (x[0], x[1].get("Localidad", "")))[:3]
-        provincias.append({"id": prov, "nombre": PROVINCIAS[prov], "cyl": prov in CYL, "n": len(lista),
-                           "media": round(mean(precios), 3), "mediana": round(median(precios), 3),
-                           "min": min(precios), "max": max(precios), "descartados": descartes.get(prov, 0),
-                           "baratas": [estacion(e, p) for p, e in baratas]})
+        fila = {"id": prov, "nombre": PROVINCIAS[prov], "cyl": prov in CYL, "n": len(lista),
+                "media": round(mean(precios), 3), "mediana": round(median(precios), 3),
+                "min": min(precios), "max": max(precios), "descartados": descartes.get(prov, 0),
+                "baratas": [estacion(e, p) for p, e in baratas]}
+        if prov in CYL:
+            # Castilla y León: todas las gasolineras de la provincia (de más barata a más cara; las dudosas, marcadas)
+            buenos = {id(e) for _, e in lista}
+            todas = []
+            for p, e in sorted(completas[prov], key=lambda x: (x[0], x[1].get("Localidad", ""))):
+                est = estacion(e, p)
+                if id(e) not in buenos:
+                    est["dudoso"] = True
+                todas.append(est)
+            fila["todas"] = todas
+        provincias.append(fila)
     todos = [p for lista in por_prov.values() for p, _ in lista]
     cyl = [p for prov in CYL for p, _ in por_prov.get(prov, [])]
     try:

@@ -75,3 +75,17 @@ def test_descarta_precios_anomalos(g):
                    [_est("10", "1,700"), _est("10", "1,650"), _est("10", "1,690"), _est("10", "1,099", "BARATO SOSPECHOSO")]})
     p = r["provincias"][0]
     assert p["descartados"] == 1 and p["min"] == 1.65 and p["n"] == 3 and p["baratas"][0]["nombre"] != "Barato Sospechoso"
+
+
+def test_todas_las_de_castilla_y_leon(g):
+    resp = _resp()
+    for i, e in enumerate(resp["ListaEESSPrecio"]):
+        e["IDEESS"] = str(1000 + i)
+    resp["ListaEESSPrecio"].append(_est("05", "1,500", "MUY BARATA"))      # >20 % por debajo: dudosa
+    resp["ListaEESSPrecio"][-1]["IDEESS"] = "999"
+    r = g.resumir(resp)
+    avila, madrid = r["provincias"]
+    assert "todas" in avila and "todas" not in madrid
+    assert [x["precio"] for x in avila["todas"] if not x.get("dudoso")] == [1.05, 1.1, 1.2]
+    assert any(x.get("dudoso") and x["id"] == "999" for x in avila["todas"])
+    assert all(x["id"] for x in avila["todas"]) and avila["todas"][0]["municipio"]
