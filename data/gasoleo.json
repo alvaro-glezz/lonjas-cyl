@@ -1,5 +1,5 @@
 {
- "fecha": "2026-11-10T18:29",
+ "fecha": "2026-11-10T19:49",
  "fuente": "Ministerio para la Transición Ecológica y el Reto Demográfico (Geoportal de gasolineras)",
  "fuente_url": "https://geoportalgasolineras.es/geoportal-instalaciones/Inicio",
  "unidad": "€/l",
@@ -68,10 +68,10 @@
    "nombre": "Álava",
    "cyl": false,
    "n": 16,
-   "media": 1.781,
+   "media": 1.776,
    "mediana": 1.827,
    "min": 1.579,
-   "max": 1.903,
+   "max": 1.879,
    "descartados": 1,
    "baratas": [
     {
@@ -218,7 +218,7 @@
    "media": 1.698,
    "mediana": 1.699,
    "min": 1.469,
-   "max": 1.897,
+   "max": 1.889,
    "descartados": 1,
    "baratas": [
     {
@@ -264,7 +264,7 @@
    "nombre": "Asturias",
    "cyl": false,
    "n": 59,
-   "media": 1.75,
+   "media": 1.749,
    "mediana": 1.769,
    "min": 1.49,
    "max": 1.865,
@@ -532,7 +532,7 @@
    "nombre": "Badajoz",
    "cyl": false,
    "n": 80,
-   "media": 1.661,
+   "media": 1.66,
    "mediana": 1.649,
    "min": 1.36,
    "max": 1.89,
@@ -584,7 +584,7 @@
    "media": 1.715,
    "mediana": 1.747,
    "min": 1.48,
-   "max": 1.934,
+   "max": 1.935,
    "descartados": 0,
    "baratas": [
     {
@@ -942,7 +942,7 @@
     {
      "id": "5043",
      "nombre": "Galp",
-     "precio": 1.684,
+     "precio": 1.679,
      "municipio": "Valle de Losa",
      "direccion": "Carretera Bu-550 Km. 27",
      "localidad": "Quincoces de Yuso",
@@ -1139,7 +1139,7 @@
    "nombre": "Cádiz",
    "cyl": false,
    "n": 33,
-   "media": 1.721,
+   "media": 1.717,
    "mediana": 1.727,
    "min": 1.498,
    "max": 1.859,
@@ -1237,7 +1237,7 @@
    "nombre": "Castellón",
    "cyl": false,
    "n": 51,
-   "media": 1.671,
+   "media": 1.67,
    "mediana": 1.697,
    "min": 1.359,
    "max": 1.868,
@@ -1482,7 +1482,7 @@
    "nombre": "Girona",
    "cyl": false,
    "n": 50,
-   "media": 1.772,
+   "media": 1.77,
    "mediana": 1.799,
    "min": 1.559,
    "max": 1.899,
@@ -1776,7 +1776,7 @@
    "nombre": "Jaén",
    "cyl": false,
    "n": 119,
-   "media": 1.736,
+   "media": 1.735,
    "mediana": 1.739,
    "min": 1.518,
    "max": 1.899,
@@ -1874,7 +1874,7 @@
    "nombre": "León",
    "cyl": true,
    "n": 22,
-   "media": 1.664,
+   "media": 1.661,
    "mediana": 1.699,
    "min": 1.5,
    "max": 1.829,
@@ -1979,6 +1979,18 @@
      "lon": -6.914083
     },
     {
+     "id": "11318",
+     "nombre": "An Energéticos - Cabreros del Rio Ucogal",
+     "precio": 1.529,
+     "municipio": "Cabreros del Río",
+     "direccion": "Poligono Parcelas 88 y 89, S/n",
+     "localidad": "Cabreros del Rio",
+     "cp": "24224",
+     "horario": "L-D: 24H",
+     "lat": 42.395944,
+     "lon": -5.512083
+    },
+    {
      "id": "12400",
      "nombre": "Cooperativa San Blas",
      "precio": 1.529,
@@ -2013,18 +2025,6 @@
      "horario": "L: 07:00-22:00",
      "lat": 42.784111,
      "lon": -5.787083
-    },
-    {
-     "id": "11318",
-     "nombre": "An Energéticos - Cabreros del Rio Ucogal",
-     "precio": 1.599,
-     "municipio": "Cabreros del Río",
-     "direccion": "Poligono Parcelas 88 y 89, S/n",
-     "localidad": "Cabreros del Rio",
-     "cp": "24224",
-     "horario": "L-D: 24H",
-     "lat": 42.395944,
-     "lon": -5.512083
     },
     {
      "id": "6027",
@@ -2434,10 +2434,10 @@
    "nombre": "Navarra",
    "cyl": false,
    "n": 101,
-   "media": 1.64,
+   "media": 1.639,
    "mediana": 1.6,
    "min": 1.495,
-   "max": 1.902,
+   "max": 1.86,
    "descartados": 0,
    "baratas": [
     {
@@ -3244,21 +3244,9 @@
      "lon": -4.299639
     },
     {
-     "id": "6177",
-     "nombre": "Galp",
-     "precio": 1.744,
-     "municipio": "Villacastín",
-     "direccion": "Autopista A6 Km. 0",
-     "localidad": "Villacastin",
-     "cp": "40150",
-     "horario": "L-D: 24H",
-     "lat": 40.7975,
-     "lon": -4.460889
-    },
-    {
      "id": "6401",
      "nombre": "Galp",
-     "precio": 1.744,
+     "precio": 1.739,
      "municipio": "Villacastín",
      "direccion": "Autopista A6 Km. 0",
      "localidad": "Villacastin",
@@ -3266,6 +3254,18 @@
      "horario": "L-D: 06:00-22:00",
      "lat": 40.7975,
      "lon": -4.462889
+    },
+    {
+     "id": "6177",
+     "nombre": "Galp",
+     "precio": 1.739,
+     "municipio": "Villacastín",
+     "direccion": "Autopista A6 Km. 0",
+     "localidad": "Villacastin",
+     "cp": "40150",
+     "horario": "L-D: 24H",
+     "lat": 40.7975,
+     "lon": -4.460889
     },
     {
      "id": "6113",
@@ -3665,7 +3665,7 @@
    "nombre": "Valencia",
    "cyl": false,
    "n": 140,
-   "media": 1.661,
+   "media": 1.66,
    "mediana": 1.639,
    "min": 1.399,
    "max": 1.879,

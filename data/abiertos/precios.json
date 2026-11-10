@@ -2748,7 +2748,7 @@
    "mesa": "Porcino",
    "producto_id": "lerma-lechon-tipo-lerma",
    "producto": "Lechón tipo Lerma",
-   "producto_clave": "lechones",
+   "producto_clave": null,
    "unidad": "€/ud",
    "precio": 23.5,
    "anterior": 24.5,
