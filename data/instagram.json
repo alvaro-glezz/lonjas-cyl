@@ -1,6 +1,6 @@
 {
  "comparativa": "2026-W45",
- "franja": "reel",
+ "franja": "manana",
  "franjas": {
   "2026-11-07": [
    "reel"
@@ -14,6 +14,9 @@
    "reel",
    "historia",
    "tarde"
+  ],
+  "2026-11-10": [
+   "manana"
   ]
  },
  "historias": [
@@ -110,6 +113,12 @@
    "fecha": "2026-11-09T18:43",
    "id": "2026-11-09-salamanca",
    "media": "18104136905048166"
+  },
+  {
+   "facebook": "1368079503066363_122107372533536635",
+   "fecha": "2026-11-10T07:56",
+   "id": "2026-11-10-dia-cebada",
+   "media": "18102896237356791"
   }
  ],
  "token_renovado": "2026-11-07"
