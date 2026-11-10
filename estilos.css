@@ -537,7 +537,7 @@ button.plazo:hover { border-color: var(--pino); }
 .gp-min { font-size: 12.5px; color: var(--tenue); }
 .gp-min b { color: var(--sube); font-family: var(--cifra); font-size: 15px; }
 .gp-lista { list-style: none; margin: 0; padding: 4px 14px 10px; }
-.gp-lista li { display: grid; grid-template-columns: auto 1fr auto; gap: 10px; align-items: center; padding: 8px 0; border-bottom: 1px solid var(--linea); }
+.gp-lista li { display: grid; grid-template-columns: auto 1fr auto; gap: 10px; align-items: start; padding: 9px 0; border-bottom: 1px solid var(--linea); }
 .gp-lista li:last-child { border-bottom: 0; }
 .gp-precio { font: 600 20px var(--cifra); }
 .gp-sitio { display: grid; min-width: 0; }
@@ -546,3 +546,16 @@ button.plazo:hover { border-color: var(--pino); }
 .gp-mapa { font-size: 12.5px; font-weight: 600; color: var(--pino); white-space: nowrap; }
 .gasoleo-resto > summary { cursor: pointer; font-weight: 600; color: var(--pino); padding: 12px 2px; }
 .gp-nota { margin: 0; padding: 0 14px 12px; font-size: 12px; color: var(--tenue); }
+.gp-lista li.mas-barata .gp-precio { color: var(--sube); }
+.gp-lista li.dudosa .gp-precio { color: var(--tenue); text-decoration: line-through; text-decoration-thickness: 1px; }
+.gp-etq { font-weight: 700; color: var(--sube) !important; }
+.gp-etq.dud { color: var(--baja) !important; font-weight: 600; }
+.gp-sitio .gp-mapa { margin-top: 2px; justify-self: start; }
+.gp-fav { font: 400 24px/1 system-ui, sans-serif; color: var(--tenue); background: none; border: 0; cursor: pointer; padding: 4px 2px 4px 6px; min-width: 40px; min-height: 40px; }
+.gp-fav.on { color: var(--paja); }
+.gp-nota-arriba { padding: 10px 14px 0; }
+.gasoleo-buscar { display: grid; gap: 4px; font-size: 13px; color: var(--tenue); margin: 4px 0 10px; }
+.gasoleo-buscar input { font: inherit; font-size: 16px; color: var(--tinta); background: var(--hoja); border: 1px solid var(--linea); border-radius: 10px; padding: 11px 12px; }
+.gasoleo-buscar input:focus { outline: 2px solid var(--pino); outline-offset: 1px; }
+.gp-busqueda, .gp-favs { background: var(--hoja); border: 1px solid var(--linea); border-radius: 12px; padding: 2px 14px; }
+.gasoleo-cuenta, .gasoleo-sin { font-size: 13px; color: var(--tenue); margin: 0 0 8px; }

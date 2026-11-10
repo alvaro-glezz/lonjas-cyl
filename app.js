@@ -473,7 +473,7 @@ function seccionRedes() {
 
 function vistaFavoritos() {
   const filas = todasLasFilas().filter(f => FAVS.has(f.id));
-  return `${seccionMiPizarra(true)}${seccionRedes()}${typeof seccionAvisos === "function" ? seccionAvisos() : ""}<section class="seccion">
+  return `${seccionMiPizarra(true)}${typeof seccionGasolinerasFav === "function" ? seccionGasolinerasFav() : ""}${seccionRedes()}${typeof seccionAvisos === "function" ? seccionAvisos() : ""}<section class="seccion">
     <div class="titulo-seccion"><h2>Mis precios</h2><span>${filas.length} guardado${filas.length === 1 ? "" : "s"}</span></div>
     ${filas.length ? `<div class="tablilla">${filas.map(f => filaHTML(f, true)).join("")}</div>` :
       `<div class="vacio"><b>Aún no tienes precios guardados</b>Abre una lonja y toca la estrella junto a los productos que vendes o compras. Aparecerán aquí, juntos.</div>`}
