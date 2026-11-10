@@ -611,6 +611,9 @@ def crear_archivos(item: dict, datos: dict, hoy: date, carpeta: Path) -> None:
     elif item["tipo"] == "historia":
         import historias
         historias.reel(item["n"], carpeta / item["video"], datos, hoy)
+    elif item["tipo"] == "guia":
+        import especiales
+        especiales.imagen_guia(item["so"], carpeta / item["imagenes"][0])
     elif item["tipo"] == "especial":
         import especiales
         especiales.reel(item["nombre"], carpeta / item["video"], datos, hoy)

@@ -44,8 +44,14 @@ def _velo(im, color: tuple):
     im.alpha_composite(Image.new("RGBA", im.size, color))
 
 
+_SOLO_ARO = False                     # en las guías en foto, el toque es solo un aro para que se lea lo de debajo
+
+
 def _toque(p, x, y, t):
     """Círculo que late donde hay que tocar."""
+    if _SOLO_ARO:
+        p.circulo(x, y, 40, None, outline=(214, 64, 40, 255), width=6)
+        return
     r = 30 + 8 * math.sin(t * 7)
     p.circulo(x, y, r + 14, (233, 196, 106, 90))
     p.circulo(x, y, r, (233, 196, 106, 200), outline=TINTA, width=3)
@@ -304,6 +310,8 @@ def texto_publicacion(nombre: str, web: str = WEB) -> str:
 
 
 def item(nombre: str, hoy: date) -> dict | None:
+    if nombre in GUIAS:                # foto con los pasos, no reel
+        return item_guia(nombre, hoy)
     if nombre not in ESPECIALES:
         return None
     return {"tipo": "especial", "nombre": nombre, "id": f"{hoy}-especial-{nombre}", "texto": texto_publicacion(nombre),
@@ -313,6 +321,108 @@ def item(nombre: str, hoy: date) -> dict | None:
 def reel(nombre: str, destino: Path, datos=None, hoy=None, web: str = WEB) -> Path:
     """Sin voz y con subtítulos (lo pidió el dueño de la app el 8 nov 2026)."""
     return h.reel(0, destino, datos, hoy, web, escenas=ESPECIALES[nombre]["escenas"](datos, hoy), voz=False, leyendas=True)
+
+
+# ---------- Guías en imagen (una foto con los pasos): especial:iphone y especial:android ----------
+# Mismas pantallas dibujadas que el reel «instalar», congeladas en el momento de cada toque.
+
+GUIAS = {
+    "iphone": {
+        "titulo": "Instálala en tu iPhone",
+        "navegador": "Safari",
+        "pantallas": lambda: [pantalla_safari(0.25, "compartir"), pantalla_safari(1.6, "hoja"), pantalla_safari(3.0, "hoja")],
+        "pasos": ["Toca Compartir: el cuadrado con la flecha (en iOS 26, primero «···»).",
+                  "Baja y toca «Añadir a pantalla de inicio».",
+                  "Toca «Añadir», arriba a la derecha. ¡Ya está!"],
+        "texto": ("📲 Cómo tener Lonjas CyL en tu iPhone, como una app más (30 segundos):\n\n"
+                  "0️⃣ Abre {url} en Safari.\n"
+                  "1️⃣ Toca Compartir (el cuadrado con la flecha hacia arriba). En iOS 26 está dentro de «···».\n"
+                  "2️⃣ Baja un poco y toca «Añadir a pantalla de inicio».\n"
+                  "3️⃣ Toca «Añadir». Te aparece el icono junto a tus otras apps.\n\n"
+                  "Sin tienda de aplicaciones, gratis y sin registro. Se actualiza sola con cada sesión de las lonjas.\n\n"
+                  "¿Tienes Android? Esta noche publicamos los pasos. Guárdalo y pásaselo a quien le pueda servir."),
+    },
+    "android": {
+        "titulo": "Instálala en tu Android",
+        "navegador": "Chrome",
+        "pantallas": lambda: [pantalla_chrome(0.3), pantalla_chrome(2.0), pantalla_inicio(3.0)],
+        "pasos": ["Toca los tres puntos de arriba a la derecha.",
+                  "Toca «Instalar aplicación» (o «Añadir a pantalla de inicio»).",
+                  "Confirma con «Instalar». El icono aparece en tu pantalla."],
+        "texto": ("📲 Cómo tener Lonjas CyL en tu móvil Android, como una app más (30 segundos):\n\n"
+                  "0️⃣ Abre {url} en Chrome.\n"
+                  "1️⃣ Toca los tres puntos (⋮), arriba a la derecha.\n"
+                  "2️⃣ Toca «Instalar aplicación» (en algunos móviles pone «Añadir a pantalla de inicio»).\n"
+                  "3️⃣ Confirma con «Instalar». Te aparece el icono junto a tus otras apps.\n\n"
+                  "Sin tienda de aplicaciones, gratis y sin registro. Se actualiza sola con cada sesión de las lonjas.\n\n"
+                  "¿Tienes iPhone? Los pasos están en nuestra publicación de hoy a mediodía. Guárdalo y pásaselo a quien le pueda servir."),
+    },
+}
+
+
+def _numero(d, x, y, n):
+    d.ellipse([x - 38, y - 38, x + 38, y + 38], fill=PAJA, outline=TINTA, width=4)
+    d.text((x, y + 2), str(n), font=_cifra(54), fill=TINTA, anchor="mm")
+
+
+def _lineas(d, texto: str, letra, ancho: int) -> list[str]:
+    out, linea = [], ""
+    for pal in texto.split():
+        prueba = (linea + " " + pal).strip()
+        if d.textlength(prueba, font=letra) <= ancho:
+            linea = prueba
+        else:
+            out.append(linea)
+            linea = pal
+    return out + [linea] if linea else out
+
+
+def imagen_guia(so: str, destino: Path, web: str = WEB) -> Path:
+    """Una foto 1080×1350 con los tres pasos (móvil dibujado + explicación corta) para Instagram y Facebook."""
+    from PIL import Image, ImageDraw
+    from instagram import ALTO, ANCHO, FONDO, LINEA, _cabecera
+    g = GUIAS[so]
+    url = web.split("//")[1].rstrip("/")
+    img = Image.new("RGB", (ANCHO, ALTO), FONDO)
+    d = ImageDraw.Draw(img)
+    _cabecera(img, d, g["titulo"], "3 pasos · 30 segundos · gratis y sin registro")
+    # Paso previo: abrir la web en el navegador
+    d.rounded_rectangle([50, 345, ANCHO - 50, 435], radius=26, fill=HOJA, outline=LINEA, width=2)
+    d.text((80, 390), f"Antes: abre en {g['navegador']}", font=_texto(32, 600), fill=TINTA, anchor="lm")
+    d.text((ANCHO - 80, 392), url, font=_cifra(44), fill=PINO, anchor="rm")
+    # Los tres pasos
+    global _SOLO_ARO
+    letra = _texto(28, 600)
+    _SOLO_ARO = True
+    try:
+        pantallas = g["pantallas"]()
+    finally:
+        _SOLO_ARO = False
+    for i, (pant, paso) in enumerate(zip(pantallas, g["pasos"])):
+        cx = 190 + i * 350
+        tel = movil(pant)
+        k = 0.66
+        tel = tel.resize((int(tel.width * k), int(tel.height * k)), Image.LANCZOS)
+        img.paste(tel, (int(cx - tel.width / 2), 478), tel)
+        _numero(d, cx - tel.width / 2 + 6, 486, i + 1)
+        y = 478 + tel.height + 22
+        for linea in _lineas(d, paso, letra, 316)[:4]:
+            d.text((cx, y), linea, font=letra, fill=TINTA, anchor="ma")
+            y += 37
+    # Pie
+    d.line([70, ALTO - 100, ANCHO - 70, ALTO - 100], fill=LINEA, width=2)
+    d.text((ANCHO / 2, ALTO - 52), "Se actualiza sola · funciona sin cobertura · avisos en t.me/lonjas_cyl", font=_texto(26, 600),
+           fill=TENUE, anchor="mm")
+    destino.parent.mkdir(parents=True, exist_ok=True)
+    img.save(destino, quality=92)
+    return destino
+
+
+def item_guia(so: str, hoy: date, web: str = WEB) -> dict:
+    url = web.split("//")[1].rstrip("/")
+    texto = (GUIAS[so]["texto"].format(url=url) + f"\n\n{h.redes.ig.pie_texto(web)}\n\n"
+             + etiquetas("#agricultores", "#lonjas", "#castillayleon", "#LonjasCyL"))
+    return {"tipo": "guia", "so": so, "id": f"{hoy}-guia-{so}", "texto": texto, "imagenes": [f"{hoy}-guia-{so}.jpg"]}
 
 
 if __name__ == "__main__":
