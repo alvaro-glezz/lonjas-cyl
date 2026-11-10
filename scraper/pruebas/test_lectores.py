@@ -126,3 +126,13 @@ def test_elegir_pdf_descarta_estatutos(act):
             ("https://www.lasalina.es/pdfs/lonja-2026-Noviembre-3-2.pdf", "")]
     url, fecha = act.elegir_pdf("prueba", pdfs, r"lonja")
     assert url.endswith("Noviembre-3-2.pdf") and fecha == "2026-11-03"
+
+
+def test_lechones_comparables_solo_los_de_20_kg():
+    # El «lechón tipo Lerma» no dice su peso y cotiza ~10 € por debajo: no se mezcla con los de 20 kg (10 nov 2026)
+    from comun import clave_de
+    assert clave_de("Lechones base 20 kg") == "lechones"
+    assert clave_de("Lechones 20 kg") == "lechones"
+    assert clave_de("Lechones 20kg") == "lechones"
+    assert clave_de("Lechón tipo Lerma") is None
+    assert clave_de("Lechones 200 kg") is None

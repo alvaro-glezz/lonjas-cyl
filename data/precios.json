@@ -1268,8 +1268,7 @@
      "producto": "Lechón tipo Lerma",
      "unidad": "€/ud",
      "ant": 24.5,
-     "act": 23.5,
-     "clave": "lechones"
+     "act": 23.5
     },
     {
      "id": "lerma-terneras-carne-blanca",

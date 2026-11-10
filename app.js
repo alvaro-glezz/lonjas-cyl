@@ -99,6 +99,16 @@ function textoProxima(l) {
   if (p.dias === 1) return `Mañana hay sesión (${fechaCorta(p.fecha)})`;
   return `Próxima sesión: ${DIAS[new Date(p.fecha + "T12:00:00").getDay()]} ${fechaCorta(p.fecha)}`;
 }
+/** Lonja que lleva más de una semana sin sesión nueva: explica que es la lonja la que no ha publicado (no un fallo
+    de la app) y cuándo la revisó el robot por última vez. */
+function notaPendiente(l) {
+  const saltadas = [];
+  for (let f = sumarDias(l.fecha, 7); f < hoyISO(); f = sumarDias(f, 7)) saltadas.push(`${DIAS[new Date(f + "T12:00:00").getDay()]} ${fechaCorta(f)}`);
+  if (!saltadas.length) return "";
+  const lect = l.ultimaLectura ? new Date(l.ultimaLectura) : null;
+  const cuando = lect && !isNaN(lect) ? ` La última vez, ${fechaCorta(hoyISO()) === fechaCorta(`${lect.getFullYear()}-${String(lect.getMonth() + 1).padStart(2, "0")}-${String(lect.getDate()).padStart(2, "0")}`) ? "hoy" : "el " + lect.getDate() + " " + MESES[lect.getMonth()]} a las ${String(lect.getHours()).padStart(2, "0")}:${String(lect.getMinutes()).padStart(2, "0")} h.` : "";
+  return `<p class="aviso-red">La lonja no ha publicado en su web ${saltadas.length === 1 ? "la sesión del " + saltadas[0] : "las sesiones del " + saltadas.join(" y ")}: puede que no la hubiera (un festivo, por ejemplo) o que aún no la haya subido. El robot revisa su web tres veces al día.${cuando} <a href="${esc(l.fuente || l.origen || "#")}" target="_blank" rel="noopener noreferrer">Ver su web</a></p>`;
+}
 /** «último 2,80 · 29 oct» para un producto que no cotizó en la última sesión. */
 function textoUltimo(f) { return f.act == null && f.ult ? `último ${precio(f.ult[1], f.unidad)} (${fechaCorta(f.ult[0])})` : ""; }
 
@@ -419,14 +429,39 @@ function filaHTML(f, conLonja = false) {
   </div>`;
 }
 
+/* Buscador de productos. Cada palabra tiene que aparecer en el nombre o en la mesa, o alguno de sus sinónimos:
+   las lonjas usan sus propios nombres («lechazo» y no «cordero lechal», «porcino» y no «cerdo»). */
+const SINONIMOS = [            // grupos estrechos: «garbanzo» no debe traer también las lentejas
+  ["cordero", "lechazo", "lechal", "ternasco", "ovino", "oveja", "recental"],
+  ["cerdo", "porcino", "cerda", "cerdas", "marrano", "cochino"],
+  ["lechon", "lechones", "cochinillo", "cochinillos", "toston", "tostones"],
+  ["vaca", "vacas", "vacuno", "bovino"],
+  ["ternera", "terneras", "ternero", "terneros", "añojo", "añojos", "anojo", "anojos", "novillo", "novillos"],
+  ["legumbre", "legumbres", "leguminosa", "leguminosas"],
+  ["forraje", "forrajes", "heno"],
+  ["girasol", "pipa", "pipas"],
+  ["patata", "patatas", "papa", "papas"],
+  ["cereal", "cereales", "grano"],
+  ["cebada", "maltera"],
+];
+const sinTilde = x => String(x || "").toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+function buscadorProductos(texto) {
+  const palabras = sinTilde(texto).split(/[^a-z0-9ñ]+/).filter(w => w.length > 1 && !["de", "del", "la", "el", "los", "las", "y", "kg"].includes(w));
+  if (!palabras.length) return () => true;
+  const grupos = palabras.map(w => {
+    const g = SINONIMOS.find(gr => gr.some(s => { const n = sinTilde(s); return n === w || (w.length >= 4 && n.startsWith(w)); }));
+    return [...new Set([w, ...(g || []).map(sinTilde)])];
+  });
+  return f => { const donde = sinTilde(f.producto + " " + f.cat); return grupos.every(g => g.some(w => donde.includes(w))); };
+}
+
 function vistaLonja(id) {
   const l = DATOS.lonjas.find(x => x.id === id);
   if (!l) return vistaHoy();
   const cats = ["Todas", ...new Set(l.precios.map(f => f.cat))];
   if (!cats.includes(estado.cat)) estado.cat = "Todas";
-  const t = estado.texto.trim().toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g, "");
-  const filtradas = l.precios.filter(f => (estado.cat === "Todas" || f.cat === estado.cat) &&
-    (!t || f.producto.toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g, "").includes(t)));
+  const coincide = buscadorProductos(estado.texto);
+  const filtradas = l.precios.filter(f => (estado.cat === "Todas" || f.cat === estado.cat) && coincide(f));
   // Por mesas en el orden de la lonja; dentro de cada mesa, los que no cotizaron van al final
   const ordenCat = [...new Set(l.precios.map(f => f.cat))];
   const visibles = filtradas.map((f, i) => ({ f, i })).sort((a, b) =>
@@ -457,6 +492,7 @@ function vistaLonja(id) {
         <div class="meta"><span class="pastilla ${e.clase}">${e.txt}</span> &nbsp;Sesión del ${fechaLarga(l.fecha)}</div>
         ${prox ? `<div class="prox">${esc(prox)}</div>` : ""}
       </div>
+      ${e.txt === "Pendiente" ? notaPendiente(l) : ""}
       ${sinCot ? `<p class="nota">${sinCot === 1 ? "Un producto no cotizó" : `${sinCot} productos no cotizaron`} en esta sesión: se muestran al final de su mesa con su último precio.</p>` : ""}
       <div class="filtros" role="group" aria-label="Mesas">${cats.map(c => `<button class="chip" type="button" data-cat="${esc(c)}" aria-pressed="${c === estado.cat}">${esc(c)}</button>`).join("")}</div>
       <input id="buscar-producto" class="buscar" type="search" placeholder="Buscar producto (trigo, cordero, vacas…)" value="${esc(estado.texto)}" aria-label="Buscar producto">
@@ -616,6 +652,10 @@ function router() {
   else if (h === "historico-fuentes") { html = vistaFuentesHist(); seccion = "historico"; }
   else { html = vistaHoy(); seccion = "hoy"; }
   $("#vista").innerHTML = html;
+  // En pantallas anchas (ordenador) estas pantallas usan dos columnas; las de mucho texto siguen en una (estilos.css).
+  const vista = h.startsWith("lonja-") ? "lonja" : h.startsWith("comparar") ? "comparar" : h;
+  $("#vista").dataset.vista = vista;
+  $("#vista").toggleAttribute("data-ancho", ["hoy", "lonja", "lonjas", "comparar", "favoritos", "gasoleo"].includes(vista));
   // Al cambiar de pantalla: arriba del todo y el título de la pestaña con el nombre de la pantalla (no al repintar la misma).
   if (h !== router.ultimaPintada) {
     if (router.ultimaPintada !== undefined) window.scrollTo(0, 0);

@@ -571,3 +571,17 @@ input[aria-invalid="true"] { border-color: var(--baja, #b3261e) !important; box-
 .pagina-404 { max-width: 760px; margin: 0 auto; padding: 24px 16px; }
 .botones-404 { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 16px; }
 .botones-404 .chip { text-decoration: none; }
+
+/* Ordenador (pantallas anchas): más ancho y dos columnas en las pantallas de datos; la ficha de un producto se abre
+   como panel a la derecha, sin tapar la lista. */
+@media (min-width: 1100px) {
+  .cabecera-dentro, .navegacion ul { max-width: 1180px; }
+  main[data-ancho] { max-width: 1180px; grid-template-columns: repeat(2, minmax(0, 1fr)); align-items: start; column-gap: 28px; }
+  main[data-ancho] > .mi-pizarra, main[data-ancho] > .mi-pizarra-vacia, main[data-ancho] > .seccion:has(.pizarra),
+  main[data-ancho] > .aviso-red, main[data-ancho] > p, main[data-ancho] > :only-child { grid-column: 1 / -1; }
+  main[data-vista="lonja"] .tablilla { columns: 2; column-gap: 0; column-rule: 1px solid var(--linea); }
+  main[data-vista="lonja"] .tablilla .mesa { break-after: avoid; }
+  main[data-vista="lonja"] .tablilla .fila { break-inside: avoid; }
+  .velo { justify-items: end; align-items: stretch; background: rgba(10, 16, 12, .25); }
+  .hoja-detalle { width: 500px; max-height: 100vh; height: 100vh; border-radius: 18px 0 0 18px; align-content: start; box-shadow: -8px 0 30px rgba(0, 0, 0, .18); }
+}
