@@ -40,8 +40,8 @@ function vistaOferta() {
       <div class="meta">Escribe lo que te ofrece tu almacén, cooperativa o tratante y compáralo con lo que han pagado las lonjas esta semana.</div></div>
     ${disp.length ? `<div class="panel-filtros calc-form">
       <label class="campo"><span class="etiqueta">Producto</span><select id="of-clave">${disp.map(([k, n]) => `<option value="${esc(k)}"${k === o.clave ? " selected" : ""}>${esc(n)}</option>`).join("")}</select></label>
-      <label class="campo"><span class="etiqueta">Te ofrecen (${esc(unidad)})</span><input id="of-precio" type="number" inputmode="decimal" min="0" step="any" value="${o.precio ?? ""}" placeholder="${med != null ? esc(String(med)) : ""}"></label>
-      <label class="campo"><span class="etiqueta">Cantidad (${esc(nombreCant)}, opcional)</span><input id="of-cantidad" type="number" inputmode="decimal" min="0" step="any" value="${o.cantidad ?? ""}"></label>
+      <label class="campo"><span class="etiqueta">Te ofrecen (${esc(unidad)})</span><input id="of-precio" type="text" inputmode="decimal" autocomplete="off" min="0" step="any" value="${o.precio ?? ""}" placeholder="${med != null ? esc(String(med)) : ""}"></label>
+      <label class="campo"><span class="etiqueta">Cantidad (${esc(nombreCant)}, opcional)</span><input id="of-cantidad" type="text" inputmode="decimal" autocomplete="off" min="0" step="any" value="${o.cantidad ?? ""}"></label>
     </div>
     <div id="of-resultado" aria-live="polite"></div>
     <p class="nota">Las lonjas dan un precio de referencia en sus propias condiciones (calidad, punto de entrega, quién paga el porte). Tenlo en cuenta al comparar: una oferta en tu almacén y un precio «sobre camión» en otra provincia no son lo mismo.</p>`
@@ -88,7 +88,7 @@ function pintarOferta() {
 function guardarOfertaPantalla() {
   const o = leerOferta();
   o.clave = document.getElementById("of-clave")?.value || o.clave;
-  const p = Number(document.getElementById("of-precio")?.value), q = Number(document.getElementById("of-cantidad")?.value);
+  const p = numero(document.getElementById("of-precio")?.value), q = numero(document.getElementById("of-cantidad")?.value, true);
   o.precio = p > 0 && p < 1e6 ? p : null;
   o.cantidad = q > 0 && q < 1e7 ? q : null;
   guardarLS("lonjas-oferta", o);
@@ -159,7 +159,7 @@ function vistaExplotacion() {
     <h3 class="sub-h">Añadir una partida</h3>
     ${partidas.length >= MAX_PARTIDAS ? `<p class="nota">Como mucho ${MAX_PARTIDAS} partidas.</p>` : `<form class="panel-filtros calc-form" data-partida-form>
       <label class="campo"><span class="etiqueta">Producto</span><select name="clave" id="ex-clave">${disp.map(([k, n]) => `<option value="${esc(k)}"${k === NUEVA.clave ? " selected" : ""}>${esc(n)}</option>`).join("")}</select></label>
-      <label class="campo"><span class="etiqueta">Cantidad (${esc(nombreCant)}${ganado ? " en total" : ""})</span><input name="cantidad" type="number" inputmode="decimal" min="0" step="any" required></label>
+      <label class="campo"><span class="etiqueta">Cantidad (${esc(nombreCant)}${ganado ? " en total" : ""})</span><input name="cantidad" type="text" inputmode="decimal" autocomplete="off" min="0" step="any" required></label>
       <label class="campo"><span class="etiqueta">Valorar con</span><select name="valorar">
         <option value="media">La media de las lonjas</option><option value="max">La lonja que más paga</option>
         ${filas.map(f => `<option value="${esc(f.lonja.id)}">${esc(f.lonja.nombre)}</option>`).join("")}</select></label>
@@ -339,8 +339,8 @@ document.addEventListener("submit", e => {
   const f = e.target.closest?.("[data-partida-form]");
   if (!f) return;
   e.preventDefault();
-  const cantidad = Number(f.cantidad.value), clave = f.clave.value, valorar = f.valorar.value;
-  if (!(cantidad > 0 && cantidad < 1e7)) { f.cantidad.focus(); return; }
+  const cantidad = numero(f.cantidad.value, true), clave = f.clave.value, valorar = f.valorar.value;
+  if (!(cantidad > 0 && cantidad < 1e7)) { marcarInvalido(f.cantidad, "Escribe una cantidad mayor que 0, por ejemplo 60 o 12,5."); return; }
   if (!PRODUCTOS_CLAVE.some(p => p[0] === clave) || !(valorar === "media" || valorar === "max" || RE_ID.test(valorar))) return;
   const l = leerPartidas();
   if (l.length >= MAX_PARTIDAS) return;

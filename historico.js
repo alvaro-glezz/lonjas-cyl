@@ -858,7 +858,7 @@ document.addEventListener("click", e => {
   }
   if (q("[data-h-todas]")) { estHist.todas = !estHist.todas; return router(); }
   if (q("[data-h-reintentar]")) { HIST.error = null; return router(); }
-  if ((el = q("[data-h-abrir]"))) { cerrarDetalle(); return abrirHistoricoDe(el.dataset.hAbrir, el.dataset.hLonjaApp || null); }
+  if ((el = q("[data-h-abrir]"))) { cerrarDetalle(true); return abrirHistoricoDe(el.dataset.hAbrir, el.dataset.hLonjaApp || null); }
 });
 document.addEventListener("keydown", e => {
   if ((e.key === "Enter" || e.key === " ") && e.target.matches("[data-h-lonja]")) { e.preventDefault(); e.target.click(); return; }

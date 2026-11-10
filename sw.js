@@ -1,7 +1,7 @@
 // Funciona sin cobertura: guarda la app y los últimos precios descargados.
 // Seguridad: solo se guardan respuestas correctas (200) del propio dominio; así un error 404/500 puntual
 // no se queda "pegado" en la copia sin conexión.
-const VERSION = "lonjas-v18";
+const VERSION = "lonjas-v19";
 const AJUSTES = "lonjas-ajustes";   // avisos y ajustes que guarda la app (no se borran al actualizar)
 const APP = ["./", "index.html", "estilos.css", "app.js", "historico.js", "agricultor.js", "plazos.js", "gasoleo.js", "abiertos.js", "herramientas.js", "ayuda.js", "contador.js", "manifest.webmanifest", "icons/icono.svg", "icons/icono-192.png",
   "fonts/barlow-condensed-latin-500-normal.woff2", "fonts/barlow-condensed-latin-600-normal.woff2", "fonts/barlow-condensed-latin-700-normal.woff2",

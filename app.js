@@ -32,6 +32,30 @@ function decimales(v, unidad) {
   const s = String(v).split(".")[1] || "";
   return Math.max(2, Math.min(s.length, 5));
 }
+/* Campo con un número no válido: borde rojo y el motivo justo debajo; se quita al volver a escribir. */
+function marcarInvalido(input, motivo) {
+  input.setAttribute("aria-invalid", "true");
+  let m = input.parentElement.querySelector(".motivo-err");
+  if (!m) { m = document.createElement("small"); m.className = "motivo-err"; m.id = "err-" + Math.random().toString(36).slice(2, 8); input.parentElement.append(m); }
+  m.textContent = motivo; input.setAttribute("aria-describedby", m.id);
+  input.focus();
+}
+document.addEventListener("input", e => {
+  if (e.target.getAttribute?.("aria-invalid") === "true") {
+    e.target.removeAttribute("aria-invalid"); e.target.parentElement.querySelector(".motivo-err")?.remove();
+  }
+});
+
+/* Lee un número escrito a la española: «228,5», «1.500» (con miles=true), «1,143». Los campos son de texto con teclado
+   numérico porque un <input type="number"> descarta la coma en muchos navegadores («228,5» se leía como 2285).
+   Sin miles, el punto es decimal («1.143» €/kg). Devuelve NaN si no es un número. */
+function numero(v, miles = false) {
+  let t = String(v ?? "").trim().replace(/\s|€/g, "");
+  if (!t) return NaN;
+  if (t.includes(",")) t = t.replace(/\./g, "").replace(",", ".");
+  else if (miles && /^\d{1,3}(\.\d{3})+$/.test(t)) t = t.replace(/\./g, "");
+  return /^-?\d*\.?\d+$/.test(t) ? Number(t) : NaN;
+}
 function precio(v, unidad) {
   if (v == null) return "S/C";
   return v.toLocaleString("es-ES", { minimumFractionDigits: decimales(v, unidad), maximumFractionDigits: decimales(v, unidad) });
@@ -163,6 +187,13 @@ function pintarCabecera() {
     (g ? `Revisado ${g.getDate()} ${MESES[g.getMonth()]}, ${String(g.getHours()).padStart(2, "0")}:${String(g.getMinutes()).padStart(2, "0")} h` : "");
 }
 
+/* La media de la pizarra, con los decimales con que cotizan las lonjas: 30,17 €/ud (no 30,167), 1,143 €/kg. */
+function redondearMedia(media, valores) {
+  const dec = Math.max(...valores.map(x => (String(x).split(".")[1] || "").length));
+  const d = Math.max(2, Math.min(3, dec));
+  return Math.round(media * 10 ** d) / 10 ** d;
+}
+
 /* ---------- vistas ---------- */
 function vistaHoy() {
   const filas = todasLasFilas();
@@ -176,7 +207,7 @@ function vistaHoy() {
     const tend = bajadas > subidas ? '<span class="pastilla p-baja">▼ baja</span>' : subidas > bajadas ? '<span class="pastilla p-sube">▲ sube</span>' : '<span class="pastilla p-igual">= estable</span>';
     return `<button class="ficha" type="button" data-clave="${esc(clave)}">
       <span class="nombre">${nombre}</span>
-      <span class="valor num">${precio(Math.round(media * 1000) / 1000, v[0].unidad)}<small>${esc(v[0].unidad)}</small></span>
+      <span class="valor num">${precio(redondearMedia(media, v.map(f => f.act)), v[0].unidad)}<small>${esc(v[0].unidad)}</small></span>
       <span class="rango">${v.length > 1 ? `media de ${v.length} lonjas · ${precio(min, v[0].unidad)}–${precio(max, v[0].unidad)}` : `solo ${esc(v[0].lonja.nombre.replace("Lonja de ", ""))}`}</span>
       ${tend}</button>`;
   }).join("");
@@ -378,9 +409,11 @@ function filaHTML(f, conLonja = false) {
   const v = variacion(f);
   const fav = FAVS.has(f.id);
   const ult = textoUltimo(f);
-  return `<div class="fila${f.act == null ? " sin-cot" : ""}" role="button" tabindex="0" data-fila="${esc(f.id)}">
-    <button class="estrella" type="button" data-fav="${esc(f.id)}" aria-pressed="${fav}" aria-label="${fav ? "Quitar de" : "Añadir a"} favoritos">${icoEstrella}</button>
-    <span class="prod"><b>${esc(f.producto)}</b><small>${conLonja ? esc(f.lonja.nombre.replace("Lonja de ", "")) + " · " : ""}${esc(f.unidad)}${f.rango ? " · " + esc(f.rango) : ""}</small>${f.act == null ? `<small class="ult">Sin cotizar${ult ? ` · ${esc(ult)}` : " en esta sesión"}</small>` : ""}</span>
+  // La fila entera se puede tocar; para teclado y lectores de pantalla, el botón es el nombre (la estrella va aparte:
+  // un botón dentro de otro no se puede usar con el teclado).
+  return `<div class="fila${f.act == null ? " sin-cot" : ""}" data-fila="${esc(f.id)}">
+    <button class="estrella" type="button" data-fav="${esc(f.id)}" aria-pressed="${fav}" aria-label="${fav ? "Quitar" : "Añadir"} ${esc(f.producto)} ${fav ? "de" : "a"} favoritos">${icoEstrella}</button>
+    <button type="button" class="prod" aria-label="${esc(f.producto)}: ${esc(precio(f.act, f.unidad))} ${esc(f.unidad)}${v.txt ? ", " + esc(v.txt) : ""}. Ver ficha"><b>${esc(f.producto)}</b><small>${conLonja ? esc(f.lonja.nombre.replace("Lonja de ", "")) + " · " : ""}${esc(f.unidad)}${f.rango ? " · " + esc(f.rango) : ""}</small>${f.act == null ? `<small class="ult">Sin cotizar${ult ? ` · ${esc(ult)}` : " en esta sesión"}</small>` : ""}</button>
     <span class="precio num ${f.act == null ? "sc" : ""}" ${f.act == null ? 'title="Sin cotización"' : ""}>${precio(f.act, f.unidad)}</span>
     <span class="var ${v.clase}">${v.txt}</span>
   </div>`;
@@ -406,6 +439,16 @@ function vistaLonja(id) {
     cuerpo += filaHTML(f);
   }
   const e = estadoLonja(l);
+  if (!l.precios.length) return `
+    <section class="seccion">
+      <div class="cab-lonja">
+        <button class="volver" type="button" data-ir="lonjas">‹ Volver</button>
+        <h2>${esc(l.nombre)}</h2>
+        <div class="meta"><span class="pastilla ${e.clase}">${e.txt}</span></div>
+      </div>
+      <div class="vacio"><b>Esta lonja no está publicando precios</b>${esc(l.nota || "Ha dejado de cotizar por ahora.")} Cuando vuelva a publicar, aparecerán aquí solos.</div>
+      <p class="nota">Mientras tanto, mira <a href="#comparar">qué pagan las demás lonjas</a> o su histórico en <a href="#historico">Histórico</a>.</p>
+    </section>`;
   return `
     <section class="seccion">
       <div class="cab-lonja">
@@ -528,12 +571,26 @@ function abrirDetalle(id) {
     ${serie.length > 1 ? `<div class="serie">${[...serie].reverse().map(p => `<div><span>${fechaLarga(p[0])}</span><b class="num">${precio(p[1], f.unidad)}</b></div>`).join("")}</div>` : ""}
     <button class="chip auto" type="button" data-fav="${esc(f.id)}" aria-pressed="${FAVS.has(f.id)}">${FAVS.has(f.id) ? "★ En favoritos" : "☆ Añadir a favoritos"}</button>
   </div>`;
+  if (velo.hidden) {
+    // Con la ficha abierta, el botón «atrás» del móvil la cierra en vez de salir de la pantalla de debajo.
+    detalleDesde = document.activeElement;
+    history.pushState({ detalle: true }, "", location.href);
+  }
   velo.hidden = false;
   $(".cerrar", velo).focus();
   if (typeof pintarAvisoDetalle === "function") pintarAvisoDetalle(f);
   pintarHistDetalle(f);
 }
-function cerrarDetalle() { const v = $("#velo"); v.hidden = true; v.innerHTML = ""; }
+let detalleDesde = null;
+function cerrarDetalle(porHistorial = false) {
+  const v = $("#velo");
+  if (v.hidden) return;
+  v.hidden = true; v.innerHTML = "";
+  if (!porHistorial && history.state?.detalle) history.back();     // quita la entrada que puso abrirDetalle
+  if (detalleDesde?.isConnected) detalleDesde.focus({ preventScroll: true });   // el foco vuelve a la fila
+  detalleDesde = null;
+}
+window.addEventListener("popstate", () => { if (!$("#velo").hidden) cerrarDetalle(true); });
 
 /* ---------- navegación ---------- */
 function router() {
@@ -559,6 +616,13 @@ function router() {
   else if (h === "historico-fuentes") { html = vistaFuentesHist(); seccion = "historico"; }
   else { html = vistaHoy(); seccion = "hoy"; }
   $("#vista").innerHTML = html;
+  // Al cambiar de pantalla: arriba del todo y el título de la pestaña con el nombre de la pantalla (no al repintar la misma).
+  if (h !== router.ultimaPintada) {
+    if (router.ultimaPintada !== undefined) window.scrollTo(0, 0);
+    router.ultimaPintada = h;
+    const t = h === "hoy" ? "" : $("#vista h2")?.textContent.trim();
+    document.title = (t ? t + " · " : "") + "Lonjas CyL · Precios de las lonjas de Castilla y León hoy";
+  }
   document.querySelectorAll("[data-w]").forEach(el => { el.style.width = Math.min(100, Math.max(0, Number(el.dataset.w) || 0)) + "%"; });
   document.querySelectorAll(".navegacion a").forEach(a => a.dataset.vista === seccion ? a.setAttribute("aria-current", "page") : a.removeAttribute("aria-current"));
   if (typeof trasPintar === "function") trasPintar(h);
@@ -600,7 +664,7 @@ document.addEventListener("input", e => {
   }
 });
 $("#recargar").addEventListener("click", () => { ultimaCarga = Date.now(); cargar(true); });
-window.addEventListener("hashchange", router);
+window.addEventListener("hashchange", () => { if (!$("#velo").hidden) cerrarDetalle(true); router(); });
 let ultimaCarga = Date.now();
 document.addEventListener("visibilitychange", () => {
   if (document.visibilityState === "visible" && DATOS && Date.now() - ultimaCarga > 60000) { ultimaCarga = Date.now(); cargar(); }

@@ -137,7 +137,7 @@ function pintarAvisoDetalle(f) {
       <button class="chip" type="button" data-aviso-borrar="${esc(a.id)}" aria-label="Borrar aviso">Quitar</button></div>`; }).join("")}
     <form class="aviso-form" data-aviso-fila="${esc(f.id)}">
       <label class="campo"><span class="etiqueta">Cuando</span><select name="tipo"><option value="sube">suba a</option><option value="baja">baje a</option></select></label>
-      <label class="campo"><span class="etiqueta">Precio (${esc(f.unidad || "€")})</span><input name="umbral" type="number" inputmode="decimal" step="any" min="0" required value="${base != null ? esc(String(base)) : ""}"></label>
+      <label class="campo"><span class="etiqueta">Precio (${esc(f.unidad || "€")})</span><input name="umbral" type="text" inputmode="decimal" autocomplete="off" step="any" min="0" required value="${base != null ? esc(String(base)) : ""}"></label>
       <button class="chip boton" type="submit">Crear aviso</button>
     </form>
     <p class="nota">${esc(textoPermiso())}</p>
@@ -290,14 +290,14 @@ function vistaCalculadora() {
       <div class="meta">Cuánto te pagaría cada lonja por tu partida, con su último precio y descontando el porte.</div></div>
     <div class="panel-filtros calc-form">
       <label class="campo"><span class="etiqueta">Producto</span><select id="calc-clave">${disponibles.map(([k, n]) => `<option value="${esc(k)}"${k === c.clave ? " selected" : ""}>${esc(n)}</option>`).join("")}</select></label>
-      <label class="campo"><span class="etiqueta">Cantidad (${esc(nombreCant)})</span><input id="calc-cantidad" type="number" inputmode="decimal" min="0" step="any" value="${esc(String(c.cantidad))}"></label>
+      <label class="campo"><span class="etiqueta">Cantidad (${esc(nombreCant)})</span><input id="calc-cantidad" type="text" inputmode="decimal" autocomplete="off" min="0" step="any" value="${esc(String(c.cantidad))}"></label>
     </div>
     ${filas.length ? `<div class="calc-tabla" role="table" aria-label="Importe por lonja">
       <div class="th" role="row"><span role="columnheader">Lonja</span><span role="columnheader">Precio</span><span role="columnheader">Porte (${esc(unidad)})</span><span role="columnheader">Te pagan</span></div>
       ${filas.map(f => `<div class="tr" role="row" data-calc-fila="${esc(f.id)}" data-precio="${f.act}">
         <span role="cell"><b>${esc(corto(f.lonja))}</b><small>${esc(f.producto)} · ${fechaCorta(f.lonja.fecha)}</small></span>
         <span role="cell" class="num">${precio(f.act, f.unidad)}</span>
-        <span role="cell"><input class="porte" type="number" inputmode="decimal" min="0" step="any" aria-label="Porte hasta ${esc(corto(f.lonja))}" data-porte="${esc(f.lonja.id)}" value="${c.portes[f.lonja.id] ?? ""}" placeholder="0"></span>
+        <span role="cell"><input class="porte" type="text" inputmode="decimal" autocomplete="off" min="0" step="any" aria-label="Porte hasta ${esc(corto(f.lonja))}" data-porte="${esc(f.lonja.id)}" value="${c.portes[f.lonja.id] ?? ""}" placeholder="0"></span>
         <span role="cell" class="total"><b class="num" data-total></b><small data-dif></small></span>
       </div>`).join("")}</div>
       <p class="nota">Lo que te pagan = (precio − porte) × cantidad. Son precios orientativos de cada lonja en sus propias condiciones (calidad, punto de entrega): sirven para comparar, no son una oferta.${otras.length ? ` No se incluyen ${otras.length} precio${otras.length === 1 ? "" : "s"} en otra unidad.` : ""}</p>`
@@ -306,9 +306,9 @@ function vistaCalculadora() {
 }
 /** Recalcula los importes sin redibujar la pantalla (así no se pierde lo que se está escribiendo). */
 function recalcular() {
-  const cant = Number($("#calc-cantidad")?.value) || 0;
+  const cant = numero($("#calc-cantidad")?.value, true) || 0;
   const filas = [...document.querySelectorAll("[data-calc-fila]")].map(tr => {
-    const porte = Number(tr.querySelector("[data-porte]").value) || 0;
+    const porte = numero(tr.querySelector("[data-porte]").value) || 0;
     return { tr, neto: Number(tr.dataset.precio) - porte };
   });
   if (!filas.length) return;
@@ -321,14 +321,14 @@ function recalcular() {
     tr.classList.toggle("mejor", !!cant && total === mejor);
   }
   const grupo = [...document.querySelector(".calc-tabla").children].slice(1).sort((a, b) =>
-    (Number(b.dataset.precio) - (Number(b.querySelector("[data-porte]").value) || 0)) - (Number(a.dataset.precio) - (Number(a.querySelector("[data-porte]").value) || 0)));
+    (Number(b.dataset.precio) - (numero(b.querySelector("[data-porte]").value) || 0)) - (Number(a.dataset.precio) - (numero(a.querySelector("[data-porte]").value) || 0)));
   if (document.activeElement?.closest?.(".calc-tabla") == null) grupo.forEach(tr => tr.parentNode.appendChild(tr));
 }
 function guardarCalcDesdePantalla() {
   const c = leerCalc();
   c.clave = $("#calc-clave")?.value || c.clave;
-  const q = Number($("#calc-cantidad")?.value); if (q > 0 && q < 1e7) c.cantidad = q;
-  document.querySelectorAll("[data-porte]").forEach(i => { const v = Number(i.value); if (i.value === "") delete c.portes[i.dataset.porte]; else if (v >= 0 && v < 1e5) c.portes[i.dataset.porte] = v; });
+  const q = numero($("#calc-cantidad")?.value, true); if (q > 0 && q < 1e7) c.cantidad = q;
+  document.querySelectorAll("[data-porte]").forEach(i => { const v = numero(i.value); if (i.value === "") delete c.portes[i.dataset.porte]; else if (v >= 0 && v < 1e5) c.portes[i.dataset.porte] = v; });
   guardarLS("lonjas-calculadora", c);
 }
 
@@ -342,8 +342,8 @@ document.addEventListener("submit", async e => {
   const form = e.target.closest?.("[data-aviso-fila]");
   if (!form) return;
   e.preventDefault();
-  const umbral = Number(form.umbral.value), fila = form.dataset.avisoFila;
-  if (!(umbral > 0) || !RE_ID.test(fila)) { form.umbral.focus(); return; }
+  const umbral = numero(form.umbral.value), fila = form.dataset.avisoFila;
+  if (!(umbral > 0) || !RE_ID.test(fila)) { marcarInvalido(form.umbral, "Escribe un precio mayor que 0, por ejemplo 240 o 9,50."); return; }
   const avisos = leerAvisos();
   if (avisos.length >= MAX_AVISOS) { form.insertAdjacentHTML("afterend", `<p class="nota err">Como mucho ${MAX_AVISOS} avisos: quita alguno antes.</p>`); return; }
   const f = buscarFila(fila);
@@ -368,7 +368,7 @@ document.addEventListener("click", e => {
   }
   if ((el = t.closest("[data-calc]"))) {
     const c = leerCalc(); c.clave = el.dataset.calc; guardarLS("lonjas-calculadora", c);
-    if (!$("#velo").hidden) cerrarDetalle();
+    if (!$("#velo").hidden) cerrarDetalle(true);
     return ir("calculadora");
   }
   if ((el = t.closest("[data-compartir-resumen]"))) { compartirResumen(el); return; }
