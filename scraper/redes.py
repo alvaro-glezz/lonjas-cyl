@@ -273,11 +273,38 @@ def guion_movimientos(m: dict) -> str:
 def para_leer(texto: str) -> str:
     """Lo que la voz no debe leer letra a letra. Con PIPER_COMAS=si, «;» pasa a «,» (pausas más cortas, más fluido)."""
     texto = texto.replace("Lonjas CyL", "Lonjas Castilla y León").replace("CyL", "Castilla y León")
+    texto = texto.replace(" › ", ", ").replace("km/h", "kilómetros por hora").replace("…", ",")
     return texto.replace(";", ",") if os.environ.get("PIPER_COMAS", "si") == "si" else texto
 
 
+_KOKORO = None
+
+
+def _voz_kokoro(texto: str, destino: Path) -> Path | None:
+    """Narración con Kokoro (modelo abierto, licencia Apache 2.0), más natural que Piper. VOZ_MOTOR=kokoro y KOKORO_VOZ."""
+    global _KOKORO
+    try:
+        import numpy as np
+        import soundfile as sf
+        from kokoro import KPipeline
+        if _KOKORO is None:
+            _KOKORO = KPipeline(lang_code="e")
+        trozos = [a for _, _, a in _KOKORO(para_leer(texto), voice=os.environ.get("KOKORO_VOZ", "ef_dora"),
+                                            speed=float(os.environ.get("KOKORO_RITMO", "1.0")))]
+        audio = np.concatenate([np.asarray(a, dtype="float32") for a in trozos])
+        destino.parent.mkdir(parents=True, exist_ok=True)
+        sf.write(str(destino), audio, 24000, subtype="PCM_16")
+        return destino
+    except Exception as e:  # sin Kokoro, el reel sale solo con música
+        print(f"[redes] Sin voz (Kokoro falló): {e!r}"[:300])
+        return None
+
+
 def voz(texto: str, destino: Path) -> Path | None:
-    """Narración con Piper (si está instalada y hay modelo). Sin voz, el reel sale solo con música."""
+    """Narración con Piper (si está instalada y hay modelo), o con Kokoro si VOZ_MOTOR=kokoro.
+    Sin voz, el reel sale solo con música."""
+    if os.environ.get("VOZ_MOTOR") == "kokoro":
+        return _voz_kokoro(texto, destino)
     modelo = os.environ.get("PIPER_MODELO", "").strip()
     if not modelo or not Path(modelo).is_file():
         return None

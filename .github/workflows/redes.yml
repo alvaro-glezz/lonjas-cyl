@@ -22,7 +22,7 @@ on:
   workflow_dispatch:
     inputs:
       franja:
-        description: "Vacío = lo que toque ahora y falte por publicar. O: manana, reel, tarde, historia, historias-todas (con probar=si), especial:instalar, especial:explotacion, especial:tratamientos, especial:iphone, especial:android (foto con los pasos)"
+        description: "Vacío = lo que toque ahora y falte por publicar. O: manana, reel, tarde, historia, historias-todas (con probar=si), especial:instalar, especial:explotacion, especial:tratamientos, especial:tratamientos-voz, especial:iphone, especial:android (foto con los pasos)"
         required: false
         default: ""
       probar:
@@ -33,6 +33,10 @@ on:
         description: "si = repetir la franja aunque ya se hiciera hoy"
         required: false
         default: "no"
+      voz:
+        description: "Vacío = Piper (sharvard). O kokoro:<voz> (ef_dora, em_alex, em_santa): voz más natural, tarda más en instalarse"
+        required: false
+        default: ""
 
 permissions:
   contents: write
@@ -81,6 +85,17 @@ jobs:
           [ -s es_ES-sharvard-medium.onnx.json ] || curl -sSfLO "$B/es_ES-sharvard-medium.onnx.json"
           echo "Hola." | python -m piper -m es_ES-sharvard-medium.onnx -s 1 -f prueba.wav && {
             echo "PIPER_MODELO=$HOME/voces/es_ES-sharvard-medium.onnx"; echo "PIPER_HABLANTE=1"; } >> "$GITHUB_ENV"
+      - name: Voz (Kokoro)
+        if: startsWith(inputs.voz, 'kokoro:')
+        continue-on-error: true
+        timeout-minutes: 12
+        env:
+          VOZ: ${{ inputs.voz }}
+        run: |
+          pip install -q "kokoro>=0.9.4" soundfile "misaki[en]"
+          V="${VOZ#kokoro:}"
+          case "$V" in ef_dora|em_alex|em_santa) ;; *) echo "voz no válida"; exit 1;; esac
+          { echo "VOZ_MOTOR=kokoro"; echo "KOKORO_VOZ=$V"; } >> "$GITHUB_ENV"
       - name: Crear la publicación de esta franja
         env:
           INSTAGRAM_TOKEN: ${{ secrets.INSTAGRAM_TOKEN }}

@@ -384,15 +384,19 @@ ESPECIALES["tratamientos"] = {
               "Toca una hora y te dice el motivo: viento, rachas, temperatura, humedad o lluvia en las horas siguientes. "
               "Los límites puedes ajustarlos a tu gusto.\n\n"
               "Previsión oficial de AEMET. Es orientativo: manda siempre la etiqueta del producto.")}
-ETIQUETAS = {"tratamientos": ["#agricultores", "#fitosanitarios", "#castillayleon"], "instalar": ["#agricultores", "#lonjas", "#castillayleon"], "explotacion": ["#agricultores", "#cereal", "#castillayleon"]}
+# La misma historia con voz (y los subtítulos), publicada de nuevo el 11 nov a las 21:00 a petición del dueño.
+ESPECIALES["tratamientos-voz"] = {**ESPECIALES["tratamientos"], "voz": True}
+ETIQUETAS = {"tratamientos-voz": ["#agricultores", "#fitosanitarios", "#castillayleon"], "tratamientos": ["#agricultores", "#fitosanitarios", "#castillayleon"], "instalar": ["#agricultores", "#lonjas", "#castillayleon"], "explotacion": ["#agricultores", "#cereal", "#castillayleon"]}
 
 
 def texto_publicacion(nombre: str, web: str = WEB) -> str:
     e = ESPECIALES[nombre]
     nota = ("Ejemplo de la captura: 60 t de trigo, 45 t de cebada y 3.300 kg de lechazo, con los precios de las sesiones del 3 al 5 "
             "de noviembre de 2026. " if nombre == "explotacion" else
-            "Capturas con la previsión de AEMET para Peñafiel del 11 de noviembre de 2026. " if nombre == "tratamientos" else "")
-    return (f"{e['texto']}\n\n{h.redes.ig.pie_texto(web)}\n\n{nota}Ilustraciones y capturas reales de la app. 🔇 Con subtítulos: se entiende sin sonido.\n\n"
+            "Capturas con la previsión de AEMET para Peñafiel del 11 de noviembre de 2026. " if nombre.startswith("tratamientos") else "")
+    sonido = ("🔊 Con voz y subtítulos. Voz sintética (Kokoro, licencia Apache 2.0)." if e.get("voz")
+              else "🔇 Con subtítulos: se entiende sin sonido.")
+    return (f"{e['texto']}\n\n{h.redes.ig.pie_texto(web)}\n\n{nota}Ilustraciones y capturas reales de la app. {sonido}\n\n"
             + etiquetas(*ETIQUETAS[nombre], "#LonjasCyL"))
 
 
@@ -408,8 +412,8 @@ def item(nombre: str, hoy: date) -> dict | None:
 def reel(nombre: str, destino: Path, datos=None, hoy=None, web: str = WEB) -> Path:
     """Sin voz y con subtítulos (lo pidió el dueño de la app el 8 nov 2026)."""
     musica = h.redes.guitarra if ESPECIALES[nombre].get("musica") == "guitarra" else None
-    return h.reel(0, destino, datos, hoy, web, escenas=ESPECIALES[nombre]["escenas"](datos, hoy), voz=False, leyendas=True,
-                  musica_fn=musica)
+    return h.reel(0, destino, datos, hoy, web, escenas=ESPECIALES[nombre]["escenas"](datos, hoy),
+                  voz=ESPECIALES[nombre].get("voz", False), leyendas=True, musica_fn=musica)
 
 
 # ---------- Guías en imagen (una foto con los pasos): especial:iphone y especial:android ----------
