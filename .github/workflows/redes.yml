@@ -22,7 +22,7 @@ on:
   workflow_dispatch:
     inputs:
       franja:
-        description: "Vacío = lo que toque ahora y falte por publicar. O: manana, reel, tarde, historia, historias-todas (con probar=si), especial:instalar, especial:explotacion, especial:tratamientos, especial:tratamientos-voz, especial:iphone, especial:android (foto con los pasos)"
+        description: "Vacío = lo que toque ahora y falte por publicar. O: manana, reel, tarde, historia, historias-todas (con probar=si), especial:instalar, especial:explotacion, especial:tratamientos, especial:tratamientos-voz, especial:iphone, especial:android, especial:ordenador (foto con los pasos)"
         required: false
         default: ""
       probar:

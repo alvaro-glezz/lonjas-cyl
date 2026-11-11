@@ -453,6 +453,118 @@ GUIAS = {
 }
 
 
+GUIAS["ordenador"] = {
+    "titulo": "Instálala en tu ordenador",
+    "navegador": "Chrome o Edge",
+    "escritorio": True,
+    "pasos": ["Arriba, en la barra de direcciones, pulsa el icono de instalar: una pantallita con una flecha.",
+              "Pulsa «Instalar».",
+              "Se abre en su propia ventana, sin pestañas, y te queda un acceso en el escritorio."],
+    "texto": ("💻 Cómo tener Lonjas CyL en tu ordenador, como un programa más (30 segundos):\n\n"
+              "0️⃣ Abre {url} en Google Chrome o Microsoft Edge.\n"
+              "1️⃣ En la barra de direcciones, a la derecha, pulsa el icono de instalar (una pantallita con una flecha).\n"
+              "2️⃣ Pulsa «Instalar».\n"
+              "3️⃣ Se abre en su propia ventana, sin pestañas, y te queda un acceso en el escritorio y en el menú de inicio.\n\n"
+              "¿No ves el icono? Abre el menú del navegador (⋮ en Chrome, ··· en Edge) y busca la opción «Instalar». "
+              "En un Mac con Safari: menú Archivo › Añadir al Dock.\n\n"
+              "En la pantalla grande ves de un vistazo tu pizarra de precios, la semana, el tiempo para tratar y las lonjas, "
+              "con el menú a la izquierda.\n\n"
+              "Gratis y sin registro. Se actualiza sola con cada sesión de las lonjas. Guárdalo y pásaselo a quien le pueda servir."),
+}
+
+
+def _ventana(modo: str, ancho: int = 560, alto: int = 238):
+    """Ventana de navegador dibujada con la app real dentro (captura recursos/app-escritorio.png).
+    modo: «barra» (icono de instalar señalado), «dialogo» (aviso «¿Instalar…?») o «app» (ya instalada, ventana propia)."""
+    from PIL import Image, ImageDraw
+    gris, borde = (232, 236, 233), (196, 204, 198)
+    img = Image.new("RGBA", (ancho, alto), (0, 0, 0, 0))
+    d = ImageDraw.Draw(img)
+    d.rounded_rectangle([0, 0, ancho - 1, alto - 1], radius=14, fill=HOJA, outline=borde, width=2)
+    d.rounded_rectangle([1, 1, ancho - 2, 34], radius=13, fill=gris)
+    d.rectangle([1, 20, ancho - 2, 34], fill=gris)
+    if modo == "app":
+        ico = Image.open(ICONO).convert("RGB").resize((20, 20))
+        img.paste(ico, (62, 8))
+        d.text((90, 18), "Lonjas CyL", font=_texto(17, 600), fill=TINTA, anchor="lm")
+        x = ancho - 84
+        d.line([x - 6, 18, x + 6, 18], fill=TENUE, width=2)
+        d.rectangle([x + 20, 12, x + 32, 24], outline=TENUE, width=2)
+        d.line([x + 46, 12, x + 58, 24], fill=TENUE, width=2)
+        d.line([x + 46, 24, x + 58, 12], fill=TENUE, width=2)
+        arriba = 35
+    else:
+        for i, c in enumerate(((236, 106, 94), (244, 191, 79), (98, 197, 84))):
+            d.ellipse([14 + i * 18, 12, 24 + i * 18, 22], fill=c)
+        d.rounded_rectangle([90, 6, 250, 30], radius=8, fill=HOJA)
+        d.text((104, 18), "Lonjas CyL", font=_texto(14, 600), fill=TINTA, anchor="lm")
+        d.rectangle([1, 35, ancho - 2, 74], fill=HOJA)
+        d.line([1, 74, ancho - 2, 74], fill=borde, width=1)
+        d.rounded_rectangle([14, 42, ancho - 14, 68], radius=13, fill=gris)
+        d.text((32, 55), "lonjas-cyl-khaki.vercel.app", font=_texto(15), fill=TINTA, anchor="lm")
+        # icono de instalar: pantallita con flecha
+        ix, iy = ancho - 40, 55
+        d.rounded_rectangle([ix - 11, iy - 9, ix + 11, iy + 6], radius=2, outline=TINTA, width=2)
+        d.line([ix - 6, iy + 10, ix + 6, iy + 10], fill=TINTA, width=2)
+        d.line([ix, iy - 6, ix, iy + 2], fill=TINTA, width=2)
+        d.line([ix - 4, iy - 1, ix, iy + 3, ix + 4, iy - 1], fill=TINTA, width=2)
+        if modo == "barra":
+            d.ellipse([ix - 24, iy - 24, ix + 24, iy + 24], outline=PAJA, width=5)
+        arriba = 75
+    cap = Image.open(RECURSOS / "app-escritorio.png").convert("RGB")
+    k = (ancho - 4) / cap.width
+    cap = cap.resize((ancho - 4, int(cap.height * k)), Image.LANCZOS).crop((0, 0, ancho - 4, alto - arriba - 2))
+    if modo == "dialogo":
+        cap = Image.blend(cap, Image.new("RGB", cap.size, (30, 40, 34)), .35)
+    img.paste(cap, (2, arriba))
+    if modo == "dialogo":
+        x0, y0, x1, y1 = ancho - 300, 80, ancho - 16, 226
+        d.rounded_rectangle([x0 + 4, y0 + 6, x1 + 4, y1 + 6], radius=12, fill=(0, 0, 0, 60))
+        d.rounded_rectangle([x0, y0, x1, y1], radius=12, fill=HOJA, outline=borde, width=2)
+        d.text((x0 + 18, y0 + 26), "¿Instalar aplicación?", font=_texto(19, 700), fill=TINTA, anchor="lm")
+        ico = Image.open(ICONO).convert("RGB").resize((34, 34))
+        img.paste(ico, (x0 + 18, y0 + 50))
+        d.text((x0 + 62, y0 + 60), "Lonjas CyL", font=_texto(16, 600), fill=TINTA, anchor="lm")
+        d.text((x0 + 62, y0 + 79), "lonjas-cyl-khaki.vercel.app", font=_texto(12), fill=TENUE, anchor="lm")
+        d.rounded_rectangle([x1 - 210, y1 - 46, x1 - 112, y1 - 14], radius=16, outline=borde, width=2)
+        d.text((x1 - 161, y1 - 30), "Cancelar", font=_texto(15, 600), fill=TINTA, anchor="mm")
+        d.rounded_rectangle([x1 - 102, y1 - 46, x1 - 16, y1 - 14], radius=16, fill=PINO)
+        d.text((x1 - 59, y1 - 30), "Instalar", font=_texto(15, 700), fill=HOJA, anchor="mm")
+        d.rounded_rectangle([x1 - 110, y1 - 54, x1 - 8, y1 - 6], radius=22, outline=PAJA, width=5)
+    return img
+
+
+def imagen_guia_ordenador(destino: Path, web: str = WEB) -> Path:
+    """Foto 1080×1350: los tres pasos en filas (ventana dibujada a la izquierda, explicación a la derecha)."""
+    from PIL import Image, ImageDraw
+    from instagram import ALTO, ANCHO, FONDO, LINEA, _cabecera
+    g = GUIAS["ordenador"]
+    url = web.split("//")[1].rstrip("/")
+    img = Image.new("RGB", (ANCHO, ALTO), FONDO)
+    d = ImageDraw.Draw(img)
+    _cabecera(img, d, g["titulo"], "Chrome o Edge · 3 pasos · 30 segundos · gratis")
+    d.rounded_rectangle([50, 345, ANCHO - 50, 435], radius=26, fill=HOJA, outline=LINEA, width=2)
+    d.text((80, 390), "Antes: abre en Chrome o Edge", font=_texto(30, 600), fill=TINTA, anchor="lm")
+    d.text((ANCHO - 80, 392), url, font=_cifra(40), fill=PINO, anchor="rm")
+    letra = _texto(30, 600)
+    for i, (modo, paso) in enumerate(zip(("barra", "dialogo", "app"), g["pasos"])):
+        y = 458 + i * 262
+        v = _ventana(modo)
+        img.paste(v, (50, y), v)
+        _numero(d, 50 + 8, y + 8, i + 1)
+        lineas = _lineas(d, paso, letra, ANCHO - 50 - 640)[:5]
+        yt = y + v.height / 2 - len(lineas) * 21
+        for linea in lineas:
+            d.text((640, yt), linea, font=letra, fill=TINTA)
+            yt += 42
+    d.line([70, ALTO - 100, ANCHO - 70, ALTO - 100], fill=LINEA, width=2)
+    d.text((ANCHO / 2, ALTO - 52), "¿No ves el icono? Menú del navegador › «Instalar» · Mac: Archivo › Añadir al Dock",
+           font=_texto(25, 600), fill=TENUE, anchor="mm")
+    destino.parent.mkdir(parents=True, exist_ok=True)
+    img.save(destino, quality=92)
+    return destino
+
+
 def _numero(d, x, y, n):
     d.ellipse([x - 38, y - 38, x + 38, y + 38], fill=PAJA, outline=TINTA, width=4)
     d.text((x, y + 2), str(n), font=_cifra(54), fill=TINTA, anchor="mm")
@@ -474,6 +586,8 @@ def imagen_guia(so: str, destino: Path, web: str = WEB) -> Path:
     """Una foto 1080×1350 con los tres pasos (móvil dibujado + explicación corta) para Instagram y Facebook."""
     from PIL import Image, ImageDraw
     from instagram import ALTO, ANCHO, FONDO, LINEA, _cabecera
+    if GUIAS[so].get("escritorio"):
+        return imagen_guia_ordenador(destino, web)
     g = GUIAS[so]
     url = web.split("//")[1].rstrip("/")
     img = Image.new("RGB", (ANCHO, ALTO), FONDO)
