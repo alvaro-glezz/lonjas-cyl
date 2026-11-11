@@ -1,5 +1,5 @@
 {
- "generado": "2026-11-11T09:44+00:00",
+ "generado": "2026-11-11T13:53+00:00",
  "lonjas": [
   {
    "id": "salamanca",
@@ -407,7 +407,7 @@
    "fuente": "https://www.lonjadeleon.es/category/cotizaciones/",
    "estado": "activa",
    "nota": null,
-   "fecha": "2026-11-04",
+   "fecha": "2026-11-11",
    "precios": [
     {
      "id": "leon-agria",
@@ -458,141 +458,6 @@
      "act": 330.0
     },
     {
-     "id": "leon-girasol",
-     "cat": "Girasol",
-     "producto": "Girasol",
-     "unidad": "€/t",
-     "ant": 500.0,
-     "act": 500.0,
-     "clave": "girasol"
-    },
-    {
-     "id": "leon-girasol-alto-oleico",
-     "cat": "Girasol",
-     "producto": "Girasol alto oleico",
-     "unidad": "€/t",
-     "ant": 515.0,
-     "act": 515.0
-    },
-    {
-     "id": "leon-trigo-pienso",
-     "cat": "Cereales",
-     "producto": "Trigo Pienso",
-     "unidad": "€/t",
-     "ant": 228.0,
-     "act": 226.0,
-     "clave": "trigo"
-    },
-    {
-     "id": "leon-cebada",
-     "cat": "Cereales",
-     "producto": "Cebada",
-     "unidad": "€/t",
-     "ant": 222.0,
-     "act": 221.0,
-     "clave": "cebada"
-    },
-    {
-     "id": "leon-triticale",
-     "cat": "Cereales",
-     "producto": "Triticale",
-     "unidad": "€/t",
-     "ant": 218.0,
-     "act": 216.0,
-     "clave": "triticale"
-    },
-    {
-     "id": "leon-centeno",
-     "cat": "Cereales",
-     "producto": "Centeno",
-     "unidad": "€/t",
-     "ant": 197.0,
-     "act": 197.0,
-     "clave": "centeno"
-    },
-    {
-     "id": "leon-avena",
-     "cat": "Cereales",
-     "producto": "Avena",
-     "unidad": "€/t",
-     "ant": 202.0,
-     "act": 200.0,
-     "clave": "avena"
-    },
-    {
-     "id": "leon-maiz",
-     "cat": "Cereales",
-     "producto": "Maíz",
-     "unidad": "€/t",
-     "ant": null,
-     "act": null,
-     "clave": "maiz"
-    },
-    {
-     "id": "leon-canela",
-     "cat": "Alubias",
-     "producto": "Canela",
-     "unidad": "€/kg",
-     "ant": 1.3,
-     "act": 1.3
-    },
-    {
-     "id": "leon-negra",
-     "cat": "Alubias",
-     "producto": "Negra",
-     "unidad": "€/kg",
-     "ant": 2.8,
-     "act": 2.8
-    },
-    {
-     "id": "leon-palmena-redonda",
-     "cat": "Alubias",
-     "producto": "Palmeña Redonda",
-     "unidad": "€/kg",
-     "ant": 2.0,
-     "act": 2.0
-    },
-    {
-     "id": "leon-planchada",
-     "cat": "Alubias",
-     "producto": "Planchada",
-     "unidad": "€/kg",
-     "ant": 1.95,
-     "act": 1.95
-    },
-    {
-     "id": "leon-plancheta",
-     "cat": "Alubias",
-     "producto": "Plancheta",
-     "unidad": "€/kg",
-     "ant": 2.0,
-     "act": 2.0
-    },
-    {
-     "id": "leon-pinta",
-     "cat": "Alubias",
-     "producto": "Pinta",
-     "unidad": "€/kg",
-     "ant": 0.95,
-     "act": 0.95
-    },
-    {
-     "id": "leon-rinon-de-leon",
-     "cat": "Alubias",
-     "producto": "Riñón de León",
-     "unidad": "€/kg",
-     "ant": 1.4,
-     "act": 1.4
-    },
-    {
-     "id": "leon-redonda",
-     "cat": "Alubias",
-     "producto": "Redonda",
-     "unidad": "€/kg",
-     "ant": 1.35,
-     "act": 1.35
-    },
-    {
      "id": "leon-leche-de-vaca",
      "cat": "Leche de vaca",
      "producto": "Leche de vaca",
@@ -617,12 +482,29 @@
      "act": 0.12621
     },
     {
+     "id": "leon-girasol",
+     "cat": "Girasol",
+     "producto": "Girasol",
+     "unidad": "€/t",
+     "ant": 500.0,
+     "act": 500.0,
+     "clave": "girasol"
+    },
+    {
+     "id": "leon-girasol-alto-oleico",
+     "cat": "Girasol",
+     "producto": "Girasol alto oleico",
+     "unidad": "€/t",
+     "ant": 515.0,
+     "act": 515.0
+    },
+    {
      "id": "leon-alfalfa-paquete-rama",
      "cat": "Forrajes",
      "producto": "Alfalfa paquete rama",
      "unidad": "€/t",
      "ant": 225.0,
-     "act": 225.0,
+     "act": 235.0,
      "clave": "alfalfa"
     },
     {
@@ -631,7 +513,7 @@
      "producto": "Alfalfa paquete deshidratado",
      "unidad": "€/t",
      "ant": 255.0,
-     "act": 255.0
+     "act": 260.0
     },
     {
      "id": "leon-paja-1a-cebada",
@@ -639,7 +521,7 @@
      "producto": "Paja 1ª (Cebada)",
      "unidad": "€/t",
      "ant": 65.0,
-     "act": 65.0,
+     "act": 67.0,
      "clave": "paja"
     },
     {
@@ -648,7 +530,7 @@
      "producto": "Veza forraje de 1ª",
      "unidad": "€/t",
      "ant": 170.0,
-     "act": 170.0
+     "act": 180.0
     },
     {
      "id": "leon-forraje",
@@ -656,7 +538,61 @@
      "producto": "Forraje",
      "unidad": "€/t",
      "ant": 130.0,
-     "act": 130.0
+     "act": 135.0
+    },
+    {
+     "id": "leon-trigo-pienso",
+     "cat": "Cereales",
+     "producto": "Trigo Pienso",
+     "unidad": "€/t",
+     "ant": 226.0,
+     "act": 226.0,
+     "clave": "trigo"
+    },
+    {
+     "id": "leon-cebada",
+     "cat": "Cereales",
+     "producto": "Cebada",
+     "unidad": "€/t",
+     "ant": 221.0,
+     "act": 221.0,
+     "clave": "cebada"
+    },
+    {
+     "id": "leon-triticale",
+     "cat": "Cereales",
+     "producto": "Triticale",
+     "unidad": "€/t",
+     "ant": 216.0,
+     "act": 216.0,
+     "clave": "triticale"
+    },
+    {
+     "id": "leon-centeno",
+     "cat": "Cereales",
+     "producto": "Centeno",
+     "unidad": "€/t",
+     "ant": 197.0,
+     "act": 196.0,
+     "clave": "centeno"
+    },
+    {
+     "id": "leon-avena",
+     "cat": "Cereales",
+     "producto": "Avena",
+     "unidad": "€/t",
+     "ant": 200.0,
+     "act": 198.0,
+     "clave": "avena"
+    },
+    {
+     "id": "leon-maiz",
+     "cat": "Cereales",
+     "producto": "Maíz",
+     "unidad": "€/t",
+     "ant": null,
+     "act": null,
+     "clave": "maiz"
     },
     {
      "id": "leon-frisones",
@@ -703,8 +639,8 @@
      "cat": "Bovino carne",
      "producto": "Hembras 180-200 kg O",
      "unidad": "€/kg canal",
-     "ant": 5.25,
-     "act": 5.2
+     "ant": 5.2,
+     "act": 5.0
     },
     {
      "id": "leon-hembras-201-250-kg-u",
@@ -727,8 +663,8 @@
      "cat": "Bovino carne",
      "producto": "Hembras 201-250 kg O",
      "unidad": "€/kg canal",
-     "ant": 5.25,
-     "act": 5.2
+     "ant": 5.2,
+     "act": 5.0
     },
     {
      "id": "leon-hembras-mas-250-kg-u",
@@ -751,8 +687,8 @@
      "cat": "Bovino carne",
      "producto": "Hembras más 250 kg O",
      "unidad": "€/kg canal",
-     "ant": 5.25,
-     "act": 5.2
+     "ant": 5.2,
+     "act": 5.0
     },
     {
      "id": "leon-machos-200-250-kg-u",
@@ -760,7 +696,7 @@
      "producto": "Machos 200-250 kg U",
      "unidad": "€/kg canal",
      "ant": 6.1,
-     "act": 6.1
+     "act": 6.2
     },
     {
      "id": "leon-machos-200-250-kg-r",
@@ -768,15 +704,15 @@
      "producto": "Machos 200-250 kg R",
      "unidad": "€/kg canal",
      "ant": 6.0,
-     "act": 6.0
+     "act": 6.1
     },
     {
      "id": "leon-machos-200-250-kg-o",
      "cat": "Bovino carne",
      "producto": "Machos 200-250 kg O",
      "unidad": "€/kg canal",
-     "ant": 5.25,
-     "act": 5.2
+     "ant": 5.2,
+     "act": 5.0
     },
     {
      "id": "leon-machos-251-300-kg-u",
@@ -784,7 +720,7 @@
      "producto": "Machos 251-300 kg U",
      "unidad": "€/kg canal",
      "ant": 6.1,
-     "act": 6.1
+     "act": 6.2
     },
     {
      "id": "leon-machos-251-300-kg-r",
@@ -792,15 +728,15 @@
      "producto": "Machos 251-300 kg R",
      "unidad": "€/kg canal",
      "ant": 6.0,
-     "act": 6.0
+     "act": 6.1
     },
     {
      "id": "leon-machos-251-300-kg-o",
      "cat": "Bovino carne",
      "producto": "Machos 251-300 kg O",
      "unidad": "€/kg canal",
-     "ant": 5.25,
-     "act": 5.2
+     "ant": 5.2,
+     "act": 5.0
     },
     {
      "id": "leon-machos-mas-de-300-kg-u",
@@ -808,7 +744,7 @@
      "producto": "Machos más de 300 kg U",
      "unidad": "€/kg canal",
      "ant": 6.1,
-     "act": 6.1
+     "act": 6.2
     },
     {
      "id": "leon-machos-mas-de-300-kg-r",
@@ -816,15 +752,15 @@
      "producto": "Machos más de 300 kg R",
      "unidad": "€/kg canal",
      "ant": 6.0,
-     "act": 6.0
+     "act": 6.1
     },
     {
      "id": "leon-machos-mas-de-300-kg-o",
      "cat": "Bovino carne",
      "producto": "Machos más de 300 kg O",
      "unidad": "€/kg canal",
-     "ant": 5.25,
-     "act": 5.2
+     "ant": 5.2,
+     "act": 5.0
     },
     {
      "id": "leon-fabrica-y-segunda",
@@ -849,23 +785,23 @@
      "cat": "Ovino",
      "producto": "Lechazos hasta 12 kg",
      "unidad": "€/kg vivo",
-     "ant": 8.2,
-     "act": 8.3
+     "ant": 8.3,
+     "act": 8.2
     },
     {
      "id": "leon-cabritos-hasta-11-kg",
      "cat": "Ovino",
      "producto": "Cabritos hasta 11 kg",
      "unidad": "€/kg vivo",
-     "ant": 8.2,
-     "act": 8.3
+     "ant": 8.3,
+     "act": 8.2
     },
     {
      "id": "leon-corderos-12-1-15-kg",
      "cat": "Ovino",
      "producto": "Corderos 12,1-15 kg",
      "unidad": "€/ud",
-     "ant": 105.0,
+     "ant": 100.0,
      "act": 100.0
     },
     {
@@ -941,10 +877,74 @@
      "ant": 0.85,
      "act": 0.85,
      "rango": "0,50–1,20"
+    },
+    {
+     "id": "leon-canela",
+     "cat": "Alubias",
+     "producto": "Canela",
+     "unidad": "€/kg",
+     "ant": 1.3,
+     "act": 1.3
+    },
+    {
+     "id": "leon-negra",
+     "cat": "Alubias",
+     "producto": "Negra",
+     "unidad": "€/kg",
+     "ant": 2.8,
+     "act": 2.8
+    },
+    {
+     "id": "leon-palmena-redonda",
+     "cat": "Alubias",
+     "producto": "Palmeña Redonda",
+     "unidad": "€/kg",
+     "ant": 2.0,
+     "act": 2.0
+    },
+    {
+     "id": "leon-planchada",
+     "cat": "Alubias",
+     "producto": "Planchada",
+     "unidad": "€/kg",
+     "ant": 1.95,
+     "act": 1.95
+    },
+    {
+     "id": "leon-plancheta",
+     "cat": "Alubias",
+     "producto": "Plancheta",
+     "unidad": "€/kg",
+     "ant": 2.0,
+     "act": 2.0
+    },
+    {
+     "id": "leon-pinta",
+     "cat": "Alubias",
+     "producto": "Pinta",
+     "unidad": "€/kg",
+     "ant": 0.95,
+     "act": 0.95
+    },
+    {
+     "id": "leon-rinon-de-leon",
+     "cat": "Alubias",
+     "producto": "Riñón de León",
+     "unidad": "€/kg",
+     "ant": 1.4,
+     "act": 1.4
+    },
+    {
+     "id": "leon-redonda",
+     "cat": "Alubias",
+     "producto": "Redonda",
+     "unidad": "€/kg",
+     "ant": 1.35,
+     "act": 1.35
     }
    ],
    "comprobado": "2026-11-03T23:45:00+01:00",
-   "origen": "https://www.lonjadeleon.es/lonja-patata-04-11-2026/",
+   "origen": "https://www.lonjadeleon.es/lonja-patatas-11-11-2026/",
    "error": null,
    "ultima_lectura": "2026-11-11T09:44+00:00"
   },
@@ -1422,6 +1422,10 @@
    [
     "2026-11-04",
     226.0
+   ],
+   [
+    "2026-11-11",
+    226.0
    ]
   ],
   "leon-cebada": [
@@ -1467,6 +1471,10 @@
    ],
    [
     "2026-11-04",
+    221.0
+   ],
+   [
+    "2026-11-11",
     221.0
    ]
   ],
@@ -1514,6 +1522,10 @@
    [
     "2026-11-04",
     200.0
+   ],
+   [
+    "2026-11-11",
+    198.0
    ]
   ],
   "leon-centeno": [
@@ -1560,6 +1572,10 @@
    [
     "2026-11-04",
     197.0
+   ],
+   [
+    "2026-11-11",
+    196.0
    ]
   ],
   "leon-triticale": [
@@ -1605,6 +1621,10 @@
    ],
    [
     "2026-11-04",
+    216.0
+   ],
+   [
+    "2026-11-11",
     216.0
    ]
   ],
@@ -2128,6 +2148,10 @@
    [
     "2026-11-04",
     500.0
+   ],
+   [
+    "2026-11-11",
+    500.0
    ]
   ],
   "leon-girasol-alto-oleico": [
@@ -2137,6 +2161,10 @@
    ],
    [
     "2026-11-04",
+    515.0
+   ],
+   [
+    "2026-11-11",
     515.0
    ]
   ],
@@ -2148,6 +2176,10 @@
    [
     "2026-11-04",
     225.0
+   ],
+   [
+    "2026-11-11",
+    235.0
    ]
   ],
   "leon-alfalfa-deshidratada": [
@@ -2164,6 +2196,10 @@
    [
     "2026-11-04",
     65.0
+   ],
+   [
+    "2026-11-11",
+    67.0
    ]
   ],
   "leon-veza-forraje-1a": [
@@ -2180,6 +2216,10 @@
    [
     "2026-11-04",
     130.0
+   ],
+   [
+    "2026-11-11",
+    135.0
    ]
   ],
   "leon-alubia-canela": [
@@ -2274,6 +2314,10 @@
    [
     "2026-11-04",
     0.475
+   ],
+   [
+    "2026-11-11",
+    0.475
    ]
   ],
   "leon-leche-de-oveja": [
@@ -2284,6 +2328,10 @@
    [
     "2026-11-04",
     0.11419
+   ],
+   [
+    "2026-11-11",
+    0.11419
    ]
   ],
   "leon-leche-de-cabra": [
@@ -2293,6 +2341,10 @@
    ],
    [
     "2026-11-04",
+    0.12621
+   ],
+   [
+    "2026-11-11",
     0.12621
    ]
   ],
@@ -2364,6 +2416,10 @@
    [
     "2026-11-04",
     100.0
+   ],
+   [
+    "2026-11-11",
+    100.0
    ]
   ],
   "leon-pasteros-macho-200-kg": [
@@ -2374,6 +2430,10 @@
    [
     "2026-11-04",
     1100.0
+   ],
+   [
+    "2026-11-11",
+    1100.0
    ]
   ],
   "leon-pasteros-hembra-200-kg": [
@@ -2383,6 +2443,10 @@
    ],
    [
     "2026-11-04",
+    1000.0
+   ],
+   [
+    "2026-11-11",
     1000.0
    ]
   ],
@@ -2716,11 +2780,19 @@
    [
     "2026-11-04",
     350.0
+   ],
+   [
+    "2026-11-11",
+    350.0
    ]
   ],
   "leon-jaerla": [
    [
     "2026-11-04",
+    320.0
+   ],
+   [
+    "2026-11-11",
     320.0
    ]
   ],
@@ -2728,11 +2800,19 @@
    [
     "2026-11-04",
     390.0
+   ],
+   [
+    "2026-11-11",
+    390.0
    ]
   ],
   "leon-red-pontiac": [
    [
     "2026-11-04",
+    340.0
+   ],
+   [
+    "2026-11-11",
     340.0
    ]
   ],
@@ -2740,11 +2820,19 @@
    [
     "2026-11-04",
     330.0
+   ],
+   [
+    "2026-11-11",
+    330.0
    ]
   ],
   "leon-yona": [
    [
     "2026-11-04",
+    330.0
+   ],
+   [
+    "2026-11-11",
     330.0
    ]
   ],
@@ -2752,11 +2840,19 @@
    [
     "2026-11-04",
     1.3
+   ],
+   [
+    "2026-11-11",
+    1.3
    ]
   ],
   "leon-negra": [
    [
     "2026-11-04",
+    2.8
+   ],
+   [
+    "2026-11-11",
     2.8
    ]
   ],
@@ -2764,11 +2860,19 @@
    [
     "2026-11-04",
     2.0
+   ],
+   [
+    "2026-11-11",
+    2.0
    ]
   ],
   "leon-planchada": [
    [
     "2026-11-04",
+    1.95
+   ],
+   [
+    "2026-11-11",
     1.95
    ]
   ],
@@ -2776,11 +2880,19 @@
    [
     "2026-11-04",
     2.0
+   ],
+   [
+    "2026-11-11",
+    2.0
    ]
   ],
   "leon-pinta": [
    [
     "2026-11-04",
+    0.95
+   ],
+   [
+    "2026-11-11",
     0.95
    ]
   ],
@@ -2788,11 +2900,19 @@
    [
     "2026-11-04",
     1.4
+   ],
+   [
+    "2026-11-11",
+    1.4
    ]
   ],
   "leon-redonda": [
    [
     "2026-11-04",
+    1.35
+   ],
+   [
+    "2026-11-11",
     1.35
    ]
   ],
@@ -2932,17 +3052,29 @@
    [
     "2026-11-04",
     255.0
+   ],
+   [
+    "2026-11-11",
+    260.0
    ]
   ],
   "leon-veza-forraje-de-1a": [
    [
     "2026-11-04",
     170.0
+   ],
+   [
+    "2026-11-11",
+    180.0
    ]
   ],
   "leon-hembras-180-200-kg-u": [
    [
     "2026-11-04",
+    6.95
+   ],
+   [
+    "2026-11-11",
     6.95
    ]
   ],
@@ -2950,17 +3082,29 @@
    [
     "2026-11-04",
     6.85
+   ],
+   [
+    "2026-11-11",
+    6.85
    ]
   ],
   "leon-hembras-180-200-kg-o": [
    [
     "2026-11-04",
     5.2
+   ],
+   [
+    "2026-11-11",
+    5.0
    ]
   ],
   "leon-hembras-201-250-kg-u": [
    [
     "2026-11-04",
+    6.95
+   ],
+   [
+    "2026-11-11",
     6.95
    ]
   ],
@@ -2968,17 +3112,29 @@
    [
     "2026-11-04",
     6.85
+   ],
+   [
+    "2026-11-11",
+    6.85
    ]
   ],
   "leon-hembras-201-250-kg-o": [
    [
     "2026-11-04",
     5.2
+   ],
+   [
+    "2026-11-11",
+    5.0
    ]
   ],
   "leon-hembras-mas-250-kg-u": [
    [
     "2026-11-04",
+    6.95
+   ],
+   [
+    "2026-11-11",
     6.95
    ]
   ],
@@ -2986,71 +3142,119 @@
    [
     "2026-11-04",
     6.85
+   ],
+   [
+    "2026-11-11",
+    6.85
    ]
   ],
   "leon-hembras-mas-250-kg-o": [
    [
     "2026-11-04",
     5.2
+   ],
+   [
+    "2026-11-11",
+    5.0
    ]
   ],
   "leon-machos-200-250-kg-u": [
    [
     "2026-11-04",
     6.1
+   ],
+   [
+    "2026-11-11",
+    6.2
    ]
   ],
   "leon-machos-200-250-kg-r": [
    [
     "2026-11-04",
     6.0
+   ],
+   [
+    "2026-11-11",
+    6.1
    ]
   ],
   "leon-machos-200-250-kg-o": [
    [
     "2026-11-04",
     5.2
+   ],
+   [
+    "2026-11-11",
+    5.0
    ]
   ],
   "leon-machos-251-300-kg-u": [
    [
     "2026-11-04",
     6.1
+   ],
+   [
+    "2026-11-11",
+    6.2
    ]
   ],
   "leon-machos-251-300-kg-r": [
    [
     "2026-11-04",
     6.0
+   ],
+   [
+    "2026-11-11",
+    6.1
    ]
   ],
   "leon-machos-251-300-kg-o": [
    [
     "2026-11-04",
     5.2
+   ],
+   [
+    "2026-11-11",
+    5.0
    ]
   ],
   "leon-machos-mas-de-300-kg-u": [
    [
     "2026-11-04",
     6.1
+   ],
+   [
+    "2026-11-11",
+    6.2
    ]
   ],
   "leon-machos-mas-de-300-kg-r": [
    [
     "2026-11-04",
     6.0
+   ],
+   [
+    "2026-11-11",
+    6.1
    ]
   ],
   "leon-machos-mas-de-300-kg-o": [
    [
     "2026-11-04",
     5.2
+   ],
+   [
+    "2026-11-11",
+    5.0
    ]
   ],
   "leon-fabrica-y-segunda": [
    [
     "2026-11-04",
+    4.1
+   ],
+   [
+    "2026-11-11",
     4.1
    ]
   ],
@@ -3058,23 +3262,39 @@
    [
     "2026-11-04",
     5.35
+   ],
+   [
+    "2026-11-11",
+    5.35
    ]
   ],
   "leon-lechazos-hasta-12-kg": [
    [
     "2026-11-04",
     8.3
+   ],
+   [
+    "2026-11-11",
+    8.2
    ]
   ],
   "leon-cabritos-hasta-11-kg": [
    [
     "2026-11-04",
     8.3
+   ],
+   [
+    "2026-11-11",
+    8.2
    ]
   ],
   "leon-corderos-12-1-15-kg": [
    [
     "2026-11-04",
+    100.0
+   ],
+   [
+    "2026-11-11",
     100.0
    ]
   ],
@@ -3082,11 +3302,19 @@
    [
     "2026-11-04",
     110.0
+   ],
+   [
+    "2026-11-11",
+    110.0
    ]
   ],
   "leon-corderos-18-1-23-kg": [
    [
     "2026-11-04",
+    130.0
+   ],
+   [
+    "2026-11-11",
     130.0
    ]
   ],
@@ -3094,11 +3322,19 @@
    [
     "2026-11-04",
     140.0
+   ],
+   [
+    "2026-11-11",
+    140.0
    ]
   ],
   "leon-corderos-27-1-35-kg": [
    [
     "2026-11-04",
+    150.0
+   ],
+   [
+    "2026-11-11",
     150.0
    ]
   ],
@@ -3106,11 +3342,19 @@
    [
     "2026-11-04",
     130.0
+   ],
+   [
+    "2026-11-11",
+    130.0
    ]
   ],
   "leon-ovejas-vida-leche": [
    [
     "2026-11-04",
+    90.0
+   ],
+   [
+    "2026-11-11",
     90.0
    ]
   ],
@@ -3118,17 +3362,29 @@
    [
     "2026-11-04",
     180.0
+   ],
+   [
+    "2026-11-11",
+    180.0
    ]
   ],
   "leon-ovejas-sacrificio-1a": [
    [
     "2026-11-04",
     1.35
+   ],
+   [
+    "2026-11-11",
+    1.35
    ]
   ],
   "leon-ovejas-sacrificio-2a": [
    [
     "2026-11-04",
+    0.85
+   ],
+   [
+    "2026-11-11",
     0.85
    ]
   ]

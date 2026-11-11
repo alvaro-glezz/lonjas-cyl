@@ -43,71 +43,71 @@ salamanca;Lonja de Salamanca;Salamanca;2026-11-09;Vacuno de carne;salamanca-toro
 salamanca;Lonja de Salamanca;Salamanca;2026-11-09;Vacuno de carne;salamanca-vacas;Vacas;;€/kg canal;6,06;6,06;0;;no;;;https://datosabiertossalamanca.es/dataset/cotizaciones-semanales-de-la-lonja-de-salamanca
 salamanca;Lonja de Salamanca;Salamanca;2026-11-09;Ovino;salamanca-cordero-28-34-kg;Cordero 28-34 kg;;€/kg vivo;;;;;sí;5;2026-11-03;https://datosabiertossalamanca.es/dataset/cotizaciones-semanales-de-la-lonja-de-salamanca
 salamanca;Lonja de Salamanca;Salamanca;2026-11-09;Ovino;salamanca-cordero-mas-de-34-kg;Cordero más de 34 kg;;€/kg vivo;;;;;sí;4,4;2026-11-03;https://datosabiertossalamanca.es/dataset/cotizaciones-semanales-de-la-lonja-de-salamanca
-leon;Lonja de León;León;2026-11-04;Patatas;leon-agria;Agria;;€/t;350;350;0;;no;;;https://www.lonjadeleon.es/category/cotizaciones/
-leon;Lonja de León;León;2026-11-04;Patatas;leon-jaerla;Jaerla;;€/t;320;320;0;;no;;;https://www.lonjadeleon.es/category/cotizaciones/
-leon;Lonja de León;León;2026-11-04;Patatas;leon-kennebec;Kennebec;;€/t;390;390;0;;no;;;https://www.lonjadeleon.es/category/cotizaciones/
-leon;Lonja de León;León;2026-11-04;Patatas;leon-red-pontiac;Red Pontiac;;€/t;340;340;0;;no;;;https://www.lonjadeleon.es/category/cotizaciones/
-leon;Lonja de León;León;2026-11-04;Patatas;leon-red-scarlett;Red Scarlett;;€/t;330;330;0;;no;;;https://www.lonjadeleon.es/category/cotizaciones/
-leon;Lonja de León;León;2026-11-04;Patatas;leon-yona;Yona;;€/t;330;330;0;;no;;;https://www.lonjadeleon.es/category/cotizaciones/
-leon;Lonja de León;León;2026-11-04;Girasol;leon-girasol;Girasol;girasol;€/t;500;500;0;;no;;;https://www.lonjadeleon.es/category/cotizaciones/
-leon;Lonja de León;León;2026-11-04;Girasol;leon-girasol-alto-oleico;Girasol alto oleico;;€/t;515;515;0;;no;;;https://www.lonjadeleon.es/category/cotizaciones/
-leon;Lonja de León;León;2026-11-04;Cereales;leon-trigo-pienso;Trigo Pienso;trigo;€/t;226;228;-2;;no;;;https://www.lonjadeleon.es/category/cotizaciones/
-leon;Lonja de León;León;2026-11-04;Cereales;leon-cebada;Cebada;cebada;€/t;221;222;-1;;no;;;https://www.lonjadeleon.es/category/cotizaciones/
-leon;Lonja de León;León;2026-11-04;Cereales;leon-triticale;Triticale;triticale;€/t;216;218;-2;;no;;;https://www.lonjadeleon.es/category/cotizaciones/
-leon;Lonja de León;León;2026-11-04;Cereales;leon-centeno;Centeno;centeno;€/t;197;197;0;;no;;;https://www.lonjadeleon.es/category/cotizaciones/
-leon;Lonja de León;León;2026-11-04;Cereales;leon-avena;Avena;avena;€/t;200;202;-2;;no;;;https://www.lonjadeleon.es/category/cotizaciones/
-leon;Lonja de León;León;2026-11-04;Cereales;leon-maiz;Maíz;maiz;€/t;;;;;sí;;;https://www.lonjadeleon.es/category/cotizaciones/
-leon;Lonja de León;León;2026-11-04;Alubias;leon-canela;Canela;;€/kg;1,3;1,3;0;;no;;;https://www.lonjadeleon.es/category/cotizaciones/
-leon;Lonja de León;León;2026-11-04;Alubias;leon-negra;Negra;;€/kg;2,8;2,8;0;;no;;;https://www.lonjadeleon.es/category/cotizaciones/
-leon;Lonja de León;León;2026-11-04;Alubias;leon-palmena-redonda;Palmeña Redonda;;€/kg;2;2;0;;no;;;https://www.lonjadeleon.es/category/cotizaciones/
-leon;Lonja de León;León;2026-11-04;Alubias;leon-planchada;Planchada;;€/kg;1,95;1,95;0;;no;;;https://www.lonjadeleon.es/category/cotizaciones/
-leon;Lonja de León;León;2026-11-04;Alubias;leon-plancheta;Plancheta;;€/kg;2;2;0;;no;;;https://www.lonjadeleon.es/category/cotizaciones/
-leon;Lonja de León;León;2026-11-04;Alubias;leon-pinta;Pinta;;€/kg;0,95;0,95;0;;no;;;https://www.lonjadeleon.es/category/cotizaciones/
-leon;Lonja de León;León;2026-11-04;Alubias;leon-rinon-de-leon;Riñón de León;;€/kg;1,4;1,4;0;;no;;;https://www.lonjadeleon.es/category/cotizaciones/
-leon;Lonja de León;León;2026-11-04;Alubias;leon-redonda;Redonda;;€/kg;1,35;1,35;0;;no;;;https://www.lonjadeleon.es/category/cotizaciones/
-leon;Lonja de León;León;2026-11-04;Leche de vaca;leon-leche-de-vaca;Leche de vaca;;€/litro;0,475;0,475;0;;no;;;https://www.lonjadeleon.es/category/cotizaciones/
-leon;Lonja de León;León;2026-11-04;Leche de oveja y de cabra;leon-leche-de-oveja;Leche de oveja;;€/e.q.;0,11419;0,11419;0;;no;;;https://www.lonjadeleon.es/category/cotizaciones/
-leon;Lonja de León;León;2026-11-04;Leche de oveja y de cabra;leon-leche-de-cabra;Leche de cabra;;€/e.q.;0,12621;0,12621;0;;no;;;https://www.lonjadeleon.es/category/cotizaciones/
-leon;Lonja de León;León;2026-11-04;Forrajes;leon-alfalfa-paquete-rama;Alfalfa paquete rama;alfalfa;€/t;225;225;0;;no;;;https://www.lonjadeleon.es/category/cotizaciones/
-leon;Lonja de León;León;2026-11-04;Forrajes;leon-alfalfa-paquete-deshidratado;Alfalfa paquete deshidratado;;€/t;255;255;0;;no;;;https://www.lonjadeleon.es/category/cotizaciones/
-leon;Lonja de León;León;2026-11-04;Forrajes;leon-paja-1a-cebada;Paja 1ª (Cebada);paja;€/t;65;65;0;;no;;;https://www.lonjadeleon.es/category/cotizaciones/
-leon;Lonja de León;León;2026-11-04;Forrajes;leon-veza-forraje-de-1a;Veza forraje de 1ª;;€/t;170;170;0;;no;;;https://www.lonjadeleon.es/category/cotizaciones/
-leon;Lonja de León;León;2026-11-04;Forrajes;leon-forraje;Forraje;;€/t;130;130;0;;no;;;https://www.lonjadeleon.es/category/cotizaciones/
-leon;Lonja de León;León;2026-11-04;Ganado vida;leon-frisones;Frisones;;€/ud;100;100;0;;no;;;https://www.lonjadeleon.es/category/cotizaciones/
-leon;Lonja de León;León;2026-11-04;Ganado vida;leon-pasteros-macho-200-kg;Pasteros macho (200 kg);;€/ud;1100;1100;0;;no;;;https://www.lonjadeleon.es/category/cotizaciones/
-leon;Lonja de León;León;2026-11-04;Ganado vida;leon-pasteros-hembra-200-kg;Pasteros hembra (200 kg);;€/ud;1000;1000;0;;no;;;https://www.lonjadeleon.es/category/cotizaciones/
-leon;Lonja de León;León;2026-11-04;Bovino carne;leon-hembras-180-200-kg-u;Hembras 180-200 kg U;;€/kg canal;6,95;6,95;0;;no;;;https://www.lonjadeleon.es/category/cotizaciones/
-leon;Lonja de León;León;2026-11-04;Bovino carne;leon-hembras-180-200-kg-r;Hembras 180-200 kg R;;€/kg canal;6,85;6,85;0;;no;;;https://www.lonjadeleon.es/category/cotizaciones/
-leon;Lonja de León;León;2026-11-04;Bovino carne;leon-hembras-180-200-kg-o;Hembras 180-200 kg O;;€/kg canal;5,2;5,25;-0,05;;no;;;https://www.lonjadeleon.es/category/cotizaciones/
-leon;Lonja de León;León;2026-11-04;Bovino carne;leon-hembras-201-250-kg-u;Hembras 201-250 kg U;;€/kg canal;6,95;6,95;0;;no;;;https://www.lonjadeleon.es/category/cotizaciones/
-leon;Lonja de León;León;2026-11-04;Bovino carne;leon-hembras-201-250-kg-r;Hembras 201-250 kg R;;€/kg canal;6,85;6,85;0;;no;;;https://www.lonjadeleon.es/category/cotizaciones/
-leon;Lonja de León;León;2026-11-04;Bovino carne;leon-hembras-201-250-kg-o;Hembras 201-250 kg O;;€/kg canal;5,2;5,25;-0,05;;no;;;https://www.lonjadeleon.es/category/cotizaciones/
-leon;Lonja de León;León;2026-11-04;Bovino carne;leon-hembras-mas-250-kg-u;Hembras más 250 kg U;;€/kg canal;6,95;6,95;0;;no;;;https://www.lonjadeleon.es/category/cotizaciones/
-leon;Lonja de León;León;2026-11-04;Bovino carne;leon-hembras-mas-250-kg-r;Hembras más 250 kg R;;€/kg canal;6,85;6,85;0;;no;;;https://www.lonjadeleon.es/category/cotizaciones/
-leon;Lonja de León;León;2026-11-04;Bovino carne;leon-hembras-mas-250-kg-o;Hembras más 250 kg O;;€/kg canal;5,2;5,25;-0,05;;no;;;https://www.lonjadeleon.es/category/cotizaciones/
-leon;Lonja de León;León;2026-11-04;Bovino carne;leon-machos-200-250-kg-u;Machos 200-250 kg U;;€/kg canal;6,1;6,1;0;;no;;;https://www.lonjadeleon.es/category/cotizaciones/
-leon;Lonja de León;León;2026-11-04;Bovino carne;leon-machos-200-250-kg-r;Machos 200-250 kg R;;€/kg canal;6;6;0;;no;;;https://www.lonjadeleon.es/category/cotizaciones/
-leon;Lonja de León;León;2026-11-04;Bovino carne;leon-machos-200-250-kg-o;Machos 200-250 kg O;;€/kg canal;5,2;5,25;-0,05;;no;;;https://www.lonjadeleon.es/category/cotizaciones/
-leon;Lonja de León;León;2026-11-04;Bovino carne;leon-machos-251-300-kg-u;Machos 251-300 kg U;;€/kg canal;6,1;6,1;0;;no;;;https://www.lonjadeleon.es/category/cotizaciones/
-leon;Lonja de León;León;2026-11-04;Bovino carne;leon-machos-251-300-kg-r;Machos 251-300 kg R;;€/kg canal;6;6;0;;no;;;https://www.lonjadeleon.es/category/cotizaciones/
-leon;Lonja de León;León;2026-11-04;Bovino carne;leon-machos-251-300-kg-o;Machos 251-300 kg O;;€/kg canal;5,2;5,25;-0,05;;no;;;https://www.lonjadeleon.es/category/cotizaciones/
-leon;Lonja de León;León;2026-11-04;Bovino carne;leon-machos-mas-de-300-kg-u;Machos más de 300 kg U;;€/kg canal;6,1;6,1;0;;no;;;https://www.lonjadeleon.es/category/cotizaciones/
-leon;Lonja de León;León;2026-11-04;Bovino carne;leon-machos-mas-de-300-kg-r;Machos más de 300 kg R;;€/kg canal;6;6;0;;no;;;https://www.lonjadeleon.es/category/cotizaciones/
-leon;Lonja de León;León;2026-11-04;Bovino carne;leon-machos-mas-de-300-kg-o;Machos más de 300 kg O;;€/kg canal;5,2;5,25;-0,05;;no;;;https://www.lonjadeleon.es/category/cotizaciones/
-leon;Lonja de León;León;2026-11-04;Vacas sacrificio;leon-fabrica-y-segunda;Fábrica y Segunda;;€/kg canal;4,1;4,1;0;3,60–4,60;no;;;https://www.lonjadeleon.es/category/cotizaciones/
-leon;Lonja de León;León;2026-11-04;Vacas sacrificio;leon-primera-y-extra-engrasada;Primera y Extra (Engrasada);;€/kg canal;5,35;5,35;0;4,60–6,10;no;;;https://www.lonjadeleon.es/category/cotizaciones/
-leon;Lonja de León;León;2026-11-04;Ovino;leon-lechazos-hasta-12-kg;Lechazos hasta 12 kg;;€/kg vivo;8,3;8,2;0,1;;no;;;https://www.lonjadeleon.es/category/cotizaciones/
-leon;Lonja de León;León;2026-11-04;Ovino;leon-cabritos-hasta-11-kg;Cabritos hasta 11 kg;;€/kg vivo;8,3;8,2;0,1;;no;;;https://www.lonjadeleon.es/category/cotizaciones/
-leon;Lonja de León;León;2026-11-04;Ovino;leon-corderos-12-1-15-kg;Corderos 12,1-15 kg;;€/ud;100;105;-5;;no;;;https://www.lonjadeleon.es/category/cotizaciones/
-leon;Lonja de León;León;2026-11-04;Ovino;leon-corderos-15-1-18-kg;Corderos 15,1-18 kg;;€/ud;110;110;0;;no;;;https://www.lonjadeleon.es/category/cotizaciones/
-leon;Lonja de León;León;2026-11-04;Ovino;leon-corderos-18-1-23-kg;Corderos 18,1-23 kg;;€/ud;130;130;0;;no;;;https://www.lonjadeleon.es/category/cotizaciones/
-leon;Lonja de León;León;2026-11-04;Ovino;leon-corderos-23-1-27-kg;Corderos 23,1-27 kg;;€/ud;140;140;0;;no;;;https://www.lonjadeleon.es/category/cotizaciones/
-leon;Lonja de León;León;2026-11-04;Ovino;leon-corderos-27-1-35-kg;Corderos 27,1-35 kg;;€/ud;150;150;0;;no;;;https://www.lonjadeleon.es/category/cotizaciones/
-leon;Lonja de León;León;2026-11-04;Ovino;leon-ovejas-vida-merina;Ovejas vida merina;;€/ud;130;130;0;;no;;;https://www.lonjadeleon.es/category/cotizaciones/
-leon;Lonja de León;León;2026-11-04;Ovino;leon-ovejas-vida-leche;Ovejas vida leche;;€/ud;90;90;0;;no;;;https://www.lonjadeleon.es/category/cotizaciones/
-leon;Lonja de León;León;2026-11-04;Ovino;leon-ovejas-vida-assaf-sin-carta;Ovejas vida Assaf (Sin carta);;€/ud;180;180;0;;no;;;https://www.lonjadeleon.es/category/cotizaciones/
-leon;Lonja de León;León;2026-11-04;Ovino;leon-ovejas-sacrificio-1a;Ovejas sacrificio 1ª;;€/kg vivo;1,35;1,35;0;1,20–1,50;no;;;https://www.lonjadeleon.es/category/cotizaciones/
-leon;Lonja de León;León;2026-11-04;Ovino;leon-ovejas-sacrificio-2a;Ovejas sacrificio 2ª;;€/kg vivo;0,85;0,85;0;0,50–1,20;no;;;https://www.lonjadeleon.es/category/cotizaciones/
+leon;Lonja de León;León;2026-11-11;Patatas;leon-agria;Agria;;€/t;350;350;0;;no;;;https://www.lonjadeleon.es/category/cotizaciones/
+leon;Lonja de León;León;2026-11-11;Patatas;leon-jaerla;Jaerla;;€/t;320;320;0;;no;;;https://www.lonjadeleon.es/category/cotizaciones/
+leon;Lonja de León;León;2026-11-11;Patatas;leon-kennebec;Kennebec;;€/t;390;390;0;;no;;;https://www.lonjadeleon.es/category/cotizaciones/
+leon;Lonja de León;León;2026-11-11;Patatas;leon-red-pontiac;Red Pontiac;;€/t;340;340;0;;no;;;https://www.lonjadeleon.es/category/cotizaciones/
+leon;Lonja de León;León;2026-11-11;Patatas;leon-red-scarlett;Red Scarlett;;€/t;330;330;0;;no;;;https://www.lonjadeleon.es/category/cotizaciones/
+leon;Lonja de León;León;2026-11-11;Patatas;leon-yona;Yona;;€/t;330;330;0;;no;;;https://www.lonjadeleon.es/category/cotizaciones/
+leon;Lonja de León;León;2026-11-11;Leche de vaca;leon-leche-de-vaca;Leche de vaca;;€/litro;0,475;0,475;0;;no;;;https://www.lonjadeleon.es/category/cotizaciones/
+leon;Lonja de León;León;2026-11-11;Leche de oveja y de cabra;leon-leche-de-oveja;Leche de oveja;;€/e.q.;0,11419;0,11419;0;;no;;;https://www.lonjadeleon.es/category/cotizaciones/
+leon;Lonja de León;León;2026-11-11;Leche de oveja y de cabra;leon-leche-de-cabra;Leche de cabra;;€/e.q.;0,12621;0,12621;0;;no;;;https://www.lonjadeleon.es/category/cotizaciones/
+leon;Lonja de León;León;2026-11-11;Girasol;leon-girasol;Girasol;girasol;€/t;500;500;0;;no;;;https://www.lonjadeleon.es/category/cotizaciones/
+leon;Lonja de León;León;2026-11-11;Girasol;leon-girasol-alto-oleico;Girasol alto oleico;;€/t;515;515;0;;no;;;https://www.lonjadeleon.es/category/cotizaciones/
+leon;Lonja de León;León;2026-11-11;Forrajes;leon-alfalfa-paquete-rama;Alfalfa paquete rama;alfalfa;€/t;235;225;10;;no;;;https://www.lonjadeleon.es/category/cotizaciones/
+leon;Lonja de León;León;2026-11-11;Forrajes;leon-alfalfa-paquete-deshidratado;Alfalfa paquete deshidratado;;€/t;260;255;5;;no;;;https://www.lonjadeleon.es/category/cotizaciones/
+leon;Lonja de León;León;2026-11-11;Forrajes;leon-paja-1a-cebada;Paja 1ª (Cebada);paja;€/t;67;65;2;;no;;;https://www.lonjadeleon.es/category/cotizaciones/
+leon;Lonja de León;León;2026-11-11;Forrajes;leon-veza-forraje-de-1a;Veza forraje de 1ª;;€/t;180;170;10;;no;;;https://www.lonjadeleon.es/category/cotizaciones/
+leon;Lonja de León;León;2026-11-11;Forrajes;leon-forraje;Forraje;;€/t;135;130;5;;no;;;https://www.lonjadeleon.es/category/cotizaciones/
+leon;Lonja de León;León;2026-11-11;Cereales;leon-trigo-pienso;Trigo Pienso;trigo;€/t;226;226;0;;no;;;https://www.lonjadeleon.es/category/cotizaciones/
+leon;Lonja de León;León;2026-11-11;Cereales;leon-cebada;Cebada;cebada;€/t;221;221;0;;no;;;https://www.lonjadeleon.es/category/cotizaciones/
+leon;Lonja de León;León;2026-11-11;Cereales;leon-triticale;Triticale;triticale;€/t;216;216;0;;no;;;https://www.lonjadeleon.es/category/cotizaciones/
+leon;Lonja de León;León;2026-11-11;Cereales;leon-centeno;Centeno;centeno;€/t;196;197;-1;;no;;;https://www.lonjadeleon.es/category/cotizaciones/
+leon;Lonja de León;León;2026-11-11;Cereales;leon-avena;Avena;avena;€/t;198;200;-2;;no;;;https://www.lonjadeleon.es/category/cotizaciones/
+leon;Lonja de León;León;2026-11-11;Cereales;leon-maiz;Maíz;maiz;€/t;;;;;sí;;;https://www.lonjadeleon.es/category/cotizaciones/
+leon;Lonja de León;León;2026-11-11;Ganado vida;leon-frisones;Frisones;;€/ud;100;100;0;;no;;;https://www.lonjadeleon.es/category/cotizaciones/
+leon;Lonja de León;León;2026-11-11;Ganado vida;leon-pasteros-macho-200-kg;Pasteros macho (200 kg);;€/ud;1100;1100;0;;no;;;https://www.lonjadeleon.es/category/cotizaciones/
+leon;Lonja de León;León;2026-11-11;Ganado vida;leon-pasteros-hembra-200-kg;Pasteros hembra (200 kg);;€/ud;1000;1000;0;;no;;;https://www.lonjadeleon.es/category/cotizaciones/
+leon;Lonja de León;León;2026-11-11;Bovino carne;leon-hembras-180-200-kg-u;Hembras 180-200 kg U;;€/kg canal;6,95;6,95;0;;no;;;https://www.lonjadeleon.es/category/cotizaciones/
+leon;Lonja de León;León;2026-11-11;Bovino carne;leon-hembras-180-200-kg-r;Hembras 180-200 kg R;;€/kg canal;6,85;6,85;0;;no;;;https://www.lonjadeleon.es/category/cotizaciones/
+leon;Lonja de León;León;2026-11-11;Bovino carne;leon-hembras-180-200-kg-o;Hembras 180-200 kg O;;€/kg canal;5;5,2;-0,2;;no;;;https://www.lonjadeleon.es/category/cotizaciones/
+leon;Lonja de León;León;2026-11-11;Bovino carne;leon-hembras-201-250-kg-u;Hembras 201-250 kg U;;€/kg canal;6,95;6,95;0;;no;;;https://www.lonjadeleon.es/category/cotizaciones/
+leon;Lonja de León;León;2026-11-11;Bovino carne;leon-hembras-201-250-kg-r;Hembras 201-250 kg R;;€/kg canal;6,85;6,85;0;;no;;;https://www.lonjadeleon.es/category/cotizaciones/
+leon;Lonja de León;León;2026-11-11;Bovino carne;leon-hembras-201-250-kg-o;Hembras 201-250 kg O;;€/kg canal;5;5,2;-0,2;;no;;;https://www.lonjadeleon.es/category/cotizaciones/
+leon;Lonja de León;León;2026-11-11;Bovino carne;leon-hembras-mas-250-kg-u;Hembras más 250 kg U;;€/kg canal;6,95;6,95;0;;no;;;https://www.lonjadeleon.es/category/cotizaciones/
+leon;Lonja de León;León;2026-11-11;Bovino carne;leon-hembras-mas-250-kg-r;Hembras más 250 kg R;;€/kg canal;6,85;6,85;0;;no;;;https://www.lonjadeleon.es/category/cotizaciones/
+leon;Lonja de León;León;2026-11-11;Bovino carne;leon-hembras-mas-250-kg-o;Hembras más 250 kg O;;€/kg canal;5;5,2;-0,2;;no;;;https://www.lonjadeleon.es/category/cotizaciones/
+leon;Lonja de León;León;2026-11-11;Bovino carne;leon-machos-200-250-kg-u;Machos 200-250 kg U;;€/kg canal;6,2;6,1;0,1;;no;;;https://www.lonjadeleon.es/category/cotizaciones/
+leon;Lonja de León;León;2026-11-11;Bovino carne;leon-machos-200-250-kg-r;Machos 200-250 kg R;;€/kg canal;6,1;6;0,1;;no;;;https://www.lonjadeleon.es/category/cotizaciones/
+leon;Lonja de León;León;2026-11-11;Bovino carne;leon-machos-200-250-kg-o;Machos 200-250 kg O;;€/kg canal;5;5,2;-0,2;;no;;;https://www.lonjadeleon.es/category/cotizaciones/
+leon;Lonja de León;León;2026-11-11;Bovino carne;leon-machos-251-300-kg-u;Machos 251-300 kg U;;€/kg canal;6,2;6,1;0,1;;no;;;https://www.lonjadeleon.es/category/cotizaciones/
+leon;Lonja de León;León;2026-11-11;Bovino carne;leon-machos-251-300-kg-r;Machos 251-300 kg R;;€/kg canal;6,1;6;0,1;;no;;;https://www.lonjadeleon.es/category/cotizaciones/
+leon;Lonja de León;León;2026-11-11;Bovino carne;leon-machos-251-300-kg-o;Machos 251-300 kg O;;€/kg canal;5;5,2;-0,2;;no;;;https://www.lonjadeleon.es/category/cotizaciones/
+leon;Lonja de León;León;2026-11-11;Bovino carne;leon-machos-mas-de-300-kg-u;Machos más de 300 kg U;;€/kg canal;6,2;6,1;0,1;;no;;;https://www.lonjadeleon.es/category/cotizaciones/
+leon;Lonja de León;León;2026-11-11;Bovino carne;leon-machos-mas-de-300-kg-r;Machos más de 300 kg R;;€/kg canal;6,1;6;0,1;;no;;;https://www.lonjadeleon.es/category/cotizaciones/
+leon;Lonja de León;León;2026-11-11;Bovino carne;leon-machos-mas-de-300-kg-o;Machos más de 300 kg O;;€/kg canal;5;5,2;-0,2;;no;;;https://www.lonjadeleon.es/category/cotizaciones/
+leon;Lonja de León;León;2026-11-11;Vacas sacrificio;leon-fabrica-y-segunda;Fábrica y Segunda;;€/kg canal;4,1;4,1;0;3,60–4,60;no;;;https://www.lonjadeleon.es/category/cotizaciones/
+leon;Lonja de León;León;2026-11-11;Vacas sacrificio;leon-primera-y-extra-engrasada;Primera y Extra (Engrasada);;€/kg canal;5,35;5,35;0;4,60–6,10;no;;;https://www.lonjadeleon.es/category/cotizaciones/
+leon;Lonja de León;León;2026-11-11;Ovino;leon-lechazos-hasta-12-kg;Lechazos hasta 12 kg;;€/kg vivo;8,2;8,3;-0,1;;no;;;https://www.lonjadeleon.es/category/cotizaciones/
+leon;Lonja de León;León;2026-11-11;Ovino;leon-cabritos-hasta-11-kg;Cabritos hasta 11 kg;;€/kg vivo;8,2;8,3;-0,1;;no;;;https://www.lonjadeleon.es/category/cotizaciones/
+leon;Lonja de León;León;2026-11-11;Ovino;leon-corderos-12-1-15-kg;Corderos 12,1-15 kg;;€/ud;100;100;0;;no;;;https://www.lonjadeleon.es/category/cotizaciones/
+leon;Lonja de León;León;2026-11-11;Ovino;leon-corderos-15-1-18-kg;Corderos 15,1-18 kg;;€/ud;110;110;0;;no;;;https://www.lonjadeleon.es/category/cotizaciones/
+leon;Lonja de León;León;2026-11-11;Ovino;leon-corderos-18-1-23-kg;Corderos 18,1-23 kg;;€/ud;130;130;0;;no;;;https://www.lonjadeleon.es/category/cotizaciones/
+leon;Lonja de León;León;2026-11-11;Ovino;leon-corderos-23-1-27-kg;Corderos 23,1-27 kg;;€/ud;140;140;0;;no;;;https://www.lonjadeleon.es/category/cotizaciones/
+leon;Lonja de León;León;2026-11-11;Ovino;leon-corderos-27-1-35-kg;Corderos 27,1-35 kg;;€/ud;150;150;0;;no;;;https://www.lonjadeleon.es/category/cotizaciones/
+leon;Lonja de León;León;2026-11-11;Ovino;leon-ovejas-vida-merina;Ovejas vida merina;;€/ud;130;130;0;;no;;;https://www.lonjadeleon.es/category/cotizaciones/
+leon;Lonja de León;León;2026-11-11;Ovino;leon-ovejas-vida-leche;Ovejas vida leche;;€/ud;90;90;0;;no;;;https://www.lonjadeleon.es/category/cotizaciones/
+leon;Lonja de León;León;2026-11-11;Ovino;leon-ovejas-vida-assaf-sin-carta;Ovejas vida Assaf (Sin carta);;€/ud;180;180;0;;no;;;https://www.lonjadeleon.es/category/cotizaciones/
+leon;Lonja de León;León;2026-11-11;Ovino;leon-ovejas-sacrificio-1a;Ovejas sacrificio 1ª;;€/kg vivo;1,35;1,35;0;1,20–1,50;no;;;https://www.lonjadeleon.es/category/cotizaciones/
+leon;Lonja de León;León;2026-11-11;Ovino;leon-ovejas-sacrificio-2a;Ovejas sacrificio 2ª;;€/kg vivo;0,85;0,85;0;0,50–1,20;no;;;https://www.lonjadeleon.es/category/cotizaciones/
+leon;Lonja de León;León;2026-11-11;Alubias;leon-canela;Canela;;€/kg;1,3;1,3;0;;no;;;https://www.lonjadeleon.es/category/cotizaciones/
+leon;Lonja de León;León;2026-11-11;Alubias;leon-negra;Negra;;€/kg;2,8;2,8;0;;no;;;https://www.lonjadeleon.es/category/cotizaciones/
+leon;Lonja de León;León;2026-11-11;Alubias;leon-palmena-redonda;Palmeña Redonda;;€/kg;2;2;0;;no;;;https://www.lonjadeleon.es/category/cotizaciones/
+leon;Lonja de León;León;2026-11-11;Alubias;leon-planchada;Planchada;;€/kg;1,95;1,95;0;;no;;;https://www.lonjadeleon.es/category/cotizaciones/
+leon;Lonja de León;León;2026-11-11;Alubias;leon-plancheta;Plancheta;;€/kg;2;2;0;;no;;;https://www.lonjadeleon.es/category/cotizaciones/
+leon;Lonja de León;León;2026-11-11;Alubias;leon-pinta;Pinta;;€/kg;0,95;0,95;0;;no;;;https://www.lonjadeleon.es/category/cotizaciones/
+leon;Lonja de León;León;2026-11-11;Alubias;leon-rinon-de-leon;Riñón de León;;€/kg;1,4;1,4;0;;no;;;https://www.lonjadeleon.es/category/cotizaciones/
+leon;Lonja de León;León;2026-11-11;Alubias;leon-redonda;Redonda;;€/kg;1,35;1,35;0;;no;;;https://www.lonjadeleon.es/category/cotizaciones/
 segovia;Lonja de Segovia;Segovia;2026-11-05;Cereales;segovia-cebada-62-kg-hl;Cebada 62 kg/hl;cebada;€/t;221;223;-2;;no;;;https://www.fessegovia.es/lonja-agropecuaria-de-segovia
 segovia;Lonja de Segovia;Segovia;2026-11-05;Cereales;segovia-trigo-pienso-72-kg-hl;Trigo pienso 72 kg/hl;trigo;€/t;229;231;-2;;no;;;https://www.fessegovia.es/lonja-agropecuaria-de-segovia
 segovia;Lonja de Segovia;Segovia;2026-11-05;Oleaginosas;segovia-colza-9-2-42;Colza 9-2-42;;€/t;;;;;sí;;;https://www.fessegovia.es/lonja-agropecuaria-de-segovia
