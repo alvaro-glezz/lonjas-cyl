@@ -1,5 +1,5 @@
 {
- "fecha": "2026-11-11T17:53",
+ "fecha": "2026-11-11T18:38",
  "fuente": "Ministerio para la Transición Ecológica y el Reto Demográfico (Geoportal de gasolineras)",
  "fuente_url": "https://geoportalgasolineras.es/geoportal-instalaciones/Inicio",
  "unidad": "€/l",
@@ -954,7 +954,7 @@
     {
      "id": "5043",
      "nombre": "Galp",
-     "precio": 1.679,
+     "precio": 1.684,
      "municipio": "Valle de Losa",
      "direccion": "Carretera Bu-550 Km. 27",
      "localidad": "Quincoces de Yuso",
@@ -1072,18 +1072,6 @@
      "lon": -3.767
     },
     {
-     "id": "6026",
-     "nombre": "Repsol",
-     "precio": 1.849,
-     "municipio": "Villalmanzo",
-     "direccion": "Carretera Crta A-1, Madrid-burgos Km. 203",
-     "localidad": "Villalmanzo",
-     "cp": "09390",
-     "horario": "L-D: 24H",
-     "lat": 42.040694,
-     "lon": -3.752778
-    },
-    {
      "id": "6025",
      "nombre": "Repsol",
      "precio": 1.849,
@@ -1094,6 +1082,18 @@
      "horario": "L-D: 24H",
      "lat": 42.041028,
      "lon": -3.751667
+    },
+    {
+     "id": "6026",
+     "nombre": "Repsol",
+     "precio": 1.849,
+     "municipio": "Villalmanzo",
+     "direccion": "Carretera Crta A-1, Madrid-burgos Km. 203",
+     "localidad": "Villalmanzo",
+     "cp": "09390",
+     "horario": "L-D: 24H",
+     "lat": 42.040694,
+     "lon": -3.752778
     }
    ]
   },
@@ -1788,7 +1788,7 @@
    "nombre": "Jaén",
    "cyl": false,
    "n": 119,
-   "media": 1.731,
+   "media": 1.73,
    "mediana": 1.739,
    "min": 1.518,
    "max": 1.899,
@@ -1886,7 +1886,7 @@
    "nombre": "León",
    "cyl": true,
    "n": 22,
-   "media": 1.65,
+   "media": 1.649,
    "mediana": 1.689,
    "min": 1.499,
    "max": 1.825,
@@ -1991,6 +1991,18 @@
      "lon": -5.60025
     },
     {
+     "id": "12400",
+     "nombre": "Cooperativa San Blas",
+     "precio": 1.509,
+     "municipio": "Santa María de la Isla",
+     "direccion": "Calle el Parque, 9",
+     "localidad": "Santibañez de la Isla",
+     "cp": "24795",
+     "horario": "L-D: 24H",
+     "lat": 42.375139,
+     "lon": -5.935528
+    },
+    {
      "id": "11318",
      "nombre": "An Energéticos - Cabreros del Rio Ucogal",
      "precio": 1.529,
@@ -2013,18 +2025,6 @@
      "horario": "L-D: 24H",
      "lat": 42.534083,
      "lon": -5.584028
-    },
-    {
-     "id": "12400",
-     "nombre": "Cooperativa San Blas",
-     "precio": 1.529,
-     "municipio": "Santa María de la Isla",
-     "direccion": "Calle el Parque, 9",
-     "localidad": "Santibañez de la Isla",
-     "cp": "24795",
-     "horario": "L-D: 24H",
-     "lat": 42.375139,
-     "lon": -5.935528
     },
     {
      "id": "4948",
@@ -2201,7 +2201,7 @@
    "nombre": "Lleida",
    "cyl": false,
    "n": 54,
-   "media": 1.634,
+   "media": 1.635,
    "mediana": 1.625,
    "min": 1.458,
    "max": 1.865,
@@ -2397,7 +2397,7 @@
    "nombre": "Murcia",
    "cyl": false,
    "n": 105,
-   "media": 1.681,
+   "media": 1.68,
    "mediana": 1.699,
    "min": 1.399,
    "max": 1.979,
@@ -2446,7 +2446,7 @@
    "nombre": "Navarra",
    "cyl": false,
    "n": 101,
-   "media": 1.635,
+   "media": 1.634,
    "mediana": 1.595,
    "min": 1.495,
    "max": 1.86,
@@ -3419,7 +3419,7 @@
    "nombre": "Soria",
    "cyl": true,
    "n": 5,
-   "media": 1.719,
+   "media": 1.717,
    "mediana": 1.699,
    "min": 1.679,
    "max": 1.819,
@@ -3450,16 +3450,16 @@
      "lon": -2.404778
     },
     {
-     "id": "6275",
-     "nombre": "Repsol",
+     "id": "6106",
+     "nombre": "Cepsa",
      "precio": 1.699,
-     "municipio": "Almazán",
-     "direccion": "Cr N-111, 190",
-     "localidad": "Almazan",
-     "cp": "42200",
-     "horario": "L-D: 07:00-23:00",
-     "lat": 41.480917,
-     "lon": -2.528833
+     "municipio": "Calatañazor",
+     "direccion": "Carretera N-122 Km. 185",
+     "localidad": "Aldehuela de Calatañazor",
+     "cp": "42193",
+     "horario": "L-D: 07:00-22:00",
+     "lat": 41.708,
+     "lon": -2.775417
     }
    ],
    "todas": [
@@ -3488,6 +3488,18 @@
      "lon": -2.404778
     },
     {
+     "id": "6106",
+     "nombre": "Cepsa",
+     "precio": 1.699,
+     "municipio": "Calatañazor",
+     "direccion": "Carretera N-122 Km. 185",
+     "localidad": "Aldehuela de Calatañazor",
+     "cp": "42193",
+     "horario": "L-D: 07:00-22:00",
+     "lat": 41.708,
+     "lon": -2.775417
+    },
+    {
      "id": "6275",
      "nombre": "Repsol",
      "precio": 1.699,
@@ -3498,18 +3510,6 @@
      "horario": "L-D: 07:00-23:00",
      "lat": 41.480917,
      "lon": -2.528833
-    },
-    {
-     "id": "6106",
-     "nombre": "Cepsa",
-     "precio": 1.71,
-     "municipio": "Calatañazor",
-     "direccion": "Carretera N-122 Km. 185",
-     "localidad": "Aldehuela de Calatañazor",
-     "cp": "42193",
-     "horario": "L-D: 07:00-22:00",
-     "lat": 41.708,
-     "lon": -2.775417
     },
     {
      "id": "6190",
@@ -3628,7 +3628,7 @@
    "nombre": "Toledo",
    "cyl": false,
    "n": 35,
-   "media": 1.65,
+   "media": 1.649,
    "mediana": 1.659,
    "min": 1.399,
    "max": 1.859,
@@ -3649,7 +3649,7 @@
     {
      "id": "5435",
      "nombre": "Ntra. Sra. del Carmen - Cooperativa Vinicola",
-     "precio": 1.499,
+     "precio": 1.469,
      "municipio": "Miguel Esteban",
      "direccion": "Carretera Quintanar-alcazar Km. 7600",
      "localidad": "Miguel Esteban",
