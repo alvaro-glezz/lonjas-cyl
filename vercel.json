@@ -6,7 +6,11 @@
     "deploymentEnabled": {
       "medios": false,
       "muestras-voz": false,
-      "restauracion-antes-mejoras-1-2": false
+      "restauracion-antes-mejoras-1-2": false,
+      "telegram-diagnostico": false,
+      "descarga-jcyl": false,
+      "diagnostico-fuentes": false,
+      "historico-2026": false
     }
   },
   "headers": [

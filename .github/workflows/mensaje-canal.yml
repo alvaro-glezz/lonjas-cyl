@@ -1,0 +1,40 @@
+name: Mensaje al canal de Telegram
+
+# Para publicar a mano un aviso en t.me/lonjas_cyl: Actions → «Mensaje al canal de Telegram» → Run workflow, pegar el
+# texto y pulsar Run. Sustituye a la rama «telegram-diagnostico» (cada subida a esa rama hacía que Vercel intentara
+# publicarla como web y mandaba el correo «Preview deployment failed»).
+# Desde la terminal: gh workflow run mensaje-canal.yml -f texto="…"   (o con -f destino=yo para probarlo antes)
+
+on:
+  workflow_dispatch:
+    inputs:
+      texto:
+        description: "Texto del mensaje (se manda tal cual)"
+        required: true
+      destino:
+        description: "canal = t.me/lonjas_cyl · yo = solo a tu chat privado (TELEGRAM_ADMIN_CHAT), para probar"
+        required: false
+        default: "canal"
+
+permissions:
+  contents: read
+
+jobs:
+  mandar:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Mandar el mensaje
+        env:
+          TOKEN: ${{ secrets.TELEGRAM_TOKEN }}
+          ADMIN: ${{ secrets.TELEGRAM_ADMIN_CHAT }}
+          TEXTO: ${{ inputs.texto }}
+          DESTINO: ${{ inputs.destino }}
+        run: |
+          if [ "$DESTINO" = "yo" ]; then CHAT="$ADMIN"; else CHAT="@lonjas_cyl"; fi
+          if [ -z "$TOKEN" ] || [ -z "$CHAT" ]; then echo "Falta TELEGRAM_TOKEN o TELEGRAM_ADMIN_CHAT"; exit 1; fi
+          printf '%s' "$TEXTO" > mensaje.txt
+          r=$(curl -sS -X POST "https://api.telegram.org/bot${TOKEN}/sendMessage" \
+            --data-urlencode "chat_id=${CHAT}" --data-urlencode "text@mensaje.txt" \
+            --data-urlencode 'link_preview_options={"is_disabled":true}')
+          echo "$r" | grep -o '"ok":[a-z]*\|"message_id":[0-9]*\|"description":"[^"]*"'
+          echo "$r" | grep -q '"ok":true'
