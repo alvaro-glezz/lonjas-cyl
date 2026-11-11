@@ -1,0 +1,21 @@
+🌦️ Nuevo en Lonjas CyL: ¿se puede tratar hoy?
+
+La app te dice, hora a hora, si es buen momento para aplicar fitosanitarios en tu municipio, con la previsión oficial de AEMET.
+
+📲 Cómo se usa
+1️⃣ Entra en Campo → Tiempo (o toca «Tratamientos» en la pantalla Hoy).
+2️⃣ Busca tu municipio o toca «Usar mi ubicación».
+3️⃣ Verás cada hora de hoy y de mañana en color:
+🟩 buena · 🟨 regular · 🟥 mala
+4️⃣ Toca una hora y te dice el motivo.
+
+🔎 Qué tiene en cuenta
+• Viento y rachas, para evitar la deriva
+• Temperatura y humedad del aire
+• Que no llueva en las 4 horas siguientes
+
+⚙️ Los límites vienen puestos de serie y puedes cambiarlos en «Ajustar los límites».
+
+⚠️ Es orientativo: manda siempre la etiqueta del producto y la normativa.
+
+👉 https://lonjas-cyl-khaki.vercel.app/#tiempo

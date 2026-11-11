@@ -1,0 +1,18 @@
+name: Diagnóstico (temporal)
+on:
+  push:
+    branches: [telegram-diagnostico]
+permissions:
+  contents: read
+jobs:
+  mandar:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Mensaje al canal
+        env:
+          TOKEN: ${{ secrets.TELEGRAM_TOKEN }}
+        run: |
+          curl -sS -X POST "https://api.telegram.org/bot${TOKEN}/sendMessage" \
+            --data-urlencode "chat_id=@lonjas_cyl" --data-urlencode "text@mensaje.txt" \
+            --data-urlencode "link_preview_options={\"is_disabled\":true}" | grep -o '"ok":[a-z]*\|"message_id":[0-9]*\|"description":"[^"]*"'
