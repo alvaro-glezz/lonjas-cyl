@@ -1,6 +1,6 @@
 {
  "comparativa": "2026-W45",
- "franja": "especial:tratamientos",
+ "franja": "especial:tratamientos-voz",
  "franjas": {
   "2026-11-07": [
    "reel"
@@ -62,6 +62,13 @@
    "so": "iphone",
    "texto": "📲 Cómo tener Lonjas CyL en tu iPhone, como una app más (30 segundos):\n\n0️⃣ Abre lonjas-cyl-khaki.vercel.app en Safari.\n1️⃣ Toca Compartir (el cuadrado con la flecha hacia arriba). En iOS 26 está dentro de «···».\n2️⃣ Baja un poco y toca «Añadir a pantalla de inicio».\n3️⃣ Toca «Añadir». Te aparece el icono junto a tus otras apps.\n\nSin tienda de aplicaciones, gratis y sin registro. Se actualiza sola con cada sesión de las lonjas.\n\n¿Tienes Android? Esta noche publicamos los pasos. Guárdalo y pásaselo a quien le pueda servir.\n\n📍 Todos los precios y la comparativa entre lonjas, en el enlace de la bio (lonjas-cyl-khaki.vercel.app).\nAvisos gratis en Telegram: t.me/lonjas_cyl\n\n#agricultores #lonjas #castillayleon #LonjasCyL #CastillayLeón #preciosagrarios #agricultura #ganadería #campo",
    "tipo": "guia"
+  },
+  {
+   "id": "2026-11-11-especial-tratamientos-voz",
+   "nombre": "tratamientos-voz",
+   "texto": "🌦️ ¿Se puede tratar hoy? Lonjas CyL te lo dice hora a hora.\n\nEn Campo → Tiempo eliges tu municipio y ves cada hora de hoy y de mañana en color: 🟩 buena, 🟨 regular, 🟥 mala. Toca una hora y te dice el motivo: viento, rachas, temperatura, humedad o lluvia en las horas siguientes. Los límites puedes ajustarlos a tu gusto.\n\nPrevisión oficial de AEMET. Es orientativo: manda siempre la etiqueta del producto.\n\n📍 Todos los precios y la comparativa entre lonjas, en el enlace de la bio (lonjas-cyl-khaki.vercel.app).\nAvisos gratis en Telegram: t.me/lonjas_cyl\n\nCapturas con la previsión de AEMET para Peñafiel del 11 de noviembre de 2026. Ilustraciones y capturas reales de la app. 🔊 Con voz y subtítulos. Voz sintética (Kokoro, licencia Apache 2.0).\n\n#agricultores #fitosanitarios #castillayleon #LonjasCyL #lonjas #CastillayLeón #preciosagrarios #agricultura #ganadería #campo",
+   "tipo": "especial",
+   "video": "2026-11-11-especial-tratamientos-voz.mp4"
   }
  ],
  "publicado": {
