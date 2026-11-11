@@ -1,6 +1,6 @@
 {
  "comparativa": "2026-W45",
- "franja": "historia",
+ "franja": "tarde",
  "franjas": {
   "2026-11-07": [
    "reel"
@@ -26,7 +26,8 @@
    "manana",
    "reel",
    "especial:tratamientos",
-   "historia"
+   "historia",
+   "tarde"
   ]
  },
  "historias": [
@@ -74,7 +75,7 @@
   }
  ],
  "publicado": {
-  "leon": "2026-11-04",
+  "leon": "2026-11-11",
   "salamanca": "2026-11-09",
   "segovia": "2026-11-05"
  },
@@ -195,6 +196,12 @@
    "fecha": "2026-11-11T18:27",
    "id": "2026-11-11-historia-3-oferta",
    "media": "18117675530039446"
+  },
+  {
+   "facebook": "1368079503066363_122109272151536635",
+   "fecha": "2026-11-11T18:33",
+   "id": "2026-11-11-leon",
+   "media": "18167388031427896"
   }
  ],
  "token_renovado": "2026-11-07"
