@@ -1,10 +1,10 @@
 {
- "fecha": "2026-11-11T16:27",
+ "fecha": "2026-11-11T17:53",
  "fuente": "Ministerio para la Transición Ecológica y el Reto Demográfico (Geoportal de gasolineras)",
  "fuente_url": "https://geoportalgasolineras.es/geoportal-instalaciones/Inicio",
  "unidad": "€/l",
  "espana": {
-  "media": 1.693,
+  "media": 1.692,
   "min": 1.359,
   "n": 2251
  },
@@ -117,7 +117,7 @@
    "nombre": "Albacete",
    "cyl": false,
    "n": 39,
-   "media": 1.69,
+   "media": 1.689,
    "mediana": 1.699,
    "min": 1.449,
    "max": 1.979,
@@ -215,7 +215,7 @@
    "nombre": "Almería",
    "cyl": false,
    "n": 64,
-   "media": 1.699,
+   "media": 1.697,
    "mediana": 1.699,
    "min": 1.469,
    "max": 1.889,
@@ -246,16 +246,16 @@
      "lon": -1.932611
     },
     {
-     "id": "8985",
-     "nombre": "E.s. Coop Santa Maria del Aguila - el Ejido",
+     "id": "5623",
+     "nombre": "E.s. Campoejido Ctra Almerimar",
      "precio": 1.522,
      "municipio": "El Ejido",
-     "direccion": "Calle Camino de Roquetas, 6",
+     "direccion": "Carretera de Almerimar Km. 3",
      "localidad": "El Ejido",
      "cp": "04700",
      "horario": "L-D: 24H",
-     "lat": 36.778167,
-     "lon": -2.772639
+     "lat": 36.727361,
+     "lon": -2.802194
     }
    ]
   },
@@ -1072,18 +1072,6 @@
      "lon": -3.767
     },
     {
-     "id": "6025",
-     "nombre": "Repsol",
-     "precio": 1.849,
-     "municipio": "Villalmanzo",
-     "direccion": "Carretera A-1, Madrid-burgos Km. 203,000",
-     "localidad": "Villalmanzo",
-     "cp": "09390",
-     "horario": "L-D: 24H",
-     "lat": 42.041028,
-     "lon": -3.751667
-    },
-    {
      "id": "6026",
      "nombre": "Repsol",
      "precio": 1.849,
@@ -1094,6 +1082,18 @@
      "horario": "L-D: 24H",
      "lat": 42.040694,
      "lon": -3.752778
+    },
+    {
+     "id": "6025",
+     "nombre": "Repsol",
+     "precio": 1.849,
+     "municipio": "Villalmanzo",
+     "direccion": "Carretera A-1, Madrid-burgos Km. 203,000",
+     "localidad": "Villalmanzo",
+     "cp": "09390",
+     "horario": "L-D: 24H",
+     "lat": 42.041028,
+     "lon": -3.751667
     }
    ]
   },
@@ -1396,7 +1396,7 @@
    "nombre": "Cuenca",
    "cyl": false,
    "n": 34,
-   "media": 1.577,
+   "media": 1.575,
    "mediana": 1.578,
    "min": 1.43,
    "max": 1.779,
@@ -1415,6 +1415,18 @@
      "lon": -1.792972
     },
     {
+     "id": "9797",
+     "nombre": "San Isidro Labrador Soc. Coop. de Clm",
+     "precio": 1.435,
+     "municipio": "Belmonte",
+     "direccion": "Calle Ramon y Cajal, 42",
+     "localidad": "Belmonte",
+     "cp": "16640",
+     "horario": "L-D: 24H",
+     "lat": 39.554167,
+     "lon": -2.70975
+    },
+    {
      "id": "8899",
      "nombre": "Nt.s.de Manjavacas S.coop de Clm",
      "precio": 1.45,
@@ -1425,18 +1437,6 @@
      "horario": "L-D: 24H",
      "lat": 39.491111,
      "lon": -2.8865
-    },
-    {
-     "id": "16333",
-     "nombre": "Ntro. Padre Jesus Nazareno, Sdad. Coop de Clm",
-     "precio": 1.452,
-     "municipio": "Sisante",
-     "direccion": "Calle Deportes,, 4",
-     "localidad": "Sisante",
-     "cp": "16700",
-     "horario": "L-D: 24H",
-     "lat": 39.410333,
-     "lon": -2.201361
     }
    ]
   },
@@ -2250,16 +2250,16 @@
    "nombre": "Lugo",
    "cyl": false,
    "n": 51,
-   "media": 1.78,
+   "media": 1.779,
    "mediana": 1.795,
-   "min": 1.559,
+   "min": 1.509,
    "max": 1.889,
    "descartados": 0,
    "baratas": [
     {
      "id": "14779",
      "nombre": "O Xeixo,s.coop Galega Oil",
-     "precio": 1.559,
+     "precio": 1.509,
      "municipio": "A Pastoriza",
      "direccion": "Lugar Carrizal, S/n",
      "localidad": "A Regueira",
