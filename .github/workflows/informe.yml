@@ -56,7 +56,7 @@ jobs:
           git add data/informes/ audio/ mercado/ sitemap.xml
           if ! git diff --cached --quiet; then
             git commit -qm "Comentario semanal $(date -u +%F)"
-            git pull -q --rebase && git push -q
+            git pull -q --rebase --autostash && git push -q
           fi
       - name: Telegram
         if: inputs.telegram != 'no'
