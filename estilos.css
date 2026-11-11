@@ -588,3 +588,39 @@ input[aria-invalid="true"] { border-color: var(--baja, #b3261e) !important; box-
 .comentario-hoy { display: grid; gap: 6px; text-decoration: none; color: inherit; background: var(--hoja); border: 1px solid var(--linea); border-left: 4px solid var(--paja); border-radius: 14px; padding: 14px; }
 .comentario-hoy b { font-size: 16px; line-height: 1.3; }
 .comentario-hoy small { font-size: 13px; color: var(--tenue); line-height: 1.4; }
+
+/* Tiempo y tratamientos */
+.tiempo-hoy { width: 100%; display: grid; gap: 6px; text-align: left; font: inherit; color: inherit; cursor: pointer; background: var(--hoja); border: 1px solid var(--linea); border-radius: 14px; padding: 14px; }
+.tiempo-hoy:hover { border-color: var(--pino); }
+.tiempo-hoy small { font-size: 13px; color: var(--tenue); }
+.th-fila { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 4px 12px; }
+.th-fila b.num { font: 600 26px/1 var(--cifra); }
+.th-frase { font-size: 15px; }
+.tiempo-dia { background: var(--hoja); border: 1px solid var(--linea); border-radius: 12px; padding: 12px 14px; margin-bottom: 10px; }
+.tiempo-dia header { display: grid; gap: 2px; margin-bottom: 6px; }
+.tiempo-dia header b { font: 700 18px var(--cifra); text-transform: uppercase; letter-spacing: .03em; }
+.tiempo-dia header span { font-size: 13px; color: var(--tenue); }
+.tiempo-ventana { margin: 4px 0 8px; font-size: 14px; }
+.tiempo-ventana.no { color: var(--baja); }
+.horas { display: grid; grid-template-columns: repeat(8, 1fr); gap: 4px; }
+.hora { font: 600 13px var(--texto); border: 0; border-radius: 8px; padding: 8px 0; cursor: pointer; color: #fff; }
+.hora.h-buena, .leyenda .h-buena { background: #23774a; }
+.hora.h-regular, .leyenda .h-regular { background: #c18a17; }
+.hora.h-mala, .leyenda .h-mala { background: #b3402a; }
+.hora.noche { opacity: .55; }
+.hora.pasada { opacity: .3; }
+.hora.sel { outline: 3px solid var(--tinta); outline-offset: 1px; }
+.leyenda { font-size: 12.5px; color: var(--tenue); display: flex; flex-wrap: wrap; gap: 6px; align-items: center; margin: 0 0 10px; }
+.leyenda span { color: #fff; border-radius: 6px; padding: 2px 8px; font-weight: 600; }
+.hora-detalle { font-size: 13px; margin: 8px 0 0; padding: 8px 10px; background: var(--fondo); border-radius: 8px; }
+.hora-detalle span { color: var(--baja); }
+.tiempo-ajustes { margin: 12px 0; background: var(--hoja); border: 1px solid var(--linea); border-radius: 12px; padding: 4px 14px; }
+.tiempo-ajustes > summary { cursor: pointer; font-size: 13.5px; color: var(--pino); font-weight: 600; padding: 10px 0; }
+.ajustes-rejilla { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 10px; }
+.ajustes-rejilla label { display: grid; gap: 4px; font-size: 12.5px; color: var(--tenue); }
+.ajustes-rejilla input { font: inherit; font-size: 16px; color: var(--tinta); background: var(--fondo); border: 1px solid var(--linea); border-radius: 8px; padding: 8px; width: 100%; }
+.tiempo-lugar { margin-top: 14px; }
+.boton-sec { font: 600 14px var(--texto); background: var(--hoja); color: var(--pino); border: 1px solid var(--pino); border-radius: 999px; padding: 9px 14px; cursor: pointer; }
+.tiempo-opciones { list-style: none; margin: 10px 0 0; padding: 0; display: grid; gap: 6px; }
+.tiempo-opciones button { width: 100%; text-align: left; font: inherit; font-weight: 600; background: var(--hoja); border: 1px solid var(--linea); border-radius: 10px; padding: 10px 12px; cursor: pointer; display: grid; color: var(--tinta); }
+.tiempo-opciones small { font-weight: 400; font-size: 12.5px; color: var(--tenue); }
