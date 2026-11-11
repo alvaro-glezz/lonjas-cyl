@@ -1,0 +1,65 @@
+name: Comentario semanal
+
+# Cada sábado a las 10:30 (hora de invierno en España): comentario del mercado con los precios de la semana,
+# su página (mercado/<semana>/), el audio con la voz y el aviso en el canal de Telegram. Ver scraper/informe.py.
+on:
+  schedule:
+    - cron: "30 9 * * 6"
+  workflow_dispatch:
+    inputs:
+      telegram:
+        description: "si = mandarlo también al canal de Telegram"
+        required: false
+        default: "si"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: actualizar-precios
+  cancel-in-progress: false
+
+jobs:
+  informe:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install -q -r scraper/requirements.txt
+      - name: ffmpeg
+        run: command -v ffmpeg || (sudo apt-get update -qq && sudo apt-get install -y -qq ffmpeg)
+      - uses: actions/cache@v4
+        with:
+          path: ~/voces
+          key: piper-sharvard-medium-1
+      - name: Voz (Piper, «sharvard», CC BY 3.0)
+        continue-on-error: true
+        run: |
+          pip install -q "piper-tts==1.8.0"
+          mkdir -p ~/voces && cd ~/voces
+          B=https://huggingface.co/rhasspy/piper-voices/resolve/main/es/es_ES/sharvard/medium
+          [ -s es_ES-sharvard-medium.onnx ] || curl -sSfLO "$B/es_ES-sharvard-medium.onnx"
+          [ -s es_ES-sharvard-medium.onnx.json ] || curl -sSfLO "$B/es_ES-sharvard-medium.onnx.json"
+          echo "Hola." | python -m piper -m es_ES-sharvard-medium.onnx -s 1 -f prueba.wav && {
+            echo "PIPER_MODELO=$HOME/voces/es_ES-sharvard-medium.onnx"; echo "PIPER_HABLANTE=1"; } >> "$GITHUB_ENV"
+      - name: Crear el comentario
+        run: python scraper/informe.py --crear
+      - name: Páginas para Google
+        run: python scraper/paginas.py
+      - name: Guardar
+        run: |
+          git config user.name "actualizador-lonjas"
+          git config user.email "actions@users.noreply.github.com"
+          git add data/informes/ audio/ mercado/ sitemap.xml
+          if ! git diff --cached --quiet; then
+            git commit -qm "Comentario semanal $(date -u +%F)"
+            git pull -q --rebase && git push -q
+          fi
+      - name: Telegram
+        if: inputs.telegram != 'no'
+        env:
+          TELEGRAM_TOKEN: ${{ secrets.TELEGRAM_TOKEN }}
+        run: python scraper/informe.py --telegram

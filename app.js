@@ -233,6 +233,7 @@ function vistaHoy() {
     ${typeof seccionTitulares === "function" ? seccionTitulares() : ""}
     ${typeof bloquePlazos === "function" ? bloquePlazos() : ""}
     ${typeof bloqueGasoleo === "function" ? bloqueGasoleo() : ""}
+    ${typeof bloqueComentario === "function" ? bloqueComentario() : ""}
     <section class="seccion">
       <div class="titulo-seccion"><h2>Lonjas</h2><span>Última sesión de cada una</span></div>
       ${listaLonjas()}

@@ -20,7 +20,7 @@ RAIZ = Path(__file__).resolve().parent.parent
 DATOS = RAIZ / "data" / "precios.json"
 # Dirección pública principal (la que Google debe tomar como buena). Si se compra un dominio, se cambia solo aquí.
 WEB = "https://lonjas-cyl-khaki.vercel.app/"
-CARPETAS = ("precio", "lonja", "precios", "plazos", "gasoleo-agricola")
+CARPETAS = ("precio", "lonja", "precios", "plazos", "gasoleo-agricola", "mercado")
 PLAZOS = RAIZ / "data" / "plazos.json"
 
 # Producto (clave de la app) -> (nombre con artículo, nombre corto, categoría de la página)
@@ -106,7 +106,7 @@ def pagina(*, ruta: str, nivel: int, titulo: str, descripcion: str, h1: str, cue
 <title>{escape(titulo)}</title>
 <meta name="description" content="{escape(descripcion)}">
 <link rel="canonical" href="{canon}">
-<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; connect-src 'self'; style-src 'self'; font-src 'self'; img-src 'self'; base-uri 'none'; form-action 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; connect-src 'self'; style-src 'self'; font-src 'self'; img-src 'self'; media-src 'self'; base-uri 'none'; form-action 'none'">
 <meta name="theme-color" content="#24503c">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="es_ES">
@@ -458,6 +458,43 @@ def pagina_gasoleo(g: dict) -> str | None:
                   descripcion=frase, h1="Precio del gasóleo agrícola (B) hoy por provincia", cuerpo=cuerpo, migas=migas, ld=ld)
 
 
+def pagina_informe(inf: dict, anterior: dict | None, siguiente: dict | None) -> str:
+    """Comentario semanal del mercado (scraper/informe.py): una página por semana, que se queda como archivo."""
+    sem = inf["semana"].lower()
+    ruta = f"mercado/{sem}/"
+    audio = (f'<figure class="audio"><figcaption>🎧 Escúchalo en 2 minutos (voz generada por ordenador)</figcaption>'
+             f'<audio controls preload="none" src="../../{escape(inf["audio"])}"></audio></figure>') if inf.get("audio") else ""
+    cuerpo = [f'<p class="lead">{escape(" ".join(inf["resumen"]))}</p>',
+              f'<p class="fecha">Semana del {fecha_larga(inf["desde"])} al {fecha_larga(inf["hasta"])}. Hecho con los precios publicados por cada lonja.</p>', audio]
+    for sec in inf["secciones"]:
+        cuerpo.append(f"<h2>{escape(sec['titulo'])}</h2><ul class=\"informe\">" + "".join(f"<li>{escape(l)}</li>" for l in sec["lineas"]) + "</ul>")
+    nav = []
+    if anterior:
+        nav.append(f'<a href="../{anterior["semana"].lower()}/">← Semana anterior</a>')
+    nav.append('<a href="../">Todos los comentarios</a>')
+    if siguiente:
+        nav.append(f'<a href="../{siguiente["semana"].lower()}/">Semana siguiente →</a>')
+    cuerpo.append('<nav class="chips">' + "".join(nav) + "</nav>")
+    cuerpo.append('<section class="cta"><h2>Cada semana, en tu móvil</h2><p>Únete al canal de Telegram t.me/lonjas_cyl o abre la app: precios del día, comparador entre lonjas y avisos.</p><a class="boton" href="../../">Abrir la app</a></section>')
+    cuerpo.append('<p class="nota">Fuentes: ' + "; ".join(escape(f) for f in inf.get("fuentes", [])) + ". Precios orientativos; no es una recomendación de compra ni de venta.</p>")
+    migas = [("Inicio", ""), ("Comentario de mercado", "mercado/"), (inf["semana"].replace("-W", " · semana "), None)]
+    ld = [ld_migas(migas, ruta), {"@context": "https://schema.org", "@type": "Article", "headline": inf["titular"][:110],
+          "description": " ".join(inf["resumen"])[:300], "datePublished": inf["generado"][:10], "inLanguage": "es",
+          "author": {"@type": "Organization", "name": "Lonjas CyL", "url": WEB}, "mainEntityOfPage": WEB + ruta}]
+    return pagina(ruta=ruta, nivel=2, titulo=f"{inf['titular']} · {inf['titulo'].split(' · ')[1]} | Lonjas CyL",
+                  descripcion=" ".join(inf["resumen"])[:300], h1=inf["titulo"], cuerpo="".join(cuerpo), migas=migas, ld=ld)
+
+
+def pagina_informes(informes: list[dict]) -> str:
+    filas = "".join(f'<li><a href="{i["semana"].lower()}/"><b>{escape(i["titulo"].split(" · ")[1].capitalize())}</b></a><br><small>{escape(i["titular"])}</small></li>'
+                    for i in informes)
+    migas = [("Inicio", ""), ("Comentario de mercado", None)]
+    frase = "Cada sábado, lo que ha pasado en las lonjas de Castilla y León: dónde se paga más, qué sube y qué baja y cómo está frente al año pasado."
+    return pagina(ruta="mercado/", nivel=1, titulo="Comentario semanal del mercado agrario de Castilla y León | Lonjas CyL",
+                  descripcion=frase, h1="Comentario semanal del mercado agrario", cuerpo=f'<p class="lead">{frase}</p><ul class="informe">{filas}</ul>',
+                  migas=migas, ld=[ld_migas(migas, "mercado/")])
+
+
 def sitemap(rutas: list[tuple[str, str]]) -> str:
     urls = "".join(f"<url><loc>{WEB}{r}</loc><lastmod>{m}</lastmod></url>" for r, m in rutas)
     return f'<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">{urls}</urlset>\n'
@@ -488,6 +525,13 @@ def generar(datos: dict, raiz: Path = RAIZ, plazos: dict | None = None) -> list[
         plazos = json.loads((raiz / "data" / "plazos.json").read_text(encoding="utf-8"))
     if plazos:
         escribir("plazos/", pagina_plazos(plazos, date.today().isoformat()), (plazos.get("actualizado") or hoy))
+    informes = sorted((json.loads(f.read_text(encoding="utf-8")) for f in (raiz / "data" / "informes").glob("20*-W*.json")),
+                      key=lambda i: i["semana"], reverse=True) if (raiz / "data" / "informes").is_dir() else []
+    for k, inf in enumerate(informes):
+        escribir(f"mercado/{inf['semana'].lower()}/", pagina_informe(inf, informes[k + 1] if k + 1 < len(informes) else None,
+                                                                     informes[k - 1] if k else None), inf["generado"][:10])
+    if informes:
+        escribir("mercado/", pagina_informes(informes), informes[0]["generado"][:10])
     f_gas = raiz / "data" / "gasoleo.json"
     if f_gas.is_file():
         g = json.loads(f_gas.read_text(encoding="utf-8"))

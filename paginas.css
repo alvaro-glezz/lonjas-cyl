@@ -44,3 +44,8 @@ td small{color:var(--tenue)}
 .pie{border-top:1px solid var(--linea);margin-top:40px;padding:12px 0 28px;color:var(--tenue);font-size:.85rem}
 .pie a{color:var(--tenue)}
 @media (max-width:600px){.opc{display:none}th,td{padding:9px 8px}}
+ul.informe { padding-left: 1.1em; }
+ul.informe li { margin: .45em 0; }
+.audio { margin: 16px 0; background: var(--hoja); border: 1px solid var(--linea); border-radius: 12px; padding: 12px; }
+.audio figcaption { font-size: .9rem; color: var(--tenue); margin-bottom: 8px; }
+.audio audio { width: 100%; }
