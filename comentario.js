@@ -63,11 +63,11 @@ function vistaComentario() {
   }
   const fl = iso => { const f = new Date(iso + "T12:00:00"); return isNaN(f) ? "" : f.toLocaleDateString("es-ES", { day: "numeric", month: "long" }); };
   const dur = c.audioSeg ? (c.audioSeg < 90 ? `${c.audioSeg} segundos` : `${Math.round(c.audioSeg / 60)} minutos`) : "un par de minutos";
-  const parrafos = c.redaccion.map((x, k) => `${x.t ? `<h3>${esc(x.t)}</h3>` : ""}<p${k === 0 ? ' class="entradilla"' : ""}>${esc(x.p)}</p>`).join("");
+  const parrafos = c.redaccion.map((x, k) => `${x.t ? `<h4>${esc(x.t)}</h4>` : ""}<p${k === 0 ? ' class="entradilla"' : ""}>${esc(x.p)}</p>`).join("");
   return `<section class="seccion">${cab}
     <article class="comentario-art">
       <p class="comentario-fecha">${c.titulo.includes(" · semana ") ? `Semana ${esc(c.titulo.split(" · semana ")[1])}` : c.desde && c.hasta ? `Semana del ${esc(fl(c.desde))} al ${esc(fl(c.hasta))}` : esc(c.titulo)}${comentarioReciente(c) ? "" : " · el próximo sale el sábado"}</p>
-      <h1>${esc(c.titular)}</h1>
+      <h3 class="comentario-titular">${esc(c.titular)}</h3>
       ${c.audio ? `<figure class="comentario-audio"><figcaption>🎧 Escúchalo en ${esc(dur)} <small>(voz generada por ordenador)</small></figcaption>
         <audio controls preload="none" src="${esc(c.audio)}"></audio></figure>` : ""}
       ${parrafos}

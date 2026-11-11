@@ -627,8 +627,8 @@ input[aria-invalid="true"] { border-color: var(--baja, #b3261e) !important; box-
 
 /* Pestaña «Comentario»: el comentario semanal escrito como un artículo */
 .comentario-art { background: var(--hoja); border: 1px solid var(--linea); border-radius: 16px; padding: 18px 18px 8px; max-width: 72ch; }
-.comentario-art h1 { font: 700 clamp(24px, 6vw, 30px)/1.15 var(--cifra); margin: 4px 0 14px; text-wrap: balance; }
-.comentario-art h3 { font: 700 19px/1.2 var(--cifra); margin: 22px 0 6px; color: var(--pino); }
+.comentario-art .comentario-titular { font: 700 clamp(24px, 6vw, 30px)/1.15 var(--cifra); margin: 4px 0 14px; text-wrap: balance; }
+.comentario-art h4 { font: 700 19px/1.2 var(--cifra); margin: 22px 0 6px; color: var(--pino); }
 .comentario-art p { font-size: 16px; line-height: 1.65; margin: 0 0 12px; }
 .comentario-art p.entradilla { font-size: 17px; font-weight: 600; }
 .comentario-art .nota { margin-top: 18px; }
@@ -638,3 +638,18 @@ input[aria-invalid="true"] { border-color: var(--baja, #b3261e) !important; box-
 .comentario-audio figcaption small { font-weight: 400; color: var(--tenue); }
 .comentario-audio audio { width: 100%; }
 .comentario-mas a { font-weight: 700; color: var(--pino); }
+
+/* Móviles estrechos (320 px) y letra grande: que nada ensanche la pantalla (un <select> o una palabra larga dentro de una
+   rejilla empuja su columna si no se le deja encoger). */
+main > *, .seccion, .seccion > * { min-width: 0; }
+select, input, textarea { max-width: 100%; }
+.plazo-cab b, .plazo-cab > span:first-child { min-width: 0; overflow-wrap: anywhere; }
+.gasoleo-mia, .gasoleo-mia select, .campo select { min-width: 0; width: 100%; }
+
+/* Barra inferior con 6 apartados: en móviles estrechos (320–360 px) o con letra grande los nombres no se juntan ni se
+   salen; la letra se ajusta al ancho y, si aun así no cabe, se corta con «…». */
+.navegacion li { min-width: 0; }
+.navegacion a { font-size: min(12px, 3.05vw); min-width: 0; padding-inline: 1px; }
+.navegacion a { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+html.letra-grande .navegacion a { font-size: min(13.5px, 3.05vw); }
+@media (max-width: 360px) { .navegacion a, html.letra-grande .navegacion a { font-size: 2.9vw; letter-spacing: -.03em; } }

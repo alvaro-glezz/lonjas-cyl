@@ -200,9 +200,13 @@ def crear_informe(datos: dict, hoy: date, junta: Junta | None = None) -> dict | 
         a = trigo["anio"]
         resumen.append(f"El trigo está un {num(abs(a['pct']), 1)} % {'por encima' if a['pct'] > 0 else 'por debajo'} de hace un año "
                        f"según el histórico oficial de la Junta.")
-    sin = [nombre(l) for l in datos.get("lonjas", []) if l.get("estado") != "suspendida" and l not in activas]
+    # Sin sesión nueva: solo las lonjas cuyo día de sesión ya ha pasado (si el comentario se hace el miércoles, Lerma,
+    # que cotiza los viernes, aún no «falta»).
+    DIA = {"lunes": 0, "martes": 1, "miercoles": 2, "miércoles": 2, "jueves": 3, "viernes": 4, "sabado": 5, "sábado": 5}
+    sin = [nombre(l) for l in datos.get("lonjas", []) if l.get("estado") != "suspendida" and l not in activas
+           and DIA.get(str(l.get("dia") or "").strip().lower(), -1) < hoy.weekday()]
     if sin:
-        resumen.append(f"Sin sesión nueva esta semana: {', '.join(sin)}.")
+        resumen.append(f"Sin sesión nueva publicada esta semana: {', '.join(sin)}.")
     secciones = []
     if cereales:
         secciones.append({"titulo": "Cereales", "lineas": [x["texto"] for x in cereales]})
@@ -322,7 +326,7 @@ def redaccion(datos, lunes, sabado, tono, suben, bajan, cereales, ganado, mov, s
                     f"de lo que se pagaba hace un año")
     entrada += "."
     if sin:
-        entrada += f" {redes._lista(sin)} no {'ha celebrado' if len(sin) == 1 else 'han celebrado'} sesión nueva esta semana."
+        entrada += f" {redes._lista(sin)} no {'ha publicado' if len(sin) == 1 else 'han publicado'} sesión nueva esta semana."
     out.append({"t": "", "p": entrada})
     if cereales:
         frases = [_frase_producto(x, k) for k, x in enumerate(cereales)]

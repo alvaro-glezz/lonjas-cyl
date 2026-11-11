@@ -63,13 +63,13 @@ def test_lineas_y_empates(inf, junta):
 def test_informe_completo(inf, junta):
     r = inf.crear_informe(_datos(), date(2026, 11, 14), junta)
     assert r["semana"] == "2026-W46" and r["titulo"].endswith("semana del 9 al 14 de noviembre")
-    assert "Sin sesión nueva esta semana: Lerma." in r["resumen"] and "Zamora" not in " ".join(r["resumen"])
+    assert "Sin sesión nueva publicada esta semana: Lerma." in r["resumen"] and "Zamora" not in " ".join(r["resumen"])
     assert [s["titulo"] for s in r["secciones"]][0] == "Cereales" and r["secciones"][-1]["titulo"] == "La semana que viene"
     assert "Próximas sesiones: Salamanca el lunes, León el miércoles, Lerma el viernes." in r["secciones"][-1]["lineas"]
     assert "€" not in r["hablado"].split("Comentario")[1][:400] or True
     red = r["redaccion"]
     assert red[0]["t"] == "" and red[0]["p"].startswith("La semana del 9 al 14 de noviembre ha sido")
-    assert "Lerma no ha celebrado sesión nueva esta semana." in red[0]["p"]
+    assert "Lerma no ha publicado sesión nueva esta semana." in red[0]["p"]
     cer = next(x["p"] for x in red if x["t"] == "Cereales y oleaginosas")
     assert cer.startswith("El trigo se ha pagado mejor en Salamanca, a 234 €/t, 8 €/t por encima de León.")
     assert "baja 2 €/t en las dos lonjas" in cer and "17,3 % más caro (230 €/t de media frente a 196)" in cer
@@ -105,3 +105,13 @@ def test_paginas_del_informe(inf, junta, tmp_path):
     (tmp_path / "data" / "informes" / "ultimo.json").write_text(json.dumps(r), encoding="utf-8")
     rutas = pag.generar({"lonjas": []}, tmp_path, {"plazos": []})
     assert "mercado/2026-w46/" in rutas and "mercado/" in rutas and (tmp_path / "mercado" / "2026-w46" / "index.html").is_file()
+
+
+def test_entre_semana_no_da_por_perdida_una_sesion_que_aun_no_toca(inf, junta):
+    d = _datos()
+    for l in d["lonjas"]:
+        if l["id"] == "lerma":
+            l["dia"] = "Viernes"
+    r = inf.crear_informe(d, date(2026, 11, 11), junta)          # miércoles: Lerma cotiza el viernes
+    assert not any("Sin sesión nueva" in x for x in r["resumen"])
+    assert "Lerma no ha publicado" not in r["redaccion"][0]["p"]
