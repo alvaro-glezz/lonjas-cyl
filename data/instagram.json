@@ -1,6 +1,6 @@
 {
  "comparativa": "2026-W45",
- "franja": "tarde",
+ "franja": "especial:tratamientos-voz",
  "franjas": {
   "2026-11-07": [
    "reel"
@@ -27,7 +27,8 @@
    "reel",
    "especial:tratamientos",
    "historia",
-   "tarde"
+   "tarde",
+   "especial:tratamientos-voz"
   ]
  },
  "historias": [
@@ -202,6 +203,12 @@
    "fecha": "2026-11-11T18:33",
    "id": "2026-11-11-leon",
    "media": "18167388031427896"
+  },
+  {
+   "facebook": "1190991343404266",
+   "fecha": "2026-11-11T19:57",
+   "id": "2026-11-11-especial-tratamientos-voz",
+   "media": "18080021969443631"
   }
  ],
  "token_renovado": "2026-11-07"
