@@ -332,6 +332,61 @@ def musica(destino: Path, segundos: float = SEGUNDOS, tasa: int = 48000) -> Path
     return destino
 
 
+def guitarra(destino: Path, segundos: float = SEGUNDOS, tasa: int = 22050) -> Path:
+    """Guitarra punteada (arpegios la menor – fa – do – sol), sin derechos de autor: cuerdas sintetizadas aquí mismo
+    con el método Karplus-Strong (ruido que se va suavizando en un bucle del largo de la nota)."""
+    import random
+    rnd = random.Random(7)
+    nota = {"A2": 110.0, "C3": 130.81, "E3": 164.81, "F2": 87.31, "G2": 98.0, "A3": 220.0, "C4": 261.63, "E4": 329.63,
+            "F3": 174.61, "G3": 196.0, "B3": 246.94, "D4": 293.66}
+    acordes = [("A2", "E3", "A3", "C4", "E4", "C4", "A3", "E3"), ("F2", "C3", "F3", "A3", "C4", "A3", "F3", "C3"),
+               ("C3", "G3", "C4", "E4", "G3", "E4", "C4", "G3"), ("G2", "D4", "G3", "B3", "D4", "B3", "G3", "D4")]
+    largo = int(2.2 * tasa)
+    cache: dict = {}
+
+    def pulsar(f: float) -> list:
+        if f not in cache:
+            n = max(2, int(tasa / f))
+            buf = [rnd.uniform(-1, 1) for _ in range(n)]
+            out = [0.0] * largo
+            i = 0
+            for k in range(largo):
+                a = buf[i]
+                b = buf[(i + 1) % n]
+                buf[i] = 0.4985 * (a + b)            # promedio con pérdida: la cuerda se apaga poco a poco
+                out[k] = a
+                i = (i + 1) % n
+            cache[f] = out
+        return cache[f]
+
+    total = int(segundos * tasa) + 1
+    mezcla = [0.0] * total
+    paso = 0.36                                      # corcheas a unos 83 pulsos por minuto
+    t, j = 0.0, 0
+    while t < segundos:
+        acorde = acordes[(j // 8) % len(acordes)]
+        nombre = acorde[j % 8]
+        golpe = pulsar(nota[nombre])
+        vol = 0.42 if j % 8 == 0 else 0.26
+        i0 = int(t * tasa)
+        for k in range(min(largo, total - i0)):
+            mezcla[i0 + k] += golpe[k] * vol
+        t += paso
+        j += 1
+    datos = bytearray()
+    for i, v in enumerate(mezcla):
+        tt = i / tasa
+        glob = min(1.0, tt / 0.3) * min(1.0, (segundos - tt) / 1.5) if tt < segundos else 0.0
+        datos += struct.pack("<h", int(max(-1.0, min(1.0, v * 0.9 * max(0.0, glob))) * 32767))
+    destino.parent.mkdir(parents=True, exist_ok=True)
+    with wave.open(str(destino), "wb") as w:
+        w.setnchannels(1)
+        w.setsampwidth(2)
+        w.setframerate(tasa)
+        w.writeframes(bytes(datos))
+    return destino
+
+
 def _fondo_marca(titulo: str, sub: str):
     """Fotograma de portada y de cierre (verde, centrado)."""
     from PIL import Image, ImageDraw

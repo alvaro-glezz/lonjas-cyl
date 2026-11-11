@@ -1133,7 +1133,7 @@ def leyenda(lienzo, texto: str, t: float, dur: float, y: int = 420):
 
 
 def reel(n: int, destino: Path, datos: dict | None = None, hoy: date | None = None, web: str = WEB, escenas: list | None = None,
-         voz: bool = True, leyendas: bool = False) -> Path:
+         voz: bool = True, leyendas: bool = False, musica_fn=None) -> Path:
     """Monta el reel n de HISTORIAS, o el de las `escenas` que se le pasen (reels especiales, especiales.py).
     `voz=False`: sin locución (solo música). `leyendas=True`: lo que contaría la voz sale escrito abajo."""
     hoy = hoy or date.today()
@@ -1166,7 +1166,7 @@ def reel(n: int, destino: Path, datos: dict | None = None, hoy: date | None = No
             w.setsampwidth(2)
             w.setframerate(tasa)
             w.writeframes(bytes(buf))
-    musica = redes.musica(tmp / "musica.wav", total)
+    musica = (musica_fn or redes.musica)(tmp / "musica.wav", total)
     cierre = redes._cierre(web)
     escenas_v = [(d, e[1], e[2], e[0]) for d, e in zip(durs, escenas)] + [(durs[-1], None, None, None)]
     parcial = destino.with_name(destino.stem + ".parcial.mp4")

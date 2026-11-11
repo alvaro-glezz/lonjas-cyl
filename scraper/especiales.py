@@ -18,7 +18,7 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 import historias as h  # noqa: E402
-from historias import H, W, Lapiz, _base, _img, _reducir, bocadillo, movil, pegar, persona, rebote, silo, suave  # noqa: E402
+from historias import H, W, Lapiz, _base, _img, _reducir, bocadillo, movil, pegar, persona, rebote, silo, suave, tractor  # noqa: E402
 from instagram import CLARO, HOJA, ICONO, PAJA, PINO, TENUE, TINTA, _cifra, _texto, etiquetas  # noqa: E402
 from paginas import WEB  # noqa: E402
 
@@ -281,6 +281,85 @@ def escenas_explotacion(datos=None, hoy=None):
     ]
 
 
+def _con_toque(nombre: str, x: float, y: float, t: float, desde: int = 0):
+    """Captura con un círculo que late donde hay que tocar (coordenadas de la pantalla de 420×760)."""
+    from PIL import Image, ImageDraw
+    im = captura(nombre, desde).convert("RGBA")
+    capa = Image.new("RGBA", im.size, (0, 0, 0, 0))
+    d = ImageDraw.Draw(capa)
+    r = 26 + 6 * math.sin(t * 7)
+    d.ellipse([x - r - 12, y - r - 12, x + r + 12, y + r + 12], fill=(233, 196, 106, 80))
+    d.ellipse([x - r, y - r, x + r, y + r], fill=(233, 196, 106, 150), outline=(24, 36, 29, 255), width=3)
+    im.alpha_composite(capa)
+    return im.convert("RGB")
+
+
+def escenas_tratamientos(datos=None, hoy=None):
+    """Capturas reales del 11 nov 2026 con la previsión de AEMET para Peñafiel (lluvia hoy, rachas de 48 km/h mañana)."""
+    def e1(t, d):
+        img = _base("campo", t)
+        pegar(img, tractor(), 760, 1720, .9)
+        pegar(img, persona("pedro", "pensar", "duda"), 300, 1720)
+        if t > .7:
+            pegar(img, bocadillo("¿Trato hoy el cereal?", 520, "izq", 50), 450, 1020, rebote((t - .7) / .4))
+        return img
+
+    def e2(t, d):
+        img = _base("campo", t)
+        pant = _con_toque("hoy-campo", 50, 260, t) if t > 1.6 else captura("hoy-campo")
+        _movil_grande(img, pant, t)
+        return img
+
+    def e3(t, d):
+        img = _base("campo", t)
+        desde = int(90 * suave((t - 1.4) / 1.6))
+        _movil_grande(img, captura("tiempo", desde), t)
+        return img
+
+    @lru_cache(maxsize=None)
+    def detalle():
+        from PIL import Image
+        caja = captura("tiempo-horas").crop((14, 280, PW - 14, 358))
+        return caja.resize((caja.width * 2, caja.height * 2), Image.LANCZOS).convert("RGBA")
+
+    def e4(t, d):
+        img = _base("campo", t)
+        pant = _con_toque("tiempo-horas", 187, 225, t) if t < 1.2 else captura("tiempo-horas")
+        _movil_grande(img, pant, 1.0, abajo=1900, escala=1.1)
+        if t > 1.2:
+            a = rebote((t - 1.2) / .5)
+            pegar(img, detalle(), W / 2, 900, .95 * a, min(1, a))
+        return img
+
+    def e5(t, d):
+        img = _base("campo", t)
+        _movil_grande(img, captura("tiempo-manana"), 1.0, abajo=1900, escala=1.1)
+        return img
+
+    def e6(t, d):
+        img = _base("tarde", t)
+        pegar(img, tractor(), 760, 1720, .9)
+        pegar(img, persona("pedro", "brazos", "contento"), 300, 1720 - abs(12 * math.sin(t * 6)))
+        if t > .6:
+            pegar(img, bocadillo("Esperaré: no tiro el producto", 560, "izq", 46), 470, 1020, rebote((t - .6) / .4))
+        return img
+
+    return [
+        ("Pedro quiere tratar el cereal. Pero si llueve o hace viento, el producto se pierde… y el dinero también.",
+         "¿Se puede *tratar hoy*?", e1, 4.0),
+        ("En Lonjas CyL, la pantalla Hoy ya te lo adelanta. En Peñafiel, hoy no.",
+         "Míralo en *Hoy*", e2, 3.8),
+        ("En Campo › Tiempo ves cada hora en color: verde, buena; amarilla, regular; roja, mala.",
+         "Cada hora *en color*", e3, 4.4),
+        ("Toca una hora y te dice el motivo: lluvia, viento, rachas, humedad o temperatura.",
+         "Toca una hora: *el motivo*", e4, 4.6),
+        ("Mañana tampoco: rachas de hasta 48 km/h. Con la previsión oficial de AEMET para tu municipio.",
+         "Mañana *tampoco*", e5, 4.0),
+        ("Así que Pedro espera al buen momento. Tratar cuando toca: menos deriva y menos producto tirado.",
+         "Tratar *cuando toca*", e6, 4.0),
+    ]
+
+
 ESPECIALES = {
     "instalar": {"titulo": "Cómo instalar Lonjas CyL", "escenas": escenas_instalar,
                  "texto": ("📲 Lonjas CyL en tu móvil, como una app más (30 segundos, sin tienda de aplicaciones):\n\n"
@@ -298,13 +377,21 @@ ESPECIALES = {
                               "diferencias de calidad.\n\n"
                               "La encuentras en Hoy → «Para decidir».")},
 }
-ETIQUETAS = {"instalar": ["#agricultores", "#lonjas", "#castillayleon"], "explotacion": ["#agricultores", "#cereal", "#castillayleon"]}
+ESPECIALES["tratamientos"] = {
+    "titulo": "¿Se puede tratar hoy?", "escenas": escenas_tratamientos, "musica": "guitarra",
+    "texto": ("🌦️ ¿Se puede tratar hoy? Lonjas CyL te lo dice hora a hora.\n\n"
+              "En Campo → Tiempo eliges tu municipio y ves cada hora de hoy y de mañana en color: 🟩 buena, 🟨 regular, 🟥 mala. "
+              "Toca una hora y te dice el motivo: viento, rachas, temperatura, humedad o lluvia en las horas siguientes. "
+              "Los límites puedes ajustarlos a tu gusto.\n\n"
+              "Previsión oficial de AEMET. Es orientativo: manda siempre la etiqueta del producto.")}
+ETIQUETAS = {"tratamientos": ["#agricultores", "#fitosanitarios", "#castillayleon"], "instalar": ["#agricultores", "#lonjas", "#castillayleon"], "explotacion": ["#agricultores", "#cereal", "#castillayleon"]}
 
 
 def texto_publicacion(nombre: str, web: str = WEB) -> str:
     e = ESPECIALES[nombre]
     nota = ("Ejemplo de la captura: 60 t de trigo, 45 t de cebada y 3.300 kg de lechazo, con los precios de las sesiones del 3 al 5 "
-            "de noviembre de 2026. " if nombre == "explotacion" else "")
+            "de noviembre de 2026. " if nombre == "explotacion" else
+            "Capturas con la previsión de AEMET para Peñafiel del 11 de noviembre de 2026. " if nombre == "tratamientos" else "")
     return (f"{e['texto']}\n\n{h.redes.ig.pie_texto(web)}\n\n{nota}Ilustraciones y capturas reales de la app. 🔇 Con subtítulos: se entiende sin sonido.\n\n"
             + etiquetas(*ETIQUETAS[nombre], "#LonjasCyL"))
 
@@ -320,7 +407,9 @@ def item(nombre: str, hoy: date) -> dict | None:
 
 def reel(nombre: str, destino: Path, datos=None, hoy=None, web: str = WEB) -> Path:
     """Sin voz y con subtítulos (lo pidió el dueño de la app el 8 nov 2026)."""
-    return h.reel(0, destino, datos, hoy, web, escenas=ESPECIALES[nombre]["escenas"](datos, hoy), voz=False, leyendas=True)
+    musica = h.redes.guitarra if ESPECIALES[nombre].get("musica") == "guitarra" else None
+    return h.reel(0, destino, datos, hoy, web, escenas=ESPECIALES[nombre]["escenas"](datos, hoy), voz=False, leyendas=True,
+                  musica_fn=musica)
 
 
 # ---------- Guías en imagen (una foto con los pasos): especial:iphone y especial:android ----------
