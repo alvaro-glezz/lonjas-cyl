@@ -1,5 +1,5 @@
 {
- "fecha": "2026-11-11T10:45",
+ "fecha": "2026-11-11T11:08",
  "fuente": "Ministerio para la Transición Ecológica y el Reto Demográfico (Geoportal de gasolineras)",
  "fuente_url": "https://geoportalgasolineras.es/geoportal-instalaciones/Inicio",
  "unidad": "€/l",
@@ -19,7 +19,7 @@
    "nombre": "A Coruña",
    "cyl": false,
    "n": 88,
-   "media": 1.749,
+   "media": 1.748,
    "mediana": 1.776,
    "min": 1.453,
    "max": 1.889,
@@ -50,16 +50,16 @@
      "lon": -8.467889
     },
     {
-     "id": "9004",
-     "nombre": "Cerqueda Sl",
-     "precio": 1.579,
-     "municipio": "Malpica de Bergantiños",
-     "direccion": "Carretera Ac-414 Km. 2",
-     "localidad": "Malpica",
-     "cp": "15113",
-     "horario": "L-V: 06:15-23:00; S: 07:00-00:00; D: 07:00-23:00",
-     "lat": 43.287528,
-     "lon": -8.8015
+     "id": "262",
+     "nombre": "Valcarce",
+     "precio": 1.559,
+     "municipio": "Ponteceso",
+     "direccion": "CTRA. AC-422 (CTRA. km 37,2)",
+     "localidad": "Ponteceso",
+     "cp": "15110",
+     "horario": "L-S: 06:30-23:00; D: 07:00-23:00",
+     "lat": 43.261944,
+     "lon": -8.81925
     }
    ]
   },
@@ -166,7 +166,7 @@
    "nombre": "Alicante",
    "cyl": false,
    "n": 52,
-   "media": 1.771,
+   "media": 1.77,
    "mediana": 1.775,
    "min": 1.6,
    "max": 1.879,
@@ -1060,18 +1060,6 @@
      "lon": -3.767
     },
     {
-     "id": "6025",
-     "nombre": "Repsol",
-     "precio": 1.849,
-     "municipio": "Villalmanzo",
-     "direccion": "Carretera A-1, Madrid-burgos Km. 203,000",
-     "localidad": "Villalmanzo",
-     "cp": "09390",
-     "horario": "L-D: 24H",
-     "lat": 42.041028,
-     "lon": -3.751667
-    },
-    {
      "id": "6026",
      "nombre": "Repsol",
      "precio": 1.849,
@@ -1082,6 +1070,18 @@
      "horario": "L-D: 24H",
      "lat": 42.040694,
      "lon": -3.752778
+    },
+    {
+     "id": "6025",
+     "nombre": "Repsol",
+     "precio": 1.849,
+     "municipio": "Villalmanzo",
+     "direccion": "Carretera A-1, Madrid-burgos Km. 203,000",
+     "localidad": "Villalmanzo",
+     "cp": "09390",
+     "horario": "L-D: 24H",
+     "lat": 42.041028,
+     "lon": -3.751667
     }
    ]
   },
@@ -1678,7 +1678,7 @@
    "nombre": "Huesca",
    "cyl": false,
    "n": 56,
-   "media": 1.649,
+   "media": 1.648,
    "mediana": 1.665,
    "min": 1.479,
    "max": 1.825,
@@ -1874,8 +1874,8 @@
    "nombre": "León",
    "cyl": true,
    "n": 22,
-   "media": 1.651,
-   "mediana": 1.694,
+   "media": 1.65,
+   "mediana": 1.689,
    "min": 1.499,
    "max": 1.825,
    "descartados": 0,
@@ -2039,6 +2039,18 @@
      "lon": -5.739417
     },
     {
+     "id": "5071",
+     "nombre": "Campsa",
+     "precio": 1.689,
+     "municipio": "Ardón",
+     "direccion": "Carretera N-630 Km. 161,500",
+     "localidad": "Ardon",
+     "cp": "24232",
+     "horario": "L-V: 08:00-22:00; S: 08:00-15:00; D: 15:00-22:00",
+     "lat": 42.462444,
+     "lon": -5.579694
+    },
+    {
      "id": "5540",
      "nombre": "Repsol",
      "precio": 1.689,
@@ -2051,16 +2063,16 @@
      "lon": -6.064389
     },
     {
-     "id": "5071",
-     "nombre": "Campsa",
-     "precio": 1.699,
-     "municipio": "Ardón",
-     "direccion": "Carretera N-630 Km. 161,500",
-     "localidad": "Ardon",
-     "cp": "24232",
-     "horario": "L-V: 08:00-22:00; S: 08:00-15:00; D: 15:00-22:00",
-     "lat": 42.462444,
-     "lon": -5.579694
+     "id": "6013",
+     "nombre": "Repsol",
+     "precio": 1.689,
+     "municipio": "Villamañán",
+     "direccion": "Carretera N-630 Km. 176,600",
+     "localidad": "Villamañan",
+     "cp": "24234",
+     "horario": "L-V: 08:00-15:00",
+     "lat": 42.322167,
+     "lon": -5.576833
     },
     {
      "id": "14898",
@@ -2085,18 +2097,6 @@
      "horario": "L-V: 08:00-13:30 y 15:30-19:00",
      "lat": 42.64475,
      "lon": -5.58625
-    },
-    {
-     "id": "6013",
-     "nombre": "Repsol",
-     "precio": 1.699,
-     "municipio": "Villamañán",
-     "direccion": "Carretera N-630 Km. 176,600",
-     "localidad": "Villamañan",
-     "cp": "24234",
-     "horario": "L-V: 08:00-15:00",
-     "lat": 42.322167,
-     "lon": -5.576833
     },
     {
      "id": "6024",
