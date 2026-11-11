@@ -210,7 +210,7 @@ button.prod { font: inherit; color: inherit; background: none; border: 0; paddin
   padding-left: max(8px, env(safe-area-inset-left, 0px));
   padding-right: max(8px, env(safe-area-inset-right, 0px));
 }
-.navegacion ul { list-style: none; margin: 0 auto; padding: 0; max-width: 760px; display: grid; grid-template-columns: repeat(5, 1fr); }
+.navegacion ul { list-style: none; margin: 0 auto; padding: 0; max-width: 760px; display: grid; grid-template-columns: repeat(6, 1fr); }
 .navegacion a {
   height: var(--barra); display: grid; place-items: center; align-content: center; gap: 3px;
   text-decoration: none; color: var(--tenue); font-size: 12px; font-weight: 600;
@@ -288,7 +288,7 @@ button.prod { font: inherit; color: inherit; background: none; border: 0; paddin
 .det-hist:empty { display: none; }
 .serie.larga { max-height: none; }
 @media (min-width: 640px) { .datos-det.cuatro { grid-template-columns: repeat(4, 1fr); } }
-@media (max-width: 380px) { .navegacion a { font-size: 11px; } }
+@media (max-width: 380px) { .navegacion a { font-size: 10.5px; letter-spacing: -.01em; } }
 
 /* Gráficos del histórico: consultar al tocar, varias lonjas, ampliar y descargar */
 .c-pino { --c: var(--pino); } .c-paja { --c: var(--paja); } .c-s3 { --c: var(--s3); } .c-s4 { --c: var(--s4); } .c-s5 { --c: var(--s5); } .c-tenue { --c: var(--tenue); }
@@ -624,3 +624,17 @@ input[aria-invalid="true"] { border-color: var(--baja, #b3261e) !important; box-
 .tiempo-opciones { list-style: none; margin: 10px 0 0; padding: 0; display: grid; gap: 6px; }
 .tiempo-opciones button { width: 100%; text-align: left; font: inherit; font-weight: 600; background: var(--hoja); border: 1px solid var(--linea); border-radius: 10px; padding: 10px 12px; cursor: pointer; display: grid; color: var(--tinta); }
 .tiempo-opciones small { font-weight: 400; font-size: 12.5px; color: var(--tenue); }
+
+/* Pestaña «Comentario»: el comentario semanal escrito como un artículo */
+.comentario-art { background: var(--hoja); border: 1px solid var(--linea); border-radius: 16px; padding: 18px 18px 8px; max-width: 72ch; }
+.comentario-art h1 { font: 700 clamp(24px, 6vw, 30px)/1.15 var(--cifra); margin: 4px 0 14px; text-wrap: balance; }
+.comentario-art h3 { font: 700 19px/1.2 var(--cifra); margin: 22px 0 6px; color: var(--pino); }
+.comentario-art p { font-size: 16px; line-height: 1.65; margin: 0 0 12px; }
+.comentario-art p.entradilla { font-size: 17px; font-weight: 600; }
+.comentario-art .nota { margin-top: 18px; }
+.comentario-fecha { color: var(--tenue); font-size: 13px !important; text-transform: uppercase; letter-spacing: .04em; margin: 0 !important; }
+.comentario-audio { margin: 0 0 16px; background: var(--fondo); border-radius: 12px; padding: 10px 12px; }
+.comentario-audio figcaption { font-size: 14px; font-weight: 600; margin-bottom: 6px; }
+.comentario-audio figcaption small { font-weight: 400; color: var(--tenue); }
+.comentario-audio audio { width: 100%; }
+.comentario-mas a { font-weight: 700; color: var(--pino); }

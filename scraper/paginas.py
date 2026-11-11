@@ -466,10 +466,24 @@ def pagina_informe(inf: dict, anterior: dict | None, siguiente: dict | None) -> 
     dur = (f"{seg} segundos" if seg < 90 else f"{round(seg / 60)} minutos") if seg else "un par de minutos"
     audio = (f'<figure class="audio"><figcaption>🎧 Escúchalo en {dur} (voz generada por ordenador)</figcaption>'
              f'<audio controls preload="none" src="../../{escape(inf["audio"])}"></audio></figure>') if inf.get("audio") else ""
-    cuerpo = [f'<p class="lead">{escape(" ".join(inf["resumen"]))}</p>',
-              f'<p class="fecha">Semana del {fecha_larga(inf["desde"])} al {fecha_larga(inf["hasta"])}. Hecho con los precios publicados por cada lonja.</p>', audio]
-    for sec in inf["secciones"]:
-        cuerpo.append(f"<h2>{escape(sec['titulo'])}</h2><ul class=\"informe\">" + "".join(f"<li>{escape(l)}</li>" for l in sec["lineas"]) + "</ul>")
+    red = inf.get("redaccion") or []
+    if red:
+        # El comentario escrito como un artículo; los datos en lista quedan plegados debajo
+        cuerpo = [f'<p class="fecha">Semana del {fecha_larga(inf["desde"])} al {fecha_larga(inf["hasta"])}. Hecho con los precios publicados por cada lonja.</p>', audio,
+                  '<article class="redaccion">']
+        for k, x in enumerate(red):
+            if x.get("t"):
+                cuerpo.append(f"<h2>{escape(x['t'])}</h2>")
+            cuerpo.append(f'<p{" class=\"lead\"" if k == 0 else ""}>{escape(x["p"])}</p>')
+        cuerpo.append("</article>")
+        cuerpo.append('<details class="datos-lista"><summary>Ver los datos en lista</summary>' + "".join(
+            f"<h3>{escape(sec['titulo'])}</h3><ul class=\"informe\">" + "".join(f"<li>{escape(l)}</li>" for l in sec["lineas"]) + "</ul>"
+            for sec in inf["secciones"]) + "</details>")
+    else:
+        cuerpo = [f'<p class="lead">{escape(" ".join(inf["resumen"]))}</p>',
+                  f'<p class="fecha">Semana del {fecha_larga(inf["desde"])} al {fecha_larga(inf["hasta"])}. Hecho con los precios publicados por cada lonja.</p>', audio]
+        for sec in inf["secciones"]:
+            cuerpo.append(f"<h2>{escape(sec['titulo'])}</h2><ul class=\"informe\">" + "".join(f"<li>{escape(l)}</li>" for l in sec["lineas"]) + "</ul>")
     nav = []
     if anterior:
         nav.append(f'<a href="../{anterior["semana"].lower()}/">← Semana anterior</a>')

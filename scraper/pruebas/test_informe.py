@@ -67,8 +67,22 @@ def test_informe_completo(inf, junta):
     assert [s["titulo"] for s in r["secciones"]][0] == "Cereales" and r["secciones"][-1]["titulo"] == "La semana que viene"
     assert "Próximas sesiones: Salamanca el lunes, León el miércoles, Lerma el viernes." in r["secciones"][-1]["lineas"]
     assert "€" not in r["hablado"].split("Comentario")[1][:400] or True
+    red = r["redaccion"]
+    assert red[0]["t"] == "" and red[0]["p"].startswith("La semana del 9 al 14 de noviembre ha sido")
+    assert "Lerma no ha celebrado sesión nueva esta semana." in red[0]["p"]
+    cer = next(x["p"] for x in red if x["t"] == "Cereales y oleaginosas")
+    assert cer.startswith("El trigo se ha pagado mejor en Salamanca, a 234 €/t, 8 €/t por encima de León.")
+    assert "baja 2 €/t en las dos lonjas" in cer and "17,3 % más caro (230 €/t de media frente a 196)" in cer
+    assert "ha cotizado igual en Salamanca y León, a 500 €/t" in cer and "repite en Salamanca" in cer
+    assert red[-1]["t"] == "La semana que viene" and "Salamanca el lunes, León el miércoles y Lerma el viernes" in red[-1]["p"]
     t = inf.texto_telegram(r)
     assert t.startswith("📊 Mercado agrario") and "mercado/2026-w46/" in t and len(t) <= 4000
+
+
+def test_cambios_redactados(inf):
+    assert inf._cambios_texto([("A", -1), ("B", -1), ("C", -2), ("D", 0)], "€/t") == "baja 1 €/t en A y B y 2 €/t en C y repite en D"
+    assert inf._cambios_texto([("A", 2), ("B", 2), ("C", 2)], "€/t") == "sube 2 €/t en las tres lonjas"
+    assert inf._cambios_texto([("A", None)], "€/t") == ""
 
 
 def test_sin_sesiones_no_hay_informe(inf, junta):
@@ -85,6 +99,7 @@ def test_paginas_del_informe(inf, junta, tmp_path):
     html = pag.pagina_informe(r, None, None)
     assert "<audio controls" in html and "../../audio/informe-2026-W46.mp3" in html and "media-src 'self'" in html
     assert '"@type": "Article"' in html and "Todos los comentarios" in html
+    assert 'class="redaccion"' in html and "Ver los datos en lista" in html and "El trigo se ha pagado mejor" in html
     (tmp_path / "data" / "informes").mkdir(parents=True)
     (tmp_path / "data" / "informes" / "2026-W46.json").write_text(json.dumps(r), encoding="utf-8")
     (tmp_path / "data" / "informes" / "ultimo.json").write_text(json.dumps(r), encoding="utf-8")

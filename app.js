@@ -643,6 +643,7 @@ function router() {
   else if (h === "plazos" && typeof vistaPlazos === "function") { html = vistaPlazos(); seccion = "hoy"; }
   else if (h === "gasoleo" && typeof vistaGasoleo === "function") { html = vistaGasoleo(); seccion = "hoy"; }
   else if (h === "tiempo" && typeof vistaTiempo === "function") { html = vistaTiempo(); seccion = "hoy"; }
+  else if (h === "comentario" && typeof vistaComentario === "function") { html = vistaComentario(); seccion = "comentario"; }
   else if (h === "datos" && typeof vistaDatos === "function") { html = vistaDatos(); seccion = "lonjas"; }
   else if (h === "calculadora" && typeof vistaCalculadora === "function") { html = vistaCalculadora(); seccion = "hoy"; }
   else if (h === "oferta" && typeof vistaOferta === "function") { html = vistaOferta(); seccion = "hoy"; }

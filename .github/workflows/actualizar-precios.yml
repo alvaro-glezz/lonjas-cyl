@@ -43,6 +43,7 @@ jobs:
           python -m pytest -q scraper/pruebas
           node scraper/pruebas/js/test_telegram_api.js > /dev/null
           node scraper/pruebas/js/test_uso_api.js
+          node scraper/pruebas/js/test_tiempo_api.js
       - name: Leer las lonjas
         run: python scraper/actualizar.py
       # Histórico oficial de la Junta de CyL: baja los Excel semanales nuevos y rehace data/historico/.

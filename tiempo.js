@@ -1,5 +1,6 @@
 /* Tiempo del campo y ventana de tratamientos (#tiempo + tarjeta en Hoy).
-   Previsión hora a hora de Open-Meteo (gratis para uso no comercial; datos con licencia CC BY 4.0, se cita).
+   Previsión hora a hora de AEMET a través de /api/tiempo (la clave de AEMET vive solo en el servidor). Si AEMET no
+   responde o aún no hay clave configurada, se usa Open-Meteo como reserva (gratis para uso no comercial, CC BY 4.0).
    Cada hora de luz se califica para tratar (buena / regular / mala) según viento, rachas, lluvia, temperatura y
    humedad, con límites que el usuario puede cambiar. Es orientativo: manda la etiqueta del producto.
    El municipio elegido y los límites se guardan solo en el teléfono. */
@@ -21,30 +22,88 @@ function umbrales() {
 }
 function lugarGuardado() {
   const l = leerJSON(CLAVE_LUGAR, null);
-  return l && typeof l.lat === "number" && typeof l.lon === "number" && typeof l.nombre === "string" ? l : null;
+  if (!l || typeof l.nombre !== "string") return null;
+  const conCodigo = typeof l.c === "string" && /^\d{5}$/.test(l.c);
+  const conCoord = typeof l.lat === "number" && typeof l.lon === "number";
+  return conCodigo || conCoord ? l : null;
+}
+
+/* ---------- municipios de Castilla y León (lista de AEMET, guardada 30 días en el teléfono) ---------- */
+const MUNI = { lista: null, cargando: null, sinAemet: false };
+const CLAVE_MUNI = "lonjas-municipios-cyl";
+function listaMunicipios() {
+  if (MUNI.lista) return Promise.resolve(MUNI.lista);
+  const c = leerJSON(CLAVE_MUNI, null);
+  if (c && Array.isArray(c.l) && c.l.length > 100 && Date.now() - c.t < 30 * 864e5) return Promise.resolve(MUNI.lista = c.l);
+  if (MUNI.sinAemet) return Promise.resolve(null);
+  if (!MUNI.cargando) {
+    MUNI.cargando = fetch("api/tiempo?lista=1")
+      .then(r => (r.ok ? r.json() : null))
+      .then(j => {
+        const l = j && Array.isArray(j.municipios) ? j.municipios.filter(m => m && /^\d{5}$/.test(m.c) && typeof m.n === "string") : [];
+        if (l.length < 100) { MUNI.sinAemet = true; return null; }
+        guardarJSON(CLAVE_MUNI, { t: Date.now(), l });
+        return (MUNI.lista = l);
+      })
+      .catch(() => { MUNI.sinAemet = true; return null; })
+      .finally(() => { MUNI.cargando = null; });
+  }
+  return MUNI.cargando;
+}
+const sinTildes = s => String(s).normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
+function cercano(lista, lat, lon) {
+  let mejor = null, dm = Infinity;
+  const k = Math.cos(lat * Math.PI / 180);
+  for (const m of lista) {
+    if (typeof m.la !== "number" || typeof m.lo !== "number") continue;
+    const d = (m.la - lat) ** 2 + ((m.lo - lon) * k) ** 2;
+    if (d < dm) { dm = d; mejor = m; }
+  }
+  return dm < 0.25 ? mejor : null;      // a menos de unos 50 km: si no, está fuera de Castilla y León
 }
 
 /* ---------- datos ---------- */
-function cargarPrevision(forzar = false) {
-  const l = TIEMPO.lugar || (TIEMPO.lugar = lugarGuardado());
-  if (!l) return null;
-  const cache = leerJSON("lonjas-tiempo-cache", null);
-  if (!forzar && !TIEMPO.prevision && cache && cache.clave === `${l.lat},${l.lon}` && Date.now() - cache.t < 30 * 60e3) {
-    TIEMPO.prevision = cache.datos;
+const valida = d => d && d.hourly && Array.isArray(d.hourly.time) && d.hourly.time.length && d.daily && Array.isArray(d.daily.time);
+async function pedirPrevision(l) {
+  // Lugar sin código (elegido antes o con «mi ubicación»): se busca el municipio de AEMET más cercano
+  if (!l.c && typeof l.lat === "number") {
+    const lista = await listaMunicipios();
+    const m = lista && cercano(lista, l.lat, l.lon);
+    if (m) { l.c = m.c; if (l.nombre === "Mi ubicación") l.nombre = m.n; l.prov = m.p; guardarJSON(CLAVE_LUGAR, l); }
   }
-  if ((TIEMPO.prevision && !forzar) || TIEMPO.cargando) return TIEMPO.cargando;
+  if (l.c) {
+    try {
+      const r = await fetch(`api/tiempo?m=${encodeURIComponent(l.c)}`);
+      if (r.ok) { const d = await r.json(); if (valida(d) && d.fuente === "aemet") return d; }
+    } catch { /* reserva */ }
+  }
+  if (typeof l.lat !== "number") throw new Error("sin previsión");
   const q = new URLSearchParams({
     latitude: l.lat, longitude: l.lon, timezone: "Europe/Madrid", forecast_days: "5", wind_speed_unit: "kmh",
     hourly: "temperature_2m,relative_humidity_2m,precipitation,precipitation_probability,wind_speed_10m,wind_gusts_10m,weather_code,is_day",
     daily: "temperature_2m_max,temperature_2m_min,precipitation_sum,precipitation_probability_max,wind_speed_10m_max,weather_code",
   });
+  const r = await fetch(`${METEO}?${q}`);
+  if (!r.ok) throw new Error("HTTP " + r.status);
+  const d = await r.json();
+  if (!valida(d)) throw new Error("formato");
+  d.fuente = "open-meteo";
+  return d;
+}
+const claveLugar = l => l.c || `${l.lat},${l.lon}`;
+function cargarPrevision(forzar = false) {
+  const l = TIEMPO.lugar || (TIEMPO.lugar = lugarGuardado());
+  if (!l) return null;
+  const cache = leerJSON("lonjas-tiempo-cache", null);
+  if (!forzar && !TIEMPO.prevision && cache && cache.clave === claveLugar(l) && Date.now() - cache.t < 30 * 60e3 && valida(cache.datos)) {
+    TIEMPO.prevision = cache.datos;
+  }
+  if ((TIEMPO.prevision && !forzar) || TIEMPO.cargando) return TIEMPO.cargando;
   TIEMPO.error = "";
-  TIEMPO.cargando = fetch(`${METEO}?${q}`)
-    .then(r => { if (!r.ok) throw new Error("HTTP " + r.status); return r.json(); })
+  TIEMPO.cargando = pedirPrevision(l)
     .then(d => {
-      if (!d || !d.hourly || !Array.isArray(d.hourly.time)) throw new Error("formato");
       TIEMPO.prevision = d;
-      guardarJSON("lonjas-tiempo-cache", { clave: `${l.lat},${l.lon}`, t: Date.now(), datos: d });
+      guardarJSON("lonjas-tiempo-cache", { clave: claveLugar(l), t: Date.now(), datos: d });
     })
     .catch(() => { TIEMPO.error = "No se ha podido cargar la previsión. Comprueba la conexión."; })
     .finally(() => {
@@ -143,6 +202,10 @@ function bloqueTiempo() {
 }
 
 /* ---------- vista ---------- */
+function fechaElab(s) {
+  const m = /^(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2})/.exec(String(s));
+  return m ? `${+m[3]}/${+m[2]} a las ${m[4]}:${m[5]}` : "";
+}
 function vistaTiempo() {
   const l = TIEMPO.lugar || (TIEMPO.lugar = lugarGuardado());
   const u = umbrales();
@@ -154,8 +217,12 @@ function vistaTiempo() {
       <div id="tiempo-resultados">${resultadosLugar()}</div>
     </div>`;
   const cab = `<div class="titulo-seccion"><h2>Tiempo y tratamientos</h2><span>${l ? esc(l.nombre) + (l.prov ? ` (${esc(l.prov)})` : "") : "Elige tu municipio"}</span></div>`;
-  const pie = `<p class="nota">Orientativo: sigue siempre la etiqueta del producto y la normativa de uso de fitosanitarios (no tratar con viento que provoque deriva). Previsión: <a href="https://open-meteo.com/" target="_blank" rel="noopener noreferrer">Open-Meteo</a> (CC BY 4.0). El municipio y los límites se guardan solo en tu teléfono.</p>`;
-  if (!l) return `<section class="seccion">${cab}<p class="gasoleo-lead">Busca tu municipio y te marcamos, hora a hora y para los próximos 5 días, cuándo hay buenas condiciones para tratar.</p>${buscador}${pie}</section>`;
+  const P = TIEMPO.prevision;
+  const fuente = P && P.fuente === "open-meteo"
+    ? `Previsión: <a href="https://open-meteo.com/" target="_blank" rel="noopener noreferrer">Open-Meteo</a> (CC BY 4.0), porque AEMET no ha respondido.`
+    : `Fuente: <a href="https://www.aemet.es/" target="_blank" rel="noopener noreferrer">AEMET</a>. Información elaborada utilizando, entre otras, la obtenida de la Agencia Estatal de Meteorología${P && P.elaborado ? ` (previsión del ${esc(fechaElab(P.elaborado))})` : ""}.`;
+  const pie = `<p class="nota">Orientativo: sigue siempre la etiqueta del producto y la normativa de uso de fitosanitarios (no tratar con viento que provoque deriva). ${fuente} El municipio y los límites se guardan solo en tu teléfono.</p>`;
+  if (!l) return `<section class="seccion">${cab}<p class="gasoleo-lead">Busca tu municipio y te marcamos, hora a hora y para los próximos días, cuándo hay buenas condiciones para tratar.</p>${buscador}${pie}</section>`;
   if (!TIEMPO.prevision) {
     cargarPrevision();
     return `<section class="seccion">${cab}<div class="vacio">${TIEMPO.error ? esc(TIEMPO.error) : "Cargando la previsión…"}</div>${buscador}${pie}</section>`;
@@ -197,7 +264,7 @@ function resultadosLugar() {
   if (TIEMPO.resultados === "cargando") return `<p class="gasoleo-cuenta">Buscando…</p>`;
   if (!Array.isArray(TIEMPO.resultados)) return "";
   if (!TIEMPO.resultados.length) return `<p class="gasoleo-sin">No se ha encontrado ese municipio.</p>`;
-  return `<ul class="tiempo-opciones">${TIEMPO.resultados.map((r, k) => `<li><button type="button" data-tiempo-lugar="${k}">${esc(r.name)}<small>${esc([r.admin2, r.admin1].filter(Boolean).join(", "))}</small></button></li>`).join("")}</ul>`;
+  return `<ul class="tiempo-opciones">${TIEMPO.resultados.map((r, k) => `<li><button type="button" data-tiempo-lugar="${k}">${esc(r.nombre)}<small>${esc(r.prov || "")}</small></button></li>`).join("")}</ul>`;
 }
 let temporizadorGeo = null, busquedaN = 0, temporizadorUmbral = null;
 function buscarLugar(q) {
@@ -205,21 +272,28 @@ function buscarLugar(q) {
   const n = ++busquedaN;
   TIEMPO.buscando = q;
   if (q.trim().length < 3) { TIEMPO.resultados = null; pintarResultados(); return; }
-  temporizadorGeo = setTimeout(() => {
+  temporizadorGeo = setTimeout(async () => {
     TIEMPO.resultados = "cargando"; pintarResultados();
-    fetch(`${GEO}?${new URLSearchParams({ name: q.trim(), count: "8", language: "es", countryCode: "ES", format: "json" })}`)
-      .then(r => r.json())
-      .then(d => {
-        const res = (d.results || []).filter(r => typeof r.latitude === "number").map(r => ({
-          name: String(r.name || "").slice(0, 80), admin1: String(r.admin1 || "").slice(0, 60), admin2: String(r.admin2 || "").slice(0, 60),
-          latitude: r.latitude, longitude: r.longitude }));
-        // primero los de Castilla y León
-        res.sort((a, b) => (b.admin1 === "Castilla y León") - (a.admin1 === "Castilla y León"));
-        if (n === busquedaN) TIEMPO.resultados = res;
-      })
-      .catch(() => { if (n === busquedaN) TIEMPO.resultados = []; })
-      .finally(() => { if (n === busquedaN) pintarResultados(); });
-  }, 350);
+    let res = [];
+    try {
+      const lista = await listaMunicipios();
+      if (lista) {
+        // Municipios de AEMET (solo Castilla y León): primero los que empiezan por lo escrito
+        const t = sinTildes(q.trim());
+        const emp = [], con = [];
+        for (const m of lista) { const x = sinTildes(m.n); if (x.startsWith(t)) emp.push(m); else if (x.includes(t)) con.push(m); }
+        res = [...emp, ...con].slice(0, 8).map(m => ({ nombre: m.n, prov: m.p, c: m.c, lat: m.la, lon: m.lo }));
+      } else {
+        const r = await fetch(`${GEO}?${new URLSearchParams({ name: q.trim(), count: "8", language: "es", countryCode: "ES", format: "json" })}`);
+        const d = await r.json();
+        res = (d.results || []).filter(r => typeof r.latitude === "number").map(r => ({
+          nombre: String(r.name || "").slice(0, 80), prov: [r.admin2, r.admin1].filter(Boolean).join(", ").slice(0, 80), cyl: r.admin1 === "Castilla y León",
+          lat: Math.round(r.latitude * 100) / 100, lon: Math.round(r.longitude * 100) / 100 }));
+        res.sort((a, b) => b.cyl - a.cyl);
+      }
+    } catch { res = []; }
+    if (n === busquedaN) { TIEMPO.resultados = res; pintarResultados(); }
+  }, 250);
 }
 function pintarResultados() {
   const el = document.getElementById("tiempo-resultados");
@@ -255,7 +329,8 @@ document.addEventListener("click", e => {
   if (t.dataset.tiempoHora) { TIEMPO.hora = TIEMPO.hora === t.dataset.tiempoHora ? null : t.dataset.tiempoHora; router(); return; }
   if (t.dataset.tiempoLugar != null) {
     const r = Array.isArray(TIEMPO.resultados) ? TIEMPO.resultados[+t.dataset.tiempoLugar] : null;
-    if (r) elegirLugar({ nombre: r.name, prov: r.admin2 || r.admin1, lat: Math.round(r.latitude * 100) / 100, lon: Math.round(r.longitude * 100) / 100 });
+    if (r) elegirLugar({ nombre: r.nombre, prov: String(r.prov || "").split(",")[0], ...(r.c ? { c: r.c } : {}),
+                         ...(typeof r.lat === "number" ? { lat: r.lat, lon: r.lon } : {}) });
     return;
   }
   if (t.hasAttribute("data-umbrales-def")) { try { localStorage.removeItem(CLAVE_UMBRALES); } catch {} router(); return; }

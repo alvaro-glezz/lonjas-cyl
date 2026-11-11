@@ -151,7 +151,7 @@ def linea_producto(datos: dict, clave: str, hoy: date, junta: Junta) -> dict | N
                 f"según el histórico oficial de la Junta; ahora {num(ahora, 0 if ahora > 50 else 2)} ({signo(pct, 1)} %).")
     sube = sum(1 for _, d in cambios if d and d > 0)
     baja = sum(1 for _, d in cambios if d and d < 0)
-    return {"clave": clave, "texto": txt, "sube": sube, "baja": baja, "ranking": r, "anio": anio}
+    return {"clave": clave, "texto": txt, "sube": sube, "baja": baja, "ranking": r, "anio": anio, "cambios": cambios}
 
 
 def gasoleo(hoy: date) -> str | None:
@@ -220,9 +220,157 @@ def crear_informe(datos: dict, hoy: date, junta: Junta | None = None) -> dict | 
             "titulo": f"Mercado agrario de Castilla y León · semana {rango(lunes, sabado)}",
             "titular": titular, "resumen": resumen, "secciones": secciones,
             "hablado": guion(hoy, lunes, sabado, tono, cereales, mov, g),
+            "redaccion": redaccion(datos, lunes, sabado, tono, suben, bajan, cereales, ganado, mov, sin),
             "fuentes": ["Lonjas de Salamanca (datos abiertos de la Diputación, CC BY 4.0), León, Segovia y Lerma",
                         "Histórico de precios de la Junta de Castilla y León",
                         "Ministerio para la Transición Ecológica y el Reto Demográfico (gasóleo B)"]}
+
+
+# ---------- redacción (el comentario escrito como un artículo) ----------
+
+# Artículo y número de cada producto, para escribir frases correctas («el trigo se ha pagado», «los lechones se han pagado»)
+ARTICULO = {"trigo": "el", "cebada": "la", "maiz": "el", "centeno": "el", "avena": "la", "girasol": "el",
+            "cerdo-normal": "el", "cerdo-selecto": "el", "lechones": "los", "lechazo": "el"}
+
+
+def _con_art(clave: str, mayus: bool = False) -> str:
+    t = f"{ARTICULO.get(clave, 'el')} {PRODUCTOS[clave][1].lower()}"
+    return t[0].upper() + t[1:] if mayus else t
+
+
+def _minus(t: str) -> str:
+    """«Oveja desvieje 2ª» -> «oveja desvieje 2ª» (respeta siglas como «IGP»)."""
+    return t if len(t) > 1 and t[:2].isupper() else t[:1].lower() + t[1:]
+
+
+NUM_LONJAS = {2: "las dos", 3: "las tres", 4: "las cuatro", 5: "las cinco"}
+
+
+def _pct(v: float) -> str:
+    """16.2 -> «16,2»; 20.0 -> «20»."""
+    return num(v, 0) if abs(v - round(v)) < 0.05 else num(v, 1)
+
+
+def _cambios_texto(cambios: list, u: str) -> str:
+    """[('Salamanca', -1), ('León', -1), ('Segovia', -2), ('Lerma', 0)]
+    -> «baja 1 €/t en Salamanca y León y 2 €/t en Segovia, y repite en Lerma»."""
+    grupos: dict = {}
+    validos = [(n, d) for n, d in cambios if d is not None]
+    for n, d in validos:
+        grupos.setdefault(round(d, 3), []).append(n)
+    if not grupos:
+        return ""
+    if len(grupos) == 1 and len(validos) > 1:
+        d = next(iter(grupos))
+        donde = f"en {NUM_LONJAS.get(len(validos), 'todas las')} lonjas"
+        return f"repite {donde}" if abs(d) < 1e-9 else f"{'sube' if d > 0 else 'baja'} {cifra(abs(d))} {u} {donde}"
+    verbos = []
+    for verbo, cond in (("baja", lambda d: d < -1e-9), ("sube", lambda d: d > 1e-9)):
+        trozos = [f"{cifra(abs(d))} {u} en {redes._lista(ls)}" for d, ls in sorted(grupos.items(), key=lambda x: abs(x[0])) if cond(d)]
+        if trozos:
+            verbos.append(f"{verbo} " + redes._lista(trozos))
+    rep = [n for d, ls in grupos.items() if abs(d) < 1e-9 for n in ls]
+    if rep:
+        verbos.append(f"repite en {redes._lista(rep)}")
+    if len(verbos) <= 2:
+        return " y ".join(verbos)
+    return ", ".join(verbos[:-1]) + ", y " + verbos[-1]
+
+
+def _frase_producto(x: dict, k: int) -> str:
+    """Una o dos frases sobre un producto, con el arranque variado para que no suene a lista."""
+    clave, r = x["clave"], x["ranking"]
+    u, filas = r["unidad"], r["filas"]
+    plural = ARTICULO.get(clave) == "los"
+    p0 = filas[0][1]["act"]
+    iguales = [nombre(l) for l, p in filas if abs(p["act"] - p0) < 1e-9]
+    ultimo = filas[-1]
+    if len(filas) == 1:
+        f = f"{_con_art(clave, True)} solo ha cotizado en {nombre(filas[0][0])}, a {cifra(p0)} {u}"
+    elif len(iguales) == len(filas):
+        f = f"{_con_art(clave, True)} {'han cotizado' if plural else 'ha cotizado'} igual en {redes._lista(iguales)}, a {cifra(p0)} {u}"
+    else:
+        quien = redes._lista(iguales)
+        dif = f"{cifra(p0 - ultimo[1]['act'])} {u} por encima de {nombre(ultimo[0])}"
+        arranques = [
+            f"{_con_art(clave, True)} se {'han pagado' if plural else 'ha pagado'} mejor en {quien}, a {cifra(p0)} {u}, {dif}",
+            f"En {_con_art(clave)}, {'marcan' if len(iguales) > 1 else 'marca'} el precio más alto {quien}, con {cifra(p0)} {u}, {dif}",
+            f"Para {_con_art(clave)}, la mejor cotización ha sido la de {quien}: {cifra(p0)} {u}, {dif}",
+        ]
+        f = arranques[k % len(arranques)]
+    cambios = _cambios_texto(x["cambios"], u)
+    if cambios:
+        f += f". {('Respecto a la sesión anterior', 'Frente a la sesión anterior', 'En comparación con la sesión previa')[k % 3]}, {cambios}"
+    a = x["anio"]
+    if a and abs(a["pct"]) >= 0.05:
+        mas = a["pct"] > 0
+        f += (f". {('Comparado con hace un año', 'Si se compara con la misma semana del año pasado')[k % 2]}, {'cotizan' if plural else 'cotiza'} un {_pct(abs(a['pct']))} % "
+              f"{'más caro' + ('s' if plural else '') if mas else 'más barato' + ('s' if plural else '')} "
+              f"({num(a['ahora'], 0 if a['ahora'] > 50 else 2)} {u} de media frente a {num(a['antes'], 0 if a['antes'] > 50 else 2)})")
+    return f + "."
+
+
+def redaccion(datos, lunes, sabado, tono, suben, bajan, cereales, ganado, mov, sin) -> list[dict]:
+    """El comentario de la semana escrito como un artículo: párrafos con subtítulo opcional («t») y texto («p»)."""
+    out = []
+    entrada = (f"La semana {rango(lunes, sabado)} ha sido {tono} en los cereales de las lonjas de Castilla y León. "
+               f"De sus cotizaciones, {cuantas(suben, 'sube', 'suben')} y {cuantas(bajan, 'baja', 'bajan')} respecto a la sesión anterior")
+    trigo = next((x for x in cereales if x["clave"] == "trigo"), None)
+    if trigo and trigo["anio"] and abs(trigo["anio"]["pct"]) >= 0.05:
+        a = trigo["anio"]
+        entrada += (f", y el trigo sigue un {_pct(abs(a['pct']))} % {'por encima' if a['pct'] > 0 else 'por debajo'} "
+                    f"de lo que se pagaba hace un año")
+    entrada += "."
+    if sin:
+        entrada += f" {redes._lista(sin)} no {'ha celebrado' if len(sin) == 1 else 'han celebrado'} sesión nueva esta semana."
+    out.append({"t": "", "p": entrada})
+    if cereales:
+        frases = [_frase_producto(x, k) for k, x in enumerate(cereales)]
+        # dos párrafos si hay muchos productos, para que se lea bien
+        corte = 3 if len(frases) > 4 else len(frases)
+        out.append({"t": "Cereales y oleaginosas", "p": " ".join(frases[:corte])})
+        if frases[corte:]:
+            out.append({"t": "", "p": ("Por su parte, " + _minus(frases[corte])) + (" " + " ".join(frases[corte + 1:]) if frases[corte + 1:] else "")})
+    for titulo, lineas in ganado:
+        out.append({"t": titulo, "p": " ".join(_frase_producto(x, k + 1) for k, x in enumerate(lineas))})
+    if mov:
+        def trozo(c):
+            return f"{_minus(c['producto'])} en {c['lonja']} ({signo(c['pct'], 1)} %, hasta {cifra(c['act'])} {c['unidad']})"
+        t = []
+        if mov["suben"]:
+            t.append(f"Entre los mayores movimientos de la semana destacan las subidas de {redes._lista([trozo(c) for c in mov['suben']])}.")
+        if mov["bajan"]:
+            t.append(f"{'En el lado contrario, las mayores bajadas han sido las de' if mov['suben'] else 'Los mayores movimientos de la semana han sido las bajadas de'} "
+                     f"{redes._lista([trozo(c) for c in mov['bajan']])}.")
+        out.append({"t": "Lo que más se ha movido", "p": " ".join(t)})
+    gas = _gasoleo_datos()
+    if gas:
+        txt = (f"En cuanto a los costes, el gasóleo agrícola (gasóleo B) se paga en Castilla y León a {num(gas['media'], 3)} €/l de media, "
+               f"y la gasolinera más barata lo ofrece a {num(gas['min'], 3)} €/l.")
+        if gas.get("antes") is not None:
+            d = gas["media"] - gas["antes"]
+            txt += (" El precio medio no se ha movido en la última semana." if abs(d) < 0.0005 else
+                    f" Hace una semana la media estaba en {num(gas['antes'], 3)} €/l, así que {'ha subido' if d > 0 else 'ha bajado'} "
+                    f"{num(abs(d), 3)} € por litro.")
+        out.append({"t": "Gasóleo agrícola", "p": txt})
+    lon = sorted((l for l in datos.get("lonjas", []) if l.get("estado") != "suspendida" and l.get("dia") in ORDEN_DIAS),
+                 key=lambda l: ORDEN_DIAS.index(l["dia"]))
+    if lon:
+        out.append({"t": "La semana que viene", "p": "La próxima semana volverán a reunirse las mesas de precios: "
+                    + redes._lista([f"{nombre(l)} el {l['dia'].lower()}" for l in lon])
+                    + ". Tendrás todas las cotizaciones en Lonjas CyL en cuanto se publiquen."})
+    return out
+
+
+def _gasoleo_datos() -> dict | None:
+    if not GASOLEO_HIST.is_file():
+        return None
+    serie = json.loads(GASOLEO_HIST.read_text(encoding="utf-8")).get("cyl", [])
+    if not serie:
+        return None
+    u = serie[-1]
+    previo = next((x for x in reversed(serie) if (date.fromisoformat(u[0]) - date.fromisoformat(x[0])).days >= 6), None)
+    return {"media": u[1], "min": u[2], "antes": previo[1] if previo else None}
 
 
 def guion(hoy, lunes, sabado, tono, cereales, mov, g) -> str:

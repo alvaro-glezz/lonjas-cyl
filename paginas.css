@@ -49,3 +49,8 @@ ul.informe li { margin: .45em 0; }
 .audio { margin: 16px 0; background: var(--hoja); border: 1px solid var(--linea); border-radius: 12px; padding: 12px; }
 .audio figcaption { font-size: .9rem; color: var(--tenue); margin-bottom: 8px; }
 .audio audio { width: 100%; }
+.redaccion p { margin: 0 0 1em; max-width: 68ch; }
+.redaccion h2 { margin-top: 1.3em; }
+.datos-lista { margin: 18px 0; background: var(--hoja); border: 1px solid var(--linea); border-radius: 12px; padding: 10px 14px; }
+.datos-lista summary { cursor: pointer; font-weight: 700; }
+.datos-lista h3 { font: 700 1.15rem var(--cifra); margin: 1em 0 .3em; }

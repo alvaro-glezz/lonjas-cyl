@@ -9,7 +9,7 @@ const crypto = require("crypto");
 const { config, pipeline, hoyMadrid } = require("./_almacen");
 
 const CADUCA = 400 * 86400;
-const RUTAS = /^(hoy|lonjas|lonja-[a-z0-9-]{1,30}|comparar(-[a-z0-9-]{1,20})?|historico|favoritos|calculadora|oferta|explotacion|termometro|plazos|datos|metodo|fuentes|detalle|widget|web:[a-z0-9-]{1,40})$/;
+const RUTAS = /^(hoy|lonjas|lonja-[a-z0-9-]{1,30}|comparar(-[a-z0-9-]{1,20})?|historico|favoritos|calculadora|oferta|explotacion|termometro|plazos|datos|metodo|fuentes|detalle|widget|tiempo|gasoleo|comentario|web:[a-z0-9-]{1,40})$/;
 const ROBOTS = /bot|crawl|spider|slurp|preview|headless|lighthouse|monitor|curl|wget|python|axios|node-fetch|facebookexternalhit|whatsapp\//i;
 const ORIGENES = [
   ["google", /(^|\.)google\.[a-z.]+$/], ["bing", /(^|\.)bing\.com$/], ["duckduckgo", /(^|\.)duckduckgo\.com$/],
