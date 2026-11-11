@@ -34,8 +34,10 @@ async function pedirAemet(ruta, k) {
   const d = await conTiempo(sobre.datos);
   if (!d.ok) throw new Error("datos " + d.status);
   const buf = await d.arrayBuffer();
+  // AEMET dice que manda ISO-8859-15, pero a veces llega en UTF-8: primero UTF-8 estricto y, si falla, ISO-8859-15
   let txt;
-  try { txt = new TextDecoder("iso-8859-15").decode(buf); } catch { txt = Buffer.from(buf).toString("latin1"); }
+  try { txt = new TextDecoder("utf-8", { fatal: true }).decode(buf); }
+  catch { try { txt = new TextDecoder("iso-8859-15").decode(buf); } catch { txt = Buffer.from(buf).toString("latin1"); } }
   return JSON.parse(txt);
 }
 
@@ -114,6 +116,9 @@ function normalizar(json, ahora = new Date()) {
       H.is_day.push(orto !== null && ocaso !== null ? (h * 60 + 30 >= orto && h * 60 + 30 <= ocaso ? 1 : 0) : (c.endsWith("n") ? 0 : 1));
     }
   }
+  // Días que solo traen horas de noche (el último suele acabar a las 6 h): fuera, no sirven para tratar
+  const conLuz = new Set(H.time.filter(t => { const h = +t.slice(11, 13); return h >= 9 && h <= 17; }).map(t => t.slice(0, 10)));
+  for (let i = H.time.length - 1; i >= 0; i--) if (!conLuz.has(H.time[i].slice(0, 10))) for (const k of Object.keys(H)) H[k].splice(i, 1);
   if (!H.time.length) throw new Error("sin horas");
   // Resumen de cada día con las horas que da AEMET
   const D = { time: [], temperature_2m_max: [], temperature_2m_min: [], precipitation_sum: [], precipitation_probability_max: [],
@@ -158,7 +163,7 @@ async function manejador(req, res) {
   if (!k) { res.setHeader("Cache-Control", "no-store"); return res.status(503).json({ error: "sin-clave" }); }
   const q = req.query || {};
   try {
-    if (q.lista === "1") {
+    if (q.lista === "1" || q.lista === "2") {
       const l = municipios(await pedirAemet("/maestro/municipios", k));
       if (l.length < 100) throw new Error("lista corta");
       res.setHeader("Cache-Control", "public, max-age=86400, s-maxage=604800, stale-while-revalidate=604800");

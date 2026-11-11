@@ -30,14 +30,14 @@ function lugarGuardado() {
 
 /* ---------- municipios de Castilla y León (lista de AEMET, guardada 30 días en el teléfono) ---------- */
 const MUNI = { lista: null, cargando: null, sinAemet: false };
-const CLAVE_MUNI = "lonjas-municipios-cyl";
+const CLAVE_MUNI = "lonjas-municipios-cyl-2";   // «-2»: la primera lista pudo guardarse con tildes mal leídas
 function listaMunicipios() {
   if (MUNI.lista) return Promise.resolve(MUNI.lista);
   const c = leerJSON(CLAVE_MUNI, null);
   if (c && Array.isArray(c.l) && c.l.length > 100 && Date.now() - c.t < 30 * 864e5) return Promise.resolve(MUNI.lista = c.l);
   if (MUNI.sinAemet) return Promise.resolve(null);
   if (!MUNI.cargando) {
-    MUNI.cargando = fetch("api/tiempo?lista=1")
+    MUNI.cargando = fetch("api/tiempo?lista=2")
       .then(r => (r.ok ? r.json() : null))
       .then(j => {
         const l = j && Array.isArray(j.municipios) ? j.municipios.filter(m => m && /^\d{5}$/.test(m.c) && typeof m.n === "string") : [];

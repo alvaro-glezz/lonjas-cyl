@@ -24,6 +24,9 @@ const PREV = [{
     temperatura: horas(0, 23, h => ({ value: "5", periodo: pad(h) })),
     humedadRelativa: horas(0, 23, h => ({ value: "90", periodo: pad(h) })),
     vientoAndRachaMax: horas(0, 23, h => [{ direccion: ["C"], velocidad: ["0"], periodo: pad(h) }, { value: "", periodo: pad(h) }]).flat(),
+  }, {
+    fecha: "2026-11-13T00:00:00", orto: "08:19", ocaso: "18:05",
+    temperatura: horas(0, 6, h => ({ value: "4", periodo: pad(h) })),
   }] },
 }];
 const MAESTRO = [
@@ -36,6 +39,7 @@ const MAESTRO = [
 
 let llamadas = [];
 const latin1 = s => Uint8Array.from(Buffer.from(s, "latin1")).buffer;
+const utf8 = s => Uint8Array.from(Buffer.from(s, "utf8")).buffer;
 global.fetch = async (url, op = {}) => {
   url = String(url); llamadas.push({ url, op });
   if (url.startsWith("https://opendata.aemet.es/opendata/api/")) {
@@ -45,7 +49,7 @@ global.fetch = async (url, op = {}) => {
     if (url.endsWith("/horaria/47998")) return { ok: true, json: async () => ({ estado: 429 }) };
     if (url.endsWith("/maestro/municipios")) return { ok: true, json: async () => ({ estado: 200, datos: "https://opendata.aemet.es/opendata/sh/muni" }) };
   }
-  if (url === "https://opendata.aemet.es/opendata/sh/prev") return { ok: true, arrayBuffer: async () => latin1(JSON.stringify(PREV)) };
+  if (url === "https://opendata.aemet.es/opendata/sh/prev") return { ok: true, arrayBuffer: async () => utf8(JSON.stringify(PREV)) };   // como llega de verdad
   if (url === "https://opendata.aemet.es/opendata/sh/muni") return { ok: true, arrayBuffer: async () => latin1(JSON.stringify(MAESTRO)) };
   throw new Error("URL inesperada " + url);
 };
@@ -83,7 +87,8 @@ function llamar(url, metodo = "GET") {
   const j12 = H.time.indexOf("2026-11-12T12:00");
   assert.strictEqual(H.wind_gusts_10m[j12], 0);                    // racha vacía
   assert.strictEqual(H.weather_code[j12], 95);                     // tormenta
-  assert.deepStrictEqual(d.daily.time, ["2026-11-11", "2026-11-12"]);
+  assert.deepStrictEqual(d.daily.time, ["2026-11-11", "2026-11-12"]);   // el 13 solo tenía madrugada: fuera
+  assert.ok(!H.time.some(t => t.startsWith("2026-11-13")));
   assert.strictEqual(d.daily.temperature_2m_max[0], 20); assert.strictEqual(d.daily.temperature_2m_min[0], 12);
   assert.strictEqual(d.daily.precipitation_sum[0], 1.6); assert.strictEqual(d.daily.wind_speed_10m_max[0], 23);
   assert.strictEqual(d.daily.weather_code[1], 95);
