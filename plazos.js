@@ -91,3 +91,16 @@ function vistaPlazos() {
     <p class="nota">Fechas generales de la PAC en España. Las marcadas como «fecha prevista» son el plazo habitual y aún no se han publicado para ese año. Cada pago depende de la Junta de Castilla y León y de tu expediente: consulta tu caso con tu entidad colaboradora.</p>
   </section>`;
 }
+
+/* Fila del módulo «En el campo» de Hoy: el plazo más cercano */
+function filaCampoPlazo() {
+  if (!PLAZOS.lista) { if (!PLAZOS.error) cargarPlazos(); return ""; }
+  const x = plazosOrdenados().vivos[0];
+  if (!x) return "";
+  const { p, f } = x;
+  const urgente = f.fase === "activo" && f.dias <= 7;
+  const dato = f.fase === "activo" ? (f.dias === 0 ? "Hoy" : `${f.dias}<small>día${f.dias === 1 ? "" : "s"}</small>`) : `${f.dias}<small>para empezar</small>`;
+  return `<button class="fila-mod" type="button" data-ir="plazos"><span class="fm-ico"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg></span>
+    <span><b>${esc(p.titulo)}</b><small>${p.tipo === "cobro" ? "Cobro" : "Trámite"} ${f.fase === "activo" ? `hasta el ${fechaCorta(p.fin)}` : `desde el ${fechaCorta(p.inicio)}`}${p.confirmado ? "" : " · fecha prevista"}</small></span>
+    <span class="fm-dato${urgente ? " b" : ""}">${dato}</span></button>`;
+}

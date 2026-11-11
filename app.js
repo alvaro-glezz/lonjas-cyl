@@ -206,40 +206,126 @@ function redondearMedia(media, valores) {
 
 /* ---------- vistas ---------- */
 function vistaHoy() {
-  const filas = todasLasFilas();
-  const fichas = RESUMEN.map(clave => {
-    const nombre = PRODUCTOS_CLAVE.find(p => p[0] === clave)[1];
-    const v = filas.filter(f => f.clave === clave && f.act != null);
-    if (!v.length) return "";
-    const media = v.reduce((s, f) => s + f.act, 0) / v.length;
-    const min = Math.min(...v.map(f => f.act)), max = Math.max(...v.map(f => f.act));
-    const subidas = v.filter(f => variacion(f).d > 0).length, bajadas = v.filter(f => variacion(f).d < 0).length;
-    const tend = bajadas > subidas ? '<span class="pastilla p-baja">▼ baja</span>' : subidas > bajadas ? '<span class="pastilla p-sube">▲ sube</span>' : '<span class="pastilla p-igual">= estable</span>';
-    return `<button class="ficha" type="button" data-clave="${esc(clave)}">
-      <span class="nombre">${nombre}</span>
-      <span class="valor num">${precio(redondearMedia(media, v.map(f => f.act)), v[0].unidad)}<small>${esc(v[0].unidad)}</small></span>
-      <span class="rango">${v.length > 1 ? `media de ${v.length} lonjas · ${precio(min, v[0].unidad)}–${precio(max, v[0].unidad)}` : `solo ${esc(v[0].lonja.nombre.replace("Lonja de ", ""))}`}</span>
-      ${tend}</button>`;
-  }).join("");
   return `
     ${DATOS.__sinRed ? '<p class="aviso-red">Estás sin conexión. Se muestran los últimos precios guardados en este teléfono.</p>' : ""}
     ${typeof bloqueAvisosCumplidos === "function" ? bloqueAvisosCumplidos() : ""}
-    ${seccionMiPizarra()}
-    <section class="seccion">
-      <div class="titulo-seccion"><h2>Pizarra de la semana</h2><span>Toca un producto para comparar</span></div>
-      <div class="pizarra">${fichas}</div>
-    </section>
-    ${typeof seccionHerramientas === "function" ? seccionHerramientas() : ""}
-    ${typeof seccionTitulares === "function" ? seccionTitulares() : ""}
-    ${typeof bloquePlazos === "function" ? bloquePlazos() : ""}
-    ${typeof bloqueTiempo === "function" ? bloqueTiempo() : ""}
-    ${typeof bloqueGasoleo === "function" ? bloqueGasoleo() : ""}
-    ${typeof bloqueComentario === "function" ? bloqueComentario() : ""}
-    <section class="seccion">
-      <div class="titulo-seccion"><h2>Lonjas</h2><span>Última sesión de cada una</span></div>
-      ${listaLonjas()}
-    </section>
-    <p class="nota">Precios orientativos publicados por cada lonja. Cada lonja cotiza en sus propias condiciones (calidad, punto de entrega, peso), así que los valores no siempre son comparables entre sí. <a href="#metodo">Fuentes y método</a>.</p>`;
+    ${franjaHoy()}
+    ${moduloPizarra()}
+    ${moduloSemana()}
+    ${moduloCampo()}
+    ${moduloLonjas()}
+    <p class="nota nota-hoy">Precios orientativos publicados por cada lonja. Cada lonja cotiza en sus propias condiciones (calidad, punto de entrega, peso), así que los valores no siempre son comparables entre sí. <a href="#metodo">Fuentes y método</a>.</p>`;
+}
+
+/* Franja de arriba: lo esencial del día en tres datos */
+function franjaHoy() {
+  const activas = DATOS.lonjas.filter(l => l.estado !== "suspendida");
+  const alDia = activas.filter(l => estadoLonja(l).clase === "p-dia").length;
+  const hoy = new Date();
+  const prox = activas.map(l => ({ l, p: proximaSesion(l) })).filter(x => x.p && x.p.dias >= 0).sort((a, b) => a.p.dias - b.p.dias)[0];
+  const sesion = !prox ? "—" : prox.p.dias === 0 ? `${corta(prox.l)} · hoy` : prox.p.dias === 1 ? `${corta(prox.l)} · mañana` : `${corta(prox.l)} · ${DIAS[new Date(prox.p.fecha + "T12:00:00").getDay()].slice(0, 3)} ${fechaCorta(prox.p.fecha)}`;
+  return `<div class="franja-hoy">
+    <div><span class="etiqueta">Hoy</span><b>${DIAS[hoy.getDay()].slice(0, 3)}. ${hoy.getDate()} ${MESES[hoy.getMonth()]}</b></div>
+    <div><span class="etiqueta">Al día</span><b>${alDia} de ${activas.length} lonjas</b></div>
+    <div><span class="etiqueta">Próxima</span><b>${esc(sesion)}</b></div>
+  </div>`;
+}
+const corta = l => l.nombre.replace("Lonja de ", "");
+
+/* 01 · Pizarra: tus favoritos (si tienes) o los productos clave, en filas alineadas */
+function moduloPizarra() {
+  const favs = [...FAVS].map(buscarFila).filter(Boolean);
+  const flecha = d => d > 0 ? '<span class="pz-t s" aria-label="sube">▲</span>' : d < 0 ? '<span class="pz-t b" aria-label="baja">▼</span>' : '<span class="pz-t i" aria-label="igual">=</span>';
+  let filas, cabeza, pie;
+  if (favs.length) {
+    cabeza = ["Producto", "Precio", "Cambio"];
+    filas = favs.map(f => {
+      const v = variacion(f);
+      return `<button class="pz-fila" type="button" data-fila="${esc(f.id)}">
+        <span class="pz-nom"><b>${esc(f.producto)}</b><small>${esc(f.unidad)} · ${esc(corta(f.lonja))} · ${fechaCorta(f.lonja.fecha)}</small></span>
+        <span class="pz-val num">${f.act == null ? "—" : precio(f.act, f.unidad)}</span>
+        <span class="pz-sec ${v.clase}">${f.act == null ? (f.ult ? "sin cotizar" : "—") : v.txt === "nuevo" ? "nuevo" : v.txt === "=" ? "= repite" : v.txt.replace(/^[▲▼] /, "")}</span>
+        ${flecha(v.d)}</button>`;
+    }).join("");
+    pie = `<p class="mod-pie">Tus favoritos. Toca un producto para ver su ficha; quítalo con la ★ de su ficha.</p>`;
+  } else {
+    cabeza = ["Producto", "Media", "Horquilla"];
+    const todas = todasLasFilas();
+    filas = RESUMEN.map(clave => {
+      const nombre = PRODUCTOS_CLAVE.find(p => p[0] === clave)[1];
+      const v = todas.filter(f => f.clave === clave && f.act != null);
+      if (!v.length) return "";
+      const media = v.reduce((a, f) => a + f.act, 0) / v.length;
+      const min = Math.min(...v.map(f => f.act)), max = Math.max(...v.map(f => f.act));
+      const sub = v.filter(f => variacion(f).d > 0).length, baj = v.filter(f => variacion(f).d < 0).length;
+      return `<button class="pz-fila" type="button" data-clave="${esc(clave)}">
+        <span class="pz-nom"><b>${nombre}</b><small>${esc(v[0].unidad)} · ${v.length > 1 ? `${v.length} lonjas` : `solo ${esc(corta(v[0].lonja))}`}</small></span>
+        <span class="pz-val num">${precio(redondearMedia(media, v.map(f => f.act)), v[0].unidad)}</span>
+        <span class="pz-sec">${v.length > 1 ? `${precio(min, v[0].unidad)}–${precio(max, v[0].unidad)}` : "—"}</span>
+        ${flecha(sub - baj)}</button>`;
+    }).join("");
+    pie = `<p class="mod-pie"><b>Haz tu pizarra:</b> toca la ★ de los productos que vendes o compras y aparecerán aquí en lugar de estos.</p>`;
+  }
+  return `<section class="modulo mod-pizarra">
+    ${cabModulo("01", favs.length ? "Mi pizarra" : "Pizarra", `<a href="#${favs.length ? "favoritos" : "comparar"}">${favs.length ? "Ver en Mío ›" : "Comparar ›"}</a>`)}
+    <div class="pz-cab" aria-hidden="true"><span>${cabeza[0]}</span><span>${cabeza[1]}<span class="pz-movil"> · ${cabeza[2].toLowerCase()}</span></span><span>${cabeza[2]}</span><span></span></div>
+    ${filas}
+    ${pie}
+  </section>`;
+}
+
+/* 02 · La semana: el comentario, el balance y lo que más se ha movido */
+function moduloSemana() {
+  const r = typeof resumenSemana === "function" ? resumenSemana() : null;
+  const t = typeof generarTitulares === "function" ? generarTitulares().slice(0, 3) : [];
+  const c = typeof COMENTARIO !== "undefined" ? COMENTARIO.datos : null;
+  if (typeof cargarComentario === "function" && !c) cargarComentario();
+  const comentario = c && comentarioReciente(c) ? `<a class="sem-coment" href="#comentario">
+      <span class="etiqueta">Comentario de la semana${c.audio ? " · con audio" : ""}</span>
+      <b>${esc(c.titular)}</b><span class="sem-leer">${c.audio ? "Escuchar o leer" : "Leer"} el comentario ›</span></a>` : "";
+  if (!r || !r.total) return comentario ? `<section class="modulo">${cabModulo("02", "La semana")}${comentario}</section>` : "";
+  const mov = x => `<button type="button" class="sem-mov" data-fila="${esc(x.f.id)}"><span>${esc(x.f.producto)} <small>· ${esc(corta(x.f.lonja))}</small></span><b class="var ${x.p > 0 ? "s" : "b"}">${pctTxt(x.p)}</b></button>`;
+  const aj = typeof leerAjustes === "function" ? leerAjustes() : {};
+  return `<section class="modulo mod-semana">
+    ${cabModulo("02", "La semana", r.desde ? `<span>${fechaCorta(r.desde)} – ${fechaCorta(r.hasta)}</span>` : "")}
+    ${comentario}
+    <div class="sem-balance">
+      <div><b class="num s">${r.suben}</b><small>suben</small></div>
+      <div><b class="num b">${r.bajan}</b><small>bajan</small></div>
+      <div><b class="num">${r.total - r.suben - r.bajan}</b><small>repiten</small></div>
+    </div>
+    ${t.length ? `<ul class="sem-tit">${t.map(x => `<li><button type="button" data-fila="${esc(x.fila)}"><span class="flecha ${x.dir > 0 ? "s" : x.dir < 0 ? "b" : "i"}" aria-hidden="true">${x.dir > 0 ? "▲" : x.dir < 0 ? "▼" : "★"}</span><span><b>${esc(x.txt)}</b><small>${esc(x.valor)}</small></span></button></li>`).join("")}</ul>` : ""}
+    ${r.subidas.length || r.bajadas.length ? `<div class="sem-movs"><span class="etiqueta">Lo que más se ha movido</span>${[...r.subidas.slice(0, 2), ...r.bajadas.slice(0, 2)].map(mov).join("")}</div>` : ""}
+    <div class="mod-acciones">
+      <button class="chip" type="button" data-compartir-resumen>⇪ Compartir resumen</button>
+      ${"Notification" in window ? `<button class="chip" type="button" data-resumen-lunes aria-pressed="${!!aj.resumenLunes}">${aj.resumenLunes ? "🔔 Aviso de los lunes activado" : "🔔 Avisarme los lunes"}</button>` : ""}
+    </div>
+  </section>`;
+}
+
+/* 03 · En el campo: tiempo para tratar, gasóleo y el plazo de la PAC más cercano (una fila cada uno) */
+function moduloCampo() {
+  const filas = [typeof filaCampoTiempo === "function" ? filaCampoTiempo() : "",
+                 typeof filaCampoGasoleo === "function" ? filaCampoGasoleo() : "",
+                 typeof filaCampoPlazo === "function" ? filaCampoPlazo() : ""].filter(Boolean);
+  if (!filas.length) return "";
+  return `<section class="modulo mod-campo">${cabModulo("03", "En el campo", '<a href="#tiempo">Ver Campo ›</a>')}${filas.join("")}</section>`;
+}
+
+/* 04 · Lonjas: una fila por lonja con su última sesión, la próxima y su estado */
+function moduloLonjas() {
+  const orden = [...DATOS.lonjas].sort((a, b) => (b.estado !== "suspendida") - (a.estado !== "suspendida") || (b.fecha || "").localeCompare(a.fecha || ""));
+  const filas = orden.map(l => {
+    const e = estadoLonja(l);
+    if (l.estado === "suspendida") {
+      return `<div class="lj-fila apagada"><span class="lj-nom"><b>${esc(corta(l))}</b><small>${esc(l.nota || "Sin cotizaciones activas")}</small></span><span class="pastilla ${e.clase}">${e.txt}</span></div>`;
+    }
+    const prox = textoProxima(l);
+    return `<button class="lj-fila" type="button" data-lonja="${esc(l.id)}">
+      <span class="lj-nom"><b>${esc(corta(l))}</b><small>Sesión ${fechaCorta(l.fecha)}${prox ? ` · ${esc(prox.charAt(0).toLowerCase() + prox.slice(1))}` : ""}</small></span>
+      <span class="pastilla ${e.clase}">${e.txt}</span></button>`;
+  }).join("");
+  return `<section class="modulo mod-lonjas">${cabModulo("04", "Lonjas", '<a href="#lonjas">Ver Mercado ›</a>')}${filas}</section>`;
 }
 
 /* «Mi pizarra»: como la Pizarra de la semana, pero con los productos que el usuario ha marcado con ★.
@@ -630,7 +716,46 @@ function cerrarDetalle(porHistorial = false) {
 }
 window.addEventListener("popstate", () => { if (!$("#velo").hidden) cerrarDetalle(true); });
 
-/* ---------- navegación ---------- */
+/* ---------- navegación ----------
+   Hoy · Mercado (lonjas, comparar, histórico, comentario) · Campo (tiempo, gasóleo, plazos) · Calcular · Mío. */
+const SUBSECCIONES = {
+  mercado: { nombre: "Mercado", tabs: [["lonjas", "Lonjas"], ["comparar", "Comparar"], ["historico", "Histórico"], ["comentario", "Comentario"]] },
+  campo: { nombre: "Campo", tabs: [["tiempo", "Tiempo"], ["gasoleo", "Gasóleo"], ["plazos", "Plazos PAC"]] },
+  calcular: { nombre: "Calcular", tabs: [["calcular", "Todas"], ["calculadora", "Venta"], ["explotacion", "Mi explotación"], ["oferta", "¿Me pagan bien?"], ["termometro", "¿Caro o barato?"]] },
+};
+function seccionDe(h) {
+  if (h === "lonjas" || h.startsWith("lonja-") || ["fuentes", "metodo", "datos"].includes(h)) return { seccion: "mercado", sub: "lonjas" };
+  if (h.startsWith("comparar")) return { seccion: "mercado", sub: "comparar" };
+  if (h.startsWith("historico")) return { seccion: "mercado", sub: "historico" };
+  if (h === "comentario") return { seccion: "mercado", sub: "comentario" };
+  if (["tiempo", "gasoleo", "plazos"].includes(h)) return { seccion: "campo", sub: h };
+  if (["calcular", "calculadora", "explotacion", "oferta", "termometro"].includes(h)) return { seccion: "calcular", sub: h };
+  if (h === "favoritos") return { seccion: "mio", sub: "" };
+  return { seccion: "hoy", sub: "" };
+}
+function subnav({ seccion, sub }) {
+  const s = SUBSECCIONES[seccion];
+  if (!s) return "";
+  return `<nav class="subnav" aria-label="${s.nombre}">${s.tabs.map(([id, t]) =>
+    `<a href="#${id}"${id === sub ? ' aria-current="page"' : ""}>${t}</a>`).join("")}</nav>`;
+}
+function vistaCalcular() {
+  const tot = typeof totalExplotacion === "function" ? totalExplotacion() : null;
+  const fila = (ruta, titulo, texto) => `<button class="fila-mod" type="button" data-ir="${ruta}"><span><b>${titulo}</b><small>${texto}</small></span><span class="fm-ir" aria-hidden="true">›</span></button>`;
+  return `<section class="modulo">
+    ${cabModulo("", "Calcular", "<span>Con los precios de hoy</span>")}
+    ${fila("calculadora", "Calculadora de venta", "Cuánto te pagaría cada lonja por tu cosecha o tu ganado, con portes")}
+    ${fila("explotacion", "Mi explotación", tot ? `Lo que tienes almacenado vale <b class="num">${euros(tot.valor)}</b> a precios de hoy` : "Lo que vale lo que tienes almacenado, a precios de hoy")}
+    ${fila("oferta", "¿Me están pagando bien?", "Tu oferta del almacén o la cooperativa frente a las lonjas")}
+    ${fila("termometro", "¿Caro o barato?", "El precio de hoy frente al de otros años")}
+  </section>
+  <p class="nota">Cálculos orientativos con los precios publicados por las lonjas. Lo que escribes se guarda solo en este teléfono.</p>`;
+}
+/** Cabecera común de los módulos: número, título y, a la derecha, un dato o un único enlace. */
+function cabModulo(n, titulo, derecha = "") {
+  return `<div class="mod-cab"><h2>${n ? `<span class="mod-n">${n}</span>` : ""}${titulo}</h2>${derecha}</div>`;
+}
+
 function router() {
   if (!DATOS) return;
   const h = location.hash.slice(1) || "hoy";
@@ -654,17 +779,21 @@ function router() {
   else if (h === "favoritos") html = vistaFavoritos();
   else if (h === "historico") html = vistaHistorico();
   else if (h === "historico-fuentes") { html = vistaFuentesHist(); seccion = "historico"; }
+  else if (h === "calcular") html = vistaCalcular();
   else { html = vistaHoy(); seccion = "hoy"; }
-  $("#vista").innerHTML = html;
+  // Cinco secciones fijas (barra de abajo / menú lateral) y, dentro de Mercado, Campo y Calcular, pestañas arriba
+  const sec = seccionDe(h);
+  seccion = sec.seccion;
+  $("#vista").innerHTML = subnav(sec) + html;
   // En pantallas anchas (ordenador) estas pantallas usan dos columnas; las de mucho texto siguen en una (estilos.css).
   const vista = h.startsWith("lonja-") ? "lonja" : h.startsWith("comparar") ? "comparar" : h;
   $("#vista").dataset.vista = vista;
-  $("#vista").toggleAttribute("data-ancho", ["hoy", "lonja", "lonjas", "comparar", "favoritos", "gasoleo"].includes(vista));
+  $("#vista").toggleAttribute("data-ancho", ["lonja", "lonjas", "comparar", "favoritos", "gasoleo"].includes(vista));
   // Al cambiar de pantalla: arriba del todo y el título de la pestaña con el nombre de la pantalla (no al repintar la misma).
   if (h !== router.ultimaPintada) {
     if (router.ultimaPintada !== undefined) window.scrollTo(0, 0);
     router.ultimaPintada = h;
-    const t = h === "hoy" ? "" : $("#vista h2")?.textContent.trim();
+    const t = h === "hoy" ? "" : $("#vista h2")?.textContent.replace(/^\d+/, "").trim();
     document.title = (t ? t + " · " : "") + "Lonjas CyL · Precios de las lonjas de Castilla y León hoy";
   }
   document.querySelectorAll("[data-w]").forEach(el => { el.style.width = Math.min(100, Math.max(0, Number(el.dataset.w) || 0)) + "%"; });

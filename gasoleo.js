@@ -221,3 +221,17 @@ document.addEventListener("click", e => {
   });
   if (typeof aviso === "function") aviso(on ? "Gasolinera guardada en Favoritos" : "Gasolinera quitada de Favoritos");
 });
+
+/* Fila del módulo «En el campo» de Hoy */
+function filaCampoGasoleo() {
+  const d = GASOLEO.datos;
+  if (!d) { if (!GASOLEO.error) cargarGasoleo(); return ""; }
+  const mia = d.provincias.find(p => p.id === miProvincia());
+  const base = mia ? [mia] : d.provincias.filter(p => p.cyl);
+  if (!base.length) return "";
+  const barata = base.flatMap(p => p.baratas.slice(0, 1).map(b => ({ ...b, prov: p.nombre }))).sort((a, b) => a.precio - b.precio)[0];
+  const media = mia ? mia.media : d.cyl?.media;
+  return `<button class="fila-mod" type="button" data-ir="gasoleo"><span class="fm-ico"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M5 21V5a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v16"/><path d="M4 21h12M8 8h4M15 9l3 3v5a1.5 1.5 0 0 0 3 0V9l-3-3"/></svg></span>
+    <span><b>Gasóleo B · ${esc(mia ? mia.nombre : "media CyL")}</b><small>${barata ? `Más barato: ${litro(barata.precio)} en ${esc(barata.localidad)}${mia ? "" : ` (${esc(barata.prov)})`}` : "Precio medio de hoy"}</small></span>
+    <span class="fm-dato">${litro(media)}<small>€/l</small></span></button>`;
+}

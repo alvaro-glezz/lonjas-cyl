@@ -343,3 +343,23 @@ document.addEventListener("click", e => {
       { timeout: 10000, maximumAge: 3600e3 });
   }
 });
+
+/* Fila del módulo «En el campo» de Hoy */
+function filaCampoTiempo() {
+  const l = TIEMPO.lugar || (TIEMPO.lugar = lugarGuardado());
+  const ico = '<svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M7 17a4 4 0 1 1 1-7.9A5 5 0 0 1 18 10a3.5 3.5 0 0 1 0 7z"/><path d="M9 20l1-2M13 20l1-2"/></svg>';
+  if (!l) {
+    return `<button class="fila-mod" type="button" data-ir="tiempo"><span class="fm-ico">${ico}</span>
+      <span><b>Tiempo para tratar</b><small>Elige tu municipio y te marcamos las horas buenas</small></span><span class="fm-ir" aria-hidden="true">›</span></button>`;
+  }
+  if (!TIEMPO.prevision) { cargarPrevision(); return ""; }
+  const dias = porDias(calificarHoras(TIEMPO.prevision)).slice(0, 2);
+  const ahora = new Date().getHours();
+  const [hoy, man] = dias.map(([, hs], k) => ventanas(hs.filter(h => k > 0 || h.hora >= ahora)));
+  let dato, frase, clase;
+  if (hoy && hoy.length) { dato = "Sí"; clase = "s"; frase = `Hoy, buenas horas ${textoVentana(hoy[0])}`; }
+  else if (man && man.length) { dato = "Mañana"; clase = ""; frase = `Hoy ya no; mañana ${textoVentana(man[0])}`; }
+  else { dato = "No"; clase = "b"; frase = "Hoy y mañana sin horas buenas"; }
+  return `<button class="fila-mod" type="button" data-ir="tiempo"><span class="fm-ico">${ico}</span>
+    <span><b>Tratamientos · ${esc(l.nombre)}</b><small>${esc(frase)}</small></span><span class="fm-dato ${clase}">${dato}</span></button>`;
+}
