@@ -1,6 +1,6 @@
 {
  "comparativa": "2026-W45",
- "franja": "reel",
+ "franja": "especial:tratamientos",
  "franjas": {
   "2026-11-07": [
    "reel"
@@ -24,7 +24,8 @@
   ],
   "2026-11-11": [
    "manana",
-   "reel"
+   "reel",
+   "especial:tratamientos"
   ]
  },
  "historias": [
@@ -173,6 +174,12 @@
    "fecha": "2026-11-11T13:14",
    "id": "2026-11-11-reel-trigo",
    "media": "18132414043862797"
+  },
+  {
+   "facebook": "964393786431364",
+   "fecha": "2026-11-11T16:08",
+   "id": "2026-11-11-especial-tratamientos",
+   "media": "17909064723667764"
   }
  ],
  "token_renovado": "2026-11-07"
