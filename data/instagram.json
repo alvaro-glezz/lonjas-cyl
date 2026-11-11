@@ -1,6 +1,6 @@
 {
  "comparativa": "2026-W45",
- "franja": "tarde",
+ "franja": "manana",
  "franjas": {
   "2026-11-07": [
    "reel"
@@ -21,6 +21,9 @@
    "reel",
    "historia",
    "especial:android"
+  ],
+  "2026-11-11": [
+   "manana"
   ]
  },
  "historias": [
@@ -157,6 +160,12 @@
    "fecha": "2026-11-10T19:56",
    "id": "2026-11-10-guia-android",
    "media": "17989468971092253"
+  },
+  {
+   "facebook": "1368079503066363_122108639793536635",
+   "fecha": "2026-11-11T07:58",
+   "id": "2026-11-11-dia-centeno",
+   "media": "18128024494681545"
   }
  ],
  "token_renovado": "2026-11-07"
