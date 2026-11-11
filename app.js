@@ -741,7 +741,14 @@ function subnav({ seccion, sub }) {
 }
 function vistaCalcular() {
   const tot = typeof totalExplotacion === "function" ? totalExplotacion() : null;
-  const fila = (ruta, titulo, texto) => `<button class="fila-mod" type="button" data-ir="${ruta}"><span><b>${titulo}</b><small>${texto}</small></span><span class="fm-ir" aria-hidden="true">›</span></button>`;
+  const svg = d => `<svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${d}</svg>`;
+  const ICO = {
+    calculadora: svg('<rect x="5" y="3" width="14" height="18" rx="2"/><path d="M8 7h8M8 11h1M12 11h1M16 11h0M8 15h1M12 15h1M8 18h1M12 18h4"/>'),
+    explotacion: svg('<path d="M4 21V10l8-6 8 6v11"/><path d="M9 21v-6h6v6M4 21h16"/>'),
+    oferta: svg('<path d="M3 12l4-4 4 3 3-2 7 5"/><path d="M3 12v6h18v-2"/><circle cx="17" cy="6" r="2.5"/>'),
+    termometro: svg('<path d="M14 14.8V4a2 2 0 0 0-4 0v10.8a4 4 0 1 0 4 0z"/><path d="M12 9v7"/>'),
+  };
+  const fila = (ruta, titulo, texto) => `<button class="fila-mod" type="button" data-ir="${ruta}"><span class="fm-ico">${ICO[ruta]}</span><span><b>${titulo}</b><small>${texto}</small></span><span class="fm-ir" aria-hidden="true">›</span></button>`;
   return `<section class="modulo">
     ${cabModulo("", "Calcular", "<span>Con los precios de hoy</span>")}
     ${fila("calculadora", "Calculadora de venta", "Cuánto te pagaría cada lonja por tu cosecha o tu ganado, con portes")}

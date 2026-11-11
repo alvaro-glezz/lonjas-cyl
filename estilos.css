@@ -715,6 +715,8 @@ html.letra-grande .navegacion a { font-size: min(13.5px, 3.05vw); }
 
 .fila-mod { width: 100%; display: grid; grid-template-columns: 34px minmax(0, 1fr) auto; gap: 12px; align-items: center; padding: 12px 16px; min-height: 60px; font: inherit; color: inherit; text-align: left; background: none; border: 0; border-bottom: 1px solid var(--linea); cursor: pointer; }
 .fila-mod:last-child { border-bottom: 0; }
+.fila-mod:not(:has(> .fm-ico)) { grid-template-columns: minmax(0, 1fr) auto; }   /* sin icono: el texto ocupa todo */
+.fila-mod small b.num { font: 700 16px var(--cifra); color: var(--tinta); }
 .fila-mod:hover { background: var(--pino-suave); }
 .fm-ico { color: var(--pino); display: grid; place-items: center; }
 .fila-mod b { display: block; font-size: 15px; line-height: 1.25; }
