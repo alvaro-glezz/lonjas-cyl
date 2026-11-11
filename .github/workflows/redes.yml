@@ -56,8 +56,15 @@ jobs:
         with:
           python-version: "3.12"
       - run: pip install -q -r scraper/requirements.txt
+      # ffmpeg estático de PyPI (imageio-ffmpeg): apt-get se quedó colgado varias veces el 11 nov 2026.
       - name: ffmpeg (para los reels)
-        run: command -v ffmpeg || (sudo apt-get update -qq && sudo apt-get install -y -qq ffmpeg)
+        timeout-minutes: 6
+        run: |
+          command -v ffmpeg && exit 0
+          pip install -q imageio-ffmpeg
+          F=$(python -c "import imageio_ffmpeg; print(imageio_ffmpeg.get_ffmpeg_exe())")
+          mkdir -p "$HOME/bin" && ln -sf "$F" "$HOME/bin/ffmpeg" && echo "$HOME/bin" >> "$GITHUB_PATH"
+          "$F" -version | head -1
       # Voz de los reels: Piper, voz española «sharvard», hablante de mujer (licencia CC BY 3.0, se cita en el texto).
       # Si falla, el reel sale solo con música.
       - uses: actions/cache@v4
