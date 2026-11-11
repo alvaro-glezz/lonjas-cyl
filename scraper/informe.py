@@ -253,6 +253,12 @@ def guion(hoy, lunes, sabado, tono, cereales, mov, g) -> str:
     return " ".join(f)
 
 
+def duracion_txt(seg: int | None) -> str:
+    if not seg:
+        return "un par de minutos"
+    return f"{seg} segundos" if seg < 90 else f"{round(seg / 60)} minutos"
+
+
 def texto_telegram(inf: dict, web: str = WEB) -> str:
     partes = [f"📊 {inf['titulo']}", "", *inf["resumen"], ""]
     for s in inf["secciones"]:
@@ -299,7 +305,7 @@ def mandar_telegram(inf: dict, token: str) -> None:
     if inf.get("audio") and (RAIZ / inf["audio"]).is_file():
         with open(RAIZ / inf["audio"], "rb") as fh:
             r = requests.post(f"{api}/sendAudio", data={"chat_id": CANAL, "title": f"Comentario de mercado · {inf['semana']}",
-                                                        "performer": "Lonjas CyL", "caption": "🎧 El comentario de la semana en 2 minutos. 🔊 Voz generada por ordenador."},
+                                                        "performer": "Lonjas CyL", "caption": f"🎧 El comentario de la semana en {duracion_txt(inf.get('audio_seg'))}. 🔊 Voz generada por ordenador."},
                               files={"audio": (f"lonjas-cyl-{inf['semana']}.mp3", fh, "audio/mpeg")}, timeout=120)
         print("[informe] Telegram audio:", r.json().get("ok"), r.json().get("description", ""))
 
@@ -325,6 +331,9 @@ def main(argv: list[str]) -> int:
         return 0
     mp3 = crear_audio(inf)
     inf["audio"] = f"audio/{mp3.name}" if mp3 else None
+    if mp3:
+        r = subprocess.run(["ffprobe", "-v", "error", "-show_entries", "format=duration", "-of", "csv=p=0", str(mp3)], capture_output=True, text=True)
+        inf["audio_seg"] = round(float(r.stdout.strip() or 0))
     print(f"[informe] {guardar(inf).name} creado" + (f" con audio ({mp3.name})" if mp3 else " (sin audio)"))
     return 0
 

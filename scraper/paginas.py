@@ -462,7 +462,9 @@ def pagina_informe(inf: dict, anterior: dict | None, siguiente: dict | None) -> 
     """Comentario semanal del mercado (scraper/informe.py): una página por semana, que se queda como archivo."""
     sem = inf["semana"].lower()
     ruta = f"mercado/{sem}/"
-    audio = (f'<figure class="audio"><figcaption>🎧 Escúchalo en 2 minutos (voz generada por ordenador)</figcaption>'
+    seg = inf.get("audio_seg")
+    dur = (f"{seg} segundos" if seg < 90 else f"{round(seg / 60)} minutos") if seg else "un par de minutos"
+    audio = (f'<figure class="audio"><figcaption>🎧 Escúchalo en {dur} (voz generada por ordenador)</figcaption>'
              f'<audio controls preload="none" src="../../{escape(inf["audio"])}"></audio></figure>') if inf.get("audio") else ""
     cuerpo = [f'<p class="lead">{escape(" ".join(inf["resumen"]))}</p>',
               f'<p class="fecha">Semana del {fecha_larga(inf["desde"])} al {fecha_larga(inf["hasta"])}. Hecho con los precios publicados por cada lonja.</p>', audio]
