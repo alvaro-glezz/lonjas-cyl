@@ -1,6 +1,6 @@
 {
  "comparativa": "2026-W45",
- "franja": "especial:tratamientos-voz",
+ "franja": "historia",
  "franjas": {
   "2026-11-07": [
    "reel"
@@ -25,12 +25,14 @@
   "2026-11-11": [
    "manana",
    "reel",
-   "especial:tratamientos"
+   "especial:tratamientos",
+   "historia"
   ]
  },
  "historias": [
   1,
-  2
+  2,
+  3
  ],
  "preparado": [
   {
@@ -187,6 +189,12 @@
    "fecha": "2026-11-11T16:08",
    "id": "2026-11-11-especial-tratamientos",
    "media": "17909064723667764"
+  },
+  {
+   "facebook": "2286210498588944",
+   "fecha": "2026-11-11T18:27",
+   "id": "2026-11-11-historia-3-oferta",
+   "media": "18117675530039446"
   }
  ],
  "token_renovado": "2026-11-07"
