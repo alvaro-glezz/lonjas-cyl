@@ -1,6 +1,6 @@
 {
  "comparativa": "2026-W45",
- "franja": "manana",
+ "franja": "reel",
  "franjas": {
   "2026-11-07": [
    "reel"
@@ -23,7 +23,8 @@
    "especial:android"
   ],
   "2026-11-11": [
-   "manana"
+   "manana",
+   "reel"
   ]
  },
  "historias": [
@@ -166,6 +167,12 @@
    "fecha": "2026-11-11T07:58",
    "id": "2026-11-11-dia-centeno",
    "media": "18128024494681545"
+  },
+  {
+   "facebook": "2043767036327982",
+   "fecha": "2026-11-11T13:14",
+   "id": "2026-11-11-reel-trigo",
+   "media": "18132414043862797"
   }
  ],
  "token_renovado": "2026-11-07"
