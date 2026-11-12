@@ -1,12 +1,12 @@
 {
- "fecha": "2026-11-12T12:55",
+ "fecha": "2026-11-12T14:55",
  "fuente": "Ministerio para la Transición Ecológica y el Reto Demográfico (Geoportal de gasolineras)",
  "fuente_url": "https://geoportalgasolineras.es/geoportal-instalaciones/Inicio",
  "unidad": "€/l",
  "espana": {
-  "media": 1.687,
+  "media": 1.686,
   "min": 1.359,
-  "n": 2253
+  "n": 2255
  },
  "cyl": {
   "media": 1.654,
@@ -68,7 +68,7 @@
    "nombre": "Álava",
    "cyl": false,
    "n": 17,
-   "media": 1.74,
+   "media": 1.738,
    "mediana": 1.805,
    "min": 1.459,
    "max": 1.861,
@@ -117,16 +117,16 @@
    "nombre": "Albacete",
    "cyl": false,
    "n": 39,
-   "media": 1.684,
+   "media": 1.681,
    "mediana": 1.699,
-   "min": 1.449,
+   "min": 1.429,
    "max": 1.979,
    "descartados": 1,
    "baratas": [
     {
      "id": "8958",
      "nombre": "La Remediadora",
-     "precio": 1.449,
+     "precio": 1.429,
      "municipio": "La Roda",
      "direccion": "Alfredo Atienza, 149-151",
      "localidad": "La Roda",
@@ -134,6 +134,18 @@
      "horario": "L-D: 24H",
      "lat": 39.201139,
      "lon": -2.14775
+    },
+    {
+     "id": "10053",
+     "nombre": "Bodegas Saac",
+     "precio": 1.43,
+     "municipio": "Villamalea",
+     "direccion": "Calle Valencia, 41",
+     "localidad": "Villamalea",
+     "cp": "02270",
+     "horario": "L-D: 24H",
+     "lat": 39.367333,
+     "lon": -1.59325
     },
     {
      "id": "4394",
@@ -146,18 +158,6 @@
      "horario": "L-S: 07:00-14:00; D: 09:00-14:00",
      "lat": 38.867556,
      "lon": -1.9205
-    },
-    {
-     "id": "12334",
-     "nombre": "Sat Santa Cruz de Pozo Lorente",
-     "precio": 1.455,
-     "municipio": "Pozo-Lorente",
-     "direccion": "Poligono Paraje Recial, 2",
-     "localidad": "Pozo-lorente",
-     "cp": "02154",
-     "horario": "L-D: 24H",
-     "lat": 39.081278,
-     "lon": -1.512611
     }
    ]
   },
@@ -215,7 +215,7 @@
    "nombre": "Almería",
    "cyl": false,
    "n": 65,
-   "media": 1.693,
+   "media": 1.692,
    "mediana": 1.699,
    "min": 1.469,
    "max": 1.889,
@@ -264,7 +264,7 @@
    "nombre": "Asturias",
    "cyl": false,
    "n": 59,
-   "media": 1.737,
+   "media": 1.736,
    "mediana": 1.749,
    "min": 1.49,
    "max": 1.86,
@@ -593,7 +593,7 @@
    "nombre": "Barcelona",
    "cyl": false,
    "n": 39,
-   "media": 1.704,
+   "media": 1.703,
    "mediana": 1.727,
    "min": 1.46,
    "max": 1.935,
@@ -691,7 +691,7 @@
    "nombre": "Burgos",
    "cyl": true,
    "n": 30,
-   "media": 1.629,
+   "media": 1.628,
    "mediana": 1.639,
    "min": 1.419,
    "max": 1.839,
@@ -710,6 +710,18 @@
      "lon": -3.925778
     },
     {
+     "id": "5037",
+     "nombre": "Galp",
+     "precio": 1.459,
+     "municipio": "Miranda de Ebro",
+     "direccion": "Ctra. de Logroño, 70",
+     "localidad": "Miranda de Ebro",
+     "cp": "09200",
+     "horario": "L-D: 06:30-22:30",
+     "lat": 42.68575,
+     "lon": -2.932667
+    },
+    {
      "id": "4970",
      "nombre": "Beroil",
      "precio": 1.479,
@@ -720,18 +732,6 @@
      "horario": "L-D: 24H",
      "lat": 42.278444,
      "lon": -3.89175
-    },
-    {
-     "id": "5037",
-     "nombre": "Galp",
-     "precio": 1.479,
-     "municipio": "Miranda de Ebro",
-     "direccion": "Ctra. de Logroño, 70",
-     "localidad": "Miranda de Ebro",
-     "cp": "09200",
-     "horario": "L-D: 06:30-22:30",
-     "lat": 42.68575,
-     "lon": -2.932667
     }
    ],
    "todas": [
@@ -748,6 +748,18 @@
      "lon": -3.925778
     },
     {
+     "id": "5037",
+     "nombre": "Galp",
+     "precio": 1.459,
+     "municipio": "Miranda de Ebro",
+     "direccion": "Ctra. de Logroño, 70",
+     "localidad": "Miranda de Ebro",
+     "cp": "09200",
+     "horario": "L-D: 06:30-22:30",
+     "lat": 42.68575,
+     "lon": -2.932667
+    },
+    {
      "id": "4970",
      "nombre": "Beroil",
      "precio": 1.479,
@@ -758,18 +770,6 @@
      "horario": "L-D: 24H",
      "lat": 42.278444,
      "lon": -3.89175
-    },
-    {
-     "id": "5037",
-     "nombre": "Galp",
-     "precio": 1.479,
-     "municipio": "Miranda de Ebro",
-     "direccion": "Ctra. de Logroño, 70",
-     "localidad": "Miranda de Ebro",
-     "cp": "09200",
-     "horario": "L-D: 06:30-22:30",
-     "lat": 42.68575,
-     "lon": -2.932667
     },
     {
      "id": "4908",
@@ -1199,9 +1199,9 @@
    "id": "39",
    "nombre": "Cantabria",
    "cyl": false,
-   "n": 30,
-   "media": 1.731,
-   "mediana": 1.767,
+   "n": 29,
+   "media": 1.725,
+   "mediana": 1.749,
    "min": 1.52,
    "max": 1.849,
    "descartados": 1,
@@ -1248,8 +1248,8 @@
    "id": "12",
    "nombre": "Castellón",
    "cyl": false,
-   "n": 51,
-   "media": 1.665,
+   "n": 52,
+   "media": 1.666,
    "mediana": 1.685,
    "min": 1.359,
    "max": 1.808,
@@ -1366,6 +1366,18 @@
      "lon": -4.555528
     },
     {
+     "id": "15288",
+     "nombre": "Almazaras de la Subbetica",
+     "precio": 1.472,
+     "municipio": "Carcabuey",
+     "direccion": "Carretera Ctra. a 339 Km. Km. 17,8",
+     "localidad": "Carcabuey",
+     "cp": "14810",
+     "horario": "L-D: 24H",
+     "lat": 37.463889,
+     "lon": -4.272083
+    },
+    {
      "id": "9878",
      "nombre": "Cepsa",
      "precio": 1.478,
@@ -1376,18 +1388,6 @@
      "horario": "L-D: 24H",
      "lat": 37.609444,
      "lon": -4.731889
-    },
-    {
-     "id": "10331",
-     "nombre": "Cooperativa",
-     "precio": 1.481,
-     "municipio": "Benamejí",
-     "direccion": "Avenida de la Venta, 3",
-     "localidad": "Benameji",
-     "cp": "14910",
-     "horario": "L: 08:00-22:00",
-     "lat": 37.266889,
-     "lon": -4.536861
     }
    ]
   },
@@ -1494,7 +1494,7 @@
    "nombre": "Girona",
    "cyl": false,
    "n": 50,
-   "media": 1.76,
+   "media": 1.759,
    "mediana": 1.768,
    "min": 1.559,
    "max": 1.899,
@@ -1542,8 +1542,8 @@
    "id": "18",
    "nombre": "Granada",
    "cyl": false,
-   "n": 57,
-   "media": 1.648,
+   "n": 58,
+   "media": 1.651,
    "mediana": 1.659,
    "min": 1.459,
    "max": 1.819,
@@ -1690,10 +1690,10 @@
    "nombre": "Huesca",
    "cyl": false,
    "n": 57,
-   "media": 1.643,
+   "media": 1.642,
    "mediana": 1.655,
    "min": 1.445,
-   "max": 1.825,
+   "max": 1.824,
    "descartados": 0,
    "baratas": [
     {
@@ -1709,6 +1709,18 @@
      "lon": 0.32
     },
     {
+     "id": "15310",
+     "nombre": "Cooperativa Osca",
+     "precio": 1.499,
+     "municipio": "Alcolea de Cinca",
+     "direccion": "Poligono Parcela 33, 33",
+     "localidad": "Alcolea de Cinca",
+     "cp": "22410",
+     "horario": "L-D: 24H",
+     "lat": 41.719333,
+     "lon": 0.103917
+    },
+    {
      "id": "12014",
      "nombre": "Virgen de la Corona",
      "precio": 1.51,
@@ -1719,18 +1731,6 @@
      "horario": "L-D: 24H",
      "lat": 42.040111,
      "lon": -0.588028
-    },
-    {
-     "id": "9139",
-     "nombre": "An Energéticos - Lanaja",
-     "precio": 1.51,
-     "municipio": "Lanaja",
-     "direccion": "Acceso Partida Saso Bajo, S/n",
-     "localidad": "Lanaja",
-     "cp": "22250",
-     "horario": "L-D: 24H",
-     "lat": 41.77575,
-     "lon": -0.32975
     }
    ]
   },
@@ -1738,12 +1738,12 @@
    "id": "07",
    "nombre": "Illes Balears",
    "cyl": false,
-   "n": 34,
-   "media": 1.83,
-   "mediana": 1.834,
+   "n": 33,
+   "media": 1.816,
+   "mediana": 1.829,
    "min": 1.509,
-   "max": 2.199,
-   "descartados": 0,
+   "max": 1.929,
+   "descartados": 1,
    "baratas": [
     {
      "id": "15569",
@@ -2201,7 +2201,7 @@
    "nombre": "Lleida",
    "cyl": false,
    "n": 54,
-   "media": 1.63,
+   "media": 1.631,
    "mediana": 1.625,
    "min": 1.458,
    "max": 1.845,
@@ -2250,7 +2250,7 @@
    "nombre": "Lugo",
    "cyl": false,
    "n": 51,
-   "media": 1.775,
+   "media": 1.774,
    "mediana": 1.785,
    "min": 1.509,
    "max": 1.889,
@@ -2396,8 +2396,8 @@
    "id": "30",
    "nombre": "Murcia",
    "cyl": false,
-   "n": 105,
-   "media": 1.676,
+   "n": 106,
+   "media": 1.674,
    "mediana": 1.695,
    "min": 1.399,
    "max": 1.979,
@@ -2445,9 +2445,9 @@
    "id": "31",
    "nombre": "Navarra",
    "cyl": false,
-   "n": 101,
-   "media": 1.632,
-   "mediana": 1.595,
+   "n": 102,
+   "media": 1.63,
+   "mediana": 1.589,
    "min": 1.495,
    "max": 1.86,
    "descartados": 0,
@@ -2800,8 +2800,8 @@
    "nombre": "Salamanca",
    "cyl": true,
    "n": 19,
-   "media": 1.682,
-   "mediana": 1.689,
+   "media": 1.681,
+   "mediana": 1.684,
    "min": 1.507,
    "max": 1.795,
    "descartados": 0,
@@ -2953,6 +2953,18 @@
      "lon": -5.877528
     },
     {
+     "id": "4958",
+     "nombre": "Shell",
+     "precio": 1.684,
+     "municipio": "Sancti-Spíritus",
+     "direccion": "N-620 km 309,2",
+     "localidad": "Sancti-spiritus",
+     "cp": "37470",
+     "horario": "L-D: 24H",
+     "lat": 40.697972,
+     "lon": -6.416278
+    },
+    {
      "id": "6208",
      "nombre": "Repsol",
      "precio": 1.689,
@@ -3011,18 +3023,6 @@
      "horario": "L-S: 07:00-22:00; D: 08:00-22:00",
      "lat": 40.386889,
      "lon": -6.60825
-    },
-    {
-     "id": "4958",
-     "nombre": "Shell",
-     "precio": 1.699,
-     "municipio": "Sancti-Spíritus",
-     "direccion": "N-620 km 309,2",
-     "localidad": "Sancti-spiritus",
-     "cp": "37470",
-     "horario": "L-D: 24H",
-     "lat": 40.697972,
-     "lon": -6.416278
     },
     {
      "id": "6209",
@@ -3256,21 +3256,9 @@
      "lon": -4.040444
     },
     {
-     "id": "6177",
-     "nombre": "Galp",
-     "precio": 1.724,
-     "municipio": "Villacastín",
-     "direccion": "Autopista A6 Km. 0",
-     "localidad": "Villacastin",
-     "cp": "40150",
-     "horario": "L-D: 24H",
-     "lat": 40.7975,
-     "lon": -4.460889
-    },
-    {
      "id": "6401",
      "nombre": "Galp",
-     "precio": 1.724,
+     "precio": 1.719,
      "municipio": "Villacastín",
      "direccion": "Autopista A6 Km. 0",
      "localidad": "Villacastin",
@@ -3278,6 +3266,18 @@
      "horario": "L-D: 06:00-22:00",
      "lat": 40.7975,
      "lon": -4.462889
+    },
+    {
+     "id": "6177",
+     "nombre": "Galp",
+     "precio": 1.719,
+     "municipio": "Villacastín",
+     "direccion": "Autopista A6 Km. 0",
+     "localidad": "Villacastin",
+     "cp": "40150",
+     "horario": "L-D: 24H",
+     "lat": 40.7975,
+     "lon": -4.460889
     },
     {
      "id": "6113",
@@ -3391,7 +3391,7 @@
     {
      "id": "16292",
      "nombre": "Gasolinera de la Cooperativa Ntra Sra del Rosario",
-     "precio": 1.485,
+     "precio": 1.475,
      "municipio": "El Saucejo",
      "direccion": "Calle Fray Martin Povea, 51",
      "localidad": "El Saucejo",
@@ -3530,7 +3530,7 @@
    "nombre": "Tarragona",
    "cyl": false,
    "n": 53,
-   "media": 1.645,
+   "media": 1.646,
    "mediana": 1.655,
    "min": 1.446,
    "max": 1.859,
@@ -3561,16 +3561,16 @@
      "lon": 0.705167
     },
     {
-     "id": "9582",
-     "nombre": "Oilprix",
-     "precio": 1.453,
-     "municipio": "Alcover",
-     "direccion": "CRTA.C-14 km 19,50",
-     "localidad": "Alcover",
-     "cp": "43460",
-     "horario": "L-S: 06:30-22:00; D: 07:30-22:00",
-     "lat": 41.250583,
-     "lon": 1.169889
+     "id": "2029",
+     "nombre": "Coperal",
+     "precio": 1.469,
+     "municipio": "Santa Coloma de Queralt",
+     "direccion": "Carretera Igualada Km. S/n",
+     "localidad": "Santa Coloma de Queralt",
+     "cp": "43420",
+     "horario": "L-D: 24H",
+     "lat": 41.536694,
+     "lon": 1.387667
     }
    ]
   },
@@ -3677,7 +3677,7 @@
    "nombre": "Valencia",
    "cyl": false,
    "n": 140,
-   "media": 1.648,
+   "media": 1.646,
    "mediana": 1.625,
    "min": 1.399,
    "max": 1.879,
@@ -4332,7 +4332,7 @@
    "nombre": "Zaragoza",
    "cyl": false,
    "n": 85,
-   "media": 1.671,
+   "media": 1.669,
    "mediana": 1.65,
    "min": 1.359,
    "max": 1.899,
@@ -4363,16 +4363,16 @@
      "lon": -0.773944
     },
     {
-     "id": "10537",
-     "nombre": "Coop. Virgen Oliva",
-     "precio": 1.495,
-     "municipio": "Ejea de los Caballeros",
-     "direccion": "Calle Pinar, S/n",
-     "localidad": "Bardena del Caudillo",
-     "cp": "50694",
+     "id": "9046",
+     "nombre": "Sanantonio",
+     "precio": 1.457,
+     "municipio": "Alagón",
+     "direccion": "Vía Torremata, 5",
+     "localidad": "Alagon",
+     "cp": "50630",
      "horario": "L-D: 24H",
-     "lat": 42.176528,
-     "lon": -1.197556
+     "lat": 41.764583,
+     "lon": -1.126167
     }
    ]
   }
