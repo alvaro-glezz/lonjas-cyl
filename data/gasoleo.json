@@ -1,12 +1,12 @@
 {
- "fecha": "2026-11-12T18:33",
+ "fecha": "2026-11-12T22:28",
  "fuente": "Ministerio para la Transición Ecológica y el Reto Demográfico (Geoportal de gasolineras)",
  "fuente_url": "https://geoportalgasolineras.es/geoportal-instalaciones/Inicio",
  "unidad": "€/l",
  "espana": {
   "media": 1.685,
   "min": 1.359,
-  "n": 2257
+  "n": 2256
  },
  "cyl": {
   "media": 1.653,
@@ -166,7 +166,7 @@
    "nombre": "Alicante",
    "cyl": false,
    "n": 52,
-   "media": 1.765,
+   "media": 1.762,
    "mediana": 1.775,
    "min": 1.599,
    "max": 1.879,
@@ -197,16 +197,16 @@
      "lon": -0.585333
     },
     {
-     "id": "13864",
-     "nombre": "Jbm",
-     "precio": 1.629,
-     "municipio": "Villena",
-     "direccion": "Partida Prado de la Villa, 106",
-     "localidad": "Villena",
-     "cp": "03400",
+     "id": "1881",
+     "nombre": "Coopego",
+     "precio": 1.609,
+     "municipio": "Pego",
+     "direccion": "Carretera Denia Km. 1",
+     "localidad": "Pego",
+     "cp": "03780",
      "horario": "L-D: 06:00-22:00",
-     "lat": 38.635861,
-     "lon": -0.873944
+     "lat": 38.843694,
+     "lon": -0.106778
     }
    ]
   },
@@ -215,7 +215,7 @@
    "nombre": "Almería",
    "cyl": false,
    "n": 65,
-   "media": 1.691,
+   "media": 1.69,
    "mediana": 1.699,
    "min": 1.469,
    "max": 1.889,
@@ -264,7 +264,7 @@
    "nombre": "Asturias",
    "cyl": false,
    "n": 59,
-   "media": 1.737,
+   "media": 1.736,
    "mediana": 1.749,
    "min": 1.49,
    "max": 1.86,
@@ -344,7 +344,7 @@
      "lon": -4.728611
     },
     {
-     "id": "5980",
+     "id": "5981",
      "nombre": "Petronor",
      "precio": 1.659,
      "municipio": "San Pedro del Arroyo",
@@ -352,8 +352,8 @@
      "localidad": "San Pedro del Arroyo",
      "cp": "05350",
      "horario": "L-S: 07:00-23:00; D: 08:00-22:00",
-     "lat": 40.803111,
-     "lon": -4.873083
+     "lat": 40.802917,
+     "lon": -4.873278
     }
    ],
    "todas": [
@@ -382,18 +382,6 @@
      "lon": -4.728611
     },
     {
-     "id": "5980",
-     "nombre": "Petronor",
-     "precio": 1.659,
-     "municipio": "San Pedro del Arroyo",
-     "direccion": "Calle Calzada, S/n",
-     "localidad": "San Pedro del Arroyo",
-     "cp": "05350",
-     "horario": "L-S: 07:00-23:00; D: 08:00-22:00",
-     "lat": 40.803111,
-     "lon": -4.873083
-    },
-    {
      "id": "5981",
      "nombre": "Petronor",
      "precio": 1.659,
@@ -404,6 +392,18 @@
      "horario": "L-S: 07:00-23:00; D: 08:00-22:00",
      "lat": 40.802917,
      "lon": -4.873278
+    },
+    {
+     "id": "5980",
+     "nombre": "Petronor",
+     "precio": 1.659,
+     "municipio": "San Pedro del Arroyo",
+     "direccion": "Calle Calzada, S/n",
+     "localidad": "San Pedro del Arroyo",
+     "cp": "05350",
+     "horario": "L-S: 07:00-23:00; D: 08:00-22:00",
+     "lat": 40.803111,
+     "lon": -4.873083
     },
     {
      "id": "8065",
@@ -593,7 +593,7 @@
    "nombre": "Barcelona",
    "cyl": false,
    "n": 39,
-   "media": 1.703,
+   "media": 1.702,
    "mediana": 1.727,
    "min": 1.46,
    "max": 1.935,
@@ -978,7 +978,7 @@
     {
      "id": "5043",
      "nombre": "Galp",
-     "precio": 1.684,
+     "precio": 1.679,
      "municipio": "Valle de Losa",
      "direccion": "Carretera Bu-550 Km. 27",
      "localidad": "Quincoces de Yuso",
@@ -1249,7 +1249,7 @@
    "nombre": "Castellón",
    "cyl": false,
    "n": 52,
-   "media": 1.667,
+   "media": 1.666,
    "mediana": 1.685,
    "min": 1.359,
    "max": 1.808,
@@ -1395,9 +1395,9 @@
    "id": "16",
    "nombre": "Cuenca",
    "cyl": false,
-   "n": 34,
+   "n": 33,
    "media": 1.572,
-   "mediana": 1.558,
+   "mediana": 1.549,
    "min": 1.43,
    "max": 1.779,
    "descartados": 0,
@@ -1445,7 +1445,7 @@
    "nombre": "Gipuzkoa",
    "cyl": false,
    "n": 24,
-   "media": 1.799,
+   "media": 1.798,
    "mediana": 1.799,
    "min": 1.664,
    "max": 1.859,
@@ -1690,7 +1690,7 @@
    "nombre": "Huesca",
    "cyl": false,
    "n": 57,
-   "media": 1.641,
+   "media": 1.64,
    "mediana": 1.655,
    "min": 1.445,
    "max": 1.824,
@@ -1739,10 +1739,10 @@
    "nombre": "Illes Balears",
    "cyl": false,
    "n": 33,
-   "media": 1.816,
-   "mediana": 1.829,
+   "media": 1.814,
+   "mediana": 1.825,
    "min": 1.509,
-   "max": 1.929,
+   "max": 1.919,
    "descartados": 1,
    "baratas": [
     {
@@ -1788,10 +1788,10 @@
    "nombre": "Jaén",
    "cyl": false,
    "n": 120,
-   "media": 1.721,
+   "media": 1.72,
    "mediana": 1.719,
    "min": 1.459,
-   "max": 1.879,
+   "max": 1.869,
    "descartados": 0,
    "baratas": [
     {
@@ -1807,6 +1807,18 @@
      "lon": -3.920556
     },
     {
+     "id": "10550",
+     "nombre": "Gcl",
+     "precio": 1.489,
+     "municipio": "Alcaudete",
+     "direccion": "Carretera Nal.432 Km.367.950",
+     "localidad": "Alcaudete",
+     "cp": "23660",
+     "horario": "L-D: 24H",
+     "lat": 37.543833,
+     "lon": -4.024389
+    },
+    {
      "id": "10821",
      "nombre": "S.c.a. Ntra. Sra. de la Cabeza",
      "precio": 1.509,
@@ -1817,18 +1829,6 @@
      "horario": "L-V: 09:00-14:00 y 16:00-19:00",
      "lat": 37.558722,
      "lon": -3.624111
-    },
-    {
-     "id": "9864",
-     "nombre": "Aceites Guadalquivir",
-     "precio": 1.518,
-     "municipio": "Villanueva de la Reina",
-     "direccion": "J-231 km 0,700",
-     "localidad": "Villanueva de la Reina",
-     "cp": "23730",
-     "horario": "L-D: 06:00-22:00",
-     "lat": 38.009333,
-     "lon": -3.905028
     }
    ]
   },
@@ -2299,7 +2299,7 @@
    "nombre": "Madrid",
    "cyl": false,
    "n": 42,
-   "media": 1.763,
+   "media": 1.762,
    "mediana": 1.784,
    "min": 1.569,
    "max": 1.899,
@@ -3079,8 +3079,8 @@
    "nombre": "Segovia",
    "cyl": true,
    "n": 20,
-   "media": 1.688,
-   "mediana": 1.697,
+   "media": 1.684,
+   "mediana": 1.685,
    "min": 1.483,
    "max": 1.813,
    "descartados": 0,
@@ -3184,6 +3184,18 @@
      "lon": -3.952194
     },
     {
+     "id": "11793",
+     "nombre": "Cepsa E.s. Torrecaballeros (llorsoil)",
+     "precio": 1.619,
+     "municipio": "Torrecaballeros",
+     "direccion": "Carretera N-110 Km. 182,650",
+     "localidad": "Aldehuela",
+     "cp": "40160",
+     "horario": "L-D: 07:30-22:00",
+     "lat": 40.986139,
+     "lon": -4.040444
+    },
+    {
      "id": "6235",
      "nombre": "Buquerin",
      "precio": 1.649,
@@ -3244,21 +3256,9 @@
      "lon": -4.299639
     },
     {
-     "id": "11793",
-     "nombre": "Cepsa E.s. Torrecaballeros (llorsoil)",
-     "precio": 1.699,
-     "municipio": "Torrecaballeros",
-     "direccion": "Carretera N-110 Km. 182,650",
-     "localidad": "Aldehuela",
-     "cp": "40160",
-     "horario": "L-D: 07:30-22:00",
-     "lat": 40.986139,
-     "lon": -4.040444
-    },
-    {
      "id": "6401",
      "nombre": "Galp",
-     "precio": 1.724,
+     "precio": 1.719,
      "municipio": "Villacastín",
      "direccion": "Autopista A6 Km. 0",
      "localidad": "Villacastin",
@@ -3270,7 +3270,7 @@
     {
      "id": "6177",
      "nombre": "Galp",
-     "precio": 1.724,
+     "precio": 1.719,
      "municipio": "Villacastín",
      "direccion": "Autopista A6 Km. 0",
      "localidad": "Villacastin",
