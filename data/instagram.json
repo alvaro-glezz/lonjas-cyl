@@ -1,6 +1,6 @@
 {
  "comparativa": "2026-W45",
- "franja": "especial:ordenador",
+ "franja": "reel",
  "franjas": {
   "2026-11-07": [
    "reel"
@@ -32,7 +32,8 @@
   ],
   "2026-11-12": [
    "manana",
-   "especial:ordenador"
+   "especial:ordenador",
+   "reel"
   ]
  },
  "historias": [
@@ -225,6 +226,12 @@
    "fecha": "2026-11-12T09:58",
    "id": "2026-11-12-guia-ordenador",
    "media": "18157185757540390"
+  },
+  {
+   "facebook": "1678925360623232",
+   "fecha": "2026-11-12T13:18",
+   "id": "2026-11-12-reel-movimientos",
+   "media": "18132806305835064"
   }
  ],
  "token_renovado": "2026-11-07"
