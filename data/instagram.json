@@ -1,6 +1,6 @@
 {
  "comparativa": "2026-W45",
- "franja": "reel",
+ "franja": "historia",
  "franjas": {
   "2026-11-07": [
    "reel"
@@ -33,13 +33,15 @@
   "2026-11-12": [
    "manana",
    "especial:ordenador",
-   "reel"
+   "reel",
+   "historia"
   ]
  },
  "historias": [
   1,
   2,
-  3
+  3,
+  4
  ],
  "preparado": [
   {
@@ -232,6 +234,12 @@
    "fecha": "2026-11-12T13:18",
    "id": "2026-11-12-reel-movimientos",
    "media": "18132806305835064"
+  },
+  {
+   "facebook": "1136842712037660",
+   "fecha": "2026-11-12T18:28",
+   "id": "2026-11-12-historia-4-termometro",
+   "media": "17896179411438692"
   }
  ],
  "token_renovado": "2026-11-07"
