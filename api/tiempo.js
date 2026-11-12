@@ -144,6 +144,42 @@ function normalizar(json, ahora = new Date()) {
            elaborado: String(p.elaborado || "").slice(0, 19), hourly: H, daily: D };
 }
 
+/* ---------- días que AEMET aún no da por horas (predicción diaria por tramos) ---------- */
+/** Resumen de las horas de luz de los días que faltan hasta completar 5 (los que la horaria no cubre). */
+function resumenDiario(json, diasConHoras, hasta = 5) {
+  const p = Array.isArray(json) ? json[0] : json;
+  const dias = p && p.prediccion && Array.isArray(p.prediccion.dia) ? p.prediccion.dia : [];
+  const per = x => String(x.periodo || "00-24");
+  const lleno = x => x && x.value !== "" && x.value != null;
+  // Prefiere los tramos de día (06-12, 12-18); si no hay, mañana/tarde (00-12, 12-24); si no, el día entero
+  const diurnos = (lista, ok = lleno) => {
+    const l = Array.isArray(lista) ? lista : [];
+    for (const pref of [["06-12", "12-18"], ["00-12", "12-24"], ["00-24"]]) {
+      const s = l.filter(x => pref.includes(per(x)) && ok(x));
+      if (s.length) return s;
+    }
+    return [];
+  };
+  const max = xs => (xs.length ? Math.max(...xs) : null);
+  const out = [];
+  const total = diasConHoras.length;
+  for (const d of dias) {
+    const fecha = String(d.fecha || "").slice(0, 10);
+    if (!/^\d{4}-\d{2}-\d{2}$/.test(fecha) || diasConHoras.includes(fecha)) continue;
+    if (diasConHoras.length && fecha < diasConHoras[0]) continue;
+    if (total + out.length >= hasta) break;
+    const prob = max(diurnos(d.probPrecipitacion).map(x => n(x.value)).filter(v => v !== null));
+    const viento = max(diurnos(d.viento, x => Array.isArray(x.velocidad) || x.velocidad != null)
+      .map(x => n(Array.isArray(x.velocidad) ? x.velocidad[0] : x.velocidad)).filter(v => v !== null));
+    const racha = max(diurnos(d.rachaMax).map(x => n(x.value)).filter(v => v !== null));
+    const cielos = Array.isArray(d.estadoCielo) ? d.estadoCielo.filter(lleno) : [];
+    const cielo = (cielos.find(x => ["12-18", "12-24"].includes(per(x))) || cielos.find(x => per(x) === "00-24") || cielos[0] || {}).value;
+    const t = d.temperatura || {}, hr = d.humedadRelativa || {};
+    out.push({ fecha, tmax: n(t.maxima), tmin: n(t.minima), hmin: n(hr.minima), prob, viento, racha, cielo: cieloWmo(cielo) });
+  }
+  return out;
+}
+
 /* ---------- municipios de Castilla y León ---------- */
 function municipios(lista) {
   const out = [];
@@ -171,7 +207,13 @@ async function manejador(req, res) {
     }
     const m = String(q.m || "");
     if (!/^\d{5}$/.test(m) || !PROVINCIAS[m.slice(0, 2)]) return res.status(400).json({ error: "municipio" });
-    const d = normalizar(await pedirAemet(`/prediccion/especifica/municipio/horaria/${m}`, k));
+    const [hor, dia] = await Promise.allSettled([
+      pedirAemet(`/prediccion/especifica/municipio/horaria/${m}`, k),
+      pedirAemet(`/prediccion/especifica/municipio/diaria/${m}`, k)]);
+    if (hor.status !== "fulfilled") throw hor.reason;
+    const d = normalizar(hor.value);
+    // Hasta completar 5 días, los que AEMET aún no da por horas van como resumen del día
+    if (dia.status === "fulfilled") { try { d.resumen = resumenDiario(dia.value, d.daily.time); } catch { /* sin resumen */ } }
     res.setHeader("Cache-Control", "public, max-age=600, s-maxage=1800, stale-while-revalidate=3600");
     return res.status(200).json({ ...d, codigo: m });
   } catch (e) {
@@ -184,3 +226,4 @@ module.exports = manejador;
 module.exports.normalizar = normalizar;
 module.exports.municipios = municipios;
 module.exports.cieloWmo = cieloWmo;
+module.exports.resumenDiario = resumenDiario;

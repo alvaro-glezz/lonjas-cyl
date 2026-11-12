@@ -244,10 +244,27 @@ function vistaTiempo() {
       ${sel ? `<p class="hora-detalle"><b>${sel.hora}:00 h · ${sel.nota}</b> — ${Math.round(sel.temp)} °C, humedad ${Math.round(sel.hum)} %, viento ${Math.round(sel.viento)} km/h (rachas ${Math.round(sel.rachas)}), lluvia ${num1(sel.lluvia)} mm (${sel.prob} %).${sel.motivos.length ? ` <span>Motivo: ${esc(sel.motivos.join("; "))}.</span>` : ""}</p>` : ""}
     </article>`;
   }).join("");
+  // Días que AEMET aún no da por horas: resumen del día y si pinta bien o mal con tus límites
+  const resumen = (Array.isArray(TIEMPO.prevision.resumen) ? TIEMPO.prevision.resumen : []).filter(r => r && /^\d{4}-\d{2}-\d{2}$/.test(r.fecha))
+    .map((r, k) => {
+      const mot = [];
+      if (r.viento != null && r.viento > u.viento) mot.push(`viento de ${Math.round(r.viento)} km/h`);
+      if (r.racha != null && r.racha > u.rachas) mot.push(`rachas de ${Math.round(r.racha)} km/h`);
+      if (r.prob != null && r.prob >= 50) mot.push(`${Math.round(r.prob)} % de probabilidad de lluvia`);
+      if (r.tmax != null && r.tmax < u.tmin) mot.push(`frío (máxima de ${Math.round(r.tmax)} °C)`);
+      if (r.tmax != null && r.tmax > u.tmax + 3) mot.push(`calor (máxima de ${Math.round(r.tmax)} °C)`);
+      const datos = [r.cielo != null ? CIELO(r.cielo) : "", r.tmax != null ? `${Math.round(r.tmax)}° / ${Math.round(r.tmin)}°` : "",
+                     r.prob != null ? `lluvia ${Math.round(r.prob)} %` : "", r.viento != null ? `viento hasta ${Math.round(r.viento)} km/h` : ""].filter(Boolean).join(" · ");
+      return `<article class="tiempo-dia tiempo-resumen">
+        <header><b>${nombreDia(r.fecha, dias.length + k)}</b><span>${esc(datos)}</span></header>
+        <p class="tiempo-ventana ${mot.length ? "no" : "quiza"}">${mot.length ? `❌ Día poco favorable: ${esc(mot.join(", "))}` : "🟢 Pinta bien para tratar: mira las horas cuando AEMET las publique"}</p>
+        <p class="tiempo-aviso">AEMET aún no da este día hora a hora; el resumen es de las horas de luz.</p>
+      </article>`;
+    }).join("");
   const campo = (k, txt, min, max, paso) => `<label>${txt}<input type="number" data-umbral="${k}" value="${u[k]}" min="${min}" max="${max}" step="${paso}" inputmode="numeric"></label>`;
   return `<section class="seccion">${cab}
     <p class="leyenda"><span class="h-buena">buena</span><span class="h-regular">regular</span><span class="h-mala">mala</span> Toca una hora para ver el detalle.</p>
-    ${bloques}
+    ${bloques}${resumen}
     <details class="tiempo-ajustes"><summary>Ajustar los límites (${u.viento} km/h de viento, ${u.tmin}–${u.tmax} °C, humedad ≥ ${u.hmin} %, ${u.horasSinLluvia} h sin lluvia)</summary>
       <div class="ajustes-rejilla">
         ${campo("viento", "Viento máximo (km/h)", 3, 40, 1)}${campo("rachas", "Rachas máximas (km/h)", 5, 60, 1)}

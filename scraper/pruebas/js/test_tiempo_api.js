@@ -29,6 +29,18 @@ const PREV = [{
     temperatura: horas(0, 6, h => ({ value: "4", periodo: pad(h) })),
   }] },
 }];
+const DIARIA = [{ nombre: "Peñafiel", prediccion: { dia: [
+  { fecha: "2026-11-11T00:00:00", probPrecipitacion: [{ value: 100, periodo: "00-24" }], temperatura: { maxima: 14, minima: 10 } },
+  { fecha: "2026-11-13T00:00:00", probPrecipitacion: [{ value: 90, periodo: "00-24" }, { value: 20, periodo: "00-12" }, { value: 70, periodo: "12-24" }],
+    viento: [{ direccion: "C", velocidad: 5, periodo: "00-24" }, { direccion: "N", velocidad: 10, periodo: "00-12" }, { direccion: "N", velocidad: 25, periodo: "12-24" }],
+    rachaMax: [{ value: "", periodo: "00-24" }, { value: "40", periodo: "12-24" }],
+    estadoCielo: [{ value: "", periodo: "00-24" }, { value: "12", periodo: "00-12" }, { value: "46", periodo: "12-24" }],
+    temperatura: { maxima: 12, minima: 3 }, humedadRelativa: { maxima: 95, minima: 60 } },
+  { fecha: "2026-11-14T00:00:00", probPrecipitacion: [{ value: 0 }], viento: [{ direccion: "S", velocidad: 10 }], rachaMax: [{ value: "" }],
+    estadoCielo: [{ value: "11", descripcion: "Despejado" }], temperatura: { maxima: 15, minima: 2 }, humedadRelativa: { maxima: 90, minima: 55 } },
+  { fecha: "2026-11-15T00:00:00", probPrecipitacion: [{ value: 0 }], temperatura: { maxima: 16, minima: 4 } },
+  { fecha: "2026-11-16T00:00:00", probPrecipitacion: [{ value: 0 }], temperatura: { maxima: 16, minima: 4 } },
+] } }];
 const MAESTRO = [
   { id: "id47114", nombre: "Peñafiel", latitud_dec: "41.5997", longitud_dec: "-4.1172" },
   { id: "id05019", nombre: "Ávila", latitud_dec: "40.6564", longitud_dec: "-4.6997" },
@@ -45,11 +57,14 @@ global.fetch = async (url, op = {}) => {
   if (url.startsWith("https://opendata.aemet.es/opendata/api/")) {
     assert.strictEqual(op.headers.api_key, "clave-de-prueba-123456789");
     if (url.endsWith("/horaria/47114")) return { ok: true, json: async () => ({ estado: 200, datos: "https://opendata.aemet.es/opendata/sh/prev" }) };
+    if (url.endsWith("/diaria/47114")) return { ok: true, json: async () => ({ estado: 200, datos: "https://opendata.aemet.es/opendata/sh/dia" }) };
+    if (/\/diaria\/479\d\d$/.test(url)) return { ok: true, json: async () => ({ estado: 500 }) };
     if (url.endsWith("/horaria/47999")) return { ok: true, json: async () => ({ estado: 404, descripcion: "No hay datos" }) };
     if (url.endsWith("/horaria/47998")) return { ok: true, json: async () => ({ estado: 429 }) };
     if (url.endsWith("/maestro/municipios")) return { ok: true, json: async () => ({ estado: 200, datos: "https://opendata.aemet.es/opendata/sh/muni" }) };
   }
   if (url === "https://opendata.aemet.es/opendata/sh/prev") return { ok: true, arrayBuffer: async () => utf8(JSON.stringify(PREV)) };   // como llega de verdad
+  if (url === "https://opendata.aemet.es/opendata/sh/dia") return { ok: true, arrayBuffer: async () => latin1(JSON.stringify(DIARIA)) };
   if (url === "https://opendata.aemet.es/opendata/sh/muni") return { ok: true, arrayBuffer: async () => latin1(JSON.stringify(MAESTRO)) };
   throw new Error("URL inesperada " + url);
 };
@@ -93,6 +108,10 @@ function llamar(url, metodo = "GET") {
   assert.strictEqual(d.daily.precipitation_sum[0], 1.6); assert.strictEqual(d.daily.wind_speed_10m_max[0], 23);
   assert.strictEqual(d.daily.weather_code[1], 95);
   assert.match(r.h["Cache-Control"], /s-maxage=1800/);
+  // Días 3 a 5 desde la predicción diaria: tramos de 12 h por la tarde/mañana y día entero en los lejanos
+  assert.deepStrictEqual(d.resumen.map(x => x.fecha), ["2026-11-13", "2026-11-14", "2026-11-15"]);
+  assert.deepStrictEqual(d.resumen[0], { fecha: "2026-11-13", tmax: 12, tmin: 3, hmin: 60, prob: 70, viento: 25, racha: 40, cielo: 51 });
+  assert.strictEqual(d.resumen[1].viento, 10); assert.strictEqual(d.resumen[1].racha, null); assert.strictEqual(d.resumen[1].cielo, 0);
 
   // municipios no válidos o de fuera de Castilla y León
   for (const m of ["28079", "4711", "47114x", ""]) assert.strictEqual((await llamar("/api/tiempo?m=" + m)).s, 400);

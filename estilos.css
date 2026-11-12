@@ -765,3 +765,5 @@ button.lj-fila:hover { background: var(--pino-suave); }
   main[data-vista="hoy"] > .mod-campo { grid-column: span 7; }
   main[data-ancho] > .subnav { grid-column: 1 / -1; }
 }
+.tiempo-ventana.quiza { color: var(--sube); }
+.tiempo-aviso { margin: 0; font-size: 12.5px; color: var(--tenue); }
