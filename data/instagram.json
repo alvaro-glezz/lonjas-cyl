@@ -1,6 +1,6 @@
 {
  "comparativa": "2026-W45",
- "franja": "manana",
+ "franja": "especial:ordenador",
  "franjas": {
   "2026-11-07": [
    "reel"
@@ -31,7 +31,8 @@
    "especial:tratamientos-voz"
   ],
   "2026-11-12": [
-   "manana"
+   "manana",
+   "especial:ordenador"
   ]
  },
  "historias": [
@@ -218,6 +219,12 @@
    "fecha": "2026-11-12T07:59",
    "id": "2026-11-12-dia-centeno",
    "media": "17946006984368140"
+  },
+  {
+   "facebook": "1368079503066363_122110134393536635",
+   "fecha": "2026-11-12T09:58",
+   "id": "2026-11-12-guia-ordenador",
+   "media": "18157185757540390"
   }
  ],
  "token_renovado": "2026-11-07"
