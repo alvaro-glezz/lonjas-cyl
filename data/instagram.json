@@ -1,6 +1,6 @@
 {
  "comparativa": "2026-W45",
- "franja": "reel",
+ "franja": "historia",
  "franjas": {
   "2026-11-07": [
    "reel"
@@ -38,14 +38,16 @@
   ],
   "2026-11-13": [
    "manana",
-   "reel"
+   "reel",
+   "historia"
   ]
  },
  "historias": [
   1,
   2,
   3,
-  4
+  4,
+  5
  ],
  "preparado": [
   {
@@ -256,6 +258,12 @@
    "fecha": "2026-11-13T13:13",
    "id": "2026-11-13-reel-centeno",
    "media": "18080413568422869"
+  },
+  {
+   "facebook": "1172776835418423",
+   "fecha": "2026-11-13T18:26",
+   "id": "2026-11-13-historia-5-aviso",
+   "media": "18120824909471932"
   }
  ],
  "token_renovado": "2026-11-07"
