@@ -1,12 +1,12 @@
 {
- "fecha": "2026-11-13T18:31",
+ "fecha": "2026-11-13T22:29",
  "fuente": "Ministerio para la Transición Ecológica y el Reto Demográfico (Geoportal de gasolineras)",
  "fuente_url": "https://geoportalgasolineras.es/geoportal-instalaciones/Inicio",
  "unidad": "€/l",
  "espana": {
   "media": 1.68,
   "min": 1.359,
-  "n": 2262
+  "n": 2263
  },
  "cyl": {
   "media": 1.648,
@@ -19,7 +19,7 @@
    "nombre": "A Coruña",
    "cyl": false,
    "n": 89,
-   "media": 1.744,
+   "media": 1.743,
    "mediana": 1.777,
    "min": 1.453,
    "max": 1.889,
@@ -1102,7 +1102,7 @@
    "nombre": "Cáceres",
    "cyl": false,
    "n": 49,
-   "media": 1.685,
+   "media": 1.684,
    "mediana": 1.719,
    "min": 1.46,
    "max": 1.889,
@@ -1151,10 +1151,10 @@
    "nombre": "Cádiz",
    "cyl": false,
    "n": 31,
-   "media": 1.714,
+   "media": 1.712,
    "mediana": 1.72,
    "min": 1.498,
-   "max": 1.849,
+   "max": 1.842,
    "descartados": 0,
    "baratas": [
     {
@@ -1298,7 +1298,7 @@
    "nombre": "Ciudad Real",
    "cyl": false,
    "n": 78,
-   "media": 1.64,
+   "media": 1.639,
    "mediana": 1.601,
    "min": 1.429,
    "max": 1.849,
@@ -1317,6 +1317,18 @@
      "lon": -2.955028
     },
     {
+     "id": "12514",
+     "nombre": "Castillo de Montiel",
+     "precio": 1.435,
+     "municipio": "Montiel",
+     "direccion": "Carrera Villanueva de los Infantes, S/n",
+     "localidad": "Montiel",
+     "cp": "13326",
+     "horario": "L-D: 24H",
+     "lat": 38.69975,
+     "lon": -2.882583
+    },
+    {
      "id": "8897",
      "nombre": "El Rubial Soc. Coop.",
      "precio": 1.458,
@@ -1327,18 +1339,6 @@
      "horario": "L-D: 24H",
      "lat": 39.211694,
      "lon": -3.59675
-    },
-    {
-     "id": "11483",
-     "nombre": "Sumnistros Agricolas de Pedro Muñoz S. Coop. de C-lm",
-     "precio": 1.465,
-     "municipio": "Pedro Muñoz",
-     "direccion": "Carretera Pedro Muñoz a Socuellamos Km. 1",
-     "localidad": "Pedro Muñoz",
-     "cp": "13620",
-     "horario": "L-D: 24H",
-     "lat": 39.396167,
-     "lon": -2.937778
     }
    ]
   },
@@ -1395,9 +1395,9 @@
    "id": "16",
    "nombre": "Cuenca",
    "cyl": false,
-   "n": 36,
+   "n": 37,
    "media": 1.561,
-   "mediana": 1.53,
+   "mediana": 1.539,
    "min": 1.4,
    "max": 1.779,
    "descartados": 0,
@@ -1739,10 +1739,10 @@
    "nombre": "Illes Balears",
    "cyl": false,
    "n": 33,
-   "media": 1.809,
-   "mediana": 1.819,
+   "media": 1.807,
+   "mediana": 1.809,
    "min": 1.509,
-   "max": 1.919,
+   "max": 1.909,
    "descartados": 1,
    "baratas": [
     {
@@ -2348,7 +2348,7 @@
    "nombre": "Málaga",
    "cyl": false,
    "n": 35,
-   "media": 1.681,
+   "media": 1.68,
    "mediana": 1.699,
    "min": 1.445,
    "max": 1.909,
@@ -2448,10 +2448,22 @@
    "n": 104,
    "media": 1.624,
    "mediana": 1.587,
-   "min": 1.494,
+   "min": 1.476,
    "max": 1.859,
    "descartados": 0,
    "baratas": [
+    {
+     "id": "9557",
+     "nombre": "An Energeticos - Peralta",
+     "precio": 1.476,
+     "municipio": "Peralta",
+     "direccion": "Avenida San Silvestre, S/n",
+     "localidad": "Peralta",
+     "cp": "31350",
+     "horario": "L-D: 24H",
+     "lat": 42.337694,
+     "lon": -1.809778
+    },
     {
      "id": "11922",
      "nombre": "E.s. Bardenas",
@@ -2475,18 +2487,6 @@
      "horario": "L-D: 24H",
      "lat": 42.586972,
      "lon": -1.766083
-    },
-    {
-     "id": "12001",
-     "nombre": "An Energeticos - Cintruenigo Bodega Cirbonera",
-     "precio": 1.495,
-     "municipio": "Cintruénigo",
-     "direccion": "Poligono Poligono Industrial S/n, 2",
-     "localidad": "Cintruenigo",
-     "cp": "31592",
-     "horario": "L-D: 24H",
-     "lat": 42.072611,
-     "lon": -1.793361
     }
    ]
   },
@@ -2800,10 +2800,10 @@
    "nombre": "Salamanca",
    "cyl": true,
    "n": 19,
-   "media": 1.672,
+   "media": 1.671,
    "mediana": 1.674,
    "min": 1.507,
-   "max": 1.795,
+   "max": 1.769,
    "descartados": 0,
    "baratas": [
     {
@@ -3049,6 +3049,18 @@
      "lon": -6.582694
     },
     {
+     "id": "6116",
+     "nombre": "Cepsa",
+     "precio": 1.765,
+     "municipio": "La Fuente de San Esteban",
+     "direccion": "Carretera Nacional620 Km. 291,6",
+     "localidad": "La Fuente de San Esteban",
+     "cp": "37200",
+     "horario": "L: 07:30-22:00",
+     "lat": 40.789167,
+     "lon": -6.249889
+    },
+    {
      "id": "6349",
      "nombre": "Repsol",
      "precio": 1.769,
@@ -3059,18 +3071,6 @@
      "horario": "L-D: 07:00-23:00",
      "lat": 40.659917,
      "lon": -6.113917
-    },
-    {
-     "id": "6116",
-     "nombre": "Cepsa",
-     "precio": 1.795,
-     "municipio": "La Fuente de San Esteban",
-     "direccion": "Carretera Nacional620 Km. 291,6",
-     "localidad": "La Fuente de San Esteban",
-     "cp": "37200",
-     "horario": "L: 07:30-22:00",
-     "lat": 40.789167,
-     "lon": -6.249889
     }
    ]
   },
@@ -3268,18 +3268,6 @@
      "lon": -4.51725
     },
     {
-     "id": "6401",
-     "nombre": "Galp",
-     "precio": 1.719,
-     "municipio": "Villacastín",
-     "direccion": "Autopista A6 Km. 0",
-     "localidad": "Villacastin",
-     "cp": "40150",
-     "horario": "L-D: 06:00-22:00",
-     "lat": 40.7975,
-     "lon": -4.462889
-    },
-    {
      "id": "6177",
      "nombre": "Galp",
      "precio": 1.719,
@@ -3290,6 +3278,18 @@
      "horario": "L-D: 24H",
      "lat": 40.7975,
      "lon": -4.460889
+    },
+    {
+     "id": "6401",
+     "nombre": "Galp",
+     "precio": 1.719,
+     "municipio": "Villacastín",
+     "direccion": "Autopista A6 Km. 0",
+     "localidad": "Villacastin",
+     "cp": "40150",
+     "horario": "L-D: 06:00-22:00",
+     "lat": 40.7975,
+     "lon": -4.462889
     },
     {
      "id": "6169",
