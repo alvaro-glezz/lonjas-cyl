@@ -1,6 +1,6 @@
 {
  "comparativa": "2026-W45",
- "franja": "manana",
+ "franja": "reel",
  "franjas": {
   "2026-11-07": [
    "reel"
@@ -37,7 +37,8 @@
    "historia"
   ],
   "2026-11-13": [
-   "manana"
+   "manana",
+   "reel"
   ]
  },
  "historias": [
@@ -249,6 +250,12 @@
    "fecha": "2026-11-13T07:58",
    "id": "2026-11-13-dia-girasol",
    "media": "18041019707839248"
+  },
+  {
+   "facebook": "4589535331375339",
+   "fecha": "2026-11-13T13:13",
+   "id": "2026-11-13-reel-centeno",
+   "media": "18080413568422869"
   }
  ],
  "token_renovado": "2026-11-07"
