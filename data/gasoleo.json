@@ -1,16 +1,16 @@
 {
- "fecha": "2026-11-13T14:53",
+ "fecha": "2026-11-13T18:31",
  "fuente": "Ministerio para la Transición Ecológica y el Reto Demográfico (Geoportal de gasolineras)",
  "fuente_url": "https://geoportalgasolineras.es/geoportal-instalaciones/Inicio",
  "unidad": "€/l",
  "espana": {
-  "media": 1.681,
+  "media": 1.68,
   "min": 1.359,
   "n": 2262
  },
  "cyl": {
-  "media": 1.65,
-  "min": 1.459,
+  "media": 1.648,
+  "min": 1.429,
   "n": 166
  },
  "provincias": [
@@ -117,7 +117,7 @@
    "nombre": "Albacete",
    "cyl": false,
    "n": 39,
-   "media": 1.674,
+   "media": 1.673,
    "mediana": 1.699,
    "min": 1.429,
    "max": 1.979,
@@ -215,10 +215,10 @@
    "nombre": "Almería",
    "cyl": false,
    "n": 65,
-   "media": 1.688,
-   "mediana": 1.699,
+   "media": 1.686,
+   "mediana": 1.669,
    "min": 1.469,
-   "max": 1.889,
+   "max": 1.873,
    "descartados": 1,
    "baratas": [
     {
@@ -344,7 +344,7 @@
      "lon": -4.728611
     },
     {
-     "id": "5980",
+     "id": "5981",
      "nombre": "Petronor",
      "precio": 1.659,
      "municipio": "San Pedro del Arroyo",
@@ -352,8 +352,8 @@
      "localidad": "San Pedro del Arroyo",
      "cp": "05350",
      "horario": "L-S: 07:00-23:00; D: 08:00-22:00",
-     "lat": 40.803111,
-     "lon": -4.873083
+     "lat": 40.802917,
+     "lon": -4.873278
     }
    ],
    "todas": [
@@ -382,18 +382,6 @@
      "lon": -4.728611
     },
     {
-     "id": "5980",
-     "nombre": "Petronor",
-     "precio": 1.659,
-     "municipio": "San Pedro del Arroyo",
-     "direccion": "Calle Calzada, S/n",
-     "localidad": "San Pedro del Arroyo",
-     "cp": "05350",
-     "horario": "L-S: 07:00-23:00; D: 08:00-22:00",
-     "lat": 40.803111,
-     "lon": -4.873083
-    },
-    {
      "id": "5981",
      "nombre": "Petronor",
      "precio": 1.659,
@@ -404,6 +392,18 @@
      "horario": "L-S: 07:00-23:00; D: 08:00-22:00",
      "lat": 40.802917,
      "lon": -4.873278
+    },
+    {
+     "id": "5980",
+     "nombre": "Petronor",
+     "precio": 1.659,
+     "municipio": "San Pedro del Arroyo",
+     "direccion": "Calle Calzada, S/n",
+     "localidad": "San Pedro del Arroyo",
+     "cp": "05350",
+     "horario": "L-S: 07:00-23:00; D: 08:00-22:00",
+     "lat": 40.803111,
+     "lon": -4.873083
     },
     {
      "id": "9432",
@@ -691,13 +691,25 @@
    "nombre": "Burgos",
    "cyl": true,
    "n": 30,
-   "media": 1.627,
+   "media": 1.618,
    "mediana": 1.639,
-   "min": 1.459,
+   "min": 1.429,
    "max": 1.839,
    "descartados": 0,
    "baratas": [
     {
+     "id": "4934",
+     "nombre": "E.s. Rivera",
+     "precio": 1.429,
+     "municipio": "Villarcayo de Merindad de Castilla la Vieja",
+     "direccion": "Calle Calle San Roque (carretera Burgos-villarcayo), 13",
+     "localidad": "Villarcayo",
+     "cp": "09556",
+     "horario": "L-D: 07:30-23:00",
+     "lat": 42.940389,
+     "lon": -3.570556
+    },
+    {
      "id": "5037",
      "nombre": "Galp",
      "precio": 1.459,
@@ -720,22 +732,22 @@
      "horario": "L-V: 09:00-14:00 y 16:00-19:00",
      "lat": 41.690528,
      "lon": -3.925778
-    },
-    {
-     "id": "4970",
-     "nombre": "Beroil",
-     "precio": 1.479,
-     "municipio": "Estépar",
-     "direccion": "Carretera Nacional 620 Km. 20",
-     "localidad": "Estepar",
-     "cp": "09230",
-     "horario": "L-D: 24H",
-     "lat": 42.278444,
-     "lon": -3.89175
     }
    ],
    "todas": [
     {
+     "id": "4934",
+     "nombre": "E.s. Rivera",
+     "precio": 1.429,
+     "municipio": "Villarcayo de Merindad de Castilla la Vieja",
+     "direccion": "Calle Calle San Roque (carretera Burgos-villarcayo), 13",
+     "localidad": "Villarcayo",
+     "cp": "09556",
+     "horario": "L-D: 07:30-23:00",
+     "lat": 42.940389,
+     "lon": -3.570556
+    },
+    {
      "id": "5037",
      "nombre": "Galp",
      "precio": 1.459,
@@ -760,6 +772,18 @@
      "lon": -3.925778
     },
     {
+     "id": "13238",
+     "nombre": "Beroil",
+     "precio": 1.479,
+     "municipio": "Aranda de Duero",
+     "direccion": "Avenida Portugal, 82",
+     "localidad": "Aranda de Duero",
+     "cp": "09400",
+     "horario": "L-D: 24H",
+     "lat": 41.666444,
+     "lon": -3.727861
+    },
+    {
      "id": "4970",
      "nombre": "Beroil",
      "precio": 1.479,
@@ -770,6 +794,18 @@
      "horario": "L-D: 24H",
      "lat": 42.278444,
      "lon": -3.89175
+    },
+    {
+     "id": "13254",
+     "nombre": "Beroil",
+     "precio": 1.479,
+     "municipio": "Fuentecén",
+     "direccion": "Carretera N122 Km286 Km. 286",
+     "localidad": "Fuentecen",
+     "cp": "09315",
+     "horario": "L-D: 24H",
+     "lat": 41.626083,
+     "lon": -3.878722
     },
     {
      "id": "4908",
@@ -808,18 +844,6 @@
      "lon": -3.485278
     },
     {
-     "id": "4934",
-     "nombre": "E.s. Rivera",
-     "precio": 1.539,
-     "municipio": "Villarcayo de Merindad de Castilla la Vieja",
-     "direccion": "Calle Calle San Roque (carretera Burgos-villarcayo), 13",
-     "localidad": "Villarcayo",
-     "cp": "09556",
-     "horario": "L-D: 07:30-23:00",
-     "lat": 42.940389,
-     "lon": -3.570556
-    },
-    {
      "id": "4750",
      "nombre": "E.s.saiz",
      "precio": 1.54,
@@ -830,30 +854,6 @@
      "horario": "L-D: 07:00-22:00",
      "lat": 42.379861,
      "lon": -3.928167
-    },
-    {
-     "id": "13238",
-     "nombre": "Beroil",
-     "precio": 1.549,
-     "municipio": "Aranda de Duero",
-     "direccion": "Avenida Portugal, 82",
-     "localidad": "Aranda de Duero",
-     "cp": "09400",
-     "horario": "L-D: 24H",
-     "lat": 41.666444,
-     "lon": -3.727861
-    },
-    {
-     "id": "13254",
-     "nombre": "Beroil",
-     "precio": 1.549,
-     "municipio": "Fuentecén",
-     "direccion": "Carretera N122 Km286 Km. 286",
-     "localidad": "Fuentecen",
-     "cp": "09315",
-     "horario": "L-D: 24H",
-     "lat": 41.626083,
-     "lon": -3.878722
     },
     {
      "id": "8034",
@@ -1150,9 +1150,9 @@
    "id": "11",
    "nombre": "Cádiz",
    "cyl": false,
-   "n": 32,
-   "media": 1.711,
-   "mediana": 1.724,
+   "n": 31,
+   "media": 1.714,
+   "mediana": 1.72,
    "min": 1.498,
    "max": 1.849,
    "descartados": 0,
@@ -1249,8 +1249,8 @@
    "nombre": "Castellón",
    "cyl": false,
    "n": 52,
-   "media": 1.659,
-   "mediana": 1.663,
+   "media": 1.66,
+   "mediana": 1.667,
    "min": 1.359,
    "max": 1.808,
    "descartados": 2,
@@ -1347,7 +1347,7 @@
    "nombre": "Córdoba",
    "cyl": false,
    "n": 68,
-   "media": 1.687,
+   "media": 1.686,
    "mediana": 1.7,
    "min": 1.442,
    "max": 1.855,
@@ -1395,9 +1395,9 @@
    "id": "16",
    "nombre": "Cuenca",
    "cyl": false,
-   "n": 35,
-   "media": 1.565,
-   "mediana": 1.539,
+   "n": 36,
+   "media": 1.561,
+   "mediana": 1.53,
    "min": 1.4,
    "max": 1.779,
    "descartados": 0,
@@ -1415,6 +1415,18 @@
      "lon": -2.8865
     },
     {
+     "id": "10820",
+     "nombre": "Galera Areas de Servicio",
+     "precio": 1.43,
+     "municipio": "Campillo de Altobuey",
+     "direccion": "Carretera Carretera de Valencia 5 Km.",
+     "localidad": "Campillo de Altobuey",
+     "cp": "16210",
+     "horario": "L-D: 07:30-21:00",
+     "lat": 39.612083,
+     "lon": -1.79175
+    },
+    {
      "id": "8906",
      "nombre": "S. Andres Apostol Sociedad Coop. de C-lm",
      "precio": 1.43,
@@ -1425,18 +1437,6 @@
      "horario": "L-D: 24H",
      "lat": 39.612694,
      "lon": -1.792972
-    },
-    {
-     "id": "9797",
-     "nombre": "San Isidro Labrador Soc. Coop. de Clm",
-     "precio": 1.435,
-     "municipio": "Belmonte",
-     "direccion": "Calle Ramon y Cajal, 42",
-     "localidad": "Belmonte",
-     "cp": "16640",
-     "horario": "L-D: 24H",
-     "lat": 39.554167,
-     "lon": -2.70975
     }
    ]
   },
@@ -1445,10 +1445,10 @@
    "nombre": "Gipuzkoa",
    "cyl": false,
    "n": 24,
-   "media": 1.794,
+   "media": 1.792,
    "mediana": 1.799,
    "min": 1.707,
-   "max": 1.859,
+   "max": 1.849,
    "descartados": 0,
    "baratas": [
     {
@@ -1543,7 +1543,7 @@
    "nombre": "Granada",
    "cyl": false,
    "n": 58,
-   "media": 1.645,
+   "media": 1.644,
    "mediana": 1.659,
    "min": 1.459,
    "max": 1.819,
@@ -1788,7 +1788,7 @@
    "nombre": "Jaén",
    "cyl": false,
    "n": 120,
-   "media": 1.714,
+   "media": 1.713,
    "mediana": 1.719,
    "min": 1.459,
    "max": 1.869,
@@ -1837,12 +1837,24 @@
    "nombre": "La Rioja",
    "cyl": false,
    "n": 28,
-   "media": 1.667,
+   "media": 1.664,
    "mediana": 1.696,
-   "min": 1.539,
+   "min": 1.499,
    "max": 1.799,
    "descartados": 0,
    "baratas": [
+    {
+     "id": "4300",
+     "nombre": "Beroil",
+     "precio": 1.499,
+     "municipio": "San Asensio",
+     "direccion": "CTRA. N-232, PK. km 436,9",
+     "localidad": "San Asensio",
+     "cp": "26340",
+     "horario": "L-D: 24H",
+     "lat": 42.514083,
+     "lon": -2.742111
+    },
     {
      "id": "9647",
      "nombre": "An Energeticos - Autol",
@@ -1866,18 +1878,6 @@
      "horario": "L-D: 24H",
      "lat": 42.226917,
      "lon": -1.891972
-    },
-    {
-     "id": "2406",
-     "nombre": "Adelfas",
-     "precio": 1.555,
-     "municipio": "Briones",
-     "direccion": "Carrera Nacional 232, Km 441,",
-     "localidad": "Briones",
-     "cp": "26330",
-     "horario": "L-D: 07:00-22:00",
-     "lat": 42.536083,
-     "lon": -2.773139
     }
    ]
   },
@@ -2250,7 +2250,7 @@
    "nombre": "Lugo",
    "cyl": false,
    "n": 51,
-   "media": 1.761,
+   "media": 1.76,
    "mediana": 1.765,
    "min": 1.509,
    "max": 1.889,
@@ -2299,7 +2299,7 @@
    "nombre": "Madrid",
    "cyl": false,
    "n": 42,
-   "media": 1.758,
+   "media": 1.757,
    "mediana": 1.774,
    "min": 1.569,
    "max": 1.889,
@@ -2446,7 +2446,7 @@
    "nombre": "Navarra",
    "cyl": false,
    "n": 104,
-   "media": 1.625,
+   "media": 1.624,
    "mediana": 1.587,
    "min": 1.494,
    "max": 1.859,
@@ -2800,8 +2800,8 @@
    "nombre": "Salamanca",
    "cyl": true,
    "n": 19,
-   "media": 1.676,
-   "mediana": 1.679,
+   "media": 1.672,
+   "mediana": 1.674,
    "min": 1.507,
    "max": 1.795,
    "descartados": 0,
@@ -2893,6 +2893,42 @@
      "lon": -5.970083
     },
     {
+     "id": "4741",
+     "nombre": "El Trebol",
+     "precio": 1.656,
+     "municipio": "Calvarrasa de Arriba",
+     "direccion": "*EL TREBOL* CR.ALBA DE TORMES-PIEDRAHITA KM 5.200 km 8,7",
+     "localidad": "Calvarrasa de Arriba",
+     "cp": "37191",
+     "horario": "L-S: 07:00-22:00; D: 08:00-22:00",
+     "lat": 40.894167,
+     "lon": -5.58675
+    },
+    {
+     "id": "4952",
+     "nombre": "El Trebol",
+     "precio": 1.656,
+     "municipio": "Salamanca",
+     "direccion": "(EL TREBOL) CTRA. FREGENEDA Nº 12-22 SALAMANCA",
+     "localidad": "Salamanca",
+     "cp": "37008",
+     "horario": "L-S: 07:00-22:00; D: 08:00-22:00",
+     "lat": 40.955806,
+     "lon": -5.67275
+    },
+    {
+     "id": "4747",
+     "nombre": "El Trebol",
+     "precio": 1.656,
+     "municipio": "Vecinos",
+     "direccion": "(EL TREBOL) AVD. JOSE ANTONIO Nº 7 (SALAMANCA-CORIA km 30,4)",
+     "localidad": "Vecinos",
+     "cp": "37450",
+     "horario": "L-S: 07:00-22:00; D: 08:00-22:00",
+     "lat": 40.777472,
+     "lon": -5.877528
+    },
+    {
      "id": "10879",
      "nombre": "Repsol",
      "precio": 1.659,
@@ -2927,42 +2963,6 @@
      "horario": "L-D: 24H",
      "lat": 40.697972,
      "lon": -6.416278
-    },
-    {
-     "id": "4741",
-     "nombre": "El Trebol",
-     "precio": 1.679,
-     "municipio": "Calvarrasa de Arriba",
-     "direccion": "*EL TREBOL* CR.ALBA DE TORMES-PIEDRAHITA KM 5.200 km 8,7",
-     "localidad": "Calvarrasa de Arriba",
-     "cp": "37191",
-     "horario": "L-S: 07:00-22:00; D: 08:00-22:00",
-     "lat": 40.894167,
-     "lon": -5.58675
-    },
-    {
-     "id": "4952",
-     "nombre": "El Trebol",
-     "precio": 1.679,
-     "municipio": "Salamanca",
-     "direccion": "(EL TREBOL) CTRA. FREGENEDA Nº 12-22 SALAMANCA",
-     "localidad": "Salamanca",
-     "cp": "37008",
-     "horario": "L-S: 07:00-22:00; D: 08:00-22:00",
-     "lat": 40.955806,
-     "lon": -5.67275
-    },
-    {
-     "id": "4747",
-     "nombre": "El Trebol",
-     "precio": 1.679,
-     "municipio": "Vecinos",
-     "direccion": "(EL TREBOL) AVD. JOSE ANTONIO Nº 7 (SALAMANCA-CORIA km 30,4)",
-     "localidad": "Vecinos",
-     "cp": "37450",
-     "horario": "L-S: 07:00-22:00; D: 08:00-22:00",
-     "lat": 40.777472,
-     "lon": -5.877528
     },
     {
      "id": "6208",
@@ -3579,7 +3579,7 @@
    "nombre": "Teruel",
    "cyl": false,
    "n": 35,
-   "media": 1.645,
+   "media": 1.644,
    "mediana": 1.655,
    "min": 1.487,
    "max": 1.885,
@@ -3598,6 +3598,18 @@
      "lon": 0.163472
     },
     {
+     "id": "13021",
+     "nombre": "Sanicoop",
+     "precio": 1.496,
+     "municipio": "Castelserás",
+     "direccion": "Calle Mayor Alta, 80",
+     "localidad": "Castelseras",
+     "cp": "44630",
+     "horario": "L-D: 24H",
+     "lat": 40.977528,
+     "lon": -0.143778
+    },
+    {
      "id": "13564",
      "nombre": "Gasoleos Teruel",
      "precio": 1.529,
@@ -3608,18 +3620,6 @@
      "horario": "L-D: 24H",
      "lat": 40.833083,
      "lon": -1.196778
-    },
-    {
-     "id": "12678",
-     "nombre": "Gasoleos Teruel",
-     "precio": 1.529,
-     "municipio": "Cella",
-     "direccion": "Poligono Campichuelo, S/n",
-     "localidad": "Cella",
-     "cp": "44370",
-     "horario": "L-D: 24H",
-     "lat": 40.461528,
-     "lon": -1.296778
     }
    ]
   },
@@ -3677,8 +3677,8 @@
    "nombre": "Valencia",
    "cyl": false,
    "n": 140,
-   "media": 1.644,
-   "mediana": 1.625,
+   "media": 1.643,
+   "mediana": 1.619,
    "min": 1.379,
    "max": 1.879,
    "descartados": 2,
@@ -4182,18 +4182,6 @@
      "lon": -5.566111
     },
     {
-     "id": "13002",
-     "nombre": "Staroil",
-     "precio": 1.599,
-     "municipio": "Benavente",
-     "direccion": "Calle Simon Bolivar, S/n",
-     "localidad": "Benavente",
-     "cp": "49600",
-     "horario": "L-D: 24H",
-     "lat": 42.0075,
-     "lon": -5.662333
-    },
-    {
      "id": "7996",
      "nombre": "Valcarce",
      "precio": 1.599,
@@ -4204,6 +4192,18 @@
      "horario": "L-D: 24H",
      "lat": 41.999167,
      "lon": -5.661194
+    },
+    {
+     "id": "13002",
+     "nombre": "Staroil",
+     "precio": 1.599,
+     "municipio": "Benavente",
+     "direccion": "Calle Simon Bolivar, S/n",
+     "localidad": "Benavente",
+     "cp": "49600",
+     "horario": "L-D: 24H",
+     "lat": 42.0075,
+     "lon": -5.662333
     },
     {
      "id": "9371",
@@ -4332,8 +4332,8 @@
    "nombre": "Zaragoza",
    "cyl": false,
    "n": 85,
-   "media": 1.658,
-   "mediana": 1.644,
+   "media": 1.655,
+   "mediana": 1.639,
    "min": 1.359,
    "max": 1.899,
    "descartados": 0,
@@ -4363,16 +4363,16 @@
      "lon": -0.773944
     },
     {
-     "id": "9046",
-     "nombre": "Sanantonio",
-     "precio": 1.457,
-     "municipio": "Alagón",
-     "direccion": "Vía Torremata, 5",
-     "localidad": "Alagon",
-     "cp": "50630",
+     "id": "9068",
+     "nombre": "Cooperativa San Isidro",
+     "precio": 1.445,
+     "municipio": "Zuera",
+     "direccion": "Calle Cooperativa, 2",
+     "localidad": "Ontinar de Salz",
+     "cp": "50810",
      "horario": "L-D: 24H",
-     "lat": 41.764583,
-     "lon": -1.126167
+     "lat": 41.93875,
+     "lon": -0.757611
     }
    ]
   }
