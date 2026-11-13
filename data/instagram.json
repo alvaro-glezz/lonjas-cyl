@@ -1,6 +1,6 @@
 {
  "comparativa": "2026-W45",
- "franja": "tarde",
+ "franja": "manana",
  "franjas": {
   "2026-11-07": [
    "reel"
@@ -35,6 +35,9 @@
    "especial:ordenador",
    "reel",
    "historia"
+  ],
+  "2026-11-13": [
+   "manana"
   ]
  },
  "historias": [
@@ -240,6 +243,12 @@
    "fecha": "2026-11-12T18:28",
    "id": "2026-11-12-historia-4-termometro",
    "media": "17896179411438692"
+  },
+  {
+   "facebook": "1368079503066363_122110791315536635",
+   "fecha": "2026-11-13T07:58",
+   "id": "2026-11-13-dia-girasol",
+   "media": "18041019707839248"
   }
  ],
  "token_renovado": "2026-11-07"
