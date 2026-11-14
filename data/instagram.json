@@ -1,6 +1,6 @@
 {
  "comparativa": "2026-W45",
- "franja": "manana",
+ "franja": "reel",
  "franjas": {
   "2026-11-07": [
    "reel"
@@ -43,7 +43,8 @@
    "tarde"
   ],
   "2026-11-14": [
-   "manana"
+   "manana",
+   "reel"
   ]
  },
  "historias": [
@@ -281,6 +282,12 @@
    "fecha": "2026-11-14T07:45",
    "id": "2026-11-13-lerma",
    "media": "18150372148659547"
+  },
+  {
+   "facebook": "1124371703638194",
+   "fecha": "2026-11-14T12:56",
+   "id": "2026-11-14-reel-movimientos",
+   "media": "18338254360278200"
   }
  ],
  "token_renovado": "2026-11-07"
