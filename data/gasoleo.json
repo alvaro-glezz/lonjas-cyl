@@ -1,5 +1,5 @@
 {
- "fecha": "2026-11-14T14:34",
+ "fecha": "2026-11-14T18:17",
  "fuente": "Ministerio para la Transición Ecológica y el Reto Demográfico (Geoportal de gasolineras)",
  "fuente_url": "https://geoportalgasolineras.es/geoportal-instalaciones/Inicio",
  "unidad": "€/l",
@@ -9,7 +9,7 @@
   "n": 2262
  },
  "cyl": {
-  "media": 1.646,
+  "media": 1.645,
   "min": 1.429,
   "n": 166
  },
@@ -1151,7 +1151,7 @@
    "nombre": "Cádiz",
    "cyl": false,
    "n": 31,
-   "media": 1.711,
+   "media": 1.71,
    "mediana": 1.72,
    "min": 1.498,
    "max": 1.842,
@@ -3268,18 +3268,6 @@
      "lon": -4.51725
     },
     {
-     "id": "6177",
-     "nombre": "Galp",
-     "precio": 1.719,
-     "municipio": "Villacastín",
-     "direccion": "Autopista A6 Km. 0",
-     "localidad": "Villacastin",
-     "cp": "40150",
-     "horario": "L-D: 24H",
-     "lat": 40.7975,
-     "lon": -4.460889
-    },
-    {
      "id": "6401",
      "nombre": "Galp",
      "precio": 1.719,
@@ -3290,6 +3278,18 @@
      "horario": "L-D: 06:00-22:00",
      "lat": 40.7975,
      "lon": -4.462889
+    },
+    {
+     "id": "6177",
+     "nombre": "Galp",
+     "precio": 1.719,
+     "municipio": "Villacastín",
+     "direccion": "Autopista A6 Km. 0",
+     "localidad": "Villacastin",
+     "cp": "40150",
+     "horario": "L-D: 24H",
+     "lat": 40.7975,
+     "lon": -4.460889
     },
     {
      "id": "6169",
@@ -3726,7 +3726,7 @@
    "nombre": "Valladolid",
    "cyl": true,
    "n": 19,
-   "media": 1.656,
+   "media": 1.652,
    "mediana": 1.685,
    "min": 1.469,
    "max": 1.829,
@@ -3879,6 +3879,18 @@
      "lon": -4.560694
     },
     {
+     "id": "6178",
+     "nombre": "Repsol",
+     "precio": 1.685,
+     "municipio": "Mota del Marqués",
+     "direccion": "Autovia A-6 Km. 202",
+     "localidad": "Mota del Marques",
+     "cp": "47120",
+     "horario": "L-D: 24H",
+     "lat": 41.626972,
+     "lon": -5.173278
+    },
+    {
      "id": "6413",
      "nombre": "Repsol",
      "precio": 1.685,
@@ -3937,18 +3949,6 @@
      "horario": "L-V: 07:00-22:00; S-D: 09:00-22:00",
      "lat": 41.612611,
      "lon": -4.175444
-    },
-    {
-     "id": "6178",
-     "nombre": "Repsol",
-     "precio": 1.765,
-     "municipio": "Mota del Marqués",
-     "direccion": "Autovia A-6 Km. 202",
-     "localidad": "Mota del Marques",
-     "cp": "47120",
-     "horario": "L-D: 24H",
-     "lat": 41.626972,
-     "lon": -5.173278
     },
     {
      "id": "6357",
