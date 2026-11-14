@@ -20,7 +20,7 @@ salamanca;Lonja de Salamanca;Salamanca;2026-11-09;Ovino;salamanca-oveja-de-sacri
 salamanca;Lonja de Salamanca;Salamanca;2026-11-09;Ovino;salamanca-oveja-de-vida;Oveja de vida;;€/ud;162,5;162,5;0;150–175;no;;;https://datosabiertossalamanca.es/dataset/cotizaciones-semanales-de-la-lonja-de-salamanca
 salamanca;Lonja de Salamanca;Salamanca;2026-11-09;Porcino blanco;salamanca-cerdo-selecto;Cerdo selecto;cerdo-selecto;€/kg vivo;1,135;1,165;-0,03;1,13–1,14;no;;;https://datosabiertossalamanca.es/dataset/cotizaciones-semanales-de-la-lonja-de-salamanca
 salamanca;Lonja de Salamanca;Salamanca;2026-11-09;Porcino blanco;salamanca-cerdo-normal;Cerdo normal;cerdo-normal;€/kg vivo;1,125;1,155;-0,03;1,12–1,13;no;;;https://datosabiertossalamanca.es/dataset/cotizaciones-semanales-de-la-lonja-de-salamanca
-salamanca;Lonja de Salamanca;Salamanca;2026-11-09;Porcino blanco;salamanca-cerdo-graso;Cerdo graso;;€/kg vivo;1,64;1,65;-0,01;1,62–1,66;no;;;https://datosabiertossalamanca.es/dataset/cotizaciones-semanales-de-la-lonja-de-salamanca
+salamanca;Lonja de Salamanca;Salamanca;2026-11-09;Porcino blanco;salamanca-cerdo-graso;Cerdo graso;cerdo-graso;€/kg vivo;1,64;1,65;-0,01;1,62–1,66;no;;;https://datosabiertossalamanca.es/dataset/cotizaciones-semanales-de-la-lonja-de-salamanca
 salamanca;Lonja de Salamanca;Salamanca;2026-11-09;Porcino blanco;salamanca-cerdas-de-desvieje;Cerdas de desvieje;;€/kg vivo;0,345;0,375;-0,03;0,33–0,36;no;;;https://datosabiertossalamanca.es/dataset/cotizaciones-semanales-de-la-lonja-de-salamanca
 salamanca;Lonja de Salamanca;Salamanca;2026-11-09;Porcino blanco;salamanca-lechones-base-20-kg;Lechones base 20 kg;lechones;€/ud;32;32;0;;no;;;https://datosabiertossalamanca.es/dataset/cotizaciones-semanales-de-la-lonja-de-salamanca
 salamanca;Lonja de Salamanca;Salamanca;2026-11-09;Porcino blanco;salamanca-tostones-4-6-kg;Tostones 4-6 kg;;€/ud;27;27;0;;no;;;https://datosabiertossalamanca.es/dataset/cotizaciones-semanales-de-la-lonja-de-salamanca
@@ -132,12 +132,12 @@ segovia;Lonja de Segovia;Segovia;2026-11-12;Ovino;segovia-oveja-desvieje-1a;Ovej
 segovia;Lonja de Segovia;Segovia;2026-11-12;Ovino;segovia-oveja-desvieje-2a;Oveja desvieje 2ª;;€/kg vivo;1,1;1,1;0;;no;;;https://www.fessegovia.es/lonja-agropecuaria-de-segovia
 segovia;Lonja de Segovia;Segovia;2026-11-12;Porcino;segovia-cerdo-selecto;Cerdo selecto;cerdo-selecto;€/kg vivo;1,117;1,147;-0,03;;no;;;https://www.fessegovia.es/lonja-agropecuaria-de-segovia
 segovia;Lonja de Segovia;Segovia;2026-11-12;Porcino;segovia-cerdo-normal;Cerdo normal;cerdo-normal;€/kg vivo;1,105;1,135;-0,03;;no;;;https://www.fessegovia.es/lonja-agropecuaria-de-segovia
-segovia;Lonja de Segovia;Segovia;2026-11-12;Porcino;segovia-cerdo-graso;Cerdo graso;;€/kg vivo;1,615;1,63;-0,015;;no;;;https://www.fessegovia.es/lonja-agropecuaria-de-segovia
-segovia;Lonja de Segovia;Segovia;2026-11-12;Porcino;segovia-cerda-desvieje-extra;Cerda desvieje extra;;€/kg vivo;0,23;0,23;0;;no;;;https://www.fessegovia.es/lonja-agropecuaria-de-segovia
+segovia;Lonja de Segovia;Segovia;2026-11-12;Porcino;segovia-cerdo-graso;Cerdo graso;cerdo-graso;€/kg vivo;1,615;1,63;-0,015;;no;;;https://www.fessegovia.es/lonja-agropecuaria-de-segovia
+segovia;Lonja de Segovia;Segovia;2026-11-12;Porcino;segovia-cerda-desvieje-extra;Cerda desvieje extra;cerda-extra;€/kg vivo;0,23;0,23;0;;no;;;https://www.fessegovia.es/lonja-agropecuaria-de-segovia
 segovia;Lonja de Segovia;Segovia;2026-11-12;Porcino;segovia-cerda-desvieje-primera;Cerda desvieje primera;;€/kg vivo;0,14;0,14;0;;no;;;https://www.fessegovia.es/lonja-agropecuaria-de-segovia
 segovia;Lonja de Segovia;Segovia;2026-11-12;Porcino;segovia-lechones-20-kg;Lechones 20 kg;lechones;€/ud;35;35;0;;no;;;https://www.fessegovia.es/lonja-agropecuaria-de-segovia
 segovia;Lonja de Segovia;Segovia;2026-11-12;Porcino;segovia-cochinillos-con-hierro;Cochinillos con hierro;;€/ud;;;;;sí;;;https://www.fessegovia.es/lonja-agropecuaria-de-segovia
-segovia;Lonja de Segovia;Segovia;2026-11-12;Porcino;segovia-cochinillos-sin-hierro;Cochinillos sin hierro;;€/ud;34;34;0;;no;;;https://www.fessegovia.es/lonja-agropecuaria-de-segovia
+segovia;Lonja de Segovia;Segovia;2026-11-12;Porcino;segovia-cochinillos-sin-hierro;Cochinillos sin hierro;cochinillo;€/ud;34;34;0;;no;;;https://www.fessegovia.es/lonja-agropecuaria-de-segovia
 lerma;Lonja de Lerma;Burgos;2026-11-13;Cereales;lerma-trigo-tipo-iii;Trigo tipo III;trigo;€/t;231;232;-1;;no;;;https://lerma.burgos.es/lonja
 lerma;Lonja de Lerma;Burgos;2026-11-13;Cereales;lerma-cebada-dos-carreras;Cebada dos carreras;cebada;€/t;223;223;0;;no;;;https://lerma.burgos.es/lonja
 lerma;Lonja de Lerma;Burgos;2026-11-13;Porcino;lerma-cerdo-normal;Cerdo normal;cerdo-normal;€/kg vivo;1,1;1,137;-0,037;;no;;;https://lerma.burgos.es/lonja
