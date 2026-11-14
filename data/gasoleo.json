@@ -1,5 +1,5 @@
 {
- "fecha": "2026-11-14T18:17",
+ "fecha": "2026-11-14T22:17",
  "fuente": "Ministerio para la Transición Ecológica y el Reto Demográfico (Geoportal de gasolineras)",
  "fuente_url": "https://geoportalgasolineras.es/geoportal-instalaciones/Inicio",
  "unidad": "€/l",
@@ -68,7 +68,7 @@
    "nombre": "Álava",
    "cyl": false,
    "n": 17,
-   "media": 1.728,
+   "media": 1.727,
    "mediana": 1.795,
    "min": 1.459,
    "max": 1.849,
@@ -283,6 +283,18 @@
      "lon": -6.010306
     },
     {
+     "id": "946",
+     "nombre": "Galp",
+     "precio": 1.569,
+     "municipio": "Nava",
+     "direccion": "Carretera N-634 Km. 375,1",
+     "localidad": "Nava",
+     "cp": "33520",
+     "horario": "L-S: 07:00-22:00; D: 07:00-15:00",
+     "lat": 43.358222,
+     "lon": -5.497333
+    },
+    {
      "id": "16470",
      "nombre": "Valcarce",
      "precio": 1.589,
@@ -293,18 +305,6 @@
      "horario": "L-D: 06:00-22:00",
      "lat": 43.389556,
      "lon": -5.661
-    },
-    {
-     "id": "14797",
-     "nombre": "Valcarce (ghc )",
-     "precio": 1.589,
-     "municipio": "Corvera de Asturias",
-     "direccion": "Carretera Aviles - Gijon Km. 12,500",
-     "localidad": "Silvota",
-     "cp": "33468",
-     "horario": "L-D: 24H",
-     "lat": 43.548472,
-     "lon": -5.856361
     }
    ]
   },
@@ -691,7 +691,7 @@
    "nombre": "Burgos",
    "cyl": true,
    "n": 30,
-   "media": 1.616,
+   "media": 1.614,
    "mediana": 1.639,
    "min": 1.429,
    "max": 1.839,
@@ -928,6 +928,18 @@
      "lon": -3.312889
     },
     {
+     "id": "5043",
+     "nombre": "Galp",
+     "precio": 1.639,
+     "municipio": "Valle de Losa",
+     "direccion": "Carretera Bu-550 Km. 27",
+     "localidad": "Quincoces de Yuso",
+     "cp": "09510",
+     "horario": "L-D: 07:00-21:00",
+     "lat": 42.978611,
+     "lon": -3.222722
+    },
+    {
      "id": "6071",
      "nombre": "Cepsa",
      "precio": 1.649,
@@ -998,18 +1010,6 @@
      "horario": "L-D: 07:00-22:00",
      "lat": 41.6985,
      "lon": -3.923194
-    },
-    {
-     "id": "5043",
-     "nombre": "Galp",
-     "precio": 1.679,
-     "municipio": "Valle de Losa",
-     "direccion": "Carretera Bu-550 Km. 27",
-     "localidad": "Quincoces de Yuso",
-     "cp": "09510",
-     "horario": "L-D: 07:00-21:00",
-     "lat": 42.978611,
-     "lon": -3.222722
     },
     {
      "id": "6046",
@@ -1249,7 +1249,7 @@
    "nombre": "Castellón",
    "cyl": false,
    "n": 52,
-   "media": 1.659,
+   "media": 1.658,
    "mediana": 1.665,
    "min": 1.359,
    "max": 1.808,
@@ -1415,18 +1415,6 @@
      "lon": -2.8865
     },
     {
-     "id": "10820",
-     "nombre": "Galera Areas de Servicio",
-     "precio": 1.43,
-     "municipio": "Campillo de Altobuey",
-     "direccion": "Carretera Carretera de Valencia 5 Km.",
-     "localidad": "Campillo de Altobuey",
-     "cp": "16210",
-     "horario": "L-D: 07:30-21:00",
-     "lat": 39.612083,
-     "lon": -1.79175
-    },
-    {
      "id": "8906",
      "nombre": "S. Andres Apostol Sociedad Coop. de C-lm",
      "precio": 1.43,
@@ -1437,6 +1425,18 @@
      "horario": "L-D: 24H",
      "lat": 39.612694,
      "lon": -1.792972
+    },
+    {
+     "id": "10820",
+     "nombre": "Galera Areas de Servicio",
+     "precio": 1.43,
+     "municipio": "Campillo de Altobuey",
+     "direccion": "Carretera Carretera de Valencia 5 Km.",
+     "localidad": "Campillo de Altobuey",
+     "cp": "16210",
+     "horario": "L-D: 07:30-21:00",
+     "lat": 39.612083,
+     "lon": -1.79175
     }
    ]
   },
@@ -1543,7 +1543,7 @@
    "nombre": "Granada",
    "cyl": false,
    "n": 58,
-   "media": 1.64,
+   "media": 1.639,
    "mediana": 1.649,
    "min": 1.459,
    "max": 1.819,
@@ -1739,10 +1739,10 @@
    "nombre": "Illes Balears",
    "cyl": false,
    "n": 33,
-   "media": 1.804,
-   "mediana": 1.809,
+   "media": 1.802,
+   "mediana": 1.799,
    "min": 1.509,
-   "max": 1.909,
+   "max": 1.899,
    "descartados": 1,
    "baratas": [
     {
@@ -2250,7 +2250,7 @@
    "nombre": "Lugo",
    "cyl": false,
    "n": 51,
-   "media": 1.756,
+   "media": 1.755,
    "mediana": 1.755,
    "min": 1.509,
    "max": 1.889,
@@ -2299,7 +2299,7 @@
    "nombre": "Madrid",
    "cyl": false,
    "n": 42,
-   "media": 1.753,
+   "media": 1.752,
    "mediana": 1.774,
    "min": 1.569,
    "max": 1.879,
@@ -3079,7 +3079,7 @@
    "nombre": "Segovia",
    "cyl": true,
    "n": 20,
-   "media": 1.681,
+   "media": 1.679,
    "mediana": 1.672,
    "min": 1.483,
    "max": 1.813,
@@ -3256,6 +3256,30 @@
      "lon": -4.299639
     },
     {
+     "id": "6177",
+     "nombre": "Galp",
+     "precio": 1.709,
+     "municipio": "Villacastín",
+     "direccion": "Autopista A6 Km. 0",
+     "localidad": "Villacastin",
+     "cp": "40150",
+     "horario": "L-D: 24H",
+     "lat": 40.7975,
+     "lon": -4.460889
+    },
+    {
+     "id": "6401",
+     "nombre": "Galp",
+     "precio": 1.709,
+     "municipio": "Villacastín",
+     "direccion": "Autopista A6 Km. 0",
+     "localidad": "Villacastin",
+     "cp": "40150",
+     "horario": "L-D: 06:00-22:00",
+     "lat": 40.7975,
+     "lon": -4.462889
+    },
+    {
      "id": "6113",
      "nombre": "Moeve",
      "precio": 1.715,
@@ -3266,30 +3290,6 @@
      "horario": "L-D: 06:00-22:00",
      "lat": 40.837444,
      "lon": -4.51725
-    },
-    {
-     "id": "6401",
-     "nombre": "Galp",
-     "precio": 1.719,
-     "municipio": "Villacastín",
-     "direccion": "Autopista A6 Km. 0",
-     "localidad": "Villacastin",
-     "cp": "40150",
-     "horario": "L-D: 06:00-22:00",
-     "lat": 40.7975,
-     "lon": -4.462889
-    },
-    {
-     "id": "6177",
-     "nombre": "Galp",
-     "precio": 1.719,
-     "municipio": "Villacastín",
-     "direccion": "Autopista A6 Km. 0",
-     "localidad": "Villacastin",
-     "cp": "40150",
-     "horario": "L-D: 24H",
-     "lat": 40.7975,
-     "lon": -4.460889
     },
     {
      "id": "6169",
@@ -3530,7 +3530,7 @@
    "nombre": "Tarragona",
    "cyl": false,
    "n": 52,
-   "media": 1.635,
+   "media": 1.634,
    "mediana": 1.635,
    "min": 1.446,
    "max": 1.879,
