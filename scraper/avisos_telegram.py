@@ -27,7 +27,8 @@ API = "https://api.telegram.org/bot{token}/{metodo}"
 DIAS_RECIENTE = 21
 NOMBRES = {"trigo": "Trigo", "cebada": "Cebada", "maiz": "Maíz", "avena": "Avena", "centeno": "Centeno",
            "triticale": "Triticale", "girasol": "Girasol", "alfalfa": "Alfalfa", "paja": "Paja", "cerdo-normal": "Cerdo normal",
-           "cerdo-selecto": "Cerdo selecto", "lechones": "Lechones", "lechazo": "Lechazo"}
+           "cerdo-selecto": "Cerdo selecto", "cerdo-graso": "Cerdo graso", "cerda-extra": "Cerda extra",
+           "lechones": "Lechones", "cochinillo": "Cochinillo sin hierro", "lechazo": "Lechazo"}
 
 
 class Redis:

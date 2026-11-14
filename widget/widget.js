@@ -8,7 +8,8 @@
   const RE_ID = /^[a-z0-9][a-z0-9-]{0,99}$/;
   const NOMBRES = { trigo: "Trigo", cebada: "Cebada", maiz: "Maíz", avena: "Avena", centeno: "Centeno", triticale: "Triticale",
     girasol: "Girasol", alfalfa: "Alfalfa", paja: "Paja", "cerdo-normal": "Cerdo normal", "cerdo-selecto": "Cerdo selecto",
-    lechones: "Lechones", lechazo: "Lechazo" };
+    lechones: "Lechones", lechazo: "Lechazo", "cerdo-graso": "Cerdo graso", "cerda-extra": "Cerda extra",
+    cochinillo: "Cochinillo sin hierro" };
   const PRINCIPALES = ["trigo", "cebada", "maiz", "girasol", "cerdo-normal", "lechones", "lechazo"];
   const MESES = ["ene", "feb", "mar", "abr", "may", "jun", "jul", "ago", "sep", "oct", "nov", "dic"];
   const caja = document.getElementById("w");

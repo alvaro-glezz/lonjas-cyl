@@ -31,7 +31,7 @@ ESTADO = RAIZ / "data" / "telegram.json"
 API = "https://api.telegram.org/bot{token}/{metodo}"
 DIAS_PRIMERA_VEZ = 3     # la primera vez solo se publican sesiones de los últimos 3 días
 PRINCIPALES = ["trigo", "cebada", "maiz", "avena", "centeno", "triticale", "girasol", "alfalfa", "paja",
-               "cerdo-normal", "cerdo-selecto", "lechones", "lechazo"]
+               "cerdo-normal", "cerdo-selecto", "cerdo-graso", "cerda-extra", "lechones", "cochinillo", "lechazo"]
 DIAS = ["lunes", "martes", "miércoles", "jueves", "viernes", "sábado", "domingo"]
 
 

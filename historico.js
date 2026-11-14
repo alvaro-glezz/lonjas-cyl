@@ -26,6 +26,7 @@ const CLAVE_A_JUNTA = {
   alfalfa: "Cereales y forrajes|Alfalfa rama|€/t",
   "cerdo-normal": "Porcino|Cebo · normal|€/kg vivo",
   "cerdo-selecto": "Porcino|Cebo · selecto|€/kg vivo",
+  "cerdo-graso": "Porcino|Cebo · graso|€/kg vivo",
   lechazo: "Ovino y caprino|Lechazos · 10-12 Kgs.|€/kg vivo",
 };
 

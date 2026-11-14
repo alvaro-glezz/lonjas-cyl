@@ -29,11 +29,11 @@ HISTORICO = RAIZ / "data" / "historico"
 GASOLEO_HIST = RAIZ / "data" / "gasoleo-historial.json"
 CANAL = "@lonjas_cyl"
 CEREALES = ["trigo", "cebada", "maiz", "centeno", "avena", "girasol"]
-GANADO = [("Porcino", ["cerdo-normal", "cerdo-selecto", "lechones"]), ("Ovino", ["lechazo"])]
+GANADO = [("Porcino", ["cerdo-normal", "cerdo-selecto", "cerdo-graso", "cerda-extra", "lechones", "cochinillo"]), ("Ovino", ["lechazo"])]
 # Producto de la app -> producto en el histórico de la Junta (para «hace un año»)
 JUNTA = {"trigo": "Trigo", "cebada": "Cebada (+64)", "maiz": "Maiz seco nac", "centeno": "Centeno", "avena": "Avena",
          "girasol": "Pipa de girasol", "cerdo-normal": "Cebo · normal", "cerdo-selecto": "Cebo · selecto",
-         "lechazo": "Lechazos · 10-12 Kgs."}
+         "cerdo-graso": "Cebo · graso", "lechazo": "Lechazos · 10-12 Kgs."}
 MESES = ["enero", "febrero", "marzo", "abril", "mayo", "junio", "julio", "agosto", "septiembre", "octubre", "noviembre", "diciembre"]
 ORDEN_DIAS = ["Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado", "Domingo"]
 
@@ -234,7 +234,8 @@ def crear_informe(datos: dict, hoy: date, junta: Junta | None = None) -> dict | 
 
 # Artículo y número de cada producto, para escribir frases correctas («el trigo se ha pagado», «los lechones se han pagado»)
 ARTICULO = {"trigo": "el", "cebada": "la", "maiz": "el", "centeno": "el", "avena": "la", "girasol": "el",
-            "cerdo-normal": "el", "cerdo-selecto": "el", "lechones": "los", "lechazo": "el"}
+            "cerdo-normal": "el", "cerdo-selecto": "el", "cerdo-graso": "el", "cerda-extra": "la", "cochinillo": "el",
+            "lechones": "los", "lechazo": "el"}
 
 
 def _con_art(clave: str, mayus: bool = False) -> str:

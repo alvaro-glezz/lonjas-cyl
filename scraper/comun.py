@@ -64,6 +64,11 @@ CLAVES: list[tuple[str, str]] = [
     ("paja", r"^paja\b"),
     ("cerdo-selecto", r"^cerdo selecto"),
     ("cerdo-normal", r"^cerdo (blanco )?normal"),
+    ("cerdo-graso", r"^cerdo (blanco )?graso"),
+    # Solo la cerda de desvieje «extra» de Segovia: la «primera» y las «cerdas de desvieje» sin calidad de Salamanca
+    # y Lerma son otras categorías y no se mezclan (14 nov 2026).
+    ("cerda-extra", r"^cerdas? (de )?desvieje extra"),
+    ("cochinillo", r"^cochinillos? sin hierro"),
     # Solo el lechón de 20 kg (Salamanca y Segovia). El «lechón tipo Lerma» no dice su peso y cotiza unos 10 € por
     # debajo: mezclarlo daba medias y comparaciones engañosas (revisado el 10 nov 2026). Se sigue viendo en Lerma.
     ("lechones", r"^lechon(es)? (base )?20(?!\d)"),

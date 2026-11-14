@@ -38,6 +38,9 @@ PRODUCTOS = {
     "cerdo-normal": ("del cerdo normal", "Cerdo normal", "Porcino"),
     "cerdo-selecto": ("del cerdo selecto", "Cerdo selecto", "Porcino"),
     "lechones": ("de los lechones", "Lechones", "Porcino"),
+    "cerdo-graso": ("del cerdo graso", "Cerdo graso", "Porcino"),
+    "cerda-extra": ("de la cerda de desvieje extra", "Cerda extra", "Porcino"),
+    "cochinillo": ("del cochinillo sin hierro", "Cochinillo sin hierro", "Porcino"),
 }
 # Páginas por sector: reúnen todas las categorías de la app que les corresponden
 SECTORES = {

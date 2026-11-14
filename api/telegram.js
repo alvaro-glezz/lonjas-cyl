@@ -14,7 +14,9 @@ const PRODUCTOS = [
   ["trigo", "Trigo", ["trigo"]], ["cebada", "Cebada", ["cebada"]], ["maiz", "Maíz", ["maiz"]], ["avena", "Avena", ["avena"]],
   ["centeno", "Centeno", ["centeno"]], ["triticale", "Triticale", ["triticale"]], ["girasol", "Girasol", ["girasol", "pipa"]],
   ["alfalfa", "Alfalfa", ["alfalfa"]], ["paja", "Paja", ["paja"]], ["cerdo-normal", "Cerdo normal", ["cerdo", "cerdo normal", "porcino"]],
-  ["cerdo-selecto", "Cerdo selecto", ["cerdo selecto", "selecto"]], ["lechones", "Lechones", ["lechon", "lechones"]],
+  ["cerdo-selecto", "Cerdo selecto", ["cerdo selecto", "selecto"]], ["cerdo-graso", "Cerdo graso", ["cerdo graso", "graso"]],
+  ["cerda-extra", "Cerda extra", ["cerda extra", "cerda", "cerdas", "cerda desvieje"]], ["lechones", "Lechones", ["lechon", "lechones"]],
+  ["cochinillo", "Cochinillo sin hierro", ["cochinillo", "cochinillos"]],
   ["lechazo", "Lechazo", ["lechazo", "lechazos"]],
 ];
 const LONJAS = { salamanca: "salamanca", leon: "leon", segovia: "segovia", lerma: "lerma", burgos: "lerma", zamora: "zamora" };

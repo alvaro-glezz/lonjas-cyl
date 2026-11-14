@@ -200,7 +200,8 @@
      "unidad": "€/kg vivo",
      "ant": 1.65,
      "act": 1.64,
-     "rango": "1,62–1,66"
+     "rango": "1,62–1,66",
+     "clave": "cerdo-graso"
     },
     {
      "id": "salamanca-cerdas-de-desvieje",
@@ -1166,7 +1167,8 @@
      "producto": "Cerdo graso",
      "unidad": "€/kg vivo",
      "ant": 1.63,
-     "act": 1.615
+     "act": 1.615,
+     "clave": "cerdo-graso"
     },
     {
      "id": "segovia-cerda-desvieje-extra",
@@ -1174,7 +1176,8 @@
      "producto": "Cerda desvieje extra",
      "unidad": "€/kg vivo",
      "ant": 0.23,
-     "act": 0.23
+     "act": 0.23,
+     "clave": "cerda-extra"
     },
     {
      "id": "segovia-cerda-desvieje-primera",
@@ -1207,7 +1210,8 @@
      "producto": "Cochinillos sin hierro",
      "unidad": "€/ud",
      "ant": 34.0,
-     "act": 34.0
+     "act": 34.0,
+     "clave": "cochinillo"
     }
    ],
    "comprobado": "2026-11-03T23:45:00+01:00",

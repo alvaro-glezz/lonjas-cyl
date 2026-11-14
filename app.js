@@ -5,7 +5,8 @@ const RE_ID = /^[a-z0-9][a-z0-9-]{0,99}$/;
 const PRODUCTOS_CLAVE = [
   ["trigo", "Trigo"], ["cebada", "Cebada"], ["maiz", "Maíz"], ["avena", "Avena"], ["centeno", "Centeno"],
   ["triticale", "Triticale"], ["girasol", "Girasol"], ["alfalfa", "Alfalfa"], ["paja", "Paja"],
-  ["cerdo-normal", "Cerdo normal"], ["cerdo-selecto", "Cerdo selecto"], ["lechones", "Lechones"], ["lechazo", "Lechazo"],
+  ["cerdo-normal", "Cerdo normal"], ["cerdo-selecto", "Cerdo selecto"], ["cerdo-graso", "Cerdo graso"], ["cerda-extra", "Cerda extra"],
+  ["lechones", "Lechones"], ["cochinillo", "Cochinillo sin hierro"], ["lechazo", "Lechazo"],
 ];
 const RESUMEN = ["trigo", "cebada", "maiz", "cerdo-normal", "lechones", "lechazo"];
 const $ = (s, el = document) => el.querySelector(s);
