@@ -1,0 +1,50 @@
+name: Diagnóstico (temporal)
+on:
+  push:
+    branches: [telegram-diagnostico]
+permissions:
+  contents: write
+jobs:
+  voces:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install -q -r scraper/requirements.txt "piper-tts==1.8.0" "kokoro>=0.9.4" soundfile "misaki[en]"
+      - run: command -v ffmpeg || (sudo apt-get update -qq && sudo apt-get install -y -qq ffmpeg)
+      - name: Muestras de voz (no publica nada)
+        run: |
+          mkdir -p ~/v && cd ~/v
+          H=https://huggingface.co/rhasspy/piper-voices/resolve/main/es/es_ES/sharvard/medium
+          curl -sSfLO "$H/es_ES-sharvard-medium.onnx"; curl -sSfLO "$H/es_ES-sharvard-medium.onnx.json"
+          cd "$GITHUB_WORKSPACE" && mkdir -p muestras
+          python - <<'PY'
+          import json, os, subprocess, sys
+          from datetime import date
+          sys.path.insert(0, "scraper")
+          import redes
+          d = json.load(open("data/precios.json"))
+          r = None
+          for k in ("trigo", "cebada"):
+              r = redes.ranking(d, k, date.today(), dias=21)
+              if r: break
+          texto = redes.guion_ranking(r)
+          print("TEXTO:", redes.para_leer(texto))
+          casos = [("1-actual-piper-mujer", {"PIPER_MODELO": os.path.expanduser("~/v/es_ES-sharvard-medium.onnx"), "PIPER_HABLANTE": "1"}),
+                   ("2-kokoro-dora-mujer", {"VOZ_MOTOR": "kokoro", "KOKORO_VOZ": "ef_dora"}),
+                   ("3-kokoro-alex-hombre", {"VOZ_MOTOR": "kokoro", "KOKORO_VOZ": "em_alex"}),
+                   ("4-kokoro-santa-hombre", {"VOZ_MOTOR": "kokoro", "KOKORO_VOZ": "em_santa"})]
+          for nombre, env in casos:
+              for k in ("VOZ_MOTOR", "KOKORO_VOZ", "PIPER_MODELO", "PIPER_HABLANTE"): os.environ.pop(k, None)
+              os.environ.update(env)
+              w = redes.voz(texto, redes.Path(f"muestras/{nombre}.wav"))
+              if w:
+                  subprocess.run(["ffmpeg", "-loglevel", "error", "-y", "-i", str(w), "-b:a", "112k", f"muestras/{nombre}.mp3"], check=True)
+                  print("MUESTRA:", nombre, round(redes.duracion_wav(w), 1), "s")
+              else:
+                  print("FALLO:", nombre)
+          PY
+          cd muestras && rm -f *.wav && git init -q -b muestras-voz && git add -A && git -c user.name=a -c user.email=a@b.c commit -qm muestras && git push -qf "https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git" muestras-voz
