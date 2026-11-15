@@ -72,7 +72,18 @@ function vistaComentario() {
         <audio controls preload="none" src="${esc(c.audio)}"></audio></figure>` : ""}
       ${parrafos}
       <p class="nota">Fuentes: ${esc(c.fuentes.join("; "))}. Precios orientativos; no es una recomendación de compra ni de venta.</p>
+      ${ALTA_BOLETIN ? `<a class="boletin-alta" href="${esc(ALTA_BOLETIN)}" target="_blank" rel="noopener noreferrer">✉️ Recíbelo cada sábado en tu correo <small>gratis · te das de baja con un clic</small></a>` : ""}
       <p class="comentario-mas"><a href="mercado/">Comentarios de semanas anteriores ›</a></p>
     </article>
   </section>`;
 }
+
+/* Enlace de alta al boletín por correo (formulario de Brevo; lo pone el dueño en data/boletin.json → «alta») */
+let ALTA_BOLETIN = "";
+fetch("data/boletin.json", { cache: "no-cache" }).then(r => r.ok ? r.json() : null).then(c => {
+  const u = c && typeof c.alta === "string" ? c.alta : "";
+  if (/^https:\/\/[^\s"<>]+$/.test(u)) {
+    ALTA_BOLETIN = u;
+    if ((location.hash.slice(1) || "") === "comentario") router();
+  }
+}).catch(() => {});

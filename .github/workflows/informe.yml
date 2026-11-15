@@ -11,6 +11,10 @@ on:
         description: "si = mandarlo también al canal de Telegram"
         required: false
         default: "si"
+      correo:
+        description: "si = mandar también el boletín por correo (Brevo)"
+        required: false
+        default: "si"
 
 permissions:
   contents: write
@@ -63,3 +67,20 @@ jobs:
         env:
           TELEGRAM_TOKEN: ${{ secrets.TELEGRAM_TOKEN }}
         run: python scraper/informe.py --telegram
+      # Boletín por correo (Brevo). Sin los secretos BREVO_API_KEY y BREVO_REMITENTE, o sin la lista en
+      # data/boletin.json, no hace nada. Nunca se envía dos veces la misma semana.
+      - name: Boletín por correo
+        if: inputs.correo != 'no'
+        continue-on-error: true
+        env:
+          BREVO_API_KEY: ${{ secrets.BREVO_API_KEY }}
+          BREVO_REMITENTE: ${{ secrets.BREVO_REMITENTE }}
+        run: |
+          python scraper/boletin.py --enviar
+          if [ -n "$(git status --porcelain data/boletin.json)" ]; then
+            git config user.name "actualizador-lonjas"
+            git config user.email "actions@users.noreply.github.com"
+            git add data/boletin.json
+            git commit -qm "Boletín enviado $(date -u +%F)"
+            git pull -q --rebase && git push -q
+          fi

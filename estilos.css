@@ -791,3 +791,5 @@ button.lj-fila:hover { background: var(--pino-suave); }
   .cinta-pista { animation: none; }
   .cinta-copia { display: none; }
 }
+.boletin-alta { display: grid; gap: 2px; margin: 18px 0 6px; padding: 14px 16px; border-radius: 12px; background: var(--pino); color: #f4f7f2; text-decoration: none; font-weight: 700; }
+.boletin-alta small { font-weight: 400; opacity: .8; font-size: 12.5px; }

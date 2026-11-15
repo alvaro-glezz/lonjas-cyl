@@ -461,6 +461,15 @@ def pagina_gasoleo(g: dict) -> str | None:
                   descripcion=frase, h1="Precio del gasóleo agrícola (B) hoy por provincia", cuerpo=cuerpo, migas=migas, ld=ld)
 
 
+def _alta_boletin() -> str:
+    """Enlace al formulario de alta del boletín por correo (data/boletin.json → «alta»), si está puesto."""
+    try:
+        u = json.loads((RAIZ / "data" / "boletin.json").read_text(encoding="utf-8")).get("alta") or ""
+    except (OSError, ValueError):
+        return ""
+    return u if u.startswith("https://") and not any(c in u for c in ' "<>') else ""
+
+
 def pagina_informe(inf: dict, anterior: dict | None, siguiente: dict | None) -> str:
     """Comentario semanal del mercado (scraper/informe.py): una página por semana, que se queda como archivo."""
     sem = inf["semana"].lower()
@@ -494,7 +503,9 @@ def pagina_informe(inf: dict, anterior: dict | None, siguiente: dict | None) -> 
     if siguiente:
         nav.append(f'<a href="../{siguiente["semana"].lower()}/">Semana siguiente →</a>')
     cuerpo.append('<nav class="chips">' + "".join(nav) + "</nav>")
-    cuerpo.append('<section class="cta"><h2>Cada semana, en tu móvil</h2><p>Únete al canal de Telegram t.me/lonjas_cyl o abre la app: precios del día, comparador entre lonjas y avisos.</p><a class="boton" href="../../">Abrir la app</a></section>')
+    alta = _alta_boletin()
+    cuerpo.append('<section class="cta"><h2>Cada semana, en tu móvil</h2><p>Únete al canal de Telegram t.me/lonjas_cyl o abre la app: precios del día, comparador entre lonjas y avisos.</p><a class="boton" href="../../">Abrir la app</a>'
+                  + (f' <a class="boton" href="{escape(alta)}" rel="nofollow">Recíbelo por correo</a>' if alta else "") + '</section>')
     cuerpo.append('<p class="nota">Fuentes: ' + "; ".join(escape(f) for f in inf.get("fuentes", [])) + ". Precios orientativos; no es una recomendación de compra ni de venta.</p>")
     migas = [("Inicio", ""), ("Comentario de mercado", "mercado/"), (inf["semana"].replace("-W", " · semana "), None)]
     ld = [ld_migas(migas, ruta), {"@context": "https://schema.org", "@type": "Article", "headline": inf["titular"][:110],
