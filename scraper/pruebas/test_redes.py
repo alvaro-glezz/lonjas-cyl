@@ -184,3 +184,15 @@ def test_reels_especiales_cualquier_dia():
     assert r.elegir("especial:explotacion", {"lonjas": []}, {}, domingo)["id"] == "2026-11-08-especial-explotacion"
     assert r.elegir("especial:no-existe", {"lonjas": []}, {}, domingo) is None
     assert r.elegir("reel", {"lonjas": []}, {}, domingo) is None          # el domingo, lo demás no publica
+
+
+def test_voz_kokoro_por_defecto_y_respaldo(redes, tmp_path, monkeypatch):
+    monkeypatch.setenv("VOZ_MOTOR", "kokoro")
+    assert redes.aviso_voz() == redes.AVISO_KOKORO and "em_santa" in redes.AVISO_KOKORO
+    monkeypatch.setattr(redes, "_voz_kokoro", lambda texto, destino: None)       # Kokoro falla…
+    monkeypatch.delenv("PIPER_MODELO", raising=False)
+    redes.voz("hola", tmp_path / "v.wav")
+    assert redes.VOZ_USADA == "piper"                                             # …y se intenta con Piper
+    assert redes.corregir_aviso("x " + redes.AVISO_KOKORO) == "x " + redes.AVISO_VOZ
+    monkeypatch.delenv("VOZ_MOTOR")
+    assert redes.aviso_voz() == redes.AVISO_VOZ

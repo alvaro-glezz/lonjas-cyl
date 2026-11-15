@@ -46,6 +46,18 @@ PORTADA, CIERRE = 2.4, 2.6          # segundos de la portada y del cierre del re
 # Voz: Piper con la voz española «sharvard», hablante de mujer (1). Licencia CC BY 3.0 (corpus Sharvard): hay que citarla,
 # y va en AVISO_VOZ. La tarea la descarga y pone su ruta en PIPER_MODELO (y PIPER_HABLANTE=1).
 AVISO_VOZ = "🔊 Voz generada por ordenador (voz «sharvard» de Piper, corpus Sharvard, licencia CC BY 3.0)."
+AVISO_KOKORO = "🔊 Voz generada por ordenador (Kokoro, voz «em_santa», licencia Apache 2.0)."
+VOZ_USADA = ""          # «kokoro» o «piper»: la que de verdad leyó el último texto
+
+
+def aviso_voz() -> str:
+    """Crédito de la voz para el texto de la publicación. Por defecto Kokoro (elegida el 15 nov); Piper es el respaldo."""
+    return AVISO_KOKORO if os.environ.get("VOZ_MOTOR") == "kokoro" else AVISO_VOZ
+
+
+def corregir_aviso(texto: str) -> str:
+    """Si Kokoro falló y leyó Piper, el crédito del texto tiene que decir Piper (su licencia pide citarla)."""
+    return texto.replace(AVISO_KOKORO, AVISO_VOZ) if VOZ_USADA == "piper" else texto
 
 
 # ---------- datos ----------
@@ -289,7 +301,7 @@ def _voz_kokoro(texto: str, destino: Path) -> Path | None:
         from kokoro import KPipeline
         if _KOKORO is None:
             _KOKORO = KPipeline(lang_code="e")
-        trozos = [a for _, _, a in _KOKORO(para_leer(texto), voice=os.environ.get("KOKORO_VOZ", "ef_dora"),
+        trozos = [a for _, _, a in _KOKORO(para_leer(texto), voice=os.environ.get("KOKORO_VOZ", "em_santa"),
                                             speed=float(os.environ.get("KOKORO_RITMO", "1.0")))]
         audio = np.concatenate([np.asarray(a, dtype="float32") for a in trozos])
         destino.parent.mkdir(parents=True, exist_ok=True)
@@ -303,8 +315,14 @@ def _voz_kokoro(texto: str, destino: Path) -> Path | None:
 def voz(texto: str, destino: Path) -> Path | None:
     """Narración con Piper (si está instalada y hay modelo), o con Kokoro si VOZ_MOTOR=kokoro.
     Sin voz, el reel sale solo con música."""
+    global VOZ_USADA
     if os.environ.get("VOZ_MOTOR") == "kokoro":
-        return _voz_kokoro(texto, destino)
+        r = _voz_kokoro(texto, destino)
+        if r:
+            VOZ_USADA = "kokoro"
+            return r
+        print("[redes] Kokoro no ha podido leer el texto: se usa Piper de respaldo.")
+    VOZ_USADA = "piper"
     modelo = os.environ.get("PIPER_MODELO", "").strip()
     if not modelo or not Path(modelo).is_file():
         return None
@@ -584,7 +602,7 @@ def texto_reel_ranking(r: dict, web: str = WEB) -> str:
     lineas = [titulo_ranking(r["clave"]) + " 👇", ""]
     lineas += [f"{i}. {nombre_corto(l)}: {num(p['act'])} {r['unidad']} ({p['producto']})" for i, (l, p) in enumerate(r["filas"], 1)]
     lineas += ["", f"Diferencia: {num(r['filas'][0][1]['act'] - r['filas'][-1][1]['act'], 2)} {r['unidad']}. Cada lonja cotiza su propia calidad.",
-               "", pie_texto(web), "Precios orientativos.", AVISO_VOZ, "",
+               "", pie_texto(web), "Precios orientativos.", aviso_voz(), "",
                etiquetas("#reels", "#" + NOMBRES[r["clave"]].replace(" ", "").replace("í", "i"), "#precios")]
     return "\n".join(lineas)[:2150]
 
@@ -593,7 +611,7 @@ def texto_reel_movimientos(m: dict, web: str = WEB) -> str:
     lineas = ["📊 Lo que más se ha movido esta semana en las lonjas de Castilla y León", ""]
     lineas += [f"▲ {c['producto']} ({c['lonja']}): {signo(c['pct'], 1)} % · {num(c['act'])} {c['unidad']}" for c in m["suben"]]
     lineas += [f"▼ {c['producto']} ({c['lonja']}): {signo(c['pct'], 1)} % · {num(c['act'])} {c['unidad']}" for c in m["bajan"]]
-    lineas += ["", "Cambio frente a la sesión anterior de cada lonja.", "", pie_texto(web), "Precios orientativos.", AVISO_VOZ, "",
+    lineas += ["", "Cambio frente a la sesión anterior de cada lonja.", "", pie_texto(web), "Precios orientativos.", aviso_voz(), "",
                etiquetas("#reels", "#mercadoagrario", "#precios")]
     return "\n".join(lineas)[:2150]
 
@@ -733,6 +751,8 @@ def crear(datos: dict, estado: dict, franja: str, hoy: date, carpeta: Path = SAL
     if not item:
         return None
     crear_archivos(item, datos, hoy, carpeta)
+    if item.get("texto"):
+        item["texto"] = corregir_aviso(item["texto"])
     estado["preparado"] = [item]
     return item
 

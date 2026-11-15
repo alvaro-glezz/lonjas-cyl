@@ -1034,7 +1034,7 @@ ETIQUETAS = ["#trigo", "#cebada", "#agricultores", "#cereal", "#preciosdelcereal
 def texto_publicacion(n: int, web: str = WEB) -> str:
     h = HISTORIAS[n]
     return (f"{h['texto']}\n\n{redes.ig.pie_texto(web)}\n\n"
-            f"Historia inventada e ilustrada; las cifras son reales. {redes.AVISO_VOZ}\n\n"
+            f"Historia inventada e ilustrada; las cifras son reales. {redes.aviso_voz()}\n\n"
             + etiquetas(*ETIQUETAS[:3], "#LonjasCyL"))
 
 
