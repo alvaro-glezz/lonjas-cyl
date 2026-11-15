@@ -189,7 +189,7 @@ async function cargar(forzar = false) {
     if (copia) { DATOS = copia; DATOS.__sinRed = true; }
     else if (!DATOS) { $("#vista").innerHTML = `<div class="vacio"><b>No se han podido cargar las cotizaciones</b>Comprueba la conexión y pulsa el botón de actualizar, arriba a la derecha.</div>`; }
   } finally { btn.classList.remove("girando"); }
-  if (DATOS) { pintarCabecera(); router(); if (typeof trasCargarDatos === "function") trasCargarDatos(); }
+  if (DATOS) { pintarCabecera(); router(); if (typeof pintarCinta === "function") pintarCinta(); if (typeof trasCargarDatos === "function") trasCargarDatos(); }
 }
 
 function pintarCabecera() {

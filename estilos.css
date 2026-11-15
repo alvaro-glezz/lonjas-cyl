@@ -767,3 +767,27 @@ button.lj-fila:hover { background: var(--pino-suave); }
 }
 .tiempo-ventana.quiza { color: var(--sube); }
 .tiempo-aviso { margin: 0; font-size: 12.5px; color: var(--tenue); }
+
+/* Barra de cotizaciones (cinta.js) */
+.cinta { margin: 10px calc(-1 * max(16px, env(safe-area-inset-left, 0px))) -12px; overflow: hidden;
+  background: rgba(0, 0, 0, .16); border-top: 1px solid rgba(255, 255, 255, .08); }
+.cinta-pista { display: flex; width: max-content; animation: cinta-desfile var(--dur, 40s) linear infinite; }
+.cinta-copia { display: contents; }
+.cinta:hover .cinta-pista, .cinta:focus-within .cinta-pista, .cinta.parada .cinta-pista { animation-play-state: paused; }
+@keyframes cinta-desfile { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+.cinta-item { display: inline-flex; align-items: baseline; gap: 6px; padding: 7px 16px; white-space: nowrap; color: #f4f7f2;
+  text-decoration: none; font-size: 13px; border-right: 1px solid rgba(255, 255, 255, .12); }
+.cinta-item:hover, .cinta-item:focus-visible { background: rgba(255, 255, 255, .08); outline: none; }
+.ci-nombre { font-weight: 700; text-transform: uppercase; letter-spacing: .04em; font-size: 11.5px; color: #e0b252; }
+.ci-valor { font: 600 16px var(--cifra); }
+.ci-valor small { font: 400 11px var(--texto, inherit); opacity: .75; }
+.ci-cambio { font-weight: 700; font-size: 12px; }
+.ci-cambio.sube { color: #8fe0ae; }
+.ci-cambio.baja { color: #ffb19f; }
+.ci-donde { font-size: 11.5px; opacity: .75; }
+@media (prefers-reduced-motion: reduce) {
+  .cinta { overflow-x: auto; scrollbar-width: none; }
+  .cinta::-webkit-scrollbar { display: none; }
+  .cinta-pista { animation: none; }
+  .cinta-copia { display: none; }
+}
