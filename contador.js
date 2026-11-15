@@ -8,6 +8,13 @@
     && !(navigator.globalPrivacyControl || navigator.doNotTrack === "1" || navigator.webdriver);
   const raiz = (document.currentScript && document.currentScript.src) ? new URL(".", document.currentScript.src).href : location.origin + "/";
   const destino = raiz + "api/uso";
+  // Vercel Web Analytics (sin cookies), con las mismas condiciones: solo en la web principal y sin «no rastrear».
+  // El script es del propio dominio (/_vercel/insights/), así que la política de seguridad no cambia.
+  if (ok && /(^|\.)vercel\.app$|(^|\.)lonjascyl\.es$/.test(location.hostname) && !document.querySelector("script[data-va]")) {
+    const s = document.createElement("script");
+    s.defer = true; s.src = "/_vercel/insights/script.js"; s.dataset.va = "1";
+    document.head.appendChild(s);
+  }
   let marcaSesion = false;
   try { marcaSesion = sessionStorage.getItem("lc-visita") === "1"; } catch { /* modo privado: cuenta como entrada */ }
 

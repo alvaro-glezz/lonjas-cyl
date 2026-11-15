@@ -496,6 +496,7 @@ function vistaMetodo() {
     <ul class="lista">
       <li>La app no usa cookies ni pide registrarse. Favoritos, avisos, ofertas y tu explotación se guardan solo en tu teléfono.</li>
       <li>Para saber cuánta gente la usa se cuentan las visitas de forma anónima: qué sección se ve, de qué web se llega, si es móvil u ordenador y el país. Para no contar dos veces a la misma persona en un día se usa un resumen cifrado que cambia cada día; tu dirección IP no se guarda. Los recuentos se borran a los 400 días.</li>
+      <li>Además se usa Vercel Web Analytics, la estadística del servidor que aloja la web: tampoco usa cookies y solo cuenta páginas vistas, de qué web se llega, el país y el tipo de dispositivo y de navegador.</li>
       <li>Si tu navegador pide «no rastrear», no se cuenta nada.</li>
       <li>El robot de Telegram guarda tu número de chat solo si creas avisos; «/borrar todos» lo elimina.</li>
     </ul>
