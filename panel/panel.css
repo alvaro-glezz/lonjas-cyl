@@ -51,3 +51,23 @@ details.tabla summary{cursor:pointer;color:var(--pino);font-weight:600;font-size
 table{border-collapse:collapse;width:100%;font-size:13px;margin-top:8px;font-variant-numeric:tabular-nums}
 th,td{text-align:right;padding:4px 6px;border-bottom:1px solid var(--linea)}th:first-child,td:first-child{text-align:left}
 .pie{color:var(--tenue);font-size:12.5px;margin-top:6px}
+/* Estudio de Reels */
+.enlace{color:var(--pino);font-weight:600}
+.semana{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(250px,100%),1fr));gap:10px}
+.dia{min-width:0;border:1px solid var(--linea);border-radius:12px;padding:10px 12px}
+.dia.hoy{border-color:var(--pino);box-shadow:inset 0 0 0 1px var(--pino)}
+.dia h3{margin:0 0 6px;font-size:14px}
+.dia ul,.lista{list-style:none;margin:0;padding:0;display:grid;gap:6px}
+.dia li,.lista li{display:flex;gap:10px;align-items:flex-start;border-top:1px solid var(--linea);padding-top:6px}
+.dia li:first-child,.lista li:first-child{border-top:0;padding-top:0}
+.hora{font-variant-numeric:tabular-nums;color:var(--tenue);font-size:13px;min-width:44px}
+.lista .hora{min-width:118px}
+.que{flex:1;min-width:0}
+.que b{display:block;font-size:14px;overflow-wrap:anywhere}
+.que small{color:var(--sec);font-size:12.5px}
+.p{display:inline-block;padding:2px 8px;border-radius:999px;font-size:12px;font-weight:700;white-space:nowrap;background:var(--pino-suave);color:var(--pino)}
+.p.aviso{background:#fbefd9;color:#8a5408}
+.p.mal{background:#f8e3de;color:var(--baja)}
+@media (prefers-color-scheme:dark){.p.aviso{background:#33270f;color:#f2b45a}.p.mal{background:#3a1d17}}
+.caja{min-width:0;overflow-wrap:anywhere}
+.dia ul,.lista{grid-template-columns:minmax(0,1fr)}
