@@ -1,5 +1,5 @@
 {
- "fecha": "2026-11-16T18:09",
+ "fecha": "2026-11-16T18:45",
  "fuente": "Ministerio para la Transición Ecológica y el Reto Demográfico (Geoportal de gasolineras)",
  "fuente_url": "https://geoportalgasolineras.es/geoportal-instalaciones/Inicio",
  "unidad": "€/l",
@@ -1151,8 +1151,8 @@
    "nombre": "Cádiz",
    "cyl": false,
    "n": 32,
-   "media": 1.7,
-   "mediana": 1.709,
+   "media": 1.699,
+   "mediana": 1.704,
    "min": 1.498,
    "max": 1.842,
    "descartados": 0,
@@ -1396,8 +1396,8 @@
    "nombre": "Cuenca",
    "cyl": false,
    "n": 36,
-   "media": 1.556,
-   "mediana": 1.52,
+   "media": 1.554,
+   "mediana": 1.514,
    "min": 1.4,
    "max": 1.779,
    "descartados": 0,
@@ -1690,7 +1690,7 @@
    "nombre": "Huesca",
    "cyl": false,
    "n": 57,
-   "media": 1.627,
+   "media": 1.626,
    "mediana": 1.639,
    "min": 1.428,
    "max": 1.824,
@@ -1721,16 +1721,16 @@
      "lon": -0.032806
     },
     {
-     "id": "15310",
-     "nombre": "Cooperativa Osca",
-     "precio": 1.499,
-     "municipio": "Alcolea de Cinca",
-     "direccion": "Poligono Parcela 33, 33",
-     "localidad": "Alcolea de Cinca",
-     "cp": "22410",
+     "id": "15784",
+     "nombre": "Cereales Ramiro Gruas",
+     "precio": 1.498,
+     "municipio": "San Miguel del Cinca",
+     "direccion": "Poligono Poligono 11, 94",
+     "localidad": "Estiche de Cinca",
+     "cp": "22412",
      "horario": "L-D: 24H",
-     "lat": 41.719333,
-     "lon": 0.103917
+     "lat": 41.815444,
+     "lon": 0.118194
     }
    ]
   },
@@ -2751,7 +2751,7 @@
    "nombre": "Pontevedra",
    "cyl": false,
    "n": 34,
-   "media": 1.678,
+   "media": 1.676,
    "mediana": 1.664,
    "min": 1.589,
    "max": 1.869,
@@ -2770,6 +2770,18 @@
      "lon": -7.941611
     },
     {
+     "id": "10649",
+     "nombre": "Campodeza, S.c.g.",
+     "precio": 1.599,
+     "municipio": "Lalín",
+     "direccion": "Lugar Gresande-gresande, S/n",
+     "localidad": "Gresande",
+     "cp": "36519",
+     "horario": "L-D: 08:00-00:00",
+     "lat": 42.645556,
+     "lon": -8.186694
+    },
+    {
      "id": "12123",
      "nombre": "Aira Silleda",
      "precio": 1.599,
@@ -2780,18 +2792,6 @@
      "horario": "L-V: 09:00-14:00 y 15:00-20:00; S-D: 10:00-14:00 y 16:00-20:00",
      "lat": 42.688083,
      "lon": -8.253111
-    },
-    {
-     "id": "10535",
-     "nombre": "Coafor",
-     "precio": 1.629,
-     "municipio": "Forcarei",
-     "direccion": "Rua Regueira, 47",
-     "localidad": "Forcarei",
-     "cp": "36550",
-     "horario": "L-V: 09:00-20:00; S: 09:00-14:00",
-     "lat": 42.601972,
-     "lon": -8.355833
     }
    ]
   },
