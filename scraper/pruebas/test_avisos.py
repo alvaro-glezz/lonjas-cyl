@@ -76,6 +76,7 @@ def test_flujo_completo_de_la_incidencia(avisar, monkeypatch, tmp_path):
     monkeypatch.setenv("GITHUB_REPOSITORY", "dueño/lonjas"); monkeypatch.setenv("GITHUB_TOKEN", "x"); monkeypatch.setenv("GITHUB_RUN_ID", "1")
     monkeypatch.delenv("JCYL_RESULTADO", raising=False)
     datos = tmp_path / "precios.json"; monkeypatch.setattr(avisar, "DATOS", datos)
+    monkeypatch.setattr(avisar, "RAIZ", tmp_path)   # sin plazos ni Instagram reales: solo cuentan las lonjas de la prueba
     hoy = date.today().isoformat()
     def escribir(fallos_leon):
         datos.write_text(json.dumps(_datos(leon={"fallos": fallos_leon, "fecha": hoy, "error": "x"}, lerma={"fallos": 0, "fecha": hoy})))
