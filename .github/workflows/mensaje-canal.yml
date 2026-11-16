@@ -53,13 +53,13 @@ jobs:
             [ -f "$VIDEO" ] || { echo "No existe $VIDEO"; exit 1; }
             n=$(python3 -c "import sys;print(len(open('mensaje.txt',encoding='utf-8').read()))")
             if [ "$n" -le 1024 ]; then
-              r=$(curl -sS -X POST "https://api.telegram.org/bot${TOKEN}/sendVideo" -F "chat_id=${CHAT}" \
+              r=$(curl -sS -X POST "https://api.telegram.org/bot${TOKEN}/sendVideo" --form-string "chat_id=${CHAT}" \
                 -F "video=@${VIDEO};type=video/mp4" -F "supports_streaming=true" -F "caption=<mensaje.txt" "${PM[@]}")
               echo "$r" | grep -o '"ok":[a-z]*\|"message_id":[0-9]*\|"description":"[^"]*"'
               echo "$r" | grep -q '"ok":true'
               exit 0
             fi
-            r=$(curl -sS -X POST "https://api.telegram.org/bot${TOKEN}/sendVideo" -F "chat_id=${CHAT}" \
+            r=$(curl -sS -X POST "https://api.telegram.org/bot${TOKEN}/sendVideo" --form-string "chat_id=${CHAT}" \
               -F "video=@${VIDEO};type=video/mp4" -F "supports_streaming=true")
             echo "$r" | grep -o '"ok":[a-z]*\|"message_id":[0-9]*\|"description":"[^"]*"'
             echo "$r" | grep -q '"ok":true'
