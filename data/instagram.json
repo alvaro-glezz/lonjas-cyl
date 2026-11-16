@@ -1,6 +1,10 @@
 {
  "comparativa": "2026-W46",
- "franja": "manana",
+ "error": {
+  "detalle": "Instagram no pudo procesar la imagen (ERROR)",
+  "fecha": "2026-11-16"
+ },
+ "franja": "reel",
  "franjas": {
   "2026-11-07": [
    "reel"
@@ -102,6 +106,14 @@
    "texto": "📲 Lonjas CyL en tu móvil, como una app más (30 segundos, sin tienda de aplicaciones):\n\n🍎 iPhone: abre la web en Safari → Compartir (en iOS 26, dentro de «⋯») → «Añadir a pantalla de inicio» → Añadir.\n🤖 Android: abre la web en Chrome → ⋮ → «Instalar aplicación» (o «Añadir a pantalla de inicio»).\n\nSe actualiza sola, funciona sin cobertura y es gratis, sin registro.\n\nGuárdalo para tenerlo a mano y pásaselo a quien le pueda servir.\n\n📍 Todos los precios y la comparativa entre lonjas, en el enlace de la bio (lonjas-cyl-khaki.vercel.app).\nAvisos gratis en Telegram: t.me/lonjas_cyl\n\nIlustraciones y capturas reales de la app. 🔇 Con subtítulos: se entiende sin sonido.\n\n#agricultores #lonjas #castillayleon #LonjasCyL #CastillayLeón #preciosagrarios #agricultura #ganadería #campo",
    "tipo": "especial",
    "video": "2026-11-15-especial-instalar.mp4"
+  },
+  {
+   "clave": "cebada",
+   "id": "2026-11-16-reel-cebada",
+   "reel": "ranking",
+   "texto": "¿Dónde se paga más la cebada? 👇\n\n1. Salamanca: 230 €/t (Cebada)\n2. Lerma: 223 €/t (Cebada dos carreras)\n3. León: 221 €/t (Cebada)\n4. Segovia: 221 €/t (Cebada 62 kg/hl)\n\nDiferencia: 9,00 €/t. Cada lonja cotiza su propia calidad.\n\n📍 Todos los precios y la comparativa entre lonjas, en el enlace de la bio (lonjas-cyl-khaki.vercel.app).\nAvisos gratis en Telegram: t.me/lonjas_cyl\nPrecios orientativos.\n🔊 Voz generada por ordenador (Kokoro, voz «em_santa», licencia Apache 2.0).\n\n#reels #Cebada #precios #lonjas #CastillayLeón #preciosagrarios #agricultura #ganadería #campo",
+   "tipo": "reel",
+   "video": "2026-11-16-reel-cebada.mp4"
   }
  ],
  "publicado": {
