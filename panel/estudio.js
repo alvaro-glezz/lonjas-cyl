@@ -22,7 +22,8 @@
     }
     if (franja === "manana") return `Precios de ${nombre(plan.producto_dia[dia])} o sesión de lonja`;
     if (franja === "tarde") return "Sesión de lonja o comparativa semanal";
-    return "Siguiente historia de la serie";
+    return ["Gasóleo B por provincia", "Cereales: la lonja que más paga", "Ganado: precios de la semana",
+      "¿Cuánto cambia según la lonja?", "Ocho semanas de mercado"][dia] || "";
   }
 
   function pintarSemana(plan, estado, hoy) {

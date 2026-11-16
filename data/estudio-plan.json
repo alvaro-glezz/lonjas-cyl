@@ -5,7 +5,7 @@
   "franjas": [
     {"id": "manana", "hora": "07:43", "nombre": "Publicación de la mañana", "dias": [0, 1, 2, 3, 4, 5]},
     {"id": "reel", "hora": "13:13", "nombre": "Reel del día", "dias": [0, 1, 2, 3, 4, 5]},
-    {"id": "historia", "hora": "18:37", "nombre": "Reel con historia", "dias": [0, 1, 2, 3, 4]},
+    {"id": "historia", "hora": "18:37", "nombre": "La semana en las lonjas", "dias": [0, 1, 2, 3, 4]},
     {"id": "tarde", "hora": "18:47", "nombre": "Publicación de la tarde", "dias": [0, 1, 2, 3, 4, 5]}
   ],
   "herramientas": [
