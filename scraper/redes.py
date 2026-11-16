@@ -653,7 +653,11 @@ def elegir(franja: str, datos: dict, estado: dict, hoy: date) -> dict | None:
     if franja == "historia":
         import historias
         n = historias.siguiente(estado, hoy)
-        return historias.item(n, hoy) if n else None
+        if n:
+            return historias.item(n, hoy)
+        import semana                                 # acabadas las cinco historias: «La semana en las lonjas»
+        m = semana.numero(hoy)
+        return semana.item(m, datos, hoy, semana.leer_gasoleo()) if m else None
     if franja.startswith("especial:"):              # reels especiales (especiales.py): se lanzan a mano, cualquier día
         import especiales
         return especiales.item(franja.split(":", 1)[1], hoy)
@@ -708,6 +712,10 @@ def crear_archivos(item: dict, datos: dict, hoy: date, carpeta: Path) -> None:
         ig.imagen_comparativa(ranking(datos, k, hoy), carpeta / item["imagenes"][0])
         if len(item["imagenes"]) > 1:
             imagen_evolucion(evolucion(datos, k, hoy), carpeta / item["imagenes"][1])
+    elif item["tipo"] == "semana":
+        import semana
+        if not semana.reel(item["n"], carpeta / item["video"], datos, hoy, semana.leer_gasoleo()):
+            raise RuntimeError(f"Sin datos para el reel de la semana {item['n']}")
     elif item["tipo"] == "historia":
         import historias
         historias.reel(item["n"], carpeta / item["video"], datos, hoy)
@@ -745,6 +753,14 @@ def crear(datos: dict, estado: dict, franja: str, hoy: date, carpeta: Path = SAL
             crear_archivos(it, datos, hoy, carpeta)
             (carpeta / it["video"]).with_suffix(".txt").write_text(it["texto"], encoding="utf-8")
         return {"id": "historias-todas"}
+    if franja == "semana-todas":                 # ensayo: los cinco reels de «La semana en las lonjas», sin publicar
+        import semana
+        gas = semana.leer_gasoleo()
+        for n in range(1, 6):
+            it = semana.item(n, datos, hoy, gas)
+            if it and semana.reel(n, carpeta / it["video"], datos, hoy, gas):
+                (carpeta / it["video"]).with_suffix(".txt").write_text(corregir_aviso(it["texto"]), encoding="utf-8")
+        return {"id": "semana-todas"}
     if hecha(estado, franja, hoy) and not forzar:
         return None
     item = elegir(franja, datos, estado, hoy)

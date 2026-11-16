@@ -23,7 +23,8 @@ API = "https://api.telegram.org/bot{token}/{metodo}"
 LIMITE_PIE = 1024          # Telegram: texto máximo bajo una foto o un vídeo
 LIMITE_MENSAJE = 4096
 FRANJAS = {"manana": "Publicación de las 8:00", "reel": "Reel de las 13:30", "tarde": "Publicación de las 19:00",
-           "historia": "Reel con historia de las 19:00", "historias-todas": "Ensayo: los cinco reels con historia"}
+           "historia": "Reel con historia de las 19:00", "historias-todas": "Ensayo: los cinco reels con historia",
+           "semana-todas": "Vista previa: los cinco reels de «La semana en las lonjas»"}
 IMAGEN = (".jpg", ".jpeg", ".png")
 
 
@@ -68,7 +69,7 @@ def previa(estado: dict, carpeta: Path, token: str, chat: str, probar: bool, lla
     """Manda lo creado en esta franja. Devuelve cuántos envíos hizo."""
     franja = estado.get("franja", "?")
     enviados = 0
-    if franja == "historias-todas":            # ensayo: cada vídeo con su .txt al lado
+    if franja in ("historias-todas", "semana-todas"):   # ensayo: cada vídeo con su .txt al lado
         for v in sorted(carpeta.glob("*.mp4")):
             t = v.with_suffix(".txt")
             pie = cabecera(franja, True) + "\n\n" + (t.read_text(encoding="utf-8") if t.is_file() else v.name)
@@ -91,7 +92,7 @@ def resultado(estado: dict, hoy: date, probar: bool) -> str | None:
     """Texto del aviso tras publicar. La tarea solo lo pide cuando esta franja creó algo (al publicar con éxito,
     instagram.publicar vacía estado['preparado'] y marcar() apunta la franja del día)."""
     franja = estado.get("franja", "?")
-    if franja == "historias-todas":
+    if franja in ("historias-todas", "semana-todas"):
         return None
     nombre = f"Reel especial «{franja.split(':', 1)[1]}»" if franja.startswith("especial:") else FRANJAS.get(franja, franja)
     if probar:
