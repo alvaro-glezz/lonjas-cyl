@@ -1,0 +1,332 @@
+{
+ "lonja": "salamanca",
+ "fecha": "2026-11-16",
+ "origen": "https://datosabiertossalamanca.es/dataset/cotizaciones-semanales-de-la-lonja-de-salamanca",
+ "material": {
+  "csv": "\"ID\";\"FECHA\";\"MESA\";\"PRODUCTO\";\"CATEGORIA\";\"VALOR1\";\"VALOR2\";\n\"148101\";\"2026-11-16\";\"CEREALES\";\"Cereales\";\"Trigo Blando p.e. > 72 kg/Hl\";\"234\";\"0\";\n\"148102\";\"2026-11-16\";\"CEREALES\";\"Cereales\";\"Cebada\";\"231\";\"0\";\n\"148103\";\"2026-11-16\";\"CEREALES\";\"Cereales\";\"Avena\";\"202\";\"0\";\n\"148104\";\"2026-11-16\";\"CEREALES\";\"Cereales\";\"Centeno\";\"221\";\"0\";\n\"148105\";\"2026-11-16\";\"CEREALES\";\"Cereales\";\"Triticale\";\"224\";\"0\";\n\"148106\";\"2026-11-16\";\"CEREALES\";\"Cereales\";\"Maíz\";\"241\";\"0\";\n\"148107\";\"2026-11-16\";\"CEREALES\";\"Leguminosas\";\"Guisantes\";\"0\";\"0\";\n\"148108\";\"2026-11-16\";\"CEREALES\";\"Leguminosas\";\"Garbanzo pedrosillano\";\"750\";\"0\";\n\"148109\";\"2026-11-16\";\"CEREALES\";\"Leguminosas\";\"Lenteja armuña D.O.\";\"1100\";\"0\";\n\"148110\";\"2026-11-16\";\"CEREALES\";\"Oleaginosas\";\"Girasol\";\"0\";\"0\";\n\"148111\";\"2026-11-16\";\"CEREALES\";\"Oleaginosas\";\"Girasol A.O.\";\"0\";\"0\";\n\"148112\";\"2026-11-16\";\"CEREALES\";\"Oleaginosas\";\"Colza\";\"0\";\"0\";\n\"148113\";\"2026-11-16\";\"CEREALES\";\"Forrajes\";\"Forraje Extra\";\"0\";\"0\";\n\"148114\";\"2026-11-16\";\"CEREALES\";\"Forrajes\";\"Forraje de Primera\";\"0\";\"0\";\n\"148115\";\"2026-11-16\";\"CEREALES\";\"Forrajes\";\"Alfalfa empacada\";\"0\";\"0\";\n\"148116\";\"2026-11-16\";\"CEREALES\";\"Forrajes\";\"Veza henificada\";\"0\";\"0\";\n\"148117\";\"2026-11-16\";\"CEREALES\";\"Forrajes\";\"Paja paquete pequeño\";\"0\";\"0\";\n\"148118\";\"2026-11-16\";\"CEREALES\";\"Forrajes\";\"Paja paquete grande\";\"77\";\"0\";\n\"148119\";\"2026-11-16\";\"OVINO\";\"Lechazo\";\"Extra\";\"10,45\";\"0\";\n\"148120\";\"2026-11-16\";\"OVINO\";\"Lechazo\";\"Hasta 11 Kg\";\"10,05\";\"0\";\n\"148121\";\"2026-11-16\";\"OVINO\";\"Lechazo\";\"11,01 a 13 KG.\";\"9,25\";\"0\";\n\"148122\";\"2026-11-16\";\"OVINO\";\"Lechazo\";\"13,01 a 15 KG.\";\"7,75\";\"0\";\n\"148123\";\"2026-11-16\";\"OVINO\";\"Cordero\";\"15,01 a 19 KG.\";\"7,3\";\"0\";\n\"148124\";\"2026-11-16\";\"OVINO\";\"Cordero\";\"19,01 a 23 KG.\";\"6,7\";\"0\";\n\"148125\";\"2026-11-16\";\"OVINO\";\"Cordero\";\"23,01 a 25,49 KG.\";\"6,4\";\"0\";\n\"148126\";\"2026-11-16\";\"OVINO\";\"Cordero\";\"25,5 a 28 KG.\";\"6\";\"0\";\n\"148127\";\"2026-11-16\";\"OVINO\";\"Cordero\";\"28,01 a 34 KG.\";\"5,25\";\"0\";\n\"148128\";\"2026-11-16\";\"OVINO\";\"Cordero\";\"+ de 34 KG.\";\"5\";\"0\";\n\"148129\";\"2026-11-16\";\"OVINO\";\"Oveja\";\"Sacrificio\";\",9\";\"1,4\";\n\"148130\";\"2026-11-16\";\"OVINO\";\"Oveja\";\"Vida\";\"150\";\"175\";\n\"148177\";\"2026-11-16\";\"PORCINO BLANCO E IBÉRICO\";\"Porcino blanco\";\"Selecto\";\"1,1\";\"1,11\";\n\"148178\";\"2026-11-16\";\"PORCINO BLANCO E IBÉRICO\";\"Porcino blanco\";\"Normal\";\"1,09\";\"1,1\";\n\"148179\";\"2026-11-16\";\"PORCINO BLANCO E IBÉRICO\";\"Porcino blanco\";\"Graso\";\"1,61\";\"1,65\";\n\"148180\";\"2026-11-16\";\"PORCINO BLANCO E IBÉRICO\";\"Porcino blanco\";\"Cerdas\";\",33\";\",36\";\n\"148181\";\"2026-11-16\";\"PORCINO BLANCO E IBÉRICO\";\"Lechón\";\"Selecto\";\"32\";\"0\";\n\"148182\";\"2026-11-16\";\"PORCINO BLANCO E IBÉRICO\";\"Tostón\";\" 4 a 6 Kg\";\"27\";\"0\";\n\"148183\";\"2026-11-16\";\"PORCINO BLANCO E IBÉRICO\";\"Tostón\";\"6,01 a 8 Kg\";\"27\";\"0\";\n\"148184\";\"2026-11-16\";\"PORCINO BLANCO E IBÉRICO\";\"Porcino Ibérico\";\"Bellota 100% IB\";\"0\";\"0\";\n\"148185\";\"2026-11-16\";\"PORCINO BLANCO E IBÉRICO\";\"Porcino Ibérico\";\"Bellota 75% IB\";\"0\";\"0\";\n\"148186\";\"2026-11-16\";\"PORCINO BLANCO E IBÉRICO\";\"Porcino Ibérico\";\"Bellota 50% IB\";\"0\";\"0\";\n\"148187\";\"2026-11-16\";\"PORCINO BLANCO E IBÉRICO\";\"Porcino Ibérico\";\"Cebo de campo\";\"3,16\";\"3,26\";\n\"148188\";\"2026-11-16\";\"PORCINO BLANCO E IBÉRICO\";\"Porcino Ibérico\";\"Cebo\";\"3,03\";\"3,13\";\n\"148189\";\"2026-11-16\";\"PORCINO BLANCO E IBÉRICO\";\"Porcino Ibérico\";\"Lechón ibérico puro\";\"0\";\"0\";\n\"148190\";\"2026-11-16\";\"PORCINO BLANCO E IBÉRICO\";\"Porcino Ibérico\";\"Lechones hasta 23 Kg (Gran partida)\";\"6,23\";\"6,73\";\n\"148191\";\"2026-11-16\";\"PORCINO BLANCO E IBÉRICO\";\"Porcino Ibérico\";\"Lechones hasta 23 kg (Recogida)\";\"6,23\";\"6,73\";\n\"148192\";\"2026-11-16\";\"PORCINO BLANCO E IBÉRICO\";\"Porcino Ibérico\";\"Marranos ibéricos puros\";\"0\";\"0\";\n\"148193\";\"2026-11-16\";\"PORCINO BLANCO E IBÉRICO\";\"Porcino Ibérico\";\"Marranos ibéricos cruzados\";\"0\";\"0\";\n\"148194\";\"2026-11-16\";\"PORCINO BLANCO E IBÉRICO\";\"Porcino Ibérico\";\"Primales ibérico puro\";\"4,2\";\"4,55\";\n\"148195\";\"2026-11-16\";\"PORCINO BLANCO E IBÉRICO\";\"Porcino Ibérico\";\"Primales ibérico cruzado\";\"4,2\";\"4,55\";\n\"148196\";\"2026-11-16\";\"PORCINO BLANCO E IBÉRICO\";\"Porcino Ibérico\";\"Tostones (5 - 8 Kg)\";\"0\";\"0\";\n\"148197\";\"2026-11-16\";\"PORCINO BLANCO E IBÉRICO\";\"Porcino Ibérico\";\"Tostones (9 - 12 Kg)\";\"85\";\"87\";\n\"148198\";\"2026-11-16\";\"PORCINO BLANCO E IBÉRICO\";\"Porcino Ibérico\";\"Reproductoras < de 6 meses\";\"400\";\"500\";\n\"148199\";\"2026-11-16\";\"PORCINO BLANCO E IBÉRICO\";\"Porcino Ibérico\";\"Reproductoras > de 6 meses\";\"500\";\"600\";\n\"148169\";\"2026-11-16\";\"BOVINO DE VIDA\";\"Ternero\";\"Extra macho\";\"5,82\";\"0\";\n\"148170\";\"2026-11-16\";\"BOVINO DE VIDA\";\"Ternero\";\"Primera macho\";\"5,43\";\"0\";\n\"148171\";\"2026-11-16\";\"BOVINO DE VIDA\";\"Ternero\";\"Segunda macho\";\"4,39\";\"0\";\n\"148172\";\"2026-11-16\";\"BOVINO DE VIDA\";\"Ternero\";\"Extra hembra\";\"5,36\";\"0\";\n\"148173\";\"2026-11-16\";\"BOVINO DE VIDA\";\"Ternero\";\"Primera hembra\";\"4,98\";\"0\";\n\"148174\";\"2026-11-16\";\"BOVINO DE VIDA\";\"Ternero\";\"Segunda hembra\";\"4,38\";\"0\";\n\"148175\";\"2026-11-16\";\"BOVINO DE VIDA\";\"Ternero del país\";\"Macho\";\"3,99\";\"0\";\n\"148176\";\"2026-11-16\";\"BOVINO DE VIDA\";\"Ternero del país\";\"Hembra\";\"0\";\"0\";\n\"148131\";\"2026-11-16\";\"BOVINO DE CARNE\";\"Bovino menor 12 meses\";\"Especial macho\";\"0\";\"0\";\n\"148132\";\"2026-11-16\";\"BOVINO DE CARNE\";\"Bovino menor 12 meses\";\"Extra macho\";\"0\";\"0\";\n\"148133\";\"2026-11-16\";\"BOVINO DE CARNE\";\"Bovino menor 12 meses\";\"Primera macho \";\"0\";\"0\";\n\"148134\";\"2026-11-16\";\"BOVINO DE CARNE\";\"Bovino menor 12 meses\";\"Segunda macho\";\"0\";\"0\";\n\"148135\";\"2026-11-16\";\"BOVINO DE CARNE\";\"Bovino menor 12 meses\";\"Especial hembra  de 180 a 220 Kg.\";\"0\";\"0\";\n\"148136\";\"2026-11-16\";\"BOVINO DE CARNE\";\"Bovino menor 12 meses\";\"Extra hembra   de 180 a 220 Kg.\";\"0\";\"0\";\n\"148137\";\"2026-11-16\";\"BOVINO DE CARNE\";\"Bovino menor 12 meses\";\"Primera hembra   de 180 a 220 Kg.\";\"0\";\"0\";\n\"148138\";\"2026-11-16\";\"BOVINO DE CARNE\";\"Bovino menor 12 meses\";\"Segunda hembra  de 180 a 220 Kg.\";\"0\";\"0\";\n\"148139\";\"2026-11-16\";\"BOVINO DE CARNE\";\"Ternera mayor 12 meses\";\"Especial menor 270 Kg\";\"7,4\";\"0\";\n\"148140\";\"2026-11-16\";\"BOVINO DE CARNE\";\"Ternera mayor 12 meses\";\"Extra menor  270 Kg\";\"7,37\";\"0\";\n\"148141\";\"2026-11-16\";\"BOVINO DE CARNE\";\"Ternera mayor 12 meses\";\"Primera menor 270 Kg\";\"7,25\";\"0\";\n\"148142\";\"2026-11-16\";\"BOVINO DE CARNE\";\"Ternera mayor 12 meses\";\"Segunda menor 270 Kg\";\"7,07\";\"0\";\n\"148143\";\"2026-11-16\";\"BOVINO DE CARNE\";\"Ternera mayor 12 meses\";\"Especial mayor 270 Kg\";\"7,12\";\"0\";\n\"148144\";\"2026-11-16\";\"BOVINO DE CARNE\";\"Ternera mayor 12 meses\";\"Extra mayor 270 Kg\";\"7,09\";\"0\";\n\"148145\";\"2026-11-16\";\"BOVINO DE CARNE\";\"Ternera mayor 12 meses\";\"Primera mayor  270 Kg\";\"6,97\";\"0\";\n\"148146\";\"2026-11-16\";\"BOVINO DE CARNE\";\"Ternera mayor 12 meses\";\"segunda mayor  270 Kg\";\"6,79\";\"0\";\n\"148147\";\"2026-11-16\";\"BOVINO DE CARNE\";\"Añojos\";\"Especial menor 350 Kg\";\"6,47\";\"0\";\n\"148148\";\"2026-11-16\";\"BOVINO DE CARNE\";\"Añojos\";\"Extra menor 350 Kg\";\"6,41\";\"0\";\n\"148149\";\"2026-11-16\";\"BOVINO DE CARNE\";\"Añojos\";\"Primera menor 350 Kg\";\"6,26\";\"0\";\n\"148150\";\"2026-11-16\";\"BOVINO DE CARNE\";\"Añojos\";\"Segunda menor 350 Kg\";\"6,01\";\"0\";\n\"148151\";\"2026-11-16\";\"BOVINO DE CARNE\";\"Añojos\";\"Especial mayor 350 Kg\";\"6,41\";\"0\";\n\"148152\";\"2026-11-16\";\"BOVINO DE CARNE\";\"Añojos\";\"Extra mayor 350 Kg\";\"6,35\";\"0\";\n\"148153\";\"2026-11-16\";\"BOVINO DE CARNE\";\"Añojos\";\"Primera mayor 350 Kg\";\"6,16\";\"0\";\n\"148154\";\"2026-11-16\";\"BOVINO DE CARNE\";\"Añojos\";\"Segunda mayor 350 Kg\";\"5,98\";\"0\";\n\"148155\";\"2026-11-16\";\"BOVINO DE CARNE\";\"Erales\";\"Extra\";\"5,24\";\"0\";\n\"148156\";\"2026-11-16\";\"BOVINO DE CARNE\";\"Erales\";\"Primera\";\"4,69\";\"0\";\n\"148157\";\"2026-11-16\";\"BOVINO DE CARNE\";\"Erales\";\"Segunda\";\"4,21\";\"0\";\n\"148158\";\"2026-11-16\";\"BOVINO DE CARNE\";\"Toros\";\"Extra\";\"5,26\";\"0\";\n\"148159\";\"2026-11-16\";\"BOVINO DE CARNE\";\"Toros\";\"Primera\";\"4,77\";\"0\";\n\"148160\";\"2026-11-16\";\"BOVINO DE CARNE\";\"Toros\";\"Segunda\";\"4,49\";\"0\";\n\"148161\";\"2026-11-16\";\"BOVINO DE CARNE\";\"Novillos\";\"Extra\";\"5,13\";\"0\";\n\"148162\";\"2026-11-16\";\"BOVINO DE CARNE\";\"Novillos\";\"Primera\";\"4,71\";\"0\";\n\"148163\";\"2026-11-16\";\"BOVINO DE CARNE\";\"Novillos\";\"Segunda\";\"4,43\";\"0\";\n\"148164\";\"2026-11-16\";\"BOVINO DE CARNE\";\"Vacas\";\"Extra\";\"6,06\";\"0\";\n\"148165\";\"2026-11-16\";\"BOVINO DE CARNE\";\"Vacas\";\"Primera\";\"5,46\";\"0\";\n\"148166\";\"2026-11-16\";\"BOVINO DE CARNE\";\"Vacas\";\"Segunda\";\"4,81\";\"0\";\n\"148167\";\"2026-11-16\";\"BOVINO DE CARNE\";\"Vacas\";\"Tercera\";\"4,58\";\"0\";\n\"148168\";\"2026-11-16\";\"BOVINO DE CARNE\";\"Vacas\";\"Fábrica\";\"4,34\";\"0\";\n\"148200\";\"2026-11-16\";\"DESPIECE DE IBÉRICO\";\"Jamón Ibérico en Sangre\";\"Bellota 100% IB\";\"0\";\"0\";\n\"148201\";\"2026-11-16\";\"DESPIECE DE IBÉRICO\";\"Jamón Ibérico en Sangre\";\"Bellota 75% IB\";\"0\";\"0\";\n\"148202\";\"2026-11-16\";\"DESPIECE DE IBÉRICO\";\"Jamón Ibérico en Sangre\";\"Bellota 50% IB\";\"0\";\"0\";\n\"148203\";\"2026-11-16\";\"DESPIECE DE IBÉRICO\";\"Jamón Ibérico en Sangre\";\"Cebo de campo\";\"7,6\";\"8,1\";\n\"148204\";\"2026-11-16\";\"DESPIECE DE IBÉRICO\";\"Jamón Ibérico en Sangre\";\"Cebo\";\"7,01\";\"7,21\";\n\"148205\";\"2026-11-16\";\"DESPIECE DE IBÉRICO\";\"Paleta Ibérica en Sangre\";\"Bellota 100 % IB\";\"0\";\"0\";\n\"148206\";\"2026-11-16\";\"DESPIECE DE IBÉRICO\";\"Paleta Ibérica en Sangre\";\"Bellota 75 % IB\";\"0\";\"0\";\n\"148207\";\"2026-11-16\";\"DESPIECE DE IBÉRICO\";\"Paleta Ibérica en Sangre\";\"Bellota 50 % IB\";\"0\";\"0\";\n\"148208\";\"2026-11-16\";\"DESPIECE DE IBÉRICO\";\"Paleta Ibérica en Sangre\";\"Cebo de campo\";\"6,17\";\"6,37\";\n\"148209\";\"2026-11-16\";\"DESPIECE DE IBÉRICO\";\"Paleta Ibérica en Sangre\";\"Cebo\";\"6,16\";\"6,36\";\n\"148210\";\"2026-11-16\";\"DESPIECE DE IBÉRICO\";\"Magros\";\"Magro de Bellota\";\"0\";\"0\";\n\"148211\";\"2026-11-16\";\"DESPIECE DE IBÉRICO\";\"Magros\";\"Extra\";\"2,82\";\"2,92\";\n\"148212\";\"2026-11-16\";\"DESPIECE DE IBÉRICO\";\"Magros\";\"Presa Bellota\";\"0\";\"0\";\n\"148213\";\"2026-11-16\";\"DESPIECE DE IBÉRICO\";\"Magros\";\"Presa\";\"17,3\";\"17,8\";\n\"148214\";\"2026-11-16\";\"DESPIECE DE IBÉRICO\";\"Magros\";\"Secreto\";\"15\";\"15,45\";\n\"148215\";\"2026-11-16\";\"DESPIECE DE IBÉRICO\";\"Magros\";\"Barriguera\";\"4,2\";\"4,3\";\n\"148216\";\"2026-11-16\";\"DESPIECE DE IBÉRICO\";\"Magros\";\"Solomillo\";\"10,7\";\"11,2\";\n\"148217\";\"2026-11-16\";\"DESPIECE DE IBÉRICO\";\"Magros\";\"Pluma de lomo\";\"16,6\";\"16,9\";\n\"148218\";\"2026-11-16\";\"DESPIECE DE IBÉRICO\";\"Magros\";\"Carrillera\";\"8,9\";\"9,1\";\n\"148219\";\"2026-11-16\";\"DESPIECE DE IBÉRICO\";\"Magros\";\"Abanico\";\"9,35\";\"9,45\";\n\"148220\";\"2026-11-16\";\"DESPIECE DE IBÉRICO\";\"Magros\";\"Lagarto\";\"9,7\";\"9,8\";\n\"148221\";\"2026-11-16\";\"DESPIECE DE IBÉRICO\";\"Magros\";\"Tapilla\";\"7,6\";\"7,7\";\n\"148222\";\"2026-11-16\";\"DESPIECE DE IBÉRICO\";\"Despiece\";\"Lomo Bellota\";\"0\";\"0\";\n\"148223\";\"2026-11-16\";\"DESPIECE DE IBÉRICO\";\"Despiece\";\"Lomo Cebo de Campo\";\"14,5\";\"14,75\";\n\"148224\";\"2026-11-16\";\"DESPIECE DE IBÉRICO\";\"Despiece\";\"Lomo Cebo\";\"14,35\";\"14,55\";\n\"148225\";\"2026-11-16\";\"DESPIECE DE IBÉRICO\";\"Despiece\";\"Panceta a cuadro\";\"2,15\";\"2,25\";\n\"148226\";\"2026-11-16\";\"DESPIECE DE IBÉRICO\";\"Despiece\";\"Tocino de lomo < 4cm\";\"1,1\";\"1,2\";\n\"148227\";\"2026-11-16\";\"DESPIECE DE IBÉRICO\";\"Despiece\";\"Tocino de lomo > 4cm\";\"1,44\";\"1,6\";\n\"148228\";\"2026-11-16\";\"DESPIECE DE IBÉRICO\";\"Despiece\";\"Costillas (Peladas)\";\"1,65\";\"1,75\";\n\"148229\";\"2026-11-16\";\"DESPIECE DE IBÉRICO\";\"Despiece\";\"Grasas Industriales\";\",67\";\",76\";\n\"148230\";\"2026-11-16\";\"DESPIECE DE IBÉRICO\";\"Despiece\";\"Cabeza\";\",54\";\",56\";\n\"147961\";\"2026-11-09\";\"CEREALES\";\"Cereales\";\"Trigo Blando p.e. > 72 kg/Hl\";\"234\";\"0\";\n\"147962\";\"2026-11-09\";\"CEREALES\";\"Cereales\";\"Cebada\";\"230\";\"0\";\n\"147963\";\"2026-11-09\";\"CEREALES\";\"Cereales\";\"Avena\";\"202\";\"0\";\n\"147964\";\"2026-11-09\";\"CEREALES\";\"Cereales\";\"Centeno\";\"220\";\"0\";\n\"147965\";\"2026-11-09\";\"CEREALES\";\"Cereales\";\"Triticale\";\"224\";\"0\";\n\"147966\";\"2026-11-09\";\"CEREALES\";\"Cereales\";\"Maíz\";\"240\";\"0\";\n\"147967\";\"2026-11-09\";\"CEREALES\";\"Leguminosas\";\"Guisantes\";\"0\";\"0\";\n\"147968\";\"2026-11-09\";\"CEREALES\";\"Leguminosas\";\"Garbanzo pedrosillano\";\"750\";\"0\";\n\"147969\";\"2026-11-09\";\"CEREALES\";\"Leguminosas\";\"Lenteja armuña D.O.\";\"1100\";\"0\";\n\"147970\";\"2026-11-09\";\"CEREALES\";\"Oleaginosas\";\"Girasol\";\"0\";\"0\";\n\"147971\";\"2026-11-09\";\"CEREALES\";\"Oleaginosas\";\"Girasol A.O.\";\"0\";\"0\";\n\"147972\";\"2026-11-09\";\"CEREALES\";\"Oleaginosas\";\"Colza\";\"0\";\"0\";\n\"147973\";\"2026-11-09\";\"CEREALES\";\"Forrajes\";\"Forraje Extra\";\"0\";\"0\";\n\"147974\";\"2026-11-09\";\"CEREALES\";\"Forrajes\";\"Forraje de Primera\";\"0\";\"0\";\n\"147975\";\"2026-11-09\";\"CEREALES\";\"Forrajes\";\"Alfalfa empacada\";\"0\";\"0\";\n\"147976\";\"2026-11-09\";\"CEREALES\";\"Forrajes\";\"Veza henificada\";\"0\";\"0\";\n\"147977\";\"2026-11-09\";\"CEREALES\";\"Forrajes\";\"Paja paquete pequeño\";\"0\";\"0\";\n\"147978\";\"2026-11-09\";\"CEREALES\";\"Forrajes\";\"Paja paquete grande\";\"77\";\"0\";\n\"147979\";\"2026-11-09\";\"OVINO\";\"Lechazo\";\"Extra\";\"10,35\";\"0\";\n\"147980\";\"2026-11-09\";\"OVINO\";\"Lechazo\";\"Hasta 11 Kg\";\"9,95\";\"0\";\n\"147981\";\"2026-11-09\";\"OVINO\";\"Lechazo\";\"11,01 a 13 KG.\";\"9,15\";\"0\";\n\"147982\";\"2026-11-09\";\"OVINO\";\"Lechazo\";\"13,01 a 15 KG.\";\"7,6\";\"0\";\n\"147983\";\"2026-11-09\";\"OVINO\";\"Cordero\";\"15,01 a 19 KG.\";\"7,15\";\"0\";\n\"147984\";\"2026-11-09\";\"OVINO\";\"Cordero\";\"19,01 a 23 KG.\";\"6,55\";\"0\";\n\"147985\";\"2026-11-09\";\"OVINO\";\"Cordero\";\"23,01 a 25,49 KG.\";\"6,3\";\"0\";\n\"147986\";\"2026-11-09\";\"OVINO\";\"Cordero\";\"25,5 a 28 KG.\";\"5,9\";\"0\";\n\"147987\";\"2026-11-09\";\"OVINO\";\"Cordero\";\"28,01 a 34 KG.\";\"0\";\"0\";\n\"147988\";\"2026-11-09\";\"OVINO\";\"Cordero\";\"+ de 34 KG.\";\"0\";\"0\";\n\"147989\";\"2026-11-09\";\"OVINO\";\"Oveja\";\"Sacrificio\";\",9\";\"1,4\";\n\"147990\";\"2026-11-09\";\"OVINO\";\"Oveja\";\"Vida\";\"150\";\"175\";\n\"148047\";\"2026-11-09\";\"PORCINO BLANCO E IBÉRICO\";\"Porcino blanco\";\"Selecto\";\"1,13\";\"1,14\";\n\"148048\";\"2026-11-09\";\"PORCINO BLANCO E IBÉRICO\";\"Porcino blanco\";\"Normal\";\"1,12\";\"1,13\";\n\"148049\";\"2026-11-09\";\"PORCINO BLANCO E IBÉRICO\";\"Porcino blanco\";\"Graso\";\"1,62\";\"1,66\";\n\"148050\";\"2026-11-09\";\"PORCINO BLANCO E IBÉRICO\";\"Porcino blanco\";\"Cerdas\";\",33\";\",36\";\n\"148051\";\"2026-11-09\";\"PORCINO BLANCO E IBÉRICO\";\"Lechón\";\"Selecto\";\"32\";\"0\";\n\"148052\";\"2026-11-09\";\"PORCINO BLANCO E IBÉRICO\";\"Tostón\";\" 4 a 6 Kg\";\"27\";\"0\";\n\"148053\";\"2026-11-09\";\"PORCINO BLANCO E IBÉRICO\";\"Tostón\";\"6,01 a 8 Kg\";\"27\";\"0\";\n\"148054\";\"2026-11-09\";\"PORCINO BLANCO E IBÉRICO\";\"Porcino Ibérico\";\"Bellota 100% IB\";\"0\";\"0\";\n\"148055\";\"2026-11-09\";\"PORCINO BLANCO E IBÉRICO\";\"Porcino Ibérico\";\"Bellota 75% IB\";\"0\";\"0\";\n\"148056\";\"2026-11-09\";\"PORCINO BLANCO E IBÉRICO\";\"Porcino Ibérico\";\"Bellota 50% IB\";\"0\";\"0\";\n\"148057\";\"2026-11-09\";\"PORCINO BLANCO E IBÉRICO\";\"Porcino Ibérico\";\"Cebo de campo\";\"3,16\";\"3,26\";\n\"148058\";\"2026-11-09\";\"PORCINO BLANCO E IBÉRICO\";\"Porcino Ibérico\";\"Cebo\";\"3,03\";\"3,13\";\n\"148059\";\"2026-11-09\";\"PORCINO BLANCO E IBÉRICO\";\"Porcino Ibérico\";\"Lechón ibérico puro\";\"0\";\"0\";\n\"148060\";\"2026-11-09\";\"PORCINO BLANCO E IBÉRICO\";\"Porcino Ibérico\";\"Lechones hasta 23 Kg (Gran partida)\";\"6,25\";\"6,75\";\n\"148061\";\"2026-11-09\";\"PORCINO BLANCO E IBÉRICO\";\"Porcino Ibérico\";\"Lechones hasta 23 kg (Recogida)\";\"6,25\";\"6,75\";\n\"148062\";\"2026-11-09\";\"PORCINO BLANCO E IBÉRICO\";\"Porcino Ibérico\";\"Marranos ibéricos puros\";\"0\";\"0\";\n\"148063\";\"2026-11-09\";\"PORCINO BLANCO E IBÉRICO\";\"Porcino Ibérico\";\"Marranos ibéricos cruzados\";\"0\";\"0\";\n\"148064\";\"2026-11-09\";\"PORCINO BLANCO E IBÉRICO\";\"Porcino Ibérico\";\"Primales ibérico puro\";\"4,2\";\"4,55\";\n\"148065\";\"2026-11-09\";\"PORCINO BLANCO E IBÉRICO\";\"Porcino Ibérico\";\"Primales ibérico cruzado\";\"4,2\";\"4,55\";\n\"148066\";\"2026-11-09\";\"PORCINO BLANCO E IBÉRICO\";\"Porcino Ibérico\";\"Tostones (5 - 8 Kg)\";\"0\";\"0\";\n\"148067\";\"2026-11-09\";\"PORCINO BLANCO E IBÉRICO\";\"Porcino Ibérico\";\"Tostones (9 - 12 Kg)\";\"85\";\"87\";\n\"148068\";\"2026-11-09\";\"PORCINO BLANCO E IBÉRICO\";\"Porcino Ibérico\";\"Reproductoras < de 6 meses\";\"400\";\"500\";\n\"148069\";\"2026-11-09\";\"PORCINO BLANCO E IBÉRICO\";\"Porcino Ibérico\";\"Reproductoras > de 6 meses\";\"500\";\"600\";\n\"148039\";\"2026-11-09\";\"BOVINO DE VIDA\";\"Ternero\";\"Extra macho\";\"5,82\";\"0\";\n\"148040\";\"2026-11-09\";\"BOVINO DE VIDA\";\"Ternero\";\"Primera macho\";\"5,43\";\"0\";\n\"148041\";\"2026-11-09\";\"BOVINO DE VIDA\";\"Ternero\";\"Segunda macho\";\"4,39\";\"0\";\n\"148042\";\"2026-11-09\";\"BOVINO DE VIDA\";\"Ternero\";\"Extra hembra\";\"5,36\";\"0\";\n\"148043\";\"2026-11-09\";\"BOVINO DE VIDA\";\"Ternero\";\"Primera hembra\";\"4,98\";\"0\";\n\"148044\";\"2026-11-09\";\"BOVINO DE VIDA\";\"Ternero\";\"Segunda hembra\";\"4,38\";\"0\";\n\"148045\";\"2026-11-09\";\"BOVINO DE VIDA\";\"Ternero del país\";\"Macho\";\"3,99\";\"0\";\n\"148046\";\"2026-11-09\";\"BOVINO DE VIDA\";\"Ternero del país\";\"Hembra\";\"0\";\"0\";\n\"148001\";\"2026-11-09\";\"BOVINO DE CARNE\";\"Bovino menor 12 meses\";\"Especial macho\";\"0\";\"0\";\n\"148002\";\"2026-11-09\";\"BOVINO DE CARNE\";\"Bovino menor 12 meses\";\"Extra macho\";\"0\";\"0\";\n\"148003\";\"2026-11-09\";\"BOVINO DE CARNE\";\"Bovino menor 12 meses\";\"Primera macho \";\"0\";\"0\";\n\"148004\";\"2026-11-09\";\"BOVINO DE CARNE\";\"Bovino menor 12 meses\";\"Segunda macho\";\"0\";\"0\";\n\"148005\";\"2026-11-09\";\"BOVINO DE CARNE\";\"Bovino menor 12 meses\";\"Especial hembra  de 180 a 220 Kg.\";\"0\";\"0\";\n\"148006\";\"2026-11-09\";\"BOVINO DE CARNE\";\"Bovino menor 12 meses\";\"Extra hembra   de 180 a 220 Kg.\";\"0\";\"0\";\n\"148007\";\"2026-11-09\";\"BOVINO DE CARNE\";\"Bovino menor 12 meses\";\"Primera hembra   de 180 a 220 Kg.\";\"0\";\"0\";\n\"148008\";\"2026-11-09\";\"BOVINO DE CARNE\";\"Bovino menor 12 meses\";\"Segunda hembra  de 180 a 220 Kg.\";\"0\";\"0\";\n\"148009\";\"2026-11-09\";\"BOVINO DE CARNE\";\"Ternera mayor 12 meses\";\"Especial menor 270 Kg\";\"7,4\";\"0\";\n\"148010\";\"2026-11-09\";\"BOVINO DE CARNE\";\"Ternera mayor 12 meses\";\"Extra menor  270 Kg\";\"7,37\";\"0\";\n\"148011\";\"2026-11-09\";\"BOVINO DE CARNE\";\"Ternera mayor 12 meses\";\"Primera menor 270 Kg\";\"7,25\";\"0\";\n\"148012\";\"2026-11-09\";\"BOVINO DE CARNE\";\"Ternera mayor 12 meses\";\"Segunda menor 270 Kg\";\"7,07\";\"0\";\n\"148013\";\"2026-11-09\";\"BOVINO DE CARNE\";\"Ternera mayor 12 meses\";\"Especial mayor 270 Kg\";\"7,1\";\"0\";\n\"148014\";\"2026-11-09\";\"BOVINO DE CARNE\";\"Ternera mayor 12 meses\";\"Extra mayor 270 Kg\";\"7,07\";\"0\";\n\"148015\";\"2026-11-09\";\"BOVINO DE CARNE\";\"Ternera mayor 12 meses\";\"Primera mayor  270 Kg\";\"6,95\";\"0\";\n\"148016\";\"2026-11-09\";\"BOVINO DE CARNE\";\"Ternera mayor 12 meses\";\"segunda mayor  270 Kg\";\"6,77\";\"0\";\n\"148017\";\"2026-11-09\";\"BOVINO DE CARNE\";\"Añojos\";\"Especial menor 350 Kg\";\"6,44\";\"0\";\n\"148018\";\"2026-11-09\";\"BOVINO DE CARNE\";\"Añojos\";\"Extra menor 350 Kg\";\"6,38\";\"0\";\n\"148019\";\"2026-11-09\";\"BOVINO DE CARNE\";\"Añojos\";\"Primera menor 350 Kg\";\"6,23\";\"0\";\n\"148020\";\"2026-11-09\";\"BOVINO DE CARNE\";\"Añojos\";\"Segunda menor 350 Kg\";\"5,98\";\"0\";\n\"148021\";\"2026-11-09\";\"BOVINO DE CARNE\";\"Añojos\";\"Especial mayor 350 Kg\";\"6,38\";\"0\";\n\"148022\";\"2026-11-09\";\"BOVINO DE CARNE\";\"Añojos\";\"Extra mayor 350 Kg\";\"6,32\";\"0\";\n\"148023\";\"2026-11-09\";\"BOVINO DE CARNE\";\"Añojos\";\"Primera mayor 350 Kg\";\"6,13\";\"0\";\n\"148024\";\"2026-11-09\";\"BOVINO DE CARNE\";\"Añojos\";\"Segunda mayor 350 Kg\";\"5,95\";\"0\";\n\"148025\";\"2026-11-09\";\"BOVINO DE CARNE\";\"Erales\";\"Extra\";\"5,24\";\"0\";\n\"148026\";\"2026-11-09\";\"BOVINO DE CARNE\";\"Erales\";\"Primera\";\"4,69\";\"0\";\n\"148027\";\"2026-11-09\";\"BOVINO DE CARNE\";\"Erales\";\"Segunda\";\"4,21\";\"0\";\n\"148028\";\"2026-11-09\";\"BOVINO DE CARNE\";\"Toros\";\"Extra\";\"5,26\";\"0\";\n\"148029\";\"2026-11-09\";\"BOVINO DE CARNE\";\"Toros\";\"Primera\";\"4,77\";\"0\";\n\"148030\";\"2026-11-09\";\"BOVINO DE CARNE\";\"Toros\";\"Segunda\";\"4,49\";\"0\";\n\"148031\";\"2026-11-09\";\"BOVINO DE CARNE\";\"Novillos\";\"Extra\";\"5,13\";\"0\";\n\"148032\";\"2026-11-09\";\"BOVINO DE CARNE\";\"Novillos\";\"Primera\";\"4,71\";\"0\";\n\"148033\";\"2026-11-09\";\"BOVINO DE CARNE\";\"Novillos\";\"Segunda\";\"4,43\";\"0\";\n\"148034\";\"2026-11-09\";\"BOVINO DE CARNE\";\"Vacas\";\"Extra\";\"6,06\";\"0\";\n\"148035\";\"2026-11-09\";\"BOVINO DE CARNE\";\"Vacas\";\"Primera\";\"5,47\";\"0\";\n\"148036\";\"2026-11-09\";\"BOVINO DE CARNE\";\"Vacas\";\"Segunda\";\"4,82\";\"0\";\n\"148037\";\"2026-11-09\";\"BOVINO DE CARNE\";\"Vacas\";\"Tercera\";\"4,59\";\"0\";\n\"148038\";\"2026-11-09\";\"BOVINO DE CARNE\";\"Vacas\";\"Fábrica\";\"4,35\";\"0\";\n\"148070\";\"2026-11-09\";\"DESPIECE DE IBÉRICO\";\"Jamón Ibérico en Sangre\";\"Bellota 100% IB\";\"0\";\"0\";\n\"148071\";\"2026-11-09\";\"DESPIECE DE IBÉRICO\";\"Jamón Ibérico en Sangre\";\"Bellota 75% IB\";\"0\";\"0\";\n\"148072\";\"2026-11-09\";\"DESPIECE DE IBÉRICO\";\"Jamón Ibérico en Sangre\";\"Bellota 50% IB\";\"0\";\"0\";\n\"148073\";\"2026-11-09\";\"DESPIECE DE IBÉRICO\";\"Jamón Ibérico en Sangre\";\"Cebo de campo\";\"7,59\";\"8,09\";\n\"148074\";\"2026-11-09\";\"DESPIECE DE IBÉRICO\";\"Jamón Ibérico en Sangre\";\"Cebo\";\"7\";\"7,2\";\n\"148075\";\"2026-11-09\";\"DESPIECE DE IBÉRICO\";\"Paleta Ibérica en Sangre\";\"Bellota 100 % IB\";\"0\";\"0\";\n\"148076\";\"2026-11-09\";\"DESPIECE DE IBÉRICO\";\"Paleta Ibérica en Sangre\";\"Bellota 75 % IB\";\"0\";\"0\";\n\"148077\";\"2026-11-09\";\"DESPIECE DE IBÉRICO\";\"Paleta Ibérica en Sangre\";\"Bellota 50 % IB\";\"0\";\"0\";\n\"148078\";\"2026-11-09\";\"DESPIECE DE IBÉRICO\";\"Paleta Ibérica en Sangre\";\"Cebo de campo\";\"6,16\";\"6,36\";\n\"148079\";\"2026-11-09\";\"DESPIECE DE IBÉRICO\";\"Paleta Ibérica en Sangre\";\"Cebo\";\"6,15\";\"6,35\";\n\"148080\";\"2026-11-09\";\"DESPIECE DE IBÉRICO\";\"Magros\";\"Magro de Bellota\";\"0\";\"0\";\n\"148081\";\"2026-11-09\";\"DESPIECE DE IBÉRICO\";\"Magros\";\"Extra\";\"2,87\";\"2,97\";\n\"148082\";\"2026-11-09\";\"DESPIECE DE IBÉRICO\";\"Magros\";\"Presa Bellota\";\"0\";\"0\";\n\"148083\";\"2026-11-09\";\"DESPIECE DE IBÉRICO\";\"Magros\";\"Presa\";\"17,25\";\"17,75\";\n\"148084\";\"2026-11-09\";\"DESPIECE DE IBÉRICO\";\"Magros\";\"Secreto\";\"14,95\";\"15,4\";\n\"148085\";\"2026-11-09\";\"DESPIECE DE IBÉRICO\";\"Magros\";\"Barriguera\";\"4,3\";\"4,4\";\n\"148086\";\"2026-11-09\";\"DESPIECE DE IBÉRICO\";\"Magros\";\"Solomillo\";\"10,7\";\"11,2\";\n\"148087\";\"2026-11-09\";\"DESPIECE DE IBÉRICO\";\"Magros\";\"Pluma de lomo\";\"16,6\";\"16,9\";\n\"148088\";\"2026-11-09\";\"DESPIECE DE IBÉRICO\";\"Magros\";\"Carrillera\";\"8,9\";\"9,1\";\n\"148089\";\"2026-11-09\";\"DESPIECE DE IBÉRICO\";\"Magros\";\"Abanico\";\"9,35\";\"9,45\";\n\"148090\";\"2026-11-09\";\"DESPIECE DE IBÉRICO\";\"Magros\";\"Lagarto\";\"9,7\";\"9,8\";\n\"148091\";\"2026-11-09\";\"DESPIECE DE IBÉRICO\";\"Magros\";\"Tapilla\";\"7,8\";\"7,9\";\n\"148092\";\"2026-11-09\";\"DESPIECE DE IBÉRICO\";\"Despiece\";\"Lomo Bellota\";\"0\";\"0\";\n\"148093\";\"2026-11-09\";\"DESPIECE DE IBÉRICO\";\"Despiece\";\"Lomo Cebo de Campo\";\"14,55\";\"14,8\";\n\"148094\";\"2026-11-09\";\"DESPIECE DE IBÉRICO\";\"Despiece\";\"Lomo Cebo\";\"14,4\";\"14,6\";\n\"148095\";\"2026-11-09\";\"DESPIECE DE IBÉRICO\";\"Despiece\";\"Panceta a cuadro\";\"2,15\";\"2,25\";\n\"148096\";\"2026-11-09\";\"DESPIECE DE IBÉRICO\";\"Despiece\";\"Tocino de lomo < 4cm\";\"1,1\";\"1,2\";\n\"148097\";\"2026-11-09\";\"DESPIECE DE IBÉRICO\";\"Despiece\";\"Tocino de lomo > 4cm\";\"1,44\";\"1,6\";\n\"148098\";\"2026-11-09\";\"DESPIECE DE IBÉRICO\";\"Despiece\";\"Costillas (Peladas)\";\"1,68\";\"1,78\";\n\"148099\";\"2026-11-09\";\"DESPIECE DE IBÉRICO\";\"Despiece\";\"Grasas Industriales\";\",67\";\",76\";\n\"148100\";\"2026-11-09\";\"DESPIECE DE IBÉRICO\";\"Despiece\";\"Cabeza\";\",54\";\",56\";"
+ },
+ "esperado": {
+  "fecha": "2026-11-16",
+  "filas": [
+   {
+    "producto": "Trigo blando",
+    "cat": "Cereales",
+    "unidad": "€/t",
+    "ant": 234.0,
+    "act": 234.0
+   },
+   {
+    "producto": "Cebada",
+    "cat": "Cereales",
+    "unidad": "€/t",
+    "ant": 230.0,
+    "act": 231.0
+   },
+   {
+    "producto": "Avena",
+    "cat": "Cereales",
+    "unidad": "€/t",
+    "ant": 202.0,
+    "act": 202.0
+   },
+   {
+    "producto": "Centeno",
+    "cat": "Cereales",
+    "unidad": "€/t",
+    "ant": 220.0,
+    "act": 221.0
+   },
+   {
+    "producto": "Triticale",
+    "cat": "Cereales",
+    "unidad": "€/t",
+    "ant": 224.0,
+    "act": 224.0
+   },
+   {
+    "producto": "Maíz",
+    "cat": "Cereales",
+    "unidad": "€/t",
+    "ant": 240.0,
+    "act": 241.0
+   },
+   {
+    "producto": "Garbanzo pedrosillano",
+    "cat": "Leguminosas",
+    "unidad": "€/t",
+    "ant": 750.0,
+    "act": 750.0
+   },
+   {
+    "producto": "Lenteja de La Armuña IGP",
+    "cat": "Leguminosas",
+    "unidad": "€/t",
+    "ant": 1100.0,
+    "act": 1100.0
+   },
+   {
+    "producto": "Paja",
+    "cat": "Forrajes",
+    "unidad": "€/t",
+    "ant": 77.0,
+    "act": 77.0
+   },
+   {
+    "producto": "Lechazo extra",
+    "cat": "Ovino",
+    "unidad": "€/kg vivo",
+    "ant": 10.35,
+    "act": 10.45
+   },
+   {
+    "producto": "Lechazo hasta 11 kg",
+    "cat": "Ovino",
+    "unidad": "€/kg vivo",
+    "ant": 9.95,
+    "act": 10.05
+   },
+   {
+    "producto": "Lechazo 11-13 kg",
+    "cat": "Ovino",
+    "unidad": "€/kg vivo",
+    "ant": 9.15,
+    "act": 9.25
+   },
+   {
+    "producto": "Lechazo 13-15 kg",
+    "cat": "Ovino",
+    "unidad": "€/kg vivo",
+    "ant": 7.6,
+    "act": 7.75
+   },
+   {
+    "producto": "Cordero 15-19 kg",
+    "cat": "Ovino",
+    "unidad": "€/kg vivo",
+    "ant": 7.15,
+    "act": 7.3
+   },
+   {
+    "producto": "Cordero 19-23 kg",
+    "cat": "Ovino",
+    "unidad": "€/kg vivo",
+    "ant": 6.55,
+    "act": 6.7
+   },
+   {
+    "producto": "Cordero 23-25,5 kg",
+    "cat": "Ovino",
+    "unidad": "€/kg vivo",
+    "ant": 6.3,
+    "act": 6.4
+   },
+   {
+    "producto": "Cordero 25,5-28 kg",
+    "cat": "Ovino",
+    "unidad": "€/kg vivo",
+    "ant": 5.9,
+    "act": 6.0
+   },
+   {
+    "producto": "Cordero 28-34 kg",
+    "cat": "Ovino",
+    "unidad": "€/kg vivo",
+    "ant": null,
+    "act": 5.25
+   },
+   {
+    "producto": "Cordero más de 34 kg",
+    "cat": "Ovino",
+    "unidad": "€/kg vivo",
+    "ant": null,
+    "act": 5.0
+   },
+   {
+    "producto": "Oveja de sacrificio",
+    "cat": "Ovino",
+    "unidad": "€/kg vivo",
+    "ant": 1.15,
+    "act": 1.15,
+    "rango": "0,9–1,4"
+   },
+   {
+    "producto": "Oveja de vida",
+    "cat": "Ovino",
+    "unidad": "€/ud",
+    "ant": 162.5,
+    "act": 162.5,
+    "rango": "150–175"
+   },
+   {
+    "producto": "Cerdo selecto",
+    "cat": "Porcino blanco",
+    "unidad": "€/kg vivo",
+    "ant": 1.135,
+    "act": 1.105,
+    "rango": "1,1–1,11"
+   },
+   {
+    "producto": "Cerdo normal",
+    "cat": "Porcino blanco",
+    "unidad": "€/kg vivo",
+    "ant": 1.125,
+    "act": 1.095,
+    "rango": "1,09–1,1"
+   },
+   {
+    "producto": "Cerdo graso",
+    "cat": "Porcino blanco",
+    "unidad": "€/kg vivo",
+    "ant": 1.64,
+    "act": 1.63,
+    "rango": "1,61–1,65"
+   },
+   {
+    "producto": "Cerdas de desvieje",
+    "cat": "Porcino blanco",
+    "unidad": "€/kg vivo",
+    "ant": 0.345,
+    "act": 0.345,
+    "rango": "0,33–0,36"
+   },
+   {
+    "producto": "Lechones base 20 kg",
+    "cat": "Porcino blanco",
+    "unidad": "€/ud",
+    "ant": 32.0,
+    "act": 32.0
+   },
+   {
+    "producto": "Tostones 4-6 kg",
+    "cat": "Porcino blanco",
+    "unidad": "€/ud",
+    "ant": 27.0,
+    "act": 27.0
+   },
+   {
+    "producto": "Tostones 6-8 kg",
+    "cat": "Porcino blanco",
+    "unidad": "€/ud",
+    "ant": 27.0,
+    "act": 27.0
+   },
+   {
+    "producto": "Ibérico cebo de campo",
+    "cat": "Porcino ibérico",
+    "unidad": "€/kg vivo",
+    "ant": 3.21,
+    "act": 3.21,
+    "rango": "3,16–3,26"
+   },
+   {
+    "producto": "Ibérico cebo",
+    "cat": "Porcino ibérico",
+    "unidad": "€/kg vivo",
+    "ant": 3.08,
+    "act": 3.08,
+    "rango": "3,03–3,13"
+   },
+   {
+    "producto": "Lechones ibéricos",
+    "cat": "Porcino ibérico",
+    "unidad": "€/kg vivo",
+    "ant": 6.5,
+    "act": 6.48,
+    "rango": "6,23–6,73"
+   },
+   {
+    "producto": "Primales ibérico puro",
+    "cat": "Porcino ibérico",
+    "unidad": "€/kg vivo",
+    "ant": 4.375,
+    "act": 4.375,
+    "rango": "4,2–4,55"
+   },
+   {
+    "producto": "Primales ibérico cruzado",
+    "cat": "Porcino ibérico",
+    "unidad": "€/kg vivo",
+    "ant": 4.375,
+    "act": 4.375,
+    "rango": "4,2–4,55"
+   },
+   {
+    "producto": "Terneros",
+    "cat": "Vacuno de vida",
+    "unidad": "€/kg vivo",
+    "ant": 5.82,
+    "act": 5.82
+   },
+   {
+    "producto": "Terneras",
+    "cat": "Vacuno de vida",
+    "unidad": "€/kg vivo",
+    "ant": 5.36,
+    "act": 5.36
+   },
+   {
+    "producto": "Terneros del país",
+    "cat": "Vacuno de vida",
+    "unidad": "€/kg vivo",
+    "ant": 3.99,
+    "act": 3.99
+   },
+   {
+    "producto": "Terneras +12 meses, menos de 270 kg",
+    "cat": "Vacuno de carne",
+    "unidad": "€/kg canal",
+    "ant": 7.4,
+    "act": 7.4
+   },
+   {
+    "producto": "Terneras +12 meses, más de 270 kg",
+    "cat": "Vacuno de carne",
+    "unidad": "€/kg canal",
+    "ant": 7.1,
+    "act": 7.12
+   },
+   {
+    "producto": "Añojos menos de 350 kg",
+    "cat": "Vacuno de carne",
+    "unidad": "€/kg canal",
+    "ant": 6.44,
+    "act": 6.47
+   },
+   {
+    "producto": "Añojos más de 350 kg",
+    "cat": "Vacuno de carne",
+    "unidad": "€/kg canal",
+    "ant": 6.38,
+    "act": 6.41
+   },
+   {
+    "producto": "Erales",
+    "cat": "Vacuno de carne",
+    "unidad": "€/kg canal",
+    "ant": 5.24,
+    "act": 5.24
+   },
+   {
+    "producto": "Novillos",
+    "cat": "Vacuno de carne",
+    "unidad": "€/kg canal",
+    "ant": 5.13,
+    "act": 5.13
+   },
+   {
+    "producto": "Toros",
+    "cat": "Vacuno de carne",
+    "unidad": "€/kg canal",
+    "ant": 5.26,
+    "act": 5.26
+   },
+   {
+    "producto": "Vacas",
+    "cat": "Vacuno de carne",
+    "unidad": "€/kg canal",
+    "ant": 6.06,
+    "act": 6.06
+   }
+  ]
+ }
+}

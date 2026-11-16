@@ -1,5 +1,5 @@
 {
- "generado": "2026-11-15T22:30+00:00",
+ "generado": "2026-11-16T17:08+00:00",
  "lonjas": [
   {
    "id": "salamanca",
@@ -9,14 +9,14 @@
    "fuente": "https://datosabiertossalamanca.es/dataset/cotizaciones-semanales-de-la-lonja-de-salamanca",
    "estado": "activa",
    "nota": "Datos abiertos de la Diputación de Salamanca (licencia CC BY 4.0)",
-   "fecha": "2026-11-09",
+   "fecha": "2026-11-16",
    "precios": [
     {
      "id": "salamanca-trigo-blando",
      "cat": "Cereales",
      "producto": "Trigo blando",
      "unidad": "€/t",
-     "ant": 236.0,
+     "ant": 234.0,
      "act": 234.0,
      "clave": "trigo"
     },
@@ -25,8 +25,8 @@
      "cat": "Cereales",
      "producto": "Cebada",
      "unidad": "€/t",
-     "ant": 231.0,
-     "act": 230.0,
+     "ant": 230.0,
+     "act": 231.0,
      "clave": "cebada"
     },
     {
@@ -34,7 +34,7 @@
      "cat": "Cereales",
      "producto": "Avena",
      "unidad": "€/t",
-     "ant": 204.0,
+     "ant": 202.0,
      "act": 202.0,
      "clave": "avena"
     },
@@ -43,8 +43,8 @@
      "cat": "Cereales",
      "producto": "Centeno",
      "unidad": "€/t",
-     "ant": 221.0,
-     "act": 220.0,
+     "ant": 220.0,
+     "act": 221.0,
      "clave": "centeno"
     },
     {
@@ -52,7 +52,7 @@
      "cat": "Cereales",
      "producto": "Triticale",
      "unidad": "€/t",
-     "ant": 226.0,
+     "ant": 224.0,
      "act": 224.0,
      "clave": "triticale"
     },
@@ -61,8 +61,8 @@
      "cat": "Cereales",
      "producto": "Maíz",
      "unidad": "€/t",
-     "ant": 243.0,
-     "act": 240.0,
+     "ant": 240.0,
+     "act": 241.0,
      "clave": "maiz"
     },
     {
@@ -95,16 +95,16 @@
      "cat": "Ovino",
      "producto": "Lechazo extra",
      "unidad": "€/kg vivo",
-     "ant": 10.3,
-     "act": 10.35
+     "ant": 10.35,
+     "act": 10.45
     },
     {
      "id": "salamanca-lechazo-hasta-11-kg",
      "cat": "Ovino",
      "producto": "Lechazo hasta 11 kg",
      "unidad": "€/kg vivo",
-     "ant": 9.9,
-     "act": 9.95,
+     "ant": 9.95,
+     "act": 10.05,
      "clave": "lechazo"
     },
     {
@@ -112,48 +112,64 @@
      "cat": "Ovino",
      "producto": "Lechazo 11-13 kg",
      "unidad": "€/kg vivo",
-     "ant": 9.1,
-     "act": 9.15
+     "ant": 9.15,
+     "act": 9.25
     },
     {
      "id": "salamanca-lechazo-13-15-kg",
      "cat": "Ovino",
      "producto": "Lechazo 13-15 kg",
      "unidad": "€/kg vivo",
-     "ant": 7.55,
-     "act": 7.6
+     "ant": 7.6,
+     "act": 7.75
     },
     {
      "id": "salamanca-cordero-15-19-kg",
      "cat": "Ovino",
      "producto": "Cordero 15-19 kg",
      "unidad": "€/kg vivo",
-     "ant": 7.1,
-     "act": 7.15
+     "ant": 7.15,
+     "act": 7.3
     },
     {
      "id": "salamanca-cordero-19-23-kg",
      "cat": "Ovino",
      "producto": "Cordero 19-23 kg",
      "unidad": "€/kg vivo",
-     "ant": 6.5,
-     "act": 6.55
+     "ant": 6.55,
+     "act": 6.7
     },
     {
      "id": "salamanca-cordero-23-25-5-kg",
      "cat": "Ovino",
      "producto": "Cordero 23-25,5 kg",
      "unidad": "€/kg vivo",
-     "ant": 6.25,
-     "act": 6.3
+     "ant": 6.3,
+     "act": 6.4
     },
     {
      "id": "salamanca-cordero-25-5-28-kg",
      "cat": "Ovino",
      "producto": "Cordero 25,5-28 kg",
      "unidad": "€/kg vivo",
-     "ant": 5.85,
-     "act": 5.9
+     "ant": 5.9,
+     "act": 6.0
+    },
+    {
+     "id": "salamanca-cordero-28-34-kg",
+     "cat": "Ovino",
+     "producto": "Cordero 28-34 kg",
+     "unidad": "€/kg vivo",
+     "ant": 5.0,
+     "act": 5.25
+    },
+    {
+     "id": "salamanca-cordero-mas-de-34-kg",
+     "cat": "Ovino",
+     "producto": "Cordero más de 34 kg",
+     "unidad": "€/kg vivo",
+     "ant": 4.4,
+     "act": 5.0
     },
     {
      "id": "salamanca-oveja-de-sacrificio",
@@ -178,9 +194,9 @@
      "cat": "Porcino blanco",
      "producto": "Cerdo selecto",
      "unidad": "€/kg vivo",
-     "ant": 1.165,
-     "act": 1.135,
-     "rango": "1,13–1,14",
+     "ant": 1.135,
+     "act": 1.105,
+     "rango": "1,1–1,11",
      "clave": "cerdo-selecto"
     },
     {
@@ -188,9 +204,9 @@
      "cat": "Porcino blanco",
      "producto": "Cerdo normal",
      "unidad": "€/kg vivo",
-     "ant": 1.155,
-     "act": 1.125,
-     "rango": "1,12–1,13",
+     "ant": 1.125,
+     "act": 1.095,
+     "rango": "1,09–1,1",
      "clave": "cerdo-normal"
     },
     {
@@ -198,9 +214,9 @@
      "cat": "Porcino blanco",
      "producto": "Cerdo graso",
      "unidad": "€/kg vivo",
-     "ant": 1.65,
-     "act": 1.64,
-     "rango": "1,62–1,66",
+     "ant": 1.64,
+     "act": 1.63,
+     "rango": "1,61–1,65",
      "clave": "cerdo-graso"
     },
     {
@@ -208,7 +224,7 @@
      "cat": "Porcino blanco",
      "producto": "Cerdas de desvieje",
      "unidad": "€/kg vivo",
-     "ant": 0.375,
+     "ant": 0.345,
      "act": 0.345,
      "rango": "0,33–0,36"
     },
@@ -261,8 +277,8 @@
      "producto": "Lechones ibéricos",
      "unidad": "€/kg vivo",
      "ant": 6.5,
-     "act": 6.5,
-     "rango": "6,25–6,75"
+     "act": 6.48,
+     "rango": "6,23–6,73"
     },
     {
      "id": "salamanca-primales-iberico-puro",
@@ -320,23 +336,23 @@
      "producto": "Terneras +12 meses, más de 270 kg",
      "unidad": "€/kg canal",
      "ant": 7.1,
-     "act": 7.1
+     "act": 7.12
     },
     {
      "id": "salamanca-anojos-menos-de-350-kg",
      "cat": "Vacuno de carne",
      "producto": "Añojos menos de 350 kg",
      "unidad": "€/kg canal",
-     "ant": 6.41,
-     "act": 6.44
+     "ant": 6.44,
+     "act": 6.47
     },
     {
      "id": "salamanca-anojos-mas-de-350-kg",
      "cat": "Vacuno de carne",
      "producto": "Añojos más de 350 kg",
      "unidad": "€/kg canal",
-     "ant": 6.35,
-     "act": 6.38
+     "ant": 6.38,
+     "act": 6.41
     },
     {
      "id": "salamanca-erales",
@@ -369,36 +385,12 @@
      "unidad": "€/kg canal",
      "ant": 6.06,
      "act": 6.06
-    },
-    {
-     "id": "salamanca-cordero-28-34-kg",
-     "cat": "Ovino",
-     "producto": "Cordero 28-34 kg",
-     "unidad": "€/kg vivo",
-     "ant": null,
-     "act": null,
-     "ult": [
-      "2026-11-03",
-      5.0
-     ]
-    },
-    {
-     "id": "salamanca-cordero-mas-de-34-kg",
-     "cat": "Ovino",
-     "producto": "Cordero más de 34 kg",
-     "unidad": "€/kg vivo",
-     "ant": null,
-     "act": null,
-     "ult": [
-      "2026-11-03",
-      4.4
-     ]
     }
    ],
    "comprobado": "2026-11-03T23:45:00+01:00",
    "origen": "https://datosabiertossalamanca.es/dataset/cotizaciones-semanales-de-la-lonja-de-salamanca",
    "error": null,
-   "ultima_lectura": "2026-11-15T22:30+00:00"
+   "ultima_lectura": "2026-11-16T17:08+00:00"
   },
   {
    "id": "leon",
@@ -947,7 +939,7 @@
    "comprobado": "2026-11-03T23:45:00+01:00",
    "origen": "https://www.lonjadeleon.es/lonja-patatas-11-11-2026/",
    "error": null,
-   "ultima_lectura": "2026-11-15T22:30+00:00"
+   "ultima_lectura": "2026-11-16T17:08+00:00"
   },
   {
    "id": "segovia",
@@ -1217,7 +1209,7 @@
    "comprobado": "2026-11-03T23:45:00+01:00",
    "origen": "https://www.fessegovia.es/wp-content/uploads/2026/11/LONJA-CEREALES-OVINO-Y-PORCINO-12.11.2026.pdf",
    "error": null,
-   "ultima_lectura": "2026-11-15T22:30+00:00",
+   "ultima_lectura": "2026-11-16T17:08+00:00",
    "fallos": 0,
    "fallo_desde": null
   },
@@ -1349,10 +1341,10 @@
    ],
    "comprobado": "2026-11-03T23:45:00+01:00",
    "origen": "https://lerma.burgos.es/lonja",
-   "error": null,
+   "error": "Falló la lectura automática (HTTPError)",
    "ultima_lectura": "2026-11-15T22:30+00:00",
-   "fallos": 0,
-   "fallo_desde": null
+   "fallos": 1,
+   "fallo_desde": "2026-11-16T17:08+00:00"
   },
   {
    "id": "zamora",
@@ -1860,6 +1852,10 @@
    [
     "2026-11-09",
     240.0
+   ],
+   [
+    "2026-11-16",
+    241.0
    ]
   ],
   "salamanca-trigo-blando": [
@@ -1881,6 +1877,10 @@
    ],
    [
     "2026-11-09",
+    234.0
+   ],
+   [
+    "2026-11-16",
     234.0
    ]
   ],
@@ -1904,6 +1904,10 @@
    [
     "2026-11-09",
     230.0
+   ],
+   [
+    "2026-11-16",
+    231.0
    ]
   ],
   "salamanca-triticale": [
@@ -1913,6 +1917,10 @@
    ],
    [
     "2026-11-09",
+    224.0
+   ],
+   [
+    "2026-11-16",
     224.0
    ]
   ],
@@ -1924,6 +1932,10 @@
    [
     "2026-11-09",
     77.0
+   ],
+   [
+    "2026-11-16",
+    77.0
    ]
   ],
   "salamanca-garbanzo-pedrosillano": [
@@ -1933,6 +1945,10 @@
    ],
    [
     "2026-11-09",
+    750.0
+   ],
+   [
+    "2026-11-16",
     750.0
    ]
   ],
@@ -1944,6 +1960,10 @@
    [
     "2026-11-09",
     1100.0
+   ],
+   [
+    "2026-11-16",
+    1100.0
    ]
   ],
   "salamanca-terneras-12-meses-menos-de-270-kg": [
@@ -1953,6 +1973,10 @@
    ],
    [
     "2026-11-09",
+    7.4
+   ],
+   [
+    "2026-11-16",
     7.4
    ]
   ],
@@ -1964,6 +1988,10 @@
    [
     "2026-11-09",
     7.1
+   ],
+   [
+    "2026-11-16",
+    7.12
    ]
   ],
   "salamanca-anojos-menos-de-350-kg": [
@@ -1974,6 +2002,10 @@
    [
     "2026-11-09",
     6.44
+   ],
+   [
+    "2026-11-16",
+    6.47
    ]
   ],
   "salamanca-anojos-mas-de-350-kg": [
@@ -1984,6 +2016,10 @@
    [
     "2026-11-09",
     6.38
+   ],
+   [
+    "2026-11-16",
+    6.41
    ]
   ],
   "salamanca-erales": [
@@ -1993,6 +2029,10 @@
    ],
    [
     "2026-11-09",
+    5.24
+   ],
+   [
+    "2026-11-16",
     5.24
    ]
   ],
@@ -2004,6 +2044,10 @@
    [
     "2026-11-09",
     5.13
+   ],
+   [
+    "2026-11-16",
+    5.13
    ]
   ],
   "salamanca-vacas": [
@@ -2013,6 +2057,10 @@
    ],
    [
     "2026-11-09",
+    6.06
+   ],
+   [
+    "2026-11-16",
     6.06
    ]
   ],
@@ -2024,6 +2072,10 @@
    [
     "2026-11-09",
     5.26
+   ],
+   [
+    "2026-11-16",
+    5.26
    ]
   ],
   "salamanca-terneros": [
@@ -2033,6 +2085,10 @@
    ],
    [
     "2026-11-09",
+    5.82
+   ],
+   [
+    "2026-11-16",
     5.82
    ]
   ],
@@ -2044,6 +2100,10 @@
    [
     "2026-11-09",
     5.36
+   ],
+   [
+    "2026-11-16",
+    5.36
    ]
   ],
   "salamanca-terneros-del-pais": [
@@ -2053,6 +2113,10 @@
    ],
    [
     "2026-11-09",
+    3.99
+   ],
+   [
+    "2026-11-16",
     3.99
    ]
   ],
@@ -2064,6 +2128,10 @@
    [
     "2026-11-09",
     9.95
+   ],
+   [
+    "2026-11-16",
+    10.05
    ]
   ],
   "salamanca-lechazo-11-13-kg": [
@@ -2074,6 +2142,10 @@
    [
     "2026-11-09",
     9.15
+   ],
+   [
+    "2026-11-16",
+    9.25
    ]
   ],
   "salamanca-cordero-15-19-kg": [
@@ -2084,6 +2156,10 @@
    [
     "2026-11-09",
     7.15
+   ],
+   [
+    "2026-11-16",
+    7.3
    ]
   ],
   "salamanca-cerdo-selecto": [
@@ -2094,6 +2170,10 @@
    [
     "2026-11-09",
     1.135
+   ],
+   [
+    "2026-11-16",
+    1.105
    ]
   ],
   "salamanca-cerdo-normal": [
@@ -2104,6 +2184,10 @@
    [
     "2026-11-09",
     1.125
+   ],
+   [
+    "2026-11-16",
+    1.095
    ]
   ],
   "salamanca-cerdo-graso": [
@@ -2114,6 +2198,10 @@
    [
     "2026-11-09",
     1.64
+   ],
+   [
+    "2026-11-16",
+    1.63
    ]
   ],
   "salamanca-lechones-base-20-kg": [
@@ -2123,6 +2211,10 @@
    ],
    [
     "2026-11-09",
+    32.0
+   ],
+   [
+    "2026-11-16",
     32.0
    ]
   ],
@@ -2134,6 +2226,10 @@
    [
     "2026-11-09",
     27.0
+   ],
+   [
+    "2026-11-16",
+    27.0
    ]
   ],
   "salamanca-tostones-6-8-kg": [
@@ -2143,6 +2239,10 @@
    ],
    [
     "2026-11-09",
+    27.0
+   ],
+   [
+    "2026-11-16",
     27.0
    ]
   ],
@@ -2154,6 +2254,10 @@
    [
     "2026-11-09",
     3.21
+   ],
+   [
+    "2026-11-16",
+    3.21
    ]
   ],
   "salamanca-iberico-cebo": [
@@ -2163,6 +2267,10 @@
    ],
    [
     "2026-11-09",
+    3.08
+   ],
+   [
+    "2026-11-16",
     3.08
    ]
   ],
@@ -2174,6 +2282,10 @@
    [
     "2026-11-09",
     6.5
+   ],
+   [
+    "2026-11-16",
+    6.48
    ]
   ],
   "leon-girasol": [
@@ -3092,6 +3204,10 @@
    [
     "2026-11-09",
     202.0
+   ],
+   [
+    "2026-11-16",
+    202.0
    ]
   ],
   "salamanca-centeno": [
@@ -3102,6 +3218,10 @@
    [
     "2026-11-09",
     220.0
+   ],
+   [
+    "2026-11-16",
+    221.0
    ]
   ],
   "salamanca-lechazo-extra": [
@@ -3112,6 +3232,10 @@
    [
     "2026-11-09",
     10.35
+   ],
+   [
+    "2026-11-16",
+    10.45
    ]
   ],
   "salamanca-lechazo-13-15-kg": [
@@ -3122,6 +3246,10 @@
    [
     "2026-11-09",
     7.6
+   ],
+   [
+    "2026-11-16",
+    7.75
    ]
   ],
   "salamanca-cordero-19-23-kg": [
@@ -3132,6 +3260,10 @@
    [
     "2026-11-09",
     6.55
+   ],
+   [
+    "2026-11-16",
+    6.7
    ]
   ],
   "salamanca-cordero-23-25-5-kg": [
@@ -3142,6 +3274,10 @@
    [
     "2026-11-09",
     6.3
+   ],
+   [
+    "2026-11-16",
+    6.4
    ]
   ],
   "salamanca-cordero-25-5-28-kg": [
@@ -3152,18 +3288,30 @@
    [
     "2026-11-09",
     5.9
+   ],
+   [
+    "2026-11-16",
+    6.0
    ]
   ],
   "salamanca-cordero-28-34-kg": [
    [
     "2026-11-03",
     5.0
+   ],
+   [
+    "2026-11-16",
+    5.25
    ]
   ],
   "salamanca-cordero-mas-de-34-kg": [
    [
     "2026-11-03",
     4.4
+   ],
+   [
+    "2026-11-16",
+    5.0
    ]
   ],
   "salamanca-oveja-de-sacrificio": [
@@ -3173,6 +3321,10 @@
    ],
    [
     "2026-11-09",
+    1.15
+   ],
+   [
+    "2026-11-16",
     1.15
    ]
   ],
@@ -3184,6 +3336,10 @@
    [
     "2026-11-09",
     162.5
+   ],
+   [
+    "2026-11-16",
+    162.5
    ]
   ],
   "salamanca-cerdas-de-desvieje": [
@@ -3193,6 +3349,10 @@
    ],
    [
     "2026-11-09",
+    0.345
+   ],
+   [
+    "2026-11-16",
     0.345
    ]
   ],
@@ -3204,6 +3364,10 @@
    [
     "2026-11-09",
     4.375
+   ],
+   [
+    "2026-11-16",
+    4.375
    ]
   ],
   "salamanca-primales-iberico-cruzado": [
@@ -3213,6 +3377,10 @@
    ],
    [
     "2026-11-09",
+    4.375
+   ],
+   [
+    "2026-11-16",
     4.375
    ]
   ],
