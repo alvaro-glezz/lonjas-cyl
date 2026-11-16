@@ -4,6 +4,7 @@ name: Mensaje al canal de Telegram
 # texto y pulsar Run. Sustituye a la rama «telegram-diagnostico» (cada subida a esa rama hacía que Vercel intentara
 # publicarla como web y mandaba el correo «Preview deployment failed»).
 # Desde la terminal: gh workflow run mensaje-canal.yml -f texto="…"   (o con -f destino=yo para probarlo antes)
+# Con vídeo: -f video=canal/avisos-telegram.mp4 (el texto va de pie si tiene 1024 caracteres o menos); -f html=si para <b>.
 
 on:
   workflow_dispatch:
@@ -15,6 +16,14 @@ on:
         description: "canal = t.me/lonjas_cyl · yo = solo a tu chat privado (TELEGRAM_ADMIN_CHAT), para probar"
         required: false
         default: "canal"
+      video:
+        description: "Opcional: ruta de un vídeo del repositorio (p. ej. canal/avisos-telegram.mp4). El texto va de pie si cabe (1024)"
+        required: false
+        default: ""
+      html:
+        description: "si = el texto usa <b>negrita</b> (formato HTML de Telegram)"
+        required: false
+        default: "no"
 
 permissions:
   contents: read
@@ -23,18 +32,40 @@ jobs:
   mandar:
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v4
+        if: ${{ inputs.video != '' }}
       - name: Mandar el mensaje
         env:
           TOKEN: ${{ secrets.TELEGRAM_TOKEN }}
           ADMIN: ${{ secrets.TELEGRAM_ADMIN_CHAT }}
           TEXTO: ${{ inputs.texto }}
           DESTINO: ${{ inputs.destino }}
+          VIDEO: ${{ inputs.video }}
+          HTML: ${{ inputs.html }}
         run: |
           if [ "$DESTINO" = "yo" ]; then CHAT="$ADMIN"; else CHAT="@lonjas_cyl"; fi
           if [ -z "$TOKEN" ] || [ -z "$CHAT" ]; then echo "Falta TELEGRAM_TOKEN o TELEGRAM_ADMIN_CHAT"; exit 1; fi
           printf '%s' "$TEXTO" > mensaje.txt
+          PM=(); PMU=()
+          if [ "$HTML" = "si" ]; then PM=(-F "parse_mode=HTML"); PMU=(--data-urlencode "parse_mode=HTML"); fi
+          if [ -n "$VIDEO" ]; then
+            case "$VIDEO" in *..*|/*) echo "Ruta de vídeo no válida"; exit 1;; esac
+            [ -f "$VIDEO" ] || { echo "No existe $VIDEO"; exit 1; }
+            n=$(python3 -c "import sys;print(len(open('mensaje.txt',encoding='utf-8').read()))")
+            if [ "$n" -le 1024 ]; then
+              r=$(curl -sS -X POST "https://api.telegram.org/bot${TOKEN}/sendVideo" -F "chat_id=${CHAT}" \
+                -F "video=@${VIDEO};type=video/mp4" -F "supports_streaming=true" -F "caption=<mensaje.txt" "${PM[@]}")
+              echo "$r" | grep -o '"ok":[a-z]*\|"message_id":[0-9]*\|"description":"[^"]*"'
+              echo "$r" | grep -q '"ok":true'
+              exit 0
+            fi
+            r=$(curl -sS -X POST "https://api.telegram.org/bot${TOKEN}/sendVideo" -F "chat_id=${CHAT}" \
+              -F "video=@${VIDEO};type=video/mp4" -F "supports_streaming=true")
+            echo "$r" | grep -o '"ok":[a-z]*\|"message_id":[0-9]*\|"description":"[^"]*"'
+            echo "$r" | grep -q '"ok":true'
+          fi
           r=$(curl -sS -X POST "https://api.telegram.org/bot${TOKEN}/sendMessage" \
-            --data-urlencode "chat_id=${CHAT}" --data-urlencode "text@mensaje.txt" \
+            --data-urlencode "chat_id=${CHAT}" --data-urlencode "text@mensaje.txt" "${PMU[@]}" \
             --data-urlencode 'link_preview_options={"is_disabled":true}')
           echo "$r" | grep -o '"ok":[a-z]*\|"message_id":[0-9]*\|"description":"[^"]*"'
           echo "$r" | grep -q '"ok":true'
