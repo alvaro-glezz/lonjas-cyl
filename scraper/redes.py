@@ -52,12 +52,14 @@ VOZ_USADA = ""          # «kokoro» o «piper»: la que de verdad leyó el últ
 
 def aviso_voz() -> str:
     """Crédito de la voz para el texto de la publicación. Por defecto Kokoro (elegida el 15 nov); Piper es el respaldo."""
-    return AVISO_KOKORO if os.environ.get("VOZ_MOTOR") == "kokoro" else AVISO_VOZ
+    if os.environ.get("VOZ_MOTOR") != "kokoro":
+        return AVISO_VOZ
+    return AVISO_KOKORO.replace("em_santa", os.environ.get("KOKORO_VOZ", "em_santa") or "em_santa")
 
 
 def corregir_aviso(texto: str) -> str:
     """Si Kokoro falló y leyó Piper, el crédito del texto tiene que decir Piper (su licencia pide citarla)."""
-    return texto.replace(AVISO_KOKORO, AVISO_VOZ) if VOZ_USADA == "piper" else texto
+    return texto.replace(aviso_voz(), AVISO_VOZ) if VOZ_USADA == "piper" else texto
 
 
 # ---------- datos ----------
@@ -753,10 +755,11 @@ def crear(datos: dict, estado: dict, franja: str, hoy: date, carpeta: Path = SAL
             crear_archivos(it, datos, hoy, carpeta)
             (carpeta / it["video"]).with_suffix(".txt").write_text(it["texto"], encoding="utf-8")
         return {"id": "historias-todas"}
-    if franja == "semana-todas":                 # ensayo: los cinco reels de «La semana en las lonjas», sin publicar
+    if franja.startswith("semana-todas"):        # ensayo: los cinco reels (o «semana-todas:2», solo uno), sin publicar
         import semana
         gas = semana.leer_gasoleo()
-        for n in range(1, 6):
+        solo = franja.partition(":")[2]
+        for n in ([int(solo)] if solo.isdigit() else range(1, 6)):
             it = semana.item(n, datos, hoy, gas)
             if it and semana.reel(n, carpeta / it["video"], datos, hoy, gas):
                 (carpeta / it["video"]).with_suffix(".txt").write_text(corregir_aviso(it["texto"]), encoding="utf-8")

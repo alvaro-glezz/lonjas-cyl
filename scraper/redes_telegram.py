@@ -44,7 +44,9 @@ def llamar(token: str, metodo: str, datos: dict, archivos: dict | None = None) -
 
 def cabecera(franja: str, probar: bool) -> str:
     nombre = f"Reel especial «{franja.split(':', 1)[1]}»" if franja.startswith("especial:") else FRANJAS.get(franja, franja)
-    t = f"📅 {nombre} · Instagram y Facebook"
+    nombre = FRANJAS.get(franja.split(":")[0], nombre) if franja.startswith("semana-todas") else nombre
+    voz = os.environ.get("KOKORO_VOZ", "") if os.environ.get("VOZ_MOTOR") == "kokoro" else "piper"
+    t = f"📅 {nombre} · Instagram y Facebook" + (f"\n🔊 Voz: {voz}" if probar else "")
     return ("🧪 PRUEBA (no se publicará)\n" if probar else "") + t
 
 
@@ -69,7 +71,7 @@ def previa(estado: dict, carpeta: Path, token: str, chat: str, probar: bool, lla
     """Manda lo creado en esta franja. Devuelve cuántos envíos hizo."""
     franja = estado.get("franja", "?")
     enviados = 0
-    if franja in ("historias-todas", "semana-todas"):   # ensayo: cada vídeo con su .txt al lado
+    if franja == "historias-todas" or franja.startswith("semana-todas"):   # ensayo: cada vídeo con su .txt al lado
         for v in sorted(carpeta.glob("*.mp4")):
             t = v.with_suffix(".txt")
             pie = cabecera(franja, True) + "\n\n" + (t.read_text(encoding="utf-8") if t.is_file() else v.name)
@@ -92,7 +94,7 @@ def resultado(estado: dict, hoy: date, probar: bool) -> str | None:
     """Texto del aviso tras publicar. La tarea solo lo pide cuando esta franja creó algo (al publicar con éxito,
     instagram.publicar vacía estado['preparado'] y marcar() apunta la franja del día)."""
     franja = estado.get("franja", "?")
-    if franja in ("historias-todas", "semana-todas"):
+    if franja == "historias-todas" or franja.startswith("semana-todas"):
         return None
     nombre = f"Reel especial «{franja.split(':', 1)[1]}»" if franja.startswith("especial:") else FRANJAS.get(franja, franja)
     if probar:
