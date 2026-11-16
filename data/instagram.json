@@ -1,6 +1,6 @@
 {
  "comparativa": "2026-W46",
- "franja": "historias-todas",
+ "franja": "manana",
  "franjas": {
   "2026-11-07": [
    "reel"
@@ -46,6 +46,9 @@
    "manana",
    "reel",
    "tarde"
+  ],
+  "2026-11-16": [
+   "manana"
   ]
  },
  "historias": [
@@ -302,6 +305,12 @@
    "fecha": "2026-11-14T18:11",
    "id": "2026-W46-comparativa",
    "media": "18121192726946466"
+  },
+  {
+   "facebook": "1368079503066363_122112406269536635",
+   "fecha": "2026-11-16T09:27",
+   "id": "2026-11-16-dia-trigo",
+   "media": "18642428668055084"
   }
  ],
  "token_renovado": "2026-11-07"
