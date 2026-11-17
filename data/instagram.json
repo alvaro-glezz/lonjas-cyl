@@ -4,7 +4,7 @@
   "detalle": "Instagram no pudo procesar la imagen (ERROR)",
   "fecha": "2026-11-16"
  },
- "franja": "historia",
+ "franja": "manana",
  "franjas": {
   "2026-11-07": [
    "reel"
@@ -52,6 +52,9 @@
    "tarde"
   ],
   "2026-11-16": [
+   "manana"
+  ],
+  "2026-11-17": [
    "manana"
   ]
  },
@@ -119,7 +122,7 @@
  "publicado": {
   "leon": "2026-11-11",
   "lerma": "2026-11-13",
-  "salamanca": "2026-11-09",
+  "salamanca": "2026-11-16",
   "segovia": "2026-11-12"
  },
  "registro": [
@@ -323,6 +326,12 @@
    "fecha": "2026-11-16T09:27",
    "id": "2026-11-16-dia-trigo",
    "media": "18642428668055084"
+  },
+  {
+   "facebook": "1368079503066363_122112988509536635",
+   "fecha": "2026-11-17T08:00",
+   "id": "2026-11-16-salamanca",
+   "media": "18153049942528356"
   }
  ],
  "token_renovado": "2026-11-07"
