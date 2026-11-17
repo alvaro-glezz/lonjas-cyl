@@ -1,5 +1,5 @@
 {
- "generado": "2026-11-17T17:41+00:00",
+ "generado": "2026-11-17T21:31+00:00",
  "lonjas": [
   {
    "id": "salamanca",
@@ -1343,7 +1343,7 @@
    "origen": "https://lerma.burgos.es/lonja",
    "error": "Falló la lectura automática (HTTPError)",
    "ultima_lectura": "2026-11-17T13:54+00:00",
-   "fallos": 1,
+   "fallos": 2,
    "fallo_desde": "2026-11-17T17:41+00:00"
   },
   {
