@@ -1,15 +1,15 @@
 {
- "fecha": "2026-11-19T18:36",
+ "fecha": "2026-11-19T22:29",
  "fuente": "Ministerio para la Transición Ecológica y el Reto Demográfico (Geoportal de gasolineras)",
  "fuente_url": "https://geoportalgasolineras.es/geoportal-instalaciones/Inicio",
  "unidad": "€/l",
  "espana": {
-  "media": 1.658,
+  "media": 1.657,
   "min": 1.349,
   "n": 2259
  },
  "cyl": {
-  "media": 1.626,
+  "media": 1.624,
   "min": 1.379,
   "n": 167
  },
@@ -68,7 +68,7 @@
    "nombre": "Álava",
    "cyl": false,
    "n": 17,
-   "media": 1.716,
+   "media": 1.711,
    "mediana": 1.765,
    "min": 1.459,
    "max": 1.837,
@@ -89,7 +89,7 @@
     {
      "id": "15906",
      "nombre": "Beroil Gasteiz",
-     "precio": 1.549,
+     "precio": 1.499,
      "municipio": "Vitoria-Gasteiz",
      "direccion": "Calle Zearsoloeta, 1",
      "localidad": "Vitoria-gasteiz",
@@ -264,7 +264,7 @@
    "nombre": "Asturias",
    "cyl": false,
    "n": 60,
-   "media": 1.695,
+   "media": 1.694,
    "mediana": 1.707,
    "min": 1.43,
    "max": 1.809,
@@ -285,7 +285,7 @@
     {
      "id": "946",
      "nombre": "Galp",
-     "precio": 1.544,
+     "precio": 1.539,
      "municipio": "Nava",
      "direccion": "Carretera N-634 Km. 375,1",
      "localidad": "Nava",
@@ -313,12 +313,24 @@
    "nombre": "Ávila",
    "cyl": true,
    "n": 15,
-   "media": 1.695,
+   "media": 1.689,
    "mediana": 1.685,
-   "min": 1.519,
-   "max": 1.839,
+   "min": 1.499,
+   "max": 1.799,
    "descartados": 0,
    "baratas": [
+    {
+     "id": "15660",
+     "nombre": "Beroil",
+     "precio": 1.499,
+     "municipio": "Arévalo",
+     "direccion": "Calle Fuente el Sauz, 1",
+     "localidad": "Arevalo",
+     "cp": "05100",
+     "horario": "L-D: 24H",
+     "lat": 41.067944,
+     "lon": -4.728611
+    },
     {
      "id": "13508",
      "nombre": "An Energeticos - Madrigal",
@@ -330,18 +342,6 @@
      "horario": "L-D: 24H",
      "lat": 41.096972,
      "lon": -4.990528
-    },
-    {
-     "id": "15660",
-     "nombre": "Beroil",
-     "precio": 1.549,
-     "municipio": "Arévalo",
-     "direccion": "Calle Fuente el Sauz, 1",
-     "localidad": "Arevalo",
-     "cp": "05100",
-     "horario": "L-D: 24H",
-     "lat": 41.067944,
-     "lon": -4.728611
     },
     {
      "id": "5981",
@@ -358,6 +358,18 @@
    ],
    "todas": [
     {
+     "id": "15660",
+     "nombre": "Beroil",
+     "precio": 1.499,
+     "municipio": "Arévalo",
+     "direccion": "Calle Fuente el Sauz, 1",
+     "localidad": "Arevalo",
+     "cp": "05100",
+     "horario": "L-D: 24H",
+     "lat": 41.067944,
+     "lon": -4.728611
+    },
+    {
      "id": "13508",
      "nombre": "An Energeticos - Madrigal",
      "precio": 1.519,
@@ -368,18 +380,6 @@
      "horario": "L-D: 24H",
      "lat": 41.096972,
      "lon": -4.990528
-    },
-    {
-     "id": "15660",
-     "nombre": "Beroil",
-     "precio": 1.549,
-     "municipio": "Arévalo",
-     "direccion": "Calle Fuente el Sauz, 1",
-     "localidad": "Arevalo",
-     "cp": "05100",
-     "horario": "L-D: 24H",
-     "lat": 41.067944,
-     "lon": -4.728611
     },
     {
      "id": "5981",
@@ -490,6 +490,18 @@
      "lon": -4.703917
     },
     {
+     "id": "5051",
+     "nombre": "Repsol",
+     "precio": 1.799,
+     "municipio": "Burgohondo",
+     "direccion": "CR AV-902, 1,2 (AV-902 km 1,7)",
+     "localidad": "Burgohondo",
+     "cp": "05113",
+     "horario": "L-D: 08:00-20:30",
+     "lat": 40.411778,
+     "lon": -4.77475
+    },
+    {
      "id": "4988",
      "nombre": "Cepsa",
      "precio": 1.799,
@@ -524,18 +536,6 @@
      "horario": "L-D: 07:00-21:00",
      "lat": 40.58525,
      "lon": -4.410556
-    },
-    {
-     "id": "5051",
-     "nombre": "Repsol",
-     "precio": 1.839,
-     "municipio": "Burgohondo",
-     "direccion": "CR AV-902, 1,2 (AV-902 km 1,7)",
-     "localidad": "Burgohondo",
-     "cp": "05113",
-     "horario": "L-D: 08:00-20:30",
-     "lat": 40.411778,
-     "lon": -4.77475
     }
    ]
   },
@@ -544,7 +544,7 @@
    "nombre": "Badajoz",
    "cyl": false,
    "n": 80,
-   "media": 1.634,
+   "media": 1.633,
    "mediana": 1.599,
    "min": 1.36,
    "max": 1.89,
@@ -691,7 +691,7 @@
    "nombre": "Burgos",
    "cyl": true,
    "n": 30,
-   "media": 1.586,
+   "media": 1.584,
    "mediana": 1.607,
    "min": 1.379,
    "max": 1.799,
@@ -710,6 +710,18 @@
      "lon": -2.932667
     },
     {
+     "id": "13238",
+     "nombre": "Beroil",
+     "precio": 1.419,
+     "municipio": "Aranda de Duero",
+     "direccion": "Avenida Portugal, 82",
+     "localidad": "Aranda de Duero",
+     "cp": "09400",
+     "horario": "L-D: 24H",
+     "lat": 41.666444,
+     "lon": -3.727861
+    },
+    {
      "id": "4970",
      "nombre": "Beroil",
      "precio": 1.419,
@@ -720,18 +732,6 @@
      "horario": "L-D: 24H",
      "lat": 42.278444,
      "lon": -3.89175
-    },
-    {
-     "id": "13254",
-     "nombre": "Beroil",
-     "precio": 1.419,
-     "municipio": "Fuentecén",
-     "direccion": "Carretera N122 Km286 Km. 286",
-     "localidad": "Fuentecen",
-     "cp": "09315",
-     "horario": "L-D: 24H",
-     "lat": 41.626083,
-     "lon": -3.878722
     }
    ],
    "todas": [
@@ -746,6 +746,18 @@
      "horario": "L-D: 06:30-22:30",
      "lat": 42.68575,
      "lon": -2.932667
+    },
+    {
+     "id": "13238",
+     "nombre": "Beroil",
+     "precio": 1.419,
+     "municipio": "Aranda de Duero",
+     "direccion": "Avenida Portugal, 82",
+     "localidad": "Aranda de Duero",
+     "cp": "09400",
+     "horario": "L-D: 24H",
+     "lat": 41.666444,
+     "lon": -3.727861
     },
     {
      "id": "4970",
@@ -818,18 +830,6 @@
      "horario": "L-V: 09:00-14:00 y 16:00-19:00",
      "lat": 41.690528,
      "lon": -3.925778
-    },
-    {
-     "id": "13238",
-     "nombre": "Beroil",
-     "precio": 1.479,
-     "municipio": "Aranda de Duero",
-     "direccion": "Avenida Portugal, 82",
-     "localidad": "Aranda de Duero",
-     "cp": "09400",
-     "horario": "L-D: 24H",
-     "lat": 41.666444,
-     "lon": -3.727861
     },
     {
      "id": "12449",
@@ -966,7 +966,7 @@
     {
      "id": "5043",
      "nombre": "Galp",
-     "precio": 1.644,
+     "precio": 1.639,
      "municipio": "Valle de Losa",
      "direccion": "Carretera Bu-550 Km. 27",
      "localidad": "Quincoces de Yuso",
@@ -1072,18 +1072,6 @@
      "lon": -3.999139
     },
     {
-     "id": "6026",
-     "nombre": "Repsol",
-     "precio": 1.799,
-     "municipio": "Villalmanzo",
-     "direccion": "Carretera Crta A-1, Madrid-burgos Km. 203",
-     "localidad": "Villalmanzo",
-     "cp": "09390",
-     "horario": "L-D: 24H",
-     "lat": 42.040694,
-     "lon": -3.752778
-    },
-    {
      "id": "6025",
      "nombre": "Repsol",
      "precio": 1.799,
@@ -1094,6 +1082,18 @@
      "horario": "L-D: 24H",
      "lat": 42.041028,
      "lon": -3.751667
+    },
+    {
+     "id": "6026",
+     "nombre": "Repsol",
+     "precio": 1.799,
+     "municipio": "Villalmanzo",
+     "direccion": "Carretera Crta A-1, Madrid-burgos Km. 203",
+     "localidad": "Villalmanzo",
+     "cp": "09390",
+     "horario": "L-D: 24H",
+     "lat": 42.040694,
+     "lon": -3.752778
     }
    ]
   },
@@ -1102,8 +1102,8 @@
    "nombre": "Cáceres",
    "cyl": false,
    "n": 50,
-   "media": 1.658,
-   "mediana": 1.685,
+   "media": 1.656,
+   "mediana": 1.68,
    "min": 1.349,
    "max": 1.805,
    "descartados": 0,
@@ -1151,7 +1151,7 @@
    "nombre": "Cádiz",
    "cyl": false,
    "n": 32,
-   "media": 1.691,
+   "media": 1.69,
    "mediana": 1.703,
    "min": 1.498,
    "max": 1.842,
@@ -1298,8 +1298,8 @@
    "nombre": "Ciudad Real",
    "cyl": false,
    "n": 78,
-   "media": 1.613,
-   "mediana": 1.599,
+   "media": 1.612,
+   "mediana": 1.589,
    "min": 1.429,
    "max": 1.844,
    "descartados": 2,
@@ -1396,7 +1396,7 @@
    "nombre": "Cuenca",
    "cyl": false,
    "n": 36,
-   "media": 1.544,
+   "media": 1.543,
    "mediana": 1.509,
    "min": 1.378,
    "max": 1.779,
@@ -1446,7 +1446,7 @@
    "cyl": false,
    "n": 24,
    "media": 1.762,
-   "mediana": 1.772,
+   "mediana": 1.769,
    "min": 1.667,
    "max": 1.819,
    "descartados": 0,
@@ -1496,14 +1496,14 @@
    "n": 50,
    "media": 1.733,
    "mediana": 1.76,
-   "min": 1.54,
+   "min": 1.52,
    "max": 1.879,
    "descartados": 1,
    "baratas": [
     {
      "id": "9207",
      "nombre": "Enco Sant Jordi",
-     "precio": 1.54,
+     "precio": 1.52,
      "municipio": "Sant Jordi Desvalls",
      "direccion": "Av.generalitat.25",
      "localidad": "S. Jordi Desvalls",
@@ -1641,7 +1641,7 @@
    "nombre": "Huelva",
    "cyl": false,
    "n": 42,
-   "media": 1.67,
+   "media": 1.669,
    "mediana": 1.705,
    "min": 1.4,
    "max": 1.963,
@@ -1672,16 +1672,16 @@
      "lon": -7.204889
     },
     {
-     "id": "13597",
-     "nombre": "Vibe Carburantes",
-     "precio": 1.468,
-     "municipio": "Lepe",
-     "direccion": "Calle Esparteros, 2",
-     "localidad": "Lepe",
-     "cp": "21440",
-     "horario": "L-D: 24H",
-     "lat": 37.249694,
-     "lon": -7.198861
+     "id": "12379",
+     "nombre": "Sat Condado",
+     "precio": 1.465,
+     "municipio": "Rociana del Condado",
+     "direccion": "Carretera Almonte de Km. 9",
+     "localidad": "Rociana del Condado",
+     "cp": "21720",
+     "horario": "L-D: 06:00-22:00",
+     "lat": 37.299722,
+     "lon": -6.593806
     }
    ]
   },
@@ -1739,7 +1739,7 @@
    "nombre": "Illes Balears",
    "cyl": false,
    "n": 33,
-   "media": 1.787,
+   "media": 1.783,
    "mediana": 1.779,
    "min": 1.509,
    "max": 2.099,
@@ -1837,12 +1837,36 @@
    "nombre": "La Rioja",
    "cyl": false,
    "n": 29,
-   "media": 1.633,
+   "media": 1.631,
    "mediana": 1.675,
-   "min": 1.467,
+   "min": 1.459,
    "max": 1.799,
    "descartados": 0,
    "baratas": [
+    {
+     "id": "16176",
+     "nombre": "Beroil",
+     "precio": 1.459,
+     "municipio": "Rincón de Soto",
+     "direccion": "Carretera Arnedo Km. 40",
+     "localidad": "Rincon de Soto",
+     "cp": "26550",
+     "horario": "L-D: 00:00-23:59",
+     "lat": 42.229889,
+     "lon": -1.855278
+    },
+    {
+     "id": "4300",
+     "nombre": "Beroil",
+     "precio": 1.459,
+     "municipio": "San Asensio",
+     "direccion": "CTRA. N-232, PK. km 436,9",
+     "localidad": "San Asensio",
+     "cp": "26340",
+     "horario": "L-D: 24H",
+     "lat": 42.514083,
+     "lon": -2.742111
+    },
     {
      "id": "2406",
      "nombre": "Adelfas",
@@ -1854,30 +1878,6 @@
      "horario": "L-D: 07:00-22:00",
      "lat": 42.536083,
      "lon": -2.773139
-    },
-    {
-     "id": "16176",
-     "nombre": "Beroil",
-     "precio": 1.479,
-     "municipio": "Rincón de Soto",
-     "direccion": "Carretera Arnedo Km. 40",
-     "localidad": "Rincon de Soto",
-     "cp": "26550",
-     "horario": "L-D: 00:00-23:59",
-     "lat": 42.229889,
-     "lon": -1.855278
-    },
-    {
-     "id": "13516",
-     "nombre": "Bodega San Pedro Apostol",
-     "precio": 1.49,
-     "municipio": "Huércanos",
-     "direccion": "Calle Plazuela, 55",
-     "localidad": "Huercanos",
-     "cp": "26314",
-     "horario": "L-D: 24H",
-     "lat": 42.42725,
-     "lon": -2.6905
     }
    ]
   },
@@ -1979,6 +1979,18 @@
      "lon": -5.60025
     },
     {
+     "id": "12400",
+     "nombre": "Cooperativa San Blas",
+     "precio": 1.479,
+     "municipio": "Santa María de la Isla",
+     "direccion": "Calle el Parque, 9",
+     "localidad": "Santibañez de la Isla",
+     "cp": "24795",
+     "horario": "L-D: 24H",
+     "lat": 42.375139,
+     "lon": -5.935528
+    },
+    {
      "id": "4912",
      "nombre": "Valcarce",
      "precio": 1.489,
@@ -1989,18 +2001,6 @@
      "horario": "L-D: 24H",
      "lat": 42.534083,
      "lon": -5.584028
-    },
-    {
-     "id": "12400",
-     "nombre": "Cooperativa San Blas",
-     "precio": 1.489,
-     "municipio": "Santa María de la Isla",
-     "direccion": "Calle el Parque, 9",
-     "localidad": "Santibañez de la Isla",
-     "cp": "24795",
-     "horario": "L-D: 24H",
-     "lat": 42.375139,
-     "lon": -5.935528
     },
     {
      "id": "6070",
@@ -2201,7 +2201,7 @@
    "nombre": "Lleida",
    "cyl": false,
    "n": 55,
-   "media": 1.599,
+   "media": 1.598,
    "mediana": 1.587,
    "min": 1.394,
    "max": 1.795,
@@ -2299,8 +2299,8 @@
    "nombre": "Madrid",
    "cyl": false,
    "n": 42,
-   "media": 1.731,
-   "mediana": 1.749,
+   "media": 1.73,
+   "mediana": 1.747,
    "min": 1.569,
    "max": 1.859,
    "descartados": 0,
@@ -2348,7 +2348,7 @@
    "nombre": "Málaga",
    "cyl": false,
    "n": 35,
-   "media": 1.67,
+   "media": 1.668,
    "mediana": 1.699,
    "min": 1.395,
    "max": 1.929,
@@ -2397,7 +2397,7 @@
    "nombre": "Murcia",
    "cyl": false,
    "n": 106,
-   "media": 1.646,
+   "media": 1.645,
    "mediana": 1.652,
    "min": 1.399,
    "max": 1.959,
@@ -2446,12 +2446,24 @@
    "nombre": "Navarra",
    "cyl": false,
    "n": 103,
-   "media": 1.604,
+   "media": 1.603,
    "mediana": 1.559,
-   "min": 1.465,
+   "min": 1.439,
    "max": 1.849,
    "descartados": 0,
    "baratas": [
+    {
+     "id": "9152",
+     "nombre": "Beroil",
+     "precio": 1.439,
+     "municipio": "Castejón",
+     "direccion": "Carretera N-232 Km. 83,7",
+     "localidad": "Castejon",
+     "cp": "31590",
+     "horario": "L-D: 24H",
+     "lat": 42.135028,
+     "lon": -1.700306
+    },
     {
      "id": "12279",
      "nombre": "An Energeticos - Artajona",
@@ -2475,18 +2487,6 @@
      "horario": "L-D: 24H",
      "lat": 42.072611,
      "lon": -1.793361
-    },
-    {
-     "id": "9636",
-     "nombre": "An Energeticos - Larraga-artajona",
-     "precio": 1.465,
-     "municipio": "Larraga",
-     "direccion": "Calle del Pinar, S/n",
-     "localidad": "Larraga",
-     "cp": "31251",
-     "horario": "L-D: 24H",
-     "lat": 42.562194,
-     "lon": -1.847667
     }
    ]
   },
@@ -2544,10 +2544,10 @@
    "nombre": "Palencia",
    "cyl": true,
    "n": 13,
-   "media": 1.564,
+   "media": 1.556,
    "mediana": 1.5,
    "min": 1.488,
-   "max": 1.799,
+   "max": 1.735,
    "descartados": 0,
    "baratas": [
     {
@@ -2721,6 +2721,18 @@
      "lon": -4.154528
     },
     {
+     "id": "4740",
+     "nombre": "Río Nubis",
+     "precio": 1.699,
+     "municipio": "Carrión de los Condes",
+     "direccion": "N-120A (LOGROÑO -VIGO) km 197,5",
+     "localidad": "Carrion de los Condes",
+     "cp": "34120",
+     "horario": "L-D: 08:00-22:00",
+     "lat": 42.341167,
+     "lon": -4.616639
+    },
+    {
      "id": "7751",
      "nombre": "Cepsa",
      "precio": 1.735,
@@ -2731,18 +2743,6 @@
      "horario": "L-D: 06:00-22:00",
      "lat": 42.151111,
      "lon": -4.086528
-    },
-    {
-     "id": "4740",
-     "nombre": "Río Nubis",
-     "precio": 1.799,
-     "municipio": "Carrión de los Condes",
-     "direccion": "N-120A (LOGROÑO -VIGO) km 197,5",
-     "localidad": "Carrion de los Condes",
-     "cp": "34120",
-     "horario": "L-D: 08:00-22:00",
-     "lat": 42.341167,
-     "lon": -4.616639
     }
    ]
   },
@@ -3280,21 +3280,9 @@
      "lon": -4.51725
     },
     {
-     "id": "6177",
-     "nombre": "Galp",
-     "precio": 1.694,
-     "municipio": "Villacastín",
-     "direccion": "Autopista A6 Km. 0",
-     "localidad": "Villacastin",
-     "cp": "40150",
-     "horario": "L-D: 24H",
-     "lat": 40.7975,
-     "lon": -4.460889
-    },
-    {
      "id": "6401",
      "nombre": "Galp",
-     "precio": 1.694,
+     "precio": 1.689,
      "municipio": "Villacastín",
      "direccion": "Autopista A6 Km. 0",
      "localidad": "Villacastin",
@@ -3302,6 +3290,18 @@
      "horario": "L-D: 06:00-22:00",
      "lat": 40.7975,
      "lon": -4.462889
+    },
+    {
+     "id": "6177",
+     "nombre": "Galp",
+     "precio": 1.689,
+     "municipio": "Villacastín",
+     "direccion": "Autopista A6 Km. 0",
+     "localidad": "Villacastin",
+     "cp": "40150",
+     "horario": "L-D: 24H",
+     "lat": 40.7975,
+     "lon": -4.460889
     },
     {
      "id": "6169",
@@ -3382,7 +3382,7 @@
    "nombre": "Sevilla",
    "cyl": false,
    "n": 76,
-   "media": 1.677,
+   "media": 1.675,
    "mediana": 1.69,
    "min": 1.459,
    "max": 1.879,
@@ -3689,7 +3689,7 @@
    "nombre": "Valencia",
    "cyl": false,
    "n": 138,
-   "media": 1.621,
+   "media": 1.62,
    "mediana": 1.6,
    "min": 1.379,
    "max": 1.859,
@@ -3720,16 +3720,16 @@
      "lon": -0.473194
     },
     {
-     "id": "10542",
-     "nombre": "E.s.visa",
+     "id": "16413",
+     "nombre": "Beroil",
      "precio": 1.399,
-     "municipio": "Sollana",
-     "direccion": "Plaza Calvario, 13",
-     "localidad": "Sollana",
-     "cp": "46430",
-     "horario": "L-V: 07:00-21:00; S: 07:00-15:00; D: 08:00-13:30",
-     "lat": 39.280861,
-     "lon": -0.383417
+     "municipio": "Sagunto/Sagunt",
+     "direccion": "Calle Benjamin Franklin, 1",
+     "localidad": "Sagunto",
+     "cp": "46500",
+     "horario": "L-D: 24H",
+     "lat": 39.667444,
+     "lon": -0.264111
     }
    ]
   },
@@ -4017,16 +4017,16 @@
    "nombre": "Zamora",
    "cyl": true,
    "n": 23,
-   "media": 1.6,
+   "media": 1.599,
    "mediana": 1.569,
-   "min": 1.459,
+   "min": 1.419,
    "max": 1.799,
    "descartados": 0,
    "baratas": [
     {
      "id": "15805",
      "nombre": "Beroil",
-     "precio": 1.459,
+     "precio": 1.419,
      "municipio": "Benavente",
      "direccion": "Cañada Real Berciana, 9",
      "localidad": "Benavente",
@@ -4064,7 +4064,7 @@
     {
      "id": "15805",
      "nombre": "Beroil",
-     "precio": 1.459,
+     "precio": 1.419,
      "municipio": "Benavente",
      "direccion": "Cañada Real Berciana, 9",
      "localidad": "Benavente",
