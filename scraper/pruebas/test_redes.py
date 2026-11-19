@@ -212,4 +212,13 @@ def test_patatas_de_leon_los_jueves(redes):
     assert hortalizas.item(d, date(2026, 11, 30)) is None                                          # semana vieja: nada
     h = lambda hh, mm: datetime(2026, 11, 19, hh, mm)
     assert redes.franja_pendiente(h(10, 47), {"franjas": {"2026-11-19": ["manana"]}}, jueves) == "hortalizas"
-    assert redes.franja_pendiente(h(10, 47), {"franjas": {"2026-11-20": ["manana"]}}, date(2026, 11, 20)) is None
+    assert redes.franja_pendiente(datetime(2026, 11, 21, 10, 47), {"franjas": {"2026-11-21": ["manana"]}}, date(2026, 11, 21)) is None  # sábado
+
+
+def test_alubias_de_leon_los_viernes(redes):
+    d = {"lonjas": [{"id": "leon", "nombre": "Lonja de León", "fecha": "2026-11-18", "estado": "activa", "precios": [
+        {"id": "leon-agria", "cat": "Patatas", "producto": "Agria", "unidad": "€/t", "ant": 350.0, "act": 350.0},
+        {"id": "leon-canela", "cat": "Alubias", "producto": "Canela", "unidad": "€/kg", "ant": 1.3, "act": 1.3}]}]}
+    it = redes.elegir("legumbres", d, {}, date(2026, 11, 20))
+    assert it["id"] == "2026-11-18-legumbres-leon" and "Canela" in it["texto"] and "Agria" not in it["texto"]
+    assert redes.franja_pendiente(datetime(2026, 11, 20, 10, 47), {"franjas": {"2026-11-20": ["manana"]}}, date(2026, 11, 20)) == "legumbres"

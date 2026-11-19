@@ -14,6 +14,7 @@ on:
     - cron: "43 6 * * 1-6"      # 7:43   → publicación de la mañana
     - cron: "17 9 * * 1-6"      # 10:17  → recuperación de la mañana
     - cron: "47 10 * * 4"       # 11:47  → patatas de la Lonja de León (jueves)
+    - cron: "47 10 * * 5"       # 11:47  → alubias de la Lonja de León (viernes)
     - cron: "13 12 * * 1-6"     # 13:13  → reel
     - cron: "29 14 * * 1-6"     # 15:29  → recuperación del reel
     - cron: "37 17 * * 1-6"     # 18:37  → reel con historia (L–V)
