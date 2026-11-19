@@ -4,7 +4,7 @@
   "detalle": "Instagram no pudo procesar la imagen (ERROR)",
   "fecha": "2026-11-16"
  },
- "franja": "hortalizas",
+ "franja": "reel",
  "franjas": {
   "2026-11-07": [
    "reel"
@@ -67,7 +67,8 @@
   ],
   "2026-11-19": [
    "manana",
-   "hortalizas"
+   "hortalizas",
+   "reel"
   ]
  },
  "historias": [
@@ -392,6 +393,12 @@
    "fecha": "2026-11-19T11:40",
    "id": "2026-11-18-hortalizas-leon",
    "media": "18158466418519905"
+  },
+  {
+   "facebook": "2494762437726267",
+   "fecha": "2026-11-19T13:24",
+   "id": "2026-11-19-reel-movimientos",
+   "media": "18109877993263219"
   }
  ],
  "token_renovado": "2026-11-07"
