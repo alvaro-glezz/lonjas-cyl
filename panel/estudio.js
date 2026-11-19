@@ -21,6 +21,7 @@
       return dia % 2 === 0 ? `Ranking de ${k} (o movimientos de la semana)` : `Movimientos de la semana (o ranking de ${k})`;
     }
     if (franja === "manana") return `Precios de ${nombre(plan.producto_dia[dia])} o sesión de lonja`;
+    if (franja === "hortalizas") return "Precios de las patatas de la sesión del miércoles";
     if (franja === "tarde") return "Sesión de lonja o comparativa semanal";
     return ["Gasóleo B por provincia", "Cereales: la lonja que más paga", "Ganado: precios de la semana",
       "¿Cuánto cambia según la lonja?", "Ocho semanas de mercado"][dia] || "";

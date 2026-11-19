@@ -196,3 +196,20 @@ def test_voz_kokoro_por_defecto_y_respaldo(redes, tmp_path, monkeypatch):
     assert redes.corregir_aviso("x " + redes.AVISO_KOKORO) == "x " + redes.AVISO_VOZ
     monkeypatch.delenv("VOZ_MOTOR")
     assert redes.aviso_voz() == redes.AVISO_VOZ
+
+
+def test_patatas_de_leon_los_jueves(redes):
+    import hortalizas
+    from datetime import datetime
+    d = {"lonjas": [{"id": "leon", "nombre": "Lonja de León", "fecha": "2026-11-18", "estado": "activa", "precios": [
+        {"id": "leon-agria", "cat": "Patatas", "producto": "Agria", "unidad": "€/t", "ant": 340.0, "act": 350.0},
+        {"id": "leon-yona", "cat": "Patatas", "producto": "Yona", "unidad": "€/t", "ant": 330.0, "act": 330.0},
+        {"id": "leon-trigo", "cat": "Cereales", "clave": "trigo", "producto": "Trigo", "unidad": "€/t", "ant": 226.0, "act": 226.0}]}]}
+    jueves = date(2026, 11, 19)
+    it = redes.elegir("hortalizas", d, {}, jueves)
+    assert it["id"] == "2026-11-18-hortalizas-leon" and "Agria: 350 €/t ▲ +10" in it["texto"] and "Trigo" not in it["texto"]
+    assert redes.elegir("hortalizas", d, {"registro": [{"id": it["id"]}]}, jueves) is None        # no se repite
+    assert hortalizas.item(d, date(2026, 11, 30)) is None                                          # semana vieja: nada
+    h = lambda hh, mm: datetime(2026, 11, 19, hh, mm)
+    assert redes.franja_pendiente(h(10, 47), {"franjas": {"2026-11-19": ["manana"]}}, jueves) == "hortalizas"
+    assert redes.franja_pendiente(h(10, 47), {"franjas": {"2026-11-20": ["manana"]}}, date(2026, 11, 20)) is None

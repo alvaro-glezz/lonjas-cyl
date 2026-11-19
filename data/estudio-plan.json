@@ -1,24 +1,148 @@
 {
   "nota": "Copia del calendario del robot (scraper/redes.py). La prueba test_estudio comprueba que coincide.",
-  "producto_dia": ["trigo", "cebada", "maiz", "centeno", "girasol", "lechazo"],
-  "producto_reel": ["cebada", "maiz", "trigo", "cerdo-normal", "centeno", "lechazo"],
+  "producto_dia": [
+    "trigo",
+    "cebada",
+    "maiz",
+    "centeno",
+    "girasol",
+    "lechazo"
+  ],
+  "producto_reel": [
+    "cebada",
+    "maiz",
+    "trigo",
+    "cerdo-normal",
+    "centeno",
+    "lechazo"
+  ],
   "franjas": [
-    {"id": "manana", "hora": "07:43", "nombre": "Publicación de la mañana", "dias": [0, 1, 2, 3, 4, 5]},
-    {"id": "reel", "hora": "13:13", "nombre": "Reel del día", "dias": [0, 1, 2, 3, 4, 5]},
-    {"id": "historia", "hora": "18:37", "nombre": "La semana en las lonjas", "dias": [0, 1, 2, 3, 4]},
-    {"id": "tarde", "hora": "18:47", "nombre": "Publicación de la tarde", "dias": [0, 1, 2, 3, 4, 5]}
+    {
+      "id": "manana",
+      "hora": "07:43",
+      "nombre": "Publicación de la mañana",
+      "dias": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5
+      ]
+    },
+    {
+      "id": "reel",
+      "hora": "13:13",
+      "nombre": "Reel del día",
+      "dias": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5
+      ]
+    },
+    {
+      "id": "hortalizas",
+      "hora": "11:47",
+      "nombre": "Patatas de la Lonja de León",
+      "dias": [
+        3
+      ]
+    },
+    {
+      "id": "historia",
+      "hora": "18:37",
+      "nombre": "La semana en las lonjas",
+      "dias": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ]
+    },
+    {
+      "id": "tarde",
+      "hora": "18:47",
+      "nombre": "Publicación de la tarde",
+      "dias": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5
+      ]
+    }
   ],
   "herramientas": [
-    {"nombre": "Montaje de vídeo (FFmpeg)", "donde": "GitHub Actions", "estado": "activo", "nota": "Monta cada reel 1080×1920."},
-    {"nombre": "Voz Kokoro «Santa»", "donde": "GitHub Actions", "estado": "activo", "nota": "Voz principal de los reels."},
-    {"nombre": "Voz Piper «sharvard»", "donde": "GitHub Actions", "estado": "activo", "nota": "Respaldo si Kokoro falla."},
-    {"nombre": "Instagram y Facebook", "donde": "API oficial de Meta", "estado": "activo", "nota": "Publicación automática."},
-    {"nombre": "Estadísticas de Instagram", "donde": "API oficial de Meta", "estado": "pendiente", "nota": "Falta el permiso instagram_manage_insights en el token."},
-    {"nombre": "LM Studio (guiones)", "donde": "Tu ordenador", "estado": "pendiente", "nota": "Instalado; falta conectarlo (fase 6)."},
-    {"nombre": "ComfyUI (imágenes)", "donde": "Tu ordenador", "estado": "pendiente", "nota": "Fase 7."},
-    {"nombre": "Upscayl (ampliar imágenes)", "donde": "Tu ordenador", "estado": "pendiente", "nota": "Fase 7."},
-    {"nombre": "VoiceStudio (voz y transcripción)", "donde": "Tu ordenador", "estado": "pendiente", "nota": "Fase 7."},
-    {"nombre": "Cap (grabar pantalla)", "donde": "Tu ordenador", "estado": "pendiente", "nota": "Fase 7."},
-    {"nombre": "KeePassXC (claves)", "donde": "Tu ordenador", "estado": "pendiente", "nota": "Fase 9."}
+    {
+      "nombre": "Montaje de vídeo (FFmpeg)",
+      "donde": "GitHub Actions",
+      "estado": "activo",
+      "nota": "Monta cada reel 1080×1920."
+    },
+    {
+      "nombre": "Voz Kokoro «Santa»",
+      "donde": "GitHub Actions",
+      "estado": "activo",
+      "nota": "Voz principal de los reels."
+    },
+    {
+      "nombre": "Voz Piper «sharvard»",
+      "donde": "GitHub Actions",
+      "estado": "activo",
+      "nota": "Respaldo si Kokoro falla."
+    },
+    {
+      "nombre": "Instagram y Facebook",
+      "donde": "API oficial de Meta",
+      "estado": "activo",
+      "nota": "Publicación automática."
+    },
+    {
+      "nombre": "Estadísticas de Instagram",
+      "donde": "API oficial de Meta",
+      "estado": "pendiente",
+      "nota": "Falta el permiso instagram_manage_insights en el token."
+    },
+    {
+      "nombre": "LM Studio (guiones)",
+      "donde": "Tu ordenador",
+      "estado": "pendiente",
+      "nota": "Instalado; falta conectarlo (fase 6)."
+    },
+    {
+      "nombre": "ComfyUI (imágenes)",
+      "donde": "Tu ordenador",
+      "estado": "pendiente",
+      "nota": "Fase 7."
+    },
+    {
+      "nombre": "Upscayl (ampliar imágenes)",
+      "donde": "Tu ordenador",
+      "estado": "pendiente",
+      "nota": "Fase 7."
+    },
+    {
+      "nombre": "VoiceStudio (voz y transcripción)",
+      "donde": "Tu ordenador",
+      "estado": "pendiente",
+      "nota": "Fase 7."
+    },
+    {
+      "nombre": "Cap (grabar pantalla)",
+      "donde": "Tu ordenador",
+      "estado": "pendiente",
+      "nota": "Fase 7."
+    },
+    {
+      "nombre": "KeePassXC (claves)",
+      "donde": "Tu ordenador",
+      "estado": "pendiente",
+      "nota": "Fase 9."
+    }
   ]
 }

@@ -23,7 +23,7 @@ API = "https://api.telegram.org/bot{token}/{metodo}"
 LIMITE_PIE = 1024          # Telegram: texto máximo bajo una foto o un vídeo
 LIMITE_MENSAJE = 4096
 FRANJAS = {"manana": "Publicación de las 8:00", "reel": "Reel de las 13:30", "tarde": "Publicación de las 19:00",
-           "historia": "Reel con historia de las 19:00", "historias-todas": "Ensayo: los cinco reels con historia",
+           "historia": "Reel con historia de las 19:00", "hortalizas": "Patatas de León (jueves, 11:47)", "historias-todas": "Ensayo: los cinco reels con historia",
            "semana-todas": "Vista previa: los cinco reels de «La semana en las lonjas»"}
 IMAGEN = (".jpg", ".jpeg", ".png")
 

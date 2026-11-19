@@ -629,6 +629,7 @@ def franja_por_hora(ahora: datetime) -> str:
 # tarea (GitHub retrasa las tareas programadas hasta ~1 h en horas de mucho uso, y a veces no las lanza).
 VENTANAS = (("manana", (6, 40), (11, 30), range(0, 6)),
             ("reel", (12, 10), (17, 0), range(0, 6)),
+            ("hortalizas", (10, 30), (15, 0), range(3, 4)),     # jueves: patatas de la Lonja de León
             ("historia", (17, 30), (21, 30), range(0, 5)),      # lunes a viernes
             ("tarde", (17, 40), (21, 30), range(0, 6)))
 
@@ -665,6 +666,11 @@ def elegir(franja: str, datos: dict, estado: dict, hoy: date) -> dict | None:
         return especiales.item(franja.split(":", 1)[1], hoy)
     if dia == 6:
         return None
+    if franja == "hortalizas":
+        import hortalizas
+        it = hortalizas.item(datos, hoy)
+        ya = {r.get("id") for r in estado.get("registro", [])}
+        return it if it and it["id"] not in ya else None
     if franja in ("manana", "tarde"):
         s = _sesion(datos, estado, hoy)
         if s:
@@ -714,6 +720,9 @@ def crear_archivos(item: dict, datos: dict, hoy: date, carpeta: Path) -> None:
         ig.imagen_comparativa(ranking(datos, k, hoy), carpeta / item["imagenes"][0])
         if len(item["imagenes"]) > 1:
             imagen_evolucion(evolucion(datos, k, hoy), carpeta / item["imagenes"][1])
+    elif item["tipo"] == "hortalizas":
+        import hortalizas
+        hortalizas.imagen(datos, hoy, carpeta / item["imagenes"][0])
     elif item["tipo"] == "semana":
         import semana
         if not semana.reel(item["n"], carpeta / item["video"], datos, hoy, semana.leer_gasoleo()):

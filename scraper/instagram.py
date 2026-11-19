@@ -195,13 +195,14 @@ def _pie(d, fuente: str, web: str):
     d.text((ANCHO - 70, ALTO - 78), "Avisos en Telegram: t.me/lonjas_cyl", font=_texto(26, 600), fill=PINO, anchor="ra")
 
 
-def imagen_sesion(l: dict, destino: Path, web: str = WEB) -> Path:
+def imagen_sesion(l: dict, destino: Path, web: str = WEB, filas: list[dict] | None = None, titulo: str | None = None) -> Path:
+    """Imagen de una sesión. Con «filas» y «titulo», solo esos precios (p. ej., las patatas de León)."""
     from PIL import Image, ImageDraw
     img = Image.new("RGB", (ANCHO, ALTO), FONDO)
     d = ImageDraw.Draw(img)
     f = l["fecha"]
-    _cabecera(img, d, l.get("nombre", l["id"]), f"Sesión del {DIAS[date.fromisoformat(f).weekday()]} {fecha_larga(f)}")
-    filas = principales(l)
+    _cabecera(img, d, titulo or l.get("nombre", l["id"]), f"Sesión del {DIAS[date.fromisoformat(f).weekday()]} {fecha_larga(f)}")
+    filas = filas if filas is not None else principales(l)
     y, alto_fila = 360, 90
     d.rounded_rectangle([50, y - 10, ANCHO - 50, y + alto_fila * len(filas) + 10], radius=28, fill=HOJA)
     for i, p in enumerate(filas):
@@ -222,7 +223,7 @@ def imagen_sesion(l: dict, destino: Path, web: str = WEB) -> Path:
                 w = d.textlength(t, font=_texto(30, 700))
                 d.text((ANCHO - 80, yy + alto_fila / 2), t, font=_texto(30, 700), fill=color, anchor="rm")
                 _flecha(d, int(ANCHO - 80 - w - 28), int(yy + alto_fila / 2 - 9), dc > 0, color)
-    s, b, i = balance(l)
+    s, b, i = balance({"precios": filas} if titulo else l)
     yb = y + alto_fila * len(filas) + 44
     d.text((70, yb), f"{s} suben · {b} bajan · {i} repiten", font=_texto(32, 600), fill=TINTA)
     _pie(d, l.get("nota") or l.get("nombre", ""), web)
