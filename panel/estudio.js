@@ -35,8 +35,8 @@
       const d = new Date(base); d.setDate(base.getDate() + dia);
       const f = iso(d), hechas = hecho[f] || [];
       const filas = plan.franjas.filter(x => x.dias.includes(dia)).map(x => {
-        const ok = hechas.includes(x.id);
-        const est = ok ? ["bien", "Publicado"] : f < hoyIso ? ["mal", "No consta"] : ["aviso", "Programado"];
+        const ok = hechas.includes(x.id), pausa = ((estado.pausas || {})[f] || []).includes(x.id);
+        const est = pausa ? ["aviso", "Pausado"] : ok ? ["bien", "Publicado"] : f < hoyIso ? ["mal", "No consta"] : ["aviso", "Programado"];
         return `<li><span class="hora">${esc(x.hora)}</span><span class="que"><b>${esc(x.nombre)}</b><small>${esc(previsto(x.id, dia, plan))}</small></span><span class="p ${est[0]}">${est[1]}</span></li>`;
       }).join("");
       const extra = hechas.filter(x => x.startsWith("especial:")).map(x => `<li><span class="hora">—</span><span class="que"><b>Reel especial</b><small>${esc(x.slice(9))}</small></span><span class="p bien">Publicado</span></li>`).join("");

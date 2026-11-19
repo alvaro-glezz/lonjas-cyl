@@ -8,6 +8,10 @@ const RAIZ = path.resolve(__dirname, "../../..");
 const api = require(path.join(RAIZ, "api/telegram.js"));
 const datos = JSON.parse(fs.readFileSync(path.join(__dirname, "datos/precios-8nov.json"), "utf8"));
 let pedidas = 0;
+const PLAN = { franjas: [
+  { id: "manana", hora: "07:43", nombre: "Publicación de la mañana", dias: [0, 1, 2, 3, 4, 5, 6] },
+  { id: "reel", hora: "13:13", nombre: "Reel del día", dias: [0, 1, 2, 3, 4, 5, 6] }] };
+let ESTADO = { franjas: {} };
 const redis = new Map(), sets = new Map();
 const REDIS_URL = "https://redis.example";
 global.fetch = async (url, op = {}) => {
@@ -22,6 +26,8 @@ global.fetch = async (url, op = {}) => {
     else if (c === "SREM") { sets.get(k)?.delete(v); result = 1; }
     return { ok: true, json: async () => ({ result }) };
   }
+  if (String(url) === "https://lonjas.example/data/estudio-plan.json") return { ok: true, json: async () => PLAN };
+  if (String(url) === "https://lonjas.example/data/instagram.json") return { ok: true, json: async () => ESTADO };
   pedidas++; assert.strictEqual(String(url), "https://lonjas.example/data/precios.json"); return { ok: true, json: async () => datos };
 };
 
@@ -82,6 +88,27 @@ const msg = (text, type = "private") => ({ update_id: 1, message: { message_id: 
   r = await llamar(msg("/borrar todos"), ok); assert.match(r.j.text, /borrado todos/);
   assert.ok(!redis.has("avisos:42") && !sets.get("avisos:chats").has("42"));
   r = await llamar(msg("/avisos"), ok); assert.match(r.j.text, /No tienes avisos/);
+  // ---- órdenes del dueño (solo el chat cuya huella está en admin:chat_sha) ----
+  const hoy = new Intl.DateTimeFormat("en-CA", { timeZone: "Europe/Madrid" }).format(new Date());
+  r = await llamar(msg("estado"), ok); assert.match(r.j.text, /No he encontrado/);                 // aún no es el dueño
+  r = await llamar(msg("no publiques el reel"), ok); assert.ok(!redis.has(`redes:pausa:${hoy}`));
+  redis.set("admin:chat_sha", api.sha256("42"));
+  r = await llamar(msg("no publiques el reel", "group"), ok); assert.ok(!redis.has(`redes:pausa:${hoy}`));   // en grupos, nunca
+  r = await llamar(msg("No publiques el reel"), ok); assert.match(r.j.text, /hoy no se publica <b>Reel del día<\/b>/);
+  assert.deepStrictEqual(JSON.parse(redis.get(`redes:pausa:${hoy}`)), ["reel"]);
+  r = await llamar(msg("no publiques las patatas"), ok);
+  assert.deepStrictEqual(JSON.parse(redis.get(`redes:pausa:${hoy}`)), ["reel", "hortalizas"]);
+  ESTADO = { franjas: { [hoy]: ["manana"] } };
+  r = await llamar(msg("estado"), ok);
+  assert.match(r.j.text, /Publicación de la mañana: ✅ publicada/); assert.match(r.j.text, /Reel del día: ⏸️ no se publicará/);
+  r = await llamar(msg("vuelve a publicar"), ok); assert.match(r.j.text, /hoy se publica con normalidad/); assert.ok(!redis.has(`redes:pausa:${hoy}`));
+  r = await llamar(msg("no publiques nada mañana"), ok); assert.match(r.j.text, /mañana no se publica <b>nada<\/b>/);
+  assert.ok([...redis.keys()].some(k => k.startsWith("redes:pausa:") && k !== `redes:pausa:${hoy}` && redis.get(k) === '["todo"]'));
+  r = await llamar(msg("Prepara los reels de la semana"), ok); assert.match(r.j.text, /5 vistas previas/); assert.ok(redis.has("redes:preparar"));
+  r = await llamar(msg("ordenes"), ok); assert.match(r.j.text, /Órdenes del dueño/);
+  r = await llamar({ update_id: 3, message: { message_id: 8, chat: { id: 43, type: "private" }, text: "no publiques nada" } }, ok);
+  assert.match(r.j.text, /No he encontrado/);                                                      // otra persona: nada
+
   for (const t of ["trigo", "lechazo", "salamanca", "alubia", "vacas", "ovejas"]) {
     const x = (await llamar(msg(t), ok)).j.text; assert.ok(x.length < 4000, t); console.log(`— ${t}\n${x}\n`);
   }

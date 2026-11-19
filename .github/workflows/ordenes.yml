@@ -1,0 +1,40 @@
+# Órdenes que el dueño da por Telegram («prepara los reels de la semana»): el robot de Vercel las deja en Upstash
+# y esta tarea las mira cada 15 minutos (de 7:00 a 23:00, hora de Madrid en invierno). Si hay que preparar,
+# lanza «Redes sociales» en modo ensayo (no publica nada: solo manda las vistas previas a tu chat).
+name: Órdenes de Telegram
+
+on:
+  schedule:
+    - cron: "*/15 6-21 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  actions: write
+
+concurrency:
+  group: ordenes-telegram
+  cancel-in-progress: false
+
+jobs:
+  revisar:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262  # v4.4.0
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065  # v5.6.0
+        with:
+          python-version: "3.12"
+      - run: pip install -q requests
+      - name: Leer órdenes
+        id: ordenes
+        env:
+          UPSTASH_REDIS_REST_URL: ${{ secrets.UPSTASH_REDIS_REST_URL }}
+          UPSTASH_REDIS_REST_TOKEN: ${{ secrets.UPSTASH_REDIS_REST_TOKEN }}
+          TELEGRAM_ADMIN_CHAT: ${{ secrets.TELEGRAM_ADMIN_CHAT }}
+        run: python scraper/ordenes.py --revisar
+      - name: Preparar las vistas previas de la semana
+        if: steps.ordenes.outputs.preparar == 'si'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh workflow run redes.yml -f franja=semana-todas -f probar=si

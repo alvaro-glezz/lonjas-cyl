@@ -814,6 +814,17 @@ def main(argv: list[str]) -> int:
                 print("[redes] Todo lo de esta hora ya está publicado: nada que hacer.")
                 estado["preparado"] = []
                 return 0
+            if not os.environ.get("FRANJA", "").strip():
+                import ordenes
+                if ordenes.pausada(franja, hoy):              # «no publiques …» desde Telegram
+                    print(f"[redes] Franja «{franja}»: pausada desde Telegram, hoy no se publica.")
+                    estado["preparado"] = []
+                    marcar(estado, franja, hoy)
+                    pausas = estado.setdefault("pausas", {})
+                    pausas.setdefault(hoy.isoformat(), []).append(franja)
+                    for viejo in sorted(pausas)[:-10]:
+                        del pausas[viejo]
+                    return 0
             item = crear(datos, estado, franja, hoy, forzar=os.environ.get("FORZAR") == "si")
             print(f"[redes] Franja «{franja}»: " + (f"creado {item['id']}" if item else "nada que publicar"))
         elif "--publicar" in argv:

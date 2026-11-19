@@ -111,6 +111,8 @@ jobs:
           INSTAGRAM_TOKEN: ${{ secrets.INSTAGRAM_TOKEN }}
           FRANJA: ${{ inputs.franja || '' }}
           FORZAR: ${{ inputs.forzar }}
+          UPSTASH_REDIS_REST_URL: ${{ secrets.UPSTASH_REDIS_REST_URL }}
+          UPSTASH_REDIS_REST_TOKEN: ${{ secrets.UPSTASH_REDIS_REST_TOKEN }}
         run: python scraper/redes.py --crear
       # Copia privada en tu chat con @lonjascyl_bot de lo que se va a publicar (sin TELEGRAM_ADMIN_CHAT no hace nada).
       - name: Enviarme lo que se va a publicar (Telegram)

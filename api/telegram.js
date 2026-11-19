@@ -134,6 +134,7 @@ function almacen() {
     return j.result;
   };
   return {
+    cmd,
     async leer(chat) {
       try { const l = JSON.parse((await cmd("GET", `avisos:${chat}`)) || "[]"); return Array.isArray(l) ? l.slice(0, MAX_AVISOS_CHAT) : []; }
       catch (e) { if (e.message === "almacén") throw e; return []; }
@@ -143,6 +144,86 @@ function almacen() {
       else { await cmd("DEL", `avisos:${chat}`); await cmd("SREM", "avisos:chats", String(chat)); }
     },
   };
+}
+
+
+/* ---------- órdenes del dueño ----------
+   Solo para el chat privado cuya huella SHA-256 guarda GitHub en «admin:chat_sha» (scraper/ordenes.py, a partir del
+   secreto TELEGRAM_ADMIN_CHAT). Las órdenes quedan en Upstash; el robot de redes las respeta (redes.py, ordenes.yml). */
+const ADMIN_RE = /^(estado|resumen|como va|que se ha publicado|ordenes|comandos|prepara|preparame|no publiques|no publicar|no saques|pausa|cancela|reanuda|quita la pausa|vuelve a publicar|publica)\b/;
+const FRANJAS_ADMIN = [
+  ["manana", "Publicación de la mañana", /(de|por) la manana|matinal|matutin|primera publicacion/],
+  ["hortalizas", "Patatas de León", /patata|hortaliza/],
+  ["legumbres", "Alubias de León", /alubia|legumbre/],
+  ["historia", "Reel «La semana en las lonjas»", /historia|semana en las lonjas|reel de la tarde/],
+  ["reel", "Reel del día", /\breels?\b|video del dia/],
+  ["tarde", "Publicación de la tarde", /(publicacion|post) de la tarde|ultima publicacion/],
+];
+const NOMBRE_FRANJA = Object.fromEntries(FRANJAS_ADMIN.map(([id, n]) => [id, n]));
+const sha256 = s => require("crypto").createHash("sha256").update(String(s).trim()).digest("hex");
+const diaMadrid = (dias = 0) => uso.hoyMadrid(new Date(Date.now() + dias * 86400000));
+const semanaDe = iso => (new Date(iso + "T12:00:00Z").getUTCDay() + 6) % 7;     // lunes = 0
+
+async function esAdmin(chat, alm) {
+  if (!alm) return false;
+  try { const h = await alm.cmd("GET", "admin:chat_sha"); return typeof h === "string" && h.length === 64 && h === sha256(chat); }
+  catch { return false; }
+}
+
+/** Qué franjas nombra el mensaje (ninguna = todas). «reel de la tarde»/«historia» no cuentan como «reel». */
+function franjasDe(t) {
+  const hay = FRANJAS_ADMIN.filter(([, , re]) => re.test(t)).map(([id]) => id);
+  return hay.includes("historia") && !/\breels? del dia\b/.test(t) ? hay.filter(x => x !== "reel") : hay;
+}
+/** «mañana» suelto = el día siguiente; «de la mañana» = la franja de la mañana. */
+const diaDe = t => /\bmanana\b/.test(t.replace(/\b(de|por) la manana\b/g, "")) ? diaMadrid(1) : diaMadrid(0);
+
+const AYUDA_ADMIN = ["🛠️ <b>Órdenes del dueño</b> (solo funcionan en tu chat)", "",
+  "• <b>estado</b>: qué se ha publicado hoy y qué falta",
+  "• <b>no publiques el reel</b> (o «las patatas», «la historia», «la de la tarde»…). Sin decir cuál: nada de hoy",
+  "• <b>no publiques nada mañana</b>",
+  "• <b>vuelve a publicar</b> (o «reanuda»): quita las pausas de hoy (o «… mañana»)",
+  "• <b>prepara los reels de la semana</b>: te mando las 5 vistas previas (tarda de 15 a 30 min; no publica nada)"].join("\n");
+
+async function leerJSON(web, ruta) {
+  const r = await fetch(new URL(ruta, web), { headers: { accept: "application/json" } });
+  if (!r.ok) throw new Error("HTTP " + r.status);
+  return r.json();
+}
+
+async function procesarAdmin(t, web, alm) {
+  if (/^(ordenes|comandos)\b/.test(t)) return AYUDA_ADMIN;
+  if (/^(prepara|preparame)\b/.test(t)) {
+    if (!/reel|semana|vista/.test(t)) return "¿Qué preparo? Escribe: <b>prepara los reels de la semana</b>.";
+    await alm.cmd("SET", "redes:preparar", diaMadrid(0), "EX", 86400);
+    return "👍 Hecho. En 15–30 minutos te llegan aquí las <b>5 vistas previas</b> de «La semana en las lonjas». No se publica nada: cada reel sale en su día a las 18:37.";
+  }
+  const dia = diaDe(t), clave = `redes:pausa:${dia}`, cuando = dia === diaMadrid(0) ? "hoy" : "mañana";
+  const lista = JSON.parse((await alm.cmd("GET", clave)) || "[]");
+  if (/^(no publiques|no publicar|no saques|pausa|cancela)\b/.test(t)) {
+    const fr = franjasDe(t);
+    const nueva = [...new Set([...(Array.isArray(lista) ? lista : []), ...(fr.length ? fr : ["todo"])])];
+    await alm.cmd("SET", clave, JSON.stringify(nueva), "EX", 10 * 86400);
+    const que = fr.length ? fr.map(f => NOMBRE_FRANJA[f]).join(", ") : "nada";
+    return `⏸️ Entendido: ${cuando} no se publica <b>${esc(que)}</b>.${fr.length ? "" : " (ninguna publicación)"}\n` +
+      "Si ya se había publicado, no se borra. Para deshacerlo: «vuelve a publicar" + (cuando === "mañana" ? " mañana" : "") + "».";
+  }
+  if (/^(reanuda|quita la pausa|vuelve a publicar|publica)\b/.test(t)) {
+    await alm.cmd("DEL", clave);
+    return `▶️ Hecho: ${cuando} se publica con normalidad.` + (cuando === "hoy" ? " Lo que se haya saltado ya no se recupera." : "");
+  }
+  // estado
+  const [plan, est] = await Promise.all([leerJSON(web, "data/estudio-plan.json"), leerJSON(web, "data/instagram.json")]);
+  const hoy = diaMadrid(0), d = semanaDe(hoy), hechas = (est.franjas || {})[hoy] || [], pausadasHoy = ((est.pausas || {})[hoy] || []);
+  const pend = Array.isArray(lista) ? lista : [];
+  const filas = plan.franjas.filter(f => f.dias.includes(d)).map(f => {
+    const icono = pausadasHoy.includes(f.id) ? "⏸️ pausada" : hechas.includes(f.id) ? "✅ publicada"
+      : (pend.includes("todo") || pend.includes(f.id)) ? "⏸️ no se publicará" : "⏳ pendiente";
+    return `${esc(f.hora)} · ${esc(f.nombre)}: ${icono}`;
+  });
+  const err = est.error && est.error.fecha === hoy ? `\n⚠️ Error de hoy: ${esc(String(est.error.detalle).slice(0, 200))}` : "";
+  return [`📋 <b>Estado de hoy</b> (${fecha(hoy)})`, "", ...(filas.length ? filas : ["Hoy no hay publicaciones programadas."]), err,
+    "", "Escribe <b>ordenes</b> para ver lo que puedes pedirme."].filter(x => x !== "").join("\n");
 }
 
 /** «trigo salamanca más de 240» -> { clave, lonja, dir, umbral }. Admite coma decimal, «>» y «<». */
@@ -235,6 +316,10 @@ async function procesar(textoCrudo, msg, lonjas, web, alm) {
   if (t === "miid") {
     return `Tu número de chat es <code>${esc(String(msg.chat.id))}</code>.\nPara recibir aquí lo que publica el robot de redes, guárdalo en GitHub como secreto <b>TELEGRAM_ADMIN_CHAT</b>. No es una contraseña, pero no hace falta compartirlo.`;
   }
+  if (msg.chat.type === "private" && ADMIN_RE.test(t) && await esAdmin(msg.chat.id, alm)) {
+    try { return await procesarAdmin(t, web, alm); }
+    catch { return "No he podido hacerlo ahora mismo (almacén o web sin respuesta). Prueba en unos minutos."; }
+  }
   if (/^(aviso|avisos|avisame|mis avisos|borrar|quitar)\b/.test(t)) {
     try { return await procesarAvisos(t, textoCrudo, msg, lonjas, alm); }
     catch { return "No he podido guardar o leer tus avisos ahora mismo. Prueba en unos minutos."; }
@@ -284,3 +369,5 @@ module.exports.responder = responder;
 module.exports.sanear = sanear;
 module.exports.leerAviso = leerAviso;
 module.exports.evaluarAviso = evaluarAviso;
+module.exports.franjasDe = franjasDe;
+module.exports.sha256 = sha256;
