@@ -1,5 +1,5 @@
 {
- "fecha": "2026-11-19T17:46",
+ "fecha": "2026-11-19T18:03",
  "fuente": "Ministerio para la Transición Ecológica y el Reto Demográfico (Geoportal de gasolineras)",
  "fuente_url": "https://geoportalgasolineras.es/geoportal-instalaciones/Inicio",
  "unidad": "€/l",
@@ -9,7 +9,7 @@
   "n": 2259
  },
  "cyl": {
-  "media": 1.627,
+  "media": 1.626,
   "min": 1.379,
   "n": 167
  },
@@ -117,16 +117,16 @@
    "nombre": "Albacete",
    "cyl": false,
    "n": 40,
-   "media": 1.645,
+   "media": 1.644,
    "mediana": 1.689,
-   "min": 1.409,
+   "min": 1.369,
    "max": 1.979,
    "descartados": 1,
    "baratas": [
     {
      "id": "8958",
      "nombre": "La Remediadora",
-     "precio": 1.409,
+     "precio": 1.369,
      "municipio": "La Roda",
      "direccion": "Alfredo Atienza, 149-151",
      "localidad": "La Roda",
@@ -264,7 +264,7 @@
    "nombre": "Asturias",
    "cyl": false,
    "n": 60,
-   "media": 1.694,
+   "media": 1.695,
    "mediana": 1.707,
    "min": 1.43,
    "max": 1.809,
@@ -285,7 +285,7 @@
     {
      "id": "946",
      "nombre": "Galp",
-     "precio": 1.539,
+     "precio": 1.544,
      "municipio": "Nava",
      "direccion": "Carretera N-634 Km. 375,1",
      "localidad": "Nava",
@@ -691,7 +691,7 @@
    "nombre": "Burgos",
    "cyl": true,
    "n": 30,
-   "media": 1.592,
+   "media": 1.59,
    "mediana": 1.607,
    "min": 1.379,
    "max": 1.799,
@@ -710,6 +710,18 @@
      "lon": -2.932667
     },
     {
+     "id": "4908",
+     "nombre": "Beroil, S.l.",
+     "precio": 1.419,
+     "municipio": "Rubena",
+     "direccion": "N-I km 249",
+     "localidad": "Rubena",
+     "cp": "09199",
+     "horario": "L-D: 24H",
+     "lat": 42.37675,
+     "lon": -3.590833
+    },
+    {
      "id": "4934",
      "nombre": "E.s. Rivera",
      "precio": 1.429,
@@ -720,18 +732,6 @@
      "horario": "L-D: 07:30-23:00",
      "lat": 42.940389,
      "lon": -3.570556
-    },
-    {
-     "id": "8990",
-     "nombre": "Suministros Agrobureba, Sl",
-     "precio": 1.43,
-     "municipio": "Briviesca",
-     "direccion": "Ctra.cornudilla, Km.3,2",
-     "localidad": "Briviesca",
-     "cp": "09240",
-     "horario": "L-D: 24H",
-     "lat": 42.56325,
-     "lon": -3.331597
     }
    ],
    "todas": [
@@ -746,6 +746,18 @@
      "horario": "L-D: 06:30-22:30",
      "lat": 42.68575,
      "lon": -2.932667
+    },
+    {
+     "id": "4908",
+     "nombre": "Beroil, S.l.",
+     "precio": 1.419,
+     "municipio": "Rubena",
+     "direccion": "N-I km 249",
+     "localidad": "Rubena",
+     "cp": "09199",
+     "horario": "L-D: 24H",
+     "lat": 42.37675,
+     "lon": -3.590833
     },
     {
      "id": "4934",
@@ -818,18 +830,6 @@
      "horario": "L-D: 24H",
      "lat": 41.626083,
      "lon": -3.878722
-    },
-    {
-     "id": "4908",
-     "nombre": "Beroil, S.l.",
-     "precio": 1.479,
-     "municipio": "Rubena",
-     "direccion": "N-I km 249",
-     "localidad": "Rubena",
-     "cp": "09199",
-     "horario": "L-D: 24H",
-     "lat": 42.37675,
-     "lon": -3.590833
     },
     {
      "id": "12449",
@@ -966,7 +966,7 @@
     {
      "id": "5043",
      "nombre": "Galp",
-     "precio": 1.639,
+     "precio": 1.644,
      "municipio": "Valle de Losa",
      "direccion": "Carretera Bu-550 Km. 27",
      "localidad": "Quincoces de Yuso",
@@ -1446,7 +1446,7 @@
    "cyl": false,
    "n": 24,
    "media": 1.762,
-   "mediana": 1.769,
+   "mediana": 1.772,
    "min": 1.667,
    "max": 1.819,
    "descartados": 0,
@@ -3280,21 +3280,9 @@
      "lon": -4.51725
     },
     {
-     "id": "6401",
-     "nombre": "Galp",
-     "precio": 1.689,
-     "municipio": "Villacastín",
-     "direccion": "Autopista A6 Km. 0",
-     "localidad": "Villacastin",
-     "cp": "40150",
-     "horario": "L-D: 06:00-22:00",
-     "lat": 40.7975,
-     "lon": -4.462889
-    },
-    {
      "id": "6177",
      "nombre": "Galp",
-     "precio": 1.689,
+     "precio": 1.694,
      "municipio": "Villacastín",
      "direccion": "Autopista A6 Km. 0",
      "localidad": "Villacastin",
@@ -3302,6 +3290,18 @@
      "horario": "L-D: 24H",
      "lat": 40.7975,
      "lon": -4.460889
+    },
+    {
+     "id": "6401",
+     "nombre": "Galp",
+     "precio": 1.694,
+     "municipio": "Villacastín",
+     "direccion": "Autopista A6 Km. 0",
+     "localidad": "Villacastin",
+     "cp": "40150",
+     "horario": "L-D: 06:00-22:00",
+     "lat": 40.7975,
+     "lon": -4.462889
     },
     {
      "id": "6169",
