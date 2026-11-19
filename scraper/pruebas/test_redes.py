@@ -1,7 +1,7 @@
 """Calendario de redes (scraper/redes.py): qué toca en cada franja, archivos que crea y publicación simulada."""
 import shutil
 import subprocess
-from datetime import date, datetime
+from datetime import date, datetime, timedelta
 
 import pytest
 
@@ -222,3 +222,16 @@ def test_alubias_de_leon_los_viernes(redes):
     it = redes.elegir("legumbres", d, {}, date(2026, 11, 20))
     assert it["id"] == "2026-11-18-legumbres-leon" and "Canela" in it["texto"] and "Agria" not in it["texto"]
     assert redes.franja_pendiente(datetime(2026, 11, 20, 10, 47), {"franjas": {"2026-11-20": ["manana"]}}, date(2026, 11, 20)) == "legumbres"
+
+
+def test_publicacion_del_dia_no_repite_producto(redes, monkeypatch):
+    monkeypatch.setattr(redes, "_sesion", lambda *a: None)
+    monkeypatch.setattr(redes, "ranking", lambda d, k, h: {"clave": k} if k in ("centeno", "lechazo") else None)
+    monkeypatch.setattr(redes, "evolucion", lambda *a: None)
+    monkeypatch.setattr(redes, "texto_dia", lambda *a: "t")
+    jueves = date(2026, 11, 19)
+    assert redes.elegir("manana", {}, {}, jueves)["clave"] == "centeno"
+    ayer = {"registro": [{"id": "2026-11-18-dia-centeno"}]}
+    assert redes.elegir("manana", {}, ayer, jueves)["clave"] == "lechazo"
+    hace_tiempo = {"registro": [{"id": "2026-11-10-dia-centeno"}]}
+    assert redes.elegir("manana", {}, hace_tiempo, jueves)["clave"] == "centeno"

@@ -679,7 +679,10 @@ def elegir(franja: str, datos: dict, estado: dict, hoy: date) -> dict | None:
         if franja == "tarde":
             comp = [x for x in ig.pendientes(datos, estado, hoy) if x["tipo"] == "comparativa"]
             return comp[0] if comp else None
-        for k in PRODUCTO_DIA[dia:] + PRODUCTO_DIA[:dia]:
+        recientes = {r.get("id", "").split("-dia-")[-1] for r in estado.get("registro", [])
+                     if "-dia-" in r.get("id", "") and r["id"][:10] >= (hoy - timedelta(days=2)).isoformat()}
+        orden = PRODUCTO_DIA[dia:] + PRODUCTO_DIA[:dia]
+        for k in [k for k in orden if k not in recientes] + [k for k in orden if k in recientes]:   # sin repetir producto en días seguidos
             r = ranking(datos, k, hoy)
             if r:
                 return {"tipo": "dia", "id": f"{hoy}-dia-{k}", "clave": k, "texto": texto_dia(r, evolucion(datos, k, hoy)),
