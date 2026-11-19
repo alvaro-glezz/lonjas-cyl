@@ -203,6 +203,7 @@ def imagen_sesion(l: dict, destino: Path, web: str = WEB, filas: list[dict] | No
     f = l["fecha"]
     _cabecera(img, d, titulo or l.get("nombre", l["id"]), f"Sesión del {DIAS[date.fromisoformat(f).weekday()]} {fecha_larga(f)}")
     filas = filas if filas is not None else principales(l)
+    dec = 2 if titulo and any(not float(p["act"]).is_integer() for p in filas) else None   # 2,00 junto a 1,95
     y, alto_fila = 360, 90
     d.rounded_rectangle([50, y - 10, ANCHO - 50, y + alto_fila * len(filas) + 10], radius=28, fill=HOJA)
     for i, p in enumerate(filas):
@@ -210,7 +211,7 @@ def imagen_sesion(l: dict, destino: Path, web: str = WEB, filas: list[dict] | No
         if i:
             d.line([80, yy, ANCHO - 80, yy], fill=LINEA, width=2)
         d.text((80, yy + alto_fila / 2), _ajustar(d, p["producto"], _texto(34, 600), 400), font=_texto(34, 600), fill=TINTA, anchor="lm")
-        precio = num(p["act"])
+        precio = num(p["act"], dec)
         d.text((700, yy + alto_fila / 2 + 4), precio, font=_cifra(66), fill=TINTA, anchor="rm")
         d.text((710, yy + alto_fila / 2 + 10), _ajustar(d, p.get("unidad", ""), _texto(22), 130), font=_texto(22), fill=TENUE, anchor="lm")
         dc = cambio(p)

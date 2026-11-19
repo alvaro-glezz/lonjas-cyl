@@ -34,7 +34,8 @@ def patatas(datos: dict, hoy: date, mesa: str = "hortalizas") -> tuple[dict, lis
 def texto(l: dict, filas: list[dict], web: str = WEB, mesa: str = "hortalizas") -> str:
     f, m = l["fecha"], MESAS[mesa]
     lineas = [f"{m['emoji']} {m['titulo']} · sesión del {DIAS[date.fromisoformat(f).weekday()]} {corto(f)}", ""]
-    lineas += [f"{p['producto']}: {num(p['act'])} {p.get('unidad', '')} {texto_cambio(p)}".rstrip() for p in filas]
+    dec = 2 if any(not float(p["act"]).is_integer() for p in filas) else None
+    lineas += [f"{p['producto']}: {num(p['act'], dec)} {p.get('unidad', '')} {texto_cambio(p)}".rstrip() for p in filas]
     lineas += ["", "Cambio frente a la sesión anterior.", "", pie_texto(web),
                "Fuente: Lonja de León. Precios orientativos: confírmalos con tu lonja o comprador.", "",
                etiquetas(*m["etiquetas"])]
