@@ -1,5 +1,5 @@
 {
- "fecha": "2026-11-19T18:13",
+ "fecha": "2026-11-19T18:36",
  "fuente": "Ministerio para la Transición Ecológica y el Reto Demográfico (Geoportal de gasolineras)",
  "fuente_url": "https://geoportalgasolineras.es/geoportal-instalaciones/Inicio",
  "unidad": "€/l",
@@ -691,7 +691,7 @@
    "nombre": "Burgos",
    "cyl": true,
    "n": 30,
-   "media": 1.59,
+   "media": 1.586,
    "mediana": 1.607,
    "min": 1.379,
    "max": 1.799,
@@ -710,28 +710,28 @@
      "lon": -2.932667
     },
     {
-     "id": "4908",
-     "nombre": "Beroil, S.l.",
+     "id": "4970",
+     "nombre": "Beroil",
      "precio": 1.419,
-     "municipio": "Rubena",
-     "direccion": "N-I km 249",
-     "localidad": "Rubena",
-     "cp": "09199",
+     "municipio": "Estépar",
+     "direccion": "Carretera Nacional 620 Km. 20",
+     "localidad": "Estepar",
+     "cp": "09230",
      "horario": "L-D: 24H",
-     "lat": 42.37675,
-     "lon": -3.590833
+     "lat": 42.278444,
+     "lon": -3.89175
     },
     {
-     "id": "4934",
-     "nombre": "E.s. Rivera",
-     "precio": 1.429,
-     "municipio": "Villarcayo de Merindad de Castilla la Vieja",
-     "direccion": "Calle Calle San Roque (carretera Burgos-villarcayo), 13",
-     "localidad": "Villarcayo",
-     "cp": "09556",
-     "horario": "L-D: 07:30-23:00",
-     "lat": 42.940389,
-     "lon": -3.570556
+     "id": "13254",
+     "nombre": "Beroil",
+     "precio": 1.419,
+     "municipio": "Fuentecén",
+     "direccion": "Carretera N122 Km286 Km. 286",
+     "localidad": "Fuentecen",
+     "cp": "09315",
+     "horario": "L-D: 24H",
+     "lat": 41.626083,
+     "lon": -3.878722
     }
    ],
    "todas": [
@@ -746,6 +746,30 @@
      "horario": "L-D: 06:30-22:30",
      "lat": 42.68575,
      "lon": -2.932667
+    },
+    {
+     "id": "4970",
+     "nombre": "Beroil",
+     "precio": 1.419,
+     "municipio": "Estépar",
+     "direccion": "Carretera Nacional 620 Km. 20",
+     "localidad": "Estepar",
+     "cp": "09230",
+     "horario": "L-D: 24H",
+     "lat": 42.278444,
+     "lon": -3.89175
+    },
+    {
+     "id": "13254",
+     "nombre": "Beroil",
+     "precio": 1.419,
+     "municipio": "Fuentecén",
+     "direccion": "Carretera N122 Km286 Km. 286",
+     "localidad": "Fuentecen",
+     "cp": "09315",
+     "horario": "L-D: 24H",
+     "lat": 41.626083,
+     "lon": -3.878722
     },
     {
      "id": "4908",
@@ -806,30 +830,6 @@
      "horario": "L-D: 24H",
      "lat": 41.666444,
      "lon": -3.727861
-    },
-    {
-     "id": "4970",
-     "nombre": "Beroil",
-     "precio": 1.479,
-     "municipio": "Estépar",
-     "direccion": "Carretera Nacional 620 Km. 20",
-     "localidad": "Estepar",
-     "cp": "09230",
-     "horario": "L-D: 24H",
-     "lat": 42.278444,
-     "lon": -3.89175
-    },
-    {
-     "id": "13254",
-     "nombre": "Beroil",
-     "precio": 1.479,
-     "municipio": "Fuentecén",
-     "direccion": "Carretera N122 Km286 Km. 286",
-     "localidad": "Fuentecen",
-     "cp": "09315",
-     "horario": "L-D: 24H",
-     "lat": 41.626083,
-     "lon": -3.878722
     },
     {
      "id": "12449",
@@ -1396,7 +1396,7 @@
    "nombre": "Cuenca",
    "cyl": false,
    "n": 36,
-   "media": 1.546,
+   "media": 1.544,
    "mediana": 1.509,
    "min": 1.378,
    "max": 1.779,
@@ -1543,7 +1543,7 @@
    "nombre": "Granada",
    "cyl": false,
    "n": 58,
-   "media": 1.62,
+   "media": 1.619,
    "mediana": 1.629,
    "min": 1.459,
    "max": 1.819,
@@ -2281,16 +2281,16 @@
      "lon": -7.787361
     },
     {
-     "id": "15976",
-     "nombre": "Aira Oil Taboada",
+     "id": "543",
+     "nombre": "Galp",
      "precio": 1.599,
-     "municipio": "Taboada",
-     "direccion": "Poligono Parque Empresarial de Taboada S/n, S/n",
-     "localidad": "Taboada",
-     "cp": "27550",
-     "horario": "L-D: 24H",
-     "lat": 42.723917,
-     "lon": -7.770639
+     "municipio": "Lourenzá",
+     "direccion": "Carretera N-634 Km. 578",
+     "localidad": "Lourenza (casco Urbano)",
+     "cp": "27760",
+     "horario": "L-D: 07:00-21:00",
+     "lat": 43.490083,
+     "lon": -7.284139
     }
    ]
   },
