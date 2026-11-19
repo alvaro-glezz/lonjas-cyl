@@ -1,12 +1,12 @@
 {
- "fecha": "2026-11-19T14:57",
+ "fecha": "2026-11-19T17:46",
  "fuente": "Ministerio para la Transición Ecológica y el Reto Demográfico (Geoportal de gasolineras)",
  "fuente_url": "https://geoportalgasolineras.es/geoportal-instalaciones/Inicio",
  "unidad": "€/l",
  "espana": {
-  "media": 1.659,
+  "media": 1.658,
   "min": 1.349,
-  "n": 2258
+  "n": 2259
  },
  "cyl": {
   "media": 1.627,
@@ -264,16 +264,16 @@
    "nombre": "Asturias",
    "cyl": false,
    "n": 60,
-   "media": 1.695,
+   "media": 1.694,
    "mediana": 1.707,
-   "min": 1.46,
+   "min": 1.43,
    "max": 1.809,
    "descartados": 0,
    "baratas": [
     {
      "id": "10705",
      "nombre": "Estacion de Servicio Valle de Trubia S.l.",
-     "precio": 1.46,
+     "precio": 1.43,
      "municipio": "Proaza",
      "direccion": "Carretera As-228 Km. 13",
      "localidad": "Proaza",
@@ -313,7 +313,7 @@
    "nombre": "Ávila",
    "cyl": true,
    "n": 15,
-   "media": 1.697,
+   "media": 1.695,
    "mediana": 1.685,
    "min": 1.519,
    "max": 1.839,
@@ -344,16 +344,16 @@
      "lon": -4.728611
     },
     {
-     "id": "9432",
-     "nombre": "Repsol",
-     "precio": 1.639,
-     "municipio": "Piedrahíta",
-     "direccion": "C/ Extramuros - 6 (travesia Cn - 110)",
-     "localidad": "Piedrahita",
-     "cp": "05500",
-     "horario": "L-D: 07:00-23:00",
-     "lat": 40.465194,
-     "lon": -5.325556
+     "id": "5981",
+     "nombre": "Petronor",
+     "precio": 1.629,
+     "municipio": "San Pedro del Arroyo",
+     "direccion": "Calle Calzada, S/n",
+     "localidad": "San Pedro del Arroyo",
+     "cp": "05350",
+     "horario": "L-S: 07:00-23:00; D: 08:00-22:00",
+     "lat": 40.802917,
+     "lon": -4.873278
     }
    ],
    "todas": [
@@ -382,21 +382,9 @@
      "lon": -4.728611
     },
     {
-     "id": "9432",
-     "nombre": "Repsol",
-     "precio": 1.639,
-     "municipio": "Piedrahíta",
-     "direccion": "C/ Extramuros - 6 (travesia Cn - 110)",
-     "localidad": "Piedrahita",
-     "cp": "05500",
-     "horario": "L-D: 07:00-23:00",
-     "lat": 40.465194,
-     "lon": -5.325556
-    },
-    {
      "id": "5981",
      "nombre": "Petronor",
-     "precio": 1.639,
+     "precio": 1.629,
      "municipio": "San Pedro del Arroyo",
      "direccion": "Calle Calzada, S/n",
      "localidad": "San Pedro del Arroyo",
@@ -408,7 +396,7 @@
     {
      "id": "5980",
      "nombre": "Petronor",
-     "precio": 1.639,
+     "precio": 1.629,
      "municipio": "San Pedro del Arroyo",
      "direccion": "Calle Calzada, S/n",
      "localidad": "San Pedro del Arroyo",
@@ -416,6 +404,18 @@
      "horario": "L-S: 07:00-23:00; D: 08:00-22:00",
      "lat": 40.803111,
      "lon": -4.873083
+    },
+    {
+     "id": "9432",
+     "nombre": "Repsol",
+     "precio": 1.639,
+     "municipio": "Piedrahíta",
+     "direccion": "C/ Extramuros - 6 (travesia Cn - 110)",
+     "localidad": "Piedrahita",
+     "cp": "05500",
+     "horario": "L-D: 07:00-23:00",
+     "lat": 40.465194,
+     "lon": -5.325556
     },
     {
      "id": "14470",
@@ -593,8 +593,8 @@
    "nombre": "Barcelona",
    "cyl": false,
    "n": 38,
-   "media": 1.682,
-   "mediana": 1.707,
+   "media": 1.679,
+   "mediana": 1.698,
    "min": 1.45,
    "max": 1.937,
    "descartados": 0,
@@ -642,8 +642,8 @@
    "nombre": "Bizkaia",
    "cyl": false,
    "n": 12,
-   "media": 1.751,
-   "mediana": 1.789,
+   "media": 1.749,
+   "mediana": 1.787,
    "min": 1.57,
    "max": 1.829,
    "descartados": 0,
@@ -691,7 +691,7 @@
    "nombre": "Burgos",
    "cyl": true,
    "n": 30,
-   "media": 1.594,
+   "media": 1.592,
    "mediana": 1.607,
    "min": 1.379,
    "max": 1.799,
@@ -834,7 +834,7 @@
     {
      "id": "12449",
      "nombre": "Avia",
-     "precio": 1.539,
+     "precio": 1.499,
      "municipio": "Medina de Pomar",
      "direccion": "Poligono Navas, 1",
      "localidad": "Medina de Pomar",
@@ -1072,18 +1072,6 @@
      "lon": -3.999139
     },
     {
-     "id": "6025",
-     "nombre": "Repsol",
-     "precio": 1.799,
-     "municipio": "Villalmanzo",
-     "direccion": "Carretera A-1, Madrid-burgos Km. 203,000",
-     "localidad": "Villalmanzo",
-     "cp": "09390",
-     "horario": "L-D: 24H",
-     "lat": 42.041028,
-     "lon": -3.751667
-    },
-    {
      "id": "6026",
      "nombre": "Repsol",
      "precio": 1.799,
@@ -1094,6 +1082,18 @@
      "horario": "L-D: 24H",
      "lat": 42.040694,
      "lon": -3.752778
+    },
+    {
+     "id": "6025",
+     "nombre": "Repsol",
+     "precio": 1.799,
+     "municipio": "Villalmanzo",
+     "direccion": "Carretera A-1, Madrid-burgos Km. 203,000",
+     "localidad": "Villalmanzo",
+     "cp": "09390",
+     "horario": "L-D: 24H",
+     "lat": 42.041028,
+     "lon": -3.751667
     }
    ]
   },
@@ -1102,10 +1102,10 @@
    "nombre": "Cáceres",
    "cyl": false,
    "n": 50,
-   "media": 1.66,
+   "media": 1.658,
    "mediana": 1.685,
    "min": 1.349,
-   "max": 1.889,
+   "max": 1.805,
    "descartados": 0,
    "baratas": [
     {
@@ -1151,7 +1151,7 @@
    "nombre": "Cádiz",
    "cyl": false,
    "n": 32,
-   "media": 1.692,
+   "media": 1.691,
    "mediana": 1.703,
    "min": 1.498,
    "max": 1.842,
@@ -1347,7 +1347,7 @@
    "nombre": "Córdoba",
    "cyl": false,
    "n": 69,
-   "media": 1.672,
+   "media": 1.671,
    "mediana": 1.699,
    "min": 1.442,
    "max": 1.839,
@@ -1396,7 +1396,7 @@
    "nombre": "Cuenca",
    "cyl": false,
    "n": 36,
-   "media": 1.547,
+   "media": 1.546,
    "mediana": 1.509,
    "min": 1.378,
    "max": 1.779,
@@ -1415,6 +1415,18 @@
      "lon": -2.201361
     },
     {
+     "id": "9797",
+     "nombre": "San Isidro Labrador Soc. Coop. de Clm",
+     "precio": 1.396,
+     "municipio": "Belmonte",
+     "direccion": "Calle Ramon y Cajal, 42",
+     "localidad": "Belmonte",
+     "cp": "16640",
+     "horario": "L-D: 24H",
+     "lat": 39.554167,
+     "lon": -2.70975
+    },
+    {
      "id": "8899",
      "nombre": "Nt.s.de Manjavacas S.coop de Clm",
      "precio": 1.4,
@@ -1425,18 +1437,6 @@
      "horario": "L-D: 24H",
      "lat": 39.491111,
      "lon": -2.8865
-    },
-    {
-     "id": "12108",
-     "nombre": "Carburantes Muñoz Porras",
-     "precio": 1.42,
-     "municipio": "Santa María del Campo Rus",
-     "direccion": "Calle Camino del Cementerio, 3",
-     "localidad": "Santa Maria del Campo Rus",
-     "cp": "16621",
-     "horario": "L-D: 24H",
-     "lat": 39.562389,
-     "lon": -2.426222
     }
    ]
   },
@@ -1445,10 +1445,10 @@
    "nombre": "Gipuzkoa",
    "cyl": false,
    "n": 24,
-   "media": 1.763,
+   "media": 1.762,
    "mediana": 1.769,
    "min": 1.667,
-   "max": 1.829,
+   "max": 1.819,
    "descartados": 0,
    "baratas": [
     {
@@ -1493,12 +1493,12 @@
    "id": "17",
    "nombre": "Girona",
    "cyl": false,
-   "n": 49,
-   "media": 1.734,
-   "mediana": 1.765,
+   "n": 50,
+   "media": 1.733,
+   "mediana": 1.76,
    "min": 1.54,
    "max": 1.879,
-   "descartados": 0,
+   "descartados": 1,
    "baratas": [
     {
      "id": "9207",
@@ -1543,7 +1543,7 @@
    "nombre": "Granada",
    "cyl": false,
    "n": 58,
-   "media": 1.621,
+   "media": 1.62,
    "mediana": 1.629,
    "min": 1.459,
    "max": 1.819,
@@ -1641,7 +1641,7 @@
    "nombre": "Huelva",
    "cyl": false,
    "n": 42,
-   "media": 1.671,
+   "media": 1.67,
    "mediana": 1.705,
    "min": 1.4,
    "max": 1.963,
@@ -1788,7 +1788,7 @@
    "nombre": "Jaén",
    "cyl": false,
    "n": 121,
-   "media": 1.696,
+   "media": 1.695,
    "mediana": 1.703,
    "min": 1.409,
    "max": 1.869,
@@ -2250,10 +2250,10 @@
    "nombre": "Lugo",
    "cyl": false,
    "n": 51,
-   "media": 1.731,
+   "media": 1.729,
    "mediana": 1.735,
    "min": 1.509,
-   "max": 1.889,
+   "max": 1.859,
    "descartados": 0,
    "baratas": [
     {
@@ -2397,7 +2397,7 @@
    "nombre": "Murcia",
    "cyl": false,
    "n": 106,
-   "media": 1.647,
+   "media": 1.646,
    "mediana": 1.652,
    "min": 1.399,
    "max": 1.959,
@@ -2801,7 +2801,7 @@
    "cyl": true,
    "n": 20,
    "media": 1.641,
-   "mediana": 1.637,
+   "mediana": 1.632,
    "min": 1.477,
    "max": 1.769,
    "descartados": 0,
@@ -2953,6 +2953,18 @@
      "lon": -5.877528
     },
     {
+     "id": "4925",
+     "nombre": "Eumogas, Sl",
+     "precio": 1.629,
+     "municipio": "Villarmayor",
+     "direccion": "Carretera Cl-517 Km. 22,500",
+     "localidad": "Villarmayor",
+     "cp": "37130",
+     "horario": "L-V: 07:00-20:30; S: 08:00-20:30; D: 09:00-21:00",
+     "lat": 41.012083,
+     "lon": -5.970083
+    },
+    {
      "id": "4956",
      "nombre": "Estacion de Servicio Prieto, S.l.",
      "precio": 1.635,
@@ -2963,18 +2975,6 @@
      "horario": "L-V: 07:00-20:30; S: 08:00-16:00; D: 08:00-20:30",
      "lat": 41.0305,
      "lon": -6.222444
-    },
-    {
-     "id": "4925",
-     "nombre": "Eumogas, Sl",
-     "precio": 1.639,
-     "municipio": "Villarmayor",
-     "direccion": "Carretera Cl-517 Km. 22,500",
-     "localidad": "Villarmayor",
-     "cp": "37130",
-     "horario": "L-V: 07:00-20:30; S: 08:00-20:30; D: 09:00-21:00",
-     "lat": 41.012083,
-     "lon": -5.970083
     },
     {
      "id": "6208",
