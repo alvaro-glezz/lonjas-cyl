@@ -2,6 +2,7 @@
 
   redes:pausa:AAAA-MM-DD   lista JSON de franjas que NO se publican ese día («todo» = ninguna)
   redes:preparar           si existe: mandar las vistas previas de «La semana en las lonjas»
+  redes:previa_ficha       id de una ficha del Estudio: mandar su vista previa (la pide api/estudio.js)
   admin:chat_sha           huella SHA-256 del chat del dueño (TELEGRAM_ADMIN_CHAT): así Vercel sabe quién manda
                            sin guardar el número en Vercel ni en el código
 
@@ -63,6 +64,15 @@ def revisar(r, admin: str) -> bool:
     return bool(orden)
 
 
+def ficha_pedida(r) -> str:
+    """Id de la ficha del Estudio cuya vista previa se ha pedido (y borra la petición); "" si no hay."""
+    import re
+    fid = r("GET", "redes:previa_ficha") or ""
+    if fid:
+        r("DEL", "redes:previa_ficha")
+    return fid if re.fullmatch(r"[a-z0-9]{8,24}", fid) else ""
+
+
 if __name__ == "__main__":
     if "--revisar" in sys.argv:
         r = conectar()
@@ -70,8 +80,10 @@ if __name__ == "__main__":
             print("[ordenes] Sin almacén (Upstash): nada que revisar.")
             sys.exit(0)
         preparar = revisar(r, os.environ.get("TELEGRAM_ADMIN_CHAT", ""))
-        print("[ordenes] " + ("Orden: preparar las vistas previas de la semana." if preparar else "Sin órdenes nuevas."))
+        ficha = ficha_pedida(r)
+        print("[ordenes] " + ("Orden: preparar las vistas previas de la semana. " if preparar else "")
+              + (f"Vista previa de la ficha {ficha}." if ficha else "" if preparar else "Sin órdenes nuevas."))
         salida = os.environ.get("GITHUB_OUTPUT")
         if salida:
             with open(salida, "a", encoding="utf-8") as f:
-                f.write(f"preparar={'si' if preparar else 'no'}\n")
+                f.write(f"preparar={'si' if preparar else 'no'}\nficha={ficha}\n")

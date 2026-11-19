@@ -654,7 +654,15 @@ def _sesion(datos: dict, estado: dict, hoy: date) -> dict | None:
 def elegir(franja: str, datos: dict, estado: dict, hoy: date) -> dict | None:
     """Qué toca publicar en esa franja (o None). No crea archivos."""
     dia = hoy.weekday()
+    if franja.startswith("ficha:"):                 # reel del Estudio (vista previa o publicación a mano)
+        import fichas
+        f = next((x for x in fichas.leer() if x["id"] == franja.split(":", 1)[1]), None)
+        return fichas.item(f, hoy) if f else None
     if franja == "historia":
+        import fichas                                 # un reel del Estudio programado para hoy va primero
+        f = fichas.de_hoy(fichas.leer(), hoy, estado)
+        if f:
+            return fichas.item(f, hoy)
         import historias
         n = historias.siguiente(estado, hoy)
         if n:
@@ -727,6 +735,9 @@ def crear_archivos(item: dict, datos: dict, hoy: date, carpeta: Path) -> None:
     elif item["tipo"] == "hortalizas":
         import hortalizas
         hortalizas.imagen(datos, hoy, carpeta / item["imagenes"][0], item.get("mesa", "hortalizas"))
+    elif item["tipo"] == "ficha":
+        import fichas
+        fichas.reel(item["ficha"], carpeta / item["video"])
     elif item["tipo"] == "semana":
         import semana
         if not semana.reel(item["n"], carpeta / item["video"], datos, hoy, semana.leer_gasoleo()):

@@ -23,3 +23,4 @@ jobs:
       - run: node scraper/pruebas/js/test_telegram_api.js > /dev/null
       - run: node scraper/pruebas/js/test_uso_api.js
       - run: node scraper/pruebas/js/test_tiempo_api.js
+      - run: node scraper/pruebas/js/test_estudio_api.js

@@ -43,7 +43,8 @@ def llamar(token: str, metodo: str, datos: dict, archivos: dict | None = None) -
 
 
 def cabecera(franja: str, probar: bool) -> str:
-    nombre = f"Reel especial «{franja.split(':', 1)[1]}»" if franja.startswith("especial:") else FRANJAS.get(franja, franja)
+    nombre = (f"Reel especial «{franja.split(':', 1)[1]}»" if franja.startswith("especial:")
+              else "Reel del Estudio" if franja.startswith("ficha:") else FRANJAS.get(franja, franja))
     nombre = FRANJAS.get(franja.split(":")[0], nombre) if franja.startswith("semana-todas") else nombre
     voz = os.environ.get("KOKORO_VOZ", "") if os.environ.get("VOZ_MOTOR") == "kokoro" else "piper"
     t = f"📅 {nombre} · Instagram y Facebook" + (f"\n🔊 Voz: {voz}" if probar else "")
@@ -96,7 +97,8 @@ def resultado(estado: dict, hoy: date, probar: bool) -> str | None:
     franja = estado.get("franja", "?")
     if franja == "historias-todas" or franja.startswith("semana-todas"):
         return None
-    nombre = f"Reel especial «{franja.split(':', 1)[1]}»" if franja.startswith("especial:") else FRANJAS.get(franja, franja)
+    nombre = (f"Reel especial «{franja.split(':', 1)[1]}»" if franja.startswith("especial:")
+              else "Reel del Estudio" if franja.startswith("ficha:") else FRANJAS.get(franja, franja))
     if probar:
         return f"🧪 {nombre}: era una prueba, no se ha publicado."
     e = estado.get("error")

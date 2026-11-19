@@ -38,3 +38,9 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
         run: gh workflow run redes.yml -f franja=semana-todas -f probar=si
+      - name: Vista previa de una ficha del Estudio
+        if: steps.ordenes.outputs.ficha != ''
+        env:
+          GH_TOKEN: ${{ github.token }}
+          FICHA: ${{ steps.ordenes.outputs.ficha }}
+        run: gh workflow run redes.yml -f franja="ficha:$FICHA" -f probar=si
