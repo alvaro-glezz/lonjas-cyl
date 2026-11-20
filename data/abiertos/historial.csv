@@ -432,27 +432,34 @@ salamanca;salamanca-vacas;Vacas;€/kg canal;2026-11-16;6,06
 segovia;segovia-alfalfa-empacada;Alfalfa empacada;€/t;2026-10-29;215
 segovia;segovia-alfalfa-empacada;Alfalfa empacada;€/t;2026-11-05;215
 segovia;segovia-alfalfa-empacada;Alfalfa empacada;€/t;2026-11-12;220
+segovia;segovia-alfalfa-empacada;Alfalfa empacada;€/t;2026-11-19;220
 segovia;segovia-avena;Avena;€/t;2026-10-29;200
 segovia;segovia-avena;Avena;€/t;2026-11-05;198
 segovia;segovia-avena;Avena;€/t;2026-11-12;197
+segovia;segovia-avena;Avena;€/t;2026-11-19;198
 segovia;segovia-cebada-62-kg-hl;Cebada 62 kg/hl;€/t;2026-10-01;220
 segovia;segovia-cebada-62-kg-hl;Cebada 62 kg/hl;€/t;2026-10-08;223
 segovia;segovia-cebada-62-kg-hl;Cebada 62 kg/hl;€/t;2026-10-22;223
 segovia;segovia-cebada-62-kg-hl;Cebada 62 kg/hl;€/t;2026-10-29;223
 segovia;segovia-cebada-62-kg-hl;Cebada 62 kg/hl;€/t;2026-11-05;221
 segovia;segovia-cebada-62-kg-hl;Cebada 62 kg/hl;€/t;2026-11-12;221
+segovia;segovia-cebada-62-kg-hl;Cebada 62 kg/hl;€/t;2026-11-19;223
 segovia;segovia-centeno;Centeno;€/t;2026-10-29;209
 segovia;segovia-centeno;Centeno;€/t;2026-11-05;207
 segovia;segovia-centeno;Centeno;€/t;2026-11-12;207
+segovia;segovia-centeno;Centeno;€/t;2026-11-19;207
 segovia;segovia-cerda-desvieje-extra;Cerda desvieje extra;€/kg vivo;2026-10-29;0,27
 segovia;segovia-cerda-desvieje-extra;Cerda desvieje extra;€/kg vivo;2026-11-05;0,23
 segovia;segovia-cerda-desvieje-extra;Cerda desvieje extra;€/kg vivo;2026-11-12;0,23
+segovia;segovia-cerda-desvieje-extra;Cerda desvieje extra;€/kg vivo;2026-11-19;0,23
 segovia;segovia-cerda-desvieje-primera;Cerda desvieje primera;€/kg vivo;2026-10-29;0,18
 segovia;segovia-cerda-desvieje-primera;Cerda desvieje primera;€/kg vivo;2026-11-05;0,14
 segovia;segovia-cerda-desvieje-primera;Cerda desvieje primera;€/kg vivo;2026-11-12;0,14
+segovia;segovia-cerda-desvieje-primera;Cerda desvieje primera;€/kg vivo;2026-11-19;0,14
 segovia;segovia-cerdo-graso;Cerdo graso;€/kg vivo;2026-10-29;1,65
 segovia;segovia-cerdo-graso;Cerdo graso;€/kg vivo;2026-11-05;1,63
 segovia;segovia-cerdo-graso;Cerdo graso;€/kg vivo;2026-11-12;1,615
+segovia;segovia-cerdo-graso;Cerdo graso;€/kg vivo;2026-11-19;1,605
 segovia;segovia-cerdo-normal;Cerdo normal;€/kg vivo;2026-09-24;1,315
 segovia;segovia-cerdo-normal;Cerdo normal;€/kg vivo;2026-10-01;1,29
 segovia;segovia-cerdo-normal;Cerdo normal;€/kg vivo;2026-10-08;1,27
@@ -461,6 +468,7 @@ segovia;segovia-cerdo-normal;Cerdo normal;€/kg vivo;2026-10-22;1,21
 segovia;segovia-cerdo-normal;Cerdo normal;€/kg vivo;2026-10-29;1,17
 segovia;segovia-cerdo-normal;Cerdo normal;€/kg vivo;2026-11-05;1,135
 segovia;segovia-cerdo-normal;Cerdo normal;€/kg vivo;2026-11-12;1,105
+segovia;segovia-cerdo-normal;Cerdo normal;€/kg vivo;2026-11-19;1,085
 segovia;segovia-cerdo-selecto;Cerdo selecto;€/kg vivo;2026-09-24;1,327
 segovia;segovia-cerdo-selecto;Cerdo selecto;€/kg vivo;2026-10-01;1,302
 segovia;segovia-cerdo-selecto;Cerdo selecto;€/kg vivo;2026-10-08;1,282
@@ -469,60 +477,78 @@ segovia;segovia-cerdo-selecto;Cerdo selecto;€/kg vivo;2026-10-22;1,222
 segovia;segovia-cerdo-selecto;Cerdo selecto;€/kg vivo;2026-10-29;1,182
 segovia;segovia-cerdo-selecto;Cerdo selecto;€/kg vivo;2026-11-05;1,147
 segovia;segovia-cerdo-selecto;Cerdo selecto;€/kg vivo;2026-11-12;1,117
+segovia;segovia-cerdo-selecto;Cerdo selecto;€/kg vivo;2026-11-19;1,097
 segovia;segovia-cochinillos-sin-hierro;Cochinillos sin hierro;€/ud;2026-10-29;33
 segovia;segovia-cochinillos-sin-hierro;Cochinillos sin hierro;€/ud;2026-11-05;34
 segovia;segovia-cochinillos-sin-hierro;Cochinillos sin hierro;€/ud;2026-11-12;34
+segovia;segovia-cochinillos-sin-hierro;Cochinillos sin hierro;€/ud;2026-11-19;34
 segovia;segovia-cordero-28-1-34-kg;Cordero 28,1-34 kg;€/kg vivo;2026-10-29;5,24
 segovia;segovia-cordero-28-1-34-kg;Cordero 28,1-34 kg;€/kg vivo;2026-11-05;5,39
 segovia;segovia-cordero-28-1-34-kg;Cordero 28,1-34 kg;€/kg vivo;2026-11-12;5,49
+segovia;segovia-cordero-28-1-34-kg;Cordero 28,1-34 kg;€/kg vivo;2026-11-19;5,59
 segovia;segovia-cordero-extra-igp;Cordero Extra IGP;€/kg vivo;2026-10-29;10,55
 segovia;segovia-cordero-extra-igp;Cordero Extra IGP;€/kg vivo;2026-11-05;10,55
 segovia;segovia-cordero-extra-igp;Cordero Extra IGP;€/kg vivo;2026-11-12;10,6
+segovia;segovia-cordero-extra-igp;Cordero Extra IGP;€/kg vivo;2026-11-19;10,6
 segovia;segovia-cordero-segolechal;Cordero Segolechal;€/kg vivo;2026-10-29;9,89
 segovia;segovia-cordero-segolechal;Cordero Segolechal;€/kg vivo;2026-11-05;9,89
 segovia;segovia-cordero-segolechal;Cordero Segolechal;€/kg vivo;2026-11-12;9,94
+segovia;segovia-cordero-segolechal;Cordero Segolechal;€/kg vivo;2026-11-19;9,94
 segovia;segovia-forraje;Forraje;€/t;2026-10-29;135
 segovia;segovia-forraje;Forraje;€/t;2026-11-05;135
 segovia;segovia-forraje;Forraje;€/t;2026-11-12;140
+segovia;segovia-forraje;Forraje;€/t;2026-11-19;140
 segovia;segovia-forraje-veza-mezcla;Forraje veza mezcla;€/t;2026-10-29;160
 segovia;segovia-forraje-veza-mezcla;Forraje veza mezcla;€/t;2026-11-05;160
 segovia;segovia-forraje-veza-mezcla;Forraje veza mezcla;€/t;2026-11-12;165
+segovia;segovia-forraje-veza-mezcla;Forraje veza mezcla;€/t;2026-11-19;165
 segovia;segovia-girasol-9-2-44;Girasol 9-2-44;€/t;2026-10-29;502
 segovia;segovia-girasol-9-2-44;Girasol 9-2-44;€/t;2026-11-05;500
 segovia;segovia-girasol-9-2-44;Girasol 9-2-44;€/t;2026-11-12;500
 segovia;segovia-lechal-12-1-15-kg;Lechal 12,1-15 kg;€/kg vivo;2026-10-29;8,47
 segovia;segovia-lechal-12-1-15-kg;Lechal 12,1-15 kg;€/kg vivo;2026-11-05;8,62
 segovia;segovia-lechal-12-1-15-kg;Lechal 12,1-15 kg;€/kg vivo;2026-11-12;8,62
+segovia;segovia-lechal-12-1-15-kg;Lechal 12,1-15 kg;€/kg vivo;2026-11-19;8,72
 segovia;segovia-lechazo-10-12-kg;Lechazo 10-12 kg;€/kg vivo;2026-10-29;9,45
 segovia;segovia-lechazo-10-12-kg;Lechazo 10-12 kg;€/kg vivo;2026-11-05;9,45
 segovia;segovia-lechazo-10-12-kg;Lechazo 10-12 kg;€/kg vivo;2026-11-12;9,5
+segovia;segovia-lechazo-10-12-kg;Lechazo 10-12 kg;€/kg vivo;2026-11-19;9,5
 segovia;segovia-lechones-20-kg;Lechones 20 kg;€/ud;2026-10-29;37
 segovia;segovia-lechones-20-kg;Lechones 20 kg;€/ud;2026-11-05;35
 segovia;segovia-lechones-20-kg;Lechones 20 kg;€/ud;2026-11-12;35
+segovia;segovia-lechones-20-kg;Lechones 20 kg;€/ud;2026-11-19;36
 segovia;segovia-oveja-desvieje-1a;Oveja desvieje 1ª;€/kg vivo;2026-10-29;1,65
 segovia;segovia-oveja-desvieje-1a;Oveja desvieje 1ª;€/kg vivo;2026-11-05;1,7
 segovia;segovia-oveja-desvieje-1a;Oveja desvieje 1ª;€/kg vivo;2026-11-12;1,7
+segovia;segovia-oveja-desvieje-1a;Oveja desvieje 1ª;€/kg vivo;2026-11-19;1,8
 segovia;segovia-oveja-desvieje-2a;Oveja desvieje 2ª;€/kg vivo;2026-10-29;1,05
 segovia;segovia-oveja-desvieje-2a;Oveja desvieje 2ª;€/kg vivo;2026-11-05;1,1
 segovia;segovia-oveja-desvieje-2a;Oveja desvieje 2ª;€/kg vivo;2026-11-12;1,1
+segovia;segovia-oveja-desvieje-2a;Oveja desvieje 2ª;€/kg vivo;2026-11-19;1,2
 segovia;segovia-paja-empacada;Paja empacada;€/t;2026-10-29;67
 segovia;segovia-paja-empacada;Paja empacada;€/t;2026-11-05;67
 segovia;segovia-paja-empacada;Paja empacada;€/t;2026-11-12;68
+segovia;segovia-paja-empacada;Paja empacada;€/t;2026-11-19;68
 segovia;segovia-pascual-19-1-23-kg;Pascual 19,1-23 kg;€/kg vivo;2026-10-29;6,48
 segovia;segovia-pascual-19-1-23-kg;Pascual 19,1-23 kg;€/kg vivo;2026-11-05;6,63
 segovia;segovia-pascual-19-1-23-kg;Pascual 19,1-23 kg;€/kg vivo;2026-11-12;6,68
+segovia;segovia-pascual-19-1-23-kg;Pascual 19,1-23 kg;€/kg vivo;2026-11-19;6,78
 segovia;segovia-pascual-23-1-25-5-kg;Pascual 23,1-25,5 kg;€/kg vivo;2026-10-29;6,09
 segovia;segovia-pascual-23-1-25-5-kg;Pascual 23,1-25,5 kg;€/kg vivo;2026-11-05;6,24
 segovia;segovia-pascual-23-1-25-5-kg;Pascual 23,1-25,5 kg;€/kg vivo;2026-11-12;6,34
+segovia;segovia-pascual-23-1-25-5-kg;Pascual 23,1-25,5 kg;€/kg vivo;2026-11-19;6,44
 segovia;segovia-pascual-25-5-28-kg;Pascual 25,5-28 kg;€/kg vivo;2026-10-29;5,72
 segovia;segovia-pascual-25-5-28-kg;Pascual 25,5-28 kg;€/kg vivo;2026-11-05;5,87
 segovia;segovia-pascual-25-5-28-kg;Pascual 25,5-28 kg;€/kg vivo;2026-11-12;5,97
+segovia;segovia-pascual-25-5-28-kg;Pascual 25,5-28 kg;€/kg vivo;2026-11-19;6,07
 segovia;segovia-recental-15-1-19-kg;Recental 15,1-19 kg;€/kg vivo;2026-10-29;7,47
 segovia;segovia-recental-15-1-19-kg;Recental 15,1-19 kg;€/kg vivo;2026-11-05;7,62
 segovia;segovia-recental-15-1-19-kg;Recental 15,1-19 kg;€/kg vivo;2026-11-12;7,62
+segovia;segovia-recental-15-1-19-kg;Recental 15,1-19 kg;€/kg vivo;2026-11-19;7,72
 segovia;segovia-trigo-pienso-72-kg-hl;Trigo pienso 72 kg/hl;€/t;2026-10-01;230
 segovia;segovia-trigo-pienso-72-kg-hl;Trigo pienso 72 kg/hl;€/t;2026-10-08;232
 segovia;segovia-trigo-pienso-72-kg-hl;Trigo pienso 72 kg/hl;€/t;2026-10-22;232
 segovia;segovia-trigo-pienso-72-kg-hl;Trigo pienso 72 kg/hl;€/t;2026-10-29;231
 segovia;segovia-trigo-pienso-72-kg-hl;Trigo pienso 72 kg/hl;€/t;2026-11-05;229
 segovia;segovia-trigo-pienso-72-kg-hl;Trigo pienso 72 kg/hl;€/t;2026-11-12;228
+segovia;segovia-trigo-pienso-72-kg-hl;Trigo pienso 72 kg/hl;€/t;2026-11-19;228

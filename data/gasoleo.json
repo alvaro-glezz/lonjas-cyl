@@ -1,15 +1,15 @@
 {
- "fecha": "2026-11-19T22:29",
+ "fecha": "2026-11-20T14:56",
  "fuente": "Ministerio para la Transición Ecológica y el Reto Demográfico (Geoportal de gasolineras)",
  "fuente_url": "https://geoportalgasolineras.es/geoportal-instalaciones/Inicio",
  "unidad": "€/l",
  "espana": {
-  "media": 1.657,
-  "min": 1.349,
-  "n": 2259
+  "media": 1.65,
+  "min": 1.34,
+  "n": 2258
  },
  "cyl": {
-  "media": 1.624,
+  "media": 1.616,
   "min": 1.379,
   "n": 167
  },
@@ -19,8 +19,8 @@
    "nombre": "A Coruña",
    "cyl": false,
    "n": 89,
-   "media": 1.72,
-   "mediana": 1.755,
+   "media": 1.708,
+   "mediana": 1.735,
    "min": 1.453,
    "max": 1.859,
    "descartados": 0,
@@ -68,10 +68,10 @@
    "nombre": "Álava",
    "cyl": false,
    "n": 17,
-   "media": 1.711,
-   "mediana": 1.765,
+   "media": 1.704,
+   "mediana": 1.745,
    "min": 1.459,
-   "max": 1.837,
+   "max": 1.813,
    "descartados": 0,
    "baratas": [
     {
@@ -117,8 +117,8 @@
    "nombre": "Albacete",
    "cyl": false,
    "n": 40,
-   "media": 1.644,
-   "mediana": 1.689,
+   "media": 1.64,
+   "mediana": 1.679,
    "min": 1.369,
    "max": 1.979,
    "descartados": 1,
@@ -166,10 +166,10 @@
    "nombre": "Alicante",
    "cyl": false,
    "n": 52,
-   "media": 1.732,
-   "mediana": 1.735,
+   "media": 1.724,
+   "mediana": 1.729,
    "min": 1.55,
-   "max": 1.819,
+   "max": 1.809,
    "descartados": 0,
    "baratas": [
     {
@@ -215,10 +215,10 @@
    "nombre": "Almería",
    "cyl": false,
    "n": 63,
-   "media": 1.674,
+   "media": 1.671,
    "mediana": 1.699,
    "min": 1.469,
-   "max": 1.885,
+   "max": 1.849,
    "descartados": 1,
    "baratas": [
     {
@@ -248,7 +248,7 @@
     {
      "id": "11569",
      "nombre": "Repsol",
-     "precio": 1.49,
+     "precio": 1.47,
      "municipio": "Chirivel",
      "direccion": "Autovia A-92 Km. 385",
      "localidad": "Chirivel",
@@ -264,8 +264,8 @@
    "nombre": "Asturias",
    "cyl": false,
    "n": 60,
-   "media": 1.694,
-   "mediana": 1.707,
+   "media": 1.681,
+   "mediana": 1.699,
    "min": 1.43,
    "max": 1.809,
    "descartados": 0,
@@ -285,7 +285,7 @@
     {
      "id": "946",
      "nombre": "Galp",
-     "precio": 1.539,
+     "precio": 1.519,
      "municipio": "Nava",
      "direccion": "Carretera N-634 Km. 375,1",
      "localidad": "Nava",
@@ -297,7 +297,7 @@
     {
      "id": "16470",
      "nombre": "Valcarce",
-     "precio": 1.559,
+     "precio": 1.539,
      "municipio": "Siero",
      "direccion": "Poligono Poligono Industrial el Bravo Parc 3-4, 3",
      "localidad": "Granda",
@@ -313,7 +313,7 @@
    "nombre": "Ávila",
    "cyl": true,
    "n": 15,
-   "media": 1.689,
+   "media": 1.684,
    "mediana": 1.685,
    "min": 1.499,
    "max": 1.799,
@@ -344,16 +344,16 @@
      "lon": -4.990528
     },
     {
-     "id": "5981",
-     "nombre": "Petronor",
+     "id": "9432",
+     "nombre": "Repsol",
      "precio": 1.629,
-     "municipio": "San Pedro del Arroyo",
-     "direccion": "Calle Calzada, S/n",
-     "localidad": "San Pedro del Arroyo",
-     "cp": "05350",
-     "horario": "L-S: 07:00-23:00; D: 08:00-22:00",
-     "lat": 40.802917,
-     "lon": -4.873278
+     "municipio": "Piedrahíta",
+     "direccion": "C/ Extramuros - 6 (travesia Cn - 110)",
+     "localidad": "Piedrahita",
+     "cp": "05500",
+     "horario": "L-D: 07:00-23:00",
+     "lat": 40.465194,
+     "lon": -5.325556
     }
    ],
    "todas": [
@@ -382,6 +382,18 @@
      "lon": -4.990528
     },
     {
+     "id": "9432",
+     "nombre": "Repsol",
+     "precio": 1.629,
+     "municipio": "Piedrahíta",
+     "direccion": "C/ Extramuros - 6 (travesia Cn - 110)",
+     "localidad": "Piedrahita",
+     "cp": "05500",
+     "horario": "L-D: 07:00-23:00",
+     "lat": 40.465194,
+     "lon": -5.325556
+    },
+    {
      "id": "5981",
      "nombre": "Petronor",
      "precio": 1.629,
@@ -406,21 +418,9 @@
      "lon": -4.873083
     },
     {
-     "id": "9432",
-     "nombre": "Repsol",
-     "precio": 1.639,
-     "municipio": "Piedrahíta",
-     "direccion": "C/ Extramuros - 6 (travesia Cn - 110)",
-     "localidad": "Piedrahita",
-     "cp": "05500",
-     "horario": "L-D: 07:00-23:00",
-     "lat": 40.465194,
-     "lon": -5.325556
-    },
-    {
      "id": "14470",
      "nombre": "Valcarce",
-     "precio": 1.649,
+     "precio": 1.639,
      "municipio": "Hernansancho",
      "direccion": "Carretera Av-804 Km. 21",
      "localidad": "Hernansancho",
@@ -456,7 +456,7 @@
     {
      "id": "5990",
      "nombre": "F.coca P. S.l.",
-     "precio": 1.729,
+     "precio": 1.709,
      "municipio": "Madrigal de las Altas Torres",
      "direccion": "Carretera Cr C610 Km. 26,2",
      "localidad": "Madrigal Altas Torres",
@@ -468,7 +468,7 @@
     {
      "id": "4935",
      "nombre": "Fernandez Bermejo",
-     "precio": 1.74,
+     "precio": 1.72,
      "municipio": "Arenas de San Pedro",
      "direccion": "Carretera Avila-cordoba Km. 77",
      "localidad": "Ramacastañas",
@@ -480,7 +480,7 @@
     {
      "id": "4985",
      "nombre": "Moeve",
-     "precio": 1.745,
+     "precio": 1.725,
      "municipio": "Ávila",
      "direccion": "Carretera Burgohondo Km. 1",
      "localidad": "Avila",
@@ -544,7 +544,7 @@
    "nombre": "Badajoz",
    "cyl": false,
    "n": 80,
-   "media": 1.633,
+   "media": 1.627,
    "mediana": 1.599,
    "min": 1.36,
    "max": 1.89,
@@ -565,7 +565,7 @@
     {
      "id": "10137",
      "nombre": "Cooperativa Olivarera Cabeza del Buey",
-     "precio": 1.429,
+     "precio": 1.385,
      "municipio": "Cabeza del Buey",
      "direccion": "Carretera Puebla de Alcocer Km. 1",
      "localidad": "Cabeza del Buey",
@@ -577,7 +577,7 @@
     {
      "id": "12294",
      "nombre": "San Agustin de Obando Scl",
-     "precio": 1.43,
+     "precio": 1.4,
      "municipio": "Navalvillar de Pela",
      "direccion": "Calle Siglo Xxi, 7",
      "localidad": "Navalvillar de Pela",
@@ -593,10 +593,10 @@
    "nombre": "Barcelona",
    "cyl": false,
    "n": 38,
-   "media": 1.679,
-   "mediana": 1.698,
+   "media": 1.663,
+   "mediana": 1.689,
    "min": 1.45,
-   "max": 1.937,
+   "max": 1.83,
    "descartados": 0,
    "baratas": [
     {
@@ -624,16 +624,16 @@
      "lon": 2.271167
     },
     {
-     "id": "1668",
-     "nombre": "Feixas Aulet",
-     "precio": 1.499,
-     "municipio": "Manlleu",
-     "direccion": "Calle Francesc Puget Montfort, 2",
-     "localidad": "Manlleu",
-     "cp": "08560",
+     "id": "16006",
+     "nombre": "Primer Truck Area",
+     "precio": 1.489,
+     "municipio": "Vic",
+     "direccion": "Calle Susqueda, De, 16",
+     "localidad": "Vic",
+     "cp": "08500",
      "horario": "L-D: 24H",
-     "lat": 42.004306,
-     "lon": 2.296472
+     "lat": 41.954944,
+     "lon": 2.280194
     }
    ]
   },
@@ -642,28 +642,16 @@
    "nombre": "Bizkaia",
    "cyl": false,
    "n": 12,
-   "media": 1.749,
-   "mediana": 1.787,
-   "min": 1.57,
-   "max": 1.829,
+   "media": 1.739,
+   "mediana": 1.774,
+   "min": 1.549,
+   "max": 1.819,
    "descartados": 0,
    "baratas": [
     {
-     "id": "15",
-     "nombre": "Avia Ajarte",
-     "precio": 1.57,
-     "municipio": "Arrigorriaga",
-     "direccion": "Avenida Aixarte,",
-     "localidad": "Arrigorriaga",
-     "cp": "48480",
-     "horario": "L-V: 06:00-22:00; S-D: 07:00-22:00",
-     "lat": 43.201194,
-     "lon": -2.898583
-    },
-    {
      "id": "11093",
      "nombre": "Artea Oil , S.a.",
-     "precio": 1.579,
+     "precio": 1.549,
      "municipio": "Artea",
      "direccion": "CRTA. N-240 BILBAO - VITORIA (N-240 km 26)",
      "localidad": "Elejabeitia",
@@ -671,6 +659,18 @@
      "horario": "L-D: 06:00-22:00",
      "lat": 43.134111,
      "lon": -2.781
+    },
+    {
+     "id": "15",
+     "nombre": "Avia Ajarte",
+     "precio": 1.55,
+     "municipio": "Arrigorriaga",
+     "direccion": "Avenida Aixarte,",
+     "localidad": "Arrigorriaga",
+     "cp": "48480",
+     "horario": "L-V: 06:00-22:00; S-D: 07:00-22:00",
+     "lat": 43.201194,
+     "lon": -2.898583
     },
     {
      "id": "13389",
@@ -691,7 +691,7 @@
    "nombre": "Burgos",
    "cyl": true,
    "n": 30,
-   "media": 1.584,
+   "media": 1.579,
    "mediana": 1.607,
    "min": 1.379,
    "max": 1.799,
@@ -710,6 +710,18 @@
      "lon": -2.932667
     },
     {
+     "id": "9215",
+     "nombre": "Coridu",
+     "precio": 1.397,
+     "municipio": "Roa",
+     "direccion": "Carretera San Martin de Rubiales Km. 1",
+     "localidad": "Roa",
+     "cp": "09300",
+     "horario": "L-V: 09:00-14:00 y 16:00-19:00",
+     "lat": 41.690528,
+     "lon": -3.925778
+    },
+    {
      "id": "13238",
      "nombre": "Beroil",
      "precio": 1.419,
@@ -720,18 +732,6 @@
      "horario": "L-D: 24H",
      "lat": 41.666444,
      "lon": -3.727861
-    },
-    {
-     "id": "4970",
-     "nombre": "Beroil",
-     "precio": 1.419,
-     "municipio": "Estépar",
-     "direccion": "Carretera Nacional 620 Km. 20",
-     "localidad": "Estepar",
-     "cp": "09230",
-     "horario": "L-D: 24H",
-     "lat": 42.278444,
-     "lon": -3.89175
     }
    ],
    "todas": [
@@ -746,6 +746,18 @@
      "horario": "L-D: 06:30-22:30",
      "lat": 42.68575,
      "lon": -2.932667
+    },
+    {
+     "id": "9215",
+     "nombre": "Coridu",
+     "precio": 1.397,
+     "municipio": "Roa",
+     "direccion": "Carretera San Martin de Rubiales Km. 1",
+     "localidad": "Roa",
+     "cp": "09300",
+     "horario": "L-V: 09:00-14:00 y 16:00-19:00",
+     "lat": 41.690528,
+     "lon": -3.925778
     },
     {
      "id": "13238",
@@ -820,18 +832,6 @@
      "lon": -3.331597
     },
     {
-     "id": "9215",
-     "nombre": "Coridu",
-     "precio": 1.432,
-     "municipio": "Roa",
-     "direccion": "Carretera San Martin de Rubiales Km. 1",
-     "localidad": "Roa",
-     "cp": "09300",
-     "horario": "L-V: 09:00-14:00 y 16:00-19:00",
-     "lat": 41.690528,
-     "lon": -3.925778
-    },
-    {
      "id": "12449",
      "nombre": "Avia",
      "precio": 1.499,
@@ -842,6 +842,18 @@
      "horario": "L-D: 24H",
      "lat": 42.943167,
      "lon": -3.485278
+    },
+    {
+     "id": "8034",
+     "nombre": "Valcarce",
+     "precio": 1.539,
+     "municipio": "Estépar",
+     "direccion": "N-620 km 22",
+     "localidad": "Estepar",
+     "cp": "09230",
+     "horario": "L-D: 24H",
+     "lat": 42.275278,
+     "lon": -3.897222
     },
     {
      "id": "4750",
@@ -866,18 +878,6 @@
      "horario": "L-D: 24H",
      "lat": 42.536278,
      "lon": -3.312889
-    },
-    {
-     "id": "8034",
-     "nombre": "Valcarce",
-     "precio": 1.559,
-     "municipio": "Estépar",
-     "direccion": "N-620 km 22",
-     "localidad": "Estepar",
-     "cp": "09230",
-     "horario": "L-D: 24H",
-     "lat": 42.275278,
-     "lon": -3.897222
     },
     {
      "id": "14632",
@@ -940,6 +940,30 @@
      "lon": -3.061333
     },
     {
+     "id": "6046",
+     "nombre": "Petronor",
+     "precio": 1.625,
+     "municipio": "Valle de Mena",
+     "direccion": "Carretera C-6318 Km. 43,4",
+     "localidad": "Entrambasaguas",
+     "cp": "09585",
+     "horario": "L-D: 07:00-21:00",
+     "lat": 43.111639,
+     "lon": -3.266222
+    },
+    {
+     "id": "5054",
+     "nombre": "Repsol",
+     "precio": 1.629,
+     "municipio": "Fontioso",
+     "direccion": "Carretera A-1 Km. 187,800",
+     "localidad": "Fontioso",
+     "cp": "09349",
+     "horario": "L-V: 07:00-23:00; S: 08:00-22:00; D: 08:00-23:00",
+     "lat": 41.916222,
+     "lon": -3.751139
+    },
+    {
      "id": "4737",
      "nombre": "Avia",
      "precio": 1.629,
@@ -950,18 +974,6 @@
      "horario": "L: 07:00-23:00",
      "lat": 42.920389,
      "lon": -3.581222
-    },
-    {
-     "id": "5054",
-     "nombre": "Repsol",
-     "precio": 1.635,
-     "municipio": "Fontioso",
-     "direccion": "Carretera A-1 Km. 187,800",
-     "localidad": "Fontioso",
-     "cp": "09349",
-     "horario": "L-V: 07:00-23:00; S: 08:00-22:00; D: 08:00-23:00",
-     "lat": 41.916222,
-     "lon": -3.751139
     },
     {
      "id": "5043",
@@ -976,6 +988,18 @@
      "lon": -3.222722
     },
     {
+     "id": "6042",
+     "nombre": "Repsol",
+     "precio": 1.639,
+     "municipio": "Roa",
+     "direccion": "Carretera Bu-111 Ctra. Lerma-s.marin Rubiales Km. 28,500",
+     "localidad": "Roa",
+     "cp": "09300",
+     "horario": "L-D: 07:00-22:00",
+     "lat": 41.6985,
+     "lon": -3.923194
+    },
+    {
      "id": "11947",
      "nombre": "A.s. la Estacion de Espinosa",
      "precio": 1.649,
@@ -988,18 +1012,6 @@
      "lon": -3.542806
     },
     {
-     "id": "6042",
-     "nombre": "Repsol",
-     "precio": 1.655,
-     "municipio": "Roa",
-     "direccion": "Carretera Bu-111 Ctra. Lerma-s.marin Rubiales Km. 28,500",
-     "localidad": "Roa",
-     "cp": "09300",
-     "horario": "L-D: 07:00-22:00",
-     "lat": 41.6985,
-     "lon": -3.923194
-    },
-    {
      "id": "5548",
      "nombre": "Repsol",
      "precio": 1.668,
@@ -1010,18 +1022,6 @@
      "horario": "L-D: 07:00-22:00",
      "lat": 42.417333,
      "lon": -3.207111
-    },
-    {
-     "id": "6046",
-     "nombre": "Petronor",
-     "precio": 1.695,
-     "municipio": "Valle de Mena",
-     "direccion": "Carretera C-6318 Km. 43,4",
-     "localidad": "Entrambasaguas",
-     "cp": "09585",
-     "horario": "L-D: 07:00-21:00",
-     "lat": 43.111639,
-     "lon": -3.266222
     },
     {
      "id": "6004",
@@ -1072,18 +1072,6 @@
      "lon": -3.999139
     },
     {
-     "id": "6025",
-     "nombre": "Repsol",
-     "precio": 1.799,
-     "municipio": "Villalmanzo",
-     "direccion": "Carretera A-1, Madrid-burgos Km. 203,000",
-     "localidad": "Villalmanzo",
-     "cp": "09390",
-     "horario": "L-D: 24H",
-     "lat": 42.041028,
-     "lon": -3.751667
-    },
-    {
      "id": "6026",
      "nombre": "Repsol",
      "precio": 1.799,
@@ -1094,6 +1082,18 @@
      "horario": "L-D: 24H",
      "lat": 42.040694,
      "lon": -3.752778
+    },
+    {
+     "id": "6025",
+     "nombre": "Repsol",
+     "precio": 1.799,
+     "municipio": "Villalmanzo",
+     "direccion": "Carretera A-1, Madrid-burgos Km. 203,000",
+     "localidad": "Villalmanzo",
+     "cp": "09390",
+     "horario": "L-D: 24H",
+     "lat": 42.041028,
+     "lon": -3.751667
     }
    ]
   },
@@ -1102,10 +1102,10 @@
    "nombre": "Cáceres",
    "cyl": false,
    "n": 50,
-   "media": 1.656,
-   "mediana": 1.68,
+   "media": 1.648,
+   "mediana": 1.669,
    "min": 1.349,
-   "max": 1.805,
+   "max": 1.799,
    "descartados": 0,
    "baratas": [
     {
@@ -1135,7 +1135,7 @@
     {
      "id": "7595",
      "nombre": "Dst Belvis",
-     "precio": 1.46,
+     "precio": 1.47,
      "municipio": "Belvís de Monroy",
      "direccion": "Carretera Nacional V Km. 190",
      "localidad": "Belvis de Monroy",
@@ -1151,8 +1151,8 @@
    "nombre": "Cádiz",
    "cyl": false,
    "n": 32,
-   "media": 1.69,
-   "mediana": 1.703,
+   "media": 1.683,
+   "mediana": 1.699,
    "min": 1.498,
    "max": 1.842,
    "descartados": 0,
@@ -1200,8 +1200,8 @@
    "nombre": "Cantabria",
    "cyl": false,
    "n": 29,
-   "media": 1.704,
-   "mediana": 1.745,
+   "media": 1.697,
+   "mediana": 1.725,
    "min": 1.52,
    "max": 1.839,
    "descartados": 1,
@@ -1248,9 +1248,9 @@
    "id": "12",
    "nombre": "Castellón",
    "cyl": false,
-   "n": 51,
-   "media": 1.646,
-   "mediana": 1.659,
+   "n": 52,
+   "media": 1.642,
+   "mediana": 1.655,
    "min": 1.359,
    "max": 1.795,
    "descartados": 2,
@@ -1298,7 +1298,7 @@
    "nombre": "Ciudad Real",
    "cyl": false,
    "n": 78,
-   "media": 1.612,
+   "media": 1.607,
    "mediana": 1.589,
    "min": 1.429,
    "max": 1.844,
@@ -1317,6 +1317,18 @@
      "lon": -2.955028
     },
     {
+     "id": "8897",
+     "nombre": "El Rubial Soc. Coop.",
+     "precio": 1.431,
+     "municipio": "Villarrubia de los Ojos",
+     "direccion": "Carretera Cr-201 Km. 17",
+     "localidad": "Villarrubia de los Ojos",
+     "cp": "13670",
+     "horario": "L-D: 24H",
+     "lat": 39.211694,
+     "lon": -3.59675
+    },
+    {
      "id": "12514",
      "nombre": "Castillo de Montiel",
      "precio": 1.435,
@@ -1327,18 +1339,6 @@
      "horario": "L-D: 24H",
      "lat": 38.69975,
      "lon": -2.882583
-    },
-    {
-     "id": "15672",
-     "nombre": "Coovimag",
-     "precio": 1.438,
-     "municipio": "Bolaños de Calatrava",
-     "direccion": "Sector 5 los Calares, 1",
-     "localidad": "Bolaños de Calatrava",
-     "cp": "13260",
-     "horario": "L: 24H",
-     "lat": 38.897083,
-     "lon": -3.653778
     }
    ]
   },
@@ -1347,8 +1347,8 @@
    "nombre": "Córdoba",
    "cyl": false,
    "n": 69,
-   "media": 1.671,
-   "mediana": 1.699,
+   "media": 1.667,
+   "mediana": 1.679,
    "min": 1.442,
    "max": 1.839,
    "descartados": 0,
@@ -1396,8 +1396,8 @@
    "nombre": "Cuenca",
    "cyl": false,
    "n": 36,
-   "media": 1.543,
-   "mediana": 1.509,
+   "media": 1.54,
+   "mediana": 1.507,
    "min": 1.378,
    "max": 1.779,
    "descartados": 0,
@@ -1415,21 +1415,9 @@
      "lon": -2.201361
     },
     {
-     "id": "9797",
-     "nombre": "San Isidro Labrador Soc. Coop. de Clm",
-     "precio": 1.396,
-     "municipio": "Belmonte",
-     "direccion": "Calle Ramon y Cajal, 42",
-     "localidad": "Belmonte",
-     "cp": "16640",
-     "horario": "L-D: 24H",
-     "lat": 39.554167,
-     "lon": -2.70975
-    },
-    {
      "id": "8899",
      "nombre": "Nt.s.de Manjavacas S.coop de Clm",
-     "precio": 1.4,
+     "precio": 1.38,
      "municipio": "Mota del Cuervo",
      "direccion": "Camino del Campo S/n",
      "localidad": "Mota del Cuervo",
@@ -1437,6 +1425,18 @@
      "horario": "L-D: 24H",
      "lat": 39.491111,
      "lon": -2.8865
+    },
+    {
+     "id": "12108",
+     "nombre": "Carburantes Muñoz Porras",
+     "precio": 1.39,
+     "municipio": "Santa María del Campo Rus",
+     "direccion": "Calle Camino del Cementerio, 3",
+     "localidad": "Santa Maria del Campo Rus",
+     "cp": "16621",
+     "horario": "L-D: 24H",
+     "lat": 39.562389,
+     "lon": -2.426222
     }
    ]
   },
@@ -1445,16 +1445,16 @@
    "nombre": "Gipuzkoa",
    "cyl": false,
    "n": 24,
-   "media": 1.762,
-   "mediana": 1.769,
-   "min": 1.667,
+   "media": 1.751,
+   "mediana": 1.754,
+   "min": 1.632,
    "max": 1.819,
    "descartados": 0,
    "baratas": [
     {
      "id": "13489",
      "nombre": "Ids",
-     "precio": 1.667,
+     "precio": 1.632,
      "municipio": "Irun",
      "direccion": "Calle Mazuola, 4",
      "localidad": "Irun",
@@ -1494,12 +1494,24 @@
    "nombre": "Girona",
    "cyl": false,
    "n": 50,
-   "media": 1.733,
-   "mediana": 1.76,
-   "min": 1.52,
+   "media": 1.721,
+   "mediana": 1.742,
+   "min": 1.499,
    "max": 1.879,
    "descartados": 1,
    "baratas": [
+    {
+     "id": "1636",
+     "nombre": "Galp",
+     "precio": 1.499,
+     "municipio": "La Jonquera",
+     "direccion": "Carretera N-ii Km. 774",
+     "localidad": "La Jonquera",
+     "cp": "17700",
+     "horario": "L-D: 24H",
+     "lat": 42.410333,
+     "lon": 2.876306
+    },
     {
      "id": "9207",
      "nombre": "Enco Sant Jordi",
@@ -1513,28 +1525,16 @@
      "lon": 2.95875
     },
     {
-     "id": "13225",
-     "nombre": "Globaltank",
-     "precio": 1.549,
-     "municipio": "Vilamalla",
-     "direccion": "Avenida Europa D', 1",
-     "localidad": "Poligon Emporda Internacional",
-     "cp": "17469",
+     "id": "12115",
+     "nombre": "Calsina Carre",
+     "precio": 1.529,
+     "municipio": "Pont de Molins",
+     "direccion": "Cami del Roure, 5",
+     "localidad": "Pont de Molins",
+     "cp": "17706",
      "horario": "L-D: 24H",
-     "lat": 42.231139,
-     "lon": 2.979778
-    },
-    {
-     "id": "1636",
-     "nombre": "Galp",
-     "precio": 1.554,
-     "municipio": "La Jonquera",
-     "direccion": "Carretera N-ii Km. 774",
-     "localidad": "La Jonquera",
-     "cp": "17700",
-     "horario": "L-D: 24H",
-     "lat": 42.410333,
-     "lon": 2.876306
+     "lat": 42.317833,
+     "lon": 2.936389
     }
    ]
   },
@@ -1543,8 +1543,8 @@
    "nombre": "Granada",
    "cyl": false,
    "n": 58,
-   "media": 1.619,
-   "mediana": 1.629,
+   "media": 1.614,
+   "mediana": 1.624,
    "min": 1.459,
    "max": 1.819,
    "descartados": 0,
@@ -1592,8 +1592,8 @@
    "nombre": "Guadalajara",
    "cyl": false,
    "n": 11,
-   "media": 1.64,
-   "mediana": 1.655,
+   "media": 1.63,
+   "mediana": 1.635,
    "min": 1.499,
    "max": 1.739,
    "descartados": 0,
@@ -1625,7 +1625,7 @@
     {
      "id": "4878",
      "nombre": "Repsol",
-     "precio": 1.625,
+     "precio": 1.615,
      "municipio": "Atienza",
      "direccion": "Cr C-114, 59",
      "localidad": "Atienza",
@@ -1641,12 +1641,24 @@
    "nombre": "Huelva",
    "cyl": false,
    "n": 42,
-   "media": 1.669,
-   "mediana": 1.705,
-   "min": 1.4,
+   "media": 1.648,
+   "mediana": 1.675,
+   "min": 1.34,
    "max": 1.963,
-   "descartados": 2,
+   "descartados": 1,
    "baratas": [
+    {
+     "id": "11668",
+     "nombre": "Cooperativa Corchera",
+     "precio": 1.34,
+     "municipio": "Berrocal",
+     "direccion": "Carretera Hu-4103 Km. 29,5",
+     "localidad": "Berrocal",
+     "cp": "21647",
+     "horario": "L-D: 24H",
+     "lat": 37.60625,
+     "lon": -6.543583
+    },
     {
      "id": "8432",
      "nombre": "Deoil",
@@ -1670,18 +1682,6 @@
      "horario": "L-V: 07:30-21:30; S-D: 08:30-21:30",
      "lat": 37.243,
      "lon": -7.204889
-    },
-    {
-     "id": "12379",
-     "nombre": "Sat Condado",
-     "precio": 1.465,
-     "municipio": "Rociana del Condado",
-     "direccion": "Carretera Almonte de Km. 9",
-     "localidad": "Rociana del Condado",
-     "cp": "21720",
-     "horario": "L-D: 06:00-22:00",
-     "lat": 37.299722,
-     "lon": -6.593806
     }
    ]
   },
@@ -1690,8 +1690,8 @@
    "nombre": "Huesca",
    "cyl": false,
    "n": 57,
-   "media": 1.611,
-   "mediana": 1.629,
+   "media": 1.603,
+   "mediana": 1.605,
    "min": 1.398,
    "max": 1.784,
    "descartados": 0,
@@ -1738,9 +1738,9 @@
    "id": "07",
    "nombre": "Illes Balears",
    "cyl": false,
-   "n": 33,
-   "media": 1.783,
-   "mediana": 1.779,
+   "n": 34,
+   "media": 1.777,
+   "mediana": 1.769,
    "min": 1.509,
    "max": 2.099,
    "descartados": 0,
@@ -1787,11 +1787,11 @@
    "id": "23",
    "nombre": "Jaén",
    "cyl": false,
-   "n": 121,
-   "media": 1.695,
-   "mediana": 1.703,
+   "n": 120,
+   "media": 1.688,
+   "mediana": 1.699,
    "min": 1.409,
-   "max": 1.869,
+   "max": 1.849,
    "descartados": 0,
    "baratas": [
     {
@@ -1837,8 +1837,8 @@
    "nombre": "La Rioja",
    "cyl": false,
    "n": 29,
-   "media": 1.631,
-   "mediana": 1.675,
+   "media": 1.621,
+   "mediana": 1.649,
    "min": 1.459,
    "max": 1.799,
    "descartados": 0,
@@ -1886,16 +1886,16 @@
    "nombre": "León",
    "cyl": true,
    "n": 22,
-   "media": 1.619,
-   "mediana": 1.629,
-   "min": 1.459,
+   "media": 1.606,
+   "mediana": 1.627,
+   "min": 1.449,
    "max": 1.825,
    "descartados": 0,
    "baratas": [
     {
      "id": "8073",
      "nombre": "Valcarce",
-     "precio": 1.459,
+     "precio": 1.449,
      "municipio": "Vega de Valcarce",
      "direccion": "A-6, SALIDA 419/420 km 419",
      "localidad": "La Portela de Valcarce",
@@ -1933,7 +1933,7 @@
     {
      "id": "8073",
      "nombre": "Valcarce",
-     "precio": 1.459,
+     "precio": 1.449,
      "municipio": "Vega de Valcarce",
      "direccion": "A-6, SALIDA 419/420 km 419",
      "localidad": "La Portela de Valcarce",
@@ -1979,6 +1979,18 @@
      "lon": -5.60025
     },
     {
+     "id": "4912",
+     "nombre": "Valcarce",
+     "precio": 1.479,
+     "municipio": "Onzonilla",
+     "direccion": "Carretera Nacional 630 Km. 153,6",
+     "localidad": "Onzonilla",
+     "cp": "24231",
+     "horario": "L-D: 24H",
+     "lat": 42.534083,
+     "lon": -5.584028
+    },
+    {
      "id": "12400",
      "nombre": "Cooperativa San Blas",
      "precio": 1.479,
@@ -1989,18 +2001,6 @@
      "horario": "L-D: 24H",
      "lat": 42.375139,
      "lon": -5.935528
-    },
-    {
-     "id": "4912",
-     "nombre": "Valcarce",
-     "precio": 1.489,
-     "municipio": "Onzonilla",
-     "direccion": "Carretera Nacional 630 Km. 153,6",
-     "localidad": "Onzonilla",
-     "cp": "24231",
-     "horario": "L-D: 24H",
-     "lat": 42.534083,
-     "lon": -5.584028
     },
     {
      "id": "6070",
@@ -2051,6 +2051,18 @@
      "lon": -5.890694
     },
     {
+     "id": "6027",
+     "nombre": "Repsol",
+     "precio": 1.625,
+     "municipio": "Santa María del Páramo",
+     "direccion": "Carretera Mayorga Astorga Km. 46",
+     "localidad": "Santa Maria del Paramo",
+     "cp": "24240",
+     "horario": "L-D: 06:45-22:45",
+     "lat": 42.352028,
+     "lon": -5.739417
+    },
+    {
      "id": "5071",
      "nombre": "Campsa",
      "precio": 1.629,
@@ -2061,6 +2073,30 @@
      "horario": "L-V: 08:00-22:00; S: 08:00-15:00; D: 15:00-22:00",
      "lat": 42.462444,
      "lon": -5.579694
+    },
+    {
+     "id": "5540",
+     "nombre": "Repsol",
+     "precio": 1.629,
+     "municipio": "Astorga",
+     "direccion": "Cr N-6, 325",
+     "localidad": "Astorga",
+     "cp": "24700",
+     "horario": "L-D: 07:00-23:00",
+     "lat": 42.459917,
+     "lon": -6.064389
+    },
+    {
+     "id": "6076",
+     "nombre": "Saenz de Miera Sl",
+     "precio": 1.629,
+     "municipio": "Valencia de Don Juan",
+     "direccion": "Avenida Palanquinos, 2",
+     "localidad": "Valencia de Don Juan",
+     "cp": "24200",
+     "horario": "L-D: 06:00-00:00",
+     "lat": 42.296694,
+     "lon": -5.515528
     },
     {
      "id": "6013",
@@ -2075,33 +2111,9 @@
      "lon": -5.576833
     },
     {
-     "id": "6027",
-     "nombre": "Repsol",
-     "precio": 1.635,
-     "municipio": "Santa María del Páramo",
-     "direccion": "Carretera Mayorga Astorga Km. 46",
-     "localidad": "Santa Maria del Paramo",
-     "cp": "24240",
-     "horario": "L-D: 06:45-22:45",
-     "lat": 42.352028,
-     "lon": -5.739417
-    },
-    {
-     "id": "5540",
-     "nombre": "Repsol",
-     "precio": 1.639,
-     "municipio": "Astorga",
-     "direccion": "Cr N-6, 325",
-     "localidad": "Astorga",
-     "cp": "24700",
-     "horario": "L-D: 07:00-23:00",
-     "lat": 42.459917,
-     "lon": -6.064389
-    },
-    {
      "id": "6024",
      "nombre": "Repsol",
-     "precio": 1.659,
+     "precio": 1.649,
      "municipio": "Mansilla de las Mulas",
      "direccion": "Cr N-601 308",
      "localidad": "Mansilla de las Mulas",
@@ -2109,6 +2121,18 @@
      "horario": "L-D: 07:00-23:00",
      "lat": 42.495472,
      "lon": -5.414389
+    },
+    {
+     "id": "4993",
+     "nombre": "Cepsa",
+     "precio": 1.668,
+     "municipio": "Hospital de Órbigo",
+     "direccion": "Carretera Nacional 120 Km. 335",
+     "localidad": "Hospital de Orbigo",
+     "cp": "24286",
+     "horario": "L: 06:00-22:00",
+     "lat": 42.458556,
+     "lon": -5.882444
     },
     {
      "id": "11891",
@@ -2121,18 +2145,6 @@
      "horario": "L-V: 08:00-13:30 y 15:30-19:00",
      "lat": 42.64475,
      "lon": -5.58625
-    },
-    {
-     "id": "4993",
-     "nombre": "Cepsa",
-     "precio": 1.705,
-     "municipio": "Hospital de Órbigo",
-     "direccion": "Carretera Nacional 120 Km. 335",
-     "localidad": "Hospital de Orbigo",
-     "cp": "24286",
-     "horario": "L: 06:00-22:00",
-     "lat": 42.458556,
-     "lon": -5.882444
     },
     {
      "id": "5067",
@@ -2149,7 +2161,7 @@
     {
      "id": "5021",
      "nombre": "Moeve",
-     "precio": 1.769,
+     "precio": 1.749,
      "municipio": "Villadecanes",
      "direccion": "Carretera N-vi Km. 405",
      "localidad": "Toral de los Vados",
@@ -2171,18 +2183,6 @@
      "lon": -5.444278
     },
     {
-     "id": "6076",
-     "nombre": "Saenz de Miera Sl",
-     "precio": 1.799,
-     "municipio": "Valencia de Don Juan",
-     "direccion": "Avenida Palanquinos, 2",
-     "localidad": "Valencia de Don Juan",
-     "cp": "24200",
-     "horario": "L-D: 06:00-00:00",
-     "lat": 42.296694,
-     "lon": -5.515528
-    },
-    {
      "id": "4999",
      "nombre": "Cepsa",
      "precio": 1.825,
@@ -2201,10 +2201,10 @@
    "nombre": "Lleida",
    "cyl": false,
    "n": 55,
-   "media": 1.598,
-   "mediana": 1.587,
+   "media": 1.595,
+   "mediana": 1.579,
    "min": 1.394,
-   "max": 1.795,
+   "max": 1.799,
    "descartados": 0,
    "baratas": [
     {
@@ -2250,8 +2250,8 @@
    "nombre": "Lugo",
    "cyl": false,
    "n": 51,
-   "media": 1.729,
-   "mediana": 1.735,
+   "media": 1.716,
+   "mediana": 1.705,
    "min": 1.509,
    "max": 1.859,
    "descartados": 0,
@@ -2283,7 +2283,7 @@
     {
      "id": "543",
      "nombre": "Galp",
-     "precio": 1.599,
+     "precio": 1.574,
      "municipio": "Lourenzá",
      "direccion": "Carretera N-634 Km. 578",
      "localidad": "Lourenza (casco Urbano)",
@@ -2299,10 +2299,10 @@
    "nombre": "Madrid",
    "cyl": false,
    "n": 42,
-   "media": 1.73,
-   "mediana": 1.747,
+   "media": 1.722,
+   "mediana": 1.739,
    "min": 1.569,
-   "max": 1.859,
+   "max": 1.849,
    "descartados": 0,
    "baratas": [
     {
@@ -2348,7 +2348,7 @@
    "nombre": "Málaga",
    "cyl": false,
    "n": 35,
-   "media": 1.668,
+   "media": 1.662,
    "mediana": 1.699,
    "min": 1.395,
    "max": 1.929,
@@ -2367,6 +2367,18 @@
      "lon": -4.6615
     },
     {
+     "id": "9560",
+     "nombre": "Olivarera Trabuco",
+     "precio": 1.449,
+     "municipio": "Villanueva del Trabuco",
+     "direccion": "Carretera A-7203 Km. 2,2",
+     "localidad": "Villanueva del Trabuco",
+     "cp": "29313",
+     "horario": "L-D: 06:00-00:00",
+     "lat": 37.048,
+     "lon": -4.327167
+    },
+    {
      "id": "9128",
      "nombre": "S.c.a.a. Ntra. Señora del Carmen",
      "precio": 1.458,
@@ -2377,18 +2389,6 @@
      "horario": "L-D: 07:00-22:30",
      "lat": 37.267972,
      "lon": -4.417639
-    },
-    {
-     "id": "9560",
-     "nombre": "Olivarera Trabuco",
-     "precio": 1.479,
-     "municipio": "Villanueva del Trabuco",
-     "direccion": "Carretera A-7203 Km. 2,2",
-     "localidad": "Villanueva del Trabuco",
-     "cp": "29313",
-     "horario": "L-D: 06:00-00:00",
-     "lat": 37.048,
-     "lon": -4.327167
     }
    ]
   },
@@ -2397,28 +2397,28 @@
    "nombre": "Murcia",
    "cyl": false,
    "n": 106,
-   "media": 1.645,
-   "mediana": 1.652,
-   "min": 1.399,
-   "max": 1.959,
+   "media": 1.637,
+   "mediana": 1.644,
+   "min": 1.36,
+   "max": 1.929,
    "descartados": 2,
    "baratas": [
     {
-     "id": "2130",
-     "nombre": "Renesur-el Altiplano",
-     "precio": 1.399,
-     "municipio": "Jumilla",
-     "direccion": "Ctra. Nal. 344 Jumilla - Yecla (altiplano),",
-     "localidad": "Jumilla",
-     "cp": "30520",
-     "horario": "L-D: 00:00-23:59",
-     "lat": 38.56,
-     "lon": -1.270611
+     "id": "10050",
+     "nombre": "Frucimu",
+     "precio": 1.36,
+     "municipio": "Mula",
+     "direccion": "Ctra.caravaca, S/n",
+     "localidad": "Mula",
+     "cp": "30170",
+     "horario": "L-D: 24H",
+     "lat": 38.038472,
+     "lon": -1.501
     },
     {
      "id": "2105",
      "nombre": "Froet-gas",
-     "precio": 1.445,
+     "precio": 1.384,
      "municipio": "Molina de Segura",
      "direccion": "Av. Ciudad del Transporte, S/n",
      "localidad": "Molina de Segura",
@@ -2430,7 +2430,7 @@
     {
      "id": "11925",
      "nombre": "Froet-gas",
-     "precio": 1.445,
+     "precio": 1.384,
      "municipio": "Murcia",
      "direccion": "Avenida Fuente Alamo, 1",
      "localidad": "San Gines",
@@ -2446,8 +2446,8 @@
    "nombre": "Navarra",
    "cyl": false,
    "n": 103,
-   "media": 1.603,
-   "mediana": 1.559,
+   "media": 1.598,
+   "mediana": 1.549,
    "min": 1.439,
    "max": 1.849,
    "descartados": 0,
@@ -2465,6 +2465,18 @@
      "lon": -1.700306
     },
     {
+     "id": "11922",
+     "nombre": "E.s. Bardenas",
+     "precio": 1.463,
+     "municipio": "Tudela",
+     "direccion": "Poligono la Serna - Calle B - A68(n232) Salida 91, S/n",
+     "localidad": "Tudela",
+     "cp": "31500",
+     "horario": "L-D: 24H",
+     "lat": 42.076222,
+     "lon": -1.642889
+    },
+    {
      "id": "12279",
      "nombre": "An Energeticos - Artajona",
      "precio": 1.465,
@@ -2475,18 +2487,6 @@
      "horario": "L-D: 24H",
      "lat": 42.586972,
      "lon": -1.766083
-    },
-    {
-     "id": "12001",
-     "nombre": "An Energeticos - Cintruenigo Bodega Cirbonera",
-     "precio": 1.465,
-     "municipio": "Cintruénigo",
-     "direccion": "Poligono Poligono Industrial S/n, 2",
-     "localidad": "Cintruenigo",
-     "cp": "31592",
-     "horario": "L-D: 24H",
-     "lat": 42.072611,
-     "lon": -1.793361
     }
    ]
   },
@@ -2495,7 +2495,7 @@
    "nombre": "Ourense",
    "cyl": false,
    "n": 26,
-   "media": 1.736,
+   "media": 1.737,
    "mediana": 1.759,
    "min": 1.5,
    "max": 1.809,
@@ -2544,10 +2544,10 @@
    "nombre": "Palencia",
    "cyl": true,
    "n": 13,
-   "media": 1.556,
+   "media": 1.551,
    "mediana": 1.5,
    "min": 1.488,
-   "max": 1.735,
+   "max": 1.715,
    "descartados": 0,
    "baratas": [
     {
@@ -2687,7 +2687,7 @@
     {
      "id": "4953",
      "nombre": "Los Linares",
-     "precio": 1.569,
+     "precio": 1.549,
      "municipio": "Barruelo de Santullán",
      "direccion": "AGUILAR-BARRUELO km 13,3",
      "localidad": "Barruelo de Santullan",
@@ -2695,6 +2695,18 @@
      "horario": "L-V: 08:00-21:00; S-D: 09:00-14:30 y 16:30-21:00",
      "lat": 42.894639,
      "lon": -4.287667
+    },
+    {
+     "id": "13376",
+     "nombre": "Repsol",
+     "precio": 1.629,
+     "municipio": "Aguilar de Campoo",
+     "direccion": "Autovia A-67 Km. 116,600",
+     "localidad": "Aguilar de Campoo",
+     "cp": "34800",
+     "horario": "L-D: 24H",
+     "lat": 42.86725,
+     "lon": -4.154528
     },
     {
      "id": "6314",
@@ -2707,18 +2719,6 @@
      "horario": "L-S: 07:00-22:00; D: 08:00-22:00",
      "lat": 42.264278,
      "lon": -4.406917
-    },
-    {
-     "id": "13376",
-     "nombre": "Repsol",
-     "precio": 1.649,
-     "municipio": "Aguilar de Campoo",
-     "direccion": "Autovia A-67 Km. 116,600",
-     "localidad": "Aguilar de Campoo",
-     "cp": "34800",
-     "horario": "L-D: 24H",
-     "lat": 42.86725,
-     "lon": -4.154528
     },
     {
      "id": "4740",
@@ -2735,7 +2735,7 @@
     {
      "id": "7751",
      "nombre": "Cepsa",
-     "precio": 1.735,
+     "precio": 1.715,
      "municipio": "Villodrigo",
      "direccion": "Carretera N-620a Km. 42,9",
      "localidad": "Villodrigo",
@@ -2751,8 +2751,8 @@
    "nombre": "Pontevedra",
    "cyl": false,
    "n": 34,
-   "media": 1.657,
-   "mediana": 1.649,
+   "media": 1.652,
+   "mediana": 1.634,
    "min": 1.559,
    "max": 1.869,
    "descartados": 0,
@@ -2800,10 +2800,10 @@
    "nombre": "Salamanca",
    "cyl": true,
    "n": 20,
-   "media": 1.641,
-   "mediana": 1.632,
+   "media": 1.63,
+   "mediana": 1.629,
    "min": 1.477,
-   "max": 1.769,
+   "max": 1.765,
    "descartados": 0,
    "baratas": [
     {
@@ -2883,7 +2883,7 @@
     {
      "id": "4741",
      "nombre": "El Trebol",
-     "precio": 1.629,
+     "precio": 1.619,
      "municipio": "Calvarrasa de Arriba",
      "direccion": "*EL TREBOL* CR.ALBA DE TORMES-PIEDRAHITA KM 5.200 km 8,7",
      "localidad": "Calvarrasa de Arriba",
@@ -2891,6 +2891,66 @@
      "horario": "L-S: 07:00-22:00; D: 08:00-22:00",
      "lat": 40.894167,
      "lon": -5.58675
+    },
+    {
+     "id": "4952",
+     "nombre": "El Trebol",
+     "precio": 1.619,
+     "municipio": "Salamanca",
+     "direccion": "(EL TREBOL) CTRA. FREGENEDA Nº 12-22 SALAMANCA",
+     "localidad": "Salamanca",
+     "cp": "37008",
+     "horario": "L-S: 07:00-22:00; D: 08:00-22:00",
+     "lat": 40.955806,
+     "lon": -5.67275
+    },
+    {
+     "id": "6164",
+     "nombre": "Repsol",
+     "precio": 1.619,
+     "municipio": "Ciudad Rodrigo",
+     "direccion": "Carretera N-620 Km. 313,3",
+     "localidad": "Valdecarpinteros",
+     "cp": "37593",
+     "horario": "L-D: 24H",
+     "lat": 40.664167,
+     "lon": -6.437528
+    },
+    {
+     "id": "4747",
+     "nombre": "El Trebol",
+     "precio": 1.619,
+     "municipio": "Vecinos",
+     "direccion": "(EL TREBOL) AVD. JOSE ANTONIO Nº 7 (SALAMANCA-CORIA km 30,4)",
+     "localidad": "Vecinos",
+     "cp": "37450",
+     "horario": "L-S: 07:00-22:00; D: 08:00-22:00",
+     "lat": 40.777472,
+     "lon": -5.877528
+    },
+    {
+     "id": "4956",
+     "nombre": "Estacion de Servicio Prieto, S.l.",
+     "precio": 1.625,
+     "municipio": "Villar de Peralonso",
+     "direccion": "CTRA. C-517 km 49",
+     "localidad": "Villar de Peralonso",
+     "cp": "37147",
+     "horario": "L-V: 07:00-20:30; S: 08:00-16:00; D: 08:00-20:30",
+     "lat": 41.0305,
+     "lon": -6.222444
+    },
+    {
+     "id": "6208",
+     "nombre": "Repsol",
+     "precio": 1.629,
+     "municipio": "Béjar",
+     "direccion": "Cl Crta de Salamanca, 3",
+     "localidad": "Bejar",
+     "cp": "37700",
+     "horario": "L-D: 24H",
+     "lat": 40.384167,
+     "lon": -5.762306
     },
     {
      "id": "11883",
@@ -2905,54 +2965,6 @@
      "lon": -5.982778
     },
     {
-     "id": "4952",
-     "nombre": "El Trebol",
-     "precio": 1.629,
-     "municipio": "Salamanca",
-     "direccion": "(EL TREBOL) CTRA. FREGENEDA Nº 12-22 SALAMANCA",
-     "localidad": "Salamanca",
-     "cp": "37008",
-     "horario": "L-S: 07:00-22:00; D: 08:00-22:00",
-     "lat": 40.955806,
-     "lon": -5.67275
-    },
-    {
-     "id": "10879",
-     "nombre": "Repsol",
-     "precio": 1.629,
-     "municipio": "Sancti-Spíritus",
-     "direccion": "Autovia A-62 Km. 309",
-     "localidad": "Sancti-spiritus",
-     "cp": "37470",
-     "horario": "L-D: 24H",
-     "lat": 40.711833,
-     "lon": -6.38775
-    },
-    {
-     "id": "6164",
-     "nombre": "Repsol",
-     "precio": 1.629,
-     "municipio": "Ciudad Rodrigo",
-     "direccion": "Carretera N-620 Km. 313,3",
-     "localidad": "Valdecarpinteros",
-     "cp": "37593",
-     "horario": "L-D: 24H",
-     "lat": 40.664167,
-     "lon": -6.437528
-    },
-    {
-     "id": "4747",
-     "nombre": "El Trebol",
-     "precio": 1.629,
-     "municipio": "Vecinos",
-     "direccion": "(EL TREBOL) AVD. JOSE ANTONIO Nº 7 (SALAMANCA-CORIA km 30,4)",
-     "localidad": "Vecinos",
-     "cp": "37450",
-     "horario": "L-S: 07:00-22:00; D: 08:00-22:00",
-     "lat": 40.777472,
-     "lon": -5.877528
-    },
-    {
      "id": "4925",
      "nombre": "Eumogas, Sl",
      "precio": 1.629,
@@ -2965,33 +2977,33 @@
      "lon": -5.970083
     },
     {
-     "id": "4956",
-     "nombre": "Estacion de Servicio Prieto, S.l.",
-     "precio": 1.635,
-     "municipio": "Villar de Peralonso",
-     "direccion": "CTRA. C-517 km 49",
-     "localidad": "Villar de Peralonso",
-     "cp": "37147",
-     "horario": "L-V: 07:00-20:30; S: 08:00-16:00; D: 08:00-20:30",
-     "lat": 41.0305,
-     "lon": -6.222444
+     "id": "8780",
+     "nombre": "Repsol",
+     "precio": 1.639,
+     "municipio": "Lumbrales",
+     "direccion": "Carretera Estacion Km. 89",
+     "localidad": "Lumbrales",
+     "cp": "37240",
+     "horario": "L-V: 07:00-21:00; S-D: 08:00-21:00",
+     "lat": 40.937472,
+     "lon": -6.710583
     },
     {
-     "id": "6208",
+     "id": "10879",
      "nombre": "Repsol",
-     "precio": 1.659,
-     "municipio": "Béjar",
-     "direccion": "Cl Crta de Salamanca, 3",
-     "localidad": "Bejar",
-     "cp": "37700",
+     "precio": 1.639,
+     "municipio": "Sancti-Spíritus",
+     "direccion": "Autovia A-62 Km. 309",
+     "localidad": "Sancti-spiritus",
+     "cp": "37470",
      "horario": "L-D: 24H",
-     "lat": 40.384167,
-     "lon": -5.762306
+     "lat": 40.711833,
+     "lon": -6.38775
     },
     {
      "id": "6303",
      "nombre": "Campsa",
-     "precio": 1.659,
+     "precio": 1.649,
      "municipio": "Ciudad Rodrigo",
      "direccion": "Avenida Portugal, 47",
      "localidad": "Ciudad Rodrigo",
@@ -3003,7 +3015,7 @@
     {
      "id": "4958",
      "nombre": "Shell",
-     "precio": 1.659,
+     "precio": 1.649,
      "municipio": "Sancti-Spíritus",
      "direccion": "N-620 km 309,2",
      "localidad": "Sancti-spiritus",
@@ -3013,16 +3025,16 @@
      "lon": -6.416278
     },
     {
-     "id": "8780",
+     "id": "6223",
      "nombre": "Repsol",
-     "precio": 1.669,
-     "municipio": "Lumbrales",
-     "direccion": "Carretera Estacion Km. 89",
-     "localidad": "Lumbrales",
-     "cp": "37240",
-     "horario": "L-V: 07:00-21:00; S-D: 08:00-21:00",
-     "lat": 40.937472,
-     "lon": -6.710583
+     "precio": 1.659,
+     "municipio": "Robleda",
+     "direccion": "Avenida Extremadura, 1",
+     "localidad": "Robleda",
+     "cp": "37521",
+     "horario": "L-S: 07:00-22:00; D: 08:00-22:00",
+     "lat": 40.386889,
+     "lon": -6.60825
     },
     {
      "id": "6209",
@@ -3037,16 +3049,16 @@
      "lon": -5.697028
     },
     {
-     "id": "6223",
+     "id": "6349",
      "nombre": "Repsol",
-     "precio": 1.679,
-     "municipio": "Robleda",
-     "direccion": "Avenida Extremadura, 1",
-     "localidad": "Robleda",
-     "cp": "37521",
-     "horario": "L-S: 07:00-22:00; D: 08:00-22:00",
-     "lat": 40.386889,
-     "lon": -6.60825
+     "precio": 1.699,
+     "municipio": "Tamames",
+     "direccion": "Avenida Abusejo, 5",
+     "localidad": "Tamames",
+     "cp": "37600",
+     "horario": "L-D: 07:00-23:00",
+     "lat": 40.659917,
+     "lon": -6.113917
     },
     {
      "id": "6189",
@@ -3071,18 +3083,6 @@
      "horario": "L: 07:30-22:00",
      "lat": 40.789167,
      "lon": -6.249889
-    },
-    {
-     "id": "6349",
-     "nombre": "Repsol",
-     "precio": 1.769,
-     "municipio": "Tamames",
-     "direccion": "Avenida Abusejo, 5",
-     "localidad": "Tamames",
-     "cp": "37600",
-     "horario": "L-D: 07:00-23:00",
-     "lat": 40.659917,
-     "lon": -6.113917
     }
    ]
   },
@@ -3091,16 +3091,16 @@
    "nombre": "Segovia",
    "cyl": true,
    "n": 20,
-   "media": 1.671,
-   "mediana": 1.669,
-   "min": 1.483,
+   "media": 1.659,
+   "mediana": 1.667,
+   "min": 1.427,
    "max": 1.813,
    "descartados": 0,
    "baratas": [
     {
      "id": "9384",
      "nombre": "An Energeticos - Fuentesauco Glus I",
-     "precio": 1.483,
+     "precio": 1.427,
      "municipio": "Fuentesaúco de Fuentidueña",
      "direccion": "Carretera Fuentesauco - Vegafria Km. 0,6",
      "localidad": "Fuentesauco Fuentidueña",
@@ -3122,23 +3122,23 @@
      "lon": -4.253806
     },
     {
-     "id": "4960",
-     "nombre": "Repostar",
-     "precio": 1.559,
-     "municipio": "Hontalbilla",
-     "direccion": "Carrera Riaza a Toro, Sn",
-     "localidad": "Hontalbilla",
-     "cp": "40353",
+     "id": "6329",
+     "nombre": "G Cantalejo",
+     "precio": 1.529,
+     "municipio": "Cantalejo",
+     "direccion": "Carretera Segovia Km. 4",
+     "localidad": "Cantalejo",
+     "cp": "40320",
      "horario": "L-D: 24H",
-     "lat": 41.347444,
-     "lon": -4.119111
+     "lat": 41.255389,
+     "lon": -3.929
     }
    ],
    "todas": [
     {
      "id": "9384",
      "nombre": "An Energeticos - Fuentesauco Glus I",
-     "precio": 1.483,
+     "precio": 1.427,
      "municipio": "Fuentesaúco de Fuentidueña",
      "direccion": "Carretera Fuentesauco - Vegafria Km. 0,6",
      "localidad": "Fuentesauco Fuentidueña",
@@ -3160,6 +3160,18 @@
      "lon": -4.253806
     },
     {
+     "id": "6329",
+     "nombre": "G Cantalejo",
+     "precio": 1.529,
+     "municipio": "Cantalejo",
+     "direccion": "Carretera Segovia Km. 4",
+     "localidad": "Cantalejo",
+     "cp": "40320",
+     "horario": "L-D: 24H",
+     "lat": 41.255389,
+     "lon": -3.929
+    },
+    {
      "id": "4960",
      "nombre": "Repostar",
      "precio": 1.559,
@@ -3170,6 +3182,18 @@
      "horario": "L-D: 24H",
      "lat": 41.347444,
      "lon": -4.119111
+    },
+    {
+     "id": "6226",
+     "nombre": "Bravoil",
+     "precio": 1.599,
+     "municipio": "San Miguel de Bernuy",
+     "direccion": "Cr C-603, 65",
+     "localidad": "San Miguel de Bernuy",
+     "cp": "40332",
+     "horario": "L-S: 07:00-22:00; D: 08:00-15:00",
+     "lat": 41.397417,
+     "lon": -3.952194
     },
     {
      "id": "6235",
@@ -3184,30 +3208,6 @@
      "lon": -3.383889
     },
     {
-     "id": "6329",
-     "nombre": "G Cantalejo",
-     "precio": 1.609,
-     "municipio": "Cantalejo",
-     "direccion": "Carretera Segovia Km. 4",
-     "localidad": "Cantalejo",
-     "cp": "40320",
-     "horario": "L-D: 24H",
-     "lat": 41.255389,
-     "lon": -3.929
-    },
-    {
-     "id": "6226",
-     "nombre": "Bravoil",
-     "precio": 1.618,
-     "municipio": "San Miguel de Bernuy",
-     "direccion": "Cr C-603, 65",
-     "localidad": "San Miguel de Bernuy",
-     "cp": "40332",
-     "horario": "L-S: 07:00-22:00; D: 08:00-15:00",
-     "lat": 41.397417,
-     "lon": -3.952194
-    },
-    {
      "id": "11793",
      "nombre": "Cepsa E.s. Torrecaballeros (llorsoil)",
      "precio": 1.619,
@@ -3218,6 +3218,18 @@
      "horario": "L-D: 07:30-22:00",
      "lat": 40.986139,
      "lon": -4.040444
+    },
+    {
+     "id": "6283",
+     "nombre": "Repsol",
+     "precio": 1.629,
+     "municipio": "Gomezserracín",
+     "direccion": "Autovia Cl 601 Km. 63",
+     "localidad": "Gomezserracin",
+     "cp": "40240",
+     "horario": "L-S: 07:00-22:00; D: 09:00-22:00",
+     "lat": 41.291694,
+     "lon": -4.299639
     },
     {
      "id": "6373",
@@ -3232,16 +3244,16 @@
      "lon": -4.441861
     },
     {
-     "id": "6283",
-     "nombre": "Repsol",
-     "precio": 1.655,
-     "municipio": "Gomezserracín",
-     "direccion": "Autovia Cl 601 Km. 63",
-     "localidad": "Gomezserracin",
-     "cp": "40240",
-     "horario": "L-S: 07:00-22:00; D: 09:00-22:00",
-     "lat": 41.291694,
-     "lon": -4.299639
+     "id": "6113",
+     "nombre": "Moeve",
+     "precio": 1.665,
+     "municipio": "Labajos",
+     "direccion": "Carretera N-6 Madrid Coruña Km. 94,600",
+     "localidad": "Labajos",
+     "cp": "40146",
+     "horario": "L-D: 06:00-22:00",
+     "lat": 40.837444,
+     "lon": -4.51725
     },
     {
      "id": "6269",
@@ -3268,21 +3280,9 @@
      "lon": -4.484083
     },
     {
-     "id": "6113",
-     "nombre": "Moeve",
-     "precio": 1.685,
-     "municipio": "Labajos",
-     "direccion": "Carretera N-6 Madrid Coruña Km. 94,600",
-     "localidad": "Labajos",
-     "cp": "40146",
-     "horario": "L-D: 06:00-22:00",
-     "lat": 40.837444,
-     "lon": -4.51725
-    },
-    {
      "id": "6401",
      "nombre": "Galp",
-     "precio": 1.689,
+     "precio": 1.679,
      "municipio": "Villacastín",
      "direccion": "Autopista A6 Km. 0",
      "localidad": "Villacastin",
@@ -3294,7 +3294,7 @@
     {
      "id": "6177",
      "nombre": "Galp",
-     "precio": 1.689,
+     "precio": 1.679,
      "municipio": "Villacastín",
      "direccion": "Autopista A6 Km. 0",
      "localidad": "Villacastin",
@@ -3306,7 +3306,7 @@
     {
      "id": "6169",
      "nombre": "Repsol",
-     "precio": 1.749,
+     "precio": 1.739,
      "municipio": "Mozoncillo",
      "direccion": "Carretera Yanguas-peñafiel Km. 11,700",
      "localidad": "Mozoncillo",
@@ -3381,9 +3381,9 @@
    "id": "41",
    "nombre": "Sevilla",
    "cyl": false,
-   "n": 76,
-   "media": 1.675,
-   "mediana": 1.69,
+   "n": 75,
+   "media": 1.671,
+   "mediana": 1.68,
    "min": 1.459,
    "max": 1.879,
    "descartados": 0,
@@ -3431,16 +3431,16 @@
    "nombre": "Soria",
    "cyl": true,
    "n": 5,
-   "media": 1.689,
+   "media": 1.685,
    "mediana": 1.669,
-   "min": 1.635,
+   "min": 1.625,
    "max": 1.809,
    "descartados": 0,
    "baratas": [
     {
      "id": "6275",
      "nombre": "Repsol",
-     "precio": 1.635,
+     "precio": 1.625,
      "municipio": "Almazán",
      "direccion": "Cr N-111, 190",
      "localidad": "Almazan",
@@ -3452,7 +3452,7 @@
     {
      "id": "6364",
      "nombre": "Repsol",
-     "precio": 1.655,
+     "precio": 1.645,
      "municipio": "Soria",
      "direccion": "Cr N-122, 146",
      "localidad": "Soria",
@@ -3478,7 +3478,7 @@
     {
      "id": "6275",
      "nombre": "Repsol",
-     "precio": 1.635,
+     "precio": 1.625,
      "municipio": "Almazán",
      "direccion": "Cr N-111, 190",
      "localidad": "Almazan",
@@ -3490,7 +3490,7 @@
     {
      "id": "6364",
      "nombre": "Repsol",
-     "precio": 1.655,
+     "precio": 1.645,
      "municipio": "Soria",
      "direccion": "Cr N-122, 146",
      "localidad": "Soria",
@@ -3541,9 +3541,9 @@
    "id": "43",
    "nombre": "Tarragona",
    "cyl": false,
-   "n": 52,
-   "media": 1.611,
-   "mediana": 1.615,
+   "n": 51,
+   "media": 1.601,
+   "mediana": 1.605,
    "min": 1.403,
    "max": 1.859,
    "descartados": 2,
@@ -3591,8 +3591,8 @@
    "nombre": "Teruel",
    "cyl": false,
    "n": 34,
-   "media": 1.613,
-   "mediana": 1.625,
+   "media": 1.608,
+   "mediana": 1.615,
    "min": 1.446,
    "max": 1.825,
    "descartados": 0,
@@ -3640,8 +3640,8 @@
    "nombre": "Toledo",
    "cyl": false,
    "n": 36,
-   "media": 1.612,
-   "mediana": 1.625,
+   "media": 1.607,
+   "mediana": 1.615,
    "min": 1.399,
    "max": 1.859,
    "descartados": 0,
@@ -3661,7 +3661,7 @@
     {
      "id": "5435",
      "nombre": "Ntra. Sra. del Carmen - Cooperativa Vinicola",
-     "precio": 1.469,
+     "precio": 1.459,
      "municipio": "Miguel Esteban",
      "direccion": "Carretera Quintanar-alcazar Km. 7600",
      "localidad": "Miguel Esteban",
@@ -3671,16 +3671,16 @@
      "lon": -3.08075
     },
     {
-     "id": "5358",
-     "nombre": "Bp",
+     "id": "13387",
+     "nombre": "Combustibles Huerta",
      "precio": 1.479,
-     "municipio": "La Puebla de Montalbán",
-     "direccion": "Calle Santa Lucia, S/n",
-     "localidad": "La Puebla de Montalban",
-     "cp": "45516",
-     "horario": "L-D: 06:30-21:45",
-     "lat": 39.858944,
-     "lon": -4.359528
+     "municipio": "Huerta de Valdecarábanos",
+     "direccion": "Carretera Cm 4051 Poligono 5 Parcela 122 Km. 15",
+     "localidad": "Huerta de Valdecarabanos",
+     "cp": "45750",
+     "horario": "L-D: 24H",
+     "lat": 39.868167,
+     "lon": -3.607611
     }
    ]
   },
@@ -3689,8 +3689,8 @@
    "nombre": "Valencia",
    "cyl": false,
    "n": 138,
-   "media": 1.62,
-   "mediana": 1.6,
+   "media": 1.616,
+   "mediana": 1.599,
    "min": 1.379,
    "max": 1.859,
    "descartados": 2,
@@ -3738,8 +3738,8 @@
    "nombre": "Valladolid",
    "cyl": true,
    "n": 19,
-   "media": 1.634,
-   "mediana": 1.665,
+   "media": 1.627,
+   "mediana": 1.643,
    "min": 1.469,
    "max": 1.809,
    "descartados": 0,
@@ -3845,7 +3845,7 @@
     {
      "id": "12433",
      "nombre": "Valcarce",
-     "precio": 1.559,
+     "precio": 1.549,
      "municipio": "San Vicente del Palacio",
      "direccion": "Autovia A-6 Km. 147",
      "localidad": "San Vicente del Palacio",
@@ -3891,9 +3891,21 @@
      "lon": -4.114806
     },
     {
+     "id": "6150",
+     "nombre": "Cepsa",
+     "precio": 1.643,
+     "municipio": "Valladolid",
+     "direccion": "Autovia Burgos Km. 117",
+     "localidad": "Valladolid",
+     "cp": "47009",
+     "horario": "L-V: 07:00-22:00; S-D: 09:00-18:00",
+     "lat": 41.712556,
+     "lon": -4.701222
+    },
+    {
      "id": "6413",
      "nombre": "Repsol",
-     "precio": 1.665,
+     "precio": 1.645,
      "municipio": "Valladolid",
      "direccion": "Calle Puente Colgante, 10",
      "localidad": "Valladolid",
@@ -3903,9 +3915,21 @@
      "lon": -4.734222
     },
     {
+     "id": "10876",
+     "nombre": "Repsol",
+     "precio": 1.655,
+     "municipio": "Medina del Campo",
+     "direccion": "Avenida Quinto Centenario, 2",
+     "localidad": "Medina del Campo",
+     "cp": "47400",
+     "horario": "L-D: 07:00-23:00",
+     "lat": 41.301806,
+     "lon": -4.909111
+    },
+    {
      "id": "6339",
      "nombre": "Repsol",
-     "precio": 1.675,
+     "precio": 1.665,
      "municipio": "Portillo",
      "direccion": "Cr Cl-601, 22,7",
      "localidad": "Arrabal de Portillo",
@@ -3917,7 +3941,7 @@
     {
      "id": "6178",
      "nombre": "Repsol",
-     "precio": 1.675,
+     "precio": 1.669,
      "municipio": "Mota del Marqués",
      "direccion": "Autovia A-6 Km. 202",
      "localidad": "Mota del Marques",
@@ -3925,30 +3949,6 @@
      "horario": "L-D: 24H",
      "lat": 41.626972,
      "lon": -5.173278
-    },
-    {
-     "id": "6150",
-     "nombre": "Cepsa",
-     "precio": 1.679,
-     "municipio": "Valladolid",
-     "direccion": "Autovia Burgos Km. 117",
-     "localidad": "Valladolid",
-     "cp": "47009",
-     "horario": "L-V: 07:00-22:00; S-D: 09:00-18:00",
-     "lat": 41.712556,
-     "lon": -4.701222
-    },
-    {
-     "id": "10876",
-     "nombre": "Repsol",
-     "precio": 1.685,
-     "municipio": "Medina del Campo",
-     "direccion": "Avenida Quinto Centenario, 2",
-     "localidad": "Medina del Campo",
-     "cp": "47400",
-     "horario": "L-D: 07:00-23:00",
-     "lat": 41.301806,
-     "lon": -4.909111
     },
     {
      "id": "6179",
@@ -3965,7 +3965,7 @@
     {
      "id": "6107",
      "nombre": "Moeve",
-     "precio": 1.765,
+     "precio": 1.745,
      "municipio": "Boecillo",
      "direccion": "Carretera Madrid Km. 177",
      "localidad": "Boecillo",
@@ -4017,7 +4017,7 @@
    "nombre": "Zamora",
    "cyl": true,
    "n": 23,
-   "media": 1.599,
+   "media": 1.594,
    "mediana": 1.569,
    "min": 1.419,
    "max": 1.799,
@@ -4158,6 +4158,18 @@
      "lon": -5.733611
     },
     {
+     "id": "7996",
+     "nombre": "Valcarce",
+     "precio": 1.549,
+     "municipio": "Benavente",
+     "direccion": "Avenida las Americas, Sn",
+     "localidad": "Benavente",
+     "cp": "49600",
+     "horario": "L-D: 24H",
+     "lat": 41.999167,
+     "lon": -5.661194
+    },
+    {
      "id": "10376",
      "nombre": "Agrinza",
      "precio": 1.55,
@@ -4170,16 +4182,16 @@
      "lon": -5.613111
     },
     {
-     "id": "7996",
-     "nombre": "Valcarce",
-     "precio": 1.559,
-     "municipio": "Benavente",
-     "direccion": "Avenida las Americas, Sn",
-     "localidad": "Benavente",
-     "cp": "49600",
-     "horario": "L-D: 24H",
-     "lat": 41.999167,
-     "lon": -5.661194
+     "id": "9371",
+     "nombre": "Avia",
+     "precio": 1.569,
+     "municipio": "Almeida de Sayago",
+     "direccion": "Carrera Fonfria - Ledesma, 43,230",
+     "localidad": "Almeida de Sayago",
+     "cp": "49210",
+     "horario": "L-V: 08:00-21:00; S-D: 08:00-20:00",
+     "lat": 41.256528,
+     "lon": -6.070167
     },
     {
      "id": "12459",
@@ -4218,16 +4230,16 @@
      "lon": -5.662333
     },
     {
-     "id": "9371",
-     "nombre": "Avia",
-     "precio": 1.609,
-     "municipio": "Almeida de Sayago",
-     "direccion": "Carrera Fonfria - Ledesma, 43,230",
-     "localidad": "Almeida de Sayago",
-     "cp": "49210",
-     "horario": "L-V: 08:00-21:00; S-D: 08:00-20:00",
-     "lat": 41.256528,
-     "lon": -6.070167
+     "id": "11894",
+     "nombre": "Ids",
+     "precio": 1.647,
+     "municipio": "Benavente",
+     "direccion": "Calle Vilareal, S/n",
+     "localidad": "Benavente",
+     "cp": "49600",
+     "horario": "L-D: 24H",
+     "lat": 42.005972,
+     "lon": -5.663639
     },
     {
      "id": "4915",
@@ -4242,6 +4254,18 @@
      "lon": -5.873611
     },
     {
+     "id": "6103",
+     "nombre": "Cepsa",
+     "precio": 1.675,
+     "municipio": "Benavente",
+     "direccion": "Avenida Federico Silva Muñoz, 259",
+     "localidad": "Benavente",
+     "cp": "49600",
+     "horario": "L-D: 24H",
+     "lat": 41.995111,
+     "lon": -5.652944
+    },
+    {
      "id": "6187",
      "nombre": "Repsol",
      "precio": 1.679,
@@ -4252,30 +4276,6 @@
      "horario": "L-V: 07:30-21:30; S: 08:00-15:00; D: 15:00-21:30",
      "lat": 42.033167,
      "lon": -5.650056
-    },
-    {
-     "id": "11894",
-     "nombre": "Ids",
-     "precio": 1.682,
-     "municipio": "Benavente",
-     "direccion": "Calle Vilareal, S/n",
-     "localidad": "Benavente",
-     "cp": "49600",
-     "horario": "L-D: 24H",
-     "lat": 42.005972,
-     "lon": -5.663639
-    },
-    {
-     "id": "6103",
-     "nombre": "Cepsa",
-     "precio": 1.695,
-     "municipio": "Benavente",
-     "direccion": "Avenida Federico Silva Muñoz, 259",
-     "localidad": "Benavente",
-     "cp": "49600",
-     "horario": "L-D: 24H",
-     "lat": 41.995111,
-     "lon": -5.652944
     },
     {
      "id": "6159",
@@ -4344,10 +4344,10 @@
    "nombre": "Zaragoza",
    "cyl": false,
    "n": 83,
-   "media": 1.637,
-   "mediana": 1.639,
+   "media": 1.629,
+   "mediana": 1.63,
    "min": 1.398,
-   "max": 1.859,
+   "max": 1.839,
    "descartados": 1,
    "baratas": [
     {
