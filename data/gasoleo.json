@@ -1,15 +1,15 @@
 {
- "fecha": "2026-11-21T14:42",
+ "fecha": "2026-11-21T18:25",
  "fuente": "Ministerio para la Transición Ecológica y el Reto Demográfico (Geoportal de gasolineras)",
  "fuente_url": "https://geoportalgasolineras.es/geoportal-instalaciones/Inicio",
  "unidad": "€/l",
  "espana": {
   "media": 1.644,
   "min": 1.31,
-  "n": 2259
+  "n": 2260
  },
  "cyl": {
-  "media": 1.612,
+  "media": 1.611,
   "min": 1.379,
   "n": 167
  },
@@ -691,8 +691,8 @@
    "nombre": "Burgos",
    "cyl": true,
    "n": 30,
-   "media": 1.574,
-   "mediana": 1.607,
+   "media": 1.572,
+   "mediana": 1.602,
    "min": 1.379,
    "max": 1.769,
    "descartados": 0,
@@ -904,6 +904,18 @@
      "lon": -3.390056
     },
     {
+     "id": "5548",
+     "nombre": "Repsol",
+     "precio": 1.598,
+     "municipio": "Belorado",
+     "direccion": "Carretera N-120 Km. 68,3",
+     "localidad": "Belorado",
+     "cp": "09250",
+     "horario": "L-D: 07:00-22:00",
+     "lat": 42.417333,
+     "lon": -3.207111
+    },
+    {
      "id": "12207",
      "nombre": "An Energeticos - Ventas de Armentia",
      "precio": 1.606,
@@ -990,7 +1002,7 @@
     {
      "id": "5043",
      "nombre": "Galp",
-     "precio": 1.639,
+     "precio": 1.644,
      "municipio": "Valle de Losa",
      "direccion": "Carretera Bu-550 Km. 27",
      "localidad": "Quincoces de Yuso",
@@ -1010,18 +1022,6 @@
      "horario": "L-D: 07:00-22:00",
      "lat": 43.075361,
      "lon": -3.542806
-    },
-    {
-     "id": "5548",
-     "nombre": "Repsol",
-     "precio": 1.668,
-     "municipio": "Belorado",
-     "direccion": "Carretera N-120 Km. 68,3",
-     "localidad": "Belorado",
-     "cp": "09250",
-     "horario": "L-D: 07:00-22:00",
-     "lat": 42.417333,
-     "lon": -3.207111
     },
     {
      "id": "6004",
@@ -1199,8 +1199,8 @@
    "id": "39",
    "nombre": "Cantabria",
    "cyl": false,
-   "n": 29,
-   "media": 1.695,
+   "n": 30,
+   "media": 1.699,
    "mediana": 1.725,
    "min": 1.52,
    "max": 1.839,
@@ -1641,7 +1641,7 @@
    "nombre": "Huelva",
    "cyl": false,
    "n": 42,
-   "media": 1.643,
+   "media": 1.642,
    "mediana": 1.66,
    "min": 1.34,
    "max": 1.963,
@@ -1672,16 +1672,16 @@
      "lon": -6.79925
     },
     {
-     "id": "11503",
-     "nombre": "Cobella",
-     "precio": 1.429,
+     "id": "8080",
+     "nombre": "Sp",
+     "precio": 1.418,
      "municipio": "Lepe",
-     "direccion": "Avenida Blas Infante, S/n",
+     "direccion": "CTRA. LEPE-LA ANTILLA km 0,9",
      "localidad": "Lepe",
-     "cp": "21400",
-     "horario": "L-D: 07:00-23:00",
-     "lat": 37.249639,
-     "lon": -7.214
+     "cp": "21440",
+     "horario": "L-V: 07:30-21:30; S-D: 08:30-21:30",
+     "lat": 37.243,
+     "lon": -7.204889
     }
    ]
   },
@@ -2446,7 +2446,7 @@
    "nombre": "Navarra",
    "cyl": false,
    "n": 103,
-   "media": 1.594,
+   "media": 1.593,
    "mediana": 1.549,
    "min": 1.438,
    "max": 1.849,
@@ -2495,7 +2495,7 @@
    "nombre": "Ourense",
    "cyl": false,
    "n": 26,
-   "media": 1.729,
+   "media": 1.728,
    "mediana": 1.743,
    "min": 1.5,
    "max": 1.809,
@@ -2751,7 +2751,7 @@
    "nombre": "Pontevedra",
    "cyl": false,
    "n": 34,
-   "media": 1.645,
+   "media": 1.643,
    "mediana": 1.634,
    "min": 1.559,
    "max": 1.869,
@@ -3091,8 +3091,8 @@
    "nombre": "Segovia",
    "cyl": true,
    "n": 20,
-   "media": 1.65,
-   "mediana": 1.659,
+   "media": 1.648,
+   "mediana": 1.664,
    "min": 1.427,
    "max": 1.813,
    "descartados": 0,
@@ -3172,6 +3172,18 @@
      "lon": -3.929
     },
     {
+     "id": "6226",
+     "nombre": "Bravoil",
+     "precio": 1.549,
+     "municipio": "San Miguel de Bernuy",
+     "direccion": "Cr C-603, 65",
+     "localidad": "San Miguel de Bernuy",
+     "cp": "40332",
+     "horario": "L-S: 07:00-22:00; D: 08:00-15:00",
+     "lat": 41.397417,
+     "lon": -3.952194
+    },
+    {
      "id": "4960",
      "nombre": "Repostar",
      "precio": 1.559,
@@ -3182,18 +3194,6 @@
      "horario": "L-D: 24H",
      "lat": 41.347444,
      "lon": -4.119111
-    },
-    {
-     "id": "6226",
-     "nombre": "Bravoil",
-     "precio": 1.599,
-     "municipio": "San Miguel de Bernuy",
-     "direccion": "Cr C-603, 65",
-     "localidad": "San Miguel de Bernuy",
-     "cp": "40332",
-     "horario": "L-S: 07:00-22:00; D: 08:00-15:00",
-     "lat": 41.397417,
-     "lon": -3.952194
     },
     {
      "id": "6235",
@@ -3244,21 +3244,9 @@
      "lon": -4.441861
     },
     {
-     "id": "6177",
-     "nombre": "Galp",
-     "precio": 1.659,
-     "municipio": "Villacastín",
-     "direccion": "Autopista A6 Km. 0",
-     "localidad": "Villacastin",
-     "cp": "40150",
-     "horario": "L-D: 24H",
-     "lat": 40.7975,
-     "lon": -4.460889
-    },
-    {
      "id": "6401",
      "nombre": "Galp",
-     "precio": 1.659,
+     "precio": 1.664,
      "municipio": "Villacastín",
      "direccion": "Autopista A6 Km. 0",
      "localidad": "Villacastin",
@@ -3266,6 +3254,18 @@
      "horario": "L-D: 06:00-22:00",
      "lat": 40.7975,
      "lon": -4.462889
+    },
+    {
+     "id": "6177",
+     "nombre": "Galp",
+     "precio": 1.664,
+     "municipio": "Villacastín",
+     "direccion": "Autopista A6 Km. 0",
+     "localidad": "Villacastin",
+     "cp": "40150",
+     "horario": "L-D: 24H",
+     "lat": 40.7975,
+     "lon": -4.460889
     },
     {
      "id": "6113",
@@ -3640,10 +3640,10 @@
    "nombre": "Toledo",
    "cyl": false,
    "n": 36,
-   "media": 1.604,
+   "media": 1.601,
    "mediana": 1.6,
    "min": 1.399,
-   "max": 1.859,
+   "max": 1.789,
    "descartados": 0,
    "baratas": [
     {
