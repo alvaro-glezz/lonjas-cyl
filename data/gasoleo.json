@@ -1,12 +1,12 @@
 {
- "fecha": "2026-11-21T18:25",
+ "fecha": "2026-11-21T22:20",
  "fuente": "Ministerio para la Transición Ecológica y el Reto Demográfico (Geoportal de gasolineras)",
  "fuente_url": "https://geoportalgasolineras.es/geoportal-instalaciones/Inicio",
  "unidad": "€/l",
  "espana": {
   "media": 1.644,
   "min": 1.31,
-  "n": 2260
+  "n": 2261
  },
  "cyl": {
   "media": 1.611,
@@ -406,18 +406,6 @@
      "lon": -4.730861
     },
     {
-     "id": "5980",
-     "nombre": "Petronor",
-     "precio": 1.629,
-     "municipio": "San Pedro del Arroyo",
-     "direccion": "Calle Calzada, S/n",
-     "localidad": "San Pedro del Arroyo",
-     "cp": "05350",
-     "horario": "L-S: 07:00-23:00; D: 08:00-22:00",
-     "lat": 40.803111,
-     "lon": -4.873083
-    },
-    {
      "id": "5981",
      "nombre": "Petronor",
      "precio": 1.629,
@@ -428,6 +416,18 @@
      "horario": "L-S: 07:00-23:00; D: 08:00-22:00",
      "lat": 40.802917,
      "lon": -4.873278
+    },
+    {
+     "id": "5980",
+     "nombre": "Petronor",
+     "precio": 1.629,
+     "municipio": "San Pedro del Arroyo",
+     "direccion": "Calle Calzada, S/n",
+     "localidad": "San Pedro del Arroyo",
+     "cp": "05350",
+     "horario": "L-S: 07:00-23:00; D: 08:00-22:00",
+     "lat": 40.803111,
+     "lon": -4.873083
     },
     {
      "id": "8065",
@@ -502,18 +502,6 @@
      "lon": -4.77475
     },
     {
-     "id": "5065",
-     "nombre": "Cepsa",
-     "precio": 1.799,
-     "municipio": "Candeleda",
-     "direccion": "C-501 km 8,6",
-     "localidad": "Candeleda",
-     "cp": "05480",
-     "horario": "L-D: 07:00-22:00",
-     "lat": 40.147556,
-     "lon": -5.339722
-    },
-    {
      "id": "4988",
      "nombre": "Cepsa",
      "precio": 1.799,
@@ -524,6 +512,18 @@
      "horario": "L-D: 07:00-22:00",
      "lat": 40.154556,
      "lon": -5.245833
+    },
+    {
+     "id": "5065",
+     "nombre": "Cepsa",
+     "precio": 1.799,
+     "municipio": "Candeleda",
+     "direccion": "C-501 km 8,6",
+     "localidad": "Candeleda",
+     "cp": "05480",
+     "horario": "L-D: 07:00-22:00",
+     "lat": 40.147556,
+     "lon": -5.339722
     },
     {
      "id": "4994",
@@ -1002,7 +1002,7 @@
     {
      "id": "5043",
      "nombre": "Galp",
-     "precio": 1.644,
+     "precio": 1.639,
      "municipio": "Valle de Losa",
      "direccion": "Carretera Bu-550 Km. 27",
      "localidad": "Quincoces de Yuso",
@@ -1072,18 +1072,6 @@
      "lon": -3.999139
     },
     {
-     "id": "6025",
-     "nombre": "Repsol",
-     "precio": 1.769,
-     "municipio": "Villalmanzo",
-     "direccion": "Carretera A-1, Madrid-burgos Km. 203,000",
-     "localidad": "Villalmanzo",
-     "cp": "09390",
-     "horario": "L-D: 24H",
-     "lat": 42.041028,
-     "lon": -3.751667
-    },
-    {
      "id": "6026",
      "nombre": "Repsol",
      "precio": 1.769,
@@ -1094,6 +1082,18 @@
      "horario": "L-D: 24H",
      "lat": 42.040694,
      "lon": -3.752778
+    },
+    {
+     "id": "6025",
+     "nombre": "Repsol",
+     "precio": 1.769,
+     "municipio": "Villalmanzo",
+     "direccion": "Carretera A-1, Madrid-burgos Km. 203,000",
+     "localidad": "Villalmanzo",
+     "cp": "09390",
+     "horario": "L-D: 24H",
+     "lat": 42.041028,
+     "lon": -3.751667
     }
    ]
   },
@@ -1151,7 +1151,7 @@
    "nombre": "Cádiz",
    "cyl": false,
    "n": 32,
-   "media": 1.677,
+   "media": 1.676,
    "mediana": 1.699,
    "min": 1.48,
    "max": 1.842,
@@ -1298,12 +1298,24 @@
    "nombre": "Ciudad Real",
    "cyl": false,
    "n": 78,
-   "media": 1.6,
+   "media": 1.599,
    "mediana": 1.583,
-   "min": 1.429,
+   "min": 1.399,
    "max": 1.844,
    "descartados": 2,
    "baratas": [
+    {
+     "id": "12514",
+     "nombre": "Castillo de Montiel",
+     "precio": 1.399,
+     "municipio": "Montiel",
+     "direccion": "Carrera Villanueva de los Infantes, S/n",
+     "localidad": "Montiel",
+     "cp": "13326",
+     "horario": "L-D: 24H",
+     "lat": 38.69975,
+     "lon": -2.882583
+    },
     {
      "id": "12773",
      "nombre": "E.s. San Gregorio",
@@ -1327,18 +1339,6 @@
      "horario": "L-D: 24H",
      "lat": 39.211694,
      "lon": -3.59675
-    },
-    {
-     "id": "11949",
-     "nombre": "Unión Santiago y San Miguel S. Coop. de C-lm",
-     "precio": 1.435,
-     "municipio": "Albaladejo",
-     "direccion": "Avenida de la Mancha, 21",
-     "localidad": "Albaladejo",
-     "cp": "13340",
-     "horario": "L-D: 24H",
-     "lat": 38.619028,
-     "lon": -2.811194
     }
    ]
   },
@@ -1347,7 +1347,7 @@
    "nombre": "Córdoba",
    "cyl": false,
    "n": 69,
-   "media": 1.66,
+   "media": 1.659,
    "mediana": 1.679,
    "min": 1.442,
    "max": 1.839,
@@ -1739,7 +1739,7 @@
    "nombre": "Illes Balears",
    "cyl": false,
    "n": 34,
-   "media": 1.768,
+   "media": 1.763,
    "mediana": 1.757,
    "min": 1.509,
    "max": 2.099,
@@ -1787,13 +1787,25 @@
    "id": "23",
    "nombre": "Jaén",
    "cyl": false,
-   "n": 120,
-   "media": 1.678,
+   "n": 121,
+   "media": 1.676,
    "mediana": 1.699,
-   "min": 1.4,
+   "min": 1.389,
    "max": 1.849,
    "descartados": 0,
    "baratas": [
+    {
+     "id": "10821",
+     "nombre": "S.c.a. Ntra. Sra. de la Cabeza",
+     "precio": 1.389,
+     "municipio": "Campillo de Arenas",
+     "direccion": "Carretera A-44 Km. 74,1",
+     "localidad": "Campillo de Arenas",
+     "cp": "23130",
+     "horario": "L-V: 09:00-14:00 y 16:00-19:00",
+     "lat": 37.558722,
+     "lon": -3.624111
+    },
     {
      "id": "6458",
      "nombre": "Estacion de Servicio Ortega",
@@ -1817,18 +1829,6 @@
      "horario": "L-D: 07:00-23:00",
      "lat": 37.724,
      "lon": -3.370139
-    },
-    {
-     "id": "16354",
-     "nombre": "Moeve",
-     "precio": 1.459,
-     "municipio": "Alcalá la Real",
-     "direccion": "Avenida Andalucia, 97",
-     "localidad": "Alcala la Real",
-     "cp": "23680",
-     "horario": "L-D: 06:00-22:00",
-     "lat": 37.450028,
-     "lon": -3.920556
     }
    ]
   },
@@ -2271,7 +2271,7 @@
     {
      "id": "543",
      "nombre": "Galp",
-     "precio": 1.559,
+     "precio": 1.554,
      "municipio": "Lourenzá",
      "direccion": "Carretera N-634 Km. 578",
      "localidad": "Lourenza (casco Urbano)",
@@ -2397,7 +2397,7 @@
    "nombre": "Murcia",
    "cyl": false,
    "n": 106,
-   "media": 1.631,
+   "media": 1.63,
    "mediana": 1.639,
    "min": 1.36,
    "max": 1.929,
@@ -3091,8 +3091,8 @@
    "nombre": "Segovia",
    "cyl": true,
    "n": 20,
-   "media": 1.648,
-   "mediana": 1.664,
+   "media": 1.647,
+   "mediana": 1.659,
    "min": 1.427,
    "max": 1.813,
    "descartados": 0,
@@ -3244,21 +3244,9 @@
      "lon": -4.441861
     },
     {
-     "id": "6401",
-     "nombre": "Galp",
-     "precio": 1.664,
-     "municipio": "Villacastín",
-     "direccion": "Autopista A6 Km. 0",
-     "localidad": "Villacastin",
-     "cp": "40150",
-     "horario": "L-D: 06:00-22:00",
-     "lat": 40.7975,
-     "lon": -4.462889
-    },
-    {
      "id": "6177",
      "nombre": "Galp",
-     "precio": 1.664,
+     "precio": 1.659,
      "municipio": "Villacastín",
      "direccion": "Autopista A6 Km. 0",
      "localidad": "Villacastin",
@@ -3266,6 +3254,18 @@
      "horario": "L-D: 24H",
      "lat": 40.7975,
      "lon": -4.460889
+    },
+    {
+     "id": "6401",
+     "nombre": "Galp",
+     "precio": 1.659,
+     "municipio": "Villacastín",
+     "direccion": "Autopista A6 Km. 0",
+     "localidad": "Villacastin",
+     "cp": "40150",
+     "horario": "L-D: 06:00-22:00",
+     "lat": 40.7975,
+     "lon": -4.462889
     },
     {
      "id": "6113",
