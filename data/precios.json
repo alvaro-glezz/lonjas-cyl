@@ -1,5 +1,5 @@
 {
- "generado": "2026-11-20T13:55+00:00",
+ "generado": "2026-11-21T11:06+00:00",
  "lonjas": [
   {
    "id": "salamanca",
@@ -390,7 +390,7 @@
    "comprobado": "2026-11-03T23:45:00+01:00",
    "origen": "https://datosabiertossalamanca.es/dataset/cotizaciones-semanales-de-la-lonja-de-salamanca",
    "error": null,
-   "ultima_lectura": "2026-11-20T13:55+00:00"
+   "ultima_lectura": "2026-11-21T11:06+00:00"
   },
   {
    "id": "leon",
@@ -947,7 +947,7 @@
    "comprobado": "2026-11-03T23:45:00+01:00",
    "origen": "https://www.lonjadeleon.es/lonja-patata-18-11-2026/",
    "error": null,
-   "ultima_lectura": "2026-11-20T13:55+00:00"
+   "ultima_lectura": "2026-11-21T11:06+00:00"
   },
   {
    "id": "segovia",
@@ -1221,7 +1221,7 @@
    "comprobado": "2026-11-03T23:45:00+01:00",
    "origen": "https://www.fessegovia.es/wp-content/uploads/2026/11/LONJA-CEREALES-OVINO-Y-PORCINO-19.11.2026.pdf",
    "error": null,
-   "ultima_lectura": "2026-11-20T13:55+00:00",
+   "ultima_lectura": "2026-11-21T11:06+00:00",
    "fallos": 0,
    "fallo_desde": null
   },
