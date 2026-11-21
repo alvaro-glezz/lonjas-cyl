@@ -1,54 +1,54 @@
 {
- "semana": "2026-W46",
- "desde": "2026-11-09",
- "hasta": "2026-11-14",
- "generado": "2026-11-11T10:30",
- "titulo": "Mercado agrario de Castilla y León · semana del 9 al 14 de noviembre",
- "titular": "Cereales: semana de bajadas; el trigo se paga mejor en Salamanca",
+ "semana": "2026-W47",
+ "desde": "2026-11-16",
+ "hasta": "2026-11-21",
+ "generado": "2026-11-21T10:12",
+ "titulo": "Mercado agrario de Castilla y León · semana del 16 al 21 de noviembre",
+ "titular": "Cereales: semana de subidas; el trigo se paga mejor en Salamanca",
  "resumen": [
-  "Semana de bajadas en los cereales de las lonjas de Castilla y León: de sus cotizaciones, ninguna sube y 12 bajan frente a la sesión anterior.",
-  "El trigo está un 16,2 % por encima de hace un año según el histórico oficial de la Junta."
+  "Semana de subidas en los cereales de las lonjas de Castilla y León: de sus cotizaciones, 6 suben y 1 baja frente a la sesión anterior.",
+  "El trigo está un 16,8 % por encima de hace un año según el histórico oficial de la Junta."
  ],
  "secciones": [
   {
    "titulo": "Cereales",
    "lineas": [
-    "Trigo: paga más Salamanca (234 €/t); 8 €/t más que León. Frente a la sesión anterior: Salamanca −2, Segovia −2, León −2. Hace un año, 198 €/t de media en esas lonjas según el histórico oficial de la Junta; ahora 230 (+16,2 %).",
-    "Cebada: paga más Salamanca (230 €/t); 9 €/t más que Segovia. Frente a la sesión anterior: Salamanca −1, León −1, Segovia −2. Hace un año, 191 €/t de media en esas lonjas según el histórico oficial de la Junta; ahora 224 (+17,5 %).",
-    "Centeno: paga más Salamanca (220 €/t); 23 €/t más que León. Frente a la sesión anterior: Salamanca −1, Segovia −2, León repite. Hace un año, 173 €/t de media en esas lonjas según el histórico oficial de la Junta; ahora 208 (+20,0 %).",
-    "Avena: paga más Salamanca (202 €/t); 4 €/t más que Segovia. Frente a la sesión anterior: Salamanca −2, León −2, Segovia −2. Hace un año, 139 €/t de media en esas lonjas según el histórico oficial de la Junta; ahora 200 (+43,9 %).",
-    "Girasol: igual en León y Segovia (500 €/t). Frente a la sesión anterior: León repite, Segovia −2."
+    "Trigo: paga más Salamanca (234 €/t); 8 €/t más que León. Frente a la sesión anterior: Salamanca repite, Lerma −1, Segovia repite, León repite. Hace un año, 197 €/t de media en esas lonjas según el histórico oficial de la Junta; ahora 230 (+16,8 %).",
+    "Cebada: paga más Salamanca (231 €/t); 8 €/t más que Lerma. Frente a la sesión anterior: Salamanca +1, León +2, Segovia +2, Lerma repite. Hace un año, 190 €/t de media en esas lonjas según el histórico oficial de la Junta; ahora 225 (+18,1 %).",
+    "Centeno: paga más Salamanca (221 €/t); 23 €/t más que León. Frente a la sesión anterior: Salamanca +1, Segovia repite, León +2. Hace un año, 174 €/t de media en esas lonjas según el histórico oficial de la Junta; ahora 209 (+20,2 %).",
+    "Avena: paga más Salamanca (202 €/t); 4 €/t más que Segovia. Frente a la sesión anterior: Salamanca repite, León repite, Segovia +1. Hace un año, 139 €/t de media en esas lonjas según el histórico oficial de la Junta; ahora 199 (+43,1 %)."
    ]
   },
   {
    "titulo": "Porcino",
    "lineas": [
-    "Cerdo normal: paga más Segovia (1,135 €/kg vivo); 0,01 €/kg vivo más que Salamanca. Frente a la sesión anterior: Segovia −0,035, Salamanca −0,030. Hace un año, 1,35 €/kg vivo de media en esas lonjas según el histórico oficial de la Junta; ahora 1,13 (−16,5 %).",
-    "Cerdo selecto: paga más Segovia (1,147 €/kg vivo); 0,012 €/kg vivo más que Salamanca. Frente a la sesión anterior: Segovia −0,035, Salamanca −0,030. Hace un año, 1,36 €/kg vivo de media en esas lonjas según el histórico oficial de la Junta; ahora 1,14 (−16,3 %).",
-    "Lechones: paga más Segovia (35 €/ud); 3 €/ud más que Salamanca. Frente a la sesión anterior: Segovia −2, Salamanca repite."
+    "Cerdo normal: paga más Lerma (1,10 €/kg vivo); 0,015 €/kg vivo más que Segovia. Frente a la sesión anterior: Lerma −0,037, Salamanca −0,030, Segovia −0,020. Hace un año, 1,33 €/kg vivo de media en esas lonjas según el histórico oficial de la Junta; ahora 1,09 (−17,7 %).",
+    "Cerdo selecto: paga más Salamanca (1,105 €/kg vivo); 0,008 €/kg vivo más que Segovia. Frente a la sesión anterior: Salamanca −0,030, Segovia −0,020. Hace un año, 1,35 €/kg vivo de media en esas lonjas según el histórico oficial de la Junta; ahora 1,10 (−18,2 %).",
+    "Cerdo graso: paga más Salamanca (1,63 €/kg vivo); 0,025 €/kg vivo más que Segovia. Frente a la sesión anterior: Salamanca −0,010, Segovia −0,010. Hace un año, 1,75 €/kg vivo de media en esas lonjas según el histórico oficial de la Junta; ahora 1,62 (−7,6 %).",
+    "Lechones: paga más Segovia (36 €/ud); 4 €/ud más que Salamanca. Frente a la sesión anterior: Segovia +1, Salamanca repite."
    ]
   },
   {
    "titulo": "Ovino",
    "lineas": [
-    "Lechazo: paga más Salamanca (9,95 €/kg vivo); 0,50 €/kg vivo más que Segovia. Frente a la sesión anterior: Salamanca +0,050, Segovia repite. Hace un año, 8,15 €/kg vivo de media en esa lonja según el histórico oficial de la Junta; ahora 9,45 (+16,0 %)."
+    "Lechazo: paga más Salamanca (10,05 €/kg vivo); 0,55 €/kg vivo más que Segovia. Frente a la sesión anterior: Salamanca +0,100, Segovia repite. Hace un año, 8,15 €/kg vivo de media en esa lonja según el histórico oficial de la Junta; ahora 9,50 (+16,6 %)."
    ]
   },
   {
    "titulo": "Lo que más se ha movido",
    "lineas": [
-    "Sube Oveja desvieje 2ª en Segovia: +4,8 % (1,10 €/kg vivo).",
-    "Sube Oveja desvieje 1ª en Segovia: +3,0 % (1,70 €/kg vivo).",
-    "Sube Cochinillos sin hierro en Segovia: +3,0 % (34 €/ud).",
-    "Baja Cerda desvieje primera en Segovia: −22,2 % (0,14 €/kg vivo).",
-    "Baja Cerda desvieje extra en Segovia: −14,8 % (0,23 €/kg vivo).",
-    "Baja Cerdas de desvieje en Salamanca: −8,0 % (0,345 €/kg vivo)."
+    "Sube Cordero más de 34 kg en Salamanca: +13,6 % (5 €/kg vivo).",
+    "Sube Oveja desvieje 2ª en Segovia: +9,1 % (1,20 €/kg vivo).",
+    "Sube Oveja desvieje 1ª en Segovia: +5,9 % (1,80 €/kg vivo).",
+    "Baja Hembras 180-200 kg O en León: −3,8 % (5 €/kg canal).",
+    "Baja Hembras 201-250 kg O en León: −3,8 % (5 €/kg canal).",
+    "Baja Hembras más 250 kg O en León: −3,8 % (5 €/kg canal)."
    ]
   },
   {
    "titulo": "Gasóleo agrícola",
    "lineas": [
-    "Gasóleo B en Castilla y León: 1,661 €/l de media; el más barato, 1,444 €/l."
+    "Gasóleo B en Castilla y León: 1,616 €/l de media; el más barato, 1,379 €/l. Hace una semana, 1,645 €/l (−0,029)."
    ]
   },
   {
@@ -58,35 +58,31 @@
    ]
   }
  ],
- "hablado": "Comentario de mercado de Lonjas CyL, semana del 9 al 14 de noviembre. Ha sido una semana de bajadas en los cereales. Trigo: paga más Salamanca, con doscientos treinta y cuatro euros la tonelada, ocho euros por tonelada más que León; frente a hace un año, un dieciséis coma dos por ciento más. Cebada: paga más Salamanca, con doscientos treinta euros la tonelada, nueve euros por tonelada más que Segovia; frente a hace un año, un diecisiete coma cinco por ciento más. Centeno: paga más Salamanca, con doscientos veinte euros la tonelada, veintitrés euros por tonelada más que León; frente a hace un año, un veinte por ciento más. Avena: paga más Salamanca, con doscientos dos euros la tonelada, cuatro euros por tonelada más que Segovia; frente a hace un año, un cuarenta y tres coma nueve por ciento más. La mayor subida, oveja desvieje segunda en Segovia, un cuatro coma ocho por ciento. La mayor bajada, cerda desvieje primera en Segovia, un veintidós coma dos por ciento. El gasóleo agrícola está a un euro con sesenta y seis céntimos el litro de media en Castilla y León. Tienes todos los precios, el comentario completo y avisos gratis en Lonjas CyL. Hasta la semana que viene.",
+ "hablado": "Comentario de mercado de Lonjas CyL, semana del 16 al 21 de noviembre. Ha sido una semana de subidas en los cereales. Trigo: paga más Salamanca, con doscientos treinta y cuatro euros la tonelada, ocho euros por tonelada más que León; frente a hace un año, un dieciséis coma ocho por ciento más. Cebada: paga más Salamanca, con doscientos treinta y un euros la tonelada, ocho euros por tonelada más que Lerma; frente a hace un año, un dieciocho coma uno por ciento más. Centeno: paga más Salamanca, con doscientos veintiún euros la tonelada, veintitrés euros por tonelada más que León; frente a hace un año, un veinte coma dos por ciento más. Avena: paga más Salamanca, con doscientos dos euros la tonelada, cuatro euros por tonelada más que Segovia; frente a hace un año, un cuarenta y tres coma uno por ciento más. La mayor subida, cordero más de en Salamanca, un trece coma seis por ciento. La mayor bajada, hembras en León, un tres coma ocho por ciento. El gasóleo agrícola está a un euro con sesenta y dos céntimos el litro de media en Castilla y León. Tienes todos los precios, el comentario completo y avisos gratis en Lonjas CyL. Hasta la semana que viene.",
  "redaccion": [
   {
    "t": "",
-   "p": "La semana del 9 al 14 de noviembre ha sido de bajadas en los cereales de las lonjas de Castilla y León. De sus cotizaciones, ninguna sube y 12 bajan respecto a la sesión anterior, y el trigo sigue un 16,2 % por encima de lo que se pagaba hace un año."
+   "p": "La semana del 16 al 21 de noviembre ha sido de subidas en los cereales de las lonjas de Castilla y León. De sus cotizaciones, 6 suben y 1 baja respecto a la sesión anterior, y el trigo sigue un 16,8 % por encima de lo que se pagaba hace un año."
   },
   {
    "t": "Cereales y oleaginosas",
-   "p": "El trigo se ha pagado mejor en Salamanca, a 234 €/t, 8 €/t por encima de León. Respecto a la sesión anterior, baja 2 €/t en las tres lonjas. Comparado con hace un año, cotiza un 16,2 % más caro (230 €/t de media frente a 198). En la cebada, marca el precio más alto Salamanca, con 230 €/t, 9 €/t por encima de Segovia. Frente a la sesión anterior, baja 1 €/t en Salamanca y León y 2 €/t en Segovia. Si se compara con la misma semana del año pasado, cotiza un 17,5 % más caro (224 €/t de media frente a 191). Para el centeno, la mejor cotización ha sido la de Salamanca: 220 €/t, 23 €/t por encima de León. En comparación con la sesión previa, baja 1 €/t en Salamanca y 2 €/t en Segovia y repite en León. Comparado con hace un año, cotiza un 20 % más caro (208 €/t de media frente a 173)."
-  },
-  {
-   "t": "",
-   "p": "Por su parte, la avena se ha pagado mejor en Salamanca, a 202 €/t, 4 €/t por encima de Segovia. Respecto a la sesión anterior, baja 2 €/t en las tres lonjas. Si se compara con la misma semana del año pasado, cotiza un 43,9 % más caro (200 €/t de media frente a 139). El girasol ha cotizado igual en León y Segovia, a 500 €/t. Frente a la sesión anterior, baja 2 €/t en Segovia y repite en León."
+   "p": "El trigo se ha pagado mejor en Salamanca, a 234 €/t, 8 €/t por encima de León. Respecto a la sesión anterior, baja 1 €/t en Lerma y repite en Salamanca, Segovia y León. Comparado con hace un año, cotiza un 16,8 % más caro (230 €/t de media frente a 197). En la cebada, marca el precio más alto Salamanca, con 231 €/t, 8 €/t por encima de Lerma. Frente a la sesión anterior, sube 1 €/t en Salamanca y 2 €/t en León y Segovia y repite en Lerma. Si se compara con la misma semana del año pasado, cotiza un 18,1 % más caro (225 €/t de media frente a 190). Para el centeno, la mejor cotización ha sido la de Salamanca: 221 €/t, 23 €/t por encima de León. En comparación con la sesión previa, sube 1 €/t en Salamanca y 2 €/t en León y repite en Segovia. Comparado con hace un año, cotiza un 20,2 % más caro (209 €/t de media frente a 174). La avena se ha pagado mejor en Salamanca, a 202 €/t, 4 €/t por encima de Segovia. Respecto a la sesión anterior, sube 1 €/t en Segovia y repite en Salamanca y León. Si se compara con la misma semana del año pasado, cotiza un 43,1 % más caro (199 €/t de media frente a 139)."
   },
   {
    "t": "Porcino",
-   "p": "En el cerdo normal, marca el precio más alto Segovia, con 1,135 €/kg vivo, 0,01 €/kg vivo por encima de Salamanca. Frente a la sesión anterior, baja 0,03 €/kg vivo en Salamanca y 0,035 €/kg vivo en Segovia. Si se compara con la misma semana del año pasado, cotiza un 16,5 % más barato (1,13 €/kg vivo de media frente a 1,35). Para el cerdo selecto, la mejor cotización ha sido la de Segovia: 1,147 €/kg vivo, 0,012 €/kg vivo por encima de Salamanca. En comparación con la sesión previa, baja 0,03 €/kg vivo en Salamanca y 0,035 €/kg vivo en Segovia. Comparado con hace un año, cotiza un 16,3 % más barato (1,14 €/kg vivo de media frente a 1,36). Los lechones se han pagado mejor en Segovia, a 35 €/ud, 3 €/ud por encima de Salamanca. Respecto a la sesión anterior, baja 2 €/ud en Segovia y repite en Salamanca."
+   "p": "En el cerdo normal, marca el precio más alto Lerma, con 1,10 €/kg vivo, 0,015 €/kg vivo por encima de Segovia. Frente a la sesión anterior, baja 0,02 €/kg vivo en Segovia, 0,03 €/kg vivo en Salamanca y 0,037 €/kg vivo en Lerma. Si se compara con la misma semana del año pasado, cotiza un 17,7 % más barato (1,09 €/kg vivo de media frente a 1,33). Para el cerdo selecto, la mejor cotización ha sido la de Salamanca: 1,105 €/kg vivo, 0,008 €/kg vivo por encima de Segovia. En comparación con la sesión previa, baja 0,02 €/kg vivo en Segovia y 0,03 €/kg vivo en Salamanca. Comparado con hace un año, cotiza un 18,2 % más barato (1,10 €/kg vivo de media frente a 1,35). El cerdo graso se ha pagado mejor en Salamanca, a 1,63 €/kg vivo, 0,025 €/kg vivo por encima de Segovia. Respecto a la sesión anterior, baja 0,01 €/kg vivo en las dos lonjas. Si se compara con la misma semana del año pasado, cotiza un 7,6 % más barato (1,62 €/kg vivo de media frente a 1,75). En los lechones, marca el precio más alto Segovia, con 36 €/ud, 4 €/ud por encima de Salamanca. Frente a la sesión anterior, sube 1 €/ud en Segovia y repite en Salamanca."
   },
   {
    "t": "Ovino",
-   "p": "En el lechazo, marca el precio más alto Salamanca, con 9,95 €/kg vivo, 0,50 €/kg vivo por encima de Segovia. Frente a la sesión anterior, sube 0,05 €/kg vivo en Salamanca y repite en Segovia. Si se compara con la misma semana del año pasado, cotiza un 16 % más caro (9,45 €/kg vivo de media frente a 8,15)."
+   "p": "En el lechazo, marca el precio más alto Salamanca, con 10,05 €/kg vivo, 0,55 €/kg vivo por encima de Segovia. Frente a la sesión anterior, sube 0,10 €/kg vivo en Salamanca y repite en Segovia. Si se compara con la misma semana del año pasado, cotiza un 16,6 % más caro (9,50 €/kg vivo de media frente a 8,15)."
   },
   {
    "t": "Lo que más se ha movido",
-   "p": "Entre los mayores movimientos de la semana destacan las subidas de oveja desvieje 2ª en Segovia (+4,8 %, hasta 1,10 €/kg vivo), oveja desvieje 1ª en Segovia (+3,0 %, hasta 1,70 €/kg vivo) y cochinillos sin hierro en Segovia (+3,0 %, hasta 34 €/ud). En el lado contrario, las mayores bajadas han sido las de cerda desvieje primera en Segovia (−22,2 %, hasta 0,14 €/kg vivo), cerda desvieje extra en Segovia (−14,8 %, hasta 0,23 €/kg vivo) y cerdas de desvieje en Salamanca (−8,0 %, hasta 0,345 €/kg vivo)."
+   "p": "Entre los mayores movimientos de la semana destacan las subidas de cordero más de 34 kg en Salamanca (+13,6 %, hasta 5 €/kg vivo), oveja desvieje 2ª en Segovia (+9,1 %, hasta 1,20 €/kg vivo) y oveja desvieje 1ª en Segovia (+5,9 %, hasta 1,80 €/kg vivo). En el lado contrario, las mayores bajadas han sido las de hembras 180-200 kg O en León (−3,8 %, hasta 5 €/kg canal), hembras 201-250 kg O en León (−3,8 %, hasta 5 €/kg canal) y hembras más 250 kg O en León (−3,8 %, hasta 5 €/kg canal)."
   },
   {
    "t": "Gasóleo agrícola",
-   "p": "En cuanto a los costes, el gasóleo agrícola (gasóleo B) se paga en Castilla y León a 1,661 €/l de media, y la gasolinera más barata lo ofrece a 1,444 €/l."
+   "p": "En cuanto a los costes, el gasóleo agrícola (gasóleo B) se paga en Castilla y León a 1,616 €/l de media, y la gasolinera más barata lo ofrece a 1,379 €/l. Hace una semana la media estaba en 1,645 €/l, así que ha bajado 0,029 € por litro."
   },
   {
    "t": "La semana que viene",
@@ -98,6 +94,6 @@
   "Histórico de precios de la Junta de Castilla y León",
   "Ministerio para la Transición Ecológica y el Reto Demográfico (gasóleo B)"
  ],
- "audio": "audio/informe-2026-W46.mp3",
+ "audio": "audio/informe-2026-W47.mp3",
  "audio_seg": 69
 }
