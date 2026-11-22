@@ -4,7 +4,7 @@
   "detalle": "Instagram no pudo procesar la imagen (ERROR)",
   "fecha": "2026-11-16"
  },
- "franja": "tarde",
+ "franja": "diario:1",
  "franjas": {
   "2026-11-07": [
    "reel"
@@ -143,6 +143,54 @@
    "texto": "¿Dónde se paga más la cebada? 👇\n\n1. Salamanca: 230 €/t (Cebada)\n2. Lerma: 223 €/t (Cebada dos carreras)\n3. León: 221 €/t (Cebada)\n4. Segovia: 221 €/t (Cebada 62 kg/hl)\n\nDiferencia: 9,00 €/t. Cada lonja cotiza su propia calidad.\n\n📍 Todos los precios y la comparativa entre lonjas, en el enlace de la bio (lonjas-cyl-khaki.vercel.app).\nAvisos gratis en Telegram: t.me/lonjas_cyl\nPrecios orientativos.\n🔊 Voz generada por ordenador (Kokoro, voz «em_santa», licencia Apache 2.0).\n\n#reels #Cebada #precios #lonjas #CastillayLeón #preciosagrarios #agricultura #ganadería #campo",
    "tipo": "reel",
    "video": "2026-11-16-reel-cebada.mp4"
+  },
+  {
+   "id": "2026-11-22-diario-01",
+   "n": 1,
+   "spec": {
+    "escenas": [
+     {
+      "dur": 3,
+      "sub": "Lonjas CyL · domingo 22 nov",
+      "tipo": "portada",
+      "titulo": "¿Qué es una lonja?"
+     },
+     {
+      "dur": 8,
+      "pizarra": "Precio de referencia",
+      "sub": "Compradores y vendedores acuerdan un precio de referencia",
+      "tipo": "mesa",
+      "titulo": "Una mesa, dos partes"
+     },
+     {
+      "dur": 8,
+      "items": [
+       {
+        "texto": "Es un acuerdo semanal que sirve de guía a todo el sector.",
+        "titulo": "No es una subasta"
+       },
+       {
+        "texto": "En Castilla y León cotizan en días distintos de la semana.",
+        "titulo": "Cada lonja, su día"
+       },
+       {
+        "texto": "Las ves en Lonjas CyL, gratis y en cuanto salen.",
+        "titulo": "Todas juntas"
+       }
+      ],
+      "tipo": "tarjetas",
+      "titulo": "¿Qué es una lonja?"
+     },
+     {
+      "dur": 3.5,
+      "tipo": "cierre",
+      "web": "lonjas-cyl-khaki.vercel.app"
+     }
+    ]
+   },
+   "texto": "🎬 ¿Qué es una lonja?\n\nEn una lonja, compradores y vendedores se sientan a la misma mesa y acuerdan un precio de referencia.\nNo es una subasta: es un acuerdo que sirve de guía a todo el sector. Cada lonja cotiza un día distinto.\n\n📍 Todos los precios y la comparativa entre lonjas, en el enlace de la bio (lonjas-cyl-khaki.vercel.app).\nAvisos gratis en Telegram: t.me/lonjas_cyl\nPrecios orientativos.\n\n#reels #lonjas #agricultura #CastillayLeón #preciosagrarios #ganadería #campo",
+   "tipo": "tres",
+   "video": "2026-11-22-diario-01.mp4"
   }
  ],
  "publicado": {
