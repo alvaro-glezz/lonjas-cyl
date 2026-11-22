@@ -4,6 +4,7 @@
    se valida antes de usarlo: fechas reales, textos acotados y enlaces solo https. */
 const RUTA_PLAZOS = "data/plazos.json";
 const PLAZOS = { lista: null, actualizado: null, cargando: null, error: false };
+const TIPO_PLAZO = { cobro: "Cobro", tramite: "Trámite", seguro: "Seguro agrario" };
 
 function sanearPlazos(crudo) {
   if (!crudo || typeof crudo !== "object" || !Array.isArray(crudo.plazos)) throw new Error("Formato de plazos no válido");
@@ -13,7 +14,7 @@ function sanearPlazos(crudo) {
     const inicio = fechaOk(p.inicio), fin = fechaOk(p.fin);
     const titulo = texto(p.titulo, 120);
     if (!inicio || !fin || fin < inicio || !titulo) continue;
-    lista.push({ id: p.id, titulo, inicio, fin, tipo: p.tipo === "tramite" ? "tramite" : "cobro", confirmado: p.confirmado !== false,
+    lista.push({ id: p.id, titulo, inicio, fin, tipo: ["tramite", "seguro"].includes(p.tipo) ? p.tipo : "cobro", confirmado: p.confirmado !== false,
       detalle: texto(p.detalle, 600), fuente: urlHttps(p.fuente), fuenteNombre: texto(p.fuente_nombre, 160) });
   }
   return { lista, actualizado: fechaOk(crudo.actualizado) };
@@ -57,7 +58,7 @@ function tarjetaPlazo({ p, f }, enlace) {
   const pct = f.fase === "activo" ? Math.round(f.hechos / f.total * 100) : 0;
   return `<${enlace ? 'button type="button" data-ir="plazos"' : "div"} class="plazo${f.fase === "activo" ? " activo" : ""}${urgente ? " urgente" : ""}">
     <span class="plazo-cab"><b>${esc(p.titulo)}</b><span class="pastilla ${f.fase === "activo" ? (urgente ? "p-err" : "p-dia") : f.fase === "proximo" ? "p-pend" : "p-off"}">${cuentaAtras(f)}</span></span>
-    <span class="plazo-fechas">${p.tipo === "cobro" ? "Cobro" : "Trámite"} · ${fechasPlazo(p)}${p.confirmado ? "" : " · fecha prevista"}</span>
+    <span class="plazo-fechas">${TIPO_PLAZO[p.tipo]} · ${fechasPlazo(p)}${p.confirmado ? "" : " · fecha prevista"}</span>
     ${f.fase === "activo" ? `<span class="plazo-barra" aria-hidden="true"><i data-w="${pct}"></i></span>` : ""}
   </${enlace ? "button" : "div"}>`;
 }
@@ -68,7 +69,7 @@ function bloquePlazos() {
   const { vivos } = plazosOrdenados();
   if (!vivos.length) return "";
   return `<section class="seccion">
-    <div class="titulo-seccion"><h2>Plazos del campo</h2><span>PAC · cuenta atrás</span></div>
+    <div class="titulo-seccion"><h2>Plazos del campo</h2><span>PAC y seguros · cuenta atrás</span></div>
     <div class="plazos">${vivos.slice(0, 2).map(x => tarjetaPlazo(x, true)).join("")}</div>
   </section>`;
 }
@@ -79,16 +80,21 @@ function vistaPlazos() {
     return '<div class="vacio"><b>No se ha podido cargar el calendario</b>Comprueba la conexión y vuelve a intentarlo.</div>';
   }
   const { vivos, pasados } = plazosOrdenados();
-  const ficha = x => `<div class="fuente-fila">${tarjetaPlazo(x, false)}
+  const ficha = x => `<div class="fuente-fila" id="plazo-${esc(x.p.id)}">${tarjetaPlazo(x, false)}
       ${x.p.detalle ? `<p class="nota">${esc(x.p.detalle)}</p>` : ""}
       ${x.p.fuente ? `<p class="fuente">Fuente: <a href="${esc(x.p.fuente)}" target="_blank" rel="noopener noreferrer">${esc(x.p.fuenteNombre || "documento oficial")}</a></p>` : ""}
     </div>`;
+  const grupo = (titulo, lista, vacio) => `<h3 class="mesa-suelta">${titulo}</h3>` +
+    (lista.length ? `<div class="fuentes">${lista.map(ficha).join("")}</div>` : `<div class="vacio sin-borde">${vacio}</div>`);
+  const pac = vivos.filter(x => x.p.tipo !== "seguro"), seguros = vivos.filter(x => x.p.tipo === "seguro");
   return `<section class="seccion">
     <div class="cab-lonja"><button class="volver" type="button" data-ir="hoy">‹ Volver</button><h2>Plazos del campo</h2>
-      <div class="meta">Cobros y trámites de la PAC con su cuenta atrás.${PLAZOS.actualizado ? ` Calendario revisado el ${fechaLarga(PLAZOS.actualizado)}.` : ""}</div></div>
-    ${vivos.length ? `<div class="fuentes">${vivos.map(ficha).join("")}</div>` : '<div class="vacio sin-borde">No hay plazos próximos en el calendario.</div>'}
+      <div class="meta">PAC y seguros agrarios, con su cuenta atrás.${PLAZOS.actualizado ? ` Calendario revisado el ${fechaLarga(PLAZOS.actualizado)}.` : ""}</div></div>
+    ${grupo("PAC", pac, "No hay plazos de la PAC próximos en el calendario.")}
+    ${grupo("Seguros agrarios", seguros, "No hay plazos de seguros próximos en el calendario.")}
     ${pasados.length ? `<h3 class="mesa-suelta">Ya pasados</h3><div class="fuentes">${pasados.map(ficha).join("")}</div>` : ""}
-    <p class="nota">Fechas generales de la PAC en España. Las marcadas como «fecha prevista» son el plazo habitual y aún no se han publicado para ese año. Cada pago depende de la Junta de Castilla y León y de tu expediente: consulta tu caso con tu entidad colaboradora.</p>
+    <p class="nota">PAC: fechas generales en España; las marcadas como «fecha prevista» aún no se han publicado para ese año. Cada pago depende de la Junta de Castilla y León y de tu expediente: consulta tu caso con tu entidad colaboradora.</p>
+    <p class="nota">Seguros agrarios: periodos de contratación para Castilla y León según la orden de cada seguro (BOE) o Agroseguro. Pueden ampliarse y cambian cada plan: la fecha que vale es la que te confirme tu tomador o mediador.</p>
   </section>`;
 }
 
@@ -101,6 +107,6 @@ function filaCampoPlazo() {
   const urgente = f.fase === "activo" && f.dias <= 7;
   const dato = f.fase === "activo" ? (f.dias === 0 ? "Hoy" : `${f.dias}<small>día${f.dias === 1 ? "" : "s"}</small>`) : `${f.dias}<small>para empezar</small>`;
   return `<button class="fila-mod" type="button" data-ir="plazos"><span class="fm-ico"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg></span>
-    <span><b>${esc(p.titulo)}</b><small>${p.tipo === "cobro" ? "Cobro" : "Trámite"} ${f.fase === "activo" ? `hasta el ${fechaCorta(p.fin)}` : `desde el ${fechaCorta(p.inicio)}`}${p.confirmado ? "" : " · fecha prevista"}</small></span>
+    <span><b>${esc(p.titulo)}</b><small>${TIPO_PLAZO[p.tipo]} ${f.fase === "activo" ? `hasta el ${fechaCorta(p.fin)}` : `desde el ${fechaCorta(p.inicio)}`}${p.confirmado ? "" : " · fecha prevista"}</small></span>
     <span class="fm-dato${urgente ? " b" : ""}">${dato}</span></button>`;
 }

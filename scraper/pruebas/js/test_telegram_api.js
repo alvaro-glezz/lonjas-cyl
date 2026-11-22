@@ -109,6 +109,16 @@ const msg = (text, type = "private") => ({ update_id: 1, message: { message_id: 
   r = await llamar({ update_id: 3, message: { message_id: 8, chat: { id: 43, type: "private" }, text: "no publiques nada" } }, ok);
   assert.match(r.j.text, /No he encontrado/);                                                      // otra persona: nada
 
+  // ---- plazos y seguros (lee data/plazos.json de la web) ----
+  const PL = { plazos: [
+    { id: "s", titulo: "Seguro de herbáceos de secano", tipo: "seguro", inicio: "2000-09-01", fin: "2999-12-20" },
+    { id: "p", titulo: "Anticipo de la PAC", tipo: "cobro", inicio: "2000-10-16", fin: "2999-11-30" },
+    { id: "v", titulo: "Viejo <b>", tipo: "seguro", inicio: "2000-01-01", fin: "2000-02-01" }] };
+  const txt = api.textoPlazos(PL, "seguro", "2026-11-23", "https://lonjas.example/");
+  assert.match(txt, /Seguro de herbáceos de secano/); assert.ok(!/Anticipo/.test(txt)); assert.ok(!/Viejo/.test(txt));
+  assert.match(api.textoPlazos(PL, "pac", "2026-11-23", "w"), /Anticipo de la PAC/);
+  assert.match(api.textoPlazos({ plazos: [] }, "", "2026-11-23", "w"), /No hay plazos próximos/);
+
   for (const t of ["trigo", "lechazo", "salamanca", "alubia", "vacas", "ovejas"]) {
     const x = (await llamar(msg(t), ok)).j.text; assert.ok(x.length < 4000, t); console.log(`— ${t}\n${x}\n`);
   }

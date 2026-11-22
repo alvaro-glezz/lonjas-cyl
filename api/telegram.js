@@ -72,7 +72,8 @@ function ayuda(web) {
     "• <b>Salamanca</b>, <b>León</b>, <b>Segovia</b>, <b>Lerma</b>",
     "• /lonjas: la última sesión de cada una",
     "• Cualquier otra palabra: <b>cordero</b>, <b>alubia</b>, <b>vacas</b>…", "",
-    "🔔 <b>Avisos</b>: /aviso trigo salamanca 240 te escribe cuando el trigo de Salamanca llegue a 240 €/t. /avisos para verlos.", "",
+    "🔔 <b>Avisos</b>: /aviso trigo salamanca 240 te escribe cuando el trigo de Salamanca llegue a 240 €/t. /avisos para verlos.",
+    "📅 <b>Plazos</b>: escribe <b>seguros</b> (seguros agrarios) o <b>pac</b> para ver las fechas con su cuenta atrás.", "",
     `Toda la información, avisos y calculadora: ${web}`, "Precios orientativos de cada lonja."].join("\n");
 }
 
@@ -228,6 +229,27 @@ async function procesarAdmin(t, web, alm) {
     "", "Escribe <b>ordenes</b> para ver lo que puedes pedirme."].filter(x => x !== "").join("\n");
 }
 
+/** Plazos de la PAC y de los seguros agrarios (data/plazos.json): los en curso y los próximos, con su cuenta atrás. */
+function textoPlazos(crudo, filtro, hoy, web) {
+  const dias = (a, b) => Math.round((Date.parse(a + "T12:00:00Z") - Date.parse(b + "T12:00:00Z")) / 86400000);
+  const ok = f => typeof f === "string" && /^\d{4}-\d{2}-\d{2}$/.test(f);
+  const lista = (Array.isArray(crudo && crudo.plazos) ? crudo.plazos : [])
+    .filter(p => p && ok(p.inicio) && ok(p.fin) && p.fin >= hoy && typeof p.titulo === "string")
+    .filter(p => filtro === "seguro" ? p.tipo === "seguro" : filtro === "pac" ? p.tipo !== "seguro" : true)
+    .map(p => ({ p, activo: p.inicio <= hoy }))
+    .sort((a, b) => (a.activo ? a.p.fin : a.p.inicio).localeCompare(b.activo ? b.p.fin : b.p.inicio)).slice(0, 8);
+  const titulo = filtro === "seguro" ? "Seguros agrarios" : filtro === "pac" ? "Plazos de la PAC" : "Plazos del campo (PAC y seguros)";
+  if (!lista.length) return `<b>${titulo}</b>\nNo hay plazos próximos en el calendario.`;
+  const fila = ({ p, activo }) => {
+    const n = activo ? dias(p.fin, hoy) : dias(p.inicio, hoy);
+    const cuenta = activo ? (n === 0 ? "⏰ último día" : `⏳ quedan ${n} día${n === 1 ? "" : "s"}`) : `🗓️ empieza en ${n} día${n === 1 ? "" : "s"}`;
+    return `• <b>${esc(String(p.titulo).slice(0, 120))}</b>\n  ${fecha(p.inicio)} ${p.inicio.slice(0, 4)} – ${fecha(p.fin)} ${p.fin.slice(0, 4)} · ${cuenta}`;
+  };
+  return [`📅 <b>${titulo}</b>`, "", ...lista.map(fila), "",
+    filtro === "seguro" || !filtro ? "Seguros: fechas de Castilla y León según el BOE o Agroseguro; confírmalas con tu tomador o mediador." : "",
+    `Detalle y fuentes: ${web}#plazos`, "Escribe <b>seguros</b> o <b>pac</b> para ver solo unos."].filter(x => x !== "").join("\n");
+}
+
 /** «trigo salamanca más de 240» -> { clave, lonja, dir, umbral }. Admite coma decimal, «>» y «<». */
 function leerAviso(texto) {
   const t = String(texto || "").toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "")
@@ -322,6 +344,10 @@ async function procesar(textoCrudo, msg, lonjas, web, alm) {
     try { return await procesarAdmin(t, web, alm); }
     catch { return "No he podido hacerlo ahora mismo (almacén o web sin respuesta). Prueba en unos minutos."; }
   }
+  if (/^(plazos|seguros?|seguros agrarios|pac|calendario)\b/.test(t)) {
+    try { return textoPlazos(await leerJSON(web, "data/plazos.json"), /^seguro/.test(t) ? "seguro" : /^pac\b/.test(t) ? "pac" : "", diaMadrid(0), web); }
+    catch { return "No he podido leer el calendario ahora mismo. Prueba en unos minutos."; }
+  }
   if (/^(aviso|avisos|avisame|mis avisos|borrar|quitar)\b/.test(t)) {
     try { return await procesarAvisos(t, textoCrudo, msg, lonjas, alm); }
     catch { return "No he podido guardar o leer tus avisos ahora mismo. Prueba en unos minutos."; }
@@ -373,3 +399,4 @@ module.exports.leerAviso = leerAviso;
 module.exports.evaluarAviso = evaluarAviso;
 module.exports.franjasDe = franjasDe;
 module.exports.sha256 = sha256;
+module.exports.textoPlazos = textoPlazos;

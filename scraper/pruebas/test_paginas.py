@@ -119,4 +119,4 @@ def test_plazos_reales_validos():
     assert len(ids) == len(set(ids)) and all(re.fullmatch(r"[a-z0-9][a-z0-9-]*", i) for i in ids)
     for x in p["plazos"]:
         assert date.fromisoformat(x["inicio"]) <= date.fromisoformat(x["fin"])
-        assert x["fuente"].startswith("https://") and x["titulo"] and x["tipo"] in ("cobro", "tramite")
+        assert x["fuente"].startswith("https://") and x["titulo"] and x["tipo"] in ("cobro", "tramite", "seguro")

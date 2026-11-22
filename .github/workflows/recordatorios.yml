@@ -1,0 +1,39 @@
+# Recordatorios de plazos (PAC y seguros agrarios) en el canal @lonjas_cyl: cada mañana, solo si hoy toca
+# (empieza un plazo, o quedan 7 días o 1 día para que termine). A mano, «probar» te manda todos a tu chat privado.
+name: Recordatorios de plazos
+
+on:
+  schedule:
+    - cron: "7 8 * * *"         # 9:07 en Madrid (invierno)
+  workflow_dispatch:
+    inputs:
+      probar:
+        description: "si = mandarme a mí (chat privado) un aviso de prueba de cada seguro en curso; no = lo que toque hoy, al canal"
+        default: "si"
+        type: choice
+        options: ["si", "no"]
+
+permissions:
+  contents: read
+
+jobs:
+  avisar:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262  # v4.4.0
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065  # v5.6.0
+        with:
+          python-version: "3.12"
+      - run: pip install -q requests
+      - name: Avisar
+        env:
+          TELEGRAM_TOKEN: ${{ secrets.TELEGRAM_TOKEN }}
+          TELEGRAM_ADMIN_CHAT: ${{ secrets.TELEGRAM_ADMIN_CHAT }}
+          PROBAR: ${{ inputs.probar }}
+        run: |
+          if [ "$PROBAR" = "si" ]; then
+            python scraper/recordatorios.py --todos --solo seguro --enviar yo
+          else
+            python scraper/recordatorios.py --enviar canal
+          fi

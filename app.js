@@ -722,7 +722,7 @@ window.addEventListener("popstate", () => { if (!$("#velo").hidden) cerrarDetall
    Hoy · Mercado (lonjas, comparar, histórico, comentario) · Campo (tiempo, gasóleo, plazos) · Calcular · Mío. */
 const SUBSECCIONES = {
   mercado: { nombre: "Mercado", tabs: [["lonjas", "Lonjas"], ["comparar", "Comparar"], ["historico", "Histórico"], ["comentario", "Comentario"]] },
-  campo: { nombre: "Campo", tabs: [["tiempo", "Tiempo"], ["gasoleo", "Gasóleo"], ["plazos", "Plazos PAC"]] },
+  campo: { nombre: "Campo", tabs: [["tiempo", "Tiempo"], ["gasoleo", "Gasóleo"], ["plazos", "Plazos"]] },
   calcular: { nombre: "Calcular", tabs: [["calcular", "Todas"], ["calculadora", "Venta"], ["explotacion", "Mi explotación"], ["oferta", "¿Me pagan bien?"], ["termometro", "¿Caro o barato?"]] },
 };
 function seccionDe(h) {

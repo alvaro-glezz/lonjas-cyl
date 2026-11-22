@@ -371,7 +371,7 @@ def pagina_indice(datos: dict, productos: list[str], sectores: list[str]) -> str
 
 
 def pagina_plazos(plazos: dict, hoy: str) -> str | None:
-    """Calendario de la PAC (data/plazos.json) con su cuenta atrás calculada el día en que se genera la página."""
+    """Calendario de la PAC y de los seguros agrarios (data/plazos.json), con su cuenta atrás calculada el día en que se genera la página."""
     lista = [p for p in plazos.get("plazos", []) if p.get("inicio") and p.get("fin") and p.get("titulo")]
     if not lista:
         return None
@@ -393,7 +393,7 @@ def pagina_plazos(plazos: dict, hoy: str) -> str | None:
     if vivo:
         frase = f"{vivo['titulo']}: {estado(vivo)[1].lower()} ({fecha_larga(vivo['fin'] if estado(vivo)[0] == 0 else vivo['inicio'])})."
     else:
-        frase = "Calendario de cobros y trámites de la PAC."
+        frase = "Calendario de cobros y trámites de la PAC y de los seguros agrarios."
     filas = "".join(
         f'<tr><td><a href="#{escape(p["id"])}">{escape(p["titulo"])}</a>{"" if p.get("confirmado", True) else " <small>(fecha prevista)</small>"}</td>'
         f'<td>{fecha_corta(p["inicio"])} {p["inicio"][:4]} – {fecha_corta(p["fin"])} {p["fin"][:4]}</td><td>{escape(estado(p)[1])}</td></tr>' for p in orden)
@@ -404,16 +404,18 @@ def pagina_plazos(plazos: dict, hoy: str) -> str | None:
         + (f'<p class="nota">Fuente: <a href="{escape(p["fuente"])}" rel="nofollow">{escape(p.get("fuente_nombre") or "documento oficial")}</a></p>'
            if str(p.get("fuente", "")).startswith("https://") else "") for p in orden)
     ruta = "plazos/"
-    h1 = f"Calendario de la PAC {rango_anios}: plazos y pagos"
-    migas = [("Inicio", ""), ("Plazos de la PAC", None)]
+    h1 = f"Calendario de la PAC y seguros agrarios {rango_anios}"
+    migas = [("Inicio", ""), ("Plazos de la PAC y seguros", None)]
     cuerpo = (f'<p class="lead">{escape(frase)}</p><p class="fecha">Cuenta atrás a {fecha_larga(hoy)}.</p>'
               '<div class="tabla"><table><thead><tr><th>Plazo</th><th>Fechas</th><th>Estado</th></tr></thead><tbody>' + filas + "</tbody></table></div>"
               + fichas
               + '<p class="nota">Fechas generales de la PAC en España. Las «previstas» son el plazo habitual y aún no se han publicado para ese año. '
                 'Cada pago depende de la Junta de Castilla y León y de tu expediente: consulta tu caso con tu entidad colaboradora.</p>'
+              + '<p class="nota">Seguros agrarios: periodos de contratación para Castilla y León según la orden de cada seguro (BOE) o Agroseguro. '
+                'Pueden ampliarse y cambian cada plan: la fecha que vale es la que te confirme tu tomador o mediador.</p>'
               + '<section class="cta"><h2>Cuenta atrás en el móvil</h2><p>La app muestra estos plazos en su pantalla de inicio, junto a los precios de las lonjas de Castilla y León.</p><a class="boton" href="../#plazos">Abrir Lonjas CyL</a></section>')
-    return pagina(ruta=ruta, nivel=1, titulo=f"Calendario PAC {rango_anios}: anticipo, pago del saldo y Solicitud Única | Lonjas CyL",
-                  descripcion=f"Fechas de cobro y trámites de la PAC {rango_anios} con cuenta atrás: anticipo, saldo, Solicitud Única. {frase}",
+    return pagina(ruta=ruta, nivel=1, titulo=f"Calendario PAC y seguros agrarios {rango_anios}: pagos, Solicitud Única y contratación | Lonjas CyL",
+                  descripcion=f"Fechas de la PAC {rango_anios} y de contratación de los seguros agrarios en Castilla y León (herbáceos, ganado) con cuenta atrás. {frase}",
                   h1=h1, cuerpo=cuerpo, migas=migas, ld=[ld_migas(migas, ruta)])
 
 
