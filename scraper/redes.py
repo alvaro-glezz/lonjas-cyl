@@ -659,6 +659,10 @@ def elegir(franja: str, datos: dict, estado: dict, hoy: date) -> dict | None:
         import fichas
         f = next((x for x in fichas.leer() if x["id"] == franja.split(":", 1)[1]), None)
         return fichas.item(f, hoy) if f else None
+    if franja.startswith("historia:"):               # volver a publicar una historia concreta (1-5), a mano
+        import historias
+        n = franja.split(":", 1)[1]
+        return historias.item(int(n), hoy) if n.isdigit() and int(n) in historias.HISTORIAS else None
     if franja == "historia":
         import fichas                                 # un reel del Estudio programado para hoy va primero
         f = fichas.de_hoy(fichas.leer(), hoy, estado)
