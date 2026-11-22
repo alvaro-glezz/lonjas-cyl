@@ -235,3 +235,18 @@ def test_publicacion_del_dia_no_repite_producto(redes, monkeypatch):
     assert redes.elegir("manana", {}, ayer, jueves)["clave"] == "lechazo"
     hace_tiempo = {"registro": [{"id": "2026-11-10-dia-centeno"}]}
     assert redes.elegir("manana", {}, hace_tiempo, jueves)["clave"] == "centeno"
+
+
+def test_reel_3d_diario(redes, monkeypatch):
+    import reels30
+    from datetime import datetime
+    # 21:00 de Madrid: la franja «diario» toca también en domingo, después de la tarde
+    dom = date(2026, 11, 22)
+    assert redes.franja_pendiente(datetime(2026, 11, 22, 19, 29), {}, dom) == "diario"
+    assert redes.franja_pendiente(datetime(2026, 11, 22, 18, 0), {}, dom) is None
+    monkeypatch.setattr(reels30, "spec", lambda n, d, h, web=None: ({"escenas": [{"tipo": "portada", "dur": 3}]}, ["• dato real"]))
+    it = redes.elegir("diario", {}, {}, dom)
+    assert it["tipo"] == "tres" and it["id"] == "2026-11-22-diario-01" and "¿Qué es una lonja?" in it["texto"]
+    assert redes.elegir("diario", {}, {}, date(2026, 12, 25)) is None              # fuera de los 30 días
+    monkeypatch.setattr(reels30, "spec", lambda *a, **k: None)
+    assert redes.elegir("diario", {}, {}, dom) is None                             # sin datos: nada

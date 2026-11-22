@@ -83,6 +83,20 @@
         4,
         5
       ]
+    },
+    {
+      "id": "diario",
+      "hora": "21:00",
+      "nombre": "Reel 3D del día",
+      "dias": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ]
     }
   ],
   "herramientas": [
@@ -91,6 +105,12 @@
       "donde": "GitHub Actions",
       "estado": "activo",
       "nota": "Monta cada reel 1080×1920."
+    },
+    {
+      "nombre": "Reels 3D (three.js + Chromium)",
+      "donde": "GitHub Actions",
+      "estado": "activo",
+      "nota": "Los 30 reels diarios de las 21:00, sin voz hasta tener la tuya."
     },
     {
       "nombre": "Voz Kokoro «Santa»",

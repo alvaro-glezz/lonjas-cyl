@@ -8,6 +8,8 @@
   const nombre = k => NOMBRES[k] || k;
   const iso = d => `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}-${String(d.getDate()).padStart(2, "0")}`;
 
+  let BASE = null;
+  const fechaDe = dia => { const d = new Date(BASE); d.setDate(BASE.getDate() + dia); return iso(d); };
   function lunes(hoy) {
     const d = new Date(hoy); d.setHours(12, 0, 0, 0);
     d.setDate(d.getDate() - ((d.getDay() + 6) % 7));
@@ -22,16 +24,19 @@
     }
     if (franja === "manana") return `Precios de ${nombre(plan.producto_dia[dia])} o sesión de lonja`;
     if (franja === "hortalizas") return "Precios de las patatas de la sesión del miércoles";
+    if (franja === "diario") return REELS30[fechaDe(dia)] || "Fuera de la serie de 30 reels";
     if (franja === "legumbres") return "Precios de las alubias de la sesión del miércoles";
     if (franja === "tarde") return "Sesión de lonja o comparativa semanal";
     return ["Gasóleo B por provincia", "Cereales: la lonja que más paga", "Ganado: precios de la semana",
       "¿Cuánto cambia según la lonja?", "Ocho semanas de mercado"][dia] || "";
   }
 
+  let REELS30 = {};
   function pintarSemana(plan, estado, hoy) {
     const base = lunes(hoy), hecho = estado.franjas || {}, hoyIso = iso(hoy);
+    BASE = base;
     let html = "";
-    for (let dia = 0; dia < 6; dia++) {
+    for (let dia = 0; dia < 7; dia++) {
       const d = new Date(base); d.setDate(base.getDate() + dia);
       const f = iso(d), hechas = hecho[f] || [];
       const filas = plan.franjas.filter(x => x.dias.includes(dia)).map(x => {
@@ -64,6 +69,8 @@
 
   async function cargar() {
     try {
+      const r30 = await fetch("../data/reels-30.json", { cache: "no-store" }).then(r => r.ok ? r.json() : { reels: [] }).catch(() => ({ reels: [] }));
+      REELS30 = Object.fromEntries((r30.reels || []).map(r => [r.fecha, `${r.n}/30 · ${r.titulo}`]));
       const [plan, estado] = await Promise.all(["../data/estudio-plan.json", "../data/instagram.json"].map(async u => {
         const r = await fetch(u, { cache: "no-store" });
         if (!r.ok) throw new Error(`No se ha podido leer ${u.split("/").pop()}`);

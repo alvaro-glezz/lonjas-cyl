@@ -632,6 +632,7 @@ VENTANAS = (("manana", (6, 40), (11, 30), range(0, 6)),
             ("hortalizas", (10, 30), (15, 0), range(3, 4)),     # jueves: patatas de la Lonja de León
             ("legumbres", (10, 30), (15, 0), range(4, 5)),      # viernes: alubias de la Lonja de León
             ("historia", (17, 30), (21, 30), range(0, 5)),      # lunes a viernes
+            ("diario", (19, 25), (22, 30), range(0, 7)),        # 21:00 Madrid: los 30 reels 3D (22 nov–21 dic), también domingos
             ("tarde", (17, 40), (21, 30), range(0, 6)))
 
 
@@ -673,6 +674,12 @@ def elegir(franja: str, datos: dict, estado: dict, hoy: date) -> dict | None:
     if franja.startswith("especial:"):              # reels especiales (especiales.py): se lanzan a mano, cualquier día
         import especiales
         return especiales.item(franja.split(":", 1)[1], hoy)
+    if franja == "diario" or franja.startswith("diario:"):   # los 30 reels 3D (reels30.py), todos los días
+        import reels30
+        if franja == "diario":
+            return reels30.item(datos, hoy)
+        g = next((r for r in reels30.guiones() if str(r["n"]) == franja.split(":", 1)[1]), None)
+        return reels30.item(datos, date.fromisoformat(g["fecha"]) if g and g["tipo"] != "datos" else hoy, n=g["n"]) if g else None
     if dia == 6:
         return None
     if franja in ("hortalizas", "legumbres"):
@@ -735,6 +742,9 @@ def crear_archivos(item: dict, datos: dict, hoy: date, carpeta: Path) -> None:
     elif item["tipo"] == "hortalizas":
         import hortalizas
         hortalizas.imagen(datos, hoy, carpeta / item["imagenes"][0], item.get("mesa", "hortalizas"))
+    elif item["tipo"] == "tres":
+        import reels30
+        reels30.reel(item, carpeta / item["video"])
     elif item["tipo"] == "ficha":
         import fichas
         fichas.reel(item["ficha"], carpeta / item["video"])
@@ -844,6 +854,12 @@ def main(argv: list[str]) -> int:
                 return 0
             sha = os.environ.get("MEDIOS_SHA", "").strip()
             item = estado["preparado"][0]
+            if item.get("tipo") == "tres":                       # el reel 3D sale a las 21:00 de Madrid (20:00 UTC en invierno)
+                import time
+                falta = (datetime.utcnow().replace(hour=20, minute=0, second=0, microsecond=0) - datetime.utcnow()).total_seconds()
+                if 0 < falta <= 40 * 60:
+                    print(f"[redes] Reel 3D listo: espero {round(falta / 60)} min para publicarlo a las 21:00.")
+                    time.sleep(falta)
             primero = item.get("video") or item["imagenes"][0]
             base = next((b for b in (CDN.format(sha=sha), RAW.format(sha=sha)) if ig.en_internet(b + primero, intentos=12)), None)
             if not base:
