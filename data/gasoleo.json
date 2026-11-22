@@ -1,5 +1,5 @@
 {
- "fecha": "2026-11-22T17:52",
+ "fecha": "2026-11-22T22:06",
  "fuente": "Ministerio para la Transición Ecológica y el Reto Demográfico (Geoportal de gasolineras)",
  "fuente_url": "https://geoportalgasolineras.es/geoportal-instalaciones/Inicio",
  "unidad": "€/l",
@@ -1543,7 +1543,7 @@
    "nombre": "Granada",
    "cyl": false,
    "n": 58,
-   "media": 1.607,
+   "media": 1.605,
    "mediana": 1.61,
    "min": 1.459,
    "max": 1.819,
@@ -2271,7 +2271,7 @@
     {
      "id": "543",
      "nombre": "Galp",
-     "precio": 1.549,
+     "precio": 1.544,
      "municipio": "Lourenzá",
      "direccion": "Carretera N-634 Km. 578",
      "localidad": "Lourenza (casco Urbano)",
@@ -3244,18 +3244,6 @@
      "lon": -4.040444
     },
     {
-     "id": "6177",
-     "nombre": "Galp",
-     "precio": 1.659,
-     "municipio": "Villacastín",
-     "direccion": "Autopista A6 Km. 0",
-     "localidad": "Villacastin",
-     "cp": "40150",
-     "horario": "L-D: 24H",
-     "lat": 40.7975,
-     "lon": -4.460889
-    },
-    {
      "id": "6401",
      "nombre": "Galp",
      "precio": 1.659,
@@ -3266,6 +3254,18 @@
      "horario": "L-D: 06:00-22:00",
      "lat": 40.7975,
      "lon": -4.462889
+    },
+    {
+     "id": "6177",
+     "nombre": "Galp",
+     "precio": 1.659,
+     "municipio": "Villacastín",
+     "direccion": "Autopista A6 Km. 0",
+     "localidad": "Villacastin",
+     "cp": "40150",
+     "horario": "L-D: 24H",
+     "lat": 40.7975,
+     "lon": -4.460889
     },
     {
      "id": "6113",
@@ -3382,7 +3382,7 @@
    "nombre": "Sevilla",
    "cyl": false,
    "n": 76,
-   "media": 1.663,
+   "media": 1.662,
    "mediana": 1.665,
    "min": 1.459,
    "max": 1.879,
