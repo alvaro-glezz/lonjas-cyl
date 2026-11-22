@@ -678,12 +678,12 @@ def elegir(franja: str, datos: dict, estado: dict, hoy: date) -> dict | None:
     if franja.startswith("especial:"):              # reels especiales (especiales.py): se lanzan a mano, cualquier día
         import especiales
         return especiales.item(franja.split(":", 1)[1], hoy)
-    if franja == "diario" or franja.startswith("diario:"):   # los 30 reels 3D (reels30.py), todos los días
+    if franja == "diario" or franja.startswith(("diario:", "diario-voz:")):   # los 30 reels 3D (reels30.py), todos los días
         import reels30
         if franja == "diario":
             return reels30.item(datos, hoy)
         g = next((r for r in reels30.guiones() if str(r["n"]) == franja.split(":", 1)[1]), None)
-        return reels30.item(datos, date.fromisoformat(g["fecha"]) if g and g["tipo"] != "datos" else hoy, n=g["n"]) if g else None
+        return reels30.item(datos, hoy, n=g["n"], con_voz=franja.startswith("diario-voz:")) if g else None
     if dia == 6:
         return None
     if franja in ("hortalizas", "legumbres"):

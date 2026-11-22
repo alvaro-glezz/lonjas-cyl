@@ -393,7 +393,7 @@ def texto(n: int, lineas: list[str], web: str = WEB) -> str:
     return "\n".join(cuerpo)[:2150]
 
 
-def item(datos: dict, hoy: date, n: int | None = None) -> dict | None:
+def item(datos: dict, hoy: date, n: int | None = None, con_voz: bool = False) -> dict | None:
     g = de_hoy(hoy) if n is None else next((r for r in guiones() if r["n"] == n), None)
     if not g:
         return None
@@ -401,13 +401,46 @@ def item(datos: dict, hoy: date, n: int | None = None) -> dict | None:
     if not s:
         print(f"[reels30] Reel {g['n']} («{g['titulo']}»): faltan datos hoy, no se publica.")
         return None
-    base = f"{hoy}-diario-{g['n']:02d}"
-    return {"tipo": "tres", "n": g["n"], "id": base, "texto": texto(g["n"], s[1]), "video": base + ".mp4", "spec": s[0]}
+    base = f"{hoy}-diario-{g['n']:02d}" + ("-voz" if con_voz else "")
+    t = texto(g["n"], s[1])
+    if con_voz:
+        if not guion_lleno(g["n"]):
+            print(f"[reels30] Reel {g['n']}: su guion lleva datos del día y aún no tiene voz.")
+            return None
+        t = t.replace(pie_texto(WEB), pie_texto(WEB) + "\n" + redes.aviso_voz(), 1)
+    return {"tipo": "tres", "n": g["n"], "id": base, "texto": t, "video": base + ".mp4", "spec": s[0], "voz": con_voz}
+
+
+def guion_lleno(n: int) -> str | None:
+    """Lo que lee la voz. Solo los guiones sin huecos {…} (aprender y app); los de datos aún no llevan voz."""
+    g = next(r for r in guiones() if r["n"] == n)
+    return None if "{" in g["guion"] else g["guion"]
+
+
+def ajustar(spec: dict, segundos: float) -> dict:
+    """Alarga las escenas centrales (no la portada ni el cierre) para que la voz quepa entera."""
+    total = sum(e["dur"] for e in spec["escenas"])
+    falta = segundos - total
+    medio = spec["escenas"][1:-1]
+    if falta <= 0 or not medio:
+        return spec
+    base = sum(e["dur"] for e in medio)
+    return {**spec, "escenas": [spec["escenas"][0], *[{**e, "dur": round(e["dur"] * (base + falta) / base, 2)} for e in medio], spec["escenas"][-1]]}
 
 
 def reel(it: dict, destino: Path) -> Path:
     import tres3d
-    return tres3d.render(it["spec"], destino)
+    spec, habla = it["spec"], None
+    if it.get("voz"):
+        texto_voz = guion_lleno(it["n"])
+        habla = redes.voz(texto_voz, destino.with_name(destino.stem + "-voz.wav")) if texto_voz else None
+        if habla:
+            spec = ajustar(spec, redes.duracion_wav(habla) + 0.6 + 1.5)       # 0,6 s de entrada y 1,5 s de margen
+    try:
+        return tres3d.render(spec, destino, voz=habla)
+    finally:
+        if habla:
+            habla.unlink(missing_ok=True)
 
 
 if __name__ == "__main__":

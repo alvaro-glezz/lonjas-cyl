@@ -45,7 +45,8 @@ def llamar(token: str, metodo: str, datos: dict, archivos: dict | None = None) -
 def cabecera(franja: str, probar: bool) -> str:
     nombre = (f"Reel especial «{franja.split(':', 1)[1]}»" if franja.startswith("especial:")
               else "Reel del Estudio" if franja.startswith("ficha:")
-              else f"Reel 3D n.º {franja.split(':', 1)[1]} de 30" if franja.startswith("diario:")
+              else f"Reel 3D n.º {franja.split(':', 1)[1]} de 30" + (" con voz" if franja.startswith("diario-voz:") else "")
+              if franja.startswith(("diario:", "diario-voz:"))
               else f"Historia n.º {franja.split(':', 1)[1]} (de nuevo)" if franja.startswith("historia:") else FRANJAS.get(franja, franja))
     nombre = FRANJAS.get(franja.split(":")[0], nombre) if franja.startswith("semana-todas") else nombre
     voz = os.environ.get("KOKORO_VOZ", "") if os.environ.get("VOZ_MOTOR") == "kokoro" else "piper"
@@ -101,7 +102,8 @@ def resultado(estado: dict, hoy: date, probar: bool) -> str | None:
         return None
     nombre = (f"Reel especial «{franja.split(':', 1)[1]}»" if franja.startswith("especial:")
               else "Reel del Estudio" if franja.startswith("ficha:")
-              else f"Reel 3D n.º {franja.split(':', 1)[1]} de 30" if franja.startswith("diario:")
+              else f"Reel 3D n.º {franja.split(':', 1)[1]} de 30" + (" con voz" if franja.startswith("diario-voz:") else "")
+              if franja.startswith(("diario:", "diario-voz:"))
               else f"Historia n.º {franja.split(':', 1)[1]} (de nuevo)" if franja.startswith("historia:") else FRANJAS.get(franja, franja))
     if probar:
         return f"🧪 {nombre}: era una prueba, no se ha publicado."
