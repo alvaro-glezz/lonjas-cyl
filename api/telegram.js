@@ -156,6 +156,7 @@ const FRANJAS_ADMIN = [
   ["hortalizas", "Patatas de León", /patata|hortaliza/],
   ["legumbres", "Alubias de León", /alubia|legumbre/],
   ["historia", "Reel «La semana en las lonjas»", /historia|semana en las lonjas|reel de la tarde/],
+  ["diario", "Reel 3D de las 21:00", /\b3d\b|de las (21|nueve)|de la noche/],
   ["reel", "Reel del día", /\breels?\b|video del dia/],
   ["tarde", "Publicación de la tarde", /(publicacion|post) de la tarde|ultima publicacion/],
 ];
@@ -173,14 +174,15 @@ async function esAdmin(chat, alm) {
 /** Qué franjas nombra el mensaje (ninguna = todas). «reel de la tarde»/«historia» no cuentan como «reel». */
 function franjasDe(t) {
   const hay = FRANJAS_ADMIN.filter(([, , re]) => re.test(t)).map(([id]) => id);
-  return hay.includes("historia") && !/\breels? del dia\b/.test(t) ? hay.filter(x => x !== "reel") : hay;
+  const sinReel = (hay.includes("historia") || hay.includes("diario")) && !/\breels? del dia\b/.test(t);
+  return sinReel ? hay.filter(x => x !== "reel") : hay;
 }
 /** «mañana» suelto = el día siguiente; «de la mañana» = la franja de la mañana. */
 const diaDe = t => /\bmanana\b/.test(t.replace(/\b(de|por) la manana\b/g, "")) ? diaMadrid(1) : diaMadrid(0);
 
 const AYUDA_ADMIN = ["🛠️ <b>Órdenes del dueño</b> (solo funcionan en tu chat)", "",
   "• <b>estado</b>: qué se ha publicado hoy y qué falta",
-  "• <b>no publiques el reel</b> (o «las patatas», «la historia», «la de la tarde»…). Sin decir cuál: nada de hoy",
+  "• <b>no publiques el reel</b> (o «el reel 3D», «las patatas», «la historia», «la de la tarde»…). Sin decir cuál: nada de hoy",
   "• <b>no publiques nada mañana</b>",
   "• <b>vuelve a publicar</b> (o «reanuda»): quita las pausas de hoy (o «… mañana»)",
   "• <b>prepara los reels de la semana</b>: te mando las 5 vistas previas (tarda de 15 a 30 min; no publica nada)"].join("\n");

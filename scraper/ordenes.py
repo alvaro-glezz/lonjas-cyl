@@ -21,7 +21,7 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 
-FRANJAS = ("manana", "reel", "hortalizas", "legumbres", "historia", "tarde")
+FRANJAS = ("manana", "reel", "hortalizas", "legumbres", "historia", "tarde", "diario")
 
 
 def conectar():
