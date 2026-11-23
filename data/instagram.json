@@ -4,7 +4,7 @@
   "detalle": "Instagram no pudo procesar la imagen (ERROR)",
   "fecha": "2026-11-16"
  },
- "franja": "extra:seguros-anuncio",
+ "franja": "extra:seguros-bot",
  "franjas": {
   "2026-11-07": [
    "reel"
@@ -276,6 +276,65 @@
    "texto": "🛡️ Nuevo en la app: el calendario de los seguros agrarios de Castilla y León, con su cuenta atrás.\n\n• Seguro de herbáceos de secano (cosecha 2027): hasta el 20 dic de 2026\n• Seguro de cereal de invierno en regadío (cosecha 2027): hasta el 31 may de 2027\n• Seguros de ganado: vacuno, ovino, caprino y porcino (Plan 2026): hasta el 31 may de 2027\n• Seguro de girasol en regadío (cosecha 2027): hasta el 15 jul de 2027\n\nLo tienes en Campo › Plazos. Fuentes: BOE (Orden APA/863/2026) y Agroseguro.\nLa fecha que vale es la que te confirme tu tomador o mediador; los plazos pueden ampliarse.\n\n📍 Todos los precios y la comparativa entre lonjas, en el enlace de la bio (lonjas-cyl-khaki.vercel.app).\nAvisos gratis en Telegram: t.me/lonjas_cyl\n🔊 Voz generada por ordenador (Kokoro, voz «em_santa», licencia Apache 2.0).\n\n#segurosagrarios #agricultura #ganaderia #lonjas #CastillayLeón #preciosagrarios #ganadería #campo",
    "tipo": "tres",
    "video": "2026-11-23-extra-seguros-anuncio.mp4",
+   "voz": true
+  },
+  {
+   "guion": "¿Quieres que te avisemos antes de que cierre el plazo de tu seguro agrario? Abre el robot de Lonjas CyL en Telegram y escribe: avísame de los seguros. Te escribirá el día que abra cada plazo, y siete días y un día antes de que cierre. El próximo cierre es el veinte de diciembre, el de herbáceos de secano. Para ver las fechas cuando quieras, escribe: seguros. Gratis.",
+   "id": "2026-11-23-extra-seguros-bot",
+   "n": 0,
+   "spec": {
+    "escenas": [
+     {
+      "dur": 3,
+      "sub": "Lonjas CyL · en Telegram, gratis",
+      "tipo": "portada",
+      "titulo": "¿Te avisamos de los seguros?"
+     },
+     {
+      "dur": 12,
+      "items": [
+       {
+        "texto": "Busca @lonjascyl_bot en Telegram y pulsa Iniciar.",
+        "titulo": "Abre el robot"
+       },
+       {
+        "texto": "«avísame de los seguros». Y ya está: quedas apuntado.",
+        "titulo": "Escribe"
+       },
+       {
+        "texto": "El día que abre un plazo, y 7 días y 1 día antes de que cierre.",
+        "titulo": "Te escribe a las 9:00"
+       },
+       {
+        "texto": "Escribe «seguros». Para dejarlo: «baja seguros».",
+        "titulo": "¿Las fechas ahora?"
+       }
+      ],
+      "sub": "Gratis, en el robot de Lonjas CyL",
+      "tipo": "movil",
+      "titulo": "Te avisamos por Telegram"
+     },
+     {
+      "dur": 5,
+      "items": [
+       {
+        "texto": "Seguro de herbáceos de secano (cosecha 2027). Confírmalo con tu mediador.",
+        "titulo": "20 dic de 2026"
+       }
+      ],
+      "tipo": "tarjetas",
+      "titulo": "El próximo cierre"
+     },
+     {
+      "dur": 3.5,
+      "tipo": "cierre",
+      "web": "lonjas-cyl-khaki.vercel.app"
+     }
+    ]
+   },
+   "texto": "🔔 Cómo pedir que te avisemos de los plazos de los seguros agrarios:\n\n1. Abre @lonjascyl_bot en Telegram y pulsa Iniciar.\n2. Escribe: avísame de los seguros\n3. Te escribirá a las 9:00 el día que abra cada plazo, y 7 días y 1 día antes de que cierre.\n\nPara ver las fechas: escribe «seguros». Para dejar de recibirlos: «baja seguros».\nPróximo cierre: Seguro de herbáceos de secano (cosecha 2027), 20 dic de 2026.\nLa fecha que vale es la que te confirme tu tomador o mediador.\n\n📍 Todos los precios y la comparativa entre lonjas, en el enlace de la bio (lonjas-cyl-khaki.vercel.app).\nAvisos gratis en Telegram: t.me/lonjas_cyl\n🔊 Voz generada por ordenador (Kokoro, voz «em_santa», licencia Apache 2.0).\n\n#segurosagrarios #agricultura #ganaderia #lonjas #CastillayLeón #preciosagrarios #ganadería #campo",
+   "tipo": "tres",
+   "video": "2026-11-23-extra-seguros-bot.mp4",
    "voz": true
   }
  ],
