@@ -200,6 +200,15 @@ function pintarCabecera() {
     (g ? `Revisado ${g.getDate()} ${MESES[g.getMonth()]}, ${String(g.getHours()).padStart(2, "0")}:${String(g.getMinutes()).padStart(2, "0")} h` : "");
 }
 
+/* Horquilla de la pizarra con los mismos decimales en los dos extremos: «1,065–1,100», no «1,065–1,10». */
+function horquilla(min, max, filas) {
+  const u = filas[0].unidad;
+  if (/€\/t/.test(u)) return `${precio(min, u)}–${precio(max, u)}`;
+  const dec = Math.max(2, Math.min(3, Math.max(...filas.map(f => (String(f.act).split(".")[1] || "").length))));
+  const f = x => x.toLocaleString("es-ES", { minimumFractionDigits: dec, maximumFractionDigits: dec });
+  return `${f(min)}–${f(max)}`;
+}
+
 /* La media de la pizarra, con los decimales con que cotizan las lonjas: 30,17 €/ud (no 30,167), 1,143 €/kg. */
 function redondearMedia(media, valores) {
   const dec = Math.max(...valores.map(x => (String(x).split(".")[1] || "").length));
@@ -264,7 +273,7 @@ function moduloPizarra() {
       return `<button class="pz-fila" type="button" data-clave="${esc(clave)}">
         <span class="pz-nom"><b>${nombre}</b><small>${esc(v[0].unidad)} · ${v.length > 1 ? `${v.length} lonjas` : `solo ${esc(corta(v[0].lonja))}`}</small></span>
         <span class="pz-val num">${precio(redondearMedia(media, v.map(f => f.act)), v[0].unidad)}</span>
-        <span class="pz-sec">${v.length > 1 ? `${precio(min, v[0].unidad)}–${precio(max, v[0].unidad)}` : "—"}</span>
+        <span class="pz-sec">${v.length > 1 ? horquilla(min, max, v) : "—"}</span>
         ${flecha(sub - baj)}</button>`;
     }).join("");
     pie = `<p class="mod-pie"><b>Haz tu pizarra:</b> toca la ★ de los productos que vendes o compras y aparecerán aquí en lugar de estos.</p>`;
@@ -589,7 +598,9 @@ function vistaLonja(id) {
       <div class="filtros" role="group" aria-label="Mesas">${cats.map(c => `<button class="chip" type="button" data-cat="${esc(c)}" aria-pressed="${c === estado.cat}">${esc(c)}</button>`).join("")}</div>
       <input id="buscar-producto" class="buscar" type="search" placeholder="Buscar producto (trigo, cordero, vacas…)" value="${esc(estado.texto)}" aria-label="Buscar producto">
       <div class="tablilla">${cuerpo || '<div class="vacio sin-borde"><b>Nada coincide</b>Prueba con otra palabra o elige «Todas».</div>'}</div>
-      <p class="fuente">Fuente: ${l.fuente ? `<a href="${esc(l.fuente)}" target="_blank" rel="noopener noreferrer">${l.nota ? esc(l.nota) : "publicación oficial de la lonja"}</a>` : "lonja"}${l.origen === "carga manual" ? " · cargado a mano" : ""}${l.error ? " · La última lectura automática falló; se muestran los precios de la sesión indicada." : ""} · <a href="#fuentes">Estado de las fuentes</a> · <a href="#metodo">Fuentes y método</a></p>
+      <p class="fuente">Fuente: ${/Junta/.test(l.nota || "") && /^https:\/\/[^"<>\s]+jcyl\.es\//.test(l.origen || "")
+        ? `<a href="${esc(l.origen)}" target="_blank" rel="noopener noreferrer">boletín semanal de la Junta de Castilla y León</a> (la web de la lonja no deja entrar al robot) · <a href="${esc(l.fuente)}" target="_blank" rel="noopener noreferrer">web de la lonja</a>`
+        : l.fuente ? `<a href="${esc(l.fuente)}" target="_blank" rel="noopener noreferrer">${l.nota ? esc(l.nota) : "publicación oficial de la lonja"}</a>` : "lonja"}${l.origen === "carga manual" ? " · cargado a mano" : ""}${l.error ? " · La última lectura automática falló; se muestran los precios de la sesión indicada." : ""} · <a href="#fuentes">Estado de las fuentes</a> · <a href="#metodo">Fuentes y método</a></p>
     </section>`;
 }
 

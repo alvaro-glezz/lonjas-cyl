@@ -115,3 +115,15 @@ def test_entre_semana_no_da_por_perdida_una_sesion_que_aun_no_toca(inf, junta):
     r = inf.crear_informe(d, date(2026, 11, 11), junta)          # miércoles: Lerma cotiza el viernes
     assert not any("Sin sesión nueva" in x for x in r["resumen"])
     assert "Lerma no ha publicado" not in r["redaccion"][0]["p"]
+
+
+def test_la_sesion_del_viernes_anterior_no_es_de_esta_semana(inf, junta):
+    # 21 nov 2026: la sesión de Lerma del 13 nov se coló como «precio más alto» de la semana del 16 al 21
+    d = _datos()
+    for l in d["lonjas"]:
+        if l["id"] == "lerma":
+            l["fecha"] = "2026-11-06"
+            l["precios"] = [{"id": "l-t", "cat": "Cereales", "producto": "Trigo tipo III", "unidad": "€/t", "ant": 300, "act": 300, "clave": "trigo"}]
+    r = inf.crear_informe(d, date(2026, 11, 14), junta)        # sábado: semana del 9 al 14
+    texto = " ".join(x["p"] for x in r["redaccion"])
+    assert "300" not in texto and "Lerma no ha publicado sesión nueva esta semana." in texto

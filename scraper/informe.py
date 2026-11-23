@@ -112,13 +112,19 @@ class Junta:
 
 # ---------- contenido ----------
 
-def sesiones_semana(datos: dict, hoy: date, dias: int = 8) -> list[dict]:
-    desde = (hoy - timedelta(days=dias)).isoformat()
+def dias_semana(hoy: date) -> int:
+    """Días desde el lunes de esta semana. El comentario habla de «la semana del lunes al sábado»: una sesión del
+    viernes anterior ya no es de esta semana (el 21 nov 2026 se coló la de Lerma del 13 nov como si lo fuera)."""
+    return hoy.weekday()
+
+
+def sesiones_semana(datos: dict, hoy: date, dias: int | None = None) -> list[dict]:
+    desde = (hoy - timedelta(days=dias_semana(hoy) if dias is None else dias)).isoformat()
     return [l for l in datos.get("lonjas", []) if l.get("estado") != "suspendida" and (l.get("fecha") or "") >= desde]
 
 
 def linea_producto(datos: dict, clave: str, hoy: date, junta: Junta) -> dict | None:
-    r = redes.ranking(datos, clave, hoy, dias=8)
+    r = redes.ranking(datos, clave, hoy, dias=dias_semana(hoy))
     if not r:
         return None
     u = r["unidad"]
