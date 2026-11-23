@@ -24,6 +24,7 @@
     }
     if (franja === "manana") return `Precios de ${nombre(plan.producto_dia[dia])} o sesión de lonja`;
     if (franja === "hortalizas") return "Precios de las patatas de la sesión del miércoles";
+    if (franja === "extra") return "Solo los días con un reel extra programado";
     if (franja === "diario") return REELS30[fechaDe(dia)] || "Fuera de la serie de 30 reels";
     if (franja === "legumbres") return "Precios de las alubias de la sesión del miércoles";
     if (franja === "tarde") return "Sesión de lonja o comparativa semanal";

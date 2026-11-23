@@ -85,6 +85,20 @@
       ]
     },
     {
+      "id": "extra",
+      "hora": "16:00",
+      "nombre": "Reel 3D extra (si hay uno programado)",
+      "dias": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ]
+    },
+    {
       "id": "diario",
       "hora": "21:00",
       "nombre": "Reel 3D del día",

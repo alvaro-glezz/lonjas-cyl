@@ -73,7 +73,8 @@ function ayuda(web) {
     "• /lonjas: la última sesión de cada una",
     "• Cualquier otra palabra: <b>cordero</b>, <b>alubia</b>, <b>vacas</b>…", "",
     "🔔 <b>Avisos</b>: /aviso trigo salamanca 240 te escribe cuando el trigo de Salamanca llegue a 240 €/t. /avisos para verlos.",
-    "📅 <b>Plazos</b>: escribe <b>seguros</b> (seguros agrarios) o <b>pac</b> para ver las fechas con su cuenta atrás.", "",
+    "📅 <b>Plazos</b>: escribe <b>seguros</b> (seguros agrarios) o <b>pac</b> para ver las fechas con su cuenta atrás.",
+    "🛡️ <b>avísame de los seguros</b>: te escribo antes de que cierre cada plazo de contratación.", "",
     `Toda la información, avisos y calculadora: ${web}`, "Precios orientativos de cada lonja."].join("\n");
 }
 
@@ -247,7 +248,8 @@ function textoPlazos(crudo, filtro, hoy, web) {
   };
   return [`📅 <b>${titulo}</b>`, "", ...lista.map(fila), "",
     filtro === "seguro" || !filtro ? "Seguros: fechas de Castilla y León según el BOE o Agroseguro; confírmalas con tu tomador o mediador." : "",
-    `Detalle y fuentes: ${web}#plazos`, "Escribe <b>seguros</b> o <b>pac</b> para ver solo unos."].filter(x => x !== "").join("\n");
+    `Detalle y fuentes: ${web}#plazos`, "Escribe <b>seguros</b> o <b>pac</b> para ver solo unos.",
+    filtro !== "pac" ? "🔔 ¿Quieres que te avise antes de que cierre cada seguro? Escribe <b>avísame de los seguros</b>." : ""].filter(x => x !== "").join("\n");
 }
 
 /** «trigo salamanca más de 240» -> { clave, lonja, dir, umbral }. Admite coma decimal, «>» y «<». */
@@ -343,6 +345,23 @@ async function procesar(textoCrudo, msg, lonjas, web, alm) {
   if (msg.chat.type === "private" && ADMIN_RE.test(t) && await esAdmin(msg.chat.id, alm)) {
     try { return await procesarAdmin(t, web, alm); }
     catch { return "No he podido hacerlo ahora mismo (almacén o web sin respuesta). Prueba en unos minutos."; }
+  }
+  // Avisos personales de los plazos de los seguros agrarios (los manda scraper/recordatorios.py cada mañana)
+  if (/^(alta seguros|avisame (de )?(los )?seguros|avisarme (de )?(los )?seguros|recuerdame (los )?seguros)\b/.test(t)) {
+    if (!alm) return "Ahora mismo no puedo guardar avisos. Prueba en unos minutos.";
+    try {
+      const n = await alm.cmd("SCARD", "seguros:chats");
+      if (n >= 5000) return "Ahora mismo no admito más avisos de seguros. Mira las fechas escribiendo <b>seguros</b>.";
+      await alm.cmd("SADD", "seguros:chats", String(msg.chat.id));
+      return ["✅ <b>Hecho.</b> Te escribiré por aquí, a las 9 de la mañana:", "• el día que <b>abra</b> un plazo de contratación de un seguro agrario,",
+        "• cuando falten <b>7 días</b> y <b>1 día</b> para que <b>cierre</b>.", "",
+        "Para ver ahora las fechas: <b>seguros</b>. Para dejar de recibirlos: <b>baja seguros</b>."].join("\n");
+    } catch { return "No he podido guardar tu aviso ahora mismo. Prueba en unos minutos."; }
+  }
+  if (/^(baja seguros|no me avises (de )?(los )?seguros|quitar (aviso|avisos) (de )?(los )?seguros)\b/.test(t)) {
+    if (!alm) return "Ahora mismo no puedo cambiar tus avisos. Prueba en unos minutos.";
+    try { await alm.cmd("SREM", "seguros:chats", String(msg.chat.id)); return "Hecho: ya no te avisaré de los plazos de los seguros. Si cambias de idea: <b>avísame de los seguros</b>."; }
+    catch { return "No he podido cambiar tus avisos ahora mismo. Prueba en unos minutos."; }
   }
   if (/^(plazos|seguros?|seguros agrarios|pac|calendario)\b/.test(t)) {
     try { return textoPlazos(await leerJSON(web, "data/plazos.json"), /^seguro/.test(t) ? "seguro" : /^pac\b/.test(t) ? "pac" : "", diaMadrid(0), web); }

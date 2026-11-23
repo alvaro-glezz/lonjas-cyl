@@ -1,5 +1,6 @@
 # Recordatorios de plazos (PAC y seguros agrarios) en el canal @lonjas_cyl: cada mañana, solo si hoy toca
-# (empieza un plazo, o quedan 7 días o 1 día para que termine). A mano, «probar» te manda todos a tu chat privado.
+# (empieza un plazo, o quedan 7 días o 1 día para que termine). Los de seguros llegan también, por privado, a quien
+# escribió «avísame de los seguros» al robot. A mano, «probar» te manda los avisos de prueba a tu chat privado.
 name: Recordatorios de plazos
 
 on:
@@ -30,6 +31,8 @@ jobs:
         env:
           TELEGRAM_TOKEN: ${{ secrets.TELEGRAM_TOKEN }}
           TELEGRAM_ADMIN_CHAT: ${{ secrets.TELEGRAM_ADMIN_CHAT }}
+          UPSTASH_REDIS_REST_URL: ${{ secrets.UPSTASH_REDIS_REST_URL }}
+          UPSTASH_REDIS_REST_TOKEN: ${{ secrets.UPSTASH_REDIS_REST_TOKEN }}
           PROBAR: ${{ inputs.probar }}
         run: |
           if [ "$PROBAR" = "si" ]; then

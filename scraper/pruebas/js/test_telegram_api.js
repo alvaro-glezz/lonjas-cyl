@@ -24,6 +24,7 @@ global.fetch = async (url, op = {}) => {
     else if (c === "DEL") { result = redis.delete(k) ? 1 : 0; }
     else if (c === "SADD") { (sets.get(k) || sets.set(k, new Set()).get(k)).add(v); result = 1; }
     else if (c === "SREM") { sets.get(k)?.delete(v); result = 1; }
+    else if (c === "SCARD") { result = sets.get(k)?.size || 0; }
     return { ok: true, json: async () => ({ result }) };
   }
   if (String(url) === "https://lonjas.example/data/estudio-plan.json") return { ok: true, json: async () => PLAN };
@@ -118,6 +119,11 @@ const msg = (text, type = "private") => ({ update_id: 1, message: { message_id: 
   assert.match(txt, /Seguro de herbáceos de secano/); assert.ok(!/Anticipo/.test(txt)); assert.ok(!/Viejo/.test(txt));
   assert.match(api.textoPlazos(PL, "pac", "2026-11-23", "w"), /Anticipo de la PAC/);
   assert.match(api.textoPlazos({ plazos: [] }, "", "2026-11-23", "w"), /No hay plazos próximos/);
+
+  // ---- avisos de seguros: alta y baja ----
+  r = await llamar(msg("Avísame de los seguros"), ok); assert.match(r.j.text, /Te escribiré por aquí/);
+  assert.ok(sets.get("seguros:chats").has("42"));
+  r = await llamar(msg("baja seguros"), ok); assert.match(r.j.text, /ya no te avisaré/); assert.ok(!sets.get("seguros:chats").has("42"));
 
   for (const t of ["trigo", "lechazo", "salamanca", "alubia", "vacas", "ovejas"]) {
     const x = (await llamar(msg(t), ok)).j.text; assert.ok(x.length < 4000, t); console.log(`— ${t}\n${x}\n`);

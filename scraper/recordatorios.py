@@ -58,7 +58,8 @@ def mensaje(p: dict, motivo: str) -> str:
     return "\n".join(lineas)
 
 
-def avisos(plazos: dict, hoy: date, todos: bool = False, solo: str | None = None) -> list[str]:
+def avisos(plazos: dict, hoy: date, todos: bool = False, solo: str | None = None, con_tipo: bool = False) -> list:
+    """Mensajes de hoy. Con con_tipo=True devuelve (tipo, mensaje) para mandar los de seguros también a los suscritos."""
     out = []
     for p in plazos.get("plazos", []):
         m = toca(p, hoy)
@@ -67,16 +68,31 @@ def avisos(plazos: dict, hoy: date, todos: bool = False, solo: str | None = None
         elif todos:
             m = None
         if m:
-            out.append(mensaje(p, m))
+            out.append((p.get("tipo"), mensaje(p, m)) if con_tipo else mensaje(p, m))
     return out
 
 
-def enviar(texto: str, chat: str) -> None:
+def enviar(texto: str, chat: str) -> int:
     import requests
     r = requests.post(f"https://api.telegram.org/bot{os.environ['TELEGRAM_TOKEN']}/sendMessage",
                       data={"chat_id": chat, "text": texto, "parse_mode": "HTML", "disable_web_page_preview": "true"}, timeout=30)
-    if not r.ok:
+    if not r.ok and r.status_code not in (400, 403):
         raise RuntimeError(f"Telegram respondió {r.status_code}: {r.text[:200]}")
+    return r.status_code
+
+
+def suscritos() -> tuple[object, list[str]]:
+    """Chats que pidieron «avísame de los seguros» (api/telegram.js, conjunto «seguros:chats» de Upstash)."""
+    sys.path.insert(0, str(Path(__file__).resolve().parent))
+    import ordenes
+    r = ordenes.conectar()
+    if r is None:
+        return None, []
+    try:
+        return r, [c for c in (r("SMEMBERS", "seguros:chats") or []) if str(c).lstrip("-").isdigit()]
+    except (RuntimeError, OSError, ValueError) as e:
+        print(f"[recordatorios] No se pudo leer la lista de suscritos ({e}).")
+        return None, []
 
 
 if __name__ == "__main__":
@@ -84,12 +100,20 @@ if __name__ == "__main__":
     hoy = date.fromisoformat(args[args.index("--fecha") + 1]) if "--fecha" in args else date.today()
     destino = args[args.index("--enviar") + 1] if "--enviar" in args else ""
     solo = args[args.index("--solo") + 1] if "--solo" in args else None
-    lista = avisos(json.loads(PLAZOS.read_text(encoding="utf-8")), hoy, todos="--todos" in args, solo=solo)
+    lista = avisos(json.loads(PLAZOS.read_text(encoding="utf-8")), hoy, todos="--todos" in args, solo=solo, con_tipo=True)
     print(f"[recordatorios] {len(lista)} aviso(s) para el {hoy}.")
-    for t in lista:
+    r, chats = suscritos() if destino == "canal" and any(tipo == "seguro" for tipo, _ in lista) else (None, [])
+    if chats:
+        print(f"[recordatorios] {len(chats)} persona(s) apuntada(s) a los avisos de seguros.")
+    for tipo, t in lista:
         print("—" * 30 + "\n" + t)
         if destino:
             chat = "@lonjas_cyl" if destino == "canal" else os.environ.get("TELEGRAM_ADMIN_CHAT", "")
             if not chat or not os.environ.get("TELEGRAM_TOKEN"):
                 sys.exit("Falta TELEGRAM_TOKEN o TELEGRAM_ADMIN_CHAT")
             enviar(("🧪 <i>Prueba (solo te llega a ti)</i>\n\n" if destino == "yo" else "") + t, chat)
+            if tipo == "seguro":
+                pie = "\n\n<i>Te llega porque pediste «avísame de los seguros». Para dejar de recibirlo: baja seguros.</i>"
+                for c in chats:
+                    if enviar(t + pie, c) == 403 and r is not None:      # bloqueó el robot: se le quita de la lista
+                        r("SREM", "seguros:chats", c)

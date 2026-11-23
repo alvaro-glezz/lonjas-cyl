@@ -21,6 +21,8 @@ on:
     - cron: "47 17 * * 1-6"     # 18:47  → publicación de la tarde
     - cron: "19 19 * * 1-6"     # 20:19  → recuperación de la tarde
     - cron: "11 20 * * 1-6"     # 21:11  → recuperación de la tarde
+    - cron: "31 14 * * *"       # 15:31  → reel 3D extra programado (data/programados.json; espera a su hora)
+    - cron: "17 16 * * *"       # 17:17  → recuperación del reel extra
     - cron: "29 19 * * *"       # 20:29  → reel 3D diario (se monta y espera a las 21:00 para publicarse)
     - cron: "13 21 * * *"       # 22:13  → recuperación del reel 3D diario
   workflow_dispatch:
@@ -75,12 +77,12 @@ jobs:
           "$F" -version | head -1
       # Reels 3D diarios (scraper/reels30.py + scraper/tres/): Chromium sin pantalla dibuja la escena de three.js.
       - uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830  # v4.3.0
-        if: contains(fromJSON('["29 19 * * *", "13 21 * * *", "11 20 * * 1-6", "19 19 * * 1-6"]'), github.event.schedule) || startsWith(inputs.franja, 'diario')
+        if: contains(fromJSON('["31 14 * * *", "17 16 * * *", "29 19 * * *", "13 21 * * *", "11 20 * * 1-6", "19 19 * * 1-6"]'), github.event.schedule) || startsWith(inputs.franja, 'diario') || startsWith(inputs.franja, 'extra')
         with:
           path: ~/.cache/ms-playwright
           key: playwright-chromium-1.49.1
       - name: Chromium (reels 3D)
-        if: contains(fromJSON('["29 19 * * *", "13 21 * * *", "11 20 * * 1-6", "19 19 * * 1-6"]'), github.event.schedule) || startsWith(inputs.franja, 'diario')
+        if: contains(fromJSON('["31 14 * * *", "17 16 * * *", "29 19 * * *", "13 21 * * *", "11 20 * * 1-6", "19 19 * * 1-6"]'), github.event.schedule) || startsWith(inputs.franja, 'diario') || startsWith(inputs.franja, 'extra')
         timeout-minutes: 8
         run: |
           pip install -q "playwright==1.49.1"

@@ -23,7 +23,7 @@ API = "https://api.telegram.org/bot{token}/{metodo}"
 LIMITE_PIE = 1024          # Telegram: texto máximo bajo una foto o un vídeo
 LIMITE_MENSAJE = 4096
 FRANJAS = {"manana": "Publicación de las 8:00", "reel": "Reel de las 13:30", "tarde": "Publicación de las 19:00",
-           "historia": "Reel con historia de las 19:00", "hortalizas": "Patatas de León (jueves, 11:47)", "legumbres": "Alubias de León (viernes, 11:47)", "diario": "Reel 3D del día (21:00)", "historias-todas": "Ensayo: los cinco reels con historia",
+           "historia": "Reel con historia de las 19:00", "hortalizas": "Patatas de León (jueves, 11:47)", "legumbres": "Alubias de León (viernes, 11:47)", "diario": "Reel 3D del día (21:00)", "extra": "Reel 3D extra programado", "historias-todas": "Ensayo: los cinco reels con historia",
            "semana-todas": "Vista previa: los cinco reels de «La semana en las lonjas»"}
 IMAGEN = (".jpg", ".jpeg", ".png")
 
@@ -47,6 +47,7 @@ def cabecera(franja: str, probar: bool) -> str:
               else "Reel del Estudio" if franja.startswith("ficha:")
               else f"Reel 3D n.º {franja.split(':', 1)[1]} de 30" + (" con voz" if franja.startswith("diario-voz:") else "")
               if franja.startswith(("diario:", "diario-voz:"))
+              else f"Reel 3D extra «{franja.split(':', 1)[1]}»" if franja.startswith("extra:")
               else f"Historia n.º {franja.split(':', 1)[1]} (de nuevo)" if franja.startswith("historia:") else FRANJAS.get(franja, franja))
     nombre = FRANJAS.get(franja.split(":")[0], nombre) if franja.startswith("semana-todas") else nombre
     voz = os.environ.get("KOKORO_VOZ", "") if os.environ.get("VOZ_MOTOR") == "kokoro" else "piper"
@@ -104,6 +105,7 @@ def resultado(estado: dict, hoy: date, probar: bool) -> str | None:
               else "Reel del Estudio" if franja.startswith("ficha:")
               else f"Reel 3D n.º {franja.split(':', 1)[1]} de 30" + (" con voz" if franja.startswith("diario-voz:") else "")
               if franja.startswith(("diario:", "diario-voz:"))
+              else f"Reel 3D extra «{franja.split(':', 1)[1]}»" if franja.startswith("extra:")
               else f"Historia n.º {franja.split(':', 1)[1]} (de nuevo)" if franja.startswith("historia:") else FRANJAS.get(franja, franja))
     if probar:
         return f"🧪 {nombre}: era una prueba, no se ha publicado."

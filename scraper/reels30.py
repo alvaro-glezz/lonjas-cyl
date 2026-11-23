@@ -335,6 +335,103 @@ FIJOS = {
 }
 
 
+# ---------- reels extra (fuera de la serie de 30), programados en data/programados.json ----------
+
+MESES_H = ["enero", "febrero", "marzo", "abril", "mayo", "junio", "julio", "agosto", "septiembre", "octubre", "noviembre", "diciembre"]
+PROGRAMADOS = RAIZ / "data" / "programados.json"
+
+
+def _fecha_h(iso: str) -> str:
+    d = date.fromisoformat(iso)
+    return f"{redes.en_palabras(d.day)} de {MESES_H[d.month - 1]}"
+
+
+def _seguros(hoy: date) -> list[dict]:
+    pl = _leer(RAIZ / "data" / "plazos.json") or {}
+    return sorted((p for p in pl.get("plazos", []) if p.get("tipo") == "seguro" and p["inicio"] <= hoy.isoformat() <= p["fin"]),
+                  key=lambda p: p["fin"])
+
+
+def extra(nombre: str, hoy: date) -> tuple[dict, list[str], str] | None:
+    """(spec, líneas del texto, guion de la voz) de un reel extra, con las fechas reales de data/plazos.json."""
+    seg = _seguros(hoy)
+    if not seg:
+        return None
+    por_id = {p["id"]: p for p in seg}
+    if nombre == "seguros-anuncio":
+        CORTOS = {"seguro-herbaceos-secano-2027": "Secano", "seguro-herbaceos-regadio-2027": "Regadío", "seguro-ganado-plan-2026": "Ganado",
+                  "seguro-girasol-regadio-2027": "Girasol", "seguro-herbaceos-modulo-p-2027": "Módulo P", "seguro-cereal-primavera-2027": "Maíz"}
+        corto_t = lambda p: CORTOS.get(p["id"], p["titulo"].replace("Seguro de ", "").replace("Seguros de ", "").split(" (")[0][:10])
+        items = [{"etiqueta": corto_t(p), "valor": (date.fromisoformat(p["fin"]) - hoy).days,
+                  "texto": corto(p["fin"]), "destacar": i == 0} for i, p in enumerate(seg[:5])]
+        primero = seg[0]
+        escenas = [
+            {"tipo": "barras", "dur": 8, "forma": "columna", "color": "pino", "titulo": "¿Hasta cuándo puedes contratar?",
+             "sub": "Seguros agrarios en Castilla y León · altura = días que quedan", "items": items,
+             "nota": f"El primero en cerrar: {corto(primero['fin'])} ({(date.fromisoformat(primero['fin']) - hoy).days} días)"},
+            {"tipo": "tarjetas", "dur": 9, "titulo": "Nuevo en Lonjas CyL", "items": [
+                {"titulo": "Calendario de seguros", "texto": "Herbáceos, cereal de regadío, maíz, girasol y ganado, con su cuenta atrás."},
+                {"titulo": "Dónde verlo", "texto": "En la app: Campo › Plazos. Cada seguro con su fuente oficial (BOE o Agroseguro)."},
+                {"titulo": "Confírmalo", "texto": "La fecha que vale es la que te dé tu tomador o mediador de seguros."}]},
+        ]
+        frases = [f"El que antes cierra es el de {primero['titulo'].replace('Seguro de ', '').split(' (')[0]}: se contrata hasta el {_fecha_h(primero['fin'])}."]
+        if "seguro-herbaceos-regadio-2027" in por_id and "seguro-ganado-plan-2026" in por_id:
+            frases.append(f"El de cereal en regadío y los de ganado, hasta el {_fecha_h(por_id['seguro-ganado-plan-2026']['fin'])}.")
+        guion = ("Novedad en Lonjas CyL: ya tienes el calendario de los seguros agrarios de Castilla y León. " + " ".join(frases)
+                 + " Lo encontrarás en Campo, Plazos, con la cuenta atrás de cada seguro y su fuente oficial. Y confirma siempre la fecha con tu mediador.")
+        lineas = ["🛡️ Nuevo en la app: el calendario de los seguros agrarios de Castilla y León, con su cuenta atrás.", ""]
+        lineas += [f"• {p['titulo']}: hasta el {corto(p['fin'])} de {p['fin'][:4]}" for p in seg]
+        lineas += ["", "Lo tienes en Campo › Plazos. Fuentes: BOE (Orden APA/863/2026) y Agroseguro.",
+                   "La fecha que vale es la que te confirme tu tomador o mediador; los plazos pueden ampliarse."]
+        return {"escenas": [{"tipo": "portada", "dur": 3, "titulo": "Seguros agrarios: ya en la app", "sub": "Lonjas CyL · calendario con cuenta atrás"},
+                            *escenas, {"tipo": "cierre", "dur": 3.5, "web": WEB.replace("https://", "").rstrip("/")}]}, lineas, guion
+    if nombre == "seguros-bot":
+        primero = seg[0]
+        escenas = [
+            {"tipo": "movil", "dur": 12, "titulo": "Te avisamos por Telegram", "sub": "Gratis, en el robot de Lonjas CyL", "items": [
+                {"titulo": "Abre el robot", "texto": "Busca @lonjascyl_bot en Telegram y pulsa Iniciar."},
+                {"titulo": "Escribe", "texto": "«avísame de los seguros». Y ya está: quedas apuntado."},
+                {"titulo": "Te escribe a las 9:00", "texto": "El día que abre un plazo, y 7 días y 1 día antes de que cierre."},
+                {"titulo": "¿Las fechas ahora?", "texto": "Escribe «seguros». Para dejarlo: «baja seguros»."}]},
+            {"tipo": "tarjetas", "dur": 5, "titulo": "El próximo cierre", "items": [
+                {"titulo": f"{corto(primero['fin'])} de {primero['fin'][:4]}", "texto": primero["titulo"] + ". Confírmalo con tu mediador."}]},
+        ]
+        guion = ("¿Quieres que te avisemos antes de que cierre el plazo de tu seguro agrario? Abre el robot de Lonjas CyL en Telegram "
+                 "y escribe: avísame de los seguros. Te escribirá el día que abra cada plazo, y siete días y un día antes de que cierre. "
+                 f"El próximo cierre es el {_fecha_h(primero['fin'])}, el de {primero['titulo'].replace('Seguro de ', '').split(' (')[0]}. "
+                 "Para ver las fechas cuando quieras, escribe: seguros. Gratis.")
+        lineas = ["🔔 Cómo pedir que te avisemos de los plazos de los seguros agrarios:", "",
+                  "1. Abre @lonjascyl_bot en Telegram y pulsa Iniciar.", "2. Escribe: avísame de los seguros",
+                  "3. Te escribirá a las 9:00 el día que abra cada plazo, y 7 días y 1 día antes de que cierre.", "",
+                  "Para ver las fechas: escribe «seguros». Para dejar de recibirlos: «baja seguros».",
+                  f"Próximo cierre: {primero['titulo']}, {corto(primero['fin'])} de {primero['fin'][:4]}.",
+                  "La fecha que vale es la que te confirme tu tomador o mediador."]
+        return {"escenas": [{"tipo": "portada", "dur": 3, "titulo": "¿Te avisamos de los seguros?", "sub": "Lonjas CyL · en Telegram, gratis"},
+                            *escenas, {"tipo": "cierre", "dur": 3.5, "web": WEB.replace("https://", "").rstrip("/")}]}, lineas, guion
+    return None
+
+
+def item_extra(nombre: str, hoy: date, hora_utc: str = "") -> dict | None:
+    e = extra(nombre, hoy)
+    if not e:
+        return None
+    spec, lineas, guion = e
+    base = f"{hoy}-extra-{nombre}"
+    t = "\n".join([*lineas, "", pie_texto(WEB), redes.aviso_voz(), "", etiquetas("#segurosagrarios", "#agricultura", "#ganaderia")])[:2150]
+    return {"tipo": "tres", "n": 0, "id": base, "texto": t, "video": base + ".mp4", "spec": spec, "voz": True, "guion": guion,
+            **({"hora_utc": hora_utc} if hora_utc else {})}
+
+
+def programado_hoy(hoy: date, estado: dict) -> dict | None:
+    """El reel extra programado para hoy (data/programados.json) que aún no se ha publicado."""
+    lista = (_leer(PROGRAMADOS) or {}).get("programados", [])
+    ya = {r.get("id") for r in estado.get("registro", [])}
+    for p in lista:
+        if p.get("fecha") == hoy.isoformat() and f"{hoy}-extra-{p['nombre']}" not in ya:
+            return item_extra(p["nombre"], hoy, p.get("hora_utc", ""))
+    return None
+
+
 def contenido(n: int, datos: dict, hoy: date):
     """(escenas, líneas del texto) del reel n con los datos de hoy, o None si faltan datos."""
     if n in FIJOS:
@@ -432,7 +529,7 @@ def reel(it: dict, destino: Path) -> Path:
     import tres3d
     spec, habla = it["spec"], None
     if it.get("voz"):
-        texto_voz = guion_lleno(it["n"])
+        texto_voz = it.get("guion") or guion_lleno(it["n"])
         habla = redes.voz(texto_voz, destino.with_name(destino.stem + "-voz.wav")) if texto_voz else None
         if habla:
             spec = ajustar(spec, redes.duracion_wav(habla) + 0.6 + 1.5)       # 0,6 s de entrada y 1,5 s de margen

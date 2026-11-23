@@ -632,6 +632,7 @@ VENTANAS = (("manana", (6, 40), (11, 30), range(0, 6)),
             ("hortalizas", (10, 30), (15, 0), range(3, 4)),     # jueves: patatas de la Lonja de León
             ("legumbres", (10, 30), (15, 0), range(4, 5)),      # viernes: alubias de la Lonja de León
             ("historia", (17, 30), (21, 30), range(0, 5)),      # lunes a viernes
+            ("extra", (14, 25), (17, 30), range(0, 7)),         # reels extra a una hora concreta (data/programados.json)
             ("diario", (19, 25), (22, 30), range(0, 7)),        # 21:00 Madrid: los 30 reels 3D (22 nov–21 dic), también domingos
             ("tarde", (17, 40), (21, 30), range(0, 6)))
 
@@ -678,6 +679,11 @@ def elegir(franja: str, datos: dict, estado: dict, hoy: date) -> dict | None:
     if franja.startswith("especial:"):              # reels especiales (especiales.py): se lanzan a mano, cualquier día
         import especiales
         return especiales.item(franja.split(":", 1)[1], hoy)
+    if franja == "extra" or franja.startswith("extra:"):   # reels 3D extra (reels30.extra): programados o a mano
+        import reels30
+        if franja == "extra":
+            return reels30.programado_hoy(hoy, estado)
+        return reels30.item_extra(franja.split(":", 1)[1], hoy)
     if franja == "diario" or franja.startswith(("diario:", "diario-voz:")):   # los 30 reels 3D (reels30.py), todos los días
         import reels30
         if franja == "diario":
@@ -858,11 +864,12 @@ def main(argv: list[str]) -> int:
                 return 0
             sha = os.environ.get("MEDIOS_SHA", "").strip()
             item = estado["preparado"][0]
-            if item.get("tipo") == "tres":                       # el reel 3D sale a las 21:00 de Madrid (20:00 UTC en invierno)
+            if item.get("tipo") == "tres":                       # el reel 3D sale a su hora: 21:00 de Madrid o la programada
                 import time
-                falta = (datetime.utcnow().replace(hour=20, minute=0, second=0, microsecond=0) - datetime.utcnow()).total_seconds()
+                hh, mm = (int(x) for x in (item.get("hora_utc") or "20:00").split(":"))
+                falta = (datetime.utcnow().replace(hour=hh, minute=mm, second=0, microsecond=0) - datetime.utcnow()).total_seconds()
                 if 0 < falta <= 40 * 60:
-                    print(f"[redes] Reel 3D listo: espero {round(falta / 60)} min para publicarlo a las 21:00.")
+                    print(f"[redes] Reel 3D listo: espero {round(falta / 60)} min para publicarlo a su hora ({hh:02d}:{mm:02d} UTC).")
                     time.sleep(falta)
             primero = item.get("video") or item["imagenes"][0]
             base = next((b for b in (CDN.format(sha=sha), RAW.format(sha=sha)) if ig.en_internet(b + primero, intentos=12)), None)

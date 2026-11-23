@@ -36,3 +36,12 @@ def test_camion_hace_la_cuenta():
     esc, lineas = reels30.camion(_datos(), date(2026, 11, 6))
     assert esc[0]["items"][0]["valor"] == esc[0]["items"][0]["valor"] // 1 or True
     assert "25 t ×" in lineas[0]
+
+
+def test_extras_de_seguros_con_fechas_reales():
+    a = reels30.item_extra("seguros-anuncio", date(2026, 11, 23), "15:00")
+    assert a["hora_utc"] == "15:00" and a["voz"] and "veinte de diciembre" in a["guion"]
+    assert "20 dic" in a["texto"] and "BOE" in a["texto"]
+    b = reels30.item_extra("seguros-bot", date(2026, 11, 24))
+    assert "avísame de los seguros" in b["guion"] and "baja seguros" in b["texto"]
+    assert reels30.item_extra("seguros-bot", date(2030, 1, 1)) is None        # sin seguros en curso: nada

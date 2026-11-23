@@ -1,0 +1,15 @@
+{
+ "LEEME": "Reels extra a una hora concreta (reels30.extra). fecha AAAA-MM-DD; hora_utc HH:MM (16:00 de Madrid en invierno = 15:00 UTC). Se publican en la franja «extra» (redes.py).",
+ "programados": [
+  {
+   "nombre": "seguros-anuncio",
+   "fecha": "2026-11-23",
+   "hora_utc": "15:00"
+  },
+  {
+   "nombre": "seguros-bot",
+   "fecha": "2026-11-24",
+   "hora_utc": "15:00"
+  }
+ ]
+}
