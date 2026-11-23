@@ -690,12 +690,74 @@ def leer_lerma_html(html: str):
     return fecha, filas
 
 
+# Lerma en el Excel semanal de la Junta (data/historico, lo importa importar_jcyl.py) -> fila de la app.
+# La Junta da los cereales en €/100 kg: se pasan a €/t como los publica la lonja (×10).
+LERMA_JUNTA = [
+    ("cereales-y-forrajes--trigo--100-kg", "Cereales", "Trigo tipo III", "€/t", 10),
+    ("cereales-y-forrajes--cebada-64--100-kg", "Cereales", "Cebada dos carreras", "€/t", 10),
+    ("porcino--cebo-normal--kg-vivo", "Porcino", "Cerdo normal", "€/kg vivo", 1),
+    ("porcino--cebo-cerda-desvieje--kg-vivo", "Porcino", "Cerdas de desvieje", "€/kg vivo", 1),
+    ("vacuno--ternera-carne-blanca--kg-canal", "Vacuno", "Terneras carne blanca", "€/kg", 1),
+    ("vacuno--ternera-carne-rosada--kg-canal", "Vacuno", "Terneras carne rosada", "€/kg", 1),
+    ("vacuno--anojos-extra--kg-canal", "Vacuno", "Añojos extra", "€/kg", 1),
+    ("vacuno--anojos-primera--kg-canal", "Vacuno", "Añojos primera", "€/kg", 1),
+    ("vacuno--anojos-corriente--kg-canal", "Vacuno", "Añojos corriente", "€/kg", 1),
+    ("vacuno--vacas-extra-c-u--kg-canal", "Vacuno", "Vacas extra", "€/kg", 1),
+    ("vacuno--vacas-primera-c-r--kg-canal", "Vacuno", "Vacas primera", "€/kg", 1),
+    ("vacuno--vacas-segunda-c-o--kg-canal", "Vacuno", "Vacas segunda", "€/kg", 1),
+    ("vacuno--vacas-industria--kg-canal", "Vacuno", "Vacas industria", "€/kg", 1),
+]
+LERMA_NOTA_JUNTA = ("Precios tomados del boletín semanal de la Junta de Castilla y León: la web de la lonja no deja "
+                    "entrar al robot. Llegan con unos días de retraso respecto a la sesión.")
+PAGINA_JUNTA = "https://agriculturaganaderia.jcyl.es/web/es/estadistica-informacion-agraria/lonjas-{anio}.html"
+
+
+def leer_lerma_junta(raiz: Path | None = None):
+    """Última sesión de Lerma según el Excel semanal de la Junta de Castilla y León. Se usa cuando la web de Lerma no
+    deja leerla (desde el 17 nov 2026 rechaza los servidores de GitHub, donde corre el robot). La Junta publica con
+    unos días de retraso, pero son los mismos precios de la lonja (comprobado: coinciden semana a semana)."""
+    raiz = raiz or Path(__file__).resolve().parent.parent
+    puntos = {}
+    for anio in (date.today().year - 1, date.today().year):
+        f = raiz / "data" / "historico" / f"{anio}.json"
+        if f.is_file():
+            for k, v in json.loads(f.read_text(encoding="utf-8")).get("series", {}).items():
+                if k.startswith("lerma--"):
+                    puntos.setdefault(k[7:], []).extend(x for x in v if x and x[0])
+    fechas = sorted({p[0] for k, *_ in LERMA_JUNTA for p in puntos.get(k, [])})
+    if not fechas:
+        raise RuntimeError("La Junta no tiene sesiones de Lerma")
+    fecha = fechas[-1]
+    filas = []
+    for k, mesa, producto, unidad, factor in LERMA_JUNTA:
+        serie = sorted({p[0]: p for p in puntos.get(k, [])}.values())
+        act = next((p[2] for p in serie if p[0] == fecha), None)
+        if act is None:
+            continue
+        ant = next((p[2] for p in reversed(serie) if p[0] < fecha), None)
+        r = lambda v: None if v is None else round(v * factor, 3)
+        filas.append({"cat": mesa, "producto": producto, "unidad": unidad, "ant": r(ant), "act": r(act)})
+    print(f"[lerma] sesión tomada de la Junta de Castilla y León: {fecha}, {len(filas)} filas")
+    return fecha, filas, PAGINA_JUNTA.format(anio=fecha[:4])
+
+
 def leer_lerma():
     """Lerma publica la sesión de cada semana como tabla en su página (actual y anterior). Los PDF anuales
-    ('lonjahistoricoAAAA.pdf', una sesión por página) son su archivo: se usan solo si la tabla no se puede leer."""
-    import pdfplumber
+    ('lonjahistoricoAAAA.pdf', una sesión por página) son su archivo: se usan solo si la tabla no se puede leer.
+    Si su web no deja entrar (403 a los servidores de GitHub desde el 17 nov 2026), se usa el Excel de la Junta."""
     pagina = "https://lerma.burgos.es/lonja"
-    html = bajar(pagina).text
+    try:
+        html = bajar(pagina).text
+    except requests.exceptions.HTTPError as e:
+        if e.response is not None and e.response.status_code in (401, 403, 429):
+            print(f"[lerma] su web no deja leerla ({e.response.status_code}): se usa el Excel semanal de la Junta")
+            return leer_lerma_junta()
+        raise
+    return _leer_lerma_web(pagina, html)
+
+
+def _leer_lerma_web(pagina: str, html: str):
+    import pdfplumber
     fecha, filas = leer_lerma_html(html)
     tabla = BeautifulSoup(html, "html.parser").find("table")
     if tabla is not None:
@@ -959,6 +1021,8 @@ def main(solo: list[str]) -> int:
                     guardar_caso(lid, lectura[0], lectura[1], lectura[2])
                 if lid == "salamanca" and lectura[2] == SALAMANCA_DATASET:
                     lonja["fuente"], lonja["nota"] = SALAMANCA_DATASET, SALAMANCA_NOTA  # atribución que pide la licencia
+                if lid == "lerma":   # si su web no deja leerla, los precios vienen del boletín de la Junta: se dice
+                    lonja["nota"] = LERMA_NOTA_JUNTA if "jcyl.es" in (lectura[2] or "") else None
             except Exception as exc:  # noqa: BLE001
                 error = "Lectura incompleta o no válida"
                 print(f"[{lid}] detalle: {exc}")

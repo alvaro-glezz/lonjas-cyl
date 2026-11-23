@@ -108,7 +108,9 @@ function notaPendiente(l) {
   if (!saltadas.length) return "";
   const lect = l.ultimaLectura ? new Date(l.ultimaLectura) : null;
   const cuando = lect && !isNaN(lect) ? ` La última vez, ${fechaCorta(hoyISO()) === fechaCorta(`${lect.getFullYear()}-${String(lect.getMonth() + 1).padStart(2, "0")}-${String(lect.getDate()).padStart(2, "0")}`) ? "hoy" : "el " + lect.getDate() + " " + MESES[lect.getMonth()]} a las ${String(lect.getHours()).padStart(2, "0")}:${String(lect.getMinutes()).padStart(2, "0")} h.` : "";
-  return `<p class="aviso-red">La lonja no ha publicado en su web ${saltadas.length === 1 ? "la sesión del " + saltadas[0] : "las sesiones del " + saltadas.join(" y ")}: puede que no la hubiera (un festivo, por ejemplo) o que aún no la haya subido. El robot revisa su web tres veces al día.${cuando} <a href="${esc(l.fuente || l.origen || "#")}" target="_blank" rel="noopener noreferrer">Ver su web</a></p>`;
+  const sesiones = saltadas.length === 1 ? "la sesión del " + saltadas[0] : "las sesiones del " + saltadas.join(" y ");
+  if (/Junta/.test(l.nota || "")) return `<p class="aviso-red">Los precios de esta lonja se toman del boletín semanal de la Junta de Castilla y León, porque su web no deja entrar al robot. ${sesiones.charAt(0).toUpperCase() + sesiones.slice(1)} aún no ha salido en ese boletín (suele tardar unos días); en cuanto salga, aparecerá aquí sola.${cuando} <a href="${esc(l.fuente || "#")}" target="_blank" rel="noopener noreferrer">Ver la web de la lonja</a></p>`;
+  return `<p class="aviso-red">La lonja no ha publicado en su web ${sesiones}: puede que no la hubiera (un festivo, por ejemplo) o que aún no la haya subido. El robot revisa su web tres veces al día.${cuando} <a href="${esc(l.fuente || l.origen || "#")}" target="_blank" rel="noopener noreferrer">Ver su web</a></p>`;
 }
 /** «último 2,80 · 29 oct» para un producto que no cotizó en la última sesión. */
 function textoUltimo(f) { return f.act == null && f.ult ? `último ${precio(f.ult[1], f.unidad)} (${fechaCorta(f.ult[0])})` : ""; }
@@ -582,7 +584,7 @@ function vistaLonja(id) {
         <div class="meta"><span class="pastilla ${e.clase}">${e.txt}</span> &nbsp;Sesión del ${fechaLarga(l.fecha)}</div>
         ${prox ? `<div class="prox">${esc(prox)}</div>` : ""}
       </div>
-      ${e.txt === "Pendiente" ? notaPendiente(l) : ""}
+      ${e.txt === "Pendiente" ? notaPendiente(l) : /Junta/.test(l.nota || "") ? `<p class="nota">ⓘ ${esc(l.nota)}</p>` : ""}
       ${sinCot ? `<p class="nota">${sinCot === 1 ? "Un producto no cotizó" : `${sinCot} productos no cotizaron`} en esta sesión: se muestran al final de su mesa con su último precio.</p>` : ""}
       <div class="filtros" role="group" aria-label="Mesas">${cats.map(c => `<button class="chip" type="button" data-cat="${esc(c)}" aria-pressed="${c === estado.cat}">${esc(c)}</button>`).join("")}</div>
       <input id="buscar-producto" class="buscar" type="search" placeholder="Buscar producto (trigo, cordero, vacas…)" value="${esc(estado.texto)}" aria-label="Buscar producto">

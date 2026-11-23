@@ -136,3 +136,23 @@ def test_lechones_comparables_solo_los_de_20_kg():
     assert clave_de("Lechones 20kg") == "lechones"
     assert clave_de("Lechón tipo Lerma") is None
     assert clave_de("Lechones 200 kg") is None
+
+
+def test_lerma_desde_el_boletin_de_la_junta(tmp_path):
+    # La web de Lerma rechaza (403) a los servidores de GitHub desde el 17 nov 2026: se usa el Excel de la Junta
+    import json
+    import actualizar
+    (tmp_path / "data" / "historico").mkdir(parents=True)
+    series = {
+        "lerma--cereales-y-forrajes--trigo--100-kg": [["2026-11-06", "2026-W45", 23.1], ["2026-11-13", "2026-W46", 22.9]],
+        "lerma--porcino--cebo-normal--kg-vivo": [["2026-11-06", "2026-W45", 1.17], ["2026-11-13", "2026-W46", 1.1]],
+        "lerma--vacuno--vacas-industria--kg-canal": [["2026-11-06", "2026-W45", 1.56]],   # sin dato el día 13
+        "segovia--cereales-y-forrajes--trigo--100-kg": [["2026-11-19", "2026-W47", 23.0]],  # otra lonja: no cuenta
+    }
+    (tmp_path / "data" / "historico" / "2026.json").write_text(json.dumps({"anio": 2026, "series": series}), encoding="utf-8")
+    fecha, filas, origen = actualizar.leer_lerma_junta(tmp_path)
+    assert fecha == "2026-11-13" and "jcyl.es" in origen
+    por = {f["producto"]: f for f in filas}
+    assert por["Trigo tipo III"] == {"cat": "Cereales", "producto": "Trigo tipo III", "unidad": "€/t", "ant": 231.0, "act": 229.0}
+    assert por["Cerdo normal"]["act"] == 1.1 and por["Cerdo normal"]["ant"] == 1.17
+    assert "Vacas industria" not in por     # sin precio ese día: no se inventa
