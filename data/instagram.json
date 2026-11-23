@@ -90,7 +90,8 @@
   ],
   "2026-11-23": [
    "manana",
-   "reel"
+   "reel",
+   "extra"
   ]
  },
  "historias": [
@@ -690,6 +691,12 @@
    "fecha": "2026-11-23T13:28",
    "id": "2026-11-23-reel-cebada",
    "media": "17918474427522038"
+  },
+  {
+   "facebook": "4731752127148396",
+   "fecha": "2026-11-23T15:38",
+   "id": "2026-11-23-extra-seguros-anuncio",
+   "media": "18078076889501794"
   }
  ],
  "token_renovado": "2026-11-07"
