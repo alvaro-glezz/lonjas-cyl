@@ -1,5 +1,5 @@
 {
- "generado": "2026-11-23T18:27+00:00",
+ "generado": "2026-11-23T21:30+00:00",
  "lonjas": [
   {
    "id": "salamanca",
@@ -1228,7 +1228,7 @@
    "origen": "https://www.fessegovia.es/wp-content/uploads/2026/11/LONJA-CEREALES-OVINO-Y-PORCINO-19.11.2026.pdf",
    "error": "Falló la lectura automática (JSONDecodeError)",
    "ultima_lectura": "2026-11-23T08:30+00:00",
-   "fallos": 1,
+   "fallos": 2,
    "fallo_desde": "2026-11-23T18:27+00:00"
   },
   {
