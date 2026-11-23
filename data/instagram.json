@@ -4,7 +4,7 @@
   "detalle": "Instagram no pudo procesar la imagen (ERROR)",
   "fecha": "2026-11-16"
  },
- "franja": "manana",
+ "franja": "extra:seguros-anuncio",
  "franjas": {
   "2026-11-07": [
    "reel"
@@ -199,6 +199,84 @@
    "texto": "🎬 ¿Qué es una lonja?\n\nEn una lonja, compradores y vendedores se sientan a la misma mesa y acuerdan un precio de referencia.\nNo es una subasta: es un acuerdo que sirve de guía a todo el sector. Cada lonja cotiza un día distinto.\n\n📍 Todos los precios y la comparativa entre lonjas, en el enlace de la bio (lonjas-cyl-khaki.vercel.app).\nAvisos gratis en Telegram: t.me/lonjas_cyl\nPrecios orientativos.\n\n#reels #lonjas #agricultura #CastillayLeón #preciosagrarios #ganadería #campo",
    "tipo": "tres",
    "video": "2026-11-22-diario-01.mp4"
+  },
+  {
+   "guion": "Novedad en Lonjas CyL: ya tienes el calendario de los seguros agrarios de Castilla y León. El que antes cierra es el de herbáceos de secano: se contrata hasta el veinte de diciembre. El de cereal en regadío y los de ganado, hasta el treinta y uno de mayo. Lo encontrarás en Campo, Plazos, con la cuenta atrás de cada seguro y su fuente oficial. Y confirma siempre la fecha con tu mediador.",
+   "id": "2026-11-23-extra-seguros-anuncio",
+   "n": 0,
+   "spec": {
+    "escenas": [
+     {
+      "dur": 3,
+      "sub": "Lonjas CyL · calendario con cuenta atrás",
+      "tipo": "portada",
+      "titulo": "Seguros agrarios: ya en la app"
+     },
+     {
+      "color": "pino",
+      "dur": 8,
+      "forma": "columna",
+      "items": [
+       {
+        "destacar": true,
+        "etiqueta": "Secano",
+        "texto": "20 dic",
+        "valor": 27
+       },
+       {
+        "destacar": false,
+        "etiqueta": "Regadío",
+        "texto": "31 may",
+        "valor": 189
+       },
+       {
+        "destacar": false,
+        "etiqueta": "Ganado",
+        "texto": "31 may",
+        "valor": 189
+       },
+       {
+        "destacar": false,
+        "etiqueta": "Girasol",
+        "texto": "15 jul",
+        "valor": 234
+       }
+      ],
+      "nota": "El primero en cerrar: 20 dic (27 días)",
+      "sub": "Seguros agrarios en Castilla y León · altura = días que quedan",
+      "tipo": "barras",
+      "titulo": "¿Hasta cuándo puedes contratar?"
+     },
+     {
+      "dur": 9,
+      "items": [
+       {
+        "texto": "Herbáceos, cereal de regadío, maíz, girasol y ganado, con su cuenta atrás.",
+        "titulo": "Calendario de seguros"
+       },
+       {
+        "texto": "En la app: Campo › Plazos. Cada seguro con su fuente oficial (BOE o Agroseguro).",
+        "titulo": "Dónde verlo"
+       },
+       {
+        "texto": "La fecha que vale es la que te dé tu tomador o mediador de seguros.",
+        "titulo": "Confírmalo"
+       }
+      ],
+      "tipo": "tarjetas",
+      "titulo": "Nuevo en Lonjas CyL"
+     },
+     {
+      "dur": 3.5,
+      "tipo": "cierre",
+      "web": "lonjas-cyl-khaki.vercel.app"
+     }
+    ]
+   },
+   "texto": "🛡️ Nuevo en la app: el calendario de los seguros agrarios de Castilla y León, con su cuenta atrás.\n\n• Seguro de herbáceos de secano (cosecha 2027): hasta el 20 dic de 2026\n• Seguro de cereal de invierno en regadío (cosecha 2027): hasta el 31 may de 2027\n• Seguros de ganado: vacuno, ovino, caprino y porcino (Plan 2026): hasta el 31 may de 2027\n• Seguro de girasol en regadío (cosecha 2027): hasta el 15 jul de 2027\n\nLo tienes en Campo › Plazos. Fuentes: BOE (Orden APA/863/2026) y Agroseguro.\nLa fecha que vale es la que te confirme tu tomador o mediador; los plazos pueden ampliarse.\n\n📍 Todos los precios y la comparativa entre lonjas, en el enlace de la bio (lonjas-cyl-khaki.vercel.app).\nAvisos gratis en Telegram: t.me/lonjas_cyl\n🔊 Voz generada por ordenador (Kokoro, voz «em_santa», licencia Apache 2.0).\n\n#segurosagrarios #agricultura #ganaderia #lonjas #CastillayLeón #preciosagrarios #ganadería #campo",
+   "tipo": "tres",
+   "video": "2026-11-23-extra-seguros-anuncio.mp4",
+   "voz": true
   }
  ],
  "publicado": {
