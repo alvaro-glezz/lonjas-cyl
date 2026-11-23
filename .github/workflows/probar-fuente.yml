@@ -1,0 +1,31 @@
+name: Probar una fuente (diagnóstico)
+
+# Comprueba desde los servidores de GitHub si la web de una lonja responde, con distintas formas de pedirla.
+# Solo lee y enseña códigos de respuesta; no cambia nada.
+on:
+  workflow_dispatch:
+    inputs:
+      url:
+        description: "Dirección a probar"
+        required: true
+        default: "https://lerma.burgos.es/lonja"
+
+permissions:
+  contents: read
+
+jobs:
+  probar:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Probar
+        env:
+          URL: ${{ inputs.url }}
+        run: |
+          probar() { printf '%-28s ' "$1"; shift; curl -s -o /tmp/r.html -w '%{http_code} %{size_download}B server=%header{server}\n' --max-time 30 "$@" "$URL"; }
+          probar "UA de la app"   -A "AppLonjasCyL/1.0 (lector semanal de cotizaciones publicas)"
+          probar "curl normal"
+          probar "Chrome"         -A "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36" -H "Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8" -H "Accept-Language: es-ES,es;q=0.9"
+          probar "Chrome + HTTP/2" --http2 -A "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36" -H "Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8" -H "Accept-Language: es-ES,es;q=0.9" -H "Sec-Fetch-Mode: navigate" -H "Sec-Fetch-Site: none" -H "Sec-Fetch-Dest: document" -H "Upgrade-Insecure-Requests: 1"
+          echo "--- primeras líneas de la última respuesta ---"; head -c 1500 /tmp/r.html; echo
+          echo "--- IP de este servidor de GitHub ---"; curl -s --max-time 10 https://api.ipify.org; echo
+          probar "Archivo PDF 2026" -A "Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/131.0.0.0" 
