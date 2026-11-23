@@ -1,5 +1,5 @@
 {
- "generado": "2026-11-23T17:36+00:00",
+ "generado": "2026-11-23T17:50+00:00",
  "lonjas": [
   {
    "id": "salamanca",
@@ -1238,7 +1238,7 @@
    "dia": "Viernes",
    "fuente": "https://lerma.burgos.es/lonja",
    "estado": "activa",
-   "nota": null,
+   "nota": "Precios tomados del boletín semanal de la Junta de Castilla y León: la web de la lonja no deja entrar al robot. Llegan con unos días de retraso respecto a la sesión.",
    "fecha": "2026-11-13",
    "precios": [
     {
@@ -1246,7 +1246,7 @@
      "cat": "Cereales",
      "producto": "Trigo tipo III",
      "unidad": "€/t",
-     "ant": 232.0,
+     "ant": 231.0,
      "act": 231.0,
      "clave": "trigo"
     },
@@ -1264,7 +1264,7 @@
      "cat": "Porcino",
      "producto": "Cerdo normal",
      "unidad": "€/kg vivo",
-     "ant": 1.137,
+     "ant": 1.17,
      "act": 1.1,
      "clave": "cerdo-normal"
     },
@@ -1273,16 +1273,8 @@
      "cat": "Porcino",
      "producto": "Cerdas de desvieje",
      "unidad": "€/kg vivo",
-     "ant": 0.3,
+     "ant": 0.33,
      "act": 0.3
-    },
-    {
-     "id": "lerma-lechon-tipo-lerma",
-     "cat": "Porcino",
-     "producto": "Lechón tipo Lerma",
-     "unidad": "€/ud",
-     "ant": 23.0,
-     "act": 23.0
     },
     {
      "id": "lerma-terneras-carne-blanca",
@@ -1358,11 +1350,11 @@
     }
    ],
    "comprobado": "2026-11-03T23:45:00+01:00",
-   "origen": "https://lerma.burgos.es/lonja",
-   "error": "Falló la lectura automática (HTTPError)",
-   "ultima_lectura": "2026-11-17T13:54+00:00",
-   "fallos": 3,
-   "fallo_desde": "2026-11-17T17:41+00:00"
+   "origen": "https://agriculturaganaderia.jcyl.es/web/es/estadistica-informacion-agraria/lonjas-2026.html",
+   "error": null,
+   "ultima_lectura": "2026-11-23T17:50+00:00",
+   "fallos": 0,
+   "fallo_desde": null
   },
   {
    "id": "zamora",
