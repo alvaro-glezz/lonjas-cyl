@@ -1,12 +1,12 @@
 {
- "fecha": "2026-11-25T18:28",
+ "fecha": "2026-11-25T22:39",
  "fuente": "Ministerio para la Transición Ecológica y el Reto Demográfico (Geoportal de gasolineras)",
  "fuente_url": "https://geoportalgasolineras.es/geoportal-instalaciones/Inicio",
  "unidad": "€/l",
  "espana": {
-  "media": 1.616,
-  "min": 1.299,
-  "n": 2262
+  "media": 1.615,
+  "min": 1.279,
+  "n": 2263
  },
  "cyl": {
   "media": 1.579,
@@ -166,7 +166,7 @@
    "nombre": "Alicante",
    "cyl": false,
    "n": 52,
-   "media": 1.69,
+   "media": 1.689,
    "mediana": 1.699,
    "min": 1.55,
    "max": 1.779,
@@ -214,13 +214,25 @@
    "id": "04",
    "nombre": "Almería",
    "cyl": false,
-   "n": 63,
-   "media": 1.641,
+   "n": 64,
+   "media": 1.637,
    "mediana": 1.659,
-   "min": 1.45,
+   "min": 1.4,
    "max": 1.825,
    "descartados": 2,
    "baratas": [
+    {
+     "id": "10919",
+     "nombre": "Anroroil",
+     "precio": 1.4,
+     "municipio": "Vélez-Blanco",
+     "direccion": "Carretera C-321, Pje.cañada de Navarro Km 000000 Km. 162",
+     "localidad": "Velez-blanco",
+     "cp": "04830",
+     "horario": "L-S: 07:00-23:00",
+     "lat": 37.678111,
+     "lon": -2.090333
+    },
     {
      "id": "11569",
      "nombre": "Repsol",
@@ -244,18 +256,6 @@
      "horario": "L-D: 24H",
      "lat": 36.727361,
      "lon": -2.802194
-    },
-    {
-     "id": "5622",
-     "nombre": "Campoejido",
-     "precio": 1.452,
-     "municipio": "El Ejido",
-     "direccion": "Carretera Carretera de Berja Km. 16",
-     "localidad": "El Ejido",
-     "cp": "04700",
-     "horario": "L-D: 06:00-22:00",
-     "lat": 36.780778,
-     "lon": -2.831333
     }
    ]
   },
@@ -264,7 +264,7 @@
    "nombre": "Asturias",
    "cyl": false,
    "n": 60,
-   "media": 1.646,
+   "media": 1.644,
    "mediana": 1.659,
    "min": 1.39,
    "max": 1.759,
@@ -406,18 +406,6 @@
      "lon": -5.325556
     },
     {
-     "id": "5981",
-     "nombre": "Petronor",
-     "precio": 1.589,
-     "municipio": "San Pedro del Arroyo",
-     "direccion": "Calle Calzada, S/n",
-     "localidad": "San Pedro del Arroyo",
-     "cp": "05350",
-     "horario": "L-S: 07:00-23:00; D: 08:00-22:00",
-     "lat": 40.802917,
-     "lon": -4.873278
-    },
-    {
      "id": "5980",
      "nombre": "Petronor",
      "precio": 1.589,
@@ -428,6 +416,18 @@
      "horario": "L-S: 07:00-23:00; D: 08:00-22:00",
      "lat": 40.803111,
      "lon": -4.873083
+    },
+    {
+     "id": "5981",
+     "nombre": "Petronor",
+     "precio": 1.589,
+     "municipio": "San Pedro del Arroyo",
+     "direccion": "Calle Calzada, S/n",
+     "localidad": "San Pedro del Arroyo",
+     "cp": "05350",
+     "horario": "L-S: 07:00-23:00; D: 08:00-22:00",
+     "lat": 40.802917,
+     "lon": -4.873278
     },
     {
      "id": "5060",
@@ -543,7 +543,7 @@
    "id": "06",
    "nombre": "Badajoz",
    "cyl": false,
-   "n": 80,
+   "n": 79,
    "media": 1.612,
    "mediana": 1.599,
    "min": 1.371,
@@ -928,6 +928,18 @@
      "lon": -3.751139
     },
     {
+     "id": "5043",
+     "nombre": "Galp",
+     "precio": 1.589,
+     "municipio": "Valle de Losa",
+     "direccion": "Carretera Bu-550 Km. 27",
+     "localidad": "Quincoces de Yuso",
+     "cp": "09510",
+     "horario": "L-D: 07:00-21:00",
+     "lat": 42.978611,
+     "lon": -3.222722
+    },
+    {
      "id": "6042",
      "nombre": "Repsol",
      "precio": 1.589,
@@ -938,18 +950,6 @@
      "horario": "L-D: 07:00-22:00",
      "lat": 41.6985,
      "lon": -3.923194
-    },
-    {
-     "id": "5043",
-     "nombre": "Galp",
-     "precio": 1.594,
-     "municipio": "Valle de Losa",
-     "direccion": "Carretera Bu-550 Km. 27",
-     "localidad": "Quincoces de Yuso",
-     "cp": "09510",
-     "horario": "L-D: 07:00-21:00",
-     "lat": 42.978611,
-     "lon": -3.222722
     },
     {
      "id": "5548",
@@ -1072,18 +1072,6 @@
      "lon": -3.999139
     },
     {
-     "id": "6025",
-     "nombre": "Repsol",
-     "precio": 1.759,
-     "municipio": "Villalmanzo",
-     "direccion": "Carretera A-1, Madrid-burgos Km. 203,000",
-     "localidad": "Villalmanzo",
-     "cp": "09390",
-     "horario": "L-D: 24H",
-     "lat": 42.041028,
-     "lon": -3.751667
-    },
-    {
      "id": "6026",
      "nombre": "Repsol",
      "precio": 1.759,
@@ -1094,6 +1082,18 @@
      "horario": "L-D: 24H",
      "lat": 42.040694,
      "lon": -3.752778
+    },
+    {
+     "id": "6025",
+     "nombre": "Repsol",
+     "precio": 1.759,
+     "municipio": "Villalmanzo",
+     "direccion": "Carretera A-1, Madrid-burgos Km. 203,000",
+     "localidad": "Villalmanzo",
+     "cp": "09390",
+     "horario": "L-D: 24H",
+     "lat": 42.041028,
+     "lon": -3.751667
     }
    ]
   },
@@ -1249,7 +1249,7 @@
    "nombre": "Castellón",
    "cyl": false,
    "n": 53,
-   "media": 1.615,
+   "media": 1.614,
    "mediana": 1.619,
    "min": 1.299,
    "max": 1.795,
@@ -1282,7 +1282,7 @@
     {
      "id": "3499",
      "nombre": "Galp",
-     "precio": 1.484,
+     "precio": 1.479,
      "municipio": "Nules",
      "direccion": "Carretera Cv226 Km. 26,6",
      "localidad": "Nules",
@@ -1347,8 +1347,8 @@
    "nombre": "Córdoba",
    "cyl": false,
    "n": 69,
-   "media": 1.636,
-   "mediana": 1.669,
+   "media": 1.635,
+   "mediana": 1.659,
    "min": 1.35,
    "max": 1.839,
    "descartados": 0,
@@ -1396,8 +1396,8 @@
    "nombre": "Cuenca",
    "cyl": false,
    "n": 37,
-   "media": 1.517,
-   "mediana": 1.499,
+   "media": 1.515,
+   "mediana": 1.489,
    "min": 1.302,
    "max": 1.779,
    "descartados": 0,
@@ -1739,7 +1739,7 @@
    "nombre": "Illes Balears",
    "cyl": false,
    "n": 33,
-   "media": 1.722,
+   "media": 1.719,
    "mediana": 1.719,
    "min": 1.509,
    "max": 1.829,
@@ -1788,7 +1788,7 @@
    "nombre": "Jaén",
    "cyl": false,
    "n": 121,
-   "media": 1.651,
+   "media": 1.649,
    "mediana": 1.679,
    "min": 1.389,
    "max": 1.849,
@@ -2189,7 +2189,7 @@
    "nombre": "Lleida",
    "cyl": false,
    "n": 55,
-   "media": 1.558,
+   "media": 1.557,
    "mediana": 1.578,
    "min": 1.351,
    "max": 1.765,
@@ -2238,7 +2238,7 @@
    "nombre": "Lugo",
    "cyl": false,
    "n": 51,
-   "media": 1.673,
+   "media": 1.672,
    "mediana": 1.655,
    "min": 1.509,
    "max": 1.838,
@@ -2259,7 +2259,7 @@
     {
      "id": "543",
      "nombre": "Galp",
-     "precio": 1.524,
+     "precio": 1.519,
      "municipio": "Lourenzá",
      "direccion": "Carretera N-634 Km. 578",
      "localidad": "Lourenza (casco Urbano)",
@@ -2336,7 +2336,7 @@
    "nombre": "Málaga",
    "cyl": false,
    "n": 34,
-   "media": 1.643,
+   "media": 1.642,
    "mediana": 1.669,
    "min": 1.429,
    "max": 1.809,
@@ -2483,16 +2483,16 @@
    "nombre": "Ourense",
    "cyl": false,
    "n": 26,
-   "media": 1.702,
+   "media": 1.699,
    "mediana": 1.714,
-   "min": 1.5,
+   "min": 1.422,
    "max": 1.799,
    "descartados": 0,
    "baratas": [
     {
      "id": "12243",
      "nombre": "Repsol",
-     "precio": 1.5,
+     "precio": 1.422,
      "municipio": "Riós",
      "direccion": "Lugar Rios,",
      "localidad": "Rios",
@@ -2739,7 +2739,7 @@
    "nombre": "Pontevedra",
    "cyl": false,
    "n": 33,
-   "media": 1.612,
+   "media": 1.61,
    "mediana": 1.605,
    "min": 1.459,
    "max": 1.729,
@@ -2758,6 +2758,18 @@
      "lon": -8.802444
     },
     {
+     "id": "10649",
+     "nombre": "Campodeza, S.c.g.",
+     "precio": 1.529,
+     "municipio": "Lalín",
+     "direccion": "Lugar Gresande-gresande, S/n",
+     "localidad": "Gresande",
+     "cp": "36519",
+     "horario": "L-D: 08:00-00:00",
+     "lat": 42.645556,
+     "lon": -8.186694
+    },
+    {
      "id": "713",
      "nombre": "Repsol",
      "precio": 1.555,
@@ -2768,18 +2780,6 @@
      "horario": "L-D: 07:00-23:00",
      "lat": 42.695278,
      "lon": -8.490111
-    },
-    {
-     "id": "259",
-     "nombre": "Galp",
-     "precio": 1.555,
-     "municipio": "A Estrada",
-     "direccion": "CTRA. N-640 (CTRA km 201,7)",
-     "localidad": "A Estrada",
-     "cp": "36680",
-     "horario": "L-D: 07:00-23:00",
-     "lat": 42.698139,
-     "lon": -8.459111
     }
    ]
   },
@@ -2788,8 +2788,8 @@
    "nombre": "Salamanca",
    "cyl": true,
    "n": 20,
-   "media": 1.593,
-   "mediana": 1.599,
+   "media": 1.592,
+   "mediana": 1.594,
    "min": 1.419,
    "max": 1.739,
    "descartados": 0,
@@ -2941,6 +2941,18 @@
      "lon": -5.877528
     },
     {
+     "id": "4925",
+     "nombre": "Eumogas, Sl",
+     "precio": 1.589,
+     "municipio": "Villarmayor",
+     "direccion": "Carretera Cl-517 Km. 22,500",
+     "localidad": "Villarmayor",
+     "cp": "37130",
+     "horario": "L-V: 07:00-20:30; S: 08:00-20:30; D: 09:00-21:00",
+     "lat": 41.012083,
+     "lon": -5.970083
+    },
+    {
      "id": "6303",
      "nombre": "Campsa",
      "precio": 1.599,
@@ -3013,18 +3025,6 @@
      "lon": -6.416278
     },
     {
-     "id": "4925",
-     "nombre": "Eumogas, Sl",
-     "precio": 1.609,
-     "municipio": "Villarmayor",
-     "direccion": "Carretera Cl-517 Km. 22,500",
-     "localidad": "Villarmayor",
-     "cp": "37130",
-     "horario": "L-V: 07:00-20:30; S: 08:00-20:30; D: 09:00-21:00",
-     "lat": 41.012083,
-     "lon": -5.970083
-    },
-    {
      "id": "6209",
      "nombre": "Repsol",
      "precio": 1.659,
@@ -3080,7 +3080,7 @@
    "cyl": true,
    "n": 20,
    "media": 1.619,
-   "mediana": 1.635,
+   "mediana": 1.632,
    "min": 1.393,
    "max": 1.795,
    "descartados": 0,
@@ -3244,21 +3244,9 @@
      "lon": -4.51725
     },
     {
-     "id": "6177",
-     "nombre": "Galp",
-     "precio": 1.639,
-     "municipio": "Villacastín",
-     "direccion": "Autopista A6 Km. 0",
-     "localidad": "Villacastin",
-     "cp": "40150",
-     "horario": "L-D: 24H",
-     "lat": 40.7975,
-     "lon": -4.460889
-    },
-    {
      "id": "6401",
      "nombre": "Galp",
-     "precio": 1.639,
+     "precio": 1.634,
      "municipio": "Villacastín",
      "direccion": "Autopista A6 Km. 0",
      "localidad": "Villacastin",
@@ -3266,6 +3254,18 @@
      "horario": "L-D: 06:00-22:00",
      "lat": 40.7975,
      "lon": -4.462889
+    },
+    {
+     "id": "6177",
+     "nombre": "Galp",
+     "precio": 1.634,
+     "municipio": "Villacastín",
+     "direccion": "Autopista A6 Km. 0",
+     "localidad": "Villacastin",
+     "cp": "40150",
+     "horario": "L-D: 24H",
+     "lat": 40.7975,
+     "lon": -4.460889
     },
     {
      "id": "6315",
@@ -3578,9 +3578,9 @@
    "id": "44",
    "nombre": "Teruel",
    "cyl": false,
-   "n": 34,
-   "media": 1.576,
-   "mediana": 1.57,
+   "n": 35,
+   "media": 1.569,
+   "mediana": 1.575,
    "min": 1.375,
    "max": 1.825,
    "descartados": 0,
@@ -3647,18 +3647,6 @@
      "lon": -3.82825
     },
     {
-     "id": "4388",
-     "nombre": "Hnos.fernandez",
-     "precio": 1.39,
-     "municipio": "Mora",
-     "direccion": "CL/ TOLEDO 85 (C-400 km 30,7)",
-     "localidad": "Mora",
-     "cp": "45400",
-     "horario": "L-V: 06:00-21:00; S: 08:00-21:00; D: 08:00-14:00",
-     "lat": 39.689194,
-     "lon": -3.77725
-    },
-    {
      "id": "4384",
      "nombre": "Hnos.fernandez",
      "precio": 1.39,
@@ -3669,6 +3657,18 @@
      "horario": "L-D: 24H",
      "lat": 39.678028,
      "lon": -3.774583
+    },
+    {
+     "id": "4388",
+     "nombre": "Hnos.fernandez",
+     "precio": 1.39,
+     "municipio": "Mora",
+     "direccion": "CL/ TOLEDO 85 (C-400 km 30,7)",
+     "localidad": "Mora",
+     "cp": "45400",
+     "horario": "L-V: 06:00-21:00; S: 08:00-21:00; D: 08:00-14:00",
+     "lat": 39.689194,
+     "lon": -3.77725
     }
    ]
   },
@@ -3677,12 +3677,24 @@
    "nombre": "Valencia",
    "cyl": false,
    "n": 140,
-   "media": 1.588,
-   "mediana": 1.585,
-   "min": 1.35,
+   "media": 1.584,
+   "mediana": 1.581,
+   "min": 1.279,
    "max": 1.835,
    "descartados": 2,
    "baratas": [
+    {
+     "id": "14252",
+     "nombre": "Scva Virgen Desamparados",
+     "precio": 1.279,
+     "municipio": "Yátova",
+     "direccion": "Avenida Diputación, 74",
+     "localidad": "Yatova",
+     "cp": "46367",
+     "horario": "L-D: 24H",
+     "lat": 39.385444,
+     "lon": -0.814667
+    },
     {
      "id": "3835",
      "nombre": "Repsol",
@@ -3696,28 +3708,16 @@
      "lon": -0.782861
     },
     {
-     "id": "14252",
-     "nombre": "Scva Virgen Desamparados",
+     "id": "1898",
+     "nombre": "Estacio de Servici el Regaixo",
      "precio": 1.379,
-     "municipio": "Yátova",
-     "direccion": "Avenida Diputación, 74",
-     "localidad": "Yatova",
-     "cp": "46367",
+     "municipio": "Catadau",
+     "direccion": "Carretera Cv-5202 Km. 1",
+     "localidad": "Catadau",
+     "cp": "46196",
      "horario": "L-D: 24H",
-     "lat": 39.385444,
-     "lon": -0.814667
-    },
-    {
-     "id": "4030",
-     "nombre": "Cheste Agraria",
-     "precio": 1.38,
-     "municipio": "Cheste",
-     "direccion": "Cr Vv-6112, 0,4",
-     "localidad": "Cheste",
-     "cp": "46380",
-     "horario": "L-S: 06:00-22:00; D: 07:00-21:00",
-     "lat": 39.490972,
-     "lon": -0.677222
+     "lat": 39.279111,
+     "lon": -0.567194
     }
    ]
   },
@@ -4332,7 +4332,7 @@
    "nombre": "Zaragoza",
    "cyl": false,
    "n": 84,
-   "media": 1.592,
+   "media": 1.591,
    "mediana": 1.599,
    "min": 1.343,
    "max": 1.819,
