@@ -4,7 +4,7 @@
   "detalle": "Instagram no pudo procesar la imagen (ERROR)",
   "fecha": "2026-11-16"
  },
- "franja": "tarde",
+ "franja": "diario",
  "franjas": {
   "2026-11-07": [
    "reel"
@@ -113,7 +113,8 @@
    "manana",
    "reel",
    "historia",
-   "tarde"
+   "tarde",
+   "diario"
   ]
  },
  "historias": [
@@ -815,6 +816,12 @@
    "fecha": "2026-11-26T18:37",
    "id": "2026-11-26-leon",
    "media": "17999255514052609"
+  },
+  {
+   "facebook": "2248793295702689",
+   "fecha": "2026-11-26T20:21",
+   "id": "2026-11-26-diario-05",
+   "media": "18104988611060664"
   }
  ],
  "token_renovado": "2026-11-07"
