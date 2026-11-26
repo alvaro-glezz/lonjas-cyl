@@ -1,16 +1,16 @@
 {
- "fecha": "2026-11-26T14:57",
+ "fecha": "2026-11-26T18:34",
  "fuente": "Ministerio para la Transición Ecológica y el Reto Demográfico (Geoportal de gasolineras)",
  "fuente_url": "https://geoportalgasolineras.es/geoportal-instalaciones/Inicio",
  "unidad": "€/l",
  "espana": {
-  "media": 1.608,
-  "min": 1.279,
+  "media": 1.607,
+  "min": 1.269,
   "n": 2264
  },
  "cyl": {
-  "media": 1.573,
-  "min": 1.309,
+  "media": 1.571,
+  "min": 1.269,
   "n": 166
  },
  "provincias": [
@@ -19,7 +19,7 @@
    "nombre": "A Coruña",
    "cyl": false,
    "n": 89,
-   "media": 1.677,
+   "media": 1.676,
    "mediana": 1.699,
    "min": 1.44,
    "max": 1.839,
@@ -264,7 +264,7 @@
    "nombre": "Asturias",
    "cyl": false,
    "n": 60,
-   "media": 1.636,
+   "media": 1.637,
    "mediana": 1.649,
    "min": 1.39,
    "max": 1.759,
@@ -313,7 +313,7 @@
    "nombre": "Ávila",
    "cyl": true,
    "n": 15,
-   "media": 1.65,
+   "media": 1.647,
    "mediana": 1.68,
    "min": 1.439,
    "max": 1.799,
@@ -344,16 +344,16 @@
      "lon": -4.728611
     },
     {
-     "id": "14470",
-     "nombre": "Valcarce",
-     "precio": 1.579,
-     "municipio": "Hernansancho",
-     "direccion": "Carretera Av-804 Km. 21",
-     "localidad": "Hernansancho",
-     "cp": "05164",
-     "horario": "L-V: 07:00-21:00; S-D: 08:00-21:00",
-     "lat": 40.854861,
-     "lon": -4.730861
+     "id": "5981",
+     "nombre": "Petronor",
+     "precio": 1.569,
+     "municipio": "San Pedro del Arroyo",
+     "direccion": "Calle Calzada, S/n",
+     "localidad": "San Pedro del Arroyo",
+     "cp": "05350",
+     "horario": "L-S: 07:00-23:00; D: 08:00-22:00",
+     "lat": 40.802917,
+     "lon": -4.873278
     }
    ],
    "todas": [
@@ -380,6 +380,30 @@
      "horario": "L-D: 24H",
      "lat": 41.067944,
      "lon": -4.728611
+    },
+    {
+     "id": "5981",
+     "nombre": "Petronor",
+     "precio": 1.569,
+     "municipio": "San Pedro del Arroyo",
+     "direccion": "Calle Calzada, S/n",
+     "localidad": "San Pedro del Arroyo",
+     "cp": "05350",
+     "horario": "L-S: 07:00-23:00; D: 08:00-22:00",
+     "lat": 40.802917,
+     "lon": -4.873278
+    },
+    {
+     "id": "5980",
+     "nombre": "Petronor",
+     "precio": 1.569,
+     "municipio": "San Pedro del Arroyo",
+     "direccion": "Calle Calzada, S/n",
+     "localidad": "San Pedro del Arroyo",
+     "cp": "05350",
+     "horario": "L-S: 07:00-23:00; D: 08:00-22:00",
+     "lat": 40.803111,
+     "lon": -4.873083
     },
     {
      "id": "14470",
@@ -416,30 +440,6 @@
      "horario": "L-D: 07:00-23:00",
      "lat": 40.465194,
      "lon": -5.325556
-    },
-    {
-     "id": "5980",
-     "nombre": "Petronor",
-     "precio": 1.589,
-     "municipio": "San Pedro del Arroyo",
-     "direccion": "Calle Calzada, S/n",
-     "localidad": "San Pedro del Arroyo",
-     "cp": "05350",
-     "horario": "L-S: 07:00-23:00; D: 08:00-22:00",
-     "lat": 40.803111,
-     "lon": -4.873083
-    },
-    {
-     "id": "5981",
-     "nombre": "Petronor",
-     "precio": 1.589,
-     "municipio": "San Pedro del Arroyo",
-     "direccion": "Calle Calzada, S/n",
-     "localidad": "San Pedro del Arroyo",
-     "cp": "05350",
-     "horario": "L-S: 07:00-23:00; D: 08:00-22:00",
-     "lat": 40.802917,
-     "lon": -4.873278
     },
     {
      "id": "8065",
@@ -691,12 +691,24 @@
    "nombre": "Burgos",
    "cyl": true,
    "n": 30,
-   "media": 1.541,
-   "mediana": 1.564,
-   "min": 1.309,
+   "media": 1.537,
+   "mediana": 1.558,
+   "min": 1.269,
    "max": 1.739,
    "descartados": 0,
    "baratas": [
+    {
+     "id": "5037",
+     "nombre": "Galp",
+     "precio": 1.269,
+     "municipio": "Miranda de Ebro",
+     "direccion": "Ctra. de Logroño, 70",
+     "localidad": "Miranda de Ebro",
+     "cp": "09200",
+     "horario": "L-D: 06:30-22:30",
+     "lat": 42.68575,
+     "lon": -2.932667
+    },
     {
      "id": "9215",
      "nombre": "Coridu",
@@ -708,18 +720,6 @@
      "horario": "L-V: 09:00-14:00 y 16:00-19:00",
      "lat": 41.690528,
      "lon": -3.925778
-    },
-    {
-     "id": "5037",
-     "nombre": "Galp",
-     "precio": 1.319,
-     "municipio": "Miranda de Ebro",
-     "direccion": "Ctra. de Logroño, 70",
-     "localidad": "Miranda de Ebro",
-     "cp": "09200",
-     "horario": "L-D: 06:30-22:30",
-     "lat": 42.68575,
-     "lon": -2.932667
     },
     {
      "id": "8990",
@@ -736,6 +736,18 @@
    ],
    "todas": [
     {
+     "id": "5037",
+     "nombre": "Galp",
+     "precio": 1.269,
+     "municipio": "Miranda de Ebro",
+     "direccion": "Ctra. de Logroño, 70",
+     "localidad": "Miranda de Ebro",
+     "cp": "09200",
+     "horario": "L-D: 06:30-22:30",
+     "lat": 42.68575,
+     "lon": -2.932667
+    },
+    {
      "id": "9215",
      "nombre": "Coridu",
      "precio": 1.309,
@@ -746,18 +758,6 @@
      "horario": "L-V: 09:00-14:00 y 16:00-19:00",
      "lat": 41.690528,
      "lon": -3.925778
-    },
-    {
-     "id": "5037",
-     "nombre": "Galp",
-     "precio": 1.319,
-     "municipio": "Miranda de Ebro",
-     "direccion": "Ctra. de Logroño, 70",
-     "localidad": "Miranda de Ebro",
-     "cp": "09200",
-     "horario": "L-D: 06:30-22:30",
-     "lat": 42.68575,
-     "lon": -2.932667
     },
     {
      "id": "8990",
@@ -856,6 +856,18 @@
      "lon": -3.390056
     },
     {
+     "id": "5548",
+     "nombre": "Repsol",
+     "precio": 1.498,
+     "municipio": "Belorado",
+     "direccion": "Carretera N-120 Km. 68,3",
+     "localidad": "Belorado",
+     "cp": "09250",
+     "horario": "L-D: 07:00-22:00",
+     "lat": 42.417333,
+     "lon": -3.207111
+    },
+    {
      "id": "12449",
      "nombre": "Avia",
      "precio": 1.499,
@@ -942,7 +954,7 @@
     {
      "id": "5043",
      "nombre": "Galp",
-     "precio": 1.589,
+     "precio": 1.594,
      "municipio": "Valle de Losa",
      "direccion": "Carretera Bu-550 Km. 27",
      "localidad": "Quincoces de Yuso",
@@ -950,18 +962,6 @@
      "horario": "L-D: 07:00-21:00",
      "lat": 42.978611,
      "lon": -3.222722
-    },
-    {
-     "id": "5548",
-     "nombre": "Repsol",
-     "precio": 1.598,
-     "municipio": "Belorado",
-     "direccion": "Carretera N-120 Km. 68,3",
-     "localidad": "Belorado",
-     "cp": "09250",
-     "horario": "L-D: 07:00-22:00",
-     "lat": 42.417333,
-     "lon": -3.207111
     },
     {
      "id": "12207",
@@ -1102,8 +1102,8 @@
    "nombre": "Cáceres",
    "cyl": false,
    "n": 50,
-   "media": 1.616,
-   "mediana": 1.636,
+   "media": 1.612,
+   "mediana": 1.635,
    "min": 1.349,
    "max": 1.789,
    "descartados": 0,
@@ -1133,16 +1133,16 @@
      "lon": -5.629528
     },
     {
-     "id": "12367",
-     "nombre": "Sdad Coop San Lucas del Torno",
-     "precio": 1.413,
-     "municipio": "El Torno",
-     "direccion": "Carretera el Torno - Cabezabellosa Km. 0,800",
-     "localidad": "El Torno",
-     "cp": "10617",
-     "horario": "L-D: 24H",
-     "lat": 40.134556,
-     "lon": -5.948556
+     "id": "7597",
+     "nombre": "Galp",
+     "precio": 1.399,
+     "municipio": "Casas de Don Gómez",
+     "direccion": "Carretera Ex-108 Km. 95,600",
+     "localidad": "Casas de Don Gomez",
+     "cp": "10818",
+     "horario": "L-V: 06:00-22:00; S-D: 07:00-22:00",
+     "lat": 40.023833,
+     "lon": -6.596139
     }
    ]
   },
@@ -1282,7 +1282,7 @@
     {
      "id": "3499",
      "nombre": "Galp",
-     "precio": 1.469,
+     "precio": 1.474,
      "municipio": "Nules",
      "direccion": "Carretera Cv226 Km. 26,6",
      "localidad": "Nules",
@@ -1396,7 +1396,7 @@
    "nombre": "Cuenca",
    "cyl": false,
    "n": 37,
-   "media": 1.508,
+   "media": 1.505,
    "mediana": 1.489,
    "min": 1.302,
    "max": 1.779,
@@ -1448,7 +1448,7 @@
    "media": 1.697,
    "mediana": 1.712,
    "min": 1.54,
-   "max": 1.759,
+   "max": 1.749,
    "descartados": 0,
    "baratas": [
     {
@@ -1494,8 +1494,8 @@
    "nombre": "Girona",
    "cyl": false,
    "n": 50,
-   "media": 1.681,
-   "mediana": 1.695,
+   "media": 1.679,
+   "mediana": 1.703,
    "min": 1.461,
    "max": 1.799,
    "descartados": 1,
@@ -1513,6 +1513,18 @@
      "lon": 2.95875
     },
     {
+     "id": "1636",
+     "nombre": "Galp",
+     "precio": 1.464,
+     "municipio": "La Jonquera",
+     "direccion": "Carretera N-ii Km. 774",
+     "localidad": "La Jonquera",
+     "cp": "17700",
+     "horario": "L-D: 24H",
+     "lat": 42.410333,
+     "lon": 2.876306
+    },
+    {
      "id": "13225",
      "nombre": "Globaltank",
      "precio": 1.469,
@@ -1523,18 +1535,6 @@
      "horario": "L-D: 24H",
      "lat": 42.231139,
      "lon": 2.979778
-    },
-    {
-     "id": "10517",
-     "nombre": "Valcarce",
-     "precio": 1.499,
-     "municipio": "La Jonquera",
-     "direccion": "Calle Les Salines, 9",
-     "localidad": "La Jonquera",
-     "cp": "17700",
-     "horario": "L-D: 24H",
-     "lat": 42.400556,
-     "lon": 2.878639
     }
    ]
   },
@@ -1690,8 +1690,8 @@
    "nombre": "Huesca",
    "cyl": false,
    "n": 57,
-   "media": 1.564,
-   "mediana": 1.549,
+   "media": 1.563,
+   "mediana": 1.545,
    "min": 1.357,
    "max": 1.719,
    "descartados": 0,
@@ -1788,7 +1788,7 @@
    "nombre": "Jaén",
    "cyl": false,
    "n": 121,
-   "media": 1.642,
+   "media": 1.641,
    "mediana": 1.679,
    "min": 1.349,
    "max": 1.849,
@@ -1819,16 +1819,16 @@
      "lon": -3.920556
     },
     {
-     "id": "6774",
-     "nombre": "Blanca",
-     "precio": 1.379,
-     "municipio": "Bélmez de la Moraleda",
-     "direccion": "Carretera A401 Km. 89",
-     "localidad": "Belmez de la Moraleda",
-     "cp": "23568",
-     "horario": "L-D: 07:00-23:00",
-     "lat": 37.724,
-     "lon": -3.370139
+     "id": "10821",
+     "nombre": "S.c.a. Ntra. Sra. de la Cabeza",
+     "precio": 1.359,
+     "municipio": "Campillo de Arenas",
+     "direccion": "Carretera A-44 Km. 74,1",
+     "localidad": "Campillo de Arenas",
+     "cp": "23130",
+     "horario": "L-V: 09:00-14:00 y 16:00-19:00",
+     "lat": 37.558722,
+     "lon": -3.624111
     }
    ]
   },
@@ -1886,7 +1886,7 @@
    "nombre": "León",
    "cyl": true,
    "n": 21,
-   "media": 1.551,
+   "media": 1.548,
    "mediana": 1.569,
    "min": 1.369,
    "max": 1.739,
@@ -2003,6 +2003,18 @@
      "lon": -5.935528
     },
     {
+     "id": "11318",
+     "nombre": "An Energéticos - Cabreros del Rio Ucogal",
+     "precio": 1.473,
+     "municipio": "Cabreros del Río",
+     "direccion": "Poligono Parcelas 88 y 89, S/n",
+     "localidad": "Cabreros del Rio",
+     "cp": "24224",
+     "horario": "L-D: 24H",
+     "lat": 42.395944,
+     "lon": -5.512083
+    },
+    {
      "id": "6070",
      "nombre": "Cepsa",
      "precio": 1.5,
@@ -2013,18 +2025,6 @@
      "horario": "L-D: 24H",
      "lat": 42.304444,
      "lon": -5.898028
-    },
-    {
-     "id": "11318",
-     "nombre": "An Energéticos - Cabreros del Rio Ucogal",
-     "precio": 1.529,
-     "municipio": "Cabreros del Río",
-     "direccion": "Poligono Parcelas 88 y 89, S/n",
-     "localidad": "Cabreros del Rio",
-     "cp": "24224",
-     "horario": "L-D: 24H",
-     "lat": 42.395944,
-     "lon": -5.512083
     },
     {
      "id": "6027",
@@ -2238,12 +2238,24 @@
    "nombre": "Lugo",
    "cyl": false,
    "n": 51,
-   "media": 1.667,
+   "media": 1.666,
    "mediana": 1.649,
    "min": 1.509,
-   "max": 1.838,
+   "max": 1.798,
    "descartados": 0,
    "baratas": [
+    {
+     "id": "543",
+     "nombre": "Galp",
+     "precio": 1.509,
+     "municipio": "Lourenzá",
+     "direccion": "Carretera N-634 Km. 578",
+     "localidad": "Lourenza (casco Urbano)",
+     "cp": "27760",
+     "horario": "L-D: 07:00-21:00",
+     "lat": 43.490083,
+     "lon": -7.284139
+    },
     {
      "id": "14779",
      "nombre": "O Xeixo,s.coop Galega Oil",
@@ -2255,18 +2267,6 @@
      "horario": "L-D: 24H",
      "lat": 43.285417,
      "lon": -7.403639
-    },
-    {
-     "id": "543",
-     "nombre": "Galp",
-     "precio": 1.514,
-     "municipio": "Lourenzá",
-     "direccion": "Carretera N-634 Km. 578",
-     "localidad": "Lourenza (casco Urbano)",
-     "cp": "27760",
-     "horario": "L-D: 07:00-21:00",
-     "lat": 43.490083,
-     "lon": -7.284139
     },
     {
      "id": "11907",
@@ -2385,7 +2385,7 @@
    "nombre": "Murcia",
    "cyl": false,
    "n": 106,
-   "media": 1.587,
+   "media": 1.585,
    "mediana": 1.589,
    "min": 1.299,
    "max": 1.889,
@@ -2434,12 +2434,24 @@
    "nombre": "Navarra",
    "cyl": false,
    "n": 104,
-   "media": 1.544,
-   "mediana": 1.506,
-   "min": 1.384,
+   "media": 1.543,
+   "mediana": 1.504,
+   "min": 1.375,
    "max": 1.769,
    "descartados": 0,
    "baratas": [
+    {
+     "id": "11100",
+     "nombre": "Transportes Cruz",
+     "precio": 1.375,
+     "municipio": "Tudela",
+     "direccion": "Vial Rioja, 3,1",
+     "localidad": "Tudela",
+     "cp": "31500",
+     "horario": "L-D: 24H",
+     "lat": 42.064333,
+     "lon": -1.634778
+    },
     {
      "id": "11922",
      "nombre": "E.s. Bardenas",
@@ -2463,18 +2475,6 @@
      "horario": "L-D: 24H",
      "lat": 42.586972,
      "lon": -1.766083
-    },
-    {
-     "id": "12001",
-     "nombre": "An Energeticos - Cintruenigo Bodega Cirbonera",
-     "precio": 1.385,
-     "municipio": "Cintruénigo",
-     "direccion": "Poligono Poligono Industrial S/n, 2",
-     "localidad": "Cintruenigo",
-     "cp": "31592",
-     "horario": "L-D: 24H",
-     "lat": 42.072611,
-     "lon": -1.793361
     }
    ]
   },
@@ -2483,8 +2483,8 @@
    "nombre": "Ourense",
    "cyl": false,
    "n": 26,
-   "media": 1.691,
-   "mediana": 1.709,
+   "media": 1.69,
+   "mediana": 1.704,
    "min": 1.422,
    "max": 1.799,
    "descartados": 0,
@@ -3079,8 +3079,8 @@
    "nombre": "Segovia",
    "cyl": true,
    "n": 20,
-   "media": 1.614,
-   "mediana": 1.624,
+   "media": 1.615,
+   "mediana": 1.629,
    "min": 1.372,
    "max": 1.795,
    "descartados": 0,
@@ -3234,7 +3234,7 @@
     {
      "id": "6401",
      "nombre": "Galp",
-     "precio": 1.624,
+     "precio": 1.629,
      "municipio": "Villacastín",
      "direccion": "Autopista A6 Km. 0",
      "localidad": "Villacastin",
@@ -3246,7 +3246,7 @@
     {
      "id": "6177",
      "nombre": "Galp",
-     "precio": 1.624,
+     "precio": 1.629,
      "municipio": "Villacastín",
      "direccion": "Autopista A6 Km. 0",
      "localidad": "Villacastin",
@@ -3370,8 +3370,8 @@
    "nombre": "Sevilla",
    "cyl": false,
    "n": 74,
-   "media": 1.643,
-   "mediana": 1.66,
+   "media": 1.64,
+   "mediana": 1.654,
    "min": 1.405,
    "max": 1.849,
    "descartados": 0,
@@ -3530,10 +3530,10 @@
    "nombre": "Tarragona",
    "cyl": false,
    "n": 53,
-   "media": 1.56,
+   "media": 1.556,
    "mediana": 1.545,
    "min": 1.367,
-   "max": 1.739,
+   "max": 1.709,
    "descartados": 2,
    "baratas": [
     {
@@ -3561,16 +3561,16 @@
      "lon": 1.387667
     },
     {
-     "id": "9830",
-     "nombre": "Campo",
-     "precio": 1.455,
-     "municipio": "Ulldecona",
-     "direccion": "Major, 183",
-     "localidad": "Ulldecona",
-     "cp": "43550",
-     "horario": "L-D: 24H",
-     "lat": 40.592889,
-     "lon": 0.443917
+     "id": "10029",
+     "nombre": "Alas",
+     "precio": 1.399,
+     "municipio": "L' Ametlla de Mar",
+     "direccion": "Carretera Cn-340 Km. 1110",
+     "localidad": "L' Ametlla de Mar",
+     "cp": "43860",
+     "horario": "L-V: 06:00-00:00; S-D: 08:00-20:00",
+     "lat": 40.897167,
+     "lon": 0.748389
     }
    ]
   },
@@ -3647,18 +3647,6 @@
      "lon": -3.82825
     },
     {
-     "id": "4388",
-     "nombre": "Hnos.fernandez",
-     "precio": 1.39,
-     "municipio": "Mora",
-     "direccion": "CL/ TOLEDO 85 (C-400 km 30,7)",
-     "localidad": "Mora",
-     "cp": "45400",
-     "horario": "L-V: 06:00-21:00; S: 08:00-21:00; D: 08:00-14:00",
-     "lat": 39.689194,
-     "lon": -3.77725
-    },
-    {
      "id": "4384",
      "nombre": "Hnos.fernandez",
      "precio": 1.39,
@@ -3669,6 +3657,18 @@
      "horario": "L-D: 24H",
      "lat": 39.678028,
      "lon": -3.774583
+    },
+    {
+     "id": "4388",
+     "nombre": "Hnos.fernandez",
+     "precio": 1.39,
+     "municipio": "Mora",
+     "direccion": "CL/ TOLEDO 85 (C-400 km 30,7)",
+     "localidad": "Mora",
+     "cp": "45400",
+     "horario": "L-V: 06:00-21:00; S: 08:00-21:00; D: 08:00-14:00",
+     "lat": 39.689194,
+     "lon": -3.77725
     }
    ]
   },
@@ -4332,7 +4332,7 @@
    "nombre": "Zaragoza",
    "cyl": false,
    "n": 84,
-   "media": 1.582,
+   "media": 1.581,
    "mediana": 1.595,
    "min": 1.321,
    "max": 1.819,
