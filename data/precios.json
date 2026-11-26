@@ -1,5 +1,5 @@
 {
- "generado": "2026-11-25T13:58+00:00",
+ "generado": "2026-11-26T13:57+00:00",
  "lonjas": [
   {
    "id": "salamanca",
@@ -396,7 +396,7 @@
    "comprobado": "2026-11-03T23:45:00+01:00",
    "origen": "https://datosabiertossalamanca.es/dataset/cotizaciones-semanales-de-la-lonja-de-salamanca",
    "error": null,
-   "ultima_lectura": "2026-11-25T13:58+00:00"
+   "ultima_lectura": "2026-11-26T13:57+00:00"
   },
   {
    "id": "leon",
@@ -406,7 +406,7 @@
    "fuente": "https://www.lonjadeleon.es/category/cotizaciones/",
    "estado": "activa",
    "nota": null,
-   "fecha": "2026-11-18",
+   "fecha": "2026-11-26",
    "precios": [
     {
      "id": "leon-agria",
@@ -457,29 +457,70 @@
      "act": 330.0
     },
     {
-     "id": "leon-girasol",
-     "cat": "Girasol",
-     "producto": "Girasol",
-     "unidad": "€/t",
-     "ant": 500.0,
-     "act": null,
-     "clave": "girasol",
-     "ult": [
-      "2026-11-11",
-      500.0
-     ]
+     "id": "leon-leche-de-vaca",
+     "cat": "Leche de vaca",
+     "producto": "Leche de vaca",
+     "unidad": "€/litro",
+     "ant": 0.475,
+     "act": 0.475
     },
     {
-     "id": "leon-girasol-alto-oleico",
-     "cat": "Girasol",
-     "producto": "Girasol alto oleico",
+     "id": "leon-leche-de-oveja",
+     "cat": "Leche de oveja y de cabra",
+     "producto": "Leche de oveja",
+     "unidad": "€/e.q.",
+     "ant": 0.11419,
+     "act": 0.11419
+    },
+    {
+     "id": "leon-leche-de-cabra",
+     "cat": "Leche de oveja y de cabra",
+     "producto": "Leche de cabra",
+     "unidad": "€/e.q.",
+     "ant": 0.12621,
+     "act": 0.12621
+    },
+    {
+     "id": "leon-alfalfa-paquete-rama",
+     "cat": "Forrajes",
+     "producto": "Alfalfa paquete rama",
      "unidad": "€/t",
-     "ant": 515.0,
-     "act": null,
-     "ult": [
-      "2026-11-11",
-      515.0
-     ]
+     "ant": 235.0,
+     "act": 235.0,
+     "clave": "alfalfa"
+    },
+    {
+     "id": "leon-alfalfa-paquete-deshidratado",
+     "cat": "Forrajes",
+     "producto": "Alfalfa paquete deshidratado",
+     "unidad": "€/t",
+     "ant": 260.0,
+     "act": 260.0
+    },
+    {
+     "id": "leon-paja-1a-cebada",
+     "cat": "Forrajes",
+     "producto": "Paja 1ª (Cebada)",
+     "unidad": "€/t",
+     "ant": 67.0,
+     "act": 67.0,
+     "clave": "paja"
+    },
+    {
+     "id": "leon-veza-forraje-de-1a",
+     "cat": "Forrajes",
+     "producto": "Veza forraje de 1ª",
+     "unidad": "€/t",
+     "ant": 180.0,
+     "act": 180.0
+    },
+    {
+     "id": "leon-forraje",
+     "cat": "Forrajes",
+     "producto": "Forraje",
+     "unidad": "€/t",
+     "ant": 135.0,
+     "act": 135.0
     },
     {
      "id": "leon-trigo-pienso",
@@ -487,7 +528,7 @@
      "producto": "Trigo Pienso",
      "unidad": "€/t",
      "ant": 226.0,
-     "act": 226.0,
+     "act": 230.0,
      "clave": "trigo"
     },
     {
@@ -495,8 +536,8 @@
      "cat": "Cereales",
      "producto": "Cebada",
      "unidad": "€/t",
-     "ant": 221.0,
-     "act": 223.0,
+     "ant": 223.0,
+     "act": 226.0,
      "clave": "cebada"
     },
     {
@@ -505,7 +546,7 @@
      "producto": "Triticale",
      "unidad": "€/t",
      "ant": 216.0,
-     "act": 216.0,
+     "act": 220.0,
      "clave": "triticale"
     },
     {
@@ -513,8 +554,8 @@
      "cat": "Cereales",
      "producto": "Centeno",
      "unidad": "€/t",
-     "ant": 196.0,
-     "act": 198.0,
+     "ant": 198.0,
+     "act": 200.0,
      "clave": "centeno"
     },
     {
@@ -523,7 +564,7 @@
      "producto": "Avena",
      "unidad": "€/t",
      "ant": 198.0,
-     "act": 198.0,
+     "act": 200.0,
      "clave": "avena"
     },
     {
@@ -532,8 +573,292 @@
      "producto": "Maíz",
      "unidad": "€/t",
      "ant": null,
-     "act": null,
+     "act": 252.0,
      "clave": "maiz"
+    },
+    {
+     "id": "leon-frisones",
+     "cat": "Ganado vida",
+     "producto": "Frisones",
+     "unidad": "€/ud",
+     "ant": 100.0,
+     "act": 100.0
+    },
+    {
+     "id": "leon-pasteros-macho-200-kg",
+     "cat": "Ganado vida",
+     "producto": "Pasteros macho (200 kg)",
+     "unidad": "€/ud",
+     "ant": 1100.0,
+     "act": 1100.0
+    },
+    {
+     "id": "leon-pasteros-hembra-200-kg",
+     "cat": "Ganado vida",
+     "producto": "Pasteros hembra (200 kg)",
+     "unidad": "€/ud",
+     "ant": 1000.0,
+     "act": 1000.0
+    },
+    {
+     "id": "leon-hembras-180-200-kg-u",
+     "cat": "Bovino carne",
+     "producto": "Hembras 180-200 kg U",
+     "unidad": "€/kg canal",
+     "ant": 6.95,
+     "act": 7.0
+    },
+    {
+     "id": "leon-hembras-180-200-kg-r",
+     "cat": "Bovino carne",
+     "producto": "Hembras 180-200 kg R",
+     "unidad": "€/kg canal",
+     "ant": 6.85,
+     "act": 6.9
+    },
+    {
+     "id": "leon-hembras-180-200-kg-o",
+     "cat": "Bovino carne",
+     "producto": "Hembras 180-200 kg O",
+     "unidad": "€/kg canal",
+     "ant": 5.0,
+     "act": 5.05
+    },
+    {
+     "id": "leon-hembras-201-250-kg-u",
+     "cat": "Bovino carne",
+     "producto": "Hembras 201-250 kg U",
+     "unidad": "€/kg canal",
+     "ant": 6.95,
+     "act": 7.0
+    },
+    {
+     "id": "leon-hembras-201-250-kg-r",
+     "cat": "Bovino carne",
+     "producto": "Hembras 201-250 kg R",
+     "unidad": "€/kg canal",
+     "ant": 6.85,
+     "act": 6.9
+    },
+    {
+     "id": "leon-hembras-201-250-kg-o",
+     "cat": "Bovino carne",
+     "producto": "Hembras 201-250 kg O",
+     "unidad": "€/kg canal",
+     "ant": 5.0,
+     "act": 5.05
+    },
+    {
+     "id": "leon-hembras-mas-250-kg-u",
+     "cat": "Bovino carne",
+     "producto": "Hembras más 250 kg U",
+     "unidad": "€/kg canal",
+     "ant": 6.95,
+     "act": 7.0
+    },
+    {
+     "id": "leon-hembras-mas-250-kg-r",
+     "cat": "Bovino carne",
+     "producto": "Hembras más 250 kg R",
+     "unidad": "€/kg canal",
+     "ant": 6.85,
+     "act": 6.9
+    },
+    {
+     "id": "leon-hembras-mas-250-kg-o",
+     "cat": "Bovino carne",
+     "producto": "Hembras más 250 kg O",
+     "unidad": "€/kg canal",
+     "ant": 5.0,
+     "act": 5.05
+    },
+    {
+     "id": "leon-machos-200-250-kg-u",
+     "cat": "Bovino carne",
+     "producto": "Machos 200-250 kg U",
+     "unidad": "€/kg canal",
+     "ant": 6.2,
+     "act": 6.3
+    },
+    {
+     "id": "leon-machos-200-250-kg-r",
+     "cat": "Bovino carne",
+     "producto": "Machos 200-250 kg R",
+     "unidad": "€/kg canal",
+     "ant": 6.1,
+     "act": 6.2
+    },
+    {
+     "id": "leon-machos-200-250-kg-o",
+     "cat": "Bovino carne",
+     "producto": "Machos 200-250 kg O",
+     "unidad": "€/kg canal",
+     "ant": 5.0,
+     "act": 5.05
+    },
+    {
+     "id": "leon-machos-251-300-kg-u",
+     "cat": "Bovino carne",
+     "producto": "Machos 251-300 kg U",
+     "unidad": "€/kg canal",
+     "ant": 6.2,
+     "act": 6.3
+    },
+    {
+     "id": "leon-machos-251-300-kg-r",
+     "cat": "Bovino carne",
+     "producto": "Machos 251-300 kg R",
+     "unidad": "€/kg canal",
+     "ant": 6.1,
+     "act": 6.2
+    },
+    {
+     "id": "leon-machos-251-300-kg-o",
+     "cat": "Bovino carne",
+     "producto": "Machos 251-300 kg O",
+     "unidad": "€/kg canal",
+     "ant": 5.0,
+     "act": 5.05
+    },
+    {
+     "id": "leon-machos-mas-de-300-kg-u",
+     "cat": "Bovino carne",
+     "producto": "Machos más de 300 kg U",
+     "unidad": "€/kg canal",
+     "ant": 6.2,
+     "act": 6.3
+    },
+    {
+     "id": "leon-machos-mas-de-300-kg-r",
+     "cat": "Bovino carne",
+     "producto": "Machos más de 300 kg R",
+     "unidad": "€/kg canal",
+     "ant": 6.1,
+     "act": 6.2
+    },
+    {
+     "id": "leon-machos-mas-de-300-kg-o",
+     "cat": "Bovino carne",
+     "producto": "Machos más de 300 kg O",
+     "unidad": "€/kg canal",
+     "ant": 5.0,
+     "act": 5.05
+    },
+    {
+     "id": "leon-fabrica-y-segunda",
+     "cat": "Vacas sacrificio",
+     "producto": "Fábrica y Segunda",
+     "unidad": "€/kg canal",
+     "ant": 4.1,
+     "act": 4.1,
+     "rango": "3,60–4,60"
+    },
+    {
+     "id": "leon-primera-y-extra-engrasada",
+     "cat": "Vacas sacrificio",
+     "producto": "Primera y Extra (Engrasada)",
+     "unidad": "€/kg canal",
+     "ant": 5.35,
+     "act": 5.35,
+     "rango": "4,60–6,10"
+    },
+    {
+     "id": "leon-lechazos-hasta-12-kg",
+     "cat": "Ovino",
+     "producto": "Lechazos hasta 12 kg",
+     "unidad": "€/kg vivo",
+     "ant": 8.2,
+     "act": 8.2
+    },
+    {
+     "id": "leon-cabritos-hasta-11-kg",
+     "cat": "Ovino",
+     "producto": "Cabritos hasta 11 kg",
+     "unidad": "€/kg vivo",
+     "ant": 8.2,
+     "act": 8.2
+    },
+    {
+     "id": "leon-corderos-12-1-15-kg",
+     "cat": "Ovino",
+     "producto": "Corderos 12,1-15 kg",
+     "unidad": "€/ud",
+     "ant": 100.0,
+     "act": 110.0
+    },
+    {
+     "id": "leon-corderos-15-1-18-kg",
+     "cat": "Ovino",
+     "producto": "Corderos 15,1-18 kg",
+     "unidad": "€/ud",
+     "ant": 110.0,
+     "act": 120.0
+    },
+    {
+     "id": "leon-corderos-18-1-23-kg",
+     "cat": "Ovino",
+     "producto": "Corderos 18,1-23 kg",
+     "unidad": "€/ud",
+     "ant": 130.0,
+     "act": 140.0
+    },
+    {
+     "id": "leon-corderos-23-1-27-kg",
+     "cat": "Ovino",
+     "producto": "Corderos 23,1-27 kg",
+     "unidad": "€/ud",
+     "ant": 140.0,
+     "act": 150.0
+    },
+    {
+     "id": "leon-corderos-27-1-35-kg",
+     "cat": "Ovino",
+     "producto": "Corderos 27,1-35 kg",
+     "unidad": "€/ud",
+     "ant": 150.0,
+     "act": 170.0
+    },
+    {
+     "id": "leon-ovejas-vida-merina",
+     "cat": "Ovino",
+     "producto": "Ovejas vida merina",
+     "unidad": "€/ud",
+     "ant": 130.0,
+     "act": 130.0
+    },
+    {
+     "id": "leon-ovejas-vida-leche",
+     "cat": "Ovino",
+     "producto": "Ovejas vida leche",
+     "unidad": "€/ud",
+     "ant": 90.0,
+     "act": 90.0
+    },
+    {
+     "id": "leon-ovejas-vida-assaf-sin-carta",
+     "cat": "Ovino",
+     "producto": "Ovejas vida Assaf (Sin carta)",
+     "unidad": "€/ud",
+     "ant": 180.0,
+     "act": 180.0
+    },
+    {
+     "id": "leon-ovejas-sacrificio-1a",
+     "cat": "Ovino",
+     "producto": "Ovejas sacrificio 1ª",
+     "unidad": "€/kg vivo",
+     "ant": 1.35,
+     "act": 1.35,
+     "rango": "1,20–1,50"
+    },
+    {
+     "id": "leon-ovejas-sacrificio-2a",
+     "cat": "Ovino",
+     "producto": "Ovejas sacrificio 2ª",
+     "unidad": "€/kg vivo",
+     "ant": 0.85,
+     "act": 0.85,
+     "rango": "0,50–1,20"
     },
     {
      "id": "leon-canela",
@@ -600,360 +925,35 @@
      "act": 1.35
     },
     {
-     "id": "leon-leche-de-vaca",
-     "cat": "Leche de vaca",
-     "producto": "Leche de vaca",
-     "unidad": "€/litro",
-     "ant": 0.475,
-     "act": 0.475
-    },
-    {
-     "id": "leon-leche-de-oveja",
-     "cat": "Leche de oveja y de cabra",
-     "producto": "Leche de oveja",
-     "unidad": "€/e.q.",
-     "ant": 0.11419,
-     "act": 0.11419
-    },
-    {
-     "id": "leon-leche-de-cabra",
-     "cat": "Leche de oveja y de cabra",
-     "producto": "Leche de cabra",
-     "unidad": "€/e.q.",
-     "ant": 0.12621,
-     "act": 0.12621
-    },
-    {
-     "id": "leon-alfalfa-paquete-rama",
-     "cat": "Forrajes",
-     "producto": "Alfalfa paquete rama",
+     "id": "leon-girasol",
+     "cat": "Girasol",
+     "producto": "Girasol",
      "unidad": "€/t",
-     "ant": 225.0,
-     "act": 235.0,
-     "clave": "alfalfa"
+     "ant": 500.0,
+     "act": null,
+     "clave": "girasol",
+     "ult": [
+      "2026-11-11",
+      500.0
+     ]
     },
     {
-     "id": "leon-alfalfa-paquete-deshidratado",
-     "cat": "Forrajes",
-     "producto": "Alfalfa paquete deshidratado",
+     "id": "leon-girasol-alto-oleico",
+     "cat": "Girasol",
+     "producto": "Girasol alto oleico",
      "unidad": "€/t",
-     "ant": 255.0,
-     "act": 260.0
-    },
-    {
-     "id": "leon-paja-1a-cebada",
-     "cat": "Forrajes",
-     "producto": "Paja 1ª (Cebada)",
-     "unidad": "€/t",
-     "ant": 65.0,
-     "act": 67.0,
-     "clave": "paja"
-    },
-    {
-     "id": "leon-veza-forraje-de-1a",
-     "cat": "Forrajes",
-     "producto": "Veza forraje de 1ª",
-     "unidad": "€/t",
-     "ant": 170.0,
-     "act": 180.0
-    },
-    {
-     "id": "leon-forraje",
-     "cat": "Forrajes",
-     "producto": "Forraje",
-     "unidad": "€/t",
-     "ant": 130.0,
-     "act": 135.0
-    },
-    {
-     "id": "leon-frisones",
-     "cat": "Ganado vida",
-     "producto": "Frisones",
-     "unidad": "€/ud",
-     "ant": 100.0,
-     "act": 100.0
-    },
-    {
-     "id": "leon-pasteros-macho-200-kg",
-     "cat": "Ganado vida",
-     "producto": "Pasteros macho (200 kg)",
-     "unidad": "€/ud",
-     "ant": 1100.0,
-     "act": 1100.0
-    },
-    {
-     "id": "leon-pasteros-hembra-200-kg",
-     "cat": "Ganado vida",
-     "producto": "Pasteros hembra (200 kg)",
-     "unidad": "€/ud",
-     "ant": 1000.0,
-     "act": 1000.0
-    },
-    {
-     "id": "leon-hembras-180-200-kg-u",
-     "cat": "Bovino carne",
-     "producto": "Hembras 180-200 kg U",
-     "unidad": "€/kg canal",
-     "ant": 6.95,
-     "act": 6.95
-    },
-    {
-     "id": "leon-hembras-180-200-kg-r",
-     "cat": "Bovino carne",
-     "producto": "Hembras 180-200 kg R",
-     "unidad": "€/kg canal",
-     "ant": 6.85,
-     "act": 6.85
-    },
-    {
-     "id": "leon-hembras-180-200-kg-o",
-     "cat": "Bovino carne",
-     "producto": "Hembras 180-200 kg O",
-     "unidad": "€/kg canal",
-     "ant": 5.2,
-     "act": 5.0
-    },
-    {
-     "id": "leon-hembras-201-250-kg-u",
-     "cat": "Bovino carne",
-     "producto": "Hembras 201-250 kg U",
-     "unidad": "€/kg canal",
-     "ant": 6.95,
-     "act": 6.95
-    },
-    {
-     "id": "leon-hembras-201-250-kg-r",
-     "cat": "Bovino carne",
-     "producto": "Hembras 201-250 kg R",
-     "unidad": "€/kg canal",
-     "ant": 6.85,
-     "act": 6.85
-    },
-    {
-     "id": "leon-hembras-201-250-kg-o",
-     "cat": "Bovino carne",
-     "producto": "Hembras 201-250 kg O",
-     "unidad": "€/kg canal",
-     "ant": 5.2,
-     "act": 5.0
-    },
-    {
-     "id": "leon-hembras-mas-250-kg-u",
-     "cat": "Bovino carne",
-     "producto": "Hembras más 250 kg U",
-     "unidad": "€/kg canal",
-     "ant": 6.95,
-     "act": 6.95
-    },
-    {
-     "id": "leon-hembras-mas-250-kg-r",
-     "cat": "Bovino carne",
-     "producto": "Hembras más 250 kg R",
-     "unidad": "€/kg canal",
-     "ant": 6.85,
-     "act": 6.85
-    },
-    {
-     "id": "leon-hembras-mas-250-kg-o",
-     "cat": "Bovino carne",
-     "producto": "Hembras más 250 kg O",
-     "unidad": "€/kg canal",
-     "ant": 5.2,
-     "act": 5.0
-    },
-    {
-     "id": "leon-machos-200-250-kg-u",
-     "cat": "Bovino carne",
-     "producto": "Machos 200-250 kg U",
-     "unidad": "€/kg canal",
-     "ant": 6.1,
-     "act": 6.2
-    },
-    {
-     "id": "leon-machos-200-250-kg-r",
-     "cat": "Bovino carne",
-     "producto": "Machos 200-250 kg R",
-     "unidad": "€/kg canal",
-     "ant": 6.0,
-     "act": 6.1
-    },
-    {
-     "id": "leon-machos-200-250-kg-o",
-     "cat": "Bovino carne",
-     "producto": "Machos 200-250 kg O",
-     "unidad": "€/kg canal",
-     "ant": 5.2,
-     "act": 5.0
-    },
-    {
-     "id": "leon-machos-251-300-kg-u",
-     "cat": "Bovino carne",
-     "producto": "Machos 251-300 kg U",
-     "unidad": "€/kg canal",
-     "ant": 6.1,
-     "act": 6.2
-    },
-    {
-     "id": "leon-machos-251-300-kg-r",
-     "cat": "Bovino carne",
-     "producto": "Machos 251-300 kg R",
-     "unidad": "€/kg canal",
-     "ant": 6.0,
-     "act": 6.1
-    },
-    {
-     "id": "leon-machos-251-300-kg-o",
-     "cat": "Bovino carne",
-     "producto": "Machos 251-300 kg O",
-     "unidad": "€/kg canal",
-     "ant": 5.2,
-     "act": 5.0
-    },
-    {
-     "id": "leon-machos-mas-de-300-kg-u",
-     "cat": "Bovino carne",
-     "producto": "Machos más de 300 kg U",
-     "unidad": "€/kg canal",
-     "ant": 6.1,
-     "act": 6.2
-    },
-    {
-     "id": "leon-machos-mas-de-300-kg-r",
-     "cat": "Bovino carne",
-     "producto": "Machos más de 300 kg R",
-     "unidad": "€/kg canal",
-     "ant": 6.0,
-     "act": 6.1
-    },
-    {
-     "id": "leon-machos-mas-de-300-kg-o",
-     "cat": "Bovino carne",
-     "producto": "Machos más de 300 kg O",
-     "unidad": "€/kg canal",
-     "ant": 5.2,
-     "act": 5.0
-    },
-    {
-     "id": "leon-fabrica-y-segunda",
-     "cat": "Vacas sacrificio",
-     "producto": "Fábrica y Segunda",
-     "unidad": "€/kg canal",
-     "ant": 4.1,
-     "act": 4.1,
-     "rango": "3,60–4,60"
-    },
-    {
-     "id": "leon-primera-y-extra-engrasada",
-     "cat": "Vacas sacrificio",
-     "producto": "Primera y Extra (Engrasada)",
-     "unidad": "€/kg canal",
-     "ant": 5.35,
-     "act": 5.35,
-     "rango": "4,60–6,10"
-    },
-    {
-     "id": "leon-lechazos-hasta-12-kg",
-     "cat": "Ovino",
-     "producto": "Lechazos hasta 12 kg",
-     "unidad": "€/kg vivo",
-     "ant": 8.3,
-     "act": 8.2
-    },
-    {
-     "id": "leon-cabritos-hasta-11-kg",
-     "cat": "Ovino",
-     "producto": "Cabritos hasta 11 kg",
-     "unidad": "€/kg vivo",
-     "ant": 8.3,
-     "act": 8.2
-    },
-    {
-     "id": "leon-corderos-12-1-15-kg",
-     "cat": "Ovino",
-     "producto": "Corderos 12,1-15 kg",
-     "unidad": "€/ud",
-     "ant": 100.0,
-     "act": 100.0
-    },
-    {
-     "id": "leon-corderos-15-1-18-kg",
-     "cat": "Ovino",
-     "producto": "Corderos 15,1-18 kg",
-     "unidad": "€/ud",
-     "ant": 110.0,
-     "act": 110.0
-    },
-    {
-     "id": "leon-corderos-18-1-23-kg",
-     "cat": "Ovino",
-     "producto": "Corderos 18,1-23 kg",
-     "unidad": "€/ud",
-     "ant": 130.0,
-     "act": 130.0
-    },
-    {
-     "id": "leon-corderos-23-1-27-kg",
-     "cat": "Ovino",
-     "producto": "Corderos 23,1-27 kg",
-     "unidad": "€/ud",
-     "ant": 140.0,
-     "act": 140.0
-    },
-    {
-     "id": "leon-corderos-27-1-35-kg",
-     "cat": "Ovino",
-     "producto": "Corderos 27,1-35 kg",
-     "unidad": "€/ud",
-     "ant": 150.0,
-     "act": 150.0
-    },
-    {
-     "id": "leon-ovejas-vida-merina",
-     "cat": "Ovino",
-     "producto": "Ovejas vida merina",
-     "unidad": "€/ud",
-     "ant": 130.0,
-     "act": 130.0
-    },
-    {
-     "id": "leon-ovejas-vida-leche",
-     "cat": "Ovino",
-     "producto": "Ovejas vida leche",
-     "unidad": "€/ud",
-     "ant": 90.0,
-     "act": 90.0
-    },
-    {
-     "id": "leon-ovejas-vida-assaf-sin-carta",
-     "cat": "Ovino",
-     "producto": "Ovejas vida Assaf (Sin carta)",
-     "unidad": "€/ud",
-     "ant": 180.0,
-     "act": 180.0
-    },
-    {
-     "id": "leon-ovejas-sacrificio-1a",
-     "cat": "Ovino",
-     "producto": "Ovejas sacrificio 1ª",
-     "unidad": "€/kg vivo",
-     "ant": 1.35,
-     "act": 1.35,
-     "rango": "1,20–1,50"
-    },
-    {
-     "id": "leon-ovejas-sacrificio-2a",
-     "cat": "Ovino",
-     "producto": "Ovejas sacrificio 2ª",
-     "unidad": "€/kg vivo",
-     "ant": 0.85,
-     "act": 0.85,
-     "rango": "0,50–1,20"
+     "ant": 515.0,
+     "act": null,
+     "ult": [
+      "2026-11-11",
+      515.0
+     ]
     }
    ],
    "comprobado": "2026-11-03T23:45:00+01:00",
-   "origen": "https://www.lonjadeleon.es/lonja-patata-18-11-2026/",
+   "origen": "https://www.lonjadeleon.es/lonja-patata-26-11-2026/",
    "error": null,
-   "ultima_lectura": "2026-11-25T13:58+00:00"
+   "ultima_lectura": "2026-11-26T13:57+00:00"
   },
   {
    "id": "segovia",
@@ -1227,7 +1227,7 @@
    "comprobado": "2026-11-03T23:45:00+01:00",
    "origen": "https://www.fessegovia.es/wp-content/uploads/2026/11/LONJA-CEREALES-OVINO-Y-PORCINO-19.11.2026.pdf",
    "error": null,
-   "ultima_lectura": "2026-11-25T13:58+00:00",
+   "ultima_lectura": "2026-11-26T13:57+00:00",
    "fallos": 0,
    "fallo_desde": null
   },
@@ -1352,7 +1352,7 @@
    "comprobado": "2026-11-03T23:45:00+01:00",
    "origen": "https://agriculturaganaderia.jcyl.es/web/es/estadistica-informacion-agraria/lonjas-2026.html",
    "error": null,
-   "ultima_lectura": "2026-11-25T13:58+00:00",
+   "ultima_lectura": "2026-11-26T13:57+00:00",
    "fallos": 0,
    "fallo_desde": null
   },
@@ -1436,6 +1436,10 @@
    [
     "2026-11-18",
     226.0
+   ],
+   [
+    "2026-11-26",
+    230.0
    ]
   ],
   "leon-cebada": [
@@ -1490,6 +1494,10 @@
    [
     "2026-11-18",
     223.0
+   ],
+   [
+    "2026-11-26",
+    226.0
    ]
   ],
   "leon-avena": [
@@ -1544,6 +1552,10 @@
    [
     "2026-11-18",
     198.0
+   ],
+   [
+    "2026-11-26",
+    200.0
    ]
   ],
   "leon-centeno": [
@@ -1598,6 +1610,10 @@
    [
     "2026-11-18",
     198.0
+   ],
+   [
+    "2026-11-26",
+    200.0
    ]
   ],
   "leon-triticale": [
@@ -1652,6 +1668,10 @@
    [
     "2026-11-18",
     216.0
+   ],
+   [
+    "2026-11-26",
+    220.0
    ]
   ],
   "segovia-cerdo-selecto": [
@@ -2498,6 +2518,10 @@
    [
     "2026-11-18",
     235.0
+   ],
+   [
+    "2026-11-26",
+    235.0
    ]
   ],
   "leon-alfalfa-deshidratada": [
@@ -2522,6 +2546,10 @@
    [
     "2026-11-18",
     67.0
+   ],
+   [
+    "2026-11-26",
+    67.0
    ]
   ],
   "leon-veza-forraje-1a": [
@@ -2545,6 +2573,10 @@
    ],
    [
     "2026-11-18",
+    135.0
+   ],
+   [
+    "2026-11-26",
     135.0
    ]
   ],
@@ -2648,6 +2680,10 @@
    [
     "2026-11-18",
     0.475
+   ],
+   [
+    "2026-11-26",
+    0.475
    ]
   ],
   "leon-leche-de-oveja": [
@@ -2666,6 +2702,10 @@
    [
     "2026-11-18",
     0.11419
+   ],
+   [
+    "2026-11-26",
+    0.11419
    ]
   ],
   "leon-leche-de-cabra": [
@@ -2683,6 +2723,10 @@
    ],
    [
     "2026-11-18",
+    0.12621
+   ],
+   [
+    "2026-11-26",
     0.12621
    ]
   ],
@@ -2762,6 +2806,10 @@
    [
     "2026-11-18",
     100.0
+   ],
+   [
+    "2026-11-26",
+    100.0
    ]
   ],
   "leon-pasteros-macho-200-kg": [
@@ -2780,6 +2828,10 @@
    [
     "2026-11-18",
     1100.0
+   ],
+   [
+    "2026-11-26",
+    1100.0
    ]
   ],
   "leon-pasteros-hembra-200-kg": [
@@ -2797,6 +2849,10 @@
    ],
    [
     "2026-11-18",
+    1000.0
+   ],
+   [
+    "2026-11-26",
     1000.0
    ]
   ],
@@ -3358,6 +3414,10 @@
    [
     "2026-11-18",
     350.0
+   ],
+   [
+    "2026-11-26",
+    350.0
    ]
   ],
   "leon-jaerla": [
@@ -3371,6 +3431,10 @@
    ],
    [
     "2026-11-18",
+    320.0
+   ],
+   [
+    "2026-11-26",
     320.0
    ]
   ],
@@ -3386,6 +3450,10 @@
    [
     "2026-11-18",
     390.0
+   ],
+   [
+    "2026-11-26",
+    390.0
    ]
   ],
   "leon-red-pontiac": [
@@ -3399,6 +3467,10 @@
    ],
    [
     "2026-11-18",
+    340.0
+   ],
+   [
+    "2026-11-26",
     340.0
    ]
   ],
@@ -3414,6 +3486,10 @@
    [
     "2026-11-18",
     330.0
+   ],
+   [
+    "2026-11-26",
+    330.0
    ]
   ],
   "leon-yona": [
@@ -3427,6 +3503,10 @@
    ],
    [
     "2026-11-18",
+    330.0
+   ],
+   [
+    "2026-11-26",
     330.0
    ]
   ],
@@ -3442,6 +3522,10 @@
    [
     "2026-11-18",
     1.3
+   ],
+   [
+    "2026-11-26",
+    1.3
    ]
   ],
   "leon-negra": [
@@ -3455,6 +3539,10 @@
    ],
    [
     "2026-11-18",
+    2.8
+   ],
+   [
+    "2026-11-26",
     2.8
    ]
   ],
@@ -3470,6 +3558,10 @@
    [
     "2026-11-18",
     2.0
+   ],
+   [
+    "2026-11-26",
+    2.0
    ]
   ],
   "leon-planchada": [
@@ -3483,6 +3575,10 @@
    ],
    [
     "2026-11-18",
+    1.95
+   ],
+   [
+    "2026-11-26",
     1.95
    ]
   ],
@@ -3498,6 +3594,10 @@
    [
     "2026-11-18",
     2.0
+   ],
+   [
+    "2026-11-26",
+    2.0
    ]
   ],
   "leon-pinta": [
@@ -3511,6 +3611,10 @@
    ],
    [
     "2026-11-18",
+    0.95
+   ],
+   [
+    "2026-11-26",
     0.95
    ]
   ],
@@ -3526,6 +3630,10 @@
    [
     "2026-11-18",
     1.4
+   ],
+   [
+    "2026-11-26",
+    1.4
    ]
   ],
   "leon-redonda": [
@@ -3539,6 +3647,10 @@
    ],
    [
     "2026-11-18",
+    1.35
+   ],
+   [
+    "2026-11-26",
     1.35
    ]
   ],
@@ -3790,6 +3902,10 @@
    [
     "2026-11-18",
     260.0
+   ],
+   [
+    "2026-11-26",
+    260.0
    ]
   ],
   "leon-veza-forraje-de-1a": [
@@ -3803,6 +3919,10 @@
    ],
    [
     "2026-11-18",
+    180.0
+   ],
+   [
+    "2026-11-26",
     180.0
    ]
   ],
@@ -3818,6 +3938,10 @@
    [
     "2026-11-18",
     6.95
+   ],
+   [
+    "2026-11-26",
+    7.0
    ]
   ],
   "leon-hembras-180-200-kg-r": [
@@ -3832,6 +3956,10 @@
    [
     "2026-11-18",
     6.85
+   ],
+   [
+    "2026-11-26",
+    6.9
    ]
   ],
   "leon-hembras-180-200-kg-o": [
@@ -3846,6 +3974,10 @@
    [
     "2026-11-18",
     5.0
+   ],
+   [
+    "2026-11-26",
+    5.05
    ]
   ],
   "leon-hembras-201-250-kg-u": [
@@ -3860,6 +3992,10 @@
    [
     "2026-11-18",
     6.95
+   ],
+   [
+    "2026-11-26",
+    7.0
    ]
   ],
   "leon-hembras-201-250-kg-r": [
@@ -3874,6 +4010,10 @@
    [
     "2026-11-18",
     6.85
+   ],
+   [
+    "2026-11-26",
+    6.9
    ]
   ],
   "leon-hembras-201-250-kg-o": [
@@ -3888,6 +4028,10 @@
    [
     "2026-11-18",
     5.0
+   ],
+   [
+    "2026-11-26",
+    5.05
    ]
   ],
   "leon-hembras-mas-250-kg-u": [
@@ -3902,6 +4046,10 @@
    [
     "2026-11-18",
     6.95
+   ],
+   [
+    "2026-11-26",
+    7.0
    ]
   ],
   "leon-hembras-mas-250-kg-r": [
@@ -3916,6 +4064,10 @@
    [
     "2026-11-18",
     6.85
+   ],
+   [
+    "2026-11-26",
+    6.9
    ]
   ],
   "leon-hembras-mas-250-kg-o": [
@@ -3930,6 +4082,10 @@
    [
     "2026-11-18",
     5.0
+   ],
+   [
+    "2026-11-26",
+    5.05
    ]
   ],
   "leon-machos-200-250-kg-u": [
@@ -3944,6 +4100,10 @@
    [
     "2026-11-18",
     6.2
+   ],
+   [
+    "2026-11-26",
+    6.3
    ]
   ],
   "leon-machos-200-250-kg-r": [
@@ -3958,6 +4118,10 @@
    [
     "2026-11-18",
     6.1
+   ],
+   [
+    "2026-11-26",
+    6.2
    ]
   ],
   "leon-machos-200-250-kg-o": [
@@ -3972,6 +4136,10 @@
    [
     "2026-11-18",
     5.0
+   ],
+   [
+    "2026-11-26",
+    5.05
    ]
   ],
   "leon-machos-251-300-kg-u": [
@@ -3986,6 +4154,10 @@
    [
     "2026-11-18",
     6.2
+   ],
+   [
+    "2026-11-26",
+    6.3
    ]
   ],
   "leon-machos-251-300-kg-r": [
@@ -4000,6 +4172,10 @@
    [
     "2026-11-18",
     6.1
+   ],
+   [
+    "2026-11-26",
+    6.2
    ]
   ],
   "leon-machos-251-300-kg-o": [
@@ -4014,6 +4190,10 @@
    [
     "2026-11-18",
     5.0
+   ],
+   [
+    "2026-11-26",
+    5.05
    ]
   ],
   "leon-machos-mas-de-300-kg-u": [
@@ -4028,6 +4208,10 @@
    [
     "2026-11-18",
     6.2
+   ],
+   [
+    "2026-11-26",
+    6.3
    ]
   ],
   "leon-machos-mas-de-300-kg-r": [
@@ -4042,6 +4226,10 @@
    [
     "2026-11-18",
     6.1
+   ],
+   [
+    "2026-11-26",
+    6.2
    ]
   ],
   "leon-machos-mas-de-300-kg-o": [
@@ -4056,6 +4244,10 @@
    [
     "2026-11-18",
     5.0
+   ],
+   [
+    "2026-11-26",
+    5.05
    ]
   ],
   "leon-fabrica-y-segunda": [
@@ -4069,6 +4261,10 @@
    ],
    [
     "2026-11-18",
+    4.1
+   ],
+   [
+    "2026-11-26",
     4.1
    ]
   ],
@@ -4084,6 +4280,10 @@
    [
     "2026-11-18",
     5.35
+   ],
+   [
+    "2026-11-26",
+    5.35
    ]
   ],
   "leon-lechazos-hasta-12-kg": [
@@ -4097,6 +4297,10 @@
    ],
    [
     "2026-11-18",
+    8.2
+   ],
+   [
+    "2026-11-26",
     8.2
    ]
   ],
@@ -4112,6 +4316,10 @@
    [
     "2026-11-18",
     8.2
+   ],
+   [
+    "2026-11-26",
+    8.2
    ]
   ],
   "leon-corderos-12-1-15-kg": [
@@ -4126,6 +4334,10 @@
    [
     "2026-11-18",
     100.0
+   ],
+   [
+    "2026-11-26",
+    110.0
    ]
   ],
   "leon-corderos-15-1-18-kg": [
@@ -4140,6 +4352,10 @@
    [
     "2026-11-18",
     110.0
+   ],
+   [
+    "2026-11-26",
+    120.0
    ]
   ],
   "leon-corderos-18-1-23-kg": [
@@ -4154,6 +4370,10 @@
    [
     "2026-11-18",
     130.0
+   ],
+   [
+    "2026-11-26",
+    140.0
    ]
   ],
   "leon-corderos-23-1-27-kg": [
@@ -4168,6 +4388,10 @@
    [
     "2026-11-18",
     140.0
+   ],
+   [
+    "2026-11-26",
+    150.0
    ]
   ],
   "leon-corderos-27-1-35-kg": [
@@ -4182,6 +4406,10 @@
    [
     "2026-11-18",
     150.0
+   ],
+   [
+    "2026-11-26",
+    170.0
    ]
   ],
   "leon-ovejas-vida-merina": [
@@ -4195,6 +4423,10 @@
    ],
    [
     "2026-11-18",
+    130.0
+   ],
+   [
+    "2026-11-26",
     130.0
    ]
   ],
@@ -4210,6 +4442,10 @@
    [
     "2026-11-18",
     90.0
+   ],
+   [
+    "2026-11-26",
+    90.0
    ]
   ],
   "leon-ovejas-vida-assaf-sin-carta": [
@@ -4223,6 +4459,10 @@
    ],
    [
     "2026-11-18",
+    180.0
+   ],
+   [
+    "2026-11-26",
     180.0
    ]
   ],
@@ -4238,6 +4478,10 @@
    [
     "2026-11-18",
     1.35
+   ],
+   [
+    "2026-11-26",
+    1.35
    ]
   ],
   "leon-ovejas-sacrificio-2a": [
@@ -4252,6 +4496,16 @@
    [
     "2026-11-18",
     0.85
+   ],
+   [
+    "2026-11-26",
+    0.85
+   ]
+  ],
+  "leon-maiz": [
+   [
+    "2026-11-26",
+    252.0
    ]
   ]
  }

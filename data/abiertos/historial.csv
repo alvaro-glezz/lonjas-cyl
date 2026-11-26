@@ -2,13 +2,16 @@
 leon;leon-agria;Agria;€/t;2026-11-04;350
 leon;leon-agria;Agria;€/t;2026-11-11;350
 leon;leon-agria;Agria;€/t;2026-11-18;350
+leon;leon-agria;Agria;€/t;2026-11-26;350
 leon;leon-alfalfa-paquete-deshidratado;Alfalfa paquete deshidratado;€/t;2026-11-04;255
 leon;leon-alfalfa-paquete-deshidratado;Alfalfa paquete deshidratado;€/t;2026-11-11;260
 leon;leon-alfalfa-paquete-deshidratado;Alfalfa paquete deshidratado;€/t;2026-11-18;260
+leon;leon-alfalfa-paquete-deshidratado;Alfalfa paquete deshidratado;€/t;2026-11-26;260
 leon;leon-alfalfa-paquete-rama;Alfalfa paquete rama;€/t;2026-10-29;225
 leon;leon-alfalfa-paquete-rama;Alfalfa paquete rama;€/t;2026-11-04;225
 leon;leon-alfalfa-paquete-rama;Alfalfa paquete rama;€/t;2026-11-11;235
 leon;leon-alfalfa-paquete-rama;Alfalfa paquete rama;€/t;2026-11-18;235
+leon;leon-alfalfa-paquete-rama;Alfalfa paquete rama;€/t;2026-11-26;235
 leon;leon-avena;Avena;€/t;2026-08-26;195
 leon;leon-avena;Avena;€/t;2026-09-02;198
 leon;leon-avena;Avena;€/t;2026-09-09;198
@@ -22,12 +25,15 @@ leon;leon-avena;Avena;€/t;2026-10-29;202
 leon;leon-avena;Avena;€/t;2026-11-04;200
 leon;leon-avena;Avena;€/t;2026-11-11;198
 leon;leon-avena;Avena;€/t;2026-11-18;198
+leon;leon-avena;Avena;€/t;2026-11-26;200
 leon;leon-cabritos-hasta-11-kg;Cabritos hasta 11 kg;€/kg vivo;2026-11-04;8,3
 leon;leon-cabritos-hasta-11-kg;Cabritos hasta 11 kg;€/kg vivo;2026-11-11;8,2
 leon;leon-cabritos-hasta-11-kg;Cabritos hasta 11 kg;€/kg vivo;2026-11-18;8,2
+leon;leon-cabritos-hasta-11-kg;Cabritos hasta 11 kg;€/kg vivo;2026-11-26;8,2
 leon;leon-canela;Canela;€/kg;2026-11-04;1,3
 leon;leon-canela;Canela;€/kg;2026-11-11;1,3
 leon;leon-canela;Canela;€/kg;2026-11-18;1,3
+leon;leon-canela;Canela;€/kg;2026-11-26;1,3
 leon;leon-cebada;Cebada;€/t;2026-08-26;210
 leon;leon-cebada;Cebada;€/t;2026-09-02;215
 leon;leon-cebada;Cebada;€/t;2026-09-09;215
@@ -41,6 +47,7 @@ leon;leon-cebada;Cebada;€/t;2026-10-29;222
 leon;leon-cebada;Cebada;€/t;2026-11-04;221
 leon;leon-cebada;Cebada;€/t;2026-11-11;221
 leon;leon-cebada;Cebada;€/t;2026-11-18;223
+leon;leon-cebada;Cebada;€/t;2026-11-26;226
 leon;leon-centeno;Centeno;€/t;2026-08-26;192
 leon;leon-centeno;Centeno;€/t;2026-09-02;195
 leon;leon-centeno;Centeno;€/t;2026-09-09;195
@@ -54,32 +61,41 @@ leon;leon-centeno;Centeno;€/t;2026-10-29;197
 leon;leon-centeno;Centeno;€/t;2026-11-04;197
 leon;leon-centeno;Centeno;€/t;2026-11-11;196
 leon;leon-centeno;Centeno;€/t;2026-11-18;198
+leon;leon-centeno;Centeno;€/t;2026-11-26;200
 leon;leon-corderos-12-1-15-kg;Corderos 12,1-15 kg;€/ud;2026-11-04;100
 leon;leon-corderos-12-1-15-kg;Corderos 12,1-15 kg;€/ud;2026-11-11;100
 leon;leon-corderos-12-1-15-kg;Corderos 12,1-15 kg;€/ud;2026-11-18;100
+leon;leon-corderos-12-1-15-kg;Corderos 12,1-15 kg;€/ud;2026-11-26;110
 leon;leon-corderos-15-1-18-kg;Corderos 15,1-18 kg;€/ud;2026-11-04;110
 leon;leon-corderos-15-1-18-kg;Corderos 15,1-18 kg;€/ud;2026-11-11;110
 leon;leon-corderos-15-1-18-kg;Corderos 15,1-18 kg;€/ud;2026-11-18;110
+leon;leon-corderos-15-1-18-kg;Corderos 15,1-18 kg;€/ud;2026-11-26;120
 leon;leon-corderos-18-1-23-kg;Corderos 18,1-23 kg;€/ud;2026-11-04;130
 leon;leon-corderos-18-1-23-kg;Corderos 18,1-23 kg;€/ud;2026-11-11;130
 leon;leon-corderos-18-1-23-kg;Corderos 18,1-23 kg;€/ud;2026-11-18;130
+leon;leon-corderos-18-1-23-kg;Corderos 18,1-23 kg;€/ud;2026-11-26;140
 leon;leon-corderos-23-1-27-kg;Corderos 23,1-27 kg;€/ud;2026-11-04;140
 leon;leon-corderos-23-1-27-kg;Corderos 23,1-27 kg;€/ud;2026-11-11;140
 leon;leon-corderos-23-1-27-kg;Corderos 23,1-27 kg;€/ud;2026-11-18;140
+leon;leon-corderos-23-1-27-kg;Corderos 23,1-27 kg;€/ud;2026-11-26;150
 leon;leon-corderos-27-1-35-kg;Corderos 27,1-35 kg;€/ud;2026-11-04;150
 leon;leon-corderos-27-1-35-kg;Corderos 27,1-35 kg;€/ud;2026-11-11;150
 leon;leon-corderos-27-1-35-kg;Corderos 27,1-35 kg;€/ud;2026-11-18;150
+leon;leon-corderos-27-1-35-kg;Corderos 27,1-35 kg;€/ud;2026-11-26;170
 leon;leon-fabrica-y-segunda;Fábrica y Segunda;€/kg canal;2026-11-04;4,1
 leon;leon-fabrica-y-segunda;Fábrica y Segunda;€/kg canal;2026-11-11;4,1
 leon;leon-fabrica-y-segunda;Fábrica y Segunda;€/kg canal;2026-11-18;4,1
+leon;leon-fabrica-y-segunda;Fábrica y Segunda;€/kg canal;2026-11-26;4,1
 leon;leon-forraje;Forraje;€/t;2026-10-29;130
 leon;leon-forraje;Forraje;€/t;2026-11-04;130
 leon;leon-forraje;Forraje;€/t;2026-11-11;135
 leon;leon-forraje;Forraje;€/t;2026-11-18;135
+leon;leon-forraje;Forraje;€/t;2026-11-26;135
 leon;leon-frisones;Frisones;€/ud;2026-10-29;100
 leon;leon-frisones;Frisones;€/ud;2026-11-04;100
 leon;leon-frisones;Frisones;€/ud;2026-11-11;100
 leon;leon-frisones;Frisones;€/ud;2026-11-18;100
+leon;leon-frisones;Frisones;€/ud;2026-11-26;100
 leon;leon-girasol;Girasol;€/t;2026-10-29;500
 leon;leon-girasol;Girasol;€/t;2026-11-04;500
 leon;leon-girasol;Girasol;€/t;2026-11-11;500
@@ -89,135 +105,178 @@ leon;leon-girasol-alto-oleico;Girasol alto oleico;€/t;2026-11-11;515
 leon;leon-hembras-180-200-kg-o;Hembras 180-200 kg O;€/kg canal;2026-11-04;5,2
 leon;leon-hembras-180-200-kg-o;Hembras 180-200 kg O;€/kg canal;2026-11-11;5
 leon;leon-hembras-180-200-kg-o;Hembras 180-200 kg O;€/kg canal;2026-11-18;5
+leon;leon-hembras-180-200-kg-o;Hembras 180-200 kg O;€/kg canal;2026-11-26;5,05
 leon;leon-hembras-180-200-kg-r;Hembras 180-200 kg R;€/kg canal;2026-11-04;6,85
 leon;leon-hembras-180-200-kg-r;Hembras 180-200 kg R;€/kg canal;2026-11-11;6,85
 leon;leon-hembras-180-200-kg-r;Hembras 180-200 kg R;€/kg canal;2026-11-18;6,85
+leon;leon-hembras-180-200-kg-r;Hembras 180-200 kg R;€/kg canal;2026-11-26;6,9
 leon;leon-hembras-180-200-kg-u;Hembras 180-200 kg U;€/kg canal;2026-11-04;6,95
 leon;leon-hembras-180-200-kg-u;Hembras 180-200 kg U;€/kg canal;2026-11-11;6,95
 leon;leon-hembras-180-200-kg-u;Hembras 180-200 kg U;€/kg canal;2026-11-18;6,95
+leon;leon-hembras-180-200-kg-u;Hembras 180-200 kg U;€/kg canal;2026-11-26;7
 leon;leon-hembras-201-250-kg-o;Hembras 201-250 kg O;€/kg canal;2026-11-04;5,2
 leon;leon-hembras-201-250-kg-o;Hembras 201-250 kg O;€/kg canal;2026-11-11;5
 leon;leon-hembras-201-250-kg-o;Hembras 201-250 kg O;€/kg canal;2026-11-18;5
+leon;leon-hembras-201-250-kg-o;Hembras 201-250 kg O;€/kg canal;2026-11-26;5,05
 leon;leon-hembras-201-250-kg-r;Hembras 201-250 kg R;€/kg canal;2026-11-04;6,85
 leon;leon-hembras-201-250-kg-r;Hembras 201-250 kg R;€/kg canal;2026-11-11;6,85
 leon;leon-hembras-201-250-kg-r;Hembras 201-250 kg R;€/kg canal;2026-11-18;6,85
+leon;leon-hembras-201-250-kg-r;Hembras 201-250 kg R;€/kg canal;2026-11-26;6,9
 leon;leon-hembras-201-250-kg-u;Hembras 201-250 kg U;€/kg canal;2026-11-04;6,95
 leon;leon-hembras-201-250-kg-u;Hembras 201-250 kg U;€/kg canal;2026-11-11;6,95
 leon;leon-hembras-201-250-kg-u;Hembras 201-250 kg U;€/kg canal;2026-11-18;6,95
+leon;leon-hembras-201-250-kg-u;Hembras 201-250 kg U;€/kg canal;2026-11-26;7
 leon;leon-hembras-mas-250-kg-o;Hembras más 250 kg O;€/kg canal;2026-11-04;5,2
 leon;leon-hembras-mas-250-kg-o;Hembras más 250 kg O;€/kg canal;2026-11-11;5
 leon;leon-hembras-mas-250-kg-o;Hembras más 250 kg O;€/kg canal;2026-11-18;5
+leon;leon-hembras-mas-250-kg-o;Hembras más 250 kg O;€/kg canal;2026-11-26;5,05
 leon;leon-hembras-mas-250-kg-r;Hembras más 250 kg R;€/kg canal;2026-11-04;6,85
 leon;leon-hembras-mas-250-kg-r;Hembras más 250 kg R;€/kg canal;2026-11-11;6,85
 leon;leon-hembras-mas-250-kg-r;Hembras más 250 kg R;€/kg canal;2026-11-18;6,85
+leon;leon-hembras-mas-250-kg-r;Hembras más 250 kg R;€/kg canal;2026-11-26;6,9
 leon;leon-hembras-mas-250-kg-u;Hembras más 250 kg U;€/kg canal;2026-11-04;6,95
 leon;leon-hembras-mas-250-kg-u;Hembras más 250 kg U;€/kg canal;2026-11-11;6,95
 leon;leon-hembras-mas-250-kg-u;Hembras más 250 kg U;€/kg canal;2026-11-18;6,95
+leon;leon-hembras-mas-250-kg-u;Hembras más 250 kg U;€/kg canal;2026-11-26;7
 leon;leon-jaerla;Jaerla;€/t;2026-11-04;320
 leon;leon-jaerla;Jaerla;€/t;2026-11-11;320
 leon;leon-jaerla;Jaerla;€/t;2026-11-18;320
+leon;leon-jaerla;Jaerla;€/t;2026-11-26;320
 leon;leon-kennebec;Kennebec;€/t;2026-11-04;390
 leon;leon-kennebec;Kennebec;€/t;2026-11-11;390
 leon;leon-kennebec;Kennebec;€/t;2026-11-18;390
+leon;leon-kennebec;Kennebec;€/t;2026-11-26;390
 leon;leon-lechazos-hasta-12-kg;Lechazos hasta 12 kg;€/kg vivo;2026-11-04;8,3
 leon;leon-lechazos-hasta-12-kg;Lechazos hasta 12 kg;€/kg vivo;2026-11-11;8,2
 leon;leon-lechazos-hasta-12-kg;Lechazos hasta 12 kg;€/kg vivo;2026-11-18;8,2
+leon;leon-lechazos-hasta-12-kg;Lechazos hasta 12 kg;€/kg vivo;2026-11-26;8,2
 leon;leon-leche-de-cabra;Leche de cabra;€/e.q.;2026-10-29;0,12621
 leon;leon-leche-de-cabra;Leche de cabra;€/e.q.;2026-11-04;0,12621
 leon;leon-leche-de-cabra;Leche de cabra;€/e.q.;2026-11-11;0,12621
 leon;leon-leche-de-cabra;Leche de cabra;€/e.q.;2026-11-18;0,12621
+leon;leon-leche-de-cabra;Leche de cabra;€/e.q.;2026-11-26;0,12621
 leon;leon-leche-de-oveja;Leche de oveja;€/e.q.;2026-10-29;0,11419
 leon;leon-leche-de-oveja;Leche de oveja;€/e.q.;2026-11-04;0,11419
 leon;leon-leche-de-oveja;Leche de oveja;€/e.q.;2026-11-11;0,11419
 leon;leon-leche-de-oveja;Leche de oveja;€/e.q.;2026-11-18;0,11419
+leon;leon-leche-de-oveja;Leche de oveja;€/e.q.;2026-11-26;0,11419
 leon;leon-leche-de-vaca;Leche de vaca;€/litro;2026-10-29;0,475
 leon;leon-leche-de-vaca;Leche de vaca;€/litro;2026-11-04;0,475
 leon;leon-leche-de-vaca;Leche de vaca;€/litro;2026-11-11;0,475
 leon;leon-leche-de-vaca;Leche de vaca;€/litro;2026-11-18;0,475
+leon;leon-leche-de-vaca;Leche de vaca;€/litro;2026-11-26;0,475
 leon;leon-machos-200-250-kg-o;Machos 200-250 kg O;€/kg canal;2026-11-04;5,2
 leon;leon-machos-200-250-kg-o;Machos 200-250 kg O;€/kg canal;2026-11-11;5
 leon;leon-machos-200-250-kg-o;Machos 200-250 kg O;€/kg canal;2026-11-18;5
+leon;leon-machos-200-250-kg-o;Machos 200-250 kg O;€/kg canal;2026-11-26;5,05
 leon;leon-machos-200-250-kg-r;Machos 200-250 kg R;€/kg canal;2026-11-04;6
 leon;leon-machos-200-250-kg-r;Machos 200-250 kg R;€/kg canal;2026-11-11;6,1
 leon;leon-machos-200-250-kg-r;Machos 200-250 kg R;€/kg canal;2026-11-18;6,1
+leon;leon-machos-200-250-kg-r;Machos 200-250 kg R;€/kg canal;2026-11-26;6,2
 leon;leon-machos-200-250-kg-u;Machos 200-250 kg U;€/kg canal;2026-11-04;6,1
 leon;leon-machos-200-250-kg-u;Machos 200-250 kg U;€/kg canal;2026-11-11;6,2
 leon;leon-machos-200-250-kg-u;Machos 200-250 kg U;€/kg canal;2026-11-18;6,2
+leon;leon-machos-200-250-kg-u;Machos 200-250 kg U;€/kg canal;2026-11-26;6,3
 leon;leon-machos-251-300-kg-o;Machos 251-300 kg O;€/kg canal;2026-11-04;5,2
 leon;leon-machos-251-300-kg-o;Machos 251-300 kg O;€/kg canal;2026-11-11;5
 leon;leon-machos-251-300-kg-o;Machos 251-300 kg O;€/kg canal;2026-11-18;5
+leon;leon-machos-251-300-kg-o;Machos 251-300 kg O;€/kg canal;2026-11-26;5,05
 leon;leon-machos-251-300-kg-r;Machos 251-300 kg R;€/kg canal;2026-11-04;6
 leon;leon-machos-251-300-kg-r;Machos 251-300 kg R;€/kg canal;2026-11-11;6,1
 leon;leon-machos-251-300-kg-r;Machos 251-300 kg R;€/kg canal;2026-11-18;6,1
+leon;leon-machos-251-300-kg-r;Machos 251-300 kg R;€/kg canal;2026-11-26;6,2
 leon;leon-machos-251-300-kg-u;Machos 251-300 kg U;€/kg canal;2026-11-04;6,1
 leon;leon-machos-251-300-kg-u;Machos 251-300 kg U;€/kg canal;2026-11-11;6,2
 leon;leon-machos-251-300-kg-u;Machos 251-300 kg U;€/kg canal;2026-11-18;6,2
+leon;leon-machos-251-300-kg-u;Machos 251-300 kg U;€/kg canal;2026-11-26;6,3
 leon;leon-machos-mas-de-300-kg-o;Machos más de 300 kg O;€/kg canal;2026-11-04;5,2
 leon;leon-machos-mas-de-300-kg-o;Machos más de 300 kg O;€/kg canal;2026-11-11;5
 leon;leon-machos-mas-de-300-kg-o;Machos más de 300 kg O;€/kg canal;2026-11-18;5
+leon;leon-machos-mas-de-300-kg-o;Machos más de 300 kg O;€/kg canal;2026-11-26;5,05
 leon;leon-machos-mas-de-300-kg-r;Machos más de 300 kg R;€/kg canal;2026-11-04;6
 leon;leon-machos-mas-de-300-kg-r;Machos más de 300 kg R;€/kg canal;2026-11-11;6,1
 leon;leon-machos-mas-de-300-kg-r;Machos más de 300 kg R;€/kg canal;2026-11-18;6,1
+leon;leon-machos-mas-de-300-kg-r;Machos más de 300 kg R;€/kg canal;2026-11-26;6,2
 leon;leon-machos-mas-de-300-kg-u;Machos más de 300 kg U;€/kg canal;2026-11-04;6,1
 leon;leon-machos-mas-de-300-kg-u;Machos más de 300 kg U;€/kg canal;2026-11-11;6,2
 leon;leon-machos-mas-de-300-kg-u;Machos más de 300 kg U;€/kg canal;2026-11-18;6,2
+leon;leon-machos-mas-de-300-kg-u;Machos más de 300 kg U;€/kg canal;2026-11-26;6,3
+leon;leon-maiz;Maíz;€/t;2026-11-26;252
 leon;leon-negra;Negra;€/kg;2026-11-04;2,8
 leon;leon-negra;Negra;€/kg;2026-11-11;2,8
 leon;leon-negra;Negra;€/kg;2026-11-18;2,8
+leon;leon-negra;Negra;€/kg;2026-11-26;2,8
 leon;leon-ovejas-sacrificio-1a;Ovejas sacrificio 1ª;€/kg vivo;2026-11-04;1,35
 leon;leon-ovejas-sacrificio-1a;Ovejas sacrificio 1ª;€/kg vivo;2026-11-11;1,35
 leon;leon-ovejas-sacrificio-1a;Ovejas sacrificio 1ª;€/kg vivo;2026-11-18;1,35
+leon;leon-ovejas-sacrificio-1a;Ovejas sacrificio 1ª;€/kg vivo;2026-11-26;1,35
 leon;leon-ovejas-sacrificio-2a;Ovejas sacrificio 2ª;€/kg vivo;2026-11-04;0,85
 leon;leon-ovejas-sacrificio-2a;Ovejas sacrificio 2ª;€/kg vivo;2026-11-11;0,85
 leon;leon-ovejas-sacrificio-2a;Ovejas sacrificio 2ª;€/kg vivo;2026-11-18;0,85
+leon;leon-ovejas-sacrificio-2a;Ovejas sacrificio 2ª;€/kg vivo;2026-11-26;0,85
 leon;leon-ovejas-vida-assaf-sin-carta;Ovejas vida Assaf (Sin carta);€/ud;2026-11-04;180
 leon;leon-ovejas-vida-assaf-sin-carta;Ovejas vida Assaf (Sin carta);€/ud;2026-11-11;180
 leon;leon-ovejas-vida-assaf-sin-carta;Ovejas vida Assaf (Sin carta);€/ud;2026-11-18;180
+leon;leon-ovejas-vida-assaf-sin-carta;Ovejas vida Assaf (Sin carta);€/ud;2026-11-26;180
 leon;leon-ovejas-vida-leche;Ovejas vida leche;€/ud;2026-11-04;90
 leon;leon-ovejas-vida-leche;Ovejas vida leche;€/ud;2026-11-11;90
 leon;leon-ovejas-vida-leche;Ovejas vida leche;€/ud;2026-11-18;90
+leon;leon-ovejas-vida-leche;Ovejas vida leche;€/ud;2026-11-26;90
 leon;leon-ovejas-vida-merina;Ovejas vida merina;€/ud;2026-11-04;130
 leon;leon-ovejas-vida-merina;Ovejas vida merina;€/ud;2026-11-11;130
 leon;leon-ovejas-vida-merina;Ovejas vida merina;€/ud;2026-11-18;130
+leon;leon-ovejas-vida-merina;Ovejas vida merina;€/ud;2026-11-26;130
 leon;leon-paja-1a-cebada;Paja 1ª (Cebada);€/t;2026-10-29;65
 leon;leon-paja-1a-cebada;Paja 1ª (Cebada);€/t;2026-11-04;65
 leon;leon-paja-1a-cebada;Paja 1ª (Cebada);€/t;2026-11-11;67
 leon;leon-paja-1a-cebada;Paja 1ª (Cebada);€/t;2026-11-18;67
+leon;leon-paja-1a-cebada;Paja 1ª (Cebada);€/t;2026-11-26;67
 leon;leon-palmena-redonda;Palmeña Redonda;€/kg;2026-11-04;2
 leon;leon-palmena-redonda;Palmeña Redonda;€/kg;2026-11-11;2
 leon;leon-palmena-redonda;Palmeña Redonda;€/kg;2026-11-18;2
+leon;leon-palmena-redonda;Palmeña Redonda;€/kg;2026-11-26;2
 leon;leon-pasteros-hembra-200-kg;Pasteros hembra (200 kg);€/ud;2026-10-29;1000
 leon;leon-pasteros-hembra-200-kg;Pasteros hembra (200 kg);€/ud;2026-11-04;1000
 leon;leon-pasteros-hembra-200-kg;Pasteros hembra (200 kg);€/ud;2026-11-11;1000
 leon;leon-pasteros-hembra-200-kg;Pasteros hembra (200 kg);€/ud;2026-11-18;1000
+leon;leon-pasteros-hembra-200-kg;Pasteros hembra (200 kg);€/ud;2026-11-26;1000
 leon;leon-pasteros-macho-200-kg;Pasteros macho (200 kg);€/ud;2026-10-29;1100
 leon;leon-pasteros-macho-200-kg;Pasteros macho (200 kg);€/ud;2026-11-04;1100
 leon;leon-pasteros-macho-200-kg;Pasteros macho (200 kg);€/ud;2026-11-11;1100
 leon;leon-pasteros-macho-200-kg;Pasteros macho (200 kg);€/ud;2026-11-18;1100
+leon;leon-pasteros-macho-200-kg;Pasteros macho (200 kg);€/ud;2026-11-26;1100
 leon;leon-pinta;Pinta;€/kg;2026-11-04;0,95
 leon;leon-pinta;Pinta;€/kg;2026-11-11;0,95
 leon;leon-pinta;Pinta;€/kg;2026-11-18;0,95
+leon;leon-pinta;Pinta;€/kg;2026-11-26;0,95
 leon;leon-planchada;Planchada;€/kg;2026-11-04;1,95
 leon;leon-planchada;Planchada;€/kg;2026-11-11;1,95
 leon;leon-planchada;Planchada;€/kg;2026-11-18;1,95
+leon;leon-planchada;Planchada;€/kg;2026-11-26;1,95
 leon;leon-plancheta;Plancheta;€/kg;2026-11-04;2
 leon;leon-plancheta;Plancheta;€/kg;2026-11-11;2
 leon;leon-plancheta;Plancheta;€/kg;2026-11-18;2
+leon;leon-plancheta;Plancheta;€/kg;2026-11-26;2
 leon;leon-primera-y-extra-engrasada;Primera y Extra (Engrasada);€/kg canal;2026-11-04;5,35
 leon;leon-primera-y-extra-engrasada;Primera y Extra (Engrasada);€/kg canal;2026-11-11;5,35
 leon;leon-primera-y-extra-engrasada;Primera y Extra (Engrasada);€/kg canal;2026-11-18;5,35
+leon;leon-primera-y-extra-engrasada;Primera y Extra (Engrasada);€/kg canal;2026-11-26;5,35
 leon;leon-red-pontiac;Red Pontiac;€/t;2026-11-04;340
 leon;leon-red-pontiac;Red Pontiac;€/t;2026-11-11;340
 leon;leon-red-pontiac;Red Pontiac;€/t;2026-11-18;340
+leon;leon-red-pontiac;Red Pontiac;€/t;2026-11-26;340
 leon;leon-red-scarlett;Red Scarlett;€/t;2026-11-04;330
 leon;leon-red-scarlett;Red Scarlett;€/t;2026-11-11;330
 leon;leon-red-scarlett;Red Scarlett;€/t;2026-11-18;330
+leon;leon-red-scarlett;Red Scarlett;€/t;2026-11-26;330
 leon;leon-redonda;Redonda;€/kg;2026-11-04;1,35
 leon;leon-redonda;Redonda;€/kg;2026-11-11;1,35
 leon;leon-redonda;Redonda;€/kg;2026-11-18;1,35
+leon;leon-redonda;Redonda;€/kg;2026-11-26;1,35
 leon;leon-rinon-de-leon;Riñón de León;€/kg;2026-11-04;1,4
 leon;leon-rinon-de-leon;Riñón de León;€/kg;2026-11-11;1,4
 leon;leon-rinon-de-leon;Riñón de León;€/kg;2026-11-18;1,4
+leon;leon-rinon-de-leon;Riñón de León;€/kg;2026-11-26;1,4
 leon;leon-trigo-pienso;Trigo Pienso;€/t;2026-08-26;217
 leon;leon-trigo-pienso;Trigo Pienso;€/t;2026-09-02;226
 leon;leon-trigo-pienso;Trigo Pienso;€/t;2026-09-09;229
@@ -231,6 +290,7 @@ leon;leon-trigo-pienso;Trigo Pienso;€/t;2026-10-29;228
 leon;leon-trigo-pienso;Trigo Pienso;€/t;2026-11-04;226
 leon;leon-trigo-pienso;Trigo Pienso;€/t;2026-11-11;226
 leon;leon-trigo-pienso;Trigo Pienso;€/t;2026-11-18;226
+leon;leon-trigo-pienso;Trigo Pienso;€/t;2026-11-26;230
 leon;leon-triticale;Triticale;€/t;2026-08-26;207
 leon;leon-triticale;Triticale;€/t;2026-09-02;216
 leon;leon-triticale;Triticale;€/t;2026-09-09;219
@@ -244,12 +304,15 @@ leon;leon-triticale;Triticale;€/t;2026-10-29;218
 leon;leon-triticale;Triticale;€/t;2026-11-04;216
 leon;leon-triticale;Triticale;€/t;2026-11-11;216
 leon;leon-triticale;Triticale;€/t;2026-11-18;216
+leon;leon-triticale;Triticale;€/t;2026-11-26;220
 leon;leon-veza-forraje-de-1a;Veza forraje de 1ª;€/t;2026-11-04;170
 leon;leon-veza-forraje-de-1a;Veza forraje de 1ª;€/t;2026-11-11;180
 leon;leon-veza-forraje-de-1a;Veza forraje de 1ª;€/t;2026-11-18;180
+leon;leon-veza-forraje-de-1a;Veza forraje de 1ª;€/t;2026-11-26;180
 leon;leon-yona;Yona;€/t;2026-11-04;330
 leon;leon-yona;Yona;€/t;2026-11-11;330
 leon;leon-yona;Yona;€/t;2026-11-18;330
+leon;leon-yona;Yona;€/t;2026-11-26;330
 lerma;lerma-anojos-corriente;Añojos corriente;€/kg;2026-10-30;5,31
 lerma;lerma-anojos-corriente;Añojos corriente;€/kg;2026-11-13;5,31
 lerma;lerma-anojos-extra;Añojos extra;€/kg;2026-10-30;5,68
