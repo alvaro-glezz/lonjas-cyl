@@ -1,0 +1,226 @@
+{
+ "lonja": "segovia",
+ "fecha": "2026-11-26",
+ "origen": "https://www.fessegovia.es/wp-content/uploads/2026/11/LONJA-CEREALES-OVINO-Y-PORCINO-26.11.2026.pdf",
+ "material": {
+  "texto": "LONJA AGROPECUARIA DE SEGOVIA\nCOTIZACIONES26/11/2026\nPrecio Precio\nMedida\nsemana Diferencia semana\nanterior actual\nCebada de 62 kgHl* 223,00 3,00 226,00\nTrigo pienso 72 kg/Hl. 228,00 3,00 231,00\nColza 9-2-42 (Hum-Imp-gras) S/C S/C S/C Tm/ Origen\nAvena 198,00 2,00 200,00 agricultor\nGirasol 9-2-44 S/C S/C S/C\nCenteno 207,00 3,00 210,00\neuros / Ud.\n€/Tm/ Origen\nPaquete empacada 220,00 0,00 220,00\nagricultor\n€/Tm/ Origen\nPaja paquete empacada 68,00 0,00 68,00\nagricultor\n€/Tm/ Origen\nForraje veza mezcla 165,00 0,00 165,00\nagricultor\n€/Tm/ Origen\n0,00\nForraje 140,00 140,00 agricultor\nPrecio Precio\nMedida\nsemana Diferencia semana\nanterior actual Euros / Ud.\nCordero Extra IGP 10,60 0,10 10,70 118\nCordero Segolechal 9,94 0,10 10,04 110\nCordero lechal 10-12 Kg. para\n9,50 0,10 9,60 106\nsacrificio\nCordero Nodriza y 2ª S/C S/C S/C S/C\nCordero lechal 12,1-15 kg. 8,72 0,05 8,77 114,01\nCordero recental 15,1-19 Kg. 7,72 0,10 7,82 133,33\nKg/vivo sobre\nCordero pascual 19,1-23 Kg. 6,78 0,10 6,88 144,82 granja\nCordero pascual 23,1-25,50 Kg. 6,44 0,10 6,54 158,60\nCordero pascual 25,5-28 Kg. 6,07 0,10 6,17 165,05\nCordero grande 28,1-34 Kg. 5,59 0,10 5,69 176,67\nOvejas desvieje Primera 50 Kg. Para\n1,800 0,00 1,800 90,00\nsacrificio\nOvejas desvieje Segunda 50 Kg. Para\n1,200 0,00 1,200 60,00\nsacrificio\nPrecio Precio\nsemana Diferencia semana Medida\nanterior actual\nSelecto 1,097 -0,030 1,067\nNormal 1,085 -0,030 1,055\nCerdo graso 1,605 -0,010 1,595 Kg/vivo sobre granja\nCerdas desvieje extra 0,230 0,00 0,230\nCerda desvieje primera 0,140 0,00 0,140\nLechones de 20 Kg. 36,00 1,00 37,00\nCochinillos con hierro vida S/C S/C S/C Unidad/vivo sobre granja\nCochinillos sin hierro 34,00 3,00 37,00\nToda la información de precios de esta Lonja es propiedad de la Lonja Agropecuaria de Segovia.\nQueda expresamente prohibida su reproducción o difusión a terceros por cualquier medio, sin expresa autorización.",
+  "url_pdf": "https://www.fessegovia.es/wp-content/uploads/2026/11/LONJA-CEREALES-OVINO-Y-PORCINO-26.11.2026.pdf",
+  "titulo": "Precios Lonja 26 de noviembre 2026",
+  "fecha_entrada": "2026-11-27T10:10:40"
+ },
+ "esperado": {
+  "fecha": "2026-11-26",
+  "filas": [
+   {
+    "producto": "Cebada 62 kg/hl",
+    "cat": "Cereales",
+    "unidad": "€/t",
+    "ant": 223.0,
+    "act": 226.0
+   },
+   {
+    "producto": "Trigo pienso 72 kg/hl",
+    "cat": "Cereales",
+    "unidad": "€/t",
+    "ant": 228.0,
+    "act": 231.0
+   },
+   {
+    "producto": "Colza 9-2-42",
+    "cat": "Oleaginosas",
+    "unidad": "€/t",
+    "ant": null,
+    "act": null
+   },
+   {
+    "producto": "Avena",
+    "cat": "Cereales",
+    "unidad": "€/t",
+    "ant": 198.0,
+    "act": 200.0
+   },
+   {
+    "producto": "Girasol 9-2-44",
+    "cat": "Oleaginosas",
+    "unidad": "€/t",
+    "ant": null,
+    "act": null
+   },
+   {
+    "producto": "Centeno",
+    "cat": "Cereales",
+    "unidad": "€/t",
+    "ant": 207.0,
+    "act": 210.0
+   },
+   {
+    "producto": "Alfalfa empacada",
+    "cat": "Forrajes",
+    "unidad": "€/t",
+    "ant": 220.0,
+    "act": 220.0
+   },
+   {
+    "producto": "Paja empacada",
+    "cat": "Forrajes",
+    "unidad": "€/t",
+    "ant": 68.0,
+    "act": 68.0
+   },
+   {
+    "producto": "Forraje veza mezcla",
+    "cat": "Forrajes",
+    "unidad": "€/t",
+    "ant": 165.0,
+    "act": 165.0
+   },
+   {
+    "producto": "Forraje",
+    "cat": "Forrajes",
+    "unidad": "€/t",
+    "ant": 140.0,
+    "act": 140.0
+   },
+   {
+    "producto": "Cordero Extra IGP",
+    "cat": "Ovino",
+    "unidad": "€/kg vivo",
+    "ant": 10.6,
+    "act": 10.7
+   },
+   {
+    "producto": "Cordero Segolechal",
+    "cat": "Ovino",
+    "unidad": "€/kg vivo",
+    "ant": 9.94,
+    "act": 10.04
+   },
+   {
+    "producto": "Lechazo 10-12 kg",
+    "cat": "Ovino",
+    "unidad": "€/kg vivo",
+    "ant": 9.5,
+    "act": 9.6
+   },
+   {
+    "producto": "Cordero nodriza y 2ª",
+    "cat": "Ovino",
+    "unidad": "€/kg vivo",
+    "ant": null,
+    "act": null
+   },
+   {
+    "producto": "Lechal 12,1-15 kg",
+    "cat": "Ovino",
+    "unidad": "€/kg vivo",
+    "ant": 8.72,
+    "act": 8.77
+   },
+   {
+    "producto": "Recental 15,1-19 kg",
+    "cat": "Ovino",
+    "unidad": "€/kg vivo",
+    "ant": 7.72,
+    "act": 7.82
+   },
+   {
+    "producto": "Pascual 19,1-23 kg",
+    "cat": "Ovino",
+    "unidad": "€/kg vivo",
+    "ant": 6.78,
+    "act": 6.88
+   },
+   {
+    "producto": "Pascual 23,1-25,5 kg",
+    "cat": "Ovino",
+    "unidad": "€/kg vivo",
+    "ant": 6.44,
+    "act": 6.54
+   },
+   {
+    "producto": "Pascual 25,5-28 kg",
+    "cat": "Ovino",
+    "unidad": "€/kg vivo",
+    "ant": 6.07,
+    "act": 6.17
+   },
+   {
+    "producto": "Cordero 28,1-34 kg",
+    "cat": "Ovino",
+    "unidad": "€/kg vivo",
+    "ant": 5.59,
+    "act": 5.69
+   },
+   {
+    "producto": "Oveja desvieje 1ª",
+    "cat": "Ovino",
+    "unidad": "€/kg vivo",
+    "ant": 1.8,
+    "act": 1.8
+   },
+   {
+    "producto": "Oveja desvieje 2ª",
+    "cat": "Ovino",
+    "unidad": "€/kg vivo",
+    "ant": 1.2,
+    "act": 1.2
+   },
+   {
+    "producto": "Cerdo selecto",
+    "cat": "Porcino",
+    "unidad": "€/kg vivo",
+    "ant": 1.097,
+    "act": 1.067
+   },
+   {
+    "producto": "Cerdo normal",
+    "cat": "Porcino",
+    "unidad": "€/kg vivo",
+    "ant": 1.085,
+    "act": 1.055
+   },
+   {
+    "producto": "Cerdo graso",
+    "cat": "Porcino",
+    "unidad": "€/kg vivo",
+    "ant": 1.605,
+    "act": 1.595
+   },
+   {
+    "producto": "Cerda desvieje extra",
+    "cat": "Porcino",
+    "unidad": "€/kg vivo",
+    "ant": 0.23,
+    "act": 0.23
+   },
+   {
+    "producto": "Cerda desvieje primera",
+    "cat": "Porcino",
+    "unidad": "€/kg vivo",
+    "ant": 0.14,
+    "act": 0.14
+   },
+   {
+    "producto": "Lechones 20 kg",
+    "cat": "Porcino",
+    "unidad": "€/ud",
+    "ant": 36.0,
+    "act": 37.0
+   },
+   {
+    "producto": "Cochinillos con hierro",
+    "cat": "Porcino",
+    "unidad": "€/ud",
+    "ant": null,
+    "act": null
+   },
+   {
+    "producto": "Cochinillos sin hierro",
+    "cat": "Porcino",
+    "unidad": "€/ud",
+    "ant": 34.0,
+    "act": 37.0
+   }
+  ]
+ }
+}
