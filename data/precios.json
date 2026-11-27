@@ -1,5 +1,5 @@
 {
- "generado": "2026-11-27T13:58+00:00",
+ "generado": "2026-11-27T17:34+00:00",
  "lonjas": [
   {
    "id": "salamanca",
@@ -1239,7 +1239,7 @@
    "fuente": "https://lerma.burgos.es/lonja",
    "estado": "activa",
    "nota": "Precios tomados del boletín semanal de la Junta de Castilla y León: la web de la lonja no deja entrar al robot. Llegan con unos días de retraso respecto a la sesión.",
-   "fecha": "2026-11-13",
+   "fecha": "2026-11-20",
    "precios": [
     {
      "id": "lerma-trigo-tipo-iii",
@@ -1247,7 +1247,7 @@
      "producto": "Trigo tipo III",
      "unidad": "€/t",
      "ant": 231.0,
-     "act": 231.0,
+     "act": 228.0,
      "clave": "trigo"
     },
     {
@@ -1264,8 +1264,8 @@
      "cat": "Porcino",
      "producto": "Cerdo normal",
      "unidad": "€/kg vivo",
-     "ant": 1.17,
-     "act": 1.1,
+     "ant": 1.1,
+     "act": 1.07,
      "clave": "cerdo-normal"
     },
     {
@@ -1273,7 +1273,7 @@
      "cat": "Porcino",
      "producto": "Cerdas de desvieje",
      "unidad": "€/kg vivo",
-     "ant": 0.33,
+     "ant": 0.3,
      "act": 0.3
     },
     {
@@ -1846,6 +1846,10 @@
    [
     "2026-11-13",
     1.1
+   ],
+   [
+    "2026-11-20",
+    1.07
    ]
   ],
   "lerma-lechon-tipo-lerma": [
@@ -1890,6 +1894,10 @@
    [
     "2026-11-13",
     231.0
+   ],
+   [
+    "2026-11-20",
+    228.0
    ]
   ],
   "lerma-cebada-dos-carreras": [
@@ -1911,6 +1919,10 @@
    ],
    [
     "2026-11-13",
+    223.0
+   ],
+   [
+    "2026-11-20",
     223.0
    ]
   ],
@@ -3414,6 +3426,10 @@
    [
     "2026-11-13",
     0.3
+   ],
+   [
+    "2026-11-20",
+    0.3
    ]
   ],
   "lerma-terneras-carne-blanca": [
@@ -3423,6 +3439,10 @@
    ],
    [
     "2026-11-13",
+    5.89
+   ],
+   [
+    "2026-11-20",
     5.89
    ]
   ],
@@ -3434,6 +3454,10 @@
    [
     "2026-11-13",
     5.7
+   ],
+   [
+    "2026-11-20",
+    5.7
    ]
   ],
   "lerma-anojos-extra": [
@@ -3443,6 +3467,10 @@
    ],
    [
     "2026-11-13",
+    5.68
+   ],
+   [
+    "2026-11-20",
     5.68
    ]
   ],
@@ -3454,6 +3482,10 @@
    [
     "2026-11-13",
     5.36
+   ],
+   [
+    "2026-11-20",
+    5.36
    ]
   ],
   "lerma-anojos-corriente": [
@@ -3463,6 +3495,10 @@
    ],
    [
     "2026-11-13",
+    5.31
+   ],
+   [
+    "2026-11-20",
     5.31
    ]
   ],
@@ -3474,6 +3510,10 @@
    [
     "2026-11-13",
     3.0
+   ],
+   [
+    "2026-11-20",
+    3.0
    ]
   ],
   "lerma-vacas-primera": [
@@ -3483,6 +3523,10 @@
    ],
    [
     "2026-11-13",
+    2.5
+   ],
+   [
+    "2026-11-20",
     2.5
    ]
   ],
@@ -3494,6 +3538,10 @@
    [
     "2026-11-13",
     2.0
+   ],
+   [
+    "2026-11-20",
+    2.0
    ]
   ],
   "lerma-vacas-industria": [
@@ -3503,6 +3551,10 @@
    ],
    [
     "2026-11-13",
+    1.56
+   ],
+   [
+    "2026-11-20",
     1.56
    ]
   ],
