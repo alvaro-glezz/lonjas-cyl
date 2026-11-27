@@ -1,10 +1,10 @@
 {
- "fecha": "2026-11-27T18:34",
+ "fecha": "2026-11-27T20:50",
  "fuente": "Ministerio para la Transición Ecológica y el Reto Demográfico (Geoportal de gasolineras)",
  "fuente_url": "https://geoportalgasolineras.es/geoportal-instalaciones/Inicio",
  "unidad": "€/l",
  "espana": {
-  "media": 1.6,
+  "media": 1.599,
   "min": 1.269,
   "n": 2261
  },
@@ -166,8 +166,8 @@
    "nombre": "Alicante",
    "cyl": false,
    "n": 52,
-   "media": 1.677,
-   "mediana": 1.689,
+   "media": 1.673,
+   "mediana": 1.679,
    "min": 1.509,
    "max": 1.779,
    "descartados": 0,
@@ -264,7 +264,7 @@
    "nombre": "Asturias",
    "cyl": false,
    "n": 60,
-   "media": 1.614,
+   "media": 1.613,
    "mediana": 1.637,
    "min": 1.39,
    "max": 1.739,
@@ -514,18 +514,6 @@
      "lon": -4.77475
     },
     {
-     "id": "4988",
-     "nombre": "Cepsa",
-     "precio": 1.799,
-     "municipio": "Candeleda",
-     "direccion": "Avenida Aviación Española, 47",
-     "localidad": "Candeleda",
-     "cp": "05480",
-     "horario": "L-D: 07:00-22:00",
-     "lat": 40.154556,
-     "lon": -5.245833
-    },
-    {
      "id": "5065",
      "nombre": "Cepsa",
      "precio": 1.799,
@@ -536,6 +524,18 @@
      "horario": "L-D: 07:00-22:00",
      "lat": 40.147556,
      "lon": -5.339722
+    },
+    {
+     "id": "4988",
+     "nombre": "Cepsa",
+     "precio": 1.799,
+     "municipio": "Candeleda",
+     "direccion": "Avenida Aviación Española, 47",
+     "localidad": "Candeleda",
+     "cp": "05480",
+     "horario": "L-D: 07:00-22:00",
+     "lat": 40.154556,
+     "lon": -5.245833
     }
    ]
   },
@@ -544,7 +544,7 @@
    "nombre": "Badajoz",
    "cyl": false,
    "n": 79,
-   "media": 1.6,
+   "media": 1.599,
    "mediana": 1.599,
    "min": 1.339,
    "max": 1.89,
@@ -1002,7 +1002,7 @@
     {
      "id": "5043",
      "nombre": "Galp",
-     "precio": 1.594,
+     "precio": 1.589,
      "municipio": "Valle de Losa",
      "direccion": "Carretera Bu-550 Km. 27",
      "localidad": "Quincoces de Yuso",
@@ -1249,7 +1249,7 @@
    "nombre": "Castellón",
    "cyl": false,
    "n": 52,
-   "media": 1.599,
+   "media": 1.598,
    "mediana": 1.599,
    "min": 1.299,
    "max": 1.795,
@@ -1280,16 +1280,16 @@
      "lon": -0.022833
     },
     {
-     "id": "8893",
-     "nombre": "Cooperativa Catolico Agraria Coop.v.",
+     "id": "3499",
+     "nombre": "Galp",
      "precio": 1.479,
-     "municipio": "Villarreal/Vila-real",
-     "direccion": "Avenida Castello, 75",
-     "localidad": "Villarreal",
-     "cp": "12540",
-     "horario": "L-D: 24H",
-     "lat": 39.947944,
-     "lon": -0.089444
+     "municipio": "Nules",
+     "direccion": "Carretera Cv226 Km. 26,6",
+     "localidad": "Nules",
+     "cp": "12520",
+     "horario": "L-D: 06:00-22:00",
+     "lat": 39.841639,
+     "lon": -0.180861
     }
    ]
   },
@@ -1298,7 +1298,7 @@
    "nombre": "Ciudad Real",
    "cyl": false,
    "n": 78,
-   "media": 1.55,
+   "media": 1.549,
    "mediana": 1.504,
    "min": 1.335,
    "max": 1.799,
@@ -1317,6 +1317,18 @@
      "lon": -2.882583
     },
     {
+     "id": "11483",
+     "nombre": "Sumnistros Agricolas de Pedro Muñoz S. Coop. de C-lm",
+     "precio": 1.36,
+     "municipio": "Pedro Muñoz",
+     "direccion": "Carretera Pedro Muñoz a Socuellamos Km. 1",
+     "localidad": "Pedro Muñoz",
+     "cp": "13620",
+     "horario": "L-D: 24H",
+     "lat": 39.396167,
+     "lon": -2.937778
+    },
+    {
      "id": "12773",
      "nombre": "E.s. San Gregorio",
      "precio": 1.369,
@@ -1327,18 +1339,6 @@
      "horario": "L-D: 24H",
      "lat": 38.621444,
      "lon": -2.955028
-    },
-    {
-     "id": "10672",
-     "nombre": "Galán de Membrilla",
-     "precio": 1.374,
-     "municipio": "Membrilla",
-     "direccion": "Carretera la Solana, 23 Km.",
-     "localidad": "Membrilla",
-     "cp": "13230",
-     "horario": "L-D: 24H",
-     "lat": 38.978667,
-     "lon": -3.346917
     }
    ]
   },
@@ -1347,7 +1347,7 @@
    "nombre": "Córdoba",
    "cyl": false,
    "n": 69,
-   "media": 1.624,
+   "media": 1.623,
    "mediana": 1.649,
    "min": 1.349,
    "max": 1.839,
@@ -1445,8 +1445,8 @@
    "nombre": "Gipuzkoa",
    "cyl": false,
    "n": 24,
-   "media": 1.695,
-   "mediana": 1.707,
+   "media": 1.694,
+   "mediana": 1.704,
    "min": 1.564,
    "max": 1.749,
    "descartados": 0,
@@ -1641,7 +1641,7 @@
    "nombre": "Huelva",
    "cyl": false,
    "n": 42,
-   "media": 1.597,
+   "media": 1.595,
    "mediana": 1.605,
    "min": 1.34,
    "max": 1.83,
@@ -1660,6 +1660,18 @@
      "lon": -6.543583
     },
     {
+     "id": "11503",
+     "nombre": "Cobella",
+     "precio": 1.349,
+     "municipio": "Lepe",
+     "direccion": "Avenida Blas Infante, S/n",
+     "localidad": "Lepe",
+     "cp": "21400",
+     "horario": "L-D: 07:00-23:00",
+     "lat": 37.249639,
+     "lon": -7.214
+    },
+    {
      "id": "8432",
      "nombre": "Deoil",
      "precio": 1.38,
@@ -1670,18 +1682,6 @@
      "horario": "L-D: 06:00-22:00",
      "lat": 37.422583,
      "lon": -6.79925
-    },
-    {
-     "id": "6739",
-     "nombre": "E.s.campo de Tejada",
-     "precio": 1.385,
-     "municipio": "Escacena del Campo",
-     "direccion": "Carretera Hu-5132 Km. 2",
-     "localidad": "Escacena del Campo",
-     "cp": "21870",
-     "horario": "L-S: 07:00-21:00; D: 08:30-21:00",
-     "lat": 37.399583,
-     "lon": -6.392139
     }
    ]
   },
@@ -2189,7 +2189,7 @@
    "nombre": "Lleida",
    "cyl": false,
    "n": 55,
-   "media": 1.542,
+   "media": 1.541,
    "mediana": 1.548,
    "min": 1.317,
    "max": 1.745,
@@ -2238,8 +2238,8 @@
    "nombre": "Lugo",
    "cyl": false,
    "n": 51,
-   "media": 1.654,
-   "mediana": 1.649,
+   "media": 1.653,
+   "mediana": 1.625,
    "min": 1.489,
    "max": 1.798,
    "descartados": 0,
@@ -3079,8 +3079,8 @@
    "nombre": "Segovia",
    "cyl": true,
    "n": 20,
-   "media": 1.612,
-   "mediana": 1.625,
+   "media": 1.611,
+   "mediana": 1.622,
    "min": 1.372,
    "max": 1.795,
    "descartados": 0,
@@ -3246,7 +3246,7 @@
     {
      "id": "6401",
      "nombre": "Galp",
-     "precio": 1.629,
+     "precio": 1.624,
      "municipio": "Villacastín",
      "direccion": "Autopista A6 Km. 0",
      "localidad": "Villacastin",
@@ -3258,7 +3258,7 @@
     {
      "id": "6177",
      "nombre": "Galp",
-     "precio": 1.629,
+     "precio": 1.624,
      "municipio": "Villacastín",
      "direccion": "Autopista A6 Km. 0",
      "localidad": "Villacastin",
@@ -3370,7 +3370,7 @@
    "nombre": "Sevilla",
    "cyl": false,
    "n": 74,
-   "media": 1.631,
+   "media": 1.629,
    "mediana": 1.639,
    "min": 1.405,
    "max": 1.849,
@@ -3647,18 +3647,6 @@
      "lon": -3.82825
     },
     {
-     "id": "4388",
-     "nombre": "Hnos.fernandez",
-     "precio": 1.39,
-     "municipio": "Mora",
-     "direccion": "CL/ TOLEDO 85 (C-400 km 30,7)",
-     "localidad": "Mora",
-     "cp": "45400",
-     "horario": "L-V: 06:00-21:00; S: 08:00-21:00; D: 08:00-14:00",
-     "lat": 39.689194,
-     "lon": -3.77725
-    },
-    {
      "id": "4384",
      "nombre": "Hnos.fernandez",
      "precio": 1.39,
@@ -3669,6 +3657,18 @@
      "horario": "L-D: 24H",
      "lat": 39.678028,
      "lon": -3.774583
+    },
+    {
+     "id": "4388",
+     "nombre": "Hnos.fernandez",
+     "precio": 1.39,
+     "municipio": "Mora",
+     "direccion": "CL/ TOLEDO 85 (C-400 km 30,7)",
+     "localidad": "Mora",
+     "cp": "45400",
+     "horario": "L-V: 06:00-21:00; S: 08:00-21:00; D: 08:00-14:00",
+     "lat": 39.689194,
+     "lon": -3.77725
     }
    ]
   },
@@ -3677,7 +3677,7 @@
    "nombre": "Valencia",
    "cyl": false,
    "n": 139,
-   "media": 1.572,
+   "media": 1.571,
    "mediana": 1.579,
    "min": 1.279,
    "max": 1.835,

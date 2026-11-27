@@ -1,5 +1,5 @@
 {
- "generado": "2026-11-27T17:34+00:00",
+ "generado": "2026-11-27T19:50+00:00",
  "lonjas": [
   {
    "id": "salamanca",
@@ -1238,16 +1238,16 @@
    "dia": "Viernes",
    "fuente": "https://lerma.burgos.es/lonja",
    "estado": "activa",
-   "nota": "Precios tomados del boletín semanal de la Junta de Castilla y León: la web de la lonja no deja entrar al robot. Llegan con unos días de retraso respecto a la sesión.",
-   "fecha": "2026-11-20",
+   "nota": null,
+   "fecha": "2026-11-27",
    "precios": [
     {
      "id": "lerma-trigo-tipo-iii",
      "cat": "Cereales",
      "producto": "Trigo tipo III",
      "unidad": "€/t",
-     "ant": 231.0,
-     "act": 228.0,
+     "ant": 228.0,
+     "act": 231.0,
      "clave": "trigo"
     },
     {
@@ -1256,7 +1256,7 @@
      "producto": "Cebada dos carreras",
      "unidad": "€/t",
      "ant": 223.0,
-     "act": 223.0,
+     "act": 226.0,
      "clave": "cebada"
     },
     {
@@ -1264,8 +1264,8 @@
      "cat": "Porcino",
      "producto": "Cerdo normal",
      "unidad": "€/kg vivo",
-     "ant": 1.1,
-     "act": 1.07,
+     "ant": 1.07,
+     "act": 1.05,
      "clave": "cerdo-normal"
     },
     {
@@ -1275,6 +1275,14 @@
      "unidad": "€/kg vivo",
      "ant": 0.3,
      "act": 0.3
+    },
+    {
+     "id": "lerma-lechon-tipo-lerma",
+     "cat": "Porcino",
+     "producto": "Lechón tipo Lerma",
+     "unidad": "€/ud",
+     "ant": 23.0,
+     "act": 24.0
     },
     {
      "id": "lerma-terneras-carne-blanca",
@@ -1350,7 +1358,7 @@
     }
    ],
    "comprobado": "2026-11-03T23:45:00+01:00",
-   "origen": "https://agriculturaganaderia.jcyl.es/web/es/estadistica-informacion-agraria/lonjas-2026.html",
+   "origen": "carga manual",
    "error": null,
    "ultima_lectura": "2026-11-27T13:58+00:00",
    "fallos": 0,
@@ -1850,6 +1858,10 @@
    [
     "2026-11-20",
     1.07
+   ],
+   [
+    "2026-11-27",
+    1.05
    ]
   ],
   "lerma-lechon-tipo-lerma": [
@@ -1872,6 +1884,10 @@
    [
     "2026-11-13",
     23.0
+   ],
+   [
+    "2026-11-27",
+    24.0
    ]
   ],
   "lerma-trigo-tipo-iii": [
@@ -1898,6 +1914,10 @@
    [
     "2026-11-20",
     228.0
+   ],
+   [
+    "2026-11-27",
+    231.0
    ]
   ],
   "lerma-cebada-dos-carreras": [
@@ -1924,6 +1944,10 @@
    [
     "2026-11-20",
     223.0
+   ],
+   [
+    "2026-11-27",
+    226.0
    ]
   ],
   "salamanca-maiz": [
@@ -3430,6 +3454,10 @@
    [
     "2026-11-20",
     0.3
+   ],
+   [
+    "2026-11-27",
+    0.3
    ]
   ],
   "lerma-terneras-carne-blanca": [
@@ -3443,6 +3471,10 @@
    ],
    [
     "2026-11-20",
+    5.89
+   ],
+   [
+    "2026-11-27",
     5.89
    ]
   ],
@@ -3458,6 +3490,10 @@
    [
     "2026-11-20",
     5.7
+   ],
+   [
+    "2026-11-27",
+    5.7
    ]
   ],
   "lerma-anojos-extra": [
@@ -3471,6 +3507,10 @@
    ],
    [
     "2026-11-20",
+    5.68
+   ],
+   [
+    "2026-11-27",
     5.68
    ]
   ],
@@ -3486,6 +3526,10 @@
    [
     "2026-11-20",
     5.36
+   ],
+   [
+    "2026-11-27",
+    5.36
    ]
   ],
   "lerma-anojos-corriente": [
@@ -3499,6 +3543,10 @@
    ],
    [
     "2026-11-20",
+    5.31
+   ],
+   [
+    "2026-11-27",
     5.31
    ]
   ],
@@ -3514,6 +3562,10 @@
    [
     "2026-11-20",
     3.0
+   ],
+   [
+    "2026-11-27",
+    3.0
    ]
   ],
   "lerma-vacas-primera": [
@@ -3527,6 +3579,10 @@
    ],
    [
     "2026-11-20",
+    2.5
+   ],
+   [
+    "2026-11-27",
     2.5
    ]
   ],
@@ -3542,6 +3598,10 @@
    [
     "2026-11-20",
     2.0
+   ],
+   [
+    "2026-11-27",
+    2.0
    ]
   ],
   "lerma-vacas-industria": [
@@ -3555,6 +3615,10 @@
    ],
    [
     "2026-11-20",
+    1.56
+   ],
+   [
+    "2026-11-27",
     1.56
    ]
   ],

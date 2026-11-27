@@ -316,51 +316,70 @@ leon;leon-yona;Yona;€/t;2026-11-26;330
 lerma;lerma-anojos-corriente;Añojos corriente;€/kg;2026-10-30;5,31
 lerma;lerma-anojos-corriente;Añojos corriente;€/kg;2026-11-13;5,31
 lerma;lerma-anojos-corriente;Añojos corriente;€/kg;2026-11-20;5,31
+lerma;lerma-anojos-corriente;Añojos corriente;€/kg;2026-11-27;5,31
 lerma;lerma-anojos-extra;Añojos extra;€/kg;2026-10-30;5,68
 lerma;lerma-anojos-extra;Añojos extra;€/kg;2026-11-13;5,68
 lerma;lerma-anojos-extra;Añojos extra;€/kg;2026-11-20;5,68
+lerma;lerma-anojos-extra;Añojos extra;€/kg;2026-11-27;5,68
 lerma;lerma-anojos-primera;Añojos primera;€/kg;2026-10-30;5,36
 lerma;lerma-anojos-primera;Añojos primera;€/kg;2026-11-13;5,36
 lerma;lerma-anojos-primera;Añojos primera;€/kg;2026-11-20;5,36
+lerma;lerma-anojos-primera;Añojos primera;€/kg;2026-11-27;5,36
 lerma;lerma-cebada-dos-carreras;Cebada dos carreras;€/t;2026-10-02;220
 lerma;lerma-cebada-dos-carreras;Cebada dos carreras;€/t;2026-10-09;223
 lerma;lerma-cebada-dos-carreras;Cebada dos carreras;€/t;2026-10-23;223
 lerma;lerma-cebada-dos-carreras;Cebada dos carreras;€/t;2026-10-30;223
 lerma;lerma-cebada-dos-carreras;Cebada dos carreras;€/t;2026-11-13;223
 lerma;lerma-cebada-dos-carreras;Cebada dos carreras;€/t;2026-11-20;223
+lerma;lerma-cebada-dos-carreras;Cebada dos carreras;€/t;2026-11-27;226
 lerma;lerma-cerdas-de-desvieje;Cerdas de desvieje;€/kg vivo;2026-10-30;0,33
 lerma;lerma-cerdas-de-desvieje;Cerdas de desvieje;€/kg vivo;2026-11-13;0,3
 lerma;lerma-cerdas-de-desvieje;Cerdas de desvieje;€/kg vivo;2026-11-20;0,3
+lerma;lerma-cerdas-de-desvieje;Cerdas de desvieje;€/kg vivo;2026-11-27;0,3
 lerma;lerma-cerdo-normal;Cerdo normal;€/kg vivo;2026-10-02;1,295
 lerma;lerma-cerdo-normal;Cerdo normal;€/kg vivo;2026-10-09;1,27
 lerma;lerma-cerdo-normal;Cerdo normal;€/kg vivo;2026-10-23;1,208
 lerma;lerma-cerdo-normal;Cerdo normal;€/kg vivo;2026-10-30;1,168
 lerma;lerma-cerdo-normal;Cerdo normal;€/kg vivo;2026-11-13;1,1
 lerma;lerma-cerdo-normal;Cerdo normal;€/kg vivo;2026-11-20;1,07
+lerma;lerma-cerdo-normal;Cerdo normal;€/kg vivo;2026-11-27;1,05
+lerma;lerma-lechon-tipo-lerma;Lechón tipo Lerma;€/ud;2026-10-02;26
+lerma;lerma-lechon-tipo-lerma;Lechón tipo Lerma;€/ud;2026-10-09;26
+lerma;lerma-lechon-tipo-lerma;Lechón tipo Lerma;€/ud;2026-10-23;24,5
+lerma;lerma-lechon-tipo-lerma;Lechón tipo Lerma;€/ud;2026-10-30;23,5
+lerma;lerma-lechon-tipo-lerma;Lechón tipo Lerma;€/ud;2026-11-13;23
+lerma;lerma-lechon-tipo-lerma;Lechón tipo Lerma;€/ud;2026-11-27;24
 lerma;lerma-terneras-carne-blanca;Terneras carne blanca;€/kg;2026-10-30;5,89
 lerma;lerma-terneras-carne-blanca;Terneras carne blanca;€/kg;2026-11-13;5,89
 lerma;lerma-terneras-carne-blanca;Terneras carne blanca;€/kg;2026-11-20;5,89
+lerma;lerma-terneras-carne-blanca;Terneras carne blanca;€/kg;2026-11-27;5,89
 lerma;lerma-terneras-carne-rosada;Terneras carne rosada;€/kg;2026-10-30;5,7
 lerma;lerma-terneras-carne-rosada;Terneras carne rosada;€/kg;2026-11-13;5,7
 lerma;lerma-terneras-carne-rosada;Terneras carne rosada;€/kg;2026-11-20;5,7
+lerma;lerma-terneras-carne-rosada;Terneras carne rosada;€/kg;2026-11-27;5,7
 lerma;lerma-trigo-tipo-iii;Trigo tipo III;€/t;2026-10-02;230
 lerma;lerma-trigo-tipo-iii;Trigo tipo III;€/t;2026-10-09;232
 lerma;lerma-trigo-tipo-iii;Trigo tipo III;€/t;2026-10-23;232
 lerma;lerma-trigo-tipo-iii;Trigo tipo III;€/t;2026-10-30;231
 lerma;lerma-trigo-tipo-iii;Trigo tipo III;€/t;2026-11-13;231
 lerma;lerma-trigo-tipo-iii;Trigo tipo III;€/t;2026-11-20;228
+lerma;lerma-trigo-tipo-iii;Trigo tipo III;€/t;2026-11-27;231
 lerma;lerma-vacas-extra;Vacas extra;€/kg;2026-10-30;3
 lerma;lerma-vacas-extra;Vacas extra;€/kg;2026-11-13;3
 lerma;lerma-vacas-extra;Vacas extra;€/kg;2026-11-20;3
+lerma;lerma-vacas-extra;Vacas extra;€/kg;2026-11-27;3
 lerma;lerma-vacas-industria;Vacas industria;€/kg;2026-10-30;1,56
 lerma;lerma-vacas-industria;Vacas industria;€/kg;2026-11-13;1,56
 lerma;lerma-vacas-industria;Vacas industria;€/kg;2026-11-20;1,56
+lerma;lerma-vacas-industria;Vacas industria;€/kg;2026-11-27;1,56
 lerma;lerma-vacas-primera;Vacas primera;€/kg;2026-10-30;2,5
 lerma;lerma-vacas-primera;Vacas primera;€/kg;2026-11-13;2,5
 lerma;lerma-vacas-primera;Vacas primera;€/kg;2026-11-20;2,5
+lerma;lerma-vacas-primera;Vacas primera;€/kg;2026-11-27;2,5
 lerma;lerma-vacas-segunda;Vacas segunda;€/kg;2026-10-30;2
 lerma;lerma-vacas-segunda;Vacas segunda;€/kg;2026-11-13;2
 lerma;lerma-vacas-segunda;Vacas segunda;€/kg;2026-11-20;2
+lerma;lerma-vacas-segunda;Vacas segunda;€/kg;2026-11-27;2
 salamanca;salamanca-anojos-mas-de-350-kg;Añojos más de 350 kg;€/kg canal;2026-11-03;6,35
 salamanca;salamanca-anojos-mas-de-350-kg;Añojos más de 350 kg;€/kg canal;2026-11-09;6,38
 salamanca;salamanca-anojos-mas-de-350-kg;Añojos más de 350 kg;€/kg canal;2026-11-16;6,41
