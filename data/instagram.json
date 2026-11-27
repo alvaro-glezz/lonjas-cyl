@@ -4,7 +4,7 @@
   "detalle": "Instagram no pudo procesar la imagen (ERROR)",
   "fecha": "2026-11-16"
  },
- "franja": "legumbres",
+ "franja": "reel",
  "franjas": {
   "2026-11-07": [
    "reel"
@@ -118,7 +118,8 @@
   ],
   "2026-11-27": [
    "manana",
-   "legumbres"
+   "legumbres",
+   "reel"
   ]
  },
  "historias": [
@@ -838,6 +839,12 @@
    "fecha": "2026-11-27T11:39",
    "id": "2026-11-26-legumbres-leon",
    "media": "18162838663502280"
+  },
+  {
+   "facebook": "1172823058603346",
+   "fecha": "2026-11-27T13:24",
+   "id": "2026-11-27-reel-centeno",
+   "media": "18646980868047085"
   }
  ],
  "token_renovado": "2026-11-07"
