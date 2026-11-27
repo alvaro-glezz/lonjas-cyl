@@ -1,5 +1,5 @@
 {
- "fecha": "2026-11-27T20:50",
+ "fecha": "2026-11-27T22:36",
  "fuente": "Ministerio para la Transición Ecológica y el Reto Demográfico (Geoportal de gasolineras)",
  "fuente_url": "https://geoportalgasolineras.es/geoportal-instalaciones/Inicio",
  "unidad": "€/l",
@@ -19,7 +19,7 @@
    "nombre": "A Coruña",
    "cyl": false,
    "n": 86,
-   "media": 1.676,
+   "media": 1.683,
    "mediana": 1.699,
    "min": 1.44,
    "max": 1.839,
@@ -313,7 +313,7 @@
    "nombre": "Ávila",
    "cyl": true,
    "n": 15,
-   "media": 1.632,
+   "media": 1.626,
    "mediana": 1.659,
    "min": 1.359,
    "max": 1.799,
@@ -490,6 +490,18 @@
      "lon": -5.044083
     },
     {
+     "id": "5051",
+     "nombre": "Repsol",
+     "precio": 1.699,
+     "municipio": "Burgohondo",
+     "direccion": "CR AV-902, 1,2 (AV-902 km 1,7)",
+     "localidad": "Burgohondo",
+     "cp": "05113",
+     "horario": "L-D: 08:00-20:30",
+     "lat": 40.411778,
+     "lon": -4.77475
+    },
+    {
      "id": "4994",
      "nombre": "Cepsa",
      "precio": 1.699,
@@ -500,18 +512,6 @@
      "horario": "L-D: 07:00-21:00",
      "lat": 40.58525,
      "lon": -4.410556
-    },
-    {
-     "id": "5051",
-     "nombre": "Repsol",
-     "precio": 1.799,
-     "municipio": "Burgohondo",
-     "direccion": "CR AV-902, 1,2 (AV-902 km 1,7)",
-     "localidad": "Burgohondo",
-     "cp": "05113",
-     "horario": "L-D: 08:00-20:30",
-     "lat": 40.411778,
-     "lon": -4.77475
     },
     {
      "id": "5065",
@@ -1690,7 +1690,7 @@
    "nombre": "Huesca",
    "cyl": false,
    "n": 57,
-   "media": 1.558,
+   "media": 1.557,
    "mediana": 1.539,
    "min": 1.337,
    "max": 1.719,
@@ -1739,7 +1739,7 @@
    "nombre": "Illes Balears",
    "cyl": false,
    "n": 33,
-   "media": 1.71,
+   "media": 1.708,
    "mediana": 1.709,
    "min": 1.509,
    "max": 1.809,
@@ -2287,7 +2287,7 @@
    "nombre": "Madrid",
    "cyl": false,
    "n": 42,
-   "media": 1.664,
+   "media": 1.663,
    "mediana": 1.684,
    "min": 1.469,
    "max": 1.789,
@@ -2336,7 +2336,7 @@
    "nombre": "Málaga",
    "cyl": false,
    "n": 34,
-   "media": 1.633,
+   "media": 1.632,
    "mediana": 1.654,
    "min": 1.389,
    "max": 1.809,
@@ -2434,8 +2434,8 @@
    "nombre": "Navarra",
    "cyl": false,
    "n": 104,
-   "media": 1.538,
-   "mediana": 1.504,
+   "media": 1.537,
+   "mediana": 1.502,
    "min": 1.299,
    "max": 1.769,
    "descartados": 0,
@@ -3244,18 +3244,6 @@
      "lon": -4.51725
     },
     {
-     "id": "6401",
-     "nombre": "Galp",
-     "precio": 1.624,
-     "municipio": "Villacastín",
-     "direccion": "Autopista A6 Km. 0",
-     "localidad": "Villacastin",
-     "cp": "40150",
-     "horario": "L-D: 06:00-22:00",
-     "lat": 40.7975,
-     "lon": -4.462889
-    },
-    {
      "id": "6177",
      "nombre": "Galp",
      "precio": 1.624,
@@ -3266,6 +3254,18 @@
      "horario": "L-D: 24H",
      "lat": 40.7975,
      "lon": -4.460889
+    },
+    {
+     "id": "6401",
+     "nombre": "Galp",
+     "precio": 1.624,
+     "municipio": "Villacastín",
+     "direccion": "Autopista A6 Km. 0",
+     "localidad": "Villacastin",
+     "cp": "40150",
+     "horario": "L-D: 06:00-22:00",
+     "lat": 40.7975,
+     "lon": -4.462889
     },
     {
      "id": "6315",
@@ -3647,18 +3647,6 @@
      "lon": -3.82825
     },
     {
-     "id": "4384",
-     "nombre": "Hnos.fernandez",
-     "precio": 1.39,
-     "municipio": "Mora",
-     "direccion": "Vía Manzaneque, 92",
-     "localidad": "Mora",
-     "cp": "45400",
-     "horario": "L-D: 24H",
-     "lat": 39.678028,
-     "lon": -3.774583
-    },
-    {
      "id": "4388",
      "nombre": "Hnos.fernandez",
      "precio": 1.39,
@@ -3669,6 +3657,18 @@
      "horario": "L-V: 06:00-21:00; S: 08:00-21:00; D: 08:00-14:00",
      "lat": 39.689194,
      "lon": -3.77725
+    },
+    {
+     "id": "4384",
+     "nombre": "Hnos.fernandez",
+     "precio": 1.39,
+     "municipio": "Mora",
+     "direccion": "Vía Manzaneque, 92",
+     "localidad": "Mora",
+     "cp": "45400",
+     "horario": "L-D: 24H",
+     "lat": 39.678028,
+     "lon": -3.774583
     }
    ]
   },
