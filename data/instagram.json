@@ -1,10 +1,10 @@
 {
- "comparativa": "2026-W47",
+ "comparativa": "2026-W48",
  "error": {
   "detalle": "Instagram no pudo procesar la imagen (ERROR)",
   "fecha": "2026-11-16"
  },
- "franja": "extra",
+ "franja": "tarde",
  "franjas": {
   "2026-11-07": [
    "reel"
@@ -126,7 +126,8 @@
   ],
   "2026-11-28": [
    "manana",
-   "reel"
+   "reel",
+   "tarde"
   ]
  },
  "historias": [
@@ -882,6 +883,12 @@
    "fecha": "2026-11-28T13:06",
    "id": "2026-11-28-reel-movimientos",
    "media": "18041377529656732"
+  },
+  {
+   "facebook": "1368079503066363_122117661495536635",
+   "fecha": "2026-11-28T18:22",
+   "id": "2026-W48-comparativa",
+   "media": "17982774570136653"
   }
  ],
  "token_renovado": "2026-11-07"
